@@ -1,0 +1,150 @@
+/* 背景为 灰色 */
+.gray{
+    background: #F3F5F6;
+}
+/* 下边框为黑色 */
+.operadata-btm{
+    border-bottom: 2px solid #ddd;
+}
+.operdata-negative {
+    color: red;
+}
+.tab1-width{
+    width: 200px;
+}
+
+article{
+    margin-bottom: 60px;
+}
+.tab-demo tr{
+    height: 30px;
+}
+.jarviswidget .tab-fun-btn2{
+    padding: 10px;
+}
+/*.jarviswidget {
+    overflow-x: scroll;
+}*/
+.jarviswidget .operadata-tab {
+    /*width: 1309px;*/
+    min-width: 1300px;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+.operadata-tab table {
+    text-align: center;
+    line-height: 30px;
+    font-family: "Open Sans",Arial,Helvetica,Sans-Serif;
+    /*table-layout: fixed;*/
+}
+
+
+.operadata-left>td:nth-child(1){
+    text-align: left;
+    padding-left: 10px;
+}
+
+
+.operadata-tab1 {
+    width: 100%;
+    /* border: none; */
+    table-layout: fixed;
+	border-collapse: collapse;
+	text-align: center;
+    overflow-x: scroll;
+    margin-top: 6px;
+    line-height: 30px;
+    border: 1px solid #ddd;
+}
+.operadata-tab1-width{
+    width: 200px;
+}
+.operadata-tab1 table {
+    text-align: center;
+    line-height: 30px;
+}
+.operadata-tab1-left{
+    width: 200px;
+}
+.operadata-tab1-box1{
+    overflow-x: scroll;
+}
+.operadata-tab1-right{
+    width: 1600px;
+}
+.operadata-tab1-right td{
+    border: 1px solid rgb(221, 221, 221);
+    line-height: 30px;
+}
+
+
+
+.operadata-tab2 {
+    width: 100%;
+    /* border: none; */
+    table-layout: fixed;
+	border-collapse: collapse;
+	text-align: center;
+    overflow-x: scroll;
+    margin-top: 6px;
+    line-height: 30px;
+    border: 1px solid #ddd;
+}
+.operadata-tab2 table {
+    text-align: center;
+    line-height: 30px;
+}
+.operadata-tab2-left{
+    width: 200px;
+}
+.operadata-tab2-box1{
+    overflow-x: scroll;
+}
+.operadata-tab2-right{
+    width: 2000px;
+}
+.operadata-tab2-right td{
+    border: 1px solid rgb(221, 221, 221);
+    line-height: 30px;
+}
+/* report 第二模块 */
+.jarviswidget .report-summary-tab {
+    /* width: 1309px; */
+    min-width: 1300px;
+    width: 100%;
+    padding: 15px 0;
+    border: 1px solid #ccc;
+}
+.report-summary-tab1 {
+    width: 100%;
+    /* border: none; */
+    table-layout: fixed;
+	border-collapse: collapse;
+	text-align: center;
+    overflow-x: scroll;
+    margin-top: 6px;
+    line-height: 30px;
+    border: 1px solid #ddd;
+}
+.report-summary-tab1 table {
+    text-align: center;
+    line-height: 30px;
+}
+.report-summary-tab1-left{
+    width: 200px;
+}
+.report-summary-tab1-box1{
+    overflow-x: scroll;
+}
+.report-summary-tab1-right{
+    width: 2000px;
+}
+.report-summary-tab1 td{
+    border: 1px solid rgb(221, 221, 221);
+    line-height: 30px;
+}
+.report-summary-tab1-left tr td{
+    border: none;
+    line-height: 30px;
+}

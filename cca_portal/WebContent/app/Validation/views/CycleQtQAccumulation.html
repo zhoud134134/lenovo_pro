@@ -1,0 +1,173 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <span>Cycle QtQ Accumulation</span>
+            </h1>
+        </div>
+        <!-- <big-breadcrumbs items="['Cost interlock schedule']" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs> -->
+        <!-- <div smart-include="app/layout/partials/sub-header.tpl.html"></div> -->
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12">
+                <table class="col-sm-12" style="padding: 4px;margin-top: 10px;">
+
+                    <tr style="background: #4C4F54;color: white;font-weight: bold;">
+                        <td colspan="6">
+                            <div class="pull-right" style="padding-right: 10px;">
+                                <button class="btn btn-danger btn-xs" ng-click="btnSwitch('w')" ng-show="ww">Switch to WW</button>
+                                <button class="btn btn-danger btn-xs" ng-click="btnSwitch('p')" ng-show="!ww">Switch to PRC</button>
+                                <button class="btn btn-danger btn-xs">Search</button>
+                                <button class="btn btn-danger btn-xs">export to excel</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="height:30px;background: #F4F5F7;">
+                        <td class="col-sm-2">
+                            <div class="form-group">
+                                <label for="" class="col-sm-2">BU:</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="" id="select-1">
+                                        <option value="">Think Pad</option>
+                                        <option value="">Lenovo NB</option>
+                                        <option value="">Commercial DT</option>
+                                        <option value="">Consumer DT</option>
+                                        <option value="">Workstation</option>
+                                        <option value="">Chrome</option>
+                                        <option value="">Server</option>
+                                        <option value="">Accessories</option>
+                                        <option value="">Visual</option>
+                                        <option value="">Win tabletL</option>
+                                        <option value="">Win tabletT</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-2">
+                            <div class="form-group">
+                                <label for="" class="col-sm-4">Segment:</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="" id="select-1">
+                                        <option value="">Consumer</option>
+                                        <option value="">SMB</option>
+                                        <option value="">Commercial</option>
+                                        <option value="">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-2">
+                            <div class="form-group">
+                                <label for="" class="col-sm-2">Geo:</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="" id="select-1">
+                                        <option value="">EMEA</option>
+                                        <option value="">AP</option>
+                                        <option value="">NA</option>
+                                        <option value="">All</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-2">
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-3">Cycle:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="" id="select-1">
+                                        <option value="">2017Q1M0</option>
+                                        <option value="">2017Q1M1</option>
+                                        <option value="">2017Q1M2</option>
+                                        <option value="">2017Q1M3</option>
+                                        <option value="">2016Q4M0</option>
+                                        <option value="">2016Q4M1</option>
+                                        <option value="">2016Q4M2</option>
+                                        <option value="">2016Q4M3</option>
+                                        <option value="">2016Q3M0</option>
+                                        <option value="">2016Q3M1</option>
+                                        <option value="">2016Q3M2</option>
+                                        <option value="">2016Q3M3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-2">
+                            Validated By:TOM
+                        </td>
+                        <td class="col-sm-2">
+                            Validated On:May 24
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 10px;">
+                    <tr style="background: #F4F5F7;color: #525453;font-weight: bolder;">
+                        <td>Qtr</td>
+                        <td>GEO</td>
+                        <td>Segment</td>
+                        <td>BU</td>
+                        <td>Reigon</td>
+                        <td>Invoice Qty</td>
+                        <td>Last Q<br>Gross BMS</td>
+                        <td>Current Q<br>Gross BMC</td>
+                        <td>Next Q<br>Gross BMC</td>
+                        <td>Curr.Q<br>VS Lst Q</td>
+                        <td>Next.Q<br>VS Lst Q</td>
+                        <td>Last Q Gross<br> BMC ttl</td>
+                        <td>Current Q<br>Gross BMC ttl</td>
+                        <td>Next Q<br>Gross BMC ttl</td>
+                        <td>Curr.Q<br>VS Lst Q ttl</td>
+                        <td>Next Q<br>VS Curr.Q ttl</td>
+                    </tr>
+                    <tr>
+                        <td>Q4'1718</td>
+                        <td>PRC</td>
+                        <td>YT</td>
+                        <td>ldeapad</td>
+                        <td>EET</td>
+                        <td>200</td>
+                        <td>100</td>
+                        <td>200</td>
+                        <td>300</td>
+                        <td>100</td>
+                        <td>100</td>
+                        <td>20000</td>
+                        <td>40000</td>
+                        <td>60000</td>
+                        <td>20000</td>
+                        <td>20000</td>
+                    </tr>
+                    <tr>
+                        <td>Q4'1718</td>
+                        <td>PRC</td>
+                        <td>YT</td>
+                        <td>ldeapad</td>
+                        <td>EET</td>
+                        <td>200</td>
+                        <td>100</td>
+                        <td>200</td>
+                        <td>300</td>
+                        <td>100</td>
+                        <td>100</td>
+                        <td>20000</td>
+                        <td>60000</td>
+                        <td>80000</td>
+                        <td>20000</td>
+                        <td>30000</td>
+                    </tr>
+                </table>
+            </article>
+        </div>
+
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->

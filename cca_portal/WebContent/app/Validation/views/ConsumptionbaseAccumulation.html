@@ -1,0 +1,1276 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <span>Consumption Base Accumulation</span>
+            </h1>
+        </div>
+        <!-- <big-breadcrumbs items="['Cost interlock schedule']" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs> -->
+        <!-- <div smart-include="app/layout/partials/sub-header.tpl.html"></div> -->
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12">
+                <table class="col-sm-12" style="padding: 4px;margin-top: 10px;">
+
+                    <tr style="background: #4C4F54;color: white;font-weight: bold;">
+                        <td colspan="5">
+                            <div class="pull-right" style="padding-right: 10px;">
+                                <button class="btn btn-danger btn-xs" ng-click="btnSwitch('w')" ng-show="ww">Switch to WW</button>
+                                <button class="btn btn-danger btn-xs" ng-click="btnSwitch('p')" ng-show="!ww">Switch to PRC</button>
+                                <button class="btn btn-danger btn-xs">Export</button>
+                                <button class="btn btn-danger btn-xs">Search</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="height:30px;background: #F4F5F7;">
+                        <td class="col-sm-2">
+                            <div class="form-group">
+                                <label for="" class="col-sm-2">BU:</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="" id="select-1">
+                                        <option value="">Think Pad</option>
+                                        <option value="">Lenovo NB</option>
+                                        <option value="">Commercial DT</option>
+                                        <option value="">Consumer DT</option>
+                                        <option value="">Workstation</option>
+                                        <option value="">Chrome</option>
+                                        <option value="">Server</option>
+                                        <option value="">Accessories</option>
+                                        <option value="">Visual</option>
+                                        <option value="">Win tabletL</option>
+                                        <option value="">Win tabletT</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-2">
+                            <div class="form-group">
+                                <label for="" class="col-sm-4">Commodity:</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="" id="select-1">
+                                        <option value="">CPU</option>
+                                        <option value="">ADD</option>
+                                        <option value="">ALL</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-2">
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-3">Cycle:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="" id="select-1">
+                                        <option value="">2017Q1M0</option>
+                                        <option value="">2017Q1M1</option>
+                                        <option value="">2017Q1M2</option>
+                                        <option value="">2017Q1M3</option>
+                                        <option value="">2016Q4M0</option>
+                                        <option value="">2016Q4M1</option>
+                                        <option value="">2016Q4M2</option>
+                                        <option value="">2016Q4M3</option>
+                                        <option value="">2016Q3M0</option>
+                                        <option value="">2016Q3M1</option>
+                                        <option value="">2016Q3M2</option>
+                                        <option value="">2016Q3M3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-2">
+                            Validated By:TOM
+                        </td>
+                        <td class="col-sm-2">
+                            Validated On:May 24
+                        </td>
+                    </tr>
+                </table>
+
+                <!--PRC-->
+                <table ng-show="ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 10px;">
+                    <tr style="background: #F4F5F7;color: #525453;font-weight: bolder;">
+                        <td>BU</td>
+                        <td width="100px">SKU</td>
+                        <td>Commodity</td>
+                        <td>Product Restriction</td>
+                        <td>Geo Restriction</td>
+                        <td>Vol Cap</td>
+                        <td>Total Qty(K)</td>
+                        <td>Unit Savings$/unit</td>
+                        <td>Total($M)</td>
+                    </tr>
+                    <tr>
+                        <td>LNB</td>
+                        <td>N4200</td>
+                        <td>CPU</td>
+                        <td></td>
+                        <td></td>
+                        <td>N4200 ww vol cap >100k</td>
+                        <td></td>
+                        <td>2.00</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>LDT</td>
+                        <td>G3930/T, G3900/T, G1820/T, G1840/T</td>
+                        <td>CPU</td>
+                        <td></td>
+                        <td>PRC consumer only</td>
+                        <td>ww vol <300k</td>
+                        <td>30.90</td>
+                        <td>5.00</td>
+                        <td>0.15</td>
+                    </tr>
+                    <tr>
+                        <td>TDT</td>
+                        <td>I5-7600T, I5-6600T, 6500T, 4590T, 4570T, 4670T</td>
+                        <td>CPU</td>
+                        <td></td>
+                        <td></td>
+                        <td>ww vol>200k </td>
+                        <td>-</td>
+                        <td>8.00</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>LNB</td>
+                        <td>G1840/G1840T/G3900/G3900T</td>
+                        <td>CPU</td>
+                        <td></td>
+                        <td></td>
+                        <td>ww vol< 35K </td>
+                        <td>47.28</td>
+                        <td>9.00</td>
+                        <td>0.20</td>
+                    </tr>
+                    <tr>
+                        <td>TNB</td>
+                        <td>I5 MS0 deal</td>
+                        <td>CPU</td>
+                        <td>Meet-comp. alliance growth fund</td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>TNB</td>
+                        <td>3855U</td>
+                        <td>CPU</td>
+                        <td>Bell / Gordon 2</td>
+                        <td>Exclude Japan</td>
+                        <td></td>
+                        <td>-</td>
+                        <td>3.00</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>TNB</td>
+                        <td>3855U</td>
+                        <td>CPU</td>
+                        <td>E570 / Newton 2</td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td>3.00</td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="color: red">
+                        <td>LNB</td>
+                        <td>I5 MS0 deal</td>
+                        <td>CPU</td>
+                        <td>Meet-comp. alliance growth fund</td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="color: red">
+                        <td>LNB</td>
+                        <td>i3-6100U</td>
+                        <td>CPU</td>
+                        <td>Limited model only</td>
+                        <td></td>
+                        <td></td>
+                        <td>3.40</td>
+                        <td>5.00</td>
+                        <td>0.02</td>
+                    </tr>
+                    <tr>
+                        <td>LNB</td>
+                        <td>N3050/N3060</td>
+                        <td>HDD</td>
+                        <td>Chrome N22 / IdeaPad 110 only</td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td>2.00</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>LNB</td>
+                        <td>6Y30/7Y30 for Yoga 700/Miix 700</td>
+                        <td>HDD</td>
+                        <td>Yoga 700 / Miix 700 only</td>
+                        <td></td>
+                        <td></td>
+                        <td>2.50</td>
+                        <td>15.00</td>
+                        <td>0.04</td>
+                    </tr>
+                    <tr>
+                        <td>LNB</td>
+                        <td>6Y75</td>
+                        <td>HDD</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td>30.00</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>LDT</td>
+                        <td>I5 MS0 deal</td>
+                        <td>HDD</td>
+                        <td>Meet-comp. alliance growth fund</td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>LDT</td>
+                        <td>i3-7350K</td>
+                        <td>HDD</td>
+                        <td>DT Consumer only </td>
+                        <td></td>
+                        <td>100K for kit & standalone combined</td>
+                        <td>-</td>
+                        <td>40.00</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>LDT</td>
+                        <td>i3-6100/i3-6100T/i3-7100/i3-7100T</td>
+                        <td>HDD</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>49.48</td>
+                        <td>8.00</td>
+                        <td>0.40</td>
+                    </tr>
+                    <tr>
+                        <td>TDT</td>
+                        <td>I5 MS0 deal</td>
+                        <td>HDD</td>
+                        <td>Meet-comp. alliance growth fund</td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>TDT</td>
+                        <td>i5MS0 (i5-7400/T, i5-6400/T, i5-4430/s,i5-4440/s, i5-4460/s/T)</td>
+                        <td>HDD</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>43.68</td>
+                        <td>15.00</td>
+                        <td>0.66</td>
+                    </tr>
+                    <tr>
+                        <td>TDT</td>
+                        <td>C2D (I5-4590/4690/6500/6600/7500/7600/S;I7-4790/7700/6700/S) - KQ ONLY</td>
+                        <td>HDD</td>
+                        <td>DT Commercial Only</td>
+                        <td>PRC KT/QT</td>
+                        <td></td>
+                        <td>197.71</td>
+                        <td>19.00</td>
+                        <td>3.76</td>
+                    </tr>
+                    <tr>
+                        <td>LDT</td>
+                        <td>QT incentive funding</td>
+                        <td>HDD</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>0.14</td>
+                        <td>1.43</td>
+                        <td>0.20</td>
+                    </tr>
+                </table>
+                <!--PRC额外-->
+                <table ng-show="ww" class="col-sm-12 table1" border="1" style="margin-top: 10px;border: 1px solid #ddd;">
+                    <tr style="text-align: center;color:#525453;font-weight: bolder;">
+                        <td rowspan="3" style="background: #F3F5F6;" width="25%">Deal</td>
+                        <td rowspan="3" style="background: #F3F5F6;" width="25%">BG</td>
+                        <td colspan="2">FYQ1 Cost Forecast Credit -M0 ($M)</td>
+                    </tr>
+                    <tr style="text-align: center; color:#525453;font-weight: bolder;background: #F3F5F6;">
+                        <td width="25%">PRC</td>
+                        <td rowspan="2" width="25%">Global Total</td>
+                    </tr>
+                    <tr style="text-align: center; background: #F3F5F6;">
+                        <td>Total</td>
+                    </tr>
+                </table>
+                <table ng-show="ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 6px;">
+                    <tr>
+                        <td rowspan="7" width="25%" style="color: #525453;font-weight: bolder;background: #F3F5F6;">SMB0</td>
+                        <td width="25%" style="font-weight: bold">ThinkPad</td>
+                        <td width="25%">-</td>
+                        <td width="25%">-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo NB</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Think DT</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo DT</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Workstation</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Accessories</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="background: #F3F5F6">
+                        <td style="color: #525453;font-weight: bolder;">WW</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </table>
+                <table ng-show="ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 6px;">
+                    <tr>
+                        <td rowspan="7" width="25%" style="color: #525453;font-weight: bolder;background: #F3F5F6;">AMD</td>
+                        <td width="25%" style="font-weight: bold">ThinkPad</td>
+                        <td width="25%">-</td>
+                        <td width="25%">-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo NB</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Think DT</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo DT</td>
+                        <td>0.20</td>
+                        <td>0.20</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Workstation</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Accessories</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="background: #F3F5F6">
+                        <td style="color: #525453;font-weight: bolder;">WW</td>
+                        <td>0.20</td>
+                        <td>0.20</td>
+                    </tr>
+                </table>
+                <table ng-show="ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 6px;">
+                <tr>
+                    <td rowspan="7" width="25%" style="color: #525453;font-weight: bolder;background: #F3F5F6;">CPU TTL</td>
+                    <td width="25%" style="font-weight: bold">ThinkPad</td>
+                    <td width="25%">-</td>
+                    <td width="25%">0.005085</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">Lenovo NB</td>
+                    <td>0.08</td>
+                    <td>0.242508</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">Think DT</td>
+                    <td>4.61</td>
+                    <td>9.567710</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">Lenovo DT</td>
+                    <td>0.75</td>
+                    <td>0.800284</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">Workstation</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">Accessories</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr style="background: #F3F5F6">
+                    <td style="color: #525453;font-weight: bolder;">WW</td>
+                    <td>5.44</td>
+                    <td>10.62</td>
+                </tr>
+            </table>
+                <table ng-show="ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 6px;">
+                    <tr>
+                        <td rowspan="7" width="25%" style="color: #525453;font-weight: bolder;background: #F3F5F6;">CPU Risk Commit</td>
+                        <td width="25%" style="font-weight: bold">ThinkPad</td>
+                        <td width="25%">-</td>
+                        <td width="25%">0.010170</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo NB</td>
+                        <td>0.16</td>
+                        <td>0.485016</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Think DT</td>
+                        <td>9.22</td>
+                        <td>19.135420</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo DT</td>
+                        <td>1.50</td>
+                        <td>1.600568</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Workstation</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Accessories</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="background: #F3F5F6">
+                        <td style="color: #525453;font-weight: bolder;">WW</td>
+                        <td>10.88</td>
+                        <td>21.23</td>
+                    </tr>
+                </table>
+                <table ng-show="ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 6px;">
+                    <tr>
+                        <td rowspan="7" width="25%" style="color: #525453;font-weight: bolder;background: #F3F5F6;">HDDTTL</td>
+                        <td width="25%" style="font-weight: bold">ThinkPad</td>
+                        <td width="25%">-</td>
+                        <td width="25%">0.020340</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo NB</td>
+                        <td>0.31</td>
+                        <td>0.970032</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Think DT</td>
+                        <td>18.45</td>
+                        <td>38.270841</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo DT</td>
+                        <td>3.00</td>
+                        <td>3.201136</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Workstation</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Accessories</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="background: #F3F5F6">
+                        <td style="color: #525453;font-weight: bolder;">WW</td>
+                        <td>21.76</td>
+                        <td>42.46</td>
+                    </tr>
+                </table>
+                <table ng-show="ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 6px;">
+                    <tr>
+                        <td rowspan="7" width="25%" style="color: #525453;font-weight: bolder;background: #F3F5F6;">HDD Risk Commit</td>
+                        <td width="25%" style="font-weight: bold">ThinkPad</td>
+                        <td width="25%">-</td>
+                        <td width="25%">0.040680</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo NB</td>
+                        <td>0.62</td>
+                        <td>1.940064</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Think DT</td>
+                        <td>33.14</td>
+                        <td>72.785271</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo DT</td>
+                        <td>6.00</td>
+                        <td>6.402272</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Workstation</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Accessories</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="background: #F3F5F6">
+                        <td style="color: #525453;font-weight: bolder;">WW</td>
+                        <td>39.76</td>
+                        <td>81.17</td>
+                    </tr>
+                </table>
+
+                <!--WW-->
+                <table ng-show="!ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 10px;">
+                    <tr style="background: #F4F5F7;color: #525453;font-weight: bolder;">
+                        <td>BU</td>
+                        <td width="100px">SKU</td>
+                        <td>Commodity</td>
+                        <td>GEO</td>
+                        <td>Product Restriction</td>
+                        <td>Geo Restriction</td>
+                        <td>Vol Cap</td>
+                        <td>Total Qty(K)</td>
+                        <td>Unit Savings$/unit</td>
+                        <td>Total($M)</td>
+                    </tr>
+                    <tr>
+                        <td>LNB</td>
+                        <td>N4200</td>
+                        <td>CPU</td>
+                        <td>PRC</td>
+                        <td></td>
+                        <td></td>
+                        <td>N4200 ww vol cap >100k</td>
+                        <td></td>
+                        <td>2.00</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>LDT</td>
+                        <td>G3930/T, G3900/T, G1820/T, G1840/T</td>
+                        <td>CPU</td>
+                        <td>PRC</td>
+                        <td></td>
+                        <td>PRC consumer only</td>
+                        <td>ww vol <300k</td>
+                        <td>30.90</td>
+                        <td>5.00</td>
+                        <td>0.15</td>
+                    </tr>
+                    <tr>
+                        <td>TDT</td>
+                        <td>I5-7600T, I5-6600T, 6500T, 4590T, 4570T, 4670T</td>
+                        <td>CPU</td>
+                        <td>LA</td>
+                        <td></td>
+                        <td></td>
+                        <td>ww vol>200k </td>
+                        <td>-</td>
+                        <td>8.00</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>LNB</td>
+                        <td>G1840/G1840T/G3900/G3900T</td>
+                        <td>CPU</td>
+                        <td>PRC</td>
+                        <td></td>
+                        <td></td>
+                        <td>ww vol< 35K </td>
+                        <td>47.28</td>
+                        <td>9.00</td>
+                        <td>0.20</td>
+                    </tr>
+                    <tr>
+                        <td>TNB</td>
+                        <td>I5 MS0 deal</td>
+                        <td>CPU</td>
+                        <td>LA</td>
+                        <td>Meet-comp. alliance growth fund</td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>TNB</td>
+                        <td>3855U</td>
+                        <td>CPU</td>
+                        <td>PRC</td>
+                        <td>Bell / Gordon 2</td>
+                        <td>Exclude Japan</td>
+                        <td></td>
+                        <td>-</td>
+                        <td>3.00</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>TNB</td>
+                        <td>3855U</td>
+                        <td>CPU</td>
+                        <td>LA</td>
+                        <td>E570 / Newton 2</td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td>3.00</td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="color: red">
+                        <td>LNB</td>
+                        <td>I5 MS0 deal</td>
+                        <td>CPU</td>
+                        <td>PRC</td>
+                        <td>Meet-comp. alliance growth fund</td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="color: red">
+                        <td>LNB</td>
+                        <td>i3-6100U</td>
+                        <td>CPU</td>
+                        <td>LA</td>
+                        <td>Limited model only</td>
+                        <td></td>
+                        <td></td>
+                        <td>3.40</td>
+                        <td>5.00</td>
+                        <td>0.02</td>
+                    </tr>
+                    <tr>
+                        <td>LNB</td>
+                        <td>N3050/N3060</td>
+                        <td>HDD</td>
+                        <td>PRC</td>
+                        <td>Chrome N22 / IdeaPad 110 only</td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td>2.00</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>LNB</td>
+                        <td>6Y30/7Y30 for Yoga 700/Miix 700</td>
+                        <td>HDD</td>
+                        <td>LA</td>
+                        <td>Yoga 700 / Miix 700 only</td>
+                        <td></td>
+                        <td></td>
+                        <td>2.50</td>
+                        <td>15.00</td>
+                        <td>0.04</td>
+                    </tr>
+                    <tr>
+                        <td>LNB</td>
+                        <td>6Y75</td>
+                        <td>HDD</td>
+                        <td>PRC</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td>30.00</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>LDT</td>
+                        <td>I5 MS0 deal</td>
+                        <td>HDD</td>
+                        <td>LA</td>
+                        <td>Meet-comp. alliance growth fund</td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>LDT</td>
+                        <td>i3-7350K</td>
+                        <td>HDD</td>
+                        <td>PRC</td>
+                        <td>DT Consumer only </td>
+                        <td></td>
+                        <td>100K for kit & standalone combined</td>
+                        <td>-</td>
+                        <td>40.00</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>LDT</td>
+                        <td>i3-6100/i3-6100T/i3-7100/i3-7100T</td>
+                        <td>HDD</td>
+                        <td>LA</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>49.48</td>
+                        <td>8.00</td>
+                        <td>0.40</td>
+                    </tr>
+                    <tr>
+                        <td>TDT</td>
+                        <td>I5 MS0 deal</td>
+                        <td>HDD</td>
+                        <td>PRC</td>
+                        <td>Meet-comp. alliance growth fund</td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>TDT</td>
+                        <td>i5MS0 (i5-7400/T, i5-6400/T, i5-4430/s,i5-4440/s, i5-4460/s/T)</td>
+                        <td>HDD</td>
+                        <td>LA</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>43.68</td>
+                        <td>15.00</td>
+                        <td>0.66</td>
+                    </tr>
+                    <tr>
+                        <td>TDT</td>
+                        <td>C2D (I5-4590/4690/6500/6600/7500/7600/S;I7-4790/7700/6700/S) - KQ ONLY</td>
+                        <td>HDD</td>
+                        <td>PRC</td>
+                        <td>DT Commercial Only</td>
+                        <td>PRC KT/QT</td>
+                        <td></td>
+                        <td>197.71</td>
+                        <td>19.00</td>
+                        <td>3.76</td>
+                    </tr>
+                    <tr>
+                        <td>LDT</td>
+                        <td>QT incentive funding</td>
+                        <td>HDD</td>
+                        <td>LA</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>0.14</td>
+                        <td>1.43</td>
+                        <td>0.20</td>
+                    </tr>
+                </table>
+                <!--WW额外-->
+                <table ng-show="!ww" class="col-sm-12 table1" border="1" style="margin-top: 10px;border: 1px solid #ddd;">
+                    <tr style="text-align: center;color:#525453;font-weight: bolder;">
+                        <td rowspan="3" style="background: #F3F5F6;">Deal</td>
+                        <td rowspan="3" style="background: #F3F5F6;">BG</td>
+                        <td colspan="7">FYQ1 Cost Forecast Credit -M0 ($M)</td>
+                    </tr>
+                    <tr style="text-align: center; color:#525453;font-weight: bolder;background: #F3F5F6;">
+                        <td>PRC</td>
+                        <td>AP</td>
+                        <td>EMEA</td>
+                        <td>NA</td>
+                        <td>LA</td>
+                        <td rowspan="2">BG Top</td>
+                        <td rowspan="2">Global Total</td>
+                    </tr>
+                    <tr style="text-align: center; background: #F3F5F6;">
+                        <td>Total</td>
+                        <td>Total</td>
+                        <td>Total</td>
+                        <td>Total</td>
+                        <td>Total</td>
+                    </tr>
+                </table>
+                <table ng-show="!ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 6px;">
+                    <tr>
+                        <td rowspan="7" width="70px" style="color: #525453;font-weight: bolder;background: #F3F5F6;">SMB0</td>
+                        <td width="180px" style="font-weight: bold">ThinkPad</td>
+                        <td width="10%">-</td>
+                        <td width="10%">-</td>
+                        <td width="10%">-</td>
+                        <td width="10%"> </td>
+                        <td width="10%">-</td>
+                        <td width="10%"> </td>
+                        <td width="10%">-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo NB</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Think DT</td>
+                        <td></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo DT</td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Workstation</td>
+                        <td></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Accessories</td>
+                        <td></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="background: #F3F5F6">
+                        <td style="color: #525453;font-weight: bolder;">WW</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </table>
+                <table ng-show="!ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 6px;">
+                    <tr>
+                        <td rowspan="7" width="70px" style="color: #525453;font-weight: bolder;background: #F3F5F6;">AMD</td>
+                        <td width="180px" style="font-weight: bold">ThinkPad</td>
+                        <td width="10%">-</td>
+                        <td width="10%">-</td>
+                        <td width="10%">-</td>
+                        <td width="10%"> </td>
+                        <td width="10%">-</td>
+                        <td width="10%"> </td>
+                        <td width="10%">-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo NB</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Think DT</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo DT</td>
+                        <td>0.20</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>0.20</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Workstation</td>
+                        <td></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Accessories</td>
+                        <td></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                        <td></td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="background: #F3F5F6">
+                        <td style="color: #525453;font-weight: bolder;">WW</td>
+                        <td>0.20</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>0.20</td>
+                    </tr>
+                </table>
+                <table ng-show="!ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 6px;">
+                    <tr>
+                        <td rowspan="7" width="70px" style="color: #525453;font-weight: bolder;background: #F3F5F6;">CPU TTL</td>
+                        <td width="180px" style="font-weight: bold">ThinkPad</td>
+                        <td width="10%">-</td>
+                        <td width="10%">0.00</td>
+                        <td width="10%">0.00</td>
+                        <td width="10%">0.00</td>
+                        <td width="10%">0.00</td>
+                        <td width="10%">-</td>
+                        <td width="10%">0.005085</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo NB</td>
+                        <td>0.08</td>
+                        <td>0.04</td>
+                        <td>0.03</td>
+                        <td>0.07</td>
+                        <td>0.02</td>
+                        <td>-</td>
+                        <td>0.242508</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Think DT</td>
+                        <td>4.61</td>
+                        <td>0.99</td>
+                        <td>3.17</td>
+                        <td>0.38</td>
+                        <td>0.42</td>
+                        <td>-</td>
+                        <td>9.567710</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo DT</td>
+                        <td>0.75</td>
+                        <td>0.03</td>
+                        <td>0.02</td>
+                        <td>-</td>
+                        <td>0.00</td>
+                        <td>-</td>
+                        <td>0.800284</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Workstation</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Accessories</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="background: #F3F5F6">
+                        <td style="color: #525453;font-weight: bolder;">WW</td>
+                        <td>5.44</td>
+                        <td>1.06</td>
+                        <td>3.23</td>
+                        <td>0.46</td>
+                        <td>0.44</td>
+                        <td>-</td>
+                        <td>10.62</td>
+                    </tr>
+                </table>
+                <table ng-show="!ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 6px;">
+                    <tr>
+                        <td rowspan="7" width="70px" style="color: #525453;font-weight: bolder;background: #F3F5F6;">CPU Risk Commit</td>
+                        <td width="180px" style="font-weight: bold">ThinkPad</td>
+                        <td width="10%">-</td>
+                        <td width="10%">0.00</td>
+                        <td width="10%">0.00</td>
+                        <td width="10%">0.00</td>
+                        <td width="10%">0.00</td>
+                        <td width="10%">-</td>
+                        <td width="10%">0.010170</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo NB</td>
+                        <td>0.16</td>
+                        <td>0.08</td>
+                        <td>0.07</td>
+                        <td>0.14</td>
+                        <td>0.04</td>
+                        <td>-</td>
+                        <td>0.485016</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Think DT</td>
+                        <td>9.22</td>
+                        <td>1.98</td>
+                        <td>6.34</td>
+                        <td>0.77</td>
+                        <td>0.83</td>
+                        <td>-</td>
+                        <td>19.135420</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo DT</td>
+                        <td>1.50</td>
+                        <td>0.05</td>
+                        <td>0.05</td>
+                        <td>-</td>
+                        <td>0.00</td>
+                        <td>-</td>
+                        <td>1.600568</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Workstation</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Accessories</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="background: #F3F5F6">
+                        <td style="color: #525453;font-weight: bolder;">WW</td>
+                        <td>10.88</td>
+                        <td>2.11</td>
+                        <td>6.45</td>
+                        <td>0.92</td>
+                        <td>0.87</td>
+                        <td>-</td>
+                        <td>21.23</td>
+                    </tr>
+                </table>
+                <table ng-show="!ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 6px;">
+                    <tr>
+                        <td rowspan="7" width="70px" style="color: #525453;font-weight: bolder;background: #F3F5F6;">HDDTTL</td>
+                        <td width="180px" style="font-weight: bold">ThinkPad</td>
+                        <td width="10%">-</td>
+                        <td width="10%">0.01</td>
+                        <td width="10%">0.00</td>
+                        <td width="10%">0.01</td>
+                        <td width="10%">0.00</td>
+                        <td width="10%">-</td>
+                        <td width="10%">0.020340</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo NB</td>
+                        <td>0.31</td>
+                        <td>0.16</td>
+                        <td>0.13</td>
+                        <td>0.29</td>
+                        <td>0.08</td>
+                        <td>-</td>
+                        <td>0.970032</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Think DT</td>
+                        <td>18.45</td>
+                        <td>3.95</td>
+                        <td>12.67</td>
+                        <td>1.53</td>
+                        <td>1.67</td>
+                        <td>-</td>
+                        <td>38.270841</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo DT</td>
+                        <td>3.00</td>
+                        <td>0.10</td>
+                        <td>0.10</td>
+                        <td>-</td>
+                        <td>0.00</td>
+                        <td>-</td>
+                        <td>3.201136</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Workstation</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Accessories</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="background: #F3F5F6">
+                        <td style="color: #525453;font-weight: bolder;">WW</td>
+                        <td>21.76</td>
+                        <td>4.22</td>
+                        <td>12.90</td>
+                        <td>1.83</td>
+                        <td>1.75</td>
+                        <td>-</td>
+                        <td>42.46</td>
+                    </tr>
+                </table>
+                <table ng-show="!ww" class="col-sm-12" border="1" style="border: 1px solid #ddd;text-align:center;margin-top: 6px;">
+                    <tr>
+                        <td rowspan="7" width="70px" style="color: #525453;font-weight: bolder;background: #F3F5F6;">HDD Risk Commit</td>
+                        <td width="180px" style="font-weight: bold">ThinkPad</td>
+                        <td width="10%">-</td>
+                        <td width="10%">0.01</td>
+                        <td width="10%">0.00</td>
+                        <td width="10%">0.02</td>
+                        <td width="10%">0.00</td>
+                        <td width="10%">-</td>
+                        <td width="10%">0.040680</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo NB</td>
+                        <td>0.62</td>
+                        <td>0.33</td>
+                        <td>0.26</td>
+                        <td>0.58</td>
+                        <td>0.16</td>
+                        <td>-</td>
+                        <td>1.940064</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Think DT</td>
+                        <td>33.14</td>
+                        <td>7.91</td>
+                        <td>25.34</td>
+                        <td>3.06</td>
+                        <td>3.33</td>
+                        <td>-</td>
+                        <td>72.785271</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Lenovo DT</td>
+                        <td>6.00</td>
+                        <td>0.20</td>
+                        <td>0.19</td>
+                        <td>-</td>
+                        <td>0.00</td>
+                        <td>-</td>
+                        <td>6.402272</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Workstation</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">Accessories</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="background: #F3F5F6">
+                        <td style="color: #525453;font-weight: bolder;">WW</td>
+                        <td>39.76</td>
+                        <td>8.45</td>
+                        <td>25.80</td>
+                        <td>3.66</td>
+                        <td>3.50</td>
+                        <td>-</td>
+                        <td>81.17</td>
+                    </tr>
+                </table>
+
+            </article>
+        </div>
+
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->

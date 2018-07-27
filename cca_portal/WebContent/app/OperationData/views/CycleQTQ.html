@@ -1,0 +1,266 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <big-breadcrumbs items="['Operation Data', 'Cycle QTQ']" icon="table"
+                         class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <article class="col-sm-12">
+            <!--第一部分搜索-->
+            <div jarvis-widget data-widget-color="darken"
+                 data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>Search</h2>
+                </header>
+                <div class="tab-serch">
+                    <div class="col-sm-10">
+                        <div class="col-sm-4 form-group-m">
+                            <label>Cycle Choose:</label>
+                            <div class="for-sel">
+                                <select class="form-control" ng-model="CycleChoose">
+                                    <option value="Q1M3 Actual">Q1M3 Actual</option>
+                                    <option value="Q2M0 Forecast">Q2M0 Forecast</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group-m">
+                            <label>EBR Data:</label>
+                            <div class="for-sel"  ng-click="openSel($event)">
+                                <input class="form-control" type="text" ng-model="EBRData" />
+                                <div class="select-multi" ng-show="!Sel">
+                                    <div class="select-multi-box" ng-repeat="i in dataMoth">
+                                        <input type="checkbox" ng-click="One(i)"/>
+                                        <span>{{i.data}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group-m">
+                            <label>CFE Data:</label>
+                            <div class="for-sel">
+                                <select class="form-control" ng-model="CFEData"  ng-options="x for x in cfedata">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 tab-serch-btn">
+                        <button class="btn btn-primary searchbtn" ng-click="getExecute()">Execute</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--第二部分tab-->
+            <div jarvis-widget>
+                <div style="height:248px;overflow: hidden">
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive table-border-tb" style="height: 480px">
+                            <div>
+                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data" id="tabExample" style="table-layout: fixed;">
+                                    <thead class="table-thead">
+                                    <tr>
+                                        <td width="19px"></td>
+                                        <td>Cycle Name</td>
+                                        <td>Description</td>
+                                        <td>Status</td>
+                                        <td>Created By</td>
+                                        <td>Created Date</td>
+                                        <td>End Date</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="tab in tablist">
+                                        <td>
+                                            <label class="radio">
+                                                <input type="radio" name="radio-inline" ng-click="SearchTaskId(tab.taskId,tab.cycleName,tab.status)">
+                                                <i></i>
+                                            </label>
+                                        </td>
+                                        <td>{{tab.cycleName}}</td>
+                                        <td>{{tab.taskName}}</td>
+                                        <td>{{tab.status}}</td>
+                                        <td>{{tab.sysCreatedBy}}</td>
+                                        <td>{{tab.sysCreatedDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>{{tab.sysEndDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-4 tab-fun-btn2">
+                                <button class="btn btn-primary btn-sm" ng-click="SearchTab()">Search</button>
+                                <button class="btn btn-primary btn-sm" ng-click="DelParticular()">Delete</button>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="table-pagination">
+                                    <!--<div class="M-box"></div>-->
+                                    <!--<ul class="pagination">
+                                        <li class="disabled">
+                                            <a href="javascript:void(0)" class="previous">Previous</a></li>
+                                        <li></li>
+                                        <li class="active"><a href="javascript:void(0)">1</a></li>
+                                        <li><a href="javascript:void(0)">2</a></li>
+                                        <li><a href="javascript:void(0)">3</a></li>
+                                        <li><a href="javascript:void(0)">4</a></li>
+                                        <li><a href="javascript:void(0)">5</a></li>
+                                        <li class="disabled"><a href="javascript:void(0)">…</a></li>
+                                        <li><a href="javascript:void(0)">10</a></li>
+                                        <li><a href="javascript:void(0)"class="next">Next</a></li>
+                                    </ul>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--第三部分搜索-->
+            <div jarvis-widget  data-widget-color="darken"
+                 data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
+                <header>
+                   <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>Result</h2>
+                </header>
+                <div class="tab-serch">
+                    <div class="col-sm-10">
+                        <div class="col-sm-4 form-group-m">
+                            <label>BU:</label>
+                            <div class="for-sel">
+                                <select class="form-control" ng-model="BU">
+                                    <option value="Think Pad">Think Pad</option>
+                                    <option value="Lenovo NB">Lenovo NB</option>
+                                    <option value="Commercial DT">Commercial DT</option>
+                                    <option value="Consumer DT">Consumer DT</option>
+                                    <option value="Workstation">Workstation</option>
+                                    <option value="Chrome">Chrome</option>
+                                    <option value="Server">Server</option>
+                                    <option value="Accessories">Accessories</option>
+                                    <option value="Visual">Visual</option>
+                                    <option value="Win tabletL">Win tabletL</option>
+                                    <option value="Win tabletT">Win tabletT</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group-m" ng-show="ww">
+                            <label>Geo:</label>
+                            <div class="for-sel">
+                                <select class="form-control" ng-model="Geo">
+                                    <option value="EMEA">EMEA</option>
+                                    <option value="AP">AP</option>
+                                    <option value="NA">NA</option>
+                                    <option value="ALL">ALL</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group-m">
+                            <label>Segment:</label>
+                            <div class="for-sel">
+                                <select class="form-control" ng-model="Segment">
+                                    <option value="Consumer">Consumer</option>
+                                    <option value="Commerical">Commerical</option>
+                                    <option value="SMB">SMB</option>
+                                    <option value="All">All</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-2 tab-serch-btn"></div>
+                </div>
+            </div>
+            <!--第四部分tab-->
+            <div jarvis-widget ng-show="!WW">
+                <div style="margin-bottom: 70px;max-height: 480px;overflow: hidden;">
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive table-border-tb">
+                            <div>
+                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data" id="WWExample" ng-show="ww">
+                                    <thead class="table-thead tab-mid">
+                                    <tr>
+                                        <td>Qtr</td>
+                                        <td>GEO</td>
+                                        <td>Region</td>
+                                        <td>CFE BU</td>
+                                        <td>CFE Segment</td>
+                                        <td>Invoice Qty</td>
+                                        <td>Cycle</td>
+                                        <td>Last Q Gross BMC</td>
+                                        <td>Current Q Gross BMC</td>
+                                        <td>Next Q Gross BMC</td>
+                                        <td>Curr. Q VS Lst Q</td>
+                                        <td>Next Q VS Curr. Q</td>
+                                        <td>Last Q Gross BMC ttl</td>
+                                        <td>Current Q Gross BMC ttl</td>
+                                        <td>Next Q Gross BMC ttl</td>
+                                        <td>Curr. Q VS Lst Q ttl</td>
+                                        <td>Next Q VS Curr. Q ttl</td>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="col-sm-4 tab-fun-btn">
+                                <button class="btn btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
+
+                                <button class="btn btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true" ng-click="btnSwitch('p')" ><i class="fa fa-refresh"></i></button>
+
+                                <button class="btn btn-xs" uib-tooltip="Download Summary" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
+
+                                <button class="btn btn-xs" uib-tooltip="Download Detail" tooltip-append-to-body="true"  ng-click="getWWDownLoadDet()"><i class="fa fa-sort-amount-asc" style="display: block" id="wd1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="wd2"></i></button>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="table-pagination">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div jarvis-widget ng-show="!PRC">
+                <div style="margin-bottom: 70px;max-height: 480px;overflow: hidden;">
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive table-border-tb">
+                            <div>
+                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data" id="PRCExample" >
+                                    <thead class="table-thead tab-mid">
+                                    <tr>
+                                        <td>Qtr</td>
+                                        <td>GEO</td>
+                                        <td>CFE BU</td>
+                                        <td>CFE PRC Segment</td>
+                                        <td>Invoice Qty</td>
+                                        <td>Cycle</td>
+                                        <td>Last Q Gross BMC</td>
+                                        <td>Current Q Gross BMC</td>
+                                        <td>Next Q Gross BMC</td>
+                                        <td>Curr. Q VS Lst Q</td>
+                                        <td>Next Q VS Curr. Q</td>
+                                        <td>Last Q Gross BMC ttl</td>
+                                        <td>Current Q Gross BMC ttl</td>
+                                        <td>Next Q Gross BMC ttl</td>
+                                        <td>Curr. Q VS Lst Q ttl</td>
+                                        <td>Next Q VS Curr. Q ttl</td>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="col-sm-4 tab-fun-btn">
+                                <button class="btn btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
+
+                                <button class="btn btn-xs" uib-tooltip="Switch to WW" tooltip-append-to-body="true" ng-click="btnSwitch('w')"><i class="fa fa-refresh"></i></button>
+
+                                <button class="btn btn-xs" uib-tooltip="Download Summary" tooltip-append-to-body="true" ng-click="getPRCDownLoadSum()"><i class="fa fa-download" style="display: block" id="ps1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ps2"></i></button>
+
+                                <button class="btn btn-xs" uib-tooltip="Download Detail" tooltip-append-to-body="true" ng-click="getPRCDownLoadDet()"><i class="fa fa-sort-amount-asc" style="display: block" id="pd1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="pd2"></i></button>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="table-pagination">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>

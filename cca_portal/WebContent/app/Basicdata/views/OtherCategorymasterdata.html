@@ -1,0 +1,151 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <big-breadcrumbs items="['Basic data','Other category master data Maintenance']" icon="table"
+                                 class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- article -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                    <div jarvis-widget id="no-padding-table-widget" data-widget-color="darken"
+                    data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
+                   <!--data-widget-colorbutton="false"
+                   data-widget-editbutton="false"
+                   data-widget-togglebutton="false"
+                   data-widget-deletebutton="false"
+                   data-widget-fullscreenbutton="false"
+                   data-widget-custombutton="false"
+                   data-widget-collapsed="true"
+                   data-widget-sortable="false"-->
+                   <header>
+                       <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                       <h2>Search</h2>
+                   </header>
+                   <div class="tab-serch">
+                       <div class="col-sm-8">
+                           <div class="col-sm-6 form-group-m">
+                               <label>Category:</label>
+                               <div class="for-sel">
+                                   <select class="form-control">
+                                        <option value="">Accessory</option>
+                                        <option value="">Parity</option>
+                                        <option value="">All</option>
+                                   </select>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-sm-4 tab-serch-btn">
+                           <button class="btn btn-primary searchbtn">Search</button>
+                       </div>
+                   </div>
+               </div>
+
+               <div jarvis-widget>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive table-border-tb">
+                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover">
+                                    <thead class="table-thead">
+                                    <tr>
+                                        <td style="width:19px;">
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="checkbox-inline">
+                                                <i></i>
+                                            </label>
+                                        </td>
+                                        <td>BG</td>
+                                        <td>Category Name</td>
+                                        <td>Description</td>
+                                        <td>Seperate or display inothers</td>
+                                        <td>Last Modified By</td>
+                                        <td>Last Modified Date</td>
+                                        <td>Status</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="checkbox-inline">
+                                                <i></i>
+                                            </label>
+                                        </td>
+                                        <td>PCG</td>
+                                        <td>Accessory</td>
+                                        <td>Accessory</td>
+                                        <td>N</td>
+                                        <td>Livia Zheng</td>
+                                        <td>2018/7/21</td>
+                                        <td>Saved</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="checkbox-inline">
+                                                <i></i>
+                                            </label>
+                                        </td>
+                                        <td>PCG</td>
+                                        <td>Parity</td>
+                                        <td>Parity</td>
+                                        <td>N</td>
+                                        <td>Livia Zheng</td>
+                                        <td>2018/7/21</td>
+                                        <td>Saved</td>
+                                    </tr>
+                                    <tr>
+                                            <td>
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="checkbox-inline">
+                                                    <i></i>
+                                                </label>
+                                            </td>
+                                            <td>PCG</td>
+                                            <td>SW</td>
+                                            <td>SW</td>
+                                            <td>Y</td>
+                                            <td>Livia Zheng</td>
+                                            <td>2018/7/22</td>
+                                            <td>Saved</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="col-sm-4 tab-fun-btn">
+                                    <button class="btn btn-xs" uib-tooltip="Download Template" tooltip-append-to-body="true"><i class="fa fa-download" ></i></button>
+                                    <button class="btn btn-xs" uib-tooltip="Upload" tooltip-append-to-body="true"><i class="fa fa-upload"></i></button>
+                                    <button class="btn btn-xs" uib-tooltip="Save" tooltip-append-to-body="true"><i class="fa fa-save"></i></button>
+                                    <button class="btn btn-xs" uib-tooltip="Delete" tooltip-append-to-body="true" ng-click="del()"><i class="fa fa-trash-o"></i></button>
+                                </div>
+                                <!-- <div class="col-sm-8">
+                                    <div class="table-pagination">
+                                        <ul class="pagination">
+                                            <li class="disabled">
+                                                <a href="javascript:void(0)" class="previous">Previous</a></li>
+                                            <li></li>
+                                            <li class="active"><a href="javascript:void(0)">1</a></li>
+                                            <li><a href="javascript:void(0)">2</a></li>
+                                            <li><a href="javascript:void(0)">3</a></li>
+                                            <li><a href="javascript:void(0)">4</a></li>
+                                            <li><a href="javascript:void(0)">5</a></li>
+                                            <li class="disabled"><a href="javascript:void(0)">…</a></li>
+                                            <li><a href="javascript:void(0)">10</a></li>
+                                            <li><a href="javascript:void(0)"class="next">Next</a></li>
+                                        </ul>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+
+        <!-- end article -->
+
+    </section>
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->
