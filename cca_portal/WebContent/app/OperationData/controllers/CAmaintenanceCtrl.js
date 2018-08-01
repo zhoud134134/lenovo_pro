@@ -1,18 +1,18 @@
 "use strict";
 
 angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-    // $scope.ww = true;
-    $scope.sw1 = true;
+    $scope.ww = true;
+    $scope.sw1 = false;
     $scope.sw2 = false;
     $scope.btnSwitch = function(flag){
         if(flag == 'w'){
-            // $scope.ww = false;
+            $scope.ww = false;
             $scope.sw1 = true;
             $scope.sw2 = false;
         }else if(flag == 'p'){
-        //     $scope.ww = true;
-            // $scope.sw1 = false;
-            // $scope.sw2 = false;
+            $scope.ww = true;
+            $scope.sw1 = false;
+            $scope.sw2 = false;
         }
     }
 

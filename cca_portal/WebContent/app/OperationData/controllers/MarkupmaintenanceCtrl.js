@@ -2,51 +2,39 @@
 
 angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
 
-    $scope.q1 = true;
-    $scope.sw1 = true;
-    $scope.sw2 = false;
-    $scope.btnSwitch = function(flag){
+    //Actual‰∏éForecastÈÄâÊã©Â±ïÁ§∫
+    $scope.atc = true;
+    $scope.wpSel = function(){
+        if($scope.CycleSelect == 'Actual'){
+            $scope.atc = true;
+            $scope.aww = true;
+            $scope.fww = true;
+        }else if($scope.CycleSelect =='Forecast'){
+            $scope.atc = false;
+            $scope.aww = true;
+            $scope.fww = true;
+        }
+    }
+
+    //Actual‰∏≠PRC‰∏éWWÁöÑÂàáÊç¢
+    $scope.aww = true;
+    $scope.btnSwitchA = function(flag){
         if(flag == 'w'){
-            // $scope.ww = false;
-            $scope.sw1 = true;
-            $scope.sw2 = false;
+            $scope.aww = false;
         }else if(flag == 'p'){
-            //     $scope.ww = true;
-            // $scope.sw1 = false;
-            // $scope.sw2 = false;
+            $scope.aww = true;
         }
     }
 
-    $scope.btnSV = function(flag){
-        if(flag == 's1'){
-            $scope.sw2 = true;
-            $scope.sw1 = false;
-        }else if(flag == 's2') {
-            $scope.sw1 = true;
-            $scope.sw2 = false;
+    //Actual‰∏≠PRC‰∏éWWÁöÑÂàáÊç¢
+    $scope.fww = true;
+    $scope.btnSwitchF = function(flag){
+        if(flag == 'w'){
+            $scope.fww = false;
+        }else if(flag == 'p'){
+            $scope.fww = true;
         }
     }
 
-
-
-    /*$('#abctable').dataTable({
-        //"processing": true,
-        //"scrollY": 100,
-        "scrollX": true,
-        "dom": '<"top">rt<"bottom"><"clear">',
-        "scrollCollapse": true,
-        //"jQueryUI": true,
-        // "pagingType":   "simple_numbers",
-        //stateSave: true,
-        "paging": false,
-        //"ordering": false,
-        //"lengthChange": true,
-        "autoWidth": false,
-        fixedColumns: { //πÃ∂®¡–µƒ≈‰÷√œÓ
-            leftColumns: 1, //πÃ∂®◊Û±ﬂµ⁄“ª¡–
-            //rightColumns:1 //πÃ∂®”“±ﬂµ⁄“ª¡–
-        },
-        //fixedColumns: true
-    });*/
 
 })
