@@ -365,10 +365,13 @@
 
 
 .tab-demo {
+    /*overflow: hidden;*/
     /*margin: 5px;*/
 }
 .tab-demo tr td{
     height: 16px;
+}
+.tab-viMid tr td {
     vertical-align: middle !important;
 }
 .tab-data tr td {
