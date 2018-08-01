@@ -1,6 +1,13 @@
+/* nav 去除 下边框 */
+.nav-tabs.bordered+.tab-content{
+    border: none;
+}
 /* 背景为 灰色 */
 .gray{
     background: #F3F5F6;
+    /* font-weight: bold; */
+    font-weight: 600;
+    font-size: 12px;
 }
 /* 下边框为黑色 */
 .operadata-btm{
@@ -22,9 +29,8 @@ article{
 .jarviswidget .tab-fun-btn2{
     padding: 10px;
 }
-/*.jarviswidget {
-    overflow-x: scroll;
-}*/
+.jarviswidget {
+}
 .jarviswidget .operadata-tab {
     /*width: 1309px;*/
     min-width: 1300px;
@@ -34,7 +40,7 @@ article{
 }
 .operadata-tab table {
     text-align: center;
-    line-height: 30px;
+    line-height: 32px;
     font-family: "Open Sans",Arial,Helvetica,Sans-Serif;
     /*table-layout: fixed;*/
 }
@@ -54,60 +60,89 @@ article{
 	text-align: center;
     overflow-x: scroll;
     margin-top: 6px;
-    line-height: 30px;
+    line-height: 32px;
     border: 1px solid #ddd;
 }
 .operadata-tab1-width{
-    width: 200px;
+    width: 300px;
+}
+.operadata-tab1-width1{
+    width: 160px;
 }
 .operadata-tab1 table {
     text-align: center;
-    line-height: 30px;
+    line-height: 32px;
 }
 .operadata-tab1-left{
-    width: 200px;
+    width: 160px;
 }
 .operadata-tab1-box1{
     overflow-x: scroll;
 }
 .operadata-tab1-right{
-    width: 1600px;
+    width: 2000px;
+    table-layout: fixed;
+}
+.operadata-tab1-first{
+    width: 160px;
 }
 .operadata-tab1-right td{
     border: 1px solid rgb(221, 221, 221);
-    line-height: 30px;
+    line-height: 32px;
 }
 
 
 
 .operadata-tab2 {
     width: 100%;
-    /* border: none; */
     table-layout: fixed;
 	border-collapse: collapse;
 	text-align: center;
     overflow-x: scroll;
     margin-top: 6px;
-    line-height: 30px;
+    line-height: 32px;
     border: 1px solid #ddd;
 }
 .operadata-tab2 table {
     text-align: center;
-    line-height: 30px;
+    line-height: 32px;
 }
 .operadata-tab2-left{
-    width: 200px;
+    width:100%;
+    table-layout: fixed;
 }
 .operadata-tab2-box1{
     overflow-x: scroll;
 }
 .operadata-tab2-right{
     width: 2000px;
+    table-layout: fixed;
 }
-.operadata-tab2-right td{
+.operadata-tab2-right td,.operadata-tab2-box-jin2 table td{
     border: 1px solid rgb(221, 221, 221);
-    line-height: 30px;
+    line-height: 32px;
 }
+.operadata-tab2-box-jin1 table{
+    width: 160px;
+}
+.operadata-tab2-box-jin2 table{
+    width: 100%;
+}
+.operadata-tab2-box{
+    height: 380px;
+}
+
+.operadata-tab3 {
+    table-layout: fixed;
+}
+.operadata-tab3 table{
+    text-align: center;
+    line-height: 30px !important;
+}
+.operadata-tab3 table tr{
+   height: 30px !important;
+}
+
 /* report 第二模块 */
 .jarviswidget .report-summary-tab {
     /* width: 1309px; */
