@@ -496,3 +496,6 @@ table.dataTable thead .sorting_asc {
 .tab-abc thead tr:nth-of-type(1) td:nth-of-type(1) {
     width: 200px;
 }
+.tab-point tbody tr{
+    cursor: pointer;
+}

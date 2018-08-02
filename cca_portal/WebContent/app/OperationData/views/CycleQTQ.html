@@ -57,7 +57,7 @@
                     <div class="widget-body no-padding">
                         <div class="table-responsive table-border-tb" style="height: 480px">
                             <div>
-                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data" id="tabExample" style="table-layout: fixed;">
+                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-point" id="tabExample" style="table-layout: fixed;">
                                     <thead class="table-thead">
                                     <tr>
                                         <td width="19px"></td>
@@ -70,10 +70,10 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="tab in tablist">
+                                    <tr ng-repeat="tab in tablist" ng-click="trClick($event,tab.taskId,tab.status,tab.cycleName)">
                                         <td>
                                             <label class="radio">
-                                                <input type="radio" name="radio-inline" ng-click="SearchTaskId(tab.taskId,tab.cycleName,tab.status)">
+                                                <input type="radio" name="radio-inline">
                                                 <i></i>
                                             </label>
                                         </td>

@@ -114,12 +114,24 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
 
     $scope.WW = true;
     $scope.PRC = true;
+    //单击整行选中
+    $scope.trClick = function($event,id,status,cycleName){
+        $($("#tabExample input:radio")).removeAttr("checked");
+        $($event.target).parent().find("input:radio").prop("checked",true);
+        $scope.taskId = id;
+        console.log($scope.taskId)
+        $scope.status = status;
+        console.log($scope.status)
+        $scope.cyclename = cycleName;
+        console.log($scope.cyclename)
+        //$scope.SearchTaskId(a,b,c)
+    }
     //单选获得taskId
-    $scope.SearchTaskId = function(id,cycleName,status){
+   /* $scope.SearchTaskId = function(id,cycleName,status){
         $scope.taskId = id;
         $scope.status = status;
         $scope.cyclename = cycleName;
-    };
+    };*/
 
     //点击Search
     $scope.SearchTab = function(){
@@ -206,10 +218,12 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
                 "scrollY": 400,
                 "scrollX": true,
                 "dom": '<"top">rt<"bottom"><"clear">',
+                //"dom": '<"top"i>rt<"bottom"flp><"clear">',
                 "scrollCollapse": true,
                 //"jQueryUI": true,
                 // "pagingType":   "simple_numbers",
                 //stateSave: true,
+                //"pagingType":   "full_numbers",
                 "paging": false,
                 "ordering": false,
                 //"lengthChange": true,
