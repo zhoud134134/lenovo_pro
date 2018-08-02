@@ -42,16 +42,12 @@
                                     <thead class="table-thead">
                                     <tr>
                                         <td width="19px"></td>
-                                        <td>cycleName</td>
-                                        <td>programName</td>
-                                        <td>quarter</td>
-                                        <td>status</td>
-                                        <td>sysCreatedBy</td>
-                                        <td>sysCreatedDate</td>
-                                        <td>sysEndDate</td>
-                                        <td>taskId</td>
-                                        <td>taskName</td>
-                                        <td>year</td>
+                                        <td>Cycle Name</td>
+                                        <td>Description</td>
+                                        <td>Status</td>
+                                        <td>Created By</td>
+                                        <td>Created Date</td>
+                                        <td>End Date</td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -68,10 +64,6 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td style="width:19px;">
@@ -80,28 +72,6 @@
                                                 <i></i>
                                             </label>
                                         </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:19px;">
-                                            <label class="radio">
-                                                <input type="radio" name="radio-inline">
-                                                <i></i>
-                                            </label>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -122,6 +92,16 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:19px;">
+                                            <label class="radio">
+                                                <input type="radio" name="radio-inline">
+                                                <i></i>
+                                            </label>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -134,10 +114,6 @@
                                                 <i></i>
                                             </label>
                                         </td>
-                                        <td> </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -516,7 +492,7 @@
 
                         <button class="btn btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
 
-                        <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
+                        <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none"></i></button>
                     </div>
                 </div>
                 <!--PRC-->
@@ -528,7 +504,7 @@
                         </header>
                         <div>
                             <div class="widget-body no-padding">
-                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;">
+                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo tab-viMid" style="table-layout: fixed;">
                                     <thead class="table-thead">
                                     <tr>
                                         <td>XXX+PRC</td>
@@ -601,7 +577,7 @@
 
                         <button class="btn btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
 
-                        <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
+                        <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none"></i></button>
                     </div>
                 </div>
             </div>
@@ -727,7 +703,7 @@
 
                         <button class="btn btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
 
-                        <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
+                        <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none" ></i></button>
                     </div>
                 </div>
                 <div class="mup-tabbtn" id="operadata-segment-tab" style="margin-top: 10px;" ng-show="!fww">
@@ -753,12 +729,12 @@
                                         <a href="#operadata-segment-3" data-toggle="tab">Others</a>
                                     </li>
                                     <li>
-                                        <a href="#operadata-segment-3" data-toggle="tab">TTL</a>
+                                        <a href="#operadata-segment-3" data-toggle="tab"> <i class="fa fa-reorder"></i> TTL</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content " style="overflow: auto;width: 100%;">
                                     <div id="operadata-segment-1" class="tab-pane active">
-                                        <table class="col-sm-12 table-mark table-mark-style" id="abctable" border="1" style="border: 1px solid #ddd;white-space: nowrap;">
+                                        <table class="col-sm-12 table-mark table-mark-style tab-abc" id="abctable" border="1" style="border: 1px solid #ddd;white-space: nowrap;">
                                             <thead>
                                             <tr>
                                                 <td rowspan="2">XXX+BMC $M</td>
@@ -1159,7 +1135,7 @@
                                             </tr>
                                             </tfoot>
                                         </table>
-                                        <table class="col-sm-12 table-mark table-mark-style"  border="1" style="border: 1px solid #ddd;white-space: nowrap;width: 150px;position: absolute;top: 40px;left: 0;">
+                                        <table class="col-sm-12 table-mark table-mark-style"  border="1" style="border: 1px solid #ddd;white-space: nowrap;width: 202px;position: absolute;top: 40px;left: 0;">
                                             <thead>
                                             <tr style="height: 62px;">
                                                 <td rowspan="2">XXX+BMC $M</td>
@@ -1212,7 +1188,7 @@
 
                         <button class="btn btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
 
-                        <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
+                        <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none" ></i></button>
                     </div>
                 </div>
 

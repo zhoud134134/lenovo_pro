@@ -176,6 +176,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
                 OperationDataService.DelParticular($scope.taskid).then(function (data) {
                     if (data.code == 0) {
                         alert("删除成功！");
+                        $scope.taskId = '';
                         $scope.getPage();
                         //$("#tabExample").dataTable().fnDestroy();
                         $scope.PRCWW = true;
@@ -196,7 +197,11 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
     $scope.wwTable = function(){
         $("#WWExample").dataTable().fnDestroy();
         $timeout(function () {
-            $('#WWExample').dataTable({
+            $('#WWExample thead tr').eq(1).find('td').each(function() {
+                var title = $('#WWExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table = $('#WWExample').DataTable({
                 //"processing": true,
                 "scrollY": 400,
                 "scrollX": true,
@@ -230,13 +235,25 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
                     { "data": "nqCqTtl" },
                 ]
             });
+            table.columns().eq(0).each(function(colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function() {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
         });
     }
 
     $scope.prcTalbe = function(id){
         $("#PRCExample").dataTable().fnDestroy();
         $timeout(function () {
-            $('#PRCExample').dataTable({
+            $('#PRCExample thead tr').eq(1).find('td').each(function() {
+                var title = $('#PRCExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table =$('#PRCExample').DataTable({
                 //"processing": true,
                 "scrollY": 400,
                 "scrollX": true,
@@ -268,6 +285,14 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
                     { "data": "cqLqTtl" },
                     { "data": "nqCqTtl" }
                 ]
+            });
+            table.columns().eq(0).each(function(colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function() {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
             });
         });
 

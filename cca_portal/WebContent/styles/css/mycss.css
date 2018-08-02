@@ -1,3 +1,6 @@
+.fa-lg {
+    font-size: 1.33333333em !important;
+}
 .jarviswidget {
     margin-bottom: 10px;
 }
@@ -19,6 +22,7 @@
     font-size: 14px;
     color: #fff;
     background-color: #3276b1;
+    border-color: #2c699d;
     margin-right: 5px;
 }
 .jarviswidget .tab-fun-btn2 {
@@ -361,10 +365,14 @@
 
 
 .tab-demo {
+    /*overflow: hidden;*/
     /*margin: 5px;*/
 }
 .tab-demo tr td{
     height: 16px;
+}
+.tab-viMid tr td {
+    vertical-align: middle !important;
 }
 .tab-data tr td {
     white-space:nowrap;
@@ -441,6 +449,10 @@
 table.dataTable thead .sorting_asc {
     background: none;
 }
+.tab-sear thead input {
+    height: 25px;
+    font-weight: 100;
+}
 
 
 .mup-tabbtn {
@@ -455,12 +467,13 @@ table.dataTable thead .sorting_asc {
     font-size: 14px;
     color: #fff;
     background-color: #3276b1;
+    border-color: #2c699d;
     margin-right: 5px;
 }
 .table-mark-style tr td {
     /*padding: 0 5px;*/
     padding: 0px 30px;
-    width: 100px;
+    /*width: 100px;*/
     font-size: 13px;
 }
 .table-mark thead tr td,
@@ -475,4 +488,11 @@ table.dataTable thead .sorting_asc {
     line-height: 30px;
     border: 1px solid #ddd;
     font-family: "Open Sans",Arial,Helvetica,Sans-Serif;
+}
+.tab-abc {
+    width: 300%;
+    table-layout: fixed;
+}
+.tab-abc thead tr:nth-of-type(1) td:nth-of-type(1) {
+    width: 200px;
 }
