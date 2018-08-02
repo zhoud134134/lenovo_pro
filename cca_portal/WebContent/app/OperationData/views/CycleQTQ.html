@@ -19,9 +19,7 @@
                         <div class="col-sm-4 form-group-m">
                             <label>Cycle Choose:</label>
                             <div class="for-sel">
-                                <select class="form-control" ng-model="CycleChoose">
-                                    <option value="Q1M3 Actual">Q1M3 Actual</option>
-                                    <option value="Q2M0 Forecast">Q2M0 Forecast</option>
+                                <select class="form-control" ng-model="CycleChoose" ng-options="x for x in cycledata">
                                 </select>
                             </div>
                         </div>
