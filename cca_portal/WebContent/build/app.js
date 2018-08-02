@@ -271,6 +271,7 @@ appConfig.baseUrl="http://10.99.123.10:8080/lenovo-ccf-prod";
 //appConfig.baseUrl="http://10.116.19.116:8080";
 appConfig.limit = 10;
 appConfig.page =1;
+appConfig.Name =1;
 window.appConfig = appConfig;
 
 /*
@@ -2255,9 +2256,10 @@ angular.module('app.chat', ['ngSanitize'])
 angular.module("app").run(["$templateCache", function($templateCache) {$templateCache.put("app/dashboard/live-feeds.tpl.html","<div jarvis-widget id=\"live-feeds-widget\" data-widget-togglebutton=\"false\" data-widget-editbutton=\"false\"\r\n     data-widget-fullscreenbutton=\"false\" data-widget-colorbutton=\"false\" data-widget-deletebutton=\"false\">\r\n<!-- widget options:\r\nusage: <div class=\"jarviswidget\" id=\"wid-id-0\" data-widget-editbutton=\"false\">\r\n\r\ndata-widget-colorbutton=\"false\"\r\ndata-widget-editbutton=\"false\"\r\ndata-widget-togglebutton=\"false\"\r\ndata-widget-deletebutton=\"false\"\r\ndata-widget-fullscreenbutton=\"false\"\r\ndata-widget-custombutton=\"false\"\r\ndata-widget-collapsed=\"true\"\r\ndata-widget-sortable=\"false\"\r\n\r\n-->\r\n<header>\r\n    <span class=\"widget-icon\"> <i class=\"glyphicon glyphicon-stats txt-color-darken\"></i> </span>\r\n\r\n    <h2>Live Feeds </h2>\r\n\r\n    <ul class=\"nav nav-tabs pull-right in\" id=\"myTab\">\r\n        <li class=\"active\">\r\n            <a data-toggle=\"tab\" href=\"#s1\"><i class=\"fa fa-clock-o\"></i> <span class=\"hidden-mobile hidden-tablet\">Live Stats</span></a>\r\n        </li>\r\n\r\n        <li>\r\n            <a data-toggle=\"tab\" href=\"#s2\"><i class=\"fa fa-facebook\"></i> <span class=\"hidden-mobile hidden-tablet\">Social Network</span></a>\r\n        </li>\r\n\r\n        <li>\r\n            <a data-toggle=\"tab\" href=\"#s3\"><i class=\"fa fa-dollar\"></i> <span class=\"hidden-mobile hidden-tablet\">Revenue</span></a>\r\n        </li>\r\n    </ul>\r\n\r\n</header>\r\n\r\n<!-- widget div-->\r\n<div class=\"no-padding\">\r\n\r\n    <div class=\"widget-body\">\r\n        <!-- content -->\r\n        <div id=\"myTabContent\" class=\"tab-content\">\r\n            <div class=\"tab-pane fade active in padding-10 no-padding-bottom\" id=\"s1\">\r\n                <div class=\"row no-space\">\r\n                    <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8\">\r\n														<span class=\"demo-liveupdate-1\"> <span\r\n                                                                class=\"onoffswitch-title\">Live switch</span> <span\r\n                                                                class=\"onoffswitch\">\r\n																<input type=\"checkbox\" name=\"start_interval\" ng-model=\"autoUpdate\"\r\n                                                                       class=\"onoffswitch-checkbox\" id=\"start_interval\">\r\n																<label class=\"onoffswitch-label\" for=\"start_interval\">\r\n                                                                    <span class=\"onoffswitch-inner\"\r\n                                                                          data-swchon-text=\"ON\"\r\n                                                                          data-swchoff-text=\"OFF\"></span>\r\n                                                                    <span class=\"onoffswitch-switch\"></span>\r\n                                                                </label> </span> </span>\r\n\r\n                        <div id=\"updating-chart\" class=\"chart-large txt-color-blue\" flot-basic flot-data=\"liveStats\" flot-options=\"liveStatsOptions\"></div>\r\n\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4 show-stats\">\r\n\r\n                        <div class=\"row\">\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> My Tasks <span\r\n                                    class=\"pull-right\">130/200</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blueDark\" style=\"width: 65%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> Transfered <span\r\n                                    class=\"pull-right\">440 GB</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blue\" style=\"width: 34%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> Bugs Squashed<span\r\n                                    class=\"pull-right\">77%</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blue\" style=\"width: 77%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> User Testing <span\r\n                                    class=\"pull-right\">7 Days</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-greenLight\" style=\"width: 84%;\"></div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <span class=\"show-stat-buttons\"> <span class=\"col-xs-12 col-sm-6 col-md-6 col-lg-6\"> <a\r\n                                    href-void class=\"btn btn-default btn-block hidden-xs\">Generate PDF</a> </span> <span\r\n                                    class=\"col-xs-12 col-sm-6 col-md-6 col-lg-6\"> <a href-void\r\n                                                                                     class=\"btn btn-default btn-block hidden-xs\">Report\r\n                                a bug</a> </span> </span>\r\n\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"show-stat-microcharts\" data-sparkline-container data-easy-pie-chart-container>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n\r\n                        <div class=\"easy-pie-chart txt-color-orangeDark\" data-percent=\"33\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">35</span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Server Load <i class=\"fa fa-caret-up icon-color-bad\"></i> </span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-greenLight\"><i class=\"fa fa-caret-up\"></i> 97%</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blueLight\"><i class=\"fa fa-caret-down\"></i> 44%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-greenLight hidden-sm hidden-md pull-right\"\r\n                             data-sparkline-type=\"line\" data-sparkline-height=\"33px\" data-sparkline-width=\"70px\"\r\n                             data-fill-color=\"transparent\">\r\n                            130, 187, 250, 257, 200, 210, 300, 270, 363, 247, 270, 363, 247\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-greenLight\" data-percent=\"78.9\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">78.9 </span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Disk Space <i class=\"fa fa-caret-down icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-blueDark\"><i class=\"fa fa-caret-up\"></i> 76%</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blue\"><i class=\"fa fa-caret-down\"></i> 3%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-blue hidden-sm hidden-md pull-right\" data-sparkline-type=\"line\"\r\n                             data-sparkline-height=\"33px\" data-sparkline-width=\"70px\" data-fill-color=\"transparent\">\r\n                            257, 200, 210, 300, 270, 363, 130, 187, 250, 247, 270, 363, 247\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-blue\" data-percent=\"23\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">23 </span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Transfered <i class=\"fa fa-caret-up icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-darken\">10GB</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blueDark\"><i class=\"fa fa-caret-up\"></i> 10%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-darken hidden-sm hidden-md pull-right\"\r\n                             data-sparkline-type=\"line\" data-sparkline-height=\"33px\" data-sparkline-width=\"70px\"\r\n                             data-fill-color=\"transparent\">\r\n                            200, 210, 363, 247, 300, 270, 130, 187, 250, 257, 363, 247, 270\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-darken\" data-percent=\"36\" data-pie-size=\"50\">\r\n                            <span class=\"percent degree-sign\">36 <i class=\"fa fa-caret-up\"></i></span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Temperature <i\r\n                                class=\"fa fa-caret-down icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-red\"><i class=\"fa fa-caret-up\"></i> 124</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blue\"><i class=\"fa fa-caret-down\"></i> 40 F</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-red hidden-sm hidden-md pull-right\" data-sparkline-type=\"line\"\r\n                             data-sparkline-height=\"33px\" data-sparkline-width=\"70px\" data-fill-color=\"transparent\">\r\n                            2700, 3631, 2471, 2700, 3631, 2471, 1300, 1877, 2500, 2577, 2000, 2100, 3000\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n            <!-- end s1 tab pane -->\r\n\r\n            <div class=\"tab-pane fade\" id=\"s2\">\r\n                <div class=\"widget-body-toolbar bg-color-white\">\r\n\r\n                    <form class=\"form-inline\" role=\"form\">\r\n\r\n                        <div class=\"form-group\">\r\n                            <label class=\"sr-only\" for=\"s123\">Show From</label>\r\n                            <input type=\"email\" class=\"form-control input-sm\" id=\"s123\" placeholder=\"Show From\">\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <input type=\"email\" class=\"form-control input-sm\" id=\"s124\" placeholder=\"To\">\r\n                        </div>\r\n\r\n                        <div class=\"btn-group hidden-phone pull-right\">\r\n                            <a class=\"btn dropdown-toggle btn-xs btn-default\" data-toggle=\"dropdown\"><i\r\n                                    class=\"fa fa-cog\"></i> More <span class=\"caret\"> </span> </a>\r\n                            <ul class=\"dropdown-menu pull-right\">\r\n                                <li>\r\n                                    <a href-void><i class=\"fa fa-file-text-alt\"></i> Export to PDF</a>\r\n                                </li>\r\n                                <li>\r\n                                    <a href-void><i class=\"fa fa-question-sign\"></i> Help</a>\r\n                                </li>\r\n                            </ul>\r\n                        </div>\r\n\r\n                    </form>\r\n\r\n                </div>\r\n                <div class=\"padding-10\">\r\n                    <div id=\"statsChart\" class=\"chart-large has-legend-unique\" flot-basic flot-data=\"statsData\" flot-options=\"statsDisplayOptions\"></div>\r\n                </div>\r\n\r\n            </div>\r\n            <!-- end s2 tab pane -->\r\n\r\n            <div class=\"tab-pane fade\" id=\"s3\">\r\n\r\n                <div class=\"widget-body-toolbar bg-color-white smart-form\" id=\"rev-toggles\">\r\n\r\n                    <div class=\"inline-group\">\r\n\r\n                        <label for=\"gra-0\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-0\" ng-model=\"targetsShow\">\r\n                            <i></i> Target </label>\r\n                        <label for=\"gra-1\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-1\" ng-model=\"actualsShow\">\r\n                            <i></i> Actual </label>\r\n                        <label for=\"gra-2\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-2\" ng-model=\"signupsShow\">\r\n                            <i></i> Signups </label>\r\n                    </div>\r\n\r\n                    <div class=\"btn-group hidden-phone pull-right\">\r\n                        <a class=\"btn dropdown-toggle btn-xs btn-default\" data-toggle=\"dropdown\"><i\r\n                                class=\"fa fa-cog\"></i> More <span class=\"caret\"> </span> </a>\r\n                        <ul class=\"dropdown-menu pull-right\">\r\n                            <li>\r\n                                <a href-void><i class=\"fa fa-file-text-alt\"></i> Export to PDF</a>\r\n                            </li>\r\n                            <li>\r\n                                <a href-void><i class=\"fa fa-question-sign\"></i> Help</a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <div class=\"padding-10\">\r\n                    <div id=\"flotcontainer\" class=\"chart-large has-legend-unique\" flot-basic flot-data=\"revenewData\" flot-options=\"revenewDisplayOptions\" ></div>\r\n                </div>\r\n            </div>\r\n            <!-- end s3 tab pane -->\r\n        </div>\r\n\r\n        <!-- end content -->\r\n    </div>\r\n\r\n</div>\r\n<!-- end widget div -->\r\n</div>\r\n");
 $templateCache.put("app/layout/layout.tpl.html","<!-- HEADER -->\r\n<div data-smart-include=\"app/layout/partials/header.tpl.html\" class=\"placeholder-header\"></div>\r\n<!-- END HEADER -->\r\n\r\n\r\n<!-- Left panel : Navigation area -->\r\n<!-- Note: This width of the aside area can be adjusted through LESS variables -->\r\n<div data-smart-include=\"app/layout/partials/navigation.tpl.html\" class=\"placeholder-left-panel\"></div>\r\n\r\n<!-- END NAVIGATION -->\r\n\r\n<!-- MAIN PANEL -->\r\n<div id=\"main\" role=\"main\">\r\n    <demo-states></demo-states>\r\n\r\n    <!-- RIBBON -->\r\n    <div id=\"ribbon\">\r\n\r\n				<span class=\"ribbon-button-alignment\">\r\n					<span id=\"refresh\" class=\"btn btn-ribbon\" reset-widgets\r\n                          tooltip-placement=\"bottom\"\r\n                          smart-tooltip-html=\"<i class=\'text-warning fa fa-warning\'></i> Warning! This will reset all your widget settings.\">\r\n						<i class=\"fa fa-refresh\"></i>\r\n					</span>\r\n				</span>\r\n\r\n        <!-- breadcrumb -->\r\n        <state-breadcrumbs></state-breadcrumbs>\r\n        <!-- end breadcrumb -->\r\n\r\n\r\n    </div>\r\n    <!-- END RIBBON -->\r\n\r\n\r\n    <div data-smart-router-animation-wrap=\"content content@app\" data-wrap-for=\"#content\">\r\n        <div data-ui-view=\"content\" data-autoscroll=\"false\"></div>\r\n    </div>\r\n\r\n</div>\r\n<!-- END MAIN PANEL -->\r\n\r\n<!-- PAGE FOOTER -->\r\n<div data-smart-include=\"app/layout/partials/footer.tpl.html\"></div>\r\n\r\n<div data-smart-include=\"app/layout/shortcut/shortcut.tpl.html\"></div>\r\n\r\n<!-- END PAGE FOOTER -->\r\n\r\n\r\n");
 $templateCache.put("app/auth/directives/login-info.tpl.html","<div class=\"login-info ng-cloak\">\r\n    <span> <!-- User image size is adjusted inside CSS, it should stay as it -->\r\n        <a  href=\"\" toggle-shortcut>\r\n            <img ng-src=\"{{user.picture}}\" alt=\"me\" class=\"online\">\r\n                <span>{{user.username}}\r\n                </span>\r\n            <i class=\"fa fa-angle-down\"></i>\r\n        </a>\r\n     </span>\r\n</div>");
-$templateCache.put("app/dashboard/projects/recent-projects.tpl.html","<div class=\"project-context hidden-xs dropdown\" dropdown>\r\n\r\n    <span class=\"label\">{{getWord(\'Projects\')}}:</span>\r\n    <span class=\"project-selector dropdown-toggle\" data-toggle=\"dropdown\">{{getWord(\'Recent projects\')}} <i ng-if=\"projects.length\"\r\n            class=\"fa fa-angle-down\"></i></span>\r\n\r\n    <ul class=\"dropdown-menu\" ng-if=\"projects.length\">\r\n        <li ng-repeat=\"project in projects\">\r\n            <a href=\"{{project.href}}\">{{project.title}}</a>\r\n        </li>\r\n        <li class=\"divider\"></li>\r\n        <li>\r\n            <a ng-click=\"clearProjects()\"><i class=\"fa fa-power-off\"></i> Clear</a>\r\n        </li>\r\n    </ul>\r\n\r\n</div>");
 $templateCache.put("app/calendar/directives/full-calendar.tpl.html","<div jarvis-widget data-widget-color=\"blueDark\">\r\n    <header>\r\n        <span class=\"widget-icon\"> <i class=\"fa fa-calendar\"></i> </span>\r\n\r\n        <h2> My Events </h2>\r\n\r\n        <div class=\"widget-toolbar\">\r\n            <!-- add: non-hidden - to disable auto hide -->\r\n            <div class=\"btn-group dropdown\" dropdown >\r\n                <button class=\"btn dropdown-toggle btn-xs btn-default\" data-toggle=\"dropdown\">\r\n                    Showing <i class=\"fa fa-caret-down\"></i>\r\n                </button>\r\n                <ul class=\"dropdown-menu js-status-update pull-right\">\r\n                    <li>\r\n                        <a ng-click=\"changeView(\'month\')\">Month</a>\r\n                    </li>\r\n                    <li>\r\n                        <a ng-click=\"changeView(\'agendaWeek\')\">Agenda</a>\r\n                    </li>\r\n                    <li>\r\n                        <a ng-click=\"changeView(\'agendaDay\')\">Today</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </header>\r\n\r\n    <!-- widget div-->\r\n    <div>\r\n        <div class=\"widget-body no-padding\">\r\n            <!-- content goes here -->\r\n            <div class=\"widget-body-toolbar\">\r\n\r\n                <div id=\"calendar-buttons\">\r\n\r\n                    <div class=\"btn-group\">\r\n                        <a ng-click=\"prev()\" class=\"btn btn-default btn-xs\"><i\r\n                                class=\"fa fa-chevron-left\"></i></a>\r\n                        <a ng-click=\"next()\" class=\"btn btn-default btn-xs\"><i\r\n                                class=\"fa fa-chevron-right\"></i></a>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div id=\"calendar\"></div>\r\n\r\n            <!-- end content -->\r\n        </div>\r\n\r\n    </div>\r\n    <!-- end widget div -->\r\n</div>\r\n");
 $templateCache.put("app/calendar/views/calendar.tpl.html","<!-- MAIN CONTENT -->\r\n<div id=\"content\">\r\n\r\n    <div class=\"row\">\r\n        <big-breadcrumbs items=\"[\'Home\', \'Calendar\']\" class=\"col-xs-12 col-sm-7 col-md-7 col-lg-4\"></big-breadcrumbs>\r\n        <div smart-include=\"app/layout/partials/sub-header.tpl.html\"></div>\r\n    </div>\r\n    <!-- widget grid -->\r\n    <section id=\"widget-grid\" widget-grid>\r\n        <!-- row -->\r\n        <div class=\"row\" ng-controller=\"CalendarCtrl\" >\r\n\r\n\r\n            <div class=\"col-sm-12 col-md-12 col-lg-3\">\r\n                <!-- new widget -->\r\n                <div class=\"jarviswidget jarviswidget-color-blueDark\">\r\n                    <header>\r\n                        <h2> Add Events </h2>\r\n                    </header>\r\n\r\n                    <!-- widget div-->\r\n                    <div>\r\n\r\n                        <div class=\"widget-body\">\r\n                            <!-- content goes here -->\r\n\r\n                            <form id=\"add-event-form\">\r\n                                <fieldset>\r\n\r\n                                    <div class=\"form-group\">\r\n                                        <label>Select Event Icon</label>\r\n                                        <div class=\"btn-group btn-group-sm btn-group-justified\" data-toggle=\"buttons\" > <!--  -->\r\n                                            <label class=\"btn btn-default active\">\r\n                                                <input type=\"radio\" name=\"iconselect\" id=\"icon-1\" value=\"fa-info\" radio-toggle ng-model=\"newEvent.icon\">\r\n                                                <i class=\"fa fa-info text-muted\"></i> </label>\r\n                                            <label class=\"btn btn-default\">\r\n                                                <input type=\"radio\" name=\"iconselect\" id=\"icon-2\" value=\"fa-warning\" radio-toggle  ng-model=\"newEvent.icon\">\r\n                                                <i class=\"fa fa-warning text-muted\"></i> </label>\r\n                                            <label class=\"btn btn-default\">\r\n                                                <input type=\"radio\" name=\"iconselect\" id=\"icon-3\" value=\"fa-check\" radio-toggle  ng-model=\"newEvent.icon\">\r\n                                                <i class=\"fa fa-check text-muted\"></i> </label>\r\n                                            <label class=\"btn btn-default\">\r\n                                                <input type=\"radio\" name=\"iconselect\" id=\"icon-4\" value=\"fa-user\" radio-toggle  ng-model=\"newEvent.icon\">\r\n                                                <i class=\"fa fa-user text-muted\"></i> </label>\r\n                                            <label class=\"btn btn-default\">\r\n                                                <input type=\"radio\" name=\"iconselect\" id=\"icon-5\" value=\"fa-lock\" radio-toggle  ng-model=\"newEvent.icon\">\r\n                                                <i class=\"fa fa-lock text-muted\"></i> </label>\r\n                                            <label class=\"btn btn-default\">\r\n                                                <input type=\"radio\" name=\"iconselect\" id=\"icon-6\" value=\"fa-clock-o\" radio-toggle  ng-model=\"newEvent.icon\">\r\n                                                <i class=\"fa fa-clock-o text-muted\"></i> </label>\r\n                                        </div>\r\n                                    </div>\r\n\r\n                                    <div class=\"form-group\">\r\n                                        <label>Event Title</label>\r\n                                        <input ng-model=\"newEvent.title\" class=\"form-control\"  id=\"title\" name=\"title\" maxlength=\"40\" type=\"text\" placeholder=\"Event Title\">\r\n                                    </div>\r\n                                    <div class=\"form-group\">\r\n                                        <label>Event Description</label>\r\n                                        <textarea  ng-model=\"newEvent.description\" class=\"form-control\" placeholder=\"Please be brief\" rows=\"3\" maxlength=\"40\" id=\"description\"></textarea>\r\n                                        <p class=\"note\">Maxlength is set to 40 characters</p>\r\n                                    </div>\r\n\r\n                                    <div class=\"form-group\">\r\n                                        <label>Select Event Color</label>\r\n                                        <div class=\"btn-group btn-group-justified btn-select-tick\" data-toggle=\"buttons\" >\r\n                                            <label class=\"btn bg-color-darken active\">\r\n                                                <input   ng-model=\"newEvent.className\" radio-toggle   type=\"radio\" name=\"priority\" id=\"option1\" value=\"bg-color-darken txt-color-white\" >\r\n                                                <i class=\"fa fa-check txt-color-white\"></i> </label>\r\n                                            <label class=\"btn bg-color-blue\">\r\n                                                <input  ng-model=\"newEvent.className\" radio-toggle   type=\"radio\" name=\"priority\" id=\"option2\" value=\"bg-color-blue txt-color-white\">\r\n                                                <i class=\"fa fa-check txt-color-white\"></i> </label>\r\n                                            <label class=\"btn bg-color-orange\">\r\n                                                <input  ng-model=\"newEvent.className\" radio-toggle   type=\"radio\" name=\"priority\" id=\"option3\" value=\"bg-color-orange txt-color-white\">\r\n                                                <i class=\"fa fa-check txt-color-white\"></i> </label>\r\n                                            <label class=\"btn bg-color-greenLight\">\r\n                                                <input  ng-model=\"newEvent.className\" radio-toggle   type=\"radio\" name=\"priority\" id=\"option4\" value=\"bg-color-greenLight txt-color-white\">\r\n                                                <i class=\"fa fa-check txt-color-white\"></i> </label>\r\n                                            <label class=\"btn bg-color-blueLight\">\r\n                                                <input  ng-model=\"newEvent.className\" radio-toggle   type=\"radio\" name=\"priority\" id=\"option5\" value=\"bg-color-blueLight txt-color-white\">\r\n                                                <i class=\"fa fa-check txt-color-white\"></i> </label>\r\n                                            <label class=\"btn bg-color-red\">\r\n                                                <input  ng-model=\"newEvent.className\" radio-toggle   type=\"radio\" name=\"priority\" id=\"option6\" value=\"bg-color-red txt-color-white\">\r\n                                                <i class=\"fa fa-check txt-color-white\"></i> </label>\r\n                                        </div>\r\n                                    </div>\r\n\r\n                                </fieldset>\r\n                                <div class=\"form-actions\">\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-md-12\">\r\n                                            <button class=\"btn btn-default\" type=\"button\" id=\"add-event\" ng-click=\"addEvent()\" >\r\n                                                Add Event\r\n                                            </button>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </form>\r\n\r\n                            <!-- end content -->\r\n                        </div>\r\n\r\n                    </div>\r\n                    <!-- end widget div -->\r\n                </div>\r\n                <!-- end widget -->\r\n\r\n                <div class=\"well well-sm\" id=\"event-container\">\r\n                    <form>\r\n                        <legend>\r\n                            Draggable Events\r\n                        </legend>\r\n                        <ul id=\'external-events\' class=\"list-unstyled\">\r\n\r\n                            <li ng-repeat=\"event in eventsExternal\" dragable-event>\r\n                                <span class=\"{{event.className}}\" \r\n                                    data-description=\"{{event.description}}\"\r\n                                    data-icon=\"{{event.icon}}\"\r\n                                >\r\n                                {{event.title}}</span>\r\n                            </li>\r\n                            \r\n                        </ul>\r\n\r\n                        <!-- <ul id=\'external-events\' class=\"list-unstyled\">\r\n                            <li>\r\n                                <span class=\"bg-color-darken txt-color-white\" data-description=\"Currently busy\" data-icon=\"fa-time\">Office Meeting</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"bg-color-blue txt-color-white\" data-description=\"No Description\" data-icon=\"fa-pie\">Lunch Break</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"bg-color-red txt-color-white\" data-description=\"Urgent Tasks\" data-icon=\"fa-alert\">URGENT</span>\r\n                            </li>\r\n                        </ul> -->\r\n\r\n                        <div class=\"checkbox\">\r\n                            <label>\r\n                                <input type=\"checkbox\" id=\"drop-remove\" class=\"checkbox style-0\" checked=\"checked\">\r\n                                <span>remove after drop</span> </label>\r\n\r\n                        </div>\r\n                    </form>\r\n\r\n                </div>\r\n            </div>\r\n\r\n\r\n            <article class=\"col-sm-12 col-md-12 col-lg-9\">\r\n                <full-calendar id=\"main-calendar-widget\" data-events=\"events\"></full-calendar>\r\n            </article>\r\n        </div>\r\n    </section>\r\n</div>");
+$templateCache.put("app/dashboard/projects/recent-projects.tpl.html","<div class=\"project-context hidden-xs dropdown\" dropdown>\r\n\r\n    <span class=\"label\">{{getWord(\'Projects\')}}:</span>\r\n    <span class=\"project-selector dropdown-toggle\" data-toggle=\"dropdown\">{{getWord(\'Recent projects\')}} <i ng-if=\"projects.length\"\r\n            class=\"fa fa-angle-down\"></i></span>\r\n\r\n    <ul class=\"dropdown-menu\" ng-if=\"projects.length\">\r\n        <li ng-repeat=\"project in projects\">\r\n            <a href=\"{{project.href}}\">{{project.title}}</a>\r\n        </li>\r\n        <li class=\"divider\"></li>\r\n        <li>\r\n            <a ng-click=\"clearProjects()\"><i class=\"fa fa-power-off\"></i> Clear</a>\r\n        </li>\r\n    </ul>\r\n\r\n</div>");
+$templateCache.put("app/dashboard/todo/todo-widget.tpl.html","<div id=\"todo-widget\" jarvis-widget data-widget-editbutton=\"false\" data-widget-color=\"blue\"\r\n     ng-controller=\"TodoCtrl\">\r\n    <header>\r\n        <span class=\"widget-icon\"> <i class=\"fa fa-check txt-color-white\"></i> </span>\r\n\r\n        <h2> ToDo\'s </h2>\r\n\r\n        <div class=\"widget-toolbar\">\r\n            <!-- add: non-hidden - to disable auto hide -->\r\n            <button class=\"btn btn-xs btn-default\" ng-class=\"{active: newTodo}\" ng-click=\"toggleAdd()\"><i ng-class=\"{ \'fa fa-plus\': !newTodo, \'fa fa-times\': newTodo}\"></i> Add</button>\r\n\r\n        </div>\r\n    </header>\r\n    <!-- widget div-->\r\n    <div>\r\n        <div class=\"widget-body no-padding smart-form\">\r\n            <!-- content goes here -->\r\n            <div ng-show=\"newTodo\">\r\n                <h5 class=\"todo-group-title\"><i class=\"fa fa-plus-circle\"></i> New Todo</h5>\r\n\r\n                <form name=\"newTodoForm\" class=\"smart-form\">\r\n                    <fieldset>\r\n                        <section>\r\n                            <label class=\"input\">\r\n                                <input type=\"text\" required class=\"input-lg\" ng-model=\"newTodo.title\"\r\n                                       placeholder=\"What needs to be done?\">\r\n                            </label>\r\n                        </section>\r\n                        <section>\r\n                            <div class=\"col-xs-6\">\r\n                                <label class=\"select\">\r\n                                    <select class=\"input-sm\" ng-model=\"newTodo.state\"\r\n                                            ng-options=\"state as state for state in states\"></select> <i></i> </label>\r\n                            </div>\r\n                        </section>\r\n                    </fieldset>\r\n                    <footer>\r\n                        <button ng-disabled=\"newTodoForm.$invalid\" type=\"button\" class=\"btn btn-primary\"\r\n                                ng-click=\"createTodo()\">\r\n                            Add\r\n                        </button>\r\n                        <button type=\"button\" class=\"btn btn-default\" ng-click=\"toggleAdd()\">\r\n                            Cancel\r\n                        </button>\r\n                    </footer>\r\n                </form>\r\n            </div>\r\n\r\n            <todo-list state=\"Critical\"  title=\"Critical Tasks\" icon=\"warning\" todos=\"todos\"></todo-list>\r\n\r\n            <todo-list state=\"Important\" title=\"Important Tasks\" icon=\"exclamation\" todos=\"todos\"></todo-list>\r\n\r\n            <todo-list state=\"Completed\" title=\"Completed Tasks\" icon=\"check\" todos=\"todos\"></todo-list>\r\n\r\n            <!-- end content -->\r\n        </div>\r\n\r\n    </div>\r\n    <!-- end widget div -->\r\n</div>");
 $templateCache.put("app/layout/language/language-selector.tpl.html","<ul class=\"header-dropdown-list hidden-xs ng-cloak\" ng-controller=\"LanguagesCtrl\">\r\n    <li class=\"dropdown\" dropdown>\r\n        <a class=\"dropdown-toggle\"  data-toggle=\"dropdown\" href> <img src=\"styles/img/blank.gif\" class=\"flag flag-{{currentLanguage.key}}\" alt=\"{{currentLanguage.alt}}\"> <span> {{currentLanguage.title}} </span>\r\n            <i class=\"fa fa-angle-down\"></i> </a>\r\n        <ul class=\"dropdown-menu pull-right\">\r\n            <li ng-class=\"{active: language==currentLanguage}\" ng-repeat=\"language in languages\">\r\n                <a ng-click=\"selectLanguage(language)\" ><img src=\"styles/img/blank.gif\" class=\"flag flag-{{language.key}}\"\r\n                                                   alt=\"{{language.alt}}\"> {{language.title}}</a>\r\n            </li>\r\n        </ul>\r\n    </li>\r\n</ul>");
 $templateCache.put("app/layout/partials/footer.tpl.html","<div class=\"page-footer\">\r\n    <div class=\"row\">\r\n        <div class=\"col-xs-12 col-sm-6\">\r\n            <span class=\"txt-color-white\">SmartAdmin WebApp © 2016</span>\r\n        </div>\r\n\r\n        <div class=\"col-xs-6 col-sm-6 text-right hidden-xs\">\r\n            <div class=\"txt-color-white inline-block\">\r\n                <i class=\"txt-color-blueLight hidden-mobile\">Last account activity <i class=\"fa fa-clock-o\"></i>\r\n                    <strong>52 mins ago &nbsp;</strong> </i>\r\n\r\n                <div class=\"btn-group dropup\">\r\n                    <button class=\"btn btn-xs dropdown-toggle bg-color-blue txt-color-white\" data-toggle=\"dropdown\">\r\n                        <i class=\"fa fa-link\"></i> <span class=\"caret\"></span>\r\n                    </button>\r\n                    <ul class=\"dropdown-menu pull-right text-left\">\r\n                        <li>\r\n                            <div class=\"padding-5\">\r\n                                <p class=\"txt-color-darken font-sm no-margin\">Download Progress</p>\r\n\r\n                                <div class=\"progress progress-micro no-margin\">\r\n                                    <div class=\"progress-bar progress-bar-success\" style=\"width: 50%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"divider\"></li>\r\n                        <li>\r\n                            <div class=\"padding-5\">\r\n                                <p class=\"txt-color-darken font-sm no-margin\">Server Load</p>\r\n\r\n                                <div class=\"progress progress-micro no-margin\">\r\n                                    <div class=\"progress-bar progress-bar-success\" style=\"width: 20%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"divider\"></li>\r\n                        <li>\r\n                            <div class=\"padding-5\">\r\n                                <p class=\"txt-color-darken font-sm no-margin\">Memory Load <span class=\"text-danger\">*critical*</span>\r\n                                </p>\r\n\r\n                                <div class=\"progress progress-micro no-margin\">\r\n                                    <div class=\"progress-bar progress-bar-danger\" style=\"width: 70%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"divider\"></li>\r\n                        <li>\r\n                            <div class=\"padding-5\">\r\n                                <button class=\"btn btn-block btn-default\">refresh</button>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 $templateCache.put("app/layout/partials/header.tpl.html","<header id=\"header\">\r\n<div id=\"logo-group\">\r\n\r\n    <!-- PLACE YOUR LOGO HERE -->\r\n    <span id=\"logo\"> <img src=\"styles/img/comment/logo1.png\" alt=\"SmartAdmin\" style=\"width: 100%;height: 49px;padding-left: 0\"> </span>\r\n    <!-- END LOGO PLACEHOLDER -->\r\n\r\n    <!-- Note: The activity badge color changes when clicked and resets the number to 0\r\n    Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->\r\n    <!--<span id=\"activity\" class=\"activity-dropdown\" activities-dropdown-toggle>\r\n        <i class=\"fa fa-user\"></i> \r\n        <b class=\"badge bg-color-red\">21</b> \r\n    </span>-->\r\n    <div smart-include=\"app/dashboard/activities/activities.html\"></div>\r\n</div>\r\n\r\n\r\n<!--<recent-projects></recent-projects>-->\r\n\r\n\r\n\r\n<!-- pulled right: nav area -->\r\n<div class=\"pull-right\">\r\n\r\n    <!-- collapse menu button -->\r\n    <div id=\"hide-menu\" class=\"btn-header pull-right\">\r\n        <span> <a toggle-menu title=\"Collapse Menu\"><i\r\n                class=\"fa fa-reorder\"></i></a> </span>\r\n    </div>\r\n    <!-- end collapse menu -->\r\n\r\n    <!-- #MOBILE -->\r\n    <!-- Top menu profile link : this shows only when top menu is active -->\r\n    <ul id=\"mobile-profile-img\" class=\"header-dropdown-list hidden-xs padding-5\">\r\n        <li class=\"\">\r\n            <a href=\"#\" class=\"dropdown-toggle no-margin userdropdown\" data-toggle=\"dropdown\">\r\n                <img src=\"styles/img/avatars/sunny.png\" alt=\"John Doe\" class=\"online\"/>\r\n            </a>\r\n            <ul class=\"dropdown-menu pull-right\">\r\n                <li>\r\n                    <a href-void class=\"padding-10 padding-top-0 padding-bottom-0\"><i\r\n                            class=\"fa fa-cog\"></i> Setting</a>\r\n                </li>\r\n                <li class=\"divider\"></li>\r\n                <li>\r\n                    <a ui-sref=\"app.appViews.profileDemo\" class=\"padding-10 padding-top-0 padding-bottom-0\"> <i class=\"fa fa-user\"></i>\r\n                        <u>P</u>rofile</a>\r\n                </li>\r\n                <li class=\"divider\"></li>\r\n                <li>\r\n                    <a href-void class=\"padding-10 padding-top-0 padding-bottom-0\"\r\n                       data-action=\"toggleShortcut\"><i class=\"fa fa-arrow-down\"></i> <u>S</u>hortcut</a>\r\n                </li>\r\n                <li class=\"divider\"></li>\r\n                <li>\r\n                    <a href-void class=\"padding-10 padding-top-0 padding-bottom-0\"\r\n                       data-action=\"launchFullscreen\"><i class=\"fa fa-arrows-alt\"></i> Full <u>S</u>creen</a>\r\n                </li>\r\n                <li class=\"divider\"></li>\r\n                <li>\r\n                    <a href=\"#/login\" class=\"padding-10 padding-top-5 padding-bottom-5\" data-action=\"userLogout\"><i\r\n                            class=\"fa fa-sign-out fa-lg\"></i> <strong><u>L</u>ogout</strong></a>\r\n                </li>\r\n            </ul>\r\n        </li>\r\n    </ul>\r\n\r\n    <!-- logout button -->\r\n    <!-- <div id=\"logout\" class=\"btn-header transparent pull-right\">\r\n         <span> <a ui-sref=\"login\" title=\"Sign Out\" data-action=\"userLogout\"\r\n                   data-logout-msg=\"You can improve your security further after logging out by closing this opened browser\"><i\r\n                 class=\"fa fa-sign-out\"></i></a> </span>\r\n     </div>-->\r\n    <!-- end logout button -->\r\n\r\n    <!-- search mobile button (this is hidden till mobile view port) -->\r\n    <div id=\"search-mobile\" class=\"btn-header transparent pull-right\" data-search-mobile>\r\n        <span> <a href=\"#\" title=\"Search\"><i class=\"fa fa-search\"></i></a> </span>\r\n    </div>\r\n    <!-- end search mobile button -->\r\n\r\n    <!-- input: search field -->\r\n    <form action=\"#/search\" class=\"header-search pull-right\">\r\n        <input id=\"search-fld\" type=\"text\" name=\"param\" placeholder=\"Search\" data-autocomplete=\'[\r\n					\"ActionScript\",\r\n					\"AppleScript\",\r\n					\"Asp\",\r\n					\"BASIC\",\r\n					\"C\",\r\n					\"C++\",\r\n					\"Clojure\",\r\n					\"COBOL\",\r\n					\"ColdFusion\",\r\n					\"Erlang\",\r\n					\"Fortran\",\r\n					\"Groovy\",\r\n					\"Haskell\",\r\n					\"Java\",\r\n					\"JavaScript\",\r\n					\"Lisp\",\r\n					\"Perl\",\r\n					\"PHP\",\r\n					\"Python\",\r\n					\"Ruby\",\r\n					\"Scala\",\r\n					\"Scheme\"]\'>\r\n        <button type=\"submit\">\r\n            <i class=\"fa fa-search\"></i>\r\n        </button>\r\n        <a href=\"$\" id=\"cancel-search-js\" title=\"Cancel Search\"><i class=\"fa fa-times\"></i></a>\r\n    </form>\r\n    <!-- end input: search field -->\r\n\r\n    <!-- fullscreen button -->\r\n    <!--<div id=\"fullscreen\" class=\"btn-header transparent pull-right\">\r\n        <span> <a full-screen title=\"Full Screen\"><i\r\n                class=\"fa fa-arrows-alt\"></i></a> </span>\r\n    </div>-->\r\n    <!-- end fullscreen button -->\r\n\r\n    <!-- #Voice Command: Start Speech -->\r\n    <!--<div id=\"speech-btn\" class=\"btn-header transparent pull-right hidden-sm hidden-xs\">\r\n        <div>\r\n            <a title=\"Voice Command\" id=\"voice-command-btn\" speech-recognition><i class=\"fa fa-microphone\"></i></a>\r\n\r\n            <div class=\"popover bottom\">\r\n                <div class=\"arrow\"></div>\r\n                <div class=\"popover-content\">\r\n                    <h4 class=\"vc-title\">Voice command activated <br>\r\n                        <small>Please speak clearly into the mic</small>\r\n                    </h4>\r\n                    <h4 class=\"vc-title-error text-center\">\r\n                        <i class=\"fa fa-microphone-slash\"></i> Voice command failed\r\n                        <br>\r\n                        <small class=\"txt-color-red\">Must <strong>\"Allow\"</strong> Microphone</small>\r\n                        <br>\r\n                        <small class=\"txt-color-red\">Must have <strong>Internet Connection</strong></small>\r\n                    </h4>\r\n                    <a href-void class=\"btn btn-success\" id=\"speech-help-btn\">See Commands</a>\r\n                    <a href-void class=\"btn bg-color-purple txt-color-white\"\r\n                       onclick=\"$(\'#speech-btn .popover\').fadeOut(50);\">Close Popup</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>-->\r\n    <!-- end voice command -->\r\n\r\n\r\n\r\n    <!-- multiple lang dropdown : find all flags in the flags page -->\r\n    <language-selector></language-selector>\r\n    <!-- end multiple lang -->\r\n\r\n</div>\r\n<!-- end pulled right: nav area -->\r\n\r\n</header>");
@@ -2265,7 +2267,6 @@ $templateCache.put("app/layout/partials/navigation.tpl.html","<aside id=\"left-p
 $templateCache.put("app/layout/partials/sub-header.tpl.html","<div class=\"col-xs-12 col-sm-5 col-md-5 col-lg-8\" data-sparkline-container>\r\n    <ul id=\"sparks\" class=\"\">\r\n        <li class=\"sparks-info\">\r\n            <h5> My Income <span class=\"txt-color-blue\">$47,171</span></h5>\r\n            <div class=\"sparkline txt-color-blue hidden-mobile hidden-md hidden-sm\">\r\n                1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471\r\n            </div>\r\n        </li>\r\n        <li class=\"sparks-info\">\r\n            <h5> Site Traffic <span class=\"txt-color-purple\"><i class=\"fa fa-arrow-circle-up\"></i>&nbsp;45%</span></h5>\r\n            <div class=\"sparkline txt-color-purple hidden-mobile hidden-md hidden-sm\">\r\n                110,150,300,130,400,240,220,310,220,300, 270, 210\r\n            </div>\r\n        </li>\r\n        <li class=\"sparks-info\">\r\n            <h5> Site Orders <span class=\"txt-color-greenDark\"><i class=\"fa fa-shopping-cart\"></i>&nbsp;2447</span></h5>\r\n            <div class=\"sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm\">\r\n                110,150,300,130,400,240,220,310,220,300, 270, 210\r\n            </div>\r\n        </li>\r\n    </ul>\r\n</div>\r\n			");
 $templateCache.put("app/layout/partials/voice-commands.tpl.html","<!-- TRIGGER BUTTON:\r\n<a href=\"/my-ajax-page.html\" data-toggle=\"modal\" data-target=\"#remoteModal\" class=\"btn btn-default\">Open Modal</a>  -->\r\n\r\n<!-- MODAL PLACE HOLDER\r\n<div class=\"modal fade\" id=\"remoteModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"remoteModalLabel\" aria-hidden=\"true\">\r\n<div class=\"modal-dialog\">\r\n<div class=\"modal-content\"></div>\r\n</div>\r\n</div>   -->\r\n<!--////////////////////////////////////-->\r\n\r\n<!--<div class=\"modal-header\">\r\n<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n&times;\r\n</button>\r\n<h4 class=\"modal-title\" id=\"myModalLabel\">Command List</h4>\r\n</div>-->\r\n<div class=\"modal-body\">\r\n\r\n	<h1><i class=\"fa fa-microphone text-muted\"></i>&nbsp;&nbsp; SmartAdmin Voice Command</h1>\r\n	<hr class=\"simple\">\r\n	<h5>Instruction</h5>\r\n\r\n	Click <span class=\"text-success\">\"Allow\"</span> to access your microphone and activate Voice Command.\r\n	You will notice a <span class=\"text-primary\"><strong>BLUE</strong> Flash</span> on the microphone icon indicating activation.\r\n	The icon will appear <span class=\"text-danger\"><strong>RED</strong></span> <span class=\"label label-danger\"><i class=\"fa fa-microphone fa-lg\"></i></span> if you <span class=\"text-danger\">\"Deny\"</span> access or don\'t have any microphone installed.\r\n	<br>\r\n	<br>\r\n	As a security precaution, your browser will disconnect the microphone every 60 to 120 seconds (sooner if not being used). In which case Voice Command will prompt you again to <span class=\"text-success\">\"Allow\"</span> or <span class=\"text-danger\">\"Deny\"</span> access to your microphone.\r\n	<br>\r\n	<br>\r\n	If you host your page over <strong>http<span class=\"text-success\">s</span></strong> (secure socket layer) protocol you can wave this security measure and have an unintrupted Voice Command.\r\n	<br>\r\n	<br>\r\n	<h5>Commands</h5>\r\n	<ul>\r\n		<li>\r\n			<strong>\'show\' </strong> then say the <strong>*page*</strong> you want to go to. For example <strong>\"show inbox\"</strong> or <strong>\"show calendar\"</strong>\r\n		</li>\r\n		<li>\r\n			<strong>\'mute\' </strong> - mutes all sound effects for the theme.\r\n		</li>\r\n		<li>\r\n			<strong>\'sound on\'</strong> - unmutes all sound effects for the theme.\r\n		</li>\r\n		<li>\r\n			<span class=\"text-danger\"><strong>\'stop\'</strong></span> - deactivates voice command.\r\n		</li>\r\n		<li>\r\n			<span class=\"text-primary\"><strong>\'help\'</strong></span> - brings up the command list\r\n		</li>\r\n		<li>\r\n			<span class=\"text-danger\"><strong>\'got it\'</strong></span> - closes help modal\r\n		</li>\r\n		<li>\r\n			<strong>\'hide navigation\'</strong> - toggle navigation collapse\r\n		</li>\r\n		<li>\r\n			<strong>\'show navigation\'</strong> - toggle navigation to open (can be used again to close)\r\n		</li>\r\n		<li>\r\n			<strong>\'scroll up\'</strong> - scrolls to the top of the page\r\n		</li>\r\n		<li>\r\n			<strong>\'scroll down\'</strong> - scrollts to the bottom of the page\r\n		</li>\r\n		<li>\r\n			<strong>\'go back\' </strong> - goes back in history (history -1 click)\r\n		</li>\r\n		<li>\r\n			<strong>\'logout\'</strong> - logs you out\r\n		</li>\r\n	</ul>\r\n	<br>\r\n	<h5>Adding your own commands</h5>\r\n	Voice Command supports up to 80 languages. Adding your own commands is extreamly easy. All commands are stored inside <strong>app.config.js</strong> file under the <code>var commands = {...}</code>. \r\n\r\n	<hr class=\"simple\">\r\n	<div class=\"text-right\">\r\n		<button type=\"button\" class=\"btn btn-success btn-lg\" data-dismiss=\"modal\">\r\n			Got it!\r\n		</button>\r\n	</div>\r\n\r\n</div>\r\n<!--<div class=\"modal-footer\">\r\n<button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Got it!</button>\r\n</div> -->");
 $templateCache.put("app/layout/shortcut/shortcut.tpl.html","<div id=\"shortcut\">\r\n	<ul>\r\n		<li>\r\n			<a href=\"#/inbox/\" class=\"jarvismetro-tile big-cubes bg-color-blue\"> <span class=\"iconbox\"> <i class=\"fa fa-envelope fa-4x\"></i> <span>Mail <span class=\"label pull-right bg-color-darken\">14</span></span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/calendar\" class=\"jarvismetro-tile big-cubes bg-color-orangeDark\"> <span class=\"iconbox\"> <i class=\"fa fa-calendar fa-4x\"></i> <span>Calendar</span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/maps\" class=\"jarvismetro-tile big-cubes bg-color-purple\"> <span class=\"iconbox\"> <i class=\"fa fa-map-marker fa-4x\"></i> <span>Maps</span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/invoice\" class=\"jarvismetro-tile big-cubes bg-color-blueDark\"> <span class=\"iconbox\"> <i class=\"fa fa-book fa-4x\"></i> <span>Invoice <span class=\"label pull-right bg-color-darken\">99</span></span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/gallery\" class=\"jarvismetro-tile big-cubes bg-color-greenLight\"> <span class=\"iconbox\"> <i class=\"fa fa-picture-o fa-4x\"></i> <span>Gallery </span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/profile\" class=\"jarvismetro-tile big-cubes selected bg-color-pinkDark\"> <span class=\"iconbox\"> <i class=\"fa fa-user fa-4x\"></i> <span>My Profile </span> </span> </a>\r\n		</li>\r\n	</ul>\r\n</div>");
-$templateCache.put("app/dashboard/todo/todo-widget.tpl.html","<div id=\"todo-widget\" jarvis-widget data-widget-editbutton=\"false\" data-widget-color=\"blue\"\r\n     ng-controller=\"TodoCtrl\">\r\n    <header>\r\n        <span class=\"widget-icon\"> <i class=\"fa fa-check txt-color-white\"></i> </span>\r\n\r\n        <h2> ToDo\'s </h2>\r\n\r\n        <div class=\"widget-toolbar\">\r\n            <!-- add: non-hidden - to disable auto hide -->\r\n            <button class=\"btn btn-xs btn-default\" ng-class=\"{active: newTodo}\" ng-click=\"toggleAdd()\"><i ng-class=\"{ \'fa fa-plus\': !newTodo, \'fa fa-times\': newTodo}\"></i> Add</button>\r\n\r\n        </div>\r\n    </header>\r\n    <!-- widget div-->\r\n    <div>\r\n        <div class=\"widget-body no-padding smart-form\">\r\n            <!-- content goes here -->\r\n            <div ng-show=\"newTodo\">\r\n                <h5 class=\"todo-group-title\"><i class=\"fa fa-plus-circle\"></i> New Todo</h5>\r\n\r\n                <form name=\"newTodoForm\" class=\"smart-form\">\r\n                    <fieldset>\r\n                        <section>\r\n                            <label class=\"input\">\r\n                                <input type=\"text\" required class=\"input-lg\" ng-model=\"newTodo.title\"\r\n                                       placeholder=\"What needs to be done?\">\r\n                            </label>\r\n                        </section>\r\n                        <section>\r\n                            <div class=\"col-xs-6\">\r\n                                <label class=\"select\">\r\n                                    <select class=\"input-sm\" ng-model=\"newTodo.state\"\r\n                                            ng-options=\"state as state for state in states\"></select> <i></i> </label>\r\n                            </div>\r\n                        </section>\r\n                    </fieldset>\r\n                    <footer>\r\n                        <button ng-disabled=\"newTodoForm.$invalid\" type=\"button\" class=\"btn btn-primary\"\r\n                                ng-click=\"createTodo()\">\r\n                            Add\r\n                        </button>\r\n                        <button type=\"button\" class=\"btn btn-default\" ng-click=\"toggleAdd()\">\r\n                            Cancel\r\n                        </button>\r\n                    </footer>\r\n                </form>\r\n            </div>\r\n\r\n            <todo-list state=\"Critical\"  title=\"Critical Tasks\" icon=\"warning\" todos=\"todos\"></todo-list>\r\n\r\n            <todo-list state=\"Important\" title=\"Important Tasks\" icon=\"exclamation\" todos=\"todos\"></todo-list>\r\n\r\n            <todo-list state=\"Completed\" title=\"Completed Tasks\" icon=\"check\" todos=\"todos\"></todo-list>\r\n\r\n            <!-- end content -->\r\n        </div>\r\n\r\n    </div>\r\n    <!-- end widget div -->\r\n</div>");
 $templateCache.put("app/dashboard/chat/directives/aside-chat-widget.tpl.html","<ul>\r\n    <li>\r\n        <div class=\"display-users\">\r\n            <input class=\"form-control chat-user-filter\" placeholder=\"Filter\" type=\"text\">\r\n            <dl>\r\n                <dt>\r\n                    <a href=\"#\" class=\"usr\"\r\n                       data-chat-id=\"cha1\"\r\n                       data-chat-fname=\"Sadi\"\r\n                       data-chat-lname=\"Orlaf\"\r\n                       data-chat-status=\"busy\"\r\n                       data-chat-alertmsg=\"Sadi Orlaf is in a meeting. Please do not disturb!\"\r\n                       data-chat-alertshow=\"true\"\r\n                       popover-trigger=\"hover\"\r\n                       popover-placement=\"right\"\r\n                       smart-popover-html=\"\r\n										<div class=\'usr-card\'>\r\n											<img src=\'styles/img/avatars/5.png\' alt=\'Sadi Orlaf\'>\r\n											<div class=\'usr-card-content\'>\r\n												<h3>Sadi Orlaf</h3>\r\n												<p>Marketing Executive</p>\r\n											</div>\r\n										</div>\r\n									\">\r\n                        <i></i>Sadi Orlaf\r\n                    </a>\r\n                </dt>\r\n                <dt>\r\n                    <a href=\"#\" class=\"usr\"\r\n                       data-chat-id=\"cha2\"\r\n                       data-chat-fname=\"Jessica\"\r\n                       data-chat-lname=\"Dolof\"\r\n                       data-chat-status=\"online\"\r\n                       data-chat-alertmsg=\"\"\r\n                       data-chat-alertshow=\"false\"\r\n                       popover-trigger=\"hover\"\r\n                       popover-placement=\"right\"\r\n                       smart-popover-html=\"\r\n										<div class=\'usr-card\'>\r\n											<img src=\'styles/img/avatars/1.png\' alt=\'Jessica Dolof\'>\r\n											<div class=\'usr-card-content\'>\r\n												<h3>Jessica Dolof</h3>\r\n												<p>Sales Administrator</p>\r\n											</div>\r\n										</div>\r\n									\">\r\n                        <i></i>Jessica Dolof\r\n                    </a>\r\n                </dt>\r\n                <dt>\r\n                    <a href=\"#\" class=\"usr\"\r\n                       data-chat-id=\"cha3\"\r\n                       data-chat-fname=\"Zekarburg\"\r\n                       data-chat-lname=\"Almandalie\"\r\n                       data-chat-status=\"online\"\r\n                       popover-trigger=\"hover\"\r\n                       popover-placement=\"right\"\r\n                       smart-popover-html=\"\r\n										<div class=\'usr-card\'>\r\n											<img src=\'styles/img/avatars/3.png\' alt=\'Zekarburg Almandalie\'>\r\n											<div class=\'usr-card-content\'>\r\n												<h3>Zekarburg Almandalie</h3>\r\n												<p>Sales Admin</p>\r\n											</div>\r\n										</div>\r\n									\">\r\n                        <i></i>Zekarburg Almandalie\r\n                    </a>\r\n                </dt>\r\n                <dt>\r\n                    <a href=\"#\" class=\"usr\"\r\n                       data-chat-id=\"cha4\"\r\n                       data-chat-fname=\"Barley\"\r\n                       data-chat-lname=\"Krazurkth\"\r\n                       data-chat-status=\"away\"\r\n                       popover-trigger=\"hover\"\r\n                       popover-placement=\"right\"\r\n                       smart-popover-html=\"\r\n										<div class=\'usr-card\'>\r\n											<img src=\'styles/img/avatars/4.png\' alt=\'Barley Krazurkth\'>\r\n											<div class=\'usr-card-content\'>\r\n												<h3>Barley Krazurkth</h3>\r\n												<p>Sales Director</p>\r\n											</div>\r\n										</div>\r\n									\">\r\n                        <i></i>Barley Krazurkth\r\n                    </a>\r\n                </dt>\r\n                <dt>\r\n                    <a href=\"#\" class=\"usr offline\"\r\n                       data-chat-id=\"cha5\"\r\n                       data-chat-fname=\"Farhana\"\r\n                       data-chat-lname=\"Amrin\"\r\n                       data-chat-status=\"incognito\"\r\n                       popover-trigger=\"hover\"\r\n                       popover-placement=\"right\"\r\n                       smart-popover-html=\"\r\n										<div class=\'usr-card\'>\r\n											<img src=\'styles/img/avatars/female.png\' alt=\'Farhana Amrin\'>\r\n											<div class=\'usr-card-content\'>\r\n												<h3>Farhana Amrin</h3>\r\n												<p>Support Admin <small><i class=\'fa fa-music\'></i> Playing Beethoven Classics</small></p>\r\n											</div>\r\n										</div>\r\n									\">\r\n                        <i></i>Farhana Amrin (offline)\r\n                    </a>\r\n                </dt>\r\n                <dt>\r\n                    <a href=\"#\" class=\"usr offline\"\r\n                       data-chat-id=\"cha6\"\r\n                       data-chat-fname=\"Lezley\"\r\n                       data-chat-lname=\"Jacob\"\r\n                       data-chat-status=\"incognito\"\r\n                       popover-trigger=\"hover\"\r\n                       popover-placement=\"right\"\r\n                       smart-popover-html=\"\r\n										<div class=\'usr-card\'>\r\n											<img src=\'styles/img/avatars/male.png\' alt=\'Lezley Jacob\'>\r\n											<div class=\'usr-card-content\'>\r\n												<h3>Lezley Jacob</h3>\r\n												<p>Sales Director</p>\r\n											</div>\r\n										</div>\r\n									\">\r\n                        <i></i>Lezley Jacob (offline)\r\n                    </a>\r\n                </dt>\r\n            </dl>\r\n\r\n\r\n            <!--<a href=\"chat.html\" class=\"btn btn-xs btn-default btn-block sa-chat-learnmore-btn\">About the API</a>-->\r\n        </div>\r\n    </li>\r\n</ul>");
 $templateCache.put("app/dashboard/chat/directives/chat-users.tpl.html","<div id=\"chat-container\" ng-class=\"{open: open}\">\r\n    <span class=\"chat-list-open-close\" ng-click=\"openToggle()\"><i class=\"fa fa-user\"></i><b>!</b></span>\r\n\r\n    <div class=\"chat-list-body custom-scroll\">\r\n        <ul id=\"chat-users\">\r\n            <li ng-repeat=\"chatUser in chatUsers | filter: chatUserFilter\">\r\n                <a ng-click=\"messageTo(chatUser)\"><img ng-src=\"{{chatUser.picture}}\">{{chatUser.username}} <span\r\n                        class=\"badge badge-inverse\">{{chatUser.username.length}}</span><span class=\"state\"><i\r\n                        class=\"fa fa-circle txt-color-green pull-right\"></i></span></a>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n    <div class=\"chat-list-footer\">\r\n        <div class=\"control-group\">\r\n            <form class=\"smart-form\">\r\n                <section>\r\n                    <label class=\"input\" >\r\n                        <input type=\"text\" ng-model=\"chatUserFilter\" id=\"filter-chat-list\" placeholder=\"Filter\">\r\n                    </label>\r\n                </section>\r\n            </form>\r\n        </div>\r\n    </div>\r\n</div>");
 $templateCache.put("app/dashboard/chat/directives/chat-widget.tpl.html","<div id=\"chat-widget\" jarvis-widget data-widget-color=\"blueDark\" data-widget-editbutton=\"false\"\r\n     data-widget-fullscreenbutton=\"false\">\r\n\r\n\r\n    <header>\r\n        <span class=\"widget-icon\"> <i class=\"fa fa-comments txt-color-white\"></i> </span>\r\n\r\n        <h2> SmartMessage </h2>\r\n\r\n        <div class=\"widget-toolbar\">\r\n            <!-- add: non-hidden - to disable auto hide -->\r\n\r\n            <div class=\"btn-group\" data-dropdown>\r\n                <button class=\"btn dropdown-toggle btn-xs btn-success\" data-toggle=\"dropdown\">\r\n                    Status <i class=\"fa fa-caret-down\"></i>\r\n                </button>\r\n                <ul class=\"dropdown-menu pull-right js-status-update\">\r\n                    <li>\r\n                        <a href-void><i class=\"fa fa-circle txt-color-green\"></i> Online</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href-void><i class=\"fa fa-circle txt-color-red\"></i> Busy</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href-void><i class=\"fa fa-circle txt-color-orange\"></i> Away</a>\r\n                    </li>\r\n                    <li class=\"divider\"></li>\r\n                    <li>\r\n                        <a href-void><i class=\"fa fa-power-off\"></i> Log Off</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </header>\r\n\r\n    <!-- widget div-->\r\n    <div>\r\n        <div class=\"widget-body widget-hide-overflow no-padding\">\r\n            <!-- content goes here -->\r\n\r\n            <chat-users></chat-users>\r\n\r\n            <!-- CHAT BODY -->\r\n            <div id=\"chat-body\" class=\"chat-body custom-scroll\">\r\n                <ul>\r\n                    <li class=\"message\" ng-repeat=\"message in chatMessages\">\r\n                        <img class=\"message-picture online\" ng-src=\"{{message.user.picture}}\">\r\n\r\n                        <div class=\"message-text\">\r\n                            <time>\r\n                                {{message.date | date }}\r\n                            </time>\r\n                            <a ng-click=\"messageTo(message.user)\" class=\"username\">{{message.user.username}}</a>\r\n                            <div ng-bind-html=\"message.body\"></div>\r\n\r\n                        </div>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n\r\n            <!-- CHAT FOOTER -->\r\n            <div class=\"chat-footer\">\r\n\r\n                <!-- CHAT TEXTAREA -->\r\n                <div class=\"textarea-div\">\r\n\r\n                    <div class=\"typearea\">\r\n                        <textarea placeholder=\"Write a reply...\" id=\"textarea-expand\"\r\n                                  class=\"custom-scroll\" ng-model=\"newMessage\"></textarea>\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <!-- CHAT REPLY/SEND -->\r\n											<span class=\"textarea-controls\">\r\n												<button class=\"btn btn-sm btn-primary pull-right\" ng-click=\"sendMessage()\">\r\n                                                    Reply\r\n                                                </button> <span class=\"pull-right smart-form\"\r\n                                                                style=\"margin-top: 3px; margin-right: 10px;\"> <label\r\n                                                    class=\"checkbox pull-right\">\r\n                                                <input type=\"checkbox\" name=\"subscription\" id=\"subscription\">\r\n                                                <i></i>Press <strong> ENTER </strong> to send </label> </span> <a\r\n                                                    href-void class=\"pull-left\"><i\r\n                                                    class=\"fa fa-camera fa-fw fa-lg\"></i></a> </span>\r\n\r\n            </div>\r\n\r\n            <!-- end content -->\r\n        </div>\r\n\r\n    </div>\r\n    <!-- end widget div -->\r\n</div>");
@@ -2893,6 +2894,21 @@ angular.module('app.appViews').controller('ProjectsDemoCtrl', function ($scope, 
 });
 "use strict";
 
+angular.module('app.auth').directive('loginInfo', function(User){
+
+    return {
+        restrict: 'A',
+        templateUrl: 'app/auth/directives/login-info.tpl.html',
+        link: function(scope, element){
+            User.initialized.then(function(){
+                scope.user = User
+            });
+        }
+    }
+})
+
+"use strict";
+
 angular.module('app.auth').controller('LoginCtrl', function ($scope, $state, GooglePlus, User, ezfb) {
 
     $scope.$on('event:google-plus-signin-success', function (event, authResult) {
@@ -2912,21 +2928,6 @@ angular.module('app.auth').controller('LoginCtrl', function ($scope, $state, Goo
             $state.go('app.dashboard');
         });
     });
-})
-
-"use strict";
-
-angular.module('app.auth').directive('loginInfo', function(User){
-
-    return {
-        restrict: 'A',
-        templateUrl: 'app/auth/directives/login-info.tpl.html',
-        link: function(scope, element){
-            User.initialized.then(function(){
-                scope.user = User
-            });
-        }
-    }
 })
 
 
@@ -2950,436 +2951,6 @@ angular.module('app.auth').factory('User', function ($http, $q, APP_CONFIG) {
     return UserModel;
 });
 
-"use strict";
-
-angular.module('app.Basicdata').controller('BPCBMCForecastdetailCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-})
-"use strict";
-
-angular.module('app.Basicdata').controller('BPCCAdetailCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-})
-"use strict";
-
-angular.module('app.Basicdata').controller('BUmaintenanceCtrl', function ($scope,$state,$stateParams,BUmaintenanceService,APP_CONFIG,Upload) {
-
-    //加载页面、搜索功能
-    $scope.SegmentSel = '';
-    $scope.goPage = function(){
-        $scope.page = {
-            limit : APP_CONFIG.limit,
-            page : APP_CONFIG.page,
-            beanName : $scope.SegmentSel
-        }
-        console.log($scope.page)
-        BUmaintenanceService.getPage($scope.page).then(function(data){
-            if(data.code == 0){
-                $scope.pageList = data.result.list;
-                console.log($scope.pageList)
-            }else {
-                console.log(data);
-            }
-            console.log(data);
-        },function(data){
-            console.log(data);
-        })
-    }
-    $scope.goPage();
-
-    $('.M-box').pagination({
-        pageCount : 10,   //总页数
-        totalData : 200,  //数据总条数
-        current : 1,   //当前第几页
-        count : 2,   //当前选中页前后页数
-        isHide : false,   //1或0页隐藏分页控件
-        keepShowPN :true,   //是否一直显示上一页下一页
-        prevContent:'Previous',
-        nextContent:'Next',
-        callback:function(api){
-            $('.now').text(api.getCurrent());
-        }
-    },function(api){
-        $('.now').text(api.getCurrent());
-    });
-
-    //单选
-    $scope.arr = [];
-    $scope.One = function(page){
-        page.isChecked = !page.isChecked;
-        if(page.isChecked){
-            $scope.arr.push(page.id);
-            if($scope.arr.length == $scope.pageList.length){
-                $scope.isCheckedAll = true;
-            }
-        }else {
-            for(var i=0;i<$scope.arr.length;i++){
-                if($scope.arr[i] == page.id){
-                    $scope.arr.splice(i,1);
-                    break
-                }
-            }
-            $scope.isCheckedAll = false;
-        }
-        console.log($scope.arr)
-    }
-
-    //全选
-    $scope.All = function(){
-        $scope.isCheckedAll = !$scope.isCheckedAll;
-        $scope.arr = [];
-        for(var i =0;i<$scope.pageList.length;i++){
-            if($scope.isCheckedAll){
-                $scope.pageList[i].isChecked = true;
-                $scope.arr.push($scope.pageList[i].id)
-            }else {
-                $scope.pageList[i].isChecked = false;
-            }
-        }
-        console.log($scope.arr);
-    }
-
-    //删除
-    $scope.del = function(){
-        if($scope.arr.length<=0){
-            alert('请选择要删除的项！');
-        }else {
-            if(confirm('确认要删除？')){
-                $scope.arrlist = $scope.arr.join(',');
-                BUmaintenanceService.delList( $scope.arrlist).then(function(data){
-                    if(data.code == 0){
-                        alert('删除成功！');
-                        $scope.goPage();
-                    }else {
-                        console.log(data);
-                    }
-                },function(data){
-                    console.log(data);
-                })
-            }
-        }
-    }
-
-
-    //下载
-    $scope.downLoad = function(){
-        $scope.load = {
-            type : 'bu'
-        }
-        BUmaintenanceService.download($scope.load).then(function(data){
-            console.log(data);
-            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-            var objectUrl = URL.createObjectURL(blob);
-            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-            $("body").append(aForExcel);
-            $(".forExcel").click();
-            aForExcel.remove();
-        },function(data){
-            console.log(data);
-        })
-    }
-
-    //上传
-    $scope.myfiles = {};
-    $scope.openUpload = function(){
-        $('#myModal').modal('show');
-        $scope.myfilesVal = '';
-        $scope.fileChange = function(){
-            if($scope.myfiles.name){
-                $scope.myfilesVal = $scope.myfiles.name;
-            }else {
-                $scope.myfilesVal = '';
-            }
-        }
-    }
-
-    $scope.upload = function(){
-        Upload.upload({
-            //服务端接收
-            url:APP_CONFIG.baseUrl+ '/api/bmt/attachments',
-            data : {
-                file : $scope.myfiles
-            }
-        }).success(function (data, status, headers, config) {
-            if(data.code == 0){
-                alert('上传成功！');
-                $('#myModal').modal('hide');
-                $scope.goPage();
-            }else {
-                alert('上传失败！');
-            }
-        }).error(function (data, status, headers, config) {
-            alert('上传失败！');
-            //上传失败
-            console.log('error status: ' + status);
-        });
-    }
-})
-"use strict";
-
-angular.module('app.Basicdata').controller('CFEBMCdetailCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-})
-"use strict";
-
-angular.module('app.Basicdata').controller('CommoditymaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-
-    $scope.del = function(){
-        if(confirm('确认要删除？')){
-
-        }
-    }
-})
-"use strict";
-
-angular.module('app.Basicdata').controller('DataMappingCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-})
-"use strict";
-
-angular.module('app.Basicdata').controller('EBRQtydetailCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-})
-"use strict";
-
-angular.module('app.Basicdata').controller('MarkupdetailCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-})
-"use strict";
-
-angular.module('app.Basicdata').controller('OtherCategorymasterdataCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-
-    $scope.del = function(){
-        if(confirm('确认要删除？')){
-
-        }else {
-
-        }
-    }
-})
-"use strict";
-
-angular.module('app.Basicdata').controller('SegmentmaintenanceCtrl', function ($scope,$state,$stateParams,APP_CONFIG,SegmentmaintenanceService,Upload) {
-
-    //加载页面、搜索功能
-    $scope.SegmentSel = '';
-    $scope.goPage = function(){
-        $scope.page = {
-            limit : APP_CONFIG.limit,
-            page : APP_CONFIG.page,
-            beanName : $scope.SegmentSel
-        }
-        console.log($scope.page)
-        SegmentmaintenanceService.getPage($scope.page).then(function(data){
-            if(data.code == 0){
-                $scope.pageList = data.result.list;
-                console.log($scope.pageList)
-            }else {
-                console.log(data);
-            }
-            console.log(data);
-        },function(data){
-            console.log(data);
-        })
-    }
-    $scope.goPage();
-
-    //单选
-   $scope.arr = [];
-    $scope.One = function(page){
-        page.isChecked = !page.isChecked;
-        if(page.isChecked){
-            $scope.arr.push(page.id);
-            if($scope.arr.length == $scope.pageList.length){
-                $scope.isCheckedAll = true;
-            }
-        }else {
-            for(var i=0;i<$scope.arr.length;i++){
-                if($scope.arr[i] == page.id){
-                    $scope.arr.splice(i,1);
-                    break
-                }
-            }
-            $scope.isCheckedAll = false;
-        }
-        console.log($scope.arr)
-    }
-
-    //全选
-    $scope.All = function(){
-        $scope.isCheckedAll = !$scope.isCheckedAll;
-        $scope.arr = [];
-        for(var i =0;i<$scope.pageList.length;i++){
-            if($scope.isCheckedAll){
-                $scope.pageList[i].isChecked = true;
-                $scope.arr.push($scope.pageList[i].id)
-            }else {
-                $scope.pageList[i].isChecked = false;
-            }
-        }
-        console.log($scope.arr);
-    }
-
-    //删除
-    $scope.del = function(){
-        if($scope.arr.length<=0){
-            alert('请选择要删除的项！');
-        }else {
-            if(confirm('确认要删除？')){
-                $scope.arrlist = $scope.arr.join(',');
-                SegmentmaintenanceService.delList( $scope.arrlist).then(function(data){
-                    if(data.code == 0){
-                        alert('删除成功！');
-                        $scope.goPage();
-                    }else {
-                        console.log(data);
-                    }
-                },function(data){
-                    console.log(data);
-                })
-            }
-        }
-    }
-
-    //分页器
-    $('.M-box').pagination({
-        pageCount : 10,   //总页数
-        totalData : 200,  //数据总条数
-        current : 1,   //当前第几页
-        count : 2,   //当前选中页前后页数
-        isHide : false,   //1或0页隐藏分页控件
-        keepShowPN :true,   //是否一直显示上一页下一页
-        prevContent:'Previous',
-        nextContent:'Next',
-        callback:function(api){
-            $('.now').text(api.getCurrent());
-        }
-    },function(api){
-        $('.now').text(api.getCurrent());
-    });
-
-
-    //下载
-    $scope.downLoad = function(){
-        $scope.load = {
-            type : 'segment'
-        }
-        SegmentmaintenanceService.download($scope.load).then(function(data){
-            console.log(data);
-            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-            var objectUrl = URL.createObjectURL(blob);
-            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-            $("body").append(aForExcel);
-            $(".forExcel").click();
-            aForExcel.remove();
-        },function(data){
-            console.log(data);
-        })
-    }
-
-    //上传
-    $scope.myfiles = {};
-    $scope.openUpload = function(){
-        $('#myModal').modal('show');
-        $scope.myfilesVal = '';
-        $scope.fileChange = function(){
-            if($scope.myfiles.name){
-                $scope.myfilesVal = $scope.myfiles.name;
-            }else {
-                $scope.myfilesVal = '';
-            }
-        }
-    }
-
-    $scope.upload = function(){
-        Upload.upload({
-            //服务端接收
-            url:APP_CONFIG.baseUrl+ '/api/smt/attachments',
-            data : {
-                file : $scope.myfiles
-            }
-        }).success(function (data, status, headers, config) {
-            if(data.code == 0){
-                alert('上传成功！');
-                $('#myModal').modal('hide');
-                $scope.goPage();
-            }else {
-                alert('上传失败！');
-            }
-        }).error(function (data, status, headers, config) {
-            alert('上传失败！');
-            //上传失败
-            console.log('error status: ' + status);
-        });
-    }
-
-})
 /**
  * pagination分页插件
  * @version 1.5.0
@@ -3607,6 +3178,556 @@ angular.module('app.Basicdata').controller('SegmentmaintenanceCtrl', function ($
 /*! 12.2.13 */
 !window.XMLHttpRequest||window.FileAPI&&FileAPI.shouldLoad||(window.XMLHttpRequest.prototype.setRequestHeader=function(a){return function(b,c){if("__setXHR_"===b){var d=c(this);d instanceof Function&&d(this)}else a.apply(this,arguments)}}(window.XMLHttpRequest.prototype.setRequestHeader));var ngFileUpload=angular.module("ngFileUpload",[]);ngFileUpload.version="12.2.13",ngFileUpload.service("UploadBase",["$http","$q","$timeout",function(a,b,c){function d(d){function e(a){j.notify&&j.notify(a),k.progressFunc&&c(function(){k.progressFunc(a)})}function h(a){return null!=d._start&&g?{loaded:a.loaded+d._start,total:d._file&&d._file.size||a.total,type:a.type,config:d,lengthComputable:!0,target:a.target}:a}function i(){a(d).then(function(a){if(g&&d._chunkSize&&!d._finished&&d._file){var b=d._file&&d._file.size||0;e({loaded:Math.min(d._end,b),total:b,config:d,type:"progress"}),f.upload(d,!0)}else d._finished&&delete d._finished,j.resolve(a)},function(a){j.reject(a)},function(a){j.notify(a)})}d.method=d.method||"POST",d.headers=d.headers||{};var j=d._deferred=d._deferred||b.defer(),k=j.promise;return d.disableProgress||(d.headers.__setXHR_=function(){return function(a){a&&a.upload&&a.upload.addEventListener&&(d.__XHR=a,d.xhrFn&&d.xhrFn(a),a.upload.addEventListener("progress",function(a){a.config=d,e(h(a))},!1),a.upload.addEventListener("load",function(a){a.lengthComputable&&(a.config=d,e(h(a)))},!1))}}),g?d._chunkSize&&d._end&&!d._finished?(d._start=d._end,d._end+=d._chunkSize,i()):d.resumeSizeUrl?a.get(d.resumeSizeUrl).then(function(a){d._start=d.resumeSizeResponseReader?d.resumeSizeResponseReader(a.data):parseInt((null==a.data.size?a.data:a.data.size).toString()),d._chunkSize&&(d._end=d._start+d._chunkSize),i()},function(a){throw a}):d.resumeSize?d.resumeSize().then(function(a){d._start=a,d._chunkSize&&(d._end=d._start+d._chunkSize),i()},function(a){throw a}):(d._chunkSize&&(d._start=0,d._end=d._start+d._chunkSize),i()):i(),k.success=function(a){return k.then(function(b){a(b.data,b.status,b.headers,d)}),k},k.error=function(a){return k.then(null,function(b){a(b.data,b.status,b.headers,d)}),k},k.progress=function(a){return k.progressFunc=a,k.then(null,null,function(b){a(b)}),k},k.abort=k.pause=function(){return d.__XHR&&c(function(){d.__XHR.abort()}),k},k.xhr=function(a){return d.xhrFn=function(b){return function(){b&&b.apply(k,arguments),a.apply(k,arguments)}}(d.xhrFn),k},f.promisesCount++,k["finally"]&&k["finally"]instanceof Function&&k["finally"](function(){f.promisesCount--}),k}function e(a){var b={};for(var c in a)a.hasOwnProperty(c)&&(b[c]=a[c]);return b}var f=this;f.promisesCount=0,this.isResumeSupported=function(){return window.Blob&&window.Blob.prototype.slice};var g=this.isResumeSupported();this.isUploadInProgress=function(){return f.promisesCount>0},this.rename=function(a,b){return a.ngfName=b,a},this.jsonBlob=function(a){null==a||angular.isString(a)||(a=JSON.stringify(a));var b=new window.Blob([a],{type:"application/json"});return b._ngfBlob=!0,b},this.json=function(a){return angular.toJson(a)},this.isFile=function(a){return null!=a&&(a instanceof window.Blob||a.flashId&&a.name&&a.size)},this.upload=function(a,b){function c(b,c){if(b._ngfBlob)return b;if(a._file=a._file||b,null!=a._start&&g){a._end&&a._end>=b.size&&(a._finished=!0,a._end=b.size);var d=b.slice(a._start,a._end||b.size);return d.name=b.name,d.ngfName=b.ngfName,a._chunkSize&&(c.append("_chunkSize",a._chunkSize),c.append("_currentChunkSize",a._end-a._start),c.append("_chunkNumber",Math.floor(a._start/a._chunkSize)),c.append("_totalSize",a._file.size)),d}return b}function h(b,d,e){if(void 0!==d)if(angular.isDate(d)&&(d=d.toISOString()),angular.isString(d))b.append(e,d);else if(f.isFile(d)){var g=c(d,b),i=e.split(",");i[1]&&(g.ngfName=i[1].replace(/^\s+|\s+$/g,""),e=i[0]),a._fileKey=a._fileKey||e,b.append(e,g,g.ngfName||g.name)}else if(angular.isObject(d)){if(d.$$ngfCircularDetection)throw"ngFileUpload: Circular reference in config.data. Make sure specified data for Upload.upload() has no circular reference: "+e;d.$$ngfCircularDetection=!0;try{for(var j in d)if(d.hasOwnProperty(j)&&"$$ngfCircularDetection"!==j){var k=null==a.objectKey?"[i]":a.objectKey;d.length&&parseInt(j)>-1&&(k=null==a.arrayKey?k:a.arrayKey),h(b,d[j],e+k.replace(/[ik]/g,j))}}finally{delete d.$$ngfCircularDetection}}else b.append(e,d)}function i(){a._chunkSize=f.translateScalars(a.resumeChunkSize),a._chunkSize=a._chunkSize?parseInt(a._chunkSize.toString()):null,a.headers=a.headers||{},a.headers["Content-Type"]=void 0,a.transformRequest=a.transformRequest?angular.isArray(a.transformRequest)?a.transformRequest:[a.transformRequest]:[],a.transformRequest.push(function(b){var c,d=new window.FormData;b=b||a.fields||{},a.file&&(b.file=a.file);for(c in b)if(b.hasOwnProperty(c)){var e=b[c];a.formDataAppender?a.formDataAppender(d,c,e):h(d,e,c)}return d})}return b||(a=e(a)),a._isDigested||(a._isDigested=!0,i()),d(a)},this.http=function(b){return b=e(b),b.transformRequest=b.transformRequest||function(b){return window.ArrayBuffer&&b instanceof window.ArrayBuffer||b instanceof window.Blob?b:a.defaults.transformRequest[0].apply(this,arguments)},b._chunkSize=f.translateScalars(b.resumeChunkSize),b._chunkSize=b._chunkSize?parseInt(b._chunkSize.toString()):null,d(b)},this.translateScalars=function(a){if(angular.isString(a)){if(a.search(/kb/i)===a.length-2)return parseFloat(1024*a.substring(0,a.length-2));if(a.search(/mb/i)===a.length-2)return parseFloat(1048576*a.substring(0,a.length-2));if(a.search(/gb/i)===a.length-2)return parseFloat(1073741824*a.substring(0,a.length-2));if(a.search(/b/i)===a.length-1)return parseFloat(a.substring(0,a.length-1));if(a.search(/s/i)===a.length-1)return parseFloat(a.substring(0,a.length-1));if(a.search(/m/i)===a.length-1)return parseFloat(60*a.substring(0,a.length-1));if(a.search(/h/i)===a.length-1)return parseFloat(3600*a.substring(0,a.length-1))}return a},this.urlToBlob=function(c){var d=b.defer();return a({url:c,method:"get",responseType:"arraybuffer"}).then(function(a){var b=new Uint8Array(a.data),e=a.headers("content-type")||"image/WebP",f=new window.Blob([b],{type:e}),g=c.match(/.*\/(.+?)(\?.*)?$/);g.length>1&&(f.name=g[1]),d.resolve(f)},function(a){d.reject(a)}),d.promise},this.setDefaults=function(a){this.defaults=a||{}},this.defaults={},this.version=ngFileUpload.version}]),ngFileUpload.service("Upload",["$parse","$timeout","$compile","$q","UploadExif",function(a,b,c,d,e){function f(a,b,c){var e=[i.emptyPromise()];return angular.forEach(a,function(d,f){0===d.type.indexOf("image/jpeg")&&i.attrGetter("ngfFixOrientation",b,c,{$file:d})&&e.push(i.happyPromise(i.applyExifRotation(d),d).then(function(b){a.splice(f,1,b)}))}),d.all(e)}function g(a,b,c,e){var f=i.attrGetter("ngfResize",b,c);if(!f||!i.isResizeSupported()||!a.length)return i.emptyPromise();if(f instanceof Function){var g=d.defer();return f(a).then(function(d){h(d,a,b,c,e).then(function(a){g.resolve(a)},function(a){g.reject(a)})},function(a){g.reject(a)})}return h(f,a,b,c,e)}function h(a,b,c,e,f){function g(d,g){if(0===d.type.indexOf("image")){if(a.pattern&&!i.validatePattern(d,a.pattern))return;a.resizeIf=function(a,b){return i.attrGetter("ngfResizeIf",c,e,{$width:a,$height:b,$file:d})};var j=i.resize(d,a);h.push(j),j.then(function(a){b.splice(g,1,a)},function(a){d.$error="resize",(d.$errorMessages=d.$errorMessages||{}).resize=!0,d.$errorParam=(a?(a.message?a.message:a)+": ":"")+(d&&d.name),f.$ngfValidations.push({name:"resize",valid:!1}),i.applyModelValidation(f,b)})}}for(var h=[i.emptyPromise()],j=0;j<b.length;j++)g(b[j],j);return d.all(h)}var i=e;return i.getAttrWithDefaults=function(a,b){if(null!=a[b])return a[b];var c=i.defaults[b];return null==c?c:angular.isString(c)?c:JSON.stringify(c)},i.attrGetter=function(b,c,d,e){var f=this.getAttrWithDefaults(c,b);if(!d)return f;try{return e?a(f)(d,e):a(f)(d)}catch(g){if(b.search(/min|max|pattern/i))return f;throw g}},i.shouldUpdateOn=function(a,b,c){var d=i.attrGetter("ngfModelOptions",b,c);return d&&d.updateOn?d.updateOn.split(" ").indexOf(a)>-1:!0},i.emptyPromise=function(){var a=d.defer(),c=arguments;return b(function(){a.resolve.apply(a,c)}),a.promise},i.rejectPromise=function(){var a=d.defer(),c=arguments;return b(function(){a.reject.apply(a,c)}),a.promise},i.happyPromise=function(a,c){var e=d.defer();return a.then(function(a){e.resolve(a)},function(a){b(function(){throw a}),e.resolve(c)}),e.promise},i.updateModel=function(c,d,e,h,j,k,l){function m(f,g,j,l,m){d.$$ngfPrevValidFiles=f,d.$$ngfPrevInvalidFiles=g;var n=f&&f.length?f[0]:null,o=g&&g.length?g[0]:null;c&&(i.applyModelValidation(c,f),c.$setViewValue(m?n:f)),h&&a(h)(e,{$files:f,$file:n,$newFiles:j,$duplicateFiles:l,$invalidFiles:g,$invalidFile:o,$event:k});var p=i.attrGetter("ngfModelInvalid",d);p&&b(function(){a(p).assign(e,m?o:g)}),b(function(){})}function n(){function a(a,b){return a.name===b.name&&(a.$ngfOrigSize||a.size)===(b.$ngfOrigSize||b.size)&&a.type===b.type}function b(b){var c;for(c=0;c<r.length;c++)if(a(b,r[c]))return!0;for(c=0;c<s.length;c++)if(a(b,s[c]))return!0;return!1}if(j){q=[],t=[];for(var c=0;c<j.length;c++)b(j[c])?t.push(j[c]):q.push(j[c])}}function o(a){return angular.isArray(a)?a:[a]}function p(){function a(){b(function(){m(w?r.concat(v):v,w?s.concat(u):u,j,t,x)},z&&z.debounce?z.debounce.change||z.debounce:0)}var f=y?q:v;g(f,d,e,c).then(function(){y?i.validate(q,w?r.length:0,c,d,e).then(function(b){v=b.validsFiles,u=b.invalidsFiles,a()}):a()},function(){for(var b=0;b<f.length;b++){var c=f[b];if("resize"===c.$error){var d=v.indexOf(c);d>-1&&(v.splice(d,1),u.push(c)),a()}}})}var q,r,s,t=[],u=[],v=[];r=d.$$ngfPrevValidFiles||[],s=d.$$ngfPrevInvalidFiles||[],c&&c.$modelValue&&(r=o(c.$modelValue));var w=i.attrGetter("ngfKeep",d,e);q=(j||[]).slice(0),("distinct"===w||i.attrGetter("ngfKeepDistinct",d,e)===!0)&&n(d,e);var x=!w&&!i.attrGetter("ngfMultiple",d,e)&&!i.attrGetter("multiple",d);if(!w||q.length){i.attrGetter("ngfBeforeModelChange",d,e,{$files:j,$file:j&&j.length?j[0]:null,$newFiles:q,$duplicateFiles:t,$event:k});var y=i.attrGetter("ngfValidateAfterResize",d,e),z=i.attrGetter("ngfModelOptions",d,e);i.validate(q,w?r.length:0,c,d,e).then(function(a){l?m(q,[],j,t,x):(z&&z.allowInvalid||y?v=q:(v=a.validFiles,u=a.invalidFiles),i.attrGetter("ngfFixOrientation",d,e)&&i.isExifSupported()?f(v,d,e).then(function(){p()}):p())})}},i}]),ngFileUpload.directive("ngfSelect",["$parse","$timeout","$compile","Upload",function(a,b,c,d){function e(a){var b=a.match(/Android[^\d]*(\d+)\.(\d+)/);if(b&&b.length>2){var c=d.defaults.androidFixMinorVersion||4;return parseInt(b[1])<4||parseInt(b[1])===c&&parseInt(b[2])<c}return-1===a.indexOf("Chrome")&&/.*Windows.*Safari.*/.test(a)}function f(a,b,c,d,f,h,i,j){function k(){return"input"===b[0].tagName.toLowerCase()&&c.type&&"file"===c.type.toLowerCase()}function l(){return t("ngfChange")||t("ngfSelect")}function m(b){if(j.shouldUpdateOn("change",c,a)){var e=b.__files_||b.target&&b.target.files,f=[];if(!e)return;for(var g=0;g<e.length;g++)f.push(e[g]);j.updateModel(d,c,a,l(),f.length?f:null,b)}}function n(a,d){function e(b){a.attr("id","ngf-"+b),d.attr("id","ngf-label-"+b)}for(var f=0;f<b[0].attributes.length;f++){var g=b[0].attributes[f];"type"!==g.name&&"class"!==g.name&&"style"!==g.name&&("id"===g.name?(e(g.value),u.push(c.$observe("id",e))):a.attr(g.name,g.value||"required"!==g.name&&"multiple"!==g.name?g.value:g.name))}}function o(){if(k())return b;var a=angular.element('<input type="file">'),c=angular.element("<label>upload</label>");return c.css("visibility","hidden").css("position","absolute").css("overflow","hidden").css("width","0px").css("height","0px").css("border","none").css("margin","0px").css("padding","0px").attr("tabindex","-1"),n(a,c),g.push({el:b,ref:c}),document.body.appendChild(c.append(a)[0]),a}function p(c){if(b.attr("disabled"))return!1;if(!t("ngfSelectDisabled",a)){var d=q(c);if(null!=d)return d;r(c);try{k()||document.body.contains(x[0])||(g.push({el:b,ref:x.parent()}),document.body.appendChild(x.parent()[0]),x.bind("change",m))}catch(f){}return e(navigator.userAgent)?setTimeout(function(){x[0].click()},0):x[0].click(),!1}}function q(a){var b=a.changedTouches||a.originalEvent&&a.originalEvent.changedTouches;if(b){if("touchstart"===a.type)return w=b[0].clientX,v=b[0].clientY,!0;if("touchend"===a.type){var c=b[0].clientX,d=b[0].clientY;if(Math.abs(c-w)>20||Math.abs(d-v)>20)return a.stopPropagation(),a.preventDefault(),!1}return!0}}function r(b){j.shouldUpdateOn("click",c,a)&&x.val()&&(x.val(null),j.updateModel(d,c,a,l(),null,b,!0))}function s(a){if(x&&!x.attr("__ngf_ie10_Fix_")){if(!x[0].parentNode)return void(x=null);a.preventDefault(),a.stopPropagation(),x.unbind("click");var b=x.clone();return x.replaceWith(b),x=b,x.attr("__ngf_ie10_Fix_","true"),x.bind("change",m),x.bind("click",s),x[0].click(),!1}x.removeAttr("__ngf_ie10_Fix_")}var t=function(a,b){return j.attrGetter(a,c,b)};j.registerModelChangeValidator(d,c,a);var u=[];t("ngfMultiple")&&u.push(a.$watch(t("ngfMultiple"),function(){x.attr("multiple",t("ngfMultiple",a))})),t("ngfCapture")&&u.push(a.$watch(t("ngfCapture"),function(){x.attr("capture",t("ngfCapture",a))})),t("ngfAccept")&&u.push(a.$watch(t("ngfAccept"),function(){x.attr("accept",t("ngfAccept",a))})),u.push(c.$observe("accept",function(){x.attr("accept",t("accept"))}));var v=0,w=0,x=b;k()||(x=o()),x.bind("change",m),k()?b.bind("click",r):b.bind("click touchstart touchend",p),-1!==navigator.appVersion.indexOf("MSIE 10")&&x.bind("click",s),d&&d.$formatters.push(function(a){return(null==a||0===a.length)&&x.val()&&x.val(null),a}),a.$on("$destroy",function(){k()||x.parent().remove(),angular.forEach(u,function(a){a()})}),h(function(){for(var a=0;a<g.length;a++){var b=g[a];document.body.contains(b.el[0])||(g.splice(a,1),b.ref.remove())}}),window.FileAPI&&window.FileAPI.ngfFixIE&&window.FileAPI.ngfFixIE(b,x,m)}var g=[];return{restrict:"AEC",require:"?ngModel",link:function(e,g,h,i){f(e,g,h,i,a,b,c,d)}}}]),function(){function a(a){return"img"===a.tagName.toLowerCase()?"image":"audio"===a.tagName.toLowerCase()?"audio":"video"===a.tagName.toLowerCase()?"video":/./}function b(b,c,d,e,f,g,h,i){function j(a){var g=b.attrGetter("ngfNoObjectUrl",f,d);b.dataUrl(a,g)["finally"](function(){c(function(){var b=(g?a.$ngfDataUrl:a.$ngfBlobUrl)||a.$ngfDataUrl;i?e.css("background-image","url('"+(b||"")+"')"):e.attr("src",b),b?e.removeClass("ng-hide"):e.addClass("ng-hide")})})}c(function(){var c=d.$watch(f[g],function(c){var k=h;if("ngfThumbnail"===g&&(k||(k={width:e[0].naturalWidth||e[0].clientWidth,height:e[0].naturalHeight||e[0].clientHeight}),0===k.width&&window.getComputedStyle)){var l=getComputedStyle(e[0]);l.width&&l.width.indexOf("px")>-1&&l.height&&l.height.indexOf("px")>-1&&(k={width:parseInt(l.width.slice(0,-2)),height:parseInt(l.height.slice(0,-2))})}return angular.isString(c)?(e.removeClass("ng-hide"),i?e.css("background-image","url('"+c+"')"):e.attr("src",c)):void(!c||!c.type||0!==c.type.search(a(e[0]))||i&&0!==c.type.indexOf("image")?e.addClass("ng-hide"):k&&b.isResizeSupported()?(k.resizeIf=function(a,e){return b.attrGetter("ngfResizeIf",f,d,{$width:a,$height:e,$file:c})},b.resize(c,k).then(function(a){j(a)},function(a){throw a})):j(c))});d.$on("$destroy",function(){c()})})}ngFileUpload.service("UploadDataUrl",["UploadBase","$timeout","$q",function(a,b,c){var d=a;return d.base64DataUrl=function(a){if(angular.isArray(a)){var b=c.defer(),e=0;return angular.forEach(a,function(c){d.dataUrl(c,!0)["finally"](function(){if(e++,e===a.length){var c=[];angular.forEach(a,function(a){c.push(a.$ngfDataUrl)}),b.resolve(c,a)}})}),b.promise}return d.dataUrl(a,!0)},d.dataUrl=function(a,e){if(!a)return d.emptyPromise(a,a);if(e&&null!=a.$ngfDataUrl||!e&&null!=a.$ngfBlobUrl)return d.emptyPromise(e?a.$ngfDataUrl:a.$ngfBlobUrl,a);var f=e?a.$$ngfDataUrlPromise:a.$$ngfBlobUrlPromise;if(f)return f;var g=c.defer();return b(function(){if(window.FileReader&&a&&(!window.FileAPI||-1===navigator.userAgent.indexOf("MSIE 8")||a.size<2e4)&&(!window.FileAPI||-1===navigator.userAgent.indexOf("MSIE 9")||a.size<4e6)){var c=window.URL||window.webkitURL;if(c&&c.createObjectURL&&!e){var f;try{f=c.createObjectURL(a)}catch(h){return void b(function(){a.$ngfBlobUrl="",g.reject()})}b(function(){if(a.$ngfBlobUrl=f,f){g.resolve(f,a),d.blobUrls=d.blobUrls||[],d.blobUrlsTotalSize=d.blobUrlsTotalSize||0,d.blobUrls.push({url:f,size:a.size}),d.blobUrlsTotalSize+=a.size||0;for(var b=d.defaults.blobUrlsMaxMemory||268435456,e=d.defaults.blobUrlsMaxQueueSize||200;(d.blobUrlsTotalSize>b||d.blobUrls.length>e)&&d.blobUrls.length>1;){var h=d.blobUrls.splice(0,1)[0];c.revokeObjectURL(h.url),d.blobUrlsTotalSize-=h.size}}})}else{var i=new FileReader;i.onload=function(c){b(function(){a.$ngfDataUrl=c.target.result,g.resolve(c.target.result,a),b(function(){delete a.$ngfDataUrl},1e3)})},i.onerror=function(){b(function(){a.$ngfDataUrl="",g.reject()})},i.readAsDataURL(a)}}else b(function(){a[e?"$ngfDataUrl":"$ngfBlobUrl"]="",g.reject()})}),f=e?a.$$ngfDataUrlPromise=g.promise:a.$$ngfBlobUrlPromise=g.promise,f["finally"](function(){delete a[e?"$$ngfDataUrlPromise":"$$ngfBlobUrlPromise"]}),f},d}]),ngFileUpload.directive("ngfSrc",["Upload","$timeout",function(a,c){return{restrict:"AE",link:function(d,e,f){b(a,c,d,e,f,"ngfSrc",a.attrGetter("ngfResize",f,d),!1)}}}]),ngFileUpload.directive("ngfBackground",["Upload","$timeout",function(a,c){return{restrict:"AE",link:function(d,e,f){b(a,c,d,e,f,"ngfBackground",a.attrGetter("ngfResize",f,d),!0)}}}]),ngFileUpload.directive("ngfThumbnail",["Upload","$timeout",function(a,c){return{restrict:"AE",link:function(d,e,f){var g=a.attrGetter("ngfSize",f,d);b(a,c,d,e,f,"ngfThumbnail",g,a.attrGetter("ngfAsBackground",f,d))}}}]),ngFileUpload.config(["$compileProvider",function(a){a.imgSrcSanitizationWhitelist&&a.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|webcal|local|file|data|blob):/),a.aHrefSanitizationWhitelist&&a.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|webcal|local|file|data|blob):/)}]),ngFileUpload.filter("ngfDataUrl",["UploadDataUrl","$sce",function(a,b){return function(c,d,e){if(angular.isString(c))return b.trustAsResourceUrl(c);var f=c&&((d?c.$ngfDataUrl:c.$ngfBlobUrl)||c.$ngfDataUrl);return c&&!f?(!c.$ngfDataUrlFilterInProgress&&angular.isObject(c)&&(c.$ngfDataUrlFilterInProgress=!0,a.dataUrl(c,d)),""):(c&&delete c.$ngfDataUrlFilterInProgress,(c&&f?e?b.trustAsResourceUrl(f):f:c)||"")}}])}(),ngFileUpload.service("UploadValidate",["UploadDataUrl","$q","$timeout",function(a,b,c){function d(a){var b="",c=[];if(a.length>2&&"/"===a[0]&&"/"===a[a.length-1])b=a.substring(1,a.length-1);else{var e=a.split(",");if(e.length>1)for(var f=0;f<e.length;f++){var g=d(e[f]);g.regexp?(b+="("+g.regexp+")",f<e.length-1&&(b+="|")):c=c.concat(g.excludes)}else 0===a.indexOf("!")?c.push("^((?!"+d(a.substring(1)).regexp+").)*$"):(0===a.indexOf(".")&&(a="*"+a),b="^"+a.replace(new RegExp("[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]","g"),"\\$&")+"$",b=b.replace(/\\\*/g,".*").replace(/\\\?/g,"."))}return{regexp:b,excludes:c}}function e(a,b){null==b||a.$dirty||(a.$setDirty?a.$setDirty():a.$dirty=!0)}var f=a;return f.validatePattern=function(a,b){if(!b)return!0;var c=d(b),e=!0;if(c.regexp&&c.regexp.length){var f=new RegExp(c.regexp,"i");e=null!=a.type&&f.test(a.type)||null!=a.name&&f.test(a.name)}for(var g=c.excludes.length;g--;){var h=new RegExp(c.excludes[g],"i");e=e&&(null==a.type||h.test(a.type))&&(null==a.name||h.test(a.name))}return e},f.ratioToFloat=function(a){var b=a.toString(),c=b.search(/[x:]/i);return b=c>-1?parseFloat(b.substring(0,c))/parseFloat(b.substring(c+1)):parseFloat(b)},f.registerModelChangeValidator=function(a,b,c){a&&a.$formatters.push(function(d){if(a.$dirty){var e=d;d&&!angular.isArray(d)&&(e=[d]),f.validate(e,0,a,b,c).then(function(){f.applyModelValidation(a,e)})}return d})},f.applyModelValidation=function(a,b){e(a,b),angular.forEach(a.$ngfValidations,function(b){a.$setValidity(b.name,b.valid)})},f.getValidationAttr=function(a,b,c,d,e){var g="ngf"+c[0].toUpperCase()+c.substr(1),h=f.attrGetter(g,a,b,{$file:e});if(null==h&&(h=f.attrGetter("ngfValidate",a,b,{$file:e}))){var i=(d||c).split(".");h=h[i[0]],i.length>1&&(h=h&&h[i[1]])}return h},f.validate=function(a,c,d,e,g){function h(b,c,h){if(a){for(var i=a.length,j=null;i--;){var n=a[i];if(n){var o=f.getValidationAttr(e,g,b,c,n);null!=o&&(h(n,o,i)||(-1===k.indexOf(b)?(n.$error=b,(n.$errorMessages=n.$errorMessages||{})[b]=!0,n.$errorParam=o,-1===m.indexOf(n)&&m.push(n),l||a.splice(i,1),j=!1):a.splice(i,1)))}}null!==j&&d.$ngfValidations.push({name:b,valid:j})}}function i(c,h,i,n,o){function p(b,d,e){function f(f){if(f())if(-1===k.indexOf(c)){if(d.$error=c,(d.$errorMessages=d.$errorMessages||{})[c]=!0,d.$errorParam=e,-1===m.indexOf(d)&&m.push(d),!l){var g=a.indexOf(d);g>-1&&a.splice(g,1)}b.resolve(!1)}else{var h=a.indexOf(d);h>-1&&a.splice(h,1),b.resolve(!0)}else b.resolve(!0)}null!=e?n(d,e).then(function(a){f(function(){return!o(a,e)})},function(){f(function(){return j("ngfValidateForce",{$file:d})})}):b.resolve(!0)}var q=[f.emptyPromise(!0)];a&&(a=void 0===a.length?[a]:a,angular.forEach(a,function(a){var d=b.defer();return q.push(d.promise),!i||null!=a.type&&0===a.type.search(i)?void("dimensions"===c&&null!=f.attrGetter("ngfDimensions",e)?f.imageDimensions(a).then(function(b){p(d,a,j("ngfDimensions",{$file:a,$width:b.width,$height:b.height}))},function(){d.resolve(!1)}):"duration"===c&&null!=f.attrGetter("ngfDuration",e)?f.mediaDuration(a).then(function(b){p(d,a,j("ngfDuration",{$file:a,$duration:b}))},function(){d.resolve(!1)}):p(d,a,f.getValidationAttr(e,g,c,h,a))):void d.resolve(!0)}));var r=b.defer();return b.all(q).then(function(a){for(var b=!0,e=0;e<a.length;e++)if(!a[e]){b=!1;break}d.$ngfValidations.push({name:c,valid:b}),r.resolve(b)}),r.promise}d=d||{},d.$ngfValidations=d.$ngfValidations||[],angular.forEach(d.$ngfValidations,function(a){a.valid=!0});var j=function(a,b){return f.attrGetter(a,e,g,b)},k=(f.attrGetter("ngfIgnoreInvalid",e,g)||"").split(" "),l=f.attrGetter("ngfRunAllValidations",e,g);if(null==a||0===a.length)return f.emptyPromise({validFiles:a,invalidFiles:[]});a=void 0===a.length?[a]:a.slice(0);var m=[];h("pattern",null,f.validatePattern),h("minSize","size.min",function(a,b){return a.size+.1>=f.translateScalars(b)}),h("maxSize","size.max",function(a,b){return a.size-.1<=f.translateScalars(b)});var n=0;if(h("maxTotalSize",null,function(b,c){return n+=b.size,n>f.translateScalars(c)?(a.splice(0,a.length),!1):!0}),h("validateFn",null,function(a,b){return b===!0||null===b||""===b}),!a.length)return f.emptyPromise({validFiles:[],invalidFiles:m});var o=b.defer(),p=[];return p.push(i("maxHeight","height.max",/image/,this.imageDimensions,function(a,b){return a.height<=b})),p.push(i("minHeight","height.min",/image/,this.imageDimensions,function(a,b){return a.height>=b})),p.push(i("maxWidth","width.max",/image/,this.imageDimensions,function(a,b){return a.width<=b})),p.push(i("minWidth","width.min",/image/,this.imageDimensions,function(a,b){return a.width>=b})),p.push(i("dimensions",null,/image/,function(a,b){return f.emptyPromise(b)},function(a){return a})),p.push(i("ratio",null,/image/,this.imageDimensions,function(a,b){for(var c=b.toString().split(","),d=!1,e=0;e<c.length;e++)Math.abs(a.width/a.height-f.ratioToFloat(c[e]))<.01&&(d=!0);return d})),p.push(i("maxRatio","ratio.max",/image/,this.imageDimensions,function(a,b){return a.width/a.height-f.ratioToFloat(b)<1e-4})),p.push(i("minRatio","ratio.min",/image/,this.imageDimensions,function(a,b){return a.width/a.height-f.ratioToFloat(b)>-1e-4})),p.push(i("maxDuration","duration.max",/audio|video/,this.mediaDuration,function(a,b){return a<=f.translateScalars(b)})),p.push(i("minDuration","duration.min",/audio|video/,this.mediaDuration,function(a,b){return a>=f.translateScalars(b)})),p.push(i("duration",null,/audio|video/,function(a,b){return f.emptyPromise(b)},function(a){return a})),p.push(i("validateAsyncFn",null,null,function(a,b){return b},function(a){return a===!0||null===a||""===a})),b.all(p).then(function(){if(l)for(var b=0;b<a.length;b++){var d=a[b];d.$error&&a.splice(b--,1)}l=!1,h("maxFiles",null,function(a,b,d){return b>c+d}),o.resolve({validFiles:a,invalidFiles:m})}),o.promise},f.imageDimensions=function(a){if(a.$ngfWidth&&a.$ngfHeight){var d=b.defer();return c(function(){d.resolve({width:a.$ngfWidth,height:a.$ngfHeight})}),d.promise}if(a.$ngfDimensionPromise)return a.$ngfDimensionPromise;var e=b.defer();return c(function(){return 0!==a.type.indexOf("image")?void e.reject("not image"):void f.dataUrl(a).then(function(b){function d(){var b=h[0].naturalWidth||h[0].clientWidth,c=h[0].naturalHeight||h[0].clientHeight;h.remove(),a.$ngfWidth=b,a.$ngfHeight=c,e.resolve({width:b,height:c})}function f(){h.remove(),e.reject("load error")}function g(){c(function(){h[0].parentNode&&(h[0].clientWidth?d():i++>10?f():g())},1e3)}var h=angular.element("<img>").attr("src",b).css("visibility","hidden").css("position","fixed").css("max-width","none !important").css("max-height","none !important");h.on("load",d),h.on("error",f);var i=0;g(),angular.element(document.getElementsByTagName("body")[0]).append(h)},function(){e.reject("load error")})}),a.$ngfDimensionPromise=e.promise,a.$ngfDimensionPromise["finally"](function(){delete a.$ngfDimensionPromise}),a.$ngfDimensionPromise},f.mediaDuration=function(a){if(a.$ngfDuration){var d=b.defer();return c(function(){d.resolve(a.$ngfDuration)}),d.promise}if(a.$ngfDurationPromise)return a.$ngfDurationPromise;var e=b.defer();return c(function(){return 0!==a.type.indexOf("audio")&&0!==a.type.indexOf("video")?void e.reject("not media"):void f.dataUrl(a).then(function(b){function d(){var b=h[0].duration;a.$ngfDuration=b,h.remove(),e.resolve(b)}function f(){h.remove(),e.reject("load error")}function g(){c(function(){h[0].parentNode&&(h[0].duration?d():i>10?f():g())},1e3)}var h=angular.element(0===a.type.indexOf("audio")?"<audio>":"<video>").attr("src",b).css("visibility","none").css("position","fixed");h.on("loadedmetadata",d),h.on("error",f);var i=0;g(),angular.element(document.body).append(h)},function(){e.reject("load error")})}),a.$ngfDurationPromise=e.promise,a.$ngfDurationPromise["finally"](function(){delete a.$ngfDurationPromise}),a.$ngfDurationPromise},f}]),ngFileUpload.service("UploadResize",["UploadValidate","$q",function(a,b){var c=a,d=function(a,b,c,d,e){var f=e?Math.max(c/a,d/b):Math.min(c/a,d/b);return{width:a*f,height:b*f,marginX:a*f-c,marginY:b*f-d}},e=function(a,e,f,g,h,i,j,k){var l=b.defer(),m=document.createElement("canvas"),n=document.createElement("img");return n.setAttribute("style","visibility:hidden;position:fixed;z-index:-100000"),document.body.appendChild(n),n.onload=function(){var a=n.width,b=n.height;if(n.parentNode.removeChild(n),null!=k&&k(a,b)===!1)return void l.reject("resizeIf");try{if(i){var o=c.ratioToFloat(i),p=a/b;o>p?(e=a,f=e/o):(f=b,e=f*o)}e||(e=a),f||(f=b);var q=d(a,b,e,f,j);m.width=Math.min(q.width,e),m.height=Math.min(q.height,f);var r=m.getContext("2d");r.drawImage(n,Math.min(0,-q.marginX/2),Math.min(0,-q.marginY/2),q.width,q.height),l.resolve(m.toDataURL(h||"image/WebP",g||.934))}catch(s){l.reject(s)}},n.onerror=function(){n.parentNode.removeChild(n),l.reject()},n.src=a,l.promise};return c.dataUrltoBlob=function(a,b,c){for(var d=a.split(","),e=d[0].match(/:(.*?);/)[1],f=atob(d[1]),g=f.length,h=new Uint8Array(g);g--;)h[g]=f.charCodeAt(g);var i=new window.Blob([h],{type:e});return i.name=b,i.$ngfOrigSize=c,i},c.isResizeSupported=function(){var a=document.createElement("canvas");return window.atob&&a.getContext&&a.getContext("2d")&&window.Blob},c.isResizeSupported()&&Object.defineProperty(window.Blob.prototype,"name",{get:function(){return this.$ngfName},set:function(a){this.$ngfName=a},configurable:!0}),c.resize=function(a,d){if(0!==a.type.indexOf("image"))return c.emptyPromise(a);var f=b.defer();return c.dataUrl(a,!0).then(function(b){e(b,d.width,d.height,d.quality,d.type||a.type,d.ratio,d.centerCrop,d.resizeIf).then(function(e){if("image/jpeg"===a.type&&d.restoreExif!==!1)try{e=c.restoreExif(b,e)}catch(g){setTimeout(function(){throw g},1)}try{var h=c.dataUrltoBlob(e,a.name,a.size);f.resolve(h)}catch(g){f.reject(g)}},function(b){"resizeIf"===b&&f.resolve(a),f.reject(b)})},function(a){f.reject(a)}),f.promise},c}]),function(){function a(a,c,d,e,f,g,h,i,j,k){function l(){return c.attr("disabled")||s("ngfDropDisabled",a)}function m(b,c,d){if(b){var e;try{e=b&&b.getData&&b.getData("text/html")}catch(f){}q(b.items,b.files,s("ngfAllowDir",a)!==!1,s("multiple")||s("ngfMultiple",a)).then(function(a){a.length?n(a,c):o(d,e).then(function(a){n(a,c)})})}}function n(b,c){i.updateModel(e,d,a,s("ngfChange")||s("ngfDrop"),b,c)}function o(b,c){if(!i.shouldUpdateOn(b,d,a)||"string"!=typeof c)return i.rejectPromise([]);var e=[];c.replace(/<(img src|img [^>]* src) *=\"([^\"]*)\"/gi,function(a,b,c){e.push(c)});var f=[],g=[];if(e.length){angular.forEach(e,function(a){f.push(i.urlToBlob(a).then(function(a){g.push(a)}))});var h=k.defer();return k.all(f).then(function(){h.resolve(g)},function(a){h.reject(a)}),h.promise}return i.emptyPromise()}function p(a,b,c,d){var e=s("ngfDragOverClass",a,{$event:c}),f="dragover";if(angular.isString(e))f=e;else if(e&&(e.delay&&(w=e.delay),e.accept||e.reject)){var g=c.dataTransfer.items;if(null!=g&&g.length)for(var h=e.pattern||s("ngfPattern",a,{$event:c}),j=g.length;j--;){if(!i.validatePattern(g[j],h)){f=e.reject;break}f=e.accept}else f=e.accept}d(f)}function q(b,c,e,f){function g(a,b){var c=k.defer();if(null!=a)if(a.isDirectory){var d=[i.emptyPromise()];if(m){var e={type:"directory"};e.name=e.path=(b||"")+a.name,n.push(e)}var f=a.createReader(),h=[],p=function(){f.readEntries(function(e){try{e.length?(h=h.concat(Array.prototype.slice.call(e||[],0)),p()):(angular.forEach(h.slice(0),function(c){n.length<=j&&l>=o&&d.push(g(c,(b?b:"")+a.name+"/"))}),k.all(d).then(function(){c.resolve()},function(a){c.reject(a)}))}catch(f){c.reject(f)}},function(a){c.reject(a)})};p()}else a.file(function(a){try{a.path=(b?b:"")+a.name,m&&(a=i.rename(a,a.path)),n.push(a),o+=a.size,c.resolve()}catch(d){c.reject(d)}},function(a){c.reject(a)});return c.promise}var j=i.getValidationAttr(d,a,"maxFiles");null==j&&(j=Number.MAX_VALUE);var l=i.getValidationAttr(d,a,"maxTotalSize");null==l&&(l=Number.MAX_VALUE);var m=s("ngfIncludeDir",a),n=[],o=0,p=[i.emptyPromise()];if(b&&b.length>0&&"file:"!==h.location.protocol)for(var q=0;q<b.length;q++){if(b[q].webkitGetAsEntry&&b[q].webkitGetAsEntry()&&b[q].webkitGetAsEntry().isDirectory){var r=b[q].webkitGetAsEntry();if(r.isDirectory&&!e)continue;null!=r&&p.push(g(r))}else{var t=b[q].getAsFile();null!=t&&(n.push(t),o+=t.size)}if(n.length>j||o>l||!f&&n.length>0)break}else if(null!=c)for(var u=0;u<c.length;u++){var v=c.item(u);if((v.type||v.size>0)&&(n.push(v),o+=v.size),n.length>j||o>l||!f&&n.length>0)break}var w=k.defer();return k.all(p).then(function(){if(f||m||!n.length)w.resolve(n);else{for(var a=0;n[a]&&"directory"===n[a].type;)a++;w.resolve([n[a]])}},function(a){w.reject(a)}),w.promise}var r=b(),s=function(a,b,c){return i.attrGetter(a,d,b,c)};if(s("dropAvailable")&&g(function(){a[s("dropAvailable")]?a[s("dropAvailable")].value=r:a[s("dropAvailable")]=r}),!r)return void(s("ngfHideOnDropNotAvailable",a)===!0&&c.css("display","none"));null==s("ngfSelect")&&i.registerModelChangeValidator(e,d,a);var t,u=null,v=f(s("ngfStopPropagation")),w=1;c[0].addEventListener("dragover",function(b){if(!l()&&i.shouldUpdateOn("drop",d,a)){if(b.preventDefault(),v(a)&&b.stopPropagation(),navigator.userAgent.indexOf("Chrome")>-1){var e=b.dataTransfer.effectAllowed;b.dataTransfer.dropEffect="move"===e||"linkMove"===e?"move":"copy"}g.cancel(u),t||(t="C",p(a,d,b,function(d){t=d,c.addClass(t),s("ngfDrag",a,{$isDragging:!0,$class:t,$event:b})}))}},!1),c[0].addEventListener("dragenter",function(b){!l()&&i.shouldUpdateOn("drop",d,a)&&(b.preventDefault(),v(a)&&b.stopPropagation())},!1),c[0].addEventListener("dragleave",function(b){!l()&&i.shouldUpdateOn("drop",d,a)&&(b.preventDefault(),
 v(a)&&b.stopPropagation(),u=g(function(){t&&c.removeClass(t),t=null,s("ngfDrag",a,{$isDragging:!1,$event:b})},w||100))},!1),c[0].addEventListener("drop",function(b){!l()&&i.shouldUpdateOn("drop",d,a)&&(b.preventDefault(),v(a)&&b.stopPropagation(),t&&c.removeClass(t),t=null,m(b.dataTransfer,b,"dropUrl"))},!1),c[0].addEventListener("paste",function(b){navigator.userAgent.toLowerCase().indexOf("firefox")>-1&&s("ngfEnableFirefoxPaste",a)&&b.preventDefault(),!l()&&i.shouldUpdateOn("paste",d,a)&&m(b.clipboardData||b.originalEvent.clipboardData,b,"pasteUrl")},!1),navigator.userAgent.toLowerCase().indexOf("firefox")>-1&&s("ngfEnableFirefoxPaste",a)&&(c.attr("contenteditable",!0),c.on("keypress",function(a){a.metaKey||a.ctrlKey||a.preventDefault()}))}function b(){var a=document.createElement("div");return"draggable"in a&&"ondrop"in a&&!/Edge\/12./i.test(navigator.userAgent)}ngFileUpload.directive("ngfDrop",["$parse","$timeout","$window","Upload","$http","$q",function(b,c,d,e,f,g){return{restrict:"AEC",require:"?ngModel",link:function(h,i,j,k){a(h,i,j,k,b,c,d,e,f,g)}}}]),ngFileUpload.directive("ngfNoFileDrop",function(){return function(a,c){b()&&c.css("display","none")}}),ngFileUpload.directive("ngfDropAvailable",["$parse","$timeout","Upload",function(a,c,d){return function(e,f,g){if(b()){var h=a(d.attrGetter("ngfDropAvailable",g));c(function(){h(e),h.assign&&h.assign(e,!0)})}}}])}(),ngFileUpload.service("UploadExif",["UploadResize","$q",function(a,b){function c(a,b,c,d){switch(b){case 2:return a.transform(-1,0,0,1,c,0);case 3:return a.transform(-1,0,0,-1,c,d);case 4:return a.transform(1,0,0,-1,0,d);case 5:return a.transform(0,1,1,0,0,0);case 6:return a.transform(0,1,-1,0,d,0);case 7:return a.transform(0,-1,-1,0,d,c);case 8:return a.transform(0,-1,1,0,0,c)}}function d(a){for(var b="",c=new Uint8Array(a),d=c.byteLength,e=0;d>e;e++)b+=String.fromCharCode(c[e]);return window.btoa(b)}var e=a;return e.isExifSupported=function(){return window.FileReader&&(new FileReader).readAsArrayBuffer&&e.isResizeSupported()},e.readOrientation=function(a){var c=b.defer(),d=new FileReader,e=a.slice?a.slice(0,65536):a;return d.readAsArrayBuffer(e),d.onerror=function(a){return c.reject(a)},d.onload=function(a){var b={orientation:1},d=new DataView(this.result);if(65496!==d.getUint16(0,!1))return c.resolve(b);for(var e=d.byteLength,f=2;e>f;){var g=d.getUint16(f,!1);if(f+=2,65505===g){if(1165519206!==d.getUint32(f+=2,!1))return c.resolve(b);var h=18761===d.getUint16(f+=6,!1);f+=d.getUint32(f+4,h);var i=d.getUint16(f,h);f+=2;for(var j=0;i>j;j++)if(274===d.getUint16(f+12*j,h)){var k=d.getUint16(f+12*j+8,h);return k>=2&&8>=k&&(d.setUint16(f+12*j+8,1,h),b.fixedArrayBuffer=a.target.result),b.orientation=k,c.resolve(b)}}else{if(65280!==(65280&g))break;f+=d.getUint16(f,!1)}}return c.resolve(b)},c.promise},e.applyExifRotation=function(a){if(0!==a.type.indexOf("image/jpeg"))return e.emptyPromise(a);var f=b.defer();return e.readOrientation(a).then(function(b){return b.orientation<2||b.orientation>8?f.resolve(a):void e.dataUrl(a,!0).then(function(g){var h=document.createElement("canvas"),i=document.createElement("img");i.onload=function(){try{h.width=b.orientation>4?i.height:i.width,h.height=b.orientation>4?i.width:i.height;var g=h.getContext("2d");c(g,b.orientation,i.width,i.height),g.drawImage(i,0,0);var j=h.toDataURL(a.type||"image/WebP",.934);j=e.restoreExif(d(b.fixedArrayBuffer),j);var k=e.dataUrltoBlob(j,a.name);f.resolve(k)}catch(l){return f.reject(l)}},i.onerror=function(){f.reject()},i.src=g},function(a){f.reject(a)})},function(a){f.reject(a)}),f.promise},e.restoreExif=function(a,b){var c={};return c.KEY_STR="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",c.encode64=function(a){var b,c,d,e,f,g="",h="",i="",j=0;do b=a[j++],c=a[j++],h=a[j++],d=b>>2,e=(3&b)<<4|c>>4,f=(15&c)<<2|h>>6,i=63&h,isNaN(c)?f=i=64:isNaN(h)&&(i=64),g=g+this.KEY_STR.charAt(d)+this.KEY_STR.charAt(e)+this.KEY_STR.charAt(f)+this.KEY_STR.charAt(i),b=c=h="",d=e=f=i="";while(j<a.length);return g},c.restore=function(a,b){a.match("data:image/jpeg;base64,")&&(a=a.replace("data:image/jpeg;base64,",""));var c=this.decode64(a),d=this.slice2Segments(c),e=this.exifManipulation(b,d);return"data:image/jpeg;base64,"+this.encode64(e)},c.exifManipulation=function(a,b){var c=this.getExifArray(b),d=this.insertExif(a,c);return new Uint8Array(d)},c.getExifArray=function(a){for(var b,c=0;c<a.length;c++)if(b=a[c],255===b[0]&225===b[1])return b;return[]},c.insertExif=function(a,b){var c=a.replace("data:image/jpeg;base64,",""),d=this.decode64(c),e=d.indexOf(255,3),f=d.slice(0,e),g=d.slice(e),h=f;return h=h.concat(b),h=h.concat(g)},c.slice2Segments=function(a){for(var b=0,c=[];;){if(255===a[b]&218===a[b+1])break;if(255===a[b]&216===a[b+1])b+=2;else{var d=256*a[b+2]+a[b+3],e=b+d+2,f=a.slice(b,e);c.push(f),b=e}if(b>a.length)break}return c},c.decode64=function(a){var b,c,d,e,f,g="",h="",i=0,j=[],k=/[^A-Za-z0-9\+\/\=]/g;k.exec(a)&&console.log("There were invalid base64 characters in the input text.\nValid base64 characters are A-Z, a-z, 0-9, NaNExpect errors in decoding."),a=a.replace(/[^A-Za-z0-9\+\/\=]/g,"");do d=this.KEY_STR.indexOf(a.charAt(i++)),e=this.KEY_STR.indexOf(a.charAt(i++)),f=this.KEY_STR.indexOf(a.charAt(i++)),h=this.KEY_STR.indexOf(a.charAt(i++)),b=d<<2|e>>4,c=(15&e)<<4|f>>2,g=(3&f)<<6|h,j.push(b),64!==f&&j.push(c),64!==h&&j.push(g),b=c=g="",d=e=f=h="";while(i<a.length);return j},c.restore(a,b)},e}]);
+"use strict";
+
+angular.module('app.Basicdata').controller('BPCBMCForecastdetailCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+})
+"use strict";
+
+angular.module('app.Basicdata').controller('BPCCAdetailCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+})
+"use strict";
+
+angular.module('app.Basicdata').controller('BUmaintenanceCtrl', function ($scope,$state,$stateParams,BUmaintenanceService,APP_CONFIG,Upload) {
+
+    //加载页面、搜索功能
+    $scope.SegmentSel = '';
+    $scope.goPage = function(){
+        $scope.page = {
+            limit : APP_CONFIG.limit,
+            page : APP_CONFIG.page,
+            beanName : $scope.SegmentSel
+        }
+        console.log($scope.page)
+        BUmaintenanceService.getPage($scope.page).then(function(data){
+            if(data.code == 0){
+                $scope.pageList = data.result.list;
+                console.log($scope.pageList)
+            }else {
+                console.log(data);
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        })
+    }
+    $scope.goPage();
+
+    $('.M-box').pagination({
+        pageCount : 10,   //总页数
+        totalData : 200,  //数据总条数
+        current : 1,   //当前第几页
+        count : 2,   //当前选中页前后页数
+        isHide : false,   //1或0页隐藏分页控件
+        keepShowPN :true,   //是否一直显示上一页下一页
+        prevContent:'Previous',
+        nextContent:'Next',
+        callback:function(api){
+            $('.now').text(api.getCurrent());
+        }
+    },function(api){
+        $('.now').text(api.getCurrent());
+    });
+
+    //单选
+    $scope.arr = [];
+    $scope.One = function(page){
+        page.isChecked = !page.isChecked;
+        if(page.isChecked){
+            $scope.arr.push(page.id);
+            if($scope.arr.length == $scope.pageList.length){
+                $scope.isCheckedAll = true;
+            }
+        }else {
+            for(var i=0;i<$scope.arr.length;i++){
+                if($scope.arr[i] == page.id){
+                    $scope.arr.splice(i,1);
+                    break
+                }
+            }
+            $scope.isCheckedAll = false;
+        }
+        console.log($scope.arr)
+    }
+
+    //全选
+    $scope.All = function(){
+        $scope.isCheckedAll = !$scope.isCheckedAll;
+        $scope.arr = [];
+        for(var i =0;i<$scope.pageList.length;i++){
+            if($scope.isCheckedAll){
+                $scope.pageList[i].isChecked = true;
+                $scope.arr.push($scope.pageList[i].id)
+            }else {
+                $scope.pageList[i].isChecked = false;
+            }
+        }
+        console.log($scope.arr);
+    }
+
+    //删除
+    $scope.del = function(){
+        if($scope.arr.length<=0){
+            alert('请选择要删除的项！');
+        }else {
+            if(confirm('确认要删除？')){
+                $scope.arrlist = $scope.arr.join(',');
+                BUmaintenanceService.delList( $scope.arrlist).then(function(data){
+                    if(data.code == 0){
+                        alert('删除成功！');
+                        $scope.goPage();
+                    }else {
+                        console.log(data);
+                    }
+                },function(data){
+                    console.log(data);
+                })
+            }
+        }
+    }
+
+
+    //下载
+    $scope.downLoad = function(){
+        $scope.load = {
+            type : 'bu'
+        }
+        BUmaintenanceService.download($scope.load).then(function(data){
+            console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        },function(data){
+            console.log(data);
+        })
+    }
+
+    //上传
+    $scope.myfiles = {};
+    $scope.openUpload = function(){
+        $('#myModal').modal('show');
+        $scope.myfilesVal = '';
+        $scope.fileChange = function(){
+            if($scope.myfiles.name){
+                $scope.myfilesVal = $scope.myfiles.name;
+            }else {
+                $scope.myfilesVal = '';
+            }
+        }
+    }
+
+    $scope.upload = function(){
+        Upload.upload({
+            //服务端接收
+            url:APP_CONFIG.baseUrl+ '/api/bmt/attachments',
+            data : {
+                file : $scope.myfiles,
+                username : APP_CONFIG.Name
+            }
+        }).success(function (data, status, headers, config) {
+            if(data.code == 0){
+                alert('上传成功！');
+                $('#myModal').modal('hide');
+                $scope.goPage();
+            }else {
+                alert('上传失败！');
+            }
+        }).error(function (data, status, headers, config) {
+            alert('上传失败！');
+            //上传失败
+            console.log('error status: ' + status);
+        });
+    }
+})
+"use strict";
+
+angular.module('app.Basicdata').controller('CFEBMCdetailCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+})
+"use strict";
+
+angular.module('app.Basicdata').controller('CommoditymaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+
+    $scope.del = function(){
+        if(confirm('确认要删除？')){
+
+        }
+    }
+})
+"use strict";
+
+angular.module('app.Basicdata').controller('DataMappingCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+})
+"use strict";
+
+angular.module('app.Basicdata').controller('EBRQtydetailCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+})
+"use strict";
+
+angular.module('app.Basicdata').controller('MarkupdetailCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+})
+"use strict";
+
+angular.module('app.Basicdata').controller('OtherCategorymasterdataCtrl', function ($scope,$state,$stateParams,$location,OtherCategorymasterdataService,APP_CONFIG,Upload) {
+
+    //加载页面、搜索功能
+    $scope.OtherSel = '';
+    $scope.goPage = function(){
+        $scope.page = {
+            limit : APP_CONFIG.limit,
+            page : APP_CONFIG.page,
+            beanName : $scope.OtherSel
+        }
+        console.log($scope.page)
+        OtherCategorymasterdataService.getPage($scope.page).then(function(data){
+            if(data.code == 0){
+                $scope.pageList = data.result.list;
+                console.log($scope.pageList)
+            }else {
+                console.log(data);
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        })
+    }
+    $scope.goPage();
+
+    //单选
+    $scope.arr = [];
+    $scope.One = function(page){
+        page.isChecked = !page.isChecked;
+        if(page.isChecked){
+            $scope.arr.push(page.id);
+            if($scope.arr.length == $scope.pageList.length){
+                $scope.isCheckedAll = true;
+            }
+        }else {
+            for(var i=0;i<$scope.arr.length;i++){
+                if($scope.arr[i] == page.id){
+                    $scope.arr.splice(i,1);
+                    break
+                }
+            }
+            $scope.isCheckedAll = false;
+        }
+        console.log($scope.arr)
+    }
+
+    //全选
+    $scope.All = function(){
+        $scope.isCheckedAll = !$scope.isCheckedAll;
+        $scope.arr = [];
+        for(var i =0;i<$scope.pageList.length;i++){
+            if($scope.isCheckedAll){
+                $scope.pageList[i].isChecked = true;
+                $scope.arr.push($scope.pageList[i].id)
+            }else {
+                $scope.pageList[i].isChecked = false;
+            }
+        }
+        console.log($scope.arr);
+    }
+
+    //删除
+    $scope.del = function(){
+        if($scope.arr.length<=0){
+            alert('请选择要删除的项！');
+        }else {
+            if(confirm('确认要删除？')){
+                $scope.arrlist = $scope.arr.join(',');
+                OtherCategorymasterdataService.delList( $scope.arrlist).then(function(data){
+                    if(data.code == 0){
+                        alert('删除成功！');
+                        $scope.goPage();
+                    }else {
+                        console.log(data);
+                    }
+                },function(data){
+                    console.log(data);
+                })
+            }
+        }
+    }
+
+    //下载
+    $scope.downLoad = function(){
+        $scope.load = {
+            type : 'category'
+        }
+        OtherCategorymasterdataService.download($scope.load).then(function(data){
+            console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        },function(data){
+            console.log(data);
+        })
+    }
+
+    //上传
+    $scope.myfiles = {};
+    $scope.openUpload = function(){
+        $('#myModal').modal('show');
+        $scope.myfilesVal = '';
+        $scope.fileChange = function(){
+            if($scope.myfiles.name){
+                $scope.myfilesVal = $scope.myfiles.name;
+            }else {
+                $scope.myfilesVal = '';
+            }
+        }
+    }
+
+    $scope.upload = function(){
+        Upload.upload({
+            //服务端接收
+            url:APP_CONFIG.baseUrl+ '/api/ocm/attachments',
+            data : {
+                file : $scope.myfiles,
+                username : APP_CONFIG.Name
+            }
+        }).success(function (data, status, headers, config) {
+            if(data.code == 0){
+                alert('上传成功！');
+                $('#myModal').modal('hide');
+                $scope.goPage();
+            }else {
+                alert('上传失败！');
+            }
+        }).error(function (data, status, headers, config) {
+            alert('上传失败！');
+            //上传失败
+            console.log('error status: ' + status);
+        });
+    }
+})
+"use strict";
+
+angular.module('app.Basicdata').controller('SegmentmaintenanceCtrl', function ($scope,$state,$stateParams,APP_CONFIG,SegmentmaintenanceService,Upload) {
+
+    //加载页面、搜索功能
+    $scope.SegmentSel = '';
+    $scope.goPage = function(){
+        $scope.page = {
+            limit : APP_CONFIG.limit,
+            page : APP_CONFIG.page,
+            beanName : $scope.SegmentSel
+        }
+        console.log($scope.page)
+        SegmentmaintenanceService.getPage($scope.page).then(function(data){
+            if(data.code == 0){
+                $scope.pageList = data.result.list;
+                console.log($scope.pageList)
+            }else {
+                console.log(data);
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        })
+    }
+    $scope.goPage();
+
+    //单选
+   $scope.arr = [];
+    $scope.One = function(page){
+        page.isChecked = !page.isChecked;
+        if(page.isChecked){
+            $scope.arr.push(page.id);
+            if($scope.arr.length == $scope.pageList.length){
+                $scope.isCheckedAll = true;
+            }
+        }else {
+            for(var i=0;i<$scope.arr.length;i++){
+                if($scope.arr[i] == page.id){
+                    $scope.arr.splice(i,1);
+                    break
+                }
+            }
+            $scope.isCheckedAll = false;
+        }
+        console.log($scope.arr)
+    }
+
+    //全选
+    $scope.All = function(){
+        $scope.isCheckedAll = !$scope.isCheckedAll;
+        $scope.arr = [];
+        for(var i =0;i<$scope.pageList.length;i++){
+            if($scope.isCheckedAll){
+                $scope.pageList[i].isChecked = true;
+                $scope.arr.push($scope.pageList[i].id)
+            }else {
+                $scope.pageList[i].isChecked = false;
+            }
+        }
+        console.log($scope.arr);
+    }
+
+    //删除
+    $scope.del = function(){
+        if($scope.arr.length<=0){
+            alert('请选择要删除的项！');
+        }else {
+            if(confirm('确认要删除？')){
+                $scope.arrlist = $scope.arr.join(',');
+                SegmentmaintenanceService.delList( $scope.arrlist).then(function(data){
+                    if(data.code == 0){
+                        alert('删除成功！');
+                        $scope.goPage();
+                    }else {
+                        console.log(data);
+                    }
+                },function(data){
+                    console.log(data);
+                })
+            }
+        }
+    }
+
+    //分页器
+    $('.M-box').pagination({
+        pageCount : 10,   //总页数
+        totalData : 200,  //数据总条数
+        current : 1,   //当前第几页
+        count : 2,   //当前选中页前后页数
+        isHide : false,   //1或0页隐藏分页控件
+        keepShowPN :true,   //是否一直显示上一页下一页
+        prevContent:'Previous',
+        nextContent:'Next',
+        callback:function(api){
+            $('.now').text(api.getCurrent());
+        }
+    },function(api){
+        $('.now').text(api.getCurrent());
+    });
+
+
+    //下载
+    $scope.downLoad = function(){
+        $scope.load = {
+            type : 'segment'
+        }
+        SegmentmaintenanceService.download($scope.load).then(function(data){
+            console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        },function(data){
+            console.log(data);
+        })
+    }
+
+    //上传
+    $scope.myfiles = {};
+    $scope.openUpload = function(){
+        $('#myModal').modal('show');
+        $scope.myfilesVal = '';
+        $scope.fileChange = function(){
+            if($scope.myfiles.name){
+                $scope.myfilesVal = $scope.myfiles.name;
+            }else {
+                $scope.myfilesVal = '';
+            }
+        }
+    }
+
+    $scope.upload = function(){
+        Upload.upload({
+            //服务端接收
+            url:APP_CONFIG.baseUrl+ '/api/smt/attachments',
+            data : {
+                file : $scope.myfiles,
+                username : APP_CONFIG.Name
+            }
+        }).success(function (data, status, headers, config) {
+            if(data.code == 0){
+                alert('上传成功！');
+                $('#myModal').modal('hide');
+                $scope.goPage();
+            }else {
+                alert('上传失败！');
+            }
+        }).error(function (data, status, headers, config) {
+            alert('上传失败！');
+            //上传失败
+            console.log('error status: ' + status);
+        });
+    }
+
+})
 angular.module('app.Basicdata').service("BUmaintenanceService", function($http, $q , APP_CONFIG) {
 
     /**
@@ -3694,6 +3815,176 @@ angular.module('app.Basicdata').service("BUmaintenanceService", function($http, 
 
 
 });
+angular.module('app.Basicdata').service("CommoditymaintenanceService", function($http, $q , APP_CONFIG) {
+
+    /**
+     * ҳ���ʼ��
+     */
+    this.getPage = function(page) {
+        console.log(page)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl +'/api/dmt/',
+            transformRequest: function(obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            params : page
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+    /**
+     * ĳ��ɾ��
+     */
+    this.delList = function(id) {
+        console.log(id)
+        var d = $q.defer();
+        $http({
+            method : 'DELETE',
+            url : APP_CONFIG.baseUrl +'/api/dmts/'+id,
+            /*transformRequest: function(obj) {
+             var str = [];
+             for (var s in obj) {
+             str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+             }
+             return str.join("&");
+             },*/
+            //data : id
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+    /**
+     * ����Excel
+     */
+    this.download = function(load) {
+        console.log(load)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl +'/api/loadfile/loadexcel',
+            transformRequest: function(obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            params : load,
+            responseType : 'arraybuffer'
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+});
+angular.module('app.Basicdata').service("OtherCategorymasterdataService", function($http, $q , APP_CONFIG) {
+
+    /**
+     * ҳ���ʼ��
+     */
+    this.getPage = function(page) {
+        console.log(page)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl +'/api/ocm/',
+            transformRequest: function(obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            params : page
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+    /**
+     * ĳ��ɾ��
+     */
+    this.delList = function(id) {
+        console.log(id)
+        var d = $q.defer();
+        $http({
+            method : 'DELETE',
+            url : APP_CONFIG.baseUrl +'/api/ocms/'+id,
+            /*transformRequest: function(obj) {
+             var str = [];
+             for (var s in obj) {
+             str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+             }
+             return str.join("&");
+             },*/
+            //data : id
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+    /**
+     * ����Excel
+     */
+    this.download = function(load) {
+        console.log(load)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl +'/api/loadfile/loadexcel',
+            transformRequest: function(obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            params : load,
+            responseType : 'arraybuffer'
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+});
 angular.module('app.Basicdata').service("SegmentmaintenanceService", function($http, $q , APP_CONFIG) {
 
     /**
@@ -3778,191 +4069,6 @@ angular.module('app.Basicdata').service("SegmentmaintenanceService", function($h
         return d.promise;
     }
 
-});
-"use strict";
-
-angular.module('app.ControlPoint').controller('CostinterlockscheduleCtrl', function ($scope,$state,$stateParams,$location) {
-
-})
-"use strict";
-
-angular.module('app.ControlPoint').controller('CycleVersioncontrolCtrl', function ($scope,$state,$stateParams,$location) {
-
-})
-"use strict";
-
-angular.module('app.ControlPoint').controller('TaskqueueCtrl', function ($scope,$state,$stateParams,$location) {
-
-})
-"use strict";	
-
-angular.module('app').controller("ActivitiesCtrl", function ActivitiesCtrl($scope, $log, activityService){
-
-	$scope.activeTab = 'default';
-	$scope.currentActivityItems = [];
-	
-	// Getting different type of activites
-	activityService.get(function(data){
-
-		$scope.activities = data.activities;
-		
-	});
-
-
-	$scope.isActive = function(tab){
-		return $scope.activeTab === tab;
-	};
-
-	$scope.setTab = function(activityType){
-		$scope.activeTab = activityType;
-
-		activityService.getbytype(activityType, function(data) {
-
-			$scope.currentActivityItems = data.data;
-
-		});
-
-	};
-
-});
-"use strict";
-
-angular.module('app').directive('activitiesDropdownToggle', function($log) {
-
-	var link = function($scope,$element, attrs){
-		var ajax_dropdown = null;
-
-		$element.on('click',function(){
-			var badge = $(this).find('.badge');
-
-			if (badge.hasClass('bg-color-red')) {
-
-				badge.removeClass('bg-color-red').text(0);
-
-			}
-
-			ajax_dropdown = $(this).next('.ajax-dropdown');
-
-			if (!ajax_dropdown.is(':visible')) {
-
-				ajax_dropdown.fadeIn(150);
-
-				$(this).addClass('active');
-
-			}
-			 else {
-				
-				ajax_dropdown.fadeOut(150);
-				
-				$(this).removeClass('active');
-
-			}
-
-		})
-
-		$(document).mouseup(function(e) {
-			if (ajax_dropdown && !ajax_dropdown.is(e.target) && ajax_dropdown.has(e.target).length === 0) {
-				ajax_dropdown.fadeOut(150);
-				$element.removeClass('active');
-			}
-		});
-	}
-	
-	return{
-		restrict:'EA',
-		link:link
-	}
-});
-"use strict";
-
-angular.module('app').factory('activityService', function($http, $log, APP_CONFIG) {
-
-	function getActivities(callback){
-
-		$http.get(APP_CONFIG.apiRootUrl + '/activities/activity.json').success(function(data){
-
-			callback(data);
-				
-		}).error(function(){
-
-			$log.log('Error');
-			callback([]);
-
-		});
-
-	}
-
-	function getActivitiesByType(type, callback){
-
-		$http.get(APP_CONFIG.apiRootUrl + '/activities/activity-' + type + '.json').success(function(data){
-
-			callback(data);
-				
-		}).error(function(){
-
-			$log.log('Error');
-			callback([]);
-
-		});
-
-	}
-	
-	return{
-		get:function(callback){
-			getActivities(callback);
-		},
-		getbytype:function(type,callback){
-			getActivitiesByType(type, callback);
-		}
-	}
-});
-"use strict";
-
-angular.module('app').factory('Project', function($http, APP_CONFIG){
-    return {
-        list: $http.get(APP_CONFIG.apiRootUrl + '/projects.json')
-    }
-});
-"use strict";
-
-angular.module('app').directive('recentProjects', function(Project){
-    return {
-        restrict: "EA",
-        replace: true,
-        templateUrl: "app/dashboard/projects/recent-projects.tpl.html",
-        scope: true,
-        link: function(scope, element){
-
-            Project.list.then(function(response){
-                scope.projects = response.data;
-            });
-            scope.clearProjects = function(){
-                scope.projects = [];
-            }
-        }
-    }
-});
-'use strict';
-
-angular.module('app.eCommerce').controller('OrdersDemoCtrl', function ($scope, orders) {
-
-    $scope.orders = orders.data;
-
-    $scope.tableOptions =  {
-        "data": orders.data.data,
-//            "bDestroy": true,
-        "iDisplayLength": 15,
-        columns: [
-            {data: "orderId"},
-            {data: "customerId"},
-            {data: "purchase"},
-            {data: "delivery"},
-            {data: "basePrice"},
-            {data: "postalZip"},
-            {data: "status"}
-        ],
-        "order": [[1, 'asc']]
-    }
 });
 'use strict';
 
@@ -4192,6 +4298,228 @@ angular.module('app.calendar').directive('fullCalendar', function (CalendarEvent
 
 angular.module('app.calendar').factory('CalendarEvent', function($resource, APP_CONFIG){
     return $resource( APP_CONFIG.apiRootUrl + '/events.json', {_id:'@id'})
+});
+"use strict";
+
+angular.module('app.ControlPoint').controller('CostinterlockscheduleCtrl', function ($scope,$state,$stateParams,$location) {
+
+})
+"use strict";
+
+angular.module('app.ControlPoint').controller('CycleVersioncontrolCtrl', function ($scope,$state,$stateParams,$location) {
+
+})
+"use strict";
+
+angular.module('app.ControlPoint').controller('TaskqueueCtrl', function ($scope,$state,$stateParams,$location) {
+
+})
+"use strict";	
+
+angular.module('app').controller("ActivitiesCtrl", function ActivitiesCtrl($scope, $log, activityService){
+
+	$scope.activeTab = 'default';
+	$scope.currentActivityItems = [];
+	
+	// Getting different type of activites
+	activityService.get(function(data){
+
+		$scope.activities = data.activities;
+		
+	});
+
+
+	$scope.isActive = function(tab){
+		return $scope.activeTab === tab;
+	};
+
+	$scope.setTab = function(activityType){
+		$scope.activeTab = activityType;
+
+		activityService.getbytype(activityType, function(data) {
+
+			$scope.currentActivityItems = data.data;
+
+		});
+
+	};
+
+});
+"use strict";
+
+angular.module('app').directive('activitiesDropdownToggle', function($log) {
+
+	var link = function($scope,$element, attrs){
+		var ajax_dropdown = null;
+
+		$element.on('click',function(){
+			var badge = $(this).find('.badge');
+
+			if (badge.hasClass('bg-color-red')) {
+
+				badge.removeClass('bg-color-red').text(0);
+
+			}
+
+			ajax_dropdown = $(this).next('.ajax-dropdown');
+
+			if (!ajax_dropdown.is(':visible')) {
+
+				ajax_dropdown.fadeIn(150);
+
+				$(this).addClass('active');
+
+			}
+			 else {
+				
+				ajax_dropdown.fadeOut(150);
+				
+				$(this).removeClass('active');
+
+			}
+
+		})
+
+		$(document).mouseup(function(e) {
+			if (ajax_dropdown && !ajax_dropdown.is(e.target) && ajax_dropdown.has(e.target).length === 0) {
+				ajax_dropdown.fadeOut(150);
+				$element.removeClass('active');
+			}
+		});
+	}
+	
+	return{
+		restrict:'EA',
+		link:link
+	}
+});
+"use strict";
+
+angular.module('app').factory('activityService', function($http, $log, APP_CONFIG) {
+
+	function getActivities(callback){
+
+		$http.get(APP_CONFIG.apiRootUrl + '/activities/activity.json').success(function(data){
+
+			callback(data);
+				
+		}).error(function(){
+
+			$log.log('Error');
+			callback([]);
+
+		});
+
+	}
+
+	function getActivitiesByType(type, callback){
+
+		$http.get(APP_CONFIG.apiRootUrl + '/activities/activity-' + type + '.json').success(function(data){
+
+			callback(data);
+				
+		}).error(function(){
+
+			$log.log('Error');
+			callback([]);
+
+		});
+
+	}
+	
+	return{
+		get:function(callback){
+			getActivities(callback);
+		},
+		getbytype:function(type,callback){
+			getActivitiesByType(type, callback);
+		}
+	}
+});
+"use strict";
+
+angular.module('app').factory('Project', function($http, APP_CONFIG){
+    return {
+        list: $http.get(APP_CONFIG.apiRootUrl + '/projects.json')
+    }
+});
+"use strict";
+
+angular.module('app').directive('recentProjects', function(Project){
+    return {
+        restrict: "EA",
+        replace: true,
+        templateUrl: "app/dashboard/projects/recent-projects.tpl.html",
+        scope: true,
+        link: function(scope, element){
+
+            Project.list.then(function(response){
+                scope.projects = response.data;
+            });
+            scope.clearProjects = function(){
+                scope.projects = [];
+            }
+        }
+    }
+});
+"use strict";
+
+angular.module('app').controller('TodoCtrl', function ($scope, $timeout, Todo) {
+    $scope.newTodo = undefined;
+
+    $scope.states = ['Critical', 'Important', 'Completed'];
+
+    $scope.todos = Todo.getList().$object;
+
+    // $scope.$watch('todos', function(){ }, true)
+
+    $scope.toggleAdd = function () {
+        if (!$scope.newTodo) {
+            $scope.newTodo = {
+                state: 'Important'
+            };
+        } else {
+            $scope.newTodo = undefined;
+        }
+    };
+
+    $scope.createTodo = function () {
+        $scope.todos.push(
+           Todo.normalize($scope.newTodo)
+        );
+        $scope.newTodo = undefined;
+
+    };
+
+    $scope.deleteTodo = function (todo) {
+        todo.remove().then(function () {
+            $scope.todos.splice($scope.todos.indexOf(todo), 1);
+        });
+
+    };
+
+});
+'use strict';
+
+angular.module('app.eCommerce').controller('OrdersDemoCtrl', function ($scope, orders) {
+
+    $scope.orders = orders.data;
+
+    $scope.tableOptions =  {
+        "data": orders.data.data,
+//            "bDestroy": true,
+        "iDisplayLength": 15,
+        columns: [
+            {data: "orderId"},
+            {data: "customerId"},
+            {data: "purchase"},
+            {data: "delivery"},
+            {data: "basePrice"},
+            {data: "postalZip"},
+            {data: "status"}
+        ],
+        "order": [[1, 'asc']]
+    }
 });
 
 "use strict";
@@ -4501,75 +4829,6 @@ angular.module('app.forms').controller('ModalDemoCtrl', function($scope, $modalI
 });
 "use strict";
 
-angular.module('app.inbox').directive('messageLabels', function (InboxConfig) {
-    return {
-        replace: true,
-        restrict: 'AE',
-        link: function (scope, element) {
-
-            if (scope.message.labels && scope.message.labels.length) {
-                InboxConfig.success(function (config) {
-                    var html = _.map(scope.message.labels, function (label) {
-                        return '<span class="label bg-color-'+config.labels[label].color +'">' + config.labels[label].name + '</span>';
-                    }).join('');
-                    element.replaceWith(html);
-                });
-
-            } else {
-                element.replaceWith('');
-            }
-        }
-    }
-});
-"use strict";
-
-angular.module('app.inbox').directive('unreadMessagesCount', function(InboxConfig){
-    return {
-        restrict: 'A',
-        link: function(scope, element){
-            InboxConfig.success(function(config){
-                element.html(_.find(config.folders, {key: 'inbox'}).unread);
-            })
-        }
-    }
-});
-"use strict";
-
-angular.module('app.inbox').factory('InboxConfig', function($http, APP_CONFIG){
-    return $http.get(APP_CONFIG.apiRootUrl + '/inbox.json');
-})
-"use strict";
-
-angular.module('app.inbox').factory('InboxMessage', function($resource, APP_CONFIG){
-   var InboxMessage = $resource(APP_CONFIG.apiRootUrl + '/messages.json/:id', {'id': '@_id'}, {
-        get:{
-            url: APP_CONFIG.apiRootUrl + '/message.json',
-            isArray: false
-        }
-    });
-
-    _.extend(InboxMessage.prototype, {
-        selected: false,
-        hasAttachments: function(){
-            return (_.isArray(this.attachments) && this.attachments.length)
-        },
-        fullAttachmentsTootlip: function(){
-            return 'FILES: ' + _.pluck(this.attachments, 'name').join(', ');
-        },
-        getBodyTeaser: function(){
-            var clearBody  = this.body.replace(/<[^<>]+?>/gm, ' ').replace(/(\s{2}|\n)/gm, ' ');
-
-            var teaserMaxLength = 55 - this.subject.length;
-
-            return clearBody.length > teaserMaxLength ? clearBody.substring(0, teaserMaxLength) + '...' : clearBody;
-        }
-    });
-
-    return InboxMessage;
-
-});
-"use strict";
-
 angular.module('app.graphs').controller('FlotCtrl', function ($scope) {
 
 
@@ -4872,6 +5131,75 @@ angular.module('app.graphs').controller('FlotCtrl', function ($scope) {
         data : visitors,
         label : "Site visitors"
     }];
+});
+"use strict";
+
+angular.module('app.inbox').factory('InboxConfig', function($http, APP_CONFIG){
+    return $http.get(APP_CONFIG.apiRootUrl + '/inbox.json');
+})
+"use strict";
+
+angular.module('app.inbox').factory('InboxMessage', function($resource, APP_CONFIG){
+   var InboxMessage = $resource(APP_CONFIG.apiRootUrl + '/messages.json/:id', {'id': '@_id'}, {
+        get:{
+            url: APP_CONFIG.apiRootUrl + '/message.json',
+            isArray: false
+        }
+    });
+
+    _.extend(InboxMessage.prototype, {
+        selected: false,
+        hasAttachments: function(){
+            return (_.isArray(this.attachments) && this.attachments.length)
+        },
+        fullAttachmentsTootlip: function(){
+            return 'FILES: ' + _.pluck(this.attachments, 'name').join(', ');
+        },
+        getBodyTeaser: function(){
+            var clearBody  = this.body.replace(/<[^<>]+?>/gm, ' ').replace(/(\s{2}|\n)/gm, ' ');
+
+            var teaserMaxLength = 55 - this.subject.length;
+
+            return clearBody.length > teaserMaxLength ? clearBody.substring(0, teaserMaxLength) + '...' : clearBody;
+        }
+    });
+
+    return InboxMessage;
+
+});
+"use strict";
+
+angular.module('app.inbox').directive('messageLabels', function (InboxConfig) {
+    return {
+        replace: true,
+        restrict: 'AE',
+        link: function (scope, element) {
+
+            if (scope.message.labels && scope.message.labels.length) {
+                InboxConfig.success(function (config) {
+                    var html = _.map(scope.message.labels, function (label) {
+                        return '<span class="label bg-color-'+config.labels[label].color +'">' + config.labels[label].name + '</span>';
+                    }).join('');
+                    element.replaceWith(html);
+                });
+
+            } else {
+                element.replaceWith('');
+            }
+        }
+    }
+});
+"use strict";
+
+angular.module('app.inbox').directive('unreadMessagesCount', function(InboxConfig){
+    return {
+        restrict: 'A',
+        link: function(scope, element){
+            InboxConfig.success(function(config){
+                element.html(_.find(config.folders, {key: 'inbox'}).unread);
+            })
+        }
+    }
 });
 "use strict";
 
@@ -8800,6 +9128,259 @@ angular.module('app.Report').controller('OuttapeSummaryCtrl', function ($scope,$
 angular.module('app.Report').controller('QTQPNtakedownCtrl', function ($scope,$state,$stateParams,$location) {
 
 })
+/**
+ * Created by griga on 2/9/16.
+ */
+
+
+angular.module('app.tables').controller('DatatablesCtrl', function(DTOptionsBuilder, DTColumnBuilder){
+
+
+    this.standardOptions = DTOptionsBuilder
+        .fromSource('api/tables/datatables.standard.json')
+         //Add Bootstrap compatibility
+        .withDOM("<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+            "t" +
+            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>")
+        .withBootstrap();
+    this.standardColumns = [
+        DTColumnBuilder.newColumn('id').withClass('text-danger'),
+        DTColumnBuilder.newColumn('name'),
+        DTColumnBuilder.newColumn('phone'),
+        DTColumnBuilder.newColumn('company'),
+        DTColumnBuilder.newColumn('zip'),
+        DTColumnBuilder.newColumn('city'),
+        DTColumnBuilder.newColumn('date')
+    ];
+
+
+});
+'use strict';
+
+angular.module('app.tables').controller('JqGridCtrl', function ($scope) {
+    $scope.gridData = {
+        data: [
+            {
+                id: "1",
+                date: "2007-10-01",
+                name: "test",
+                note: "note",
+                amount: "200.00",
+                tax: "10.00",
+                total: "210.00"
+            },
+            {
+                id: "2",
+                date: "2007-10-02",
+                name: "test2",
+                note: "note2",
+                amount: "300.00",
+                tax: "20.00",
+                total: "320.00"
+            },
+            {
+                id: "3",
+                date: "2007-09-01",
+                name: "test3",
+                note: "note3",
+                amount: "400.00",
+                tax: "30.00",
+                total: "430.00"
+            },
+            {
+                id: "4",
+                date: "2007-10-04",
+                name: "test",
+                note: "note",
+                amount: "200.00",
+                tax: "10.00",
+                total: "210.00"
+            },
+            {
+                id: "5",
+                date: "2007-10-05",
+                name: "test2",
+                note: "note2",
+                amount: "300.00",
+                tax: "20.00",
+                total: "320.00"
+            },
+            {
+                id: "6",
+                date: "2007-09-06",
+                name: "test3",
+                note: "note3",
+                amount: "400.00",
+                tax: "30.00",
+                total: "430.00"
+            },
+            {
+                id: "7",
+                date: "2007-10-04",
+                name: "test",
+                note: "note",
+                amount: "200.00",
+                tax: "10.00",
+                total: "210.00"
+            },
+            {
+                id: "8",
+                date: "2007-10-03",
+                name: "test2",
+                note: "note2",
+                amount: "300.00",
+                tax: "20.00",
+                total: "320.00"
+            },
+            {
+                id: "9",
+                date: "2007-09-01",
+                name: "test3",
+                note: "note3",
+                amount: "400.00",
+                tax: "30.00",
+                total: "430.00"
+            },
+            {
+                id: "10",
+                date: "2007-10-01",
+                name: "test",
+                note: "note",
+                amount: "200.00",
+                tax: "10.00",
+                total: "210.00"
+            },
+            {
+                id: "11",
+                date: "2007-10-02",
+                name: "test2",
+                note: "note2",
+                amount: "300.00",
+                tax: "20.00",
+                total: "320.00"
+            },
+            {
+                id: "12",
+                date: "2007-09-01",
+                name: "test3",
+                note: "note3",
+                amount: "400.00",
+                tax: "30.00",
+                total: "430.00"
+            },
+            {
+                id: "13",
+                date: "2007-10-04",
+                name: "test",
+                note: "note",
+                amount: "200.00",
+                tax: "10.00",
+                total: "210.00"
+            },
+            {
+                id: "14",
+                date: "2007-10-05",
+                name: "test2",
+                note: "note2",
+                amount: "300.00",
+                tax: "20.00",
+                total: "320.00"
+            },
+            {
+                id: "15",
+                date: "2007-09-06",
+                name: "test3",
+                note: "note3",
+                amount: "400.00",
+                tax: "30.00",
+                total: "430.00"
+            },
+            {
+                id: "16",
+                date: "2007-10-04",
+                name: "test",
+                note: "note",
+                amount: "200.00",
+                tax: "10.00",
+                total: "210.00"
+            },
+            {
+                id: "17",
+                date: "2007-10-03",
+                name: "test2",
+                note: "note2",
+                amount: "300.00",
+                tax: "20.00",
+                total: "320.00"
+            },
+            {
+                id: "18",
+                date: "2007-09-01",
+                name: "test3",
+                note: "note3",
+                amount: "400.00",
+                tax: "30.00",
+                total: "430.00"
+            }
+        ],
+        colNames: ['Actions', 'Inv No', 'Date', 'Client', 'Amount', 'Tax', 'Total', 'Notes'],
+        colModel: [
+            {
+                name: 'act',
+                index: 'act',
+                sortable: false
+            },
+            {
+                name: 'id',
+                index: 'id'
+            },
+            {
+                name: 'date',
+                index: 'date',
+                editable: true
+            },
+            {
+                name: 'name',
+                index: 'name',
+                editable: true
+            },
+            {
+                name: 'amount',
+                index: 'amount',
+                align: "right",
+                editable: true
+            },
+            {
+                name: 'tax',
+                index: 'tax',
+                align: "right",
+                editable: true
+            },
+            {
+                name: 'total',
+                index: 'total',
+                align: "right",
+                editable: true
+            },
+            {
+                name: 'note',
+                index: 'note',
+                sortable: false,
+                editable: true
+            }
+        ]
+    }
+
+
+    $scope.getSelection = function(){
+        alert(jQuery('table').jqGrid('getGridParam', 'selarrrow'));
+    };
+
+    $scope.selectRow = function(row){
+       jQuery('table').jqGrid('setSelection', row);
+
+    }
+});
 "use strict";
 
 angular.module('app.ui').controller('GeneralElementsCtrl', function ($scope, $sce) {
@@ -9610,259 +10191,6 @@ angular.module('app.ui').directive('smartTreeview', function ($compile, $sce) {
         }
     };
 });
-/**
- * Created by griga on 2/9/16.
- */
-
-
-angular.module('app.tables').controller('DatatablesCtrl', function(DTOptionsBuilder, DTColumnBuilder){
-
-
-    this.standardOptions = DTOptionsBuilder
-        .fromSource('api/tables/datatables.standard.json')
-         //Add Bootstrap compatibility
-        .withDOM("<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-            "t" +
-            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>")
-        .withBootstrap();
-    this.standardColumns = [
-        DTColumnBuilder.newColumn('id').withClass('text-danger'),
-        DTColumnBuilder.newColumn('name'),
-        DTColumnBuilder.newColumn('phone'),
-        DTColumnBuilder.newColumn('company'),
-        DTColumnBuilder.newColumn('zip'),
-        DTColumnBuilder.newColumn('city'),
-        DTColumnBuilder.newColumn('date')
-    ];
-
-
-});
-'use strict';
-
-angular.module('app.tables').controller('JqGridCtrl', function ($scope) {
-    $scope.gridData = {
-        data: [
-            {
-                id: "1",
-                date: "2007-10-01",
-                name: "test",
-                note: "note",
-                amount: "200.00",
-                tax: "10.00",
-                total: "210.00"
-            },
-            {
-                id: "2",
-                date: "2007-10-02",
-                name: "test2",
-                note: "note2",
-                amount: "300.00",
-                tax: "20.00",
-                total: "320.00"
-            },
-            {
-                id: "3",
-                date: "2007-09-01",
-                name: "test3",
-                note: "note3",
-                amount: "400.00",
-                tax: "30.00",
-                total: "430.00"
-            },
-            {
-                id: "4",
-                date: "2007-10-04",
-                name: "test",
-                note: "note",
-                amount: "200.00",
-                tax: "10.00",
-                total: "210.00"
-            },
-            {
-                id: "5",
-                date: "2007-10-05",
-                name: "test2",
-                note: "note2",
-                amount: "300.00",
-                tax: "20.00",
-                total: "320.00"
-            },
-            {
-                id: "6",
-                date: "2007-09-06",
-                name: "test3",
-                note: "note3",
-                amount: "400.00",
-                tax: "30.00",
-                total: "430.00"
-            },
-            {
-                id: "7",
-                date: "2007-10-04",
-                name: "test",
-                note: "note",
-                amount: "200.00",
-                tax: "10.00",
-                total: "210.00"
-            },
-            {
-                id: "8",
-                date: "2007-10-03",
-                name: "test2",
-                note: "note2",
-                amount: "300.00",
-                tax: "20.00",
-                total: "320.00"
-            },
-            {
-                id: "9",
-                date: "2007-09-01",
-                name: "test3",
-                note: "note3",
-                amount: "400.00",
-                tax: "30.00",
-                total: "430.00"
-            },
-            {
-                id: "10",
-                date: "2007-10-01",
-                name: "test",
-                note: "note",
-                amount: "200.00",
-                tax: "10.00",
-                total: "210.00"
-            },
-            {
-                id: "11",
-                date: "2007-10-02",
-                name: "test2",
-                note: "note2",
-                amount: "300.00",
-                tax: "20.00",
-                total: "320.00"
-            },
-            {
-                id: "12",
-                date: "2007-09-01",
-                name: "test3",
-                note: "note3",
-                amount: "400.00",
-                tax: "30.00",
-                total: "430.00"
-            },
-            {
-                id: "13",
-                date: "2007-10-04",
-                name: "test",
-                note: "note",
-                amount: "200.00",
-                tax: "10.00",
-                total: "210.00"
-            },
-            {
-                id: "14",
-                date: "2007-10-05",
-                name: "test2",
-                note: "note2",
-                amount: "300.00",
-                tax: "20.00",
-                total: "320.00"
-            },
-            {
-                id: "15",
-                date: "2007-09-06",
-                name: "test3",
-                note: "note3",
-                amount: "400.00",
-                tax: "30.00",
-                total: "430.00"
-            },
-            {
-                id: "16",
-                date: "2007-10-04",
-                name: "test",
-                note: "note",
-                amount: "200.00",
-                tax: "10.00",
-                total: "210.00"
-            },
-            {
-                id: "17",
-                date: "2007-10-03",
-                name: "test2",
-                note: "note2",
-                amount: "300.00",
-                tax: "20.00",
-                total: "320.00"
-            },
-            {
-                id: "18",
-                date: "2007-09-01",
-                name: "test3",
-                note: "note3",
-                amount: "400.00",
-                tax: "30.00",
-                total: "430.00"
-            }
-        ],
-        colNames: ['Actions', 'Inv No', 'Date', 'Client', 'Amount', 'Tax', 'Total', 'Notes'],
-        colModel: [
-            {
-                name: 'act',
-                index: 'act',
-                sortable: false
-            },
-            {
-                name: 'id',
-                index: 'id'
-            },
-            {
-                name: 'date',
-                index: 'date',
-                editable: true
-            },
-            {
-                name: 'name',
-                index: 'name',
-                editable: true
-            },
-            {
-                name: 'amount',
-                index: 'amount',
-                align: "right",
-                editable: true
-            },
-            {
-                name: 'tax',
-                index: 'tax',
-                align: "right",
-                editable: true
-            },
-            {
-                name: 'total',
-                index: 'total',
-                align: "right",
-                editable: true
-            },
-            {
-                name: 'note',
-                index: 'note',
-                sortable: false,
-                editable: true
-            }
-        ]
-    }
-
-
-    $scope.getSelection = function(){
-        alert(jQuery('table').jqGrid('getGridParam', 'selarrrow'));
-    };
-
-    $scope.selectRow = function(row){
-       jQuery('table').jqGrid('setSelection', row);
-
-    }
-});
 "use strict";
 
 angular.module('app.Validation').controller('AlliancefundAccumulationCtrl', function ($scope,$state,$stateParams,$location) {
@@ -10024,43 +10352,6 @@ angular.module('app.Validation').controller('ResultcheckingbyMTMCtrl', function 
         }
     }
 })
-"use strict";
-
-angular.module('app').controller('TodoCtrl', function ($scope, $timeout, Todo) {
-    $scope.newTodo = undefined;
-
-    $scope.states = ['Critical', 'Important', 'Completed'];
-
-    $scope.todos = Todo.getList().$object;
-
-    // $scope.$watch('todos', function(){ }, true)
-
-    $scope.toggleAdd = function () {
-        if (!$scope.newTodo) {
-            $scope.newTodo = {
-                state: 'Important'
-            };
-        } else {
-            $scope.newTodo = undefined;
-        }
-    };
-
-    $scope.createTodo = function () {
-        $scope.todos.push(
-           Todo.normalize($scope.newTodo)
-        );
-        $scope.newTodo = undefined;
-
-    };
-
-    $scope.deleteTodo = function (todo) {
-        todo.remove().then(function () {
-            $scope.todos.splice($scope.todos.indexOf(todo), 1);
-        });
-
-    };
-
-});
 "use strict";
 
 angular.module('app.auth').directive('facebookSignin', function ($rootScope, ezfb) {
@@ -10768,6 +11059,86 @@ angular.module('app.chat').directive('chatWidget', function (ChatApi) {
             })
         }
     }
+});
+"use strict";
+
+ angular.module('app').directive('todoList', function ($timeout, Todo) {
+
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/dashboard/todo/directives/todo-list.tpl.html',
+        scope: {
+            todos: '='
+        },
+        link: function (scope, element, attributes) {
+            scope.title = attributes.title
+            scope.icon = attributes.icon
+            scope.state = attributes.state
+            scope.filter = {
+                state: scope.state
+            }
+
+            element.find('.todo').sortable({
+                handle: '.handle',
+                connectWith: ".todo",
+                receive: function (event, ui) {
+
+                    console.log(ui.item.scope().todo,scope.state)
+                    var todo = ui.item.scope().todo;
+                    var state = scope.state
+                    // // console.log(ui.item, todo, state)
+                    // // console.log(state, todo)
+                    if (todo && state) {
+                        todo.setState(state);
+                         // ui.sender.sortable("cancel");
+                        // scope.$apply();
+                    } else {
+                        console.log('Wat', todo, state);
+                    }
+                    
+                }
+            }).disableSelection();
+
+        }
+    }
+});
+"use strict";
+
+angular.module('app').factory('Todo', function (Restangular, APP_CONFIG, $httpBackend) {
+
+    var normalize = function(todo) {
+        if(!todo._id){
+            todo._id = _.unique('todo')
+        }
+        todo.toggle = function(){
+            if (!todo.completedAt) {
+                todo.state = 'Completed';
+                todo.completedAt = JSON.stringify(new Date());
+            } else {
+                todo.state = 'Critical';
+                todo.completedAt = null;
+            }
+        };
+
+        todo.setState = function(state){
+            todo.state = state;
+            if (state == 'Completed') {
+                todo.completedAt = JSON.stringify(new Date());
+            } else {
+                todo.completedAt = null;
+            }
+        };
+
+        return todo;
+    };
+
+    var Todo = Restangular.all(APP_CONFIG.apiRootUrl + '/todos.json');
+
+    Restangular.extendModel(APP_CONFIG.apiRootUrl + '/todos.json', normalize);
+    Todo.normalize = normalize;
+
+    return Todo
 });
 'use strict';
 
@@ -14739,83 +15110,441 @@ angular.module('SmartAdmin.UI').directive('smartTooltipHtml', function () {
 
 "use strict";
 
- angular.module('app').directive('todoList', function ($timeout, Todo) {
+
+angular.module('SmartAdmin.Forms').directive('bootstrapAttributeForm', function(){
 
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'app/dashboard/todo/directives/todo-list.tpl.html',
-        scope: {
-            todos: '='
-        },
-        link: function (scope, element, attributes) {
-            scope.title = attributes.title
-            scope.icon = attributes.icon
-            scope.state = attributes.state
-            scope.filter = {
-                state: scope.state
-            }
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-attribute-form.tpl.html',
+        link: function(scope, form){
+            form.bootstrapValidator();
 
-            element.find('.todo').sortable({
-                handle: '.handle',
-                connectWith: ".todo",
-                receive: function (event, ui) {
-
-                    console.log(ui.item.scope().todo,scope.state)
-                    var todo = ui.item.scope().todo;
-                    var state = scope.state
-                    // // console.log(ui.item, todo, state)
-                    // // console.log(state, todo)
-                    if (todo && state) {
-                        todo.setState(state);
-                         // ui.sender.sortable("cancel");
-                        // scope.$apply();
-                    } else {
-                        console.log('Wat', todo, state);
-                    }
-                    
-                }
-            }).disableSelection();
 
         }
+
     }
 });
 "use strict";
 
-angular.module('app').factory('Todo', function (Restangular, APP_CONFIG, $httpBackend) {
 
-    var normalize = function(todo) {
-        if(!todo._id){
-            todo._id = _.unique('todo')
+angular.module('SmartAdmin.Forms').directive('bootstrapButtonGroupForm', function(){
+
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-button-group-form.tpl.html',
+        link: function(scope, form){
+            form.bootstrapValidator({
+                excluded : ':disabled',
+                feedbackIcons : {
+                    valid : 'glyphicon glyphicon-ok',
+                    invalid : 'glyphicon glyphicon-remove',
+                    validating : 'glyphicon glyphicon-refresh'
+                },
+                fields : {
+                    gender : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The gender is required'
+                            }
+                        }
+                    },
+                    'languages[]' : {
+                        validators : {
+                            choice : {
+                                min : 1,
+                                max : 2,
+                                message : 'Please choose 1 - 2 languages you can speak'
+                            }
+                        }
+                    }
+                }
+            });
+
+
         }
-        todo.toggle = function(){
-            if (!todo.completedAt) {
-                todo.state = 'Completed';
-                todo.completedAt = JSON.stringify(new Date());
-            } else {
-                todo.state = 'Critical';
-                todo.completedAt = null;
-            }
-        };
 
-        todo.setState = function(state){
-            todo.state = state;
-            if (state == 'Completed') {
-                todo.completedAt = JSON.stringify(new Date());
-            } else {
-                todo.completedAt = null;
-            }
-        };
+    }
+});
+"use strict";
 
-        return todo;
-    };
 
-    var Todo = Restangular.all(APP_CONFIG.apiRootUrl + '/todos.json');
+angular.module('SmartAdmin.Forms').directive('bootstrapContactForm', function(){
 
-    Restangular.extendModel(APP_CONFIG.apiRootUrl + '/todos.json', normalize);
-    Todo.normalize = normalize;
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-contact-form.tpl.html',
+        link: function(scope, form){
+            form.bootstrapValidator({
+                container : '#messages',
+                feedbackIcons : {
+                    valid : 'glyphicon glyphicon-ok',
+                    invalid : 'glyphicon glyphicon-remove',
+                    validating : 'glyphicon glyphicon-refresh'
+                },
+                fields : {
+                    fullName : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The full name is required and cannot be empty'
+                            }
+                        }
+                    },
+                    email : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The email address is required and cannot be empty'
+                            },
+                            emailAddress : {
+                                message : 'The email address is not valid'
+                            }
+                        }
+                    },
+                    title : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The title is required and cannot be empty'
+                            },
+                            stringLength : {
+                                max : 100,
+                                message : 'The title must be less than 100 characters long'
+                            }
+                        }
+                    },
+                    content : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The content is required and cannot be empty'
+                            },
+                            stringLength : {
+                                max : 500,
+                                message : 'The content must be less than 500 characters long'
+                            }
+                        }
+                    }
+                }
+            });
 
-    return Todo
+        }
+
+    }
+
+});
+"use strict";
+
+
+angular.module('SmartAdmin.Forms').directive('bootstrapMovieForm', function(){
+
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-movie-form.tpl.html',
+        link: function(scope, form){
+            form.bootstrapValidator({
+                feedbackIcons : {
+                    valid : 'glyphicon glyphicon-ok',
+                    invalid : 'glyphicon glyphicon-remove',
+                    validating : 'glyphicon glyphicon-refresh'
+                },
+                fields : {
+                    title : {
+                        group : '.col-md-8',
+                        validators : {
+                            notEmpty : {
+                                message : 'The title is required'
+                            },
+                            stringLength : {
+                                max : 200,
+                                message : 'The title must be less than 200 characters long'
+                            }
+                        }
+                    },
+                    genre : {
+                        group : '.col-md-4',
+                        validators : {
+                            notEmpty : {
+                                message : 'The genre is required'
+                            }
+                        }
+                    },
+                    director : {
+                        group : '.col-md-4',
+                        validators : {
+                            notEmpty : {
+                                message : 'The director name is required'
+                            },
+                            stringLength : {
+                                max : 80,
+                                message : 'The director name must be less than 80 characters long'
+                            }
+                        }
+                    },
+                    writer : {
+                        group : '.col-md-4',
+                        validators : {
+                            notEmpty : {
+                                message : 'The writer name is required'
+                            },
+                            stringLength : {
+                                max : 80,
+                                message : 'The writer name must be less than 80 characters long'
+                            }
+                        }
+                    },
+                    producer : {
+                        group : '.col-md-4',
+                        validators : {
+                            notEmpty : {
+                                message : 'The producer name is required'
+                            },
+                            stringLength : {
+                                max : 80,
+                                message : 'The producer name must be less than 80 characters long'
+                            }
+                        }
+                    },
+                    website : {
+                        group : '.col-md-6',
+                        validators : {
+                            notEmpty : {
+                                message : 'The website address is required'
+                            },
+                            uri : {
+                                message : 'The website address is not valid'
+                            }
+                        }
+                    },
+                    trailer : {
+                        group : '.col-md-6',
+                        validators : {
+                            notEmpty : {
+                                message : 'The trailer link is required'
+                            },
+                            uri : {
+                                message : 'The trailer link is not valid'
+                            }
+                        }
+                    },
+                    review : {
+                        // The group will be set as default (.form-group)
+                        validators : {
+                            stringLength : {
+                                max : 500,
+                                message : 'The review must be less than 500 characters long'
+                            }
+                        }
+                    },
+                    rating : {
+                        // The group will be set as default (.form-group)
+                        validators : {
+                            notEmpty : {
+                                message : 'The rating is required'
+                            }
+                        }
+                    }
+                }
+            });
+
+        }
+
+    }
+
+});
+"use strict";
+
+
+angular.module('SmartAdmin.Forms').directive('bootstrapProductForm', function(){
+
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-product-form.tpl.html',
+        link: function(scope, form){
+            form.bootstrapValidator({
+                feedbackIcons : {
+                    valid : 'glyphicon glyphicon-ok',
+                    invalid : 'glyphicon glyphicon-remove',
+                    validating : 'glyphicon glyphicon-refresh'
+                },
+                fields : {
+                    price : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The price is required'
+                            },
+                            numeric : {
+                                message : 'The price must be a number'
+                            }
+                        }
+                    },
+                    amount : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The amount is required'
+                            },
+                            numeric : {
+                                message : 'The amount must be a number'
+                            }
+                        }
+                    },
+                    color : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The color is required'
+                            }
+                        }
+                    },
+                    size : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The size is required'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+    }
+});
+"use strict";
+
+
+angular.module('SmartAdmin.Forms').directive('bootstrapProfileForm', function(){
+
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-profile-form.tpl.html',
+        link: function(scope, form){
+           form.bootstrapValidator({
+                feedbackIcons : {
+                    valid : 'glyphicon glyphicon-ok',
+                    invalid : 'glyphicon glyphicon-remove',
+                    validating : 'glyphicon glyphicon-refresh'
+                },
+                fields : {
+                    email : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The email address is required'
+                            },
+                            emailAddress : {
+                                message : 'The email address is not valid'
+                            }
+                        }
+                    },
+                    password : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The password is required'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+    }
+
+});
+"use strict";
+
+
+angular.module('SmartAdmin.Forms').directive('bootstrapTogglingForm', function(){
+
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-toggling-form.tpl.html',
+        link: function(scope, form){
+            form.bootstrapValidator({
+                feedbackIcons : {
+                    valid : 'glyphicon glyphicon-ok',
+                    invalid : 'glyphicon glyphicon-remove',
+                    validating : 'glyphicon glyphicon-refresh'
+                },
+                fields : {
+                    firstName : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The first name is required'
+                            }
+                        }
+                    },
+                    lastName : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The last name is required'
+                            }
+                        }
+                    },
+                    company : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The company name is required'
+                            }
+                        }
+                    },
+                    // These fields will be validated when being visible
+                    job : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The job title is required'
+                            }
+                        }
+                    },
+                    department : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The department name is required'
+                            }
+                        }
+                    },
+                    mobilePhone : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The mobile phone number is required'
+                            },
+                            digits : {
+                                message : 'The mobile phone number is not valid'
+                            }
+                        }
+                    },
+                    // These fields will be validated when being visible
+                    homePhone : {
+                        validators : {
+                            digits : {
+                                message : 'The home phone number is not valid'
+                            }
+                        }
+                    },
+                    officePhone : {
+                        validators : {
+                            digits : {
+                                message : 'The office phone number is not valid'
+                            }
+                        }
+                    }
+                }
+            }).find('button[data-toggle]').on('click', function() {
+                var $target = $($(this).attr('data-toggle'));
+                // Show or hide the additional fields
+                // They will or will not be validated based on their visibilities
+                $target.toggle();
+                if (!$target.is(':visible')) {
+                    // Enable the submit buttons in case additional fields are not valid
+                    form.data('bootstrapValidator').disableSubmitButtons(false);
+                }
+            });
+        }
+
+    }
+
+
+
 });
 'use strict';
 
@@ -14904,6 +15633,417 @@ angular.module('SmartAdmin.Forms').directive('smartSummernoteEditor', function (
 
             lazyScript.register('build/vendor.ui.js').then(function(){
                 tElement.summernote(options);                
+            });
+        }
+    }
+});
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartCheckoutForm', function (formsCommon, lazyScript) {
+    return {
+        restrict: 'A',
+        link: function (scope, form) {
+           lazyScript.register('build/vendor.ui.js').then(function(){
+
+               scope.countries = formsCommon.countries;
+
+               form.validate(angular.extend({
+                    // Rules for form validation
+                    rules : {
+                        fname : {
+                            required : true
+                        },
+                        lname : {
+                            required : true
+                        },
+                        email : {
+                            required : true,
+                            email : true
+                        },
+                        phone : {
+                            required : true
+                        },
+                        country : {
+                            required : true
+                        },
+                        city : {
+                            required : true
+                        },
+                        code : {
+                            required : true,
+                            digits : true
+                        },
+                        address : {
+                            required : true
+                        },
+                        name : {
+                            required : true
+                        },
+                        card : {
+                            required : true,
+                            creditcard : true
+                        },
+                        cvv : {
+                            required : true,
+                            digits : true
+                        },
+                        month : {
+                            required : true
+                        },
+                        year : {
+                            required : true,
+                            digits : true
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages : {
+                        fname : {
+                            required : 'Please enter your first name'
+                        },
+                        lname : {
+                            required : 'Please enter your last name'
+                        },
+                        email : {
+                            required : 'Please enter your email address',
+                            email : 'Please enter a VALID email address'
+                        },
+                        phone : {
+                            required : 'Please enter your phone number'
+                        },
+                        country : {
+                            required : 'Please select your country'
+                        },
+                        city : {
+                            required : 'Please enter your city'
+                        },
+                        code : {
+                            required : 'Please enter code',
+                            digits : 'Digits only please'
+                        },
+                        address : {
+                            required : 'Please enter your full address'
+                        },
+                        name : {
+                            required : 'Please enter name on your card'
+                        },
+                        card : {
+                            required : 'Please enter your card number'
+                        },
+                        cvv : {
+                            required : 'Enter CVV2',
+                            digits : 'Digits only'
+                        },
+                        month : {
+                            required : 'Select month'
+                        },
+                        year : {
+                            required : 'Enter year',
+                            digits : 'Digits only please'
+                        }
+                    }
+                }, formsCommon.validateOptions));
+            });
+        }
+    }
+});
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartCommentForm', function (formsCommon, lazyScript) {
+    return {
+        restrict: 'A',
+        link: function (scope, form) {
+            lazyScript.register('build/vendor.ui.js').then(function(){
+                form.validate(angular.extend({
+                    // Rules for form validation
+                    rules : {
+                        name : {
+                            required : true
+                        },
+                        email : {
+                            required : true,
+                            email : true
+                        },
+                        url : {
+                            url : true
+                        },
+                        comment : {
+                            required : true
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages : {
+                        name : {
+                            required : 'Enter your name',
+                        },
+                        email : {
+                            required : 'Enter your email address',
+                            email : 'Enter a VALID email'
+                        },
+                        url : {
+                            email : 'Enter a VALID url'
+                        },
+                        comment : {
+                            required : 'Please enter your comment'
+                        }
+                    },
+
+                    // Ajax form submition
+                    submitHandler : function() {
+                        form.ajaxSubmit({
+                            success : function() {
+                                form.addClass('submited');
+                            }
+                        });
+                    }
+
+                }, formsCommon.validateOptions));
+            });
+
+        }
+    }
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartContactsForm', function (formsCommon, lazyScript) {
+    return {
+        restrict: 'A',
+        link: function (scope, form) {
+            lazyScript.register('build/vendor.ui.js').then(function(){
+                form.validate(angular.extend({
+                    // Rules for form validation
+                    rules : {
+                        name : {
+                            required : true
+                        },
+                        email : {
+                            required : true,
+                            email : true
+                        },
+                        message : {
+                            required : true,
+                            minlength : 10
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages : {
+                        name : {
+                            required : 'Please enter your name'
+                        },
+                        email : {
+                            required : 'Please enter your email address',
+                            email : 'Please enter a VALID email address'
+                        },
+                        message : {
+                            required : 'Please enter your message'
+                        }
+                    },
+
+                    // Ajax form submition
+                    submitHandler : function() {
+                        form.ajaxSubmit({
+                            success : function() {
+                                form.addClass('submited');
+                            }
+                        });
+                    }
+                }, formsCommon.validateOptions));
+            });
+        }
+    }
+});
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartOrderForm', function (formsCommon, lazyScript) {
+    return {
+        restrict: 'E',
+        link: function (scope, form) {
+            lazyScript.register('build/vendor.ui.js').then(function(){
+                form.validate(angular.extend({
+                    // Rules for form validation
+                    rules : {
+                        name : {
+                            required : true
+                        },
+                        email : {
+                            required : true,
+                            email : true
+                        },
+                        phone : {
+                            required : true
+                        },
+                        interested : {
+                            required : true
+                        },
+                        budget : {
+                            required : true
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages : {
+                        name : {
+                            required : 'Please enter your name'
+                        },
+                        email : {
+                            required : 'Please enter your email address',
+                            email : 'Please enter a VALID email address'
+                        },
+                        phone : {
+                            required : 'Please enter your phone number'
+                        },
+                        interested : {
+                            required : 'Please select interested service'
+                        },
+                        budget : {
+                            required : 'Please select your budget'
+                        }
+                    },
+
+                }, formsCommon.validateOptions));
+            });
+
+        }
+    }
+});
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartRegistrationForm', function (formsCommon, lazyScript) {
+    return {
+        restrict: 'A',
+        link: function (scope, form, attributes) {
+            lazyScript.register('build/vendor.ui.js').then(function(){
+                form.validate(angular.extend({
+
+                    // Rules for form validation
+                    rules: {
+                        username: {
+                            required: true
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        password: {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 20
+                        },
+                        passwordConfirm: {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 20,
+                            equalTo: '#password'
+                        },
+                        firstname: {
+                            required: true
+                        },
+                        lastname: {
+                            required: true
+                        },
+                        gender: {
+                            required: true
+                        },
+                        terms: {
+                            required: true
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages: {
+                        login: {
+                            required: 'Please enter your login'
+                        },
+                        email: {
+                            required: 'Please enter your email address',
+                            email: 'Please enter a VALID email address'
+                        },
+                        password: {
+                            required: 'Please enter your password'
+                        },
+                        passwordConfirm: {
+                            required: 'Please enter your password one more time',
+                            equalTo: 'Please enter the same password as above'
+                        },
+                        firstname: {
+                            required: 'Please select your first name'
+                        },
+                        lastname: {
+                            required: 'Please select your last name'
+                        },
+                        gender: {
+                            required: 'Please select your gender'
+                        },
+                        terms: {
+                            required: 'You must agree with Terms and Conditions'
+                        }
+                    }
+
+                }, formsCommon.validateOptions));
+            });
+        }
+    }
+});
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartReviewForm', function (formsCommon, lazyScript) {
+    return {
+        restrict: 'E',
+        link: function (scope, form) {
+            lazyScript.register('build/vendor.ui.js').then(function(){
+
+                form.validate(angular.extend({
+                    // Rules for form validation
+                    rules : {
+                        name : {
+                            required : true
+                        },
+                        email : {
+                            required : true,
+                            email : true
+                        },
+                        review : {
+                            required : true,
+                            minlength : 20
+                        },
+                        quality : {
+                            required : true
+                        },
+                        reliability : {
+                            required : true
+                        },
+                        overall : {
+                            required : true
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages : {
+                        name : {
+                            required : 'Please enter your name'
+                        },
+                        email : {
+                            required : 'Please enter your email address',
+                            email : '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
+                        },
+                        review : {
+                            required : 'Please enter your review'
+                        },
+                        quality : {
+                            required : 'Please rate quality of the product'
+                        },
+                        reliability : {
+                            required : 'Please rate reliability of the product'
+                        },
+                        overall : {
+                            required : 'Please rate the product'
+                        }
+                    }
+
+                }, formsCommon.validateOptions));
             });
         }
     }
@@ -15506,444 +16646,6 @@ angular.module('SmartAdmin.Forms').directive('smartValidateForm', function (form
     }
 });
 
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapAttributeForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-attribute-form.tpl.html',
-        link: function(scope, form){
-            form.bootstrapValidator();
-
-
-        }
-
-    }
-});
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapButtonGroupForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-button-group-form.tpl.html',
-        link: function(scope, form){
-            form.bootstrapValidator({
-                excluded : ':disabled',
-                feedbackIcons : {
-                    valid : 'glyphicon glyphicon-ok',
-                    invalid : 'glyphicon glyphicon-remove',
-                    validating : 'glyphicon glyphicon-refresh'
-                },
-                fields : {
-                    gender : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The gender is required'
-                            }
-                        }
-                    },
-                    'languages[]' : {
-                        validators : {
-                            choice : {
-                                min : 1,
-                                max : 2,
-                                message : 'Please choose 1 - 2 languages you can speak'
-                            }
-                        }
-                    }
-                }
-            });
-
-
-        }
-
-    }
-});
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapContactForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-contact-form.tpl.html',
-        link: function(scope, form){
-            form.bootstrapValidator({
-                container : '#messages',
-                feedbackIcons : {
-                    valid : 'glyphicon glyphicon-ok',
-                    invalid : 'glyphicon glyphicon-remove',
-                    validating : 'glyphicon glyphicon-refresh'
-                },
-                fields : {
-                    fullName : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The full name is required and cannot be empty'
-                            }
-                        }
-                    },
-                    email : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The email address is required and cannot be empty'
-                            },
-                            emailAddress : {
-                                message : 'The email address is not valid'
-                            }
-                        }
-                    },
-                    title : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The title is required and cannot be empty'
-                            },
-                            stringLength : {
-                                max : 100,
-                                message : 'The title must be less than 100 characters long'
-                            }
-                        }
-                    },
-                    content : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The content is required and cannot be empty'
-                            },
-                            stringLength : {
-                                max : 500,
-                                message : 'The content must be less than 500 characters long'
-                            }
-                        }
-                    }
-                }
-            });
-
-        }
-
-    }
-
-});
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapMovieForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-movie-form.tpl.html',
-        link: function(scope, form){
-            form.bootstrapValidator({
-                feedbackIcons : {
-                    valid : 'glyphicon glyphicon-ok',
-                    invalid : 'glyphicon glyphicon-remove',
-                    validating : 'glyphicon glyphicon-refresh'
-                },
-                fields : {
-                    title : {
-                        group : '.col-md-8',
-                        validators : {
-                            notEmpty : {
-                                message : 'The title is required'
-                            },
-                            stringLength : {
-                                max : 200,
-                                message : 'The title must be less than 200 characters long'
-                            }
-                        }
-                    },
-                    genre : {
-                        group : '.col-md-4',
-                        validators : {
-                            notEmpty : {
-                                message : 'The genre is required'
-                            }
-                        }
-                    },
-                    director : {
-                        group : '.col-md-4',
-                        validators : {
-                            notEmpty : {
-                                message : 'The director name is required'
-                            },
-                            stringLength : {
-                                max : 80,
-                                message : 'The director name must be less than 80 characters long'
-                            }
-                        }
-                    },
-                    writer : {
-                        group : '.col-md-4',
-                        validators : {
-                            notEmpty : {
-                                message : 'The writer name is required'
-                            },
-                            stringLength : {
-                                max : 80,
-                                message : 'The writer name must be less than 80 characters long'
-                            }
-                        }
-                    },
-                    producer : {
-                        group : '.col-md-4',
-                        validators : {
-                            notEmpty : {
-                                message : 'The producer name is required'
-                            },
-                            stringLength : {
-                                max : 80,
-                                message : 'The producer name must be less than 80 characters long'
-                            }
-                        }
-                    },
-                    website : {
-                        group : '.col-md-6',
-                        validators : {
-                            notEmpty : {
-                                message : 'The website address is required'
-                            },
-                            uri : {
-                                message : 'The website address is not valid'
-                            }
-                        }
-                    },
-                    trailer : {
-                        group : '.col-md-6',
-                        validators : {
-                            notEmpty : {
-                                message : 'The trailer link is required'
-                            },
-                            uri : {
-                                message : 'The trailer link is not valid'
-                            }
-                        }
-                    },
-                    review : {
-                        // The group will be set as default (.form-group)
-                        validators : {
-                            stringLength : {
-                                max : 500,
-                                message : 'The review must be less than 500 characters long'
-                            }
-                        }
-                    },
-                    rating : {
-                        // The group will be set as default (.form-group)
-                        validators : {
-                            notEmpty : {
-                                message : 'The rating is required'
-                            }
-                        }
-                    }
-                }
-            });
-
-        }
-
-    }
-
-});
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapProductForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-product-form.tpl.html',
-        link: function(scope, form){
-            form.bootstrapValidator({
-                feedbackIcons : {
-                    valid : 'glyphicon glyphicon-ok',
-                    invalid : 'glyphicon glyphicon-remove',
-                    validating : 'glyphicon glyphicon-refresh'
-                },
-                fields : {
-                    price : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The price is required'
-                            },
-                            numeric : {
-                                message : 'The price must be a number'
-                            }
-                        }
-                    },
-                    amount : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The amount is required'
-                            },
-                            numeric : {
-                                message : 'The amount must be a number'
-                            }
-                        }
-                    },
-                    color : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The color is required'
-                            }
-                        }
-                    },
-                    size : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The size is required'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-    }
-});
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapProfileForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-profile-form.tpl.html',
-        link: function(scope, form){
-           form.bootstrapValidator({
-                feedbackIcons : {
-                    valid : 'glyphicon glyphicon-ok',
-                    invalid : 'glyphicon glyphicon-remove',
-                    validating : 'glyphicon glyphicon-refresh'
-                },
-                fields : {
-                    email : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The email address is required'
-                            },
-                            emailAddress : {
-                                message : 'The email address is not valid'
-                            }
-                        }
-                    },
-                    password : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The password is required'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-    }
-
-});
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapTogglingForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-toggling-form.tpl.html',
-        link: function(scope, form){
-            form.bootstrapValidator({
-                feedbackIcons : {
-                    valid : 'glyphicon glyphicon-ok',
-                    invalid : 'glyphicon glyphicon-remove',
-                    validating : 'glyphicon glyphicon-refresh'
-                },
-                fields : {
-                    firstName : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The first name is required'
-                            }
-                        }
-                    },
-                    lastName : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The last name is required'
-                            }
-                        }
-                    },
-                    company : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The company name is required'
-                            }
-                        }
-                    },
-                    // These fields will be validated when being visible
-                    job : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The job title is required'
-                            }
-                        }
-                    },
-                    department : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The department name is required'
-                            }
-                        }
-                    },
-                    mobilePhone : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The mobile phone number is required'
-                            },
-                            digits : {
-                                message : 'The mobile phone number is not valid'
-                            }
-                        }
-                    },
-                    // These fields will be validated when being visible
-                    homePhone : {
-                        validators : {
-                            digits : {
-                                message : 'The home phone number is not valid'
-                            }
-                        }
-                    },
-                    officePhone : {
-                        validators : {
-                            digits : {
-                                message : 'The office phone number is not valid'
-                            }
-                        }
-                    }
-                }
-            }).find('button[data-toggle]').on('click', function() {
-                var $target = $($(this).attr('data-toggle'));
-                // Show or hide the additional fields
-                // They will or will not be validated based on their visibilities
-                $target.toggle();
-                if (!$target.is(':visible')) {
-                    // Enable the submit buttons in case additional fields are not valid
-                    form.data('bootstrapValidator').disableSubmitButtons(false);
-                }
-            });
-        }
-
-    }
-
-
-
-});
 'use strict';
 
 angular.module('SmartAdmin.Forms').directive('smartFueluxWizard', function () {
@@ -16072,412 +16774,130 @@ angular.module('SmartAdmin.Forms').directive('smartWizard', function () {
 });
 'use strict';
 
-angular.module('SmartAdmin.Forms').directive('smartCheckoutForm', function (formsCommon, lazyScript) {
+angular.module('SmartAdmin.Layout').directive('demoStates', function ($rootScope) {
     return {
-        restrict: 'A',
-        link: function (scope, form) {
-           lazyScript.register('build/vendor.ui.js').then(function(){
+        restrict: 'EA',
+        replace: true,
+        templateUrl: 'app/_common/layout/directives/demo/demo-states.tpl.html',
+        scope: true,
+        link: function (scope, element, attributes) {
+            element.parent().css({
+                position: 'relative'
+            });
 
-               scope.countries = formsCommon.countries;
+            element.on('click', '#demo-setting', function () {
+                element.toggleClass('activate')
+            })
+        },
+        controller: function ($scope) {
+            var $root = $('body');
 
-               form.validate(angular.extend({
-                    // Rules for form validation
-                    rules : {
-                        fname : {
-                            required : true
-                        },
-                        lname : {
-                            required : true
-                        },
-                        email : {
-                            required : true,
-                            email : true
-                        },
-                        phone : {
-                            required : true
-                        },
-                        country : {
-                            required : true
-                        },
-                        city : {
-                            required : true
-                        },
-                        code : {
-                            required : true,
-                            digits : true
-                        },
-                        address : {
-                            required : true
-                        },
-                        name : {
-                            required : true
-                        },
-                        card : {
-                            required : true,
-                            creditcard : true
-                        },
-                        cvv : {
-                            required : true,
-                            digits : true
-                        },
-                        month : {
-                            required : true
-                        },
-                        year : {
-                            required : true,
-                            digits : true
-                        }
-                    },
+            $scope.$watch('fixedHeader', function (fixedHeader) {
+                localStorage.setItem('sm-fixed-header', fixedHeader);
+                $root.toggleClass('fixed-header', fixedHeader);
+                if (fixedHeader == false) {
+                    $scope.fixedRibbon = false;
+                    $scope.fixedNavigation = false;
+                }
+            });
 
-                    // Messages for form validation
-                    messages : {
-                        fname : {
-                            required : 'Please enter your first name'
-                        },
-                        lname : {
-                            required : 'Please enter your last name'
-                        },
-                        email : {
-                            required : 'Please enter your email address',
-                            email : 'Please enter a VALID email address'
-                        },
-                        phone : {
-                            required : 'Please enter your phone number'
-                        },
-                        country : {
-                            required : 'Please select your country'
-                        },
-                        city : {
-                            required : 'Please enter your city'
-                        },
-                        code : {
-                            required : 'Please enter code',
-                            digits : 'Digits only please'
-                        },
-                        address : {
-                            required : 'Please enter your full address'
-                        },
-                        name : {
-                            required : 'Please enter name on your card'
-                        },
-                        card : {
-                            required : 'Please enter your card number'
-                        },
-                        cvv : {
-                            required : 'Enter CVV2',
-                            digits : 'Digits only'
-                        },
-                        month : {
-                            required : 'Select month'
-                        },
-                        year : {
-                            required : 'Enter year',
-                            digits : 'Digits only please'
-                        }
+
+            $scope.$watch('fixedNavigation', function (fixedNavigation) {
+                localStorage.setItem('sm-fixed-navigation', fixedNavigation);
+                $root.toggleClass('fixed-navigation', fixedNavigation);
+                if (fixedNavigation) {
+                    $scope.insideContainer = false;
+                    $scope.fixedHeader = true;
+                } else {
+                    $scope.fixedRibbon = false;
+                }
+            });
+
+
+            $scope.$watch('fixedRibbon', function (fixedRibbon) {
+                localStorage.setItem('sm-fixed-ribbon', fixedRibbon);
+                $root.toggleClass('fixed-ribbon', fixedRibbon);
+                if (fixedRibbon) {
+                    $scope.fixedHeader = true;
+                    $scope.fixedNavigation = true;
+                    $scope.insideContainer = false;
+                }
+            });
+
+            $scope.$watch('fixedPageFooter', function (fixedPageFooter) {
+                localStorage.setItem('sm-fixed-page-footer', fixedPageFooter);
+                $root.toggleClass('fixed-page-footer', fixedPageFooter);
+            });
+
+            $scope.$watch('insideContainer', function (insideContainer) {
+                localStorage.setItem('sm-inside-container', insideContainer);
+                $root.toggleClass('container', insideContainer);
+                if (insideContainer) {
+                    $scope.fixedRibbon = false;
+                    $scope.fixedNavigation = false;
+                }
+            });
+
+            $scope.$watch('rtl', function (rtl) {
+                localStorage.setItem('sm-rtl', rtl);
+                $root.toggleClass('smart-rtl', rtl);
+            });
+
+            $scope.$watch('menuOnTop', function (menuOnTop) {
+                $rootScope.$broadcast('$smartLayoutMenuOnTop', menuOnTop);
+                localStorage.setItem('sm-menu-on-top', menuOnTop);
+                $root.toggleClass('menu-on-top', menuOnTop);
+
+                if(menuOnTop)$root.removeClass('minified');
+            });
+
+            $scope.$watch('colorblindFriendly', function (colorblindFriendly) {
+                localStorage.setItem('sm-colorblind-friendly', colorblindFriendly);
+                $root.toggleClass('colorblind-friendly', colorblindFriendly);
+            });
+
+
+            $scope.fixedHeader = localStorage.getItem('sm-fixed-header') == 'true';
+            $scope.fixedNavigation = localStorage.getItem('sm-fixed-navigation') == 'true';
+            $scope.fixedRibbon = localStorage.getItem('sm-fixed-ribbon') == 'true';
+            $scope.fixedPageFooter = localStorage.getItem('sm-fixed-page-footer') == 'true';
+            $scope.insideContainer = localStorage.getItem('sm-inside-container') == 'true';
+            $scope.rtl = localStorage.getItem('sm-rtl') == 'true';
+            $scope.menuOnTop = localStorage.getItem('sm-menu-on-top') == 'true' || $root.hasClass('menu-on-top');
+            $scope.colorblindFriendly = localStorage.getItem('sm-colorblind-friendly') == 'true';
+
+
+            $scope.skins = appConfig.skins;
+
+
+            $scope.smartSkin = localStorage.getItem('sm-skin') ? localStorage.getItem('sm-skin') : appConfig.smartSkin;
+
+            $scope.setSkin = function (skin) {
+                $scope.smartSkin = skin.name;
+                $root.removeClass(_.pluck($scope.skins, 'name').join(' '));
+                $root.addClass(skin.name);
+                localStorage.setItem('sm-skin', skin.name);
+                $("#logo img").attr('src', skin.logo);
+            };
+
+
+            if($scope.smartSkin != "smart-style-0"){
+                $scope.setSkin(_.find($scope.skins, {name: $scope.smartSkin}))
+            }
+
+
+            $scope.factoryReset = function () {
+                $.SmartMessageBox({
+                    title: "<i class='fa fa-refresh' style='color:green'></i> Clear Local Storage",
+                    content: "Would you like to RESET all your saved widgets and clear LocalStorage?1",
+                    buttons: '[No][Yes]'
+                }, function (ButtonPressed) {
+                    if (ButtonPressed == "Yes" && localStorage) {
+                        localStorage.clear();
+                        location.reload()
                     }
-                }, formsCommon.validateOptions));
-            });
-        }
-    }
-});
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartCommentForm', function (formsCommon, lazyScript) {
-    return {
-        restrict: 'A',
-        link: function (scope, form) {
-            lazyScript.register('build/vendor.ui.js').then(function(){
-                form.validate(angular.extend({
-                    // Rules for form validation
-                    rules : {
-                        name : {
-                            required : true
-                        },
-                        email : {
-                            required : true,
-                            email : true
-                        },
-                        url : {
-                            url : true
-                        },
-                        comment : {
-                            required : true
-                        }
-                    },
-
-                    // Messages for form validation
-                    messages : {
-                        name : {
-                            required : 'Enter your name',
-                        },
-                        email : {
-                            required : 'Enter your email address',
-                            email : 'Enter a VALID email'
-                        },
-                        url : {
-                            email : 'Enter a VALID url'
-                        },
-                        comment : {
-                            required : 'Please enter your comment'
-                        }
-                    },
-
-                    // Ajax form submition
-                    submitHandler : function() {
-                        form.ajaxSubmit({
-                            success : function() {
-                                form.addClass('submited');
-                            }
-                        });
-                    }
-
-                }, formsCommon.validateOptions));
-            });
-
-        }
-    }
-});
-
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartContactsForm', function (formsCommon, lazyScript) {
-    return {
-        restrict: 'A',
-        link: function (scope, form) {
-            lazyScript.register('build/vendor.ui.js').then(function(){
-                form.validate(angular.extend({
-                    // Rules for form validation
-                    rules : {
-                        name : {
-                            required : true
-                        },
-                        email : {
-                            required : true,
-                            email : true
-                        },
-                        message : {
-                            required : true,
-                            minlength : 10
-                        }
-                    },
-
-                    // Messages for form validation
-                    messages : {
-                        name : {
-                            required : 'Please enter your name'
-                        },
-                        email : {
-                            required : 'Please enter your email address',
-                            email : 'Please enter a VALID email address'
-                        },
-                        message : {
-                            required : 'Please enter your message'
-                        }
-                    },
-
-                    // Ajax form submition
-                    submitHandler : function() {
-                        form.ajaxSubmit({
-                            success : function() {
-                                form.addClass('submited');
-                            }
-                        });
-                    }
-                }, formsCommon.validateOptions));
-            });
-        }
-    }
-});
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartOrderForm', function (formsCommon, lazyScript) {
-    return {
-        restrict: 'E',
-        link: function (scope, form) {
-            lazyScript.register('build/vendor.ui.js').then(function(){
-                form.validate(angular.extend({
-                    // Rules for form validation
-                    rules : {
-                        name : {
-                            required : true
-                        },
-                        email : {
-                            required : true,
-                            email : true
-                        },
-                        phone : {
-                            required : true
-                        },
-                        interested : {
-                            required : true
-                        },
-                        budget : {
-                            required : true
-                        }
-                    },
-
-                    // Messages for form validation
-                    messages : {
-                        name : {
-                            required : 'Please enter your name'
-                        },
-                        email : {
-                            required : 'Please enter your email address',
-                            email : 'Please enter a VALID email address'
-                        },
-                        phone : {
-                            required : 'Please enter your phone number'
-                        },
-                        interested : {
-                            required : 'Please select interested service'
-                        },
-                        budget : {
-                            required : 'Please select your budget'
-                        }
-                    },
-
-                }, formsCommon.validateOptions));
-            });
-
-        }
-    }
-});
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartRegistrationForm', function (formsCommon, lazyScript) {
-    return {
-        restrict: 'A',
-        link: function (scope, form, attributes) {
-            lazyScript.register('build/vendor.ui.js').then(function(){
-                form.validate(angular.extend({
-
-                    // Rules for form validation
-                    rules: {
-                        username: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        password: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20
-                        },
-                        passwordConfirm: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20,
-                            equalTo: '#password'
-                        },
-                        firstname: {
-                            required: true
-                        },
-                        lastname: {
-                            required: true
-                        },
-                        gender: {
-                            required: true
-                        },
-                        terms: {
-                            required: true
-                        }
-                    },
-
-                    // Messages for form validation
-                    messages: {
-                        login: {
-                            required: 'Please enter your login'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        password: {
-                            required: 'Please enter your password'
-                        },
-                        passwordConfirm: {
-                            required: 'Please enter your password one more time',
-                            equalTo: 'Please enter the same password as above'
-                        },
-                        firstname: {
-                            required: 'Please select your first name'
-                        },
-                        lastname: {
-                            required: 'Please select your last name'
-                        },
-                        gender: {
-                            required: 'Please select your gender'
-                        },
-                        terms: {
-                            required: 'You must agree with Terms and Conditions'
-                        }
-                    }
-
-                }, formsCommon.validateOptions));
-            });
-        }
-    }
-});
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartReviewForm', function (formsCommon, lazyScript) {
-    return {
-        restrict: 'E',
-        link: function (scope, form) {
-            lazyScript.register('build/vendor.ui.js').then(function(){
-
-                form.validate(angular.extend({
-                    // Rules for form validation
-                    rules : {
-                        name : {
-                            required : true
-                        },
-                        email : {
-                            required : true,
-                            email : true
-                        },
-                        review : {
-                            required : true,
-                            minlength : 20
-                        },
-                        quality : {
-                            required : true
-                        },
-                        reliability : {
-                            required : true
-                        },
-                        overall : {
-                            required : true
-                        }
-                    },
-
-                    // Messages for form validation
-                    messages : {
-                        name : {
-                            required : 'Please enter your name'
-                        },
-                        email : {
-                            required : 'Please enter your email address',
-                            email : '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
-                        },
-                        review : {
-                            required : 'Please enter your review'
-                        },
-                        quality : {
-                            required : 'Please rate quality of the product'
-                        },
-                        reliability : {
-                            required : 'Please rate reliability of the product'
-                        },
-                        overall : {
-                            required : 'Please rate the product'
-                        }
-                    }
-
-                }, formsCommon.validateOptions));
-            });
+                });
+            }
         }
     }
 });
@@ -16850,136 +17270,6 @@ angular.module('SmartAdmin.Layout').directive('jarvisWidget', function($rootScop
 //                    console.log('jarvisWidgetAdded', widget.attr('id'));
             });
 
-        }
-    }
-});
-
-'use strict';
-
-angular.module('SmartAdmin.Layout').directive('demoStates', function ($rootScope) {
-    return {
-        restrict: 'EA',
-        replace: true,
-        templateUrl: 'app/_common/layout/directives/demo/demo-states.tpl.html',
-        scope: true,
-        link: function (scope, element, attributes) {
-            element.parent().css({
-                position: 'relative'
-            });
-
-            element.on('click', '#demo-setting', function () {
-                element.toggleClass('activate')
-            })
-        },
-        controller: function ($scope) {
-            var $root = $('body');
-
-            $scope.$watch('fixedHeader', function (fixedHeader) {
-                localStorage.setItem('sm-fixed-header', fixedHeader);
-                $root.toggleClass('fixed-header', fixedHeader);
-                if (fixedHeader == false) {
-                    $scope.fixedRibbon = false;
-                    $scope.fixedNavigation = false;
-                }
-            });
-
-
-            $scope.$watch('fixedNavigation', function (fixedNavigation) {
-                localStorage.setItem('sm-fixed-navigation', fixedNavigation);
-                $root.toggleClass('fixed-navigation', fixedNavigation);
-                if (fixedNavigation) {
-                    $scope.insideContainer = false;
-                    $scope.fixedHeader = true;
-                } else {
-                    $scope.fixedRibbon = false;
-                }
-            });
-
-
-            $scope.$watch('fixedRibbon', function (fixedRibbon) {
-                localStorage.setItem('sm-fixed-ribbon', fixedRibbon);
-                $root.toggleClass('fixed-ribbon', fixedRibbon);
-                if (fixedRibbon) {
-                    $scope.fixedHeader = true;
-                    $scope.fixedNavigation = true;
-                    $scope.insideContainer = false;
-                }
-            });
-
-            $scope.$watch('fixedPageFooter', function (fixedPageFooter) {
-                localStorage.setItem('sm-fixed-page-footer', fixedPageFooter);
-                $root.toggleClass('fixed-page-footer', fixedPageFooter);
-            });
-
-            $scope.$watch('insideContainer', function (insideContainer) {
-                localStorage.setItem('sm-inside-container', insideContainer);
-                $root.toggleClass('container', insideContainer);
-                if (insideContainer) {
-                    $scope.fixedRibbon = false;
-                    $scope.fixedNavigation = false;
-                }
-            });
-
-            $scope.$watch('rtl', function (rtl) {
-                localStorage.setItem('sm-rtl', rtl);
-                $root.toggleClass('smart-rtl', rtl);
-            });
-
-            $scope.$watch('menuOnTop', function (menuOnTop) {
-                $rootScope.$broadcast('$smartLayoutMenuOnTop', menuOnTop);
-                localStorage.setItem('sm-menu-on-top', menuOnTop);
-                $root.toggleClass('menu-on-top', menuOnTop);
-
-                if(menuOnTop)$root.removeClass('minified');
-            });
-
-            $scope.$watch('colorblindFriendly', function (colorblindFriendly) {
-                localStorage.setItem('sm-colorblind-friendly', colorblindFriendly);
-                $root.toggleClass('colorblind-friendly', colorblindFriendly);
-            });
-
-
-            $scope.fixedHeader = localStorage.getItem('sm-fixed-header') == 'true';
-            $scope.fixedNavigation = localStorage.getItem('sm-fixed-navigation') == 'true';
-            $scope.fixedRibbon = localStorage.getItem('sm-fixed-ribbon') == 'true';
-            $scope.fixedPageFooter = localStorage.getItem('sm-fixed-page-footer') == 'true';
-            $scope.insideContainer = localStorage.getItem('sm-inside-container') == 'true';
-            $scope.rtl = localStorage.getItem('sm-rtl') == 'true';
-            $scope.menuOnTop = localStorage.getItem('sm-menu-on-top') == 'true' || $root.hasClass('menu-on-top');
-            $scope.colorblindFriendly = localStorage.getItem('sm-colorblind-friendly') == 'true';
-
-
-            $scope.skins = appConfig.skins;
-
-
-            $scope.smartSkin = localStorage.getItem('sm-skin') ? localStorage.getItem('sm-skin') : appConfig.smartSkin;
-
-            $scope.setSkin = function (skin) {
-                $scope.smartSkin = skin.name;
-                $root.removeClass(_.pluck($scope.skins, 'name').join(' '));
-                $root.addClass(skin.name);
-                localStorage.setItem('sm-skin', skin.name);
-                $("#logo img").attr('src', skin.logo);
-            };
-
-
-            if($scope.smartSkin != "smart-style-0"){
-                $scope.setSkin(_.find($scope.skins, {name: $scope.smartSkin}))
-            }
-
-
-            $scope.factoryReset = function () {
-                $.SmartMessageBox({
-                    title: "<i class='fa fa-refresh' style='color:green'></i> Clear Local Storage",
-                    content: "Would you like to RESET all your saved widgets and clear LocalStorage?1",
-                    buttons: '[No][Yes]'
-                }, function (ButtonPressed) {
-                    if (ButtonPressed == "Yes" && localStorage) {
-                        localStorage.clear();
-                        location.reload()
-                    }
-                });
-            }
         }
     }
 });

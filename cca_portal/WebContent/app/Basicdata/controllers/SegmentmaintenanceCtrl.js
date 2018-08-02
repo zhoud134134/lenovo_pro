@@ -137,7 +137,8 @@ angular.module('app.Basicdata').controller('SegmentmaintenanceCtrl', function ($
             //服务端接收
             url:APP_CONFIG.baseUrl+ '/api/smt/attachments',
             data : {
-                file : $scope.myfiles
+                file : $scope.myfiles,
+                username : APP_CONFIG.Name
             }
         }).success(function (data, status, headers, config) {
             if(data.code == 0){

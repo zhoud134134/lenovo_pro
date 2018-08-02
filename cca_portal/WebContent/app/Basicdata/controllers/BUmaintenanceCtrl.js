@@ -136,7 +136,8 @@ angular.module('app.Basicdata').controller('BUmaintenanceCtrl', function ($scope
             //服务端接收
             url:APP_CONFIG.baseUrl+ '/api/bmt/attachments',
             data : {
-                file : $scope.myfiles
+                file : $scope.myfiles,
+                username : APP_CONFIG.Name
             }
         }).success(function (data, status, headers, config) {
             if(data.code == 0){

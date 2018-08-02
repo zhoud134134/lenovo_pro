@@ -271,6 +271,7 @@ appConfig.baseUrl="http://10.99.123.10:8080/lenovo-ccf-prod";
 //appConfig.baseUrl="http://10.116.19.116:8080";
 appConfig.limit = 10;
 appConfig.page =1;
+appConfig.Name =1;
 window.appConfig = appConfig;
 
 /*
