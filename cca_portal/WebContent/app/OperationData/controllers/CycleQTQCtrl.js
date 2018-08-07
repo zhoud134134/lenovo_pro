@@ -340,7 +340,8 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
     $scope.getValidate = function(){
         $scope.validate = {
             zcycle_name : $scope.CyclName,
-            zuuid : $scope.TaskID
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
         };
         console.log($scope.validate)
         OperationDataService.getValidate($scope.validate).then(function (data) {

@@ -124,4 +124,14 @@ angular.module('app.OperationData').config(function ($stateProvider) {
             }
         })
 
+        .state('app.OperationData.login', {
+            url : '/login',
+            views: {
+                "content@app": {
+                    templateUrl: 'app/layout/login.html',
+                    controller: 'AlliancefundmaintenanceCtrl',
+                }
+            }
+        })
+
 });

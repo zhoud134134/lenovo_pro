@@ -32,7 +32,7 @@ angular.module('app.auth', [
 
     })
 
-    .state('login', {
+   /* .state('login', {
         url: '/login',
         views: {
             root: {
@@ -51,7 +51,7 @@ angular.module('app.auth', [
 
             }
         }
-    })
+    })*/
 
     .state('register', {
         url: '/register',
