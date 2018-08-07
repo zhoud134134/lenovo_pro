@@ -51,6 +51,18 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                 }
             }
         })
+        .state('app.OperationData.Bizdatamaintenance.CAmanualupload', {
+            url: '/OperationData/Bizdatamaintenance/CAmanualupload',
+            data: {
+                title: 'CA manual upload'
+            },
+            views: {
+                "content@app": {
+                    templateUrl: 'app/OperationData/views/CAmanualupload.html',
+                    controller: 'CAmanualuploadCtrl',
+                }
+            }
+        })
         .state('app.OperationData.Bizdatamaintenance.Markupmaintenance', {
             url: '/OperationData/Bizdatamaintenance/Markupmaintenance',
             data: {

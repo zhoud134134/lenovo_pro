@@ -210,16 +210,20 @@
                             </header>
                             <div>
                                 <div class="widget-body no-padding">
-                                    <table class="table table-bordered operadata-tab3">
-                                        <tr class="gray">
-                                            <td rowspan="11" style="line-height: 30;text-align: center;">CA(K)</td>
-                                            <td>BU</td>
+                                    <table class="table-bordered smart-form has-tickbox table-hover table-ca" style="width: 100%;table-layout: fixed;">
+                                        <tbody>
+                                        <tr>
+                                            <td rowspan="12">CA(K)</td>
+                                            <td rowspan="2">BU</td>
+                                            <td colspan="5">PRC Segment</td>
+                                            <td rowspan="2">Total</td>
+                                        </tr>
+                                        <tr>
                                             <td>Think-T</td>
                                             <td>T-Model</td>
                                             <td>REL</td>
                                             <td>Consumer</td>
                                             <td>YT</td>
-                                            <td>Total</td>
                                         </tr>
                                         <tr>
                                             <td>Think Pad</td>
@@ -302,7 +306,7 @@
                                             <td>701.8</td>
                                             <td>3508.9</td>
                                         </tr>
-                                        <tr class="gray">
+                                        <tr>
                                             <td>Total</td>
                                             <td>2807.2</td>
                                             <td>2807.2</td>
@@ -311,6 +315,7 @@
                                             <td>2807.2</td>
                                             <td>14035.8</td>
                                         </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -330,6 +335,9 @@
                             </button>
                             <button class="btn btn-xs" uib-tooltip="Upload" tooltip-append-to-body="true">
                                 <i class="fa fa-upload"></i>
+                            </button>
+                            <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true">
+                                <i class="fa fa-download"></i>
                             </button>
                             <button class="btn btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true">
                                 <i class="fa fa-send-o"></i>
@@ -1110,6 +1118,9 @@
                             <button class="btn btn-xs" uib-tooltip="Upload" tooltip-append-to-body="true">
                                 <i class="fa fa-upload"></i>
                             </button>
+                            <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true">
+                                <i class="fa fa-download"></i>
+                            </button>
                             <button class="btn btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true">
                                 <i class="fa fa-send-o"></i>
                             </button>
@@ -1123,7 +1134,7 @@
                                 <span class="widget-icon">
                                     <i class="fa fa-columns"></i>
                                 </span>
-                                <h2>XX Segment</h2>
+                                <h2>Result</h2>
                             </header>
                             <div>
                                 <div class="widget-body no-padding">
@@ -1148,6 +1159,12 @@
                                         </li>
                                         <li>
                                             <a href="#operadata-segment-4" data-toggle="tab" aria-expanded="false">
+                                                <i class="fa fa-lg fa-life-bouy"></i>
+                                                <span class="hidden-mobile hidden-tablet">Others</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#operadata-segment-5" data-toggle="tab" aria-expanded="false">
                                                 <i class="fa fa-lg fa-reorder"></i>
                                                 <span class="hidden-mobile hidden-tablet">Total</span>
                                             </a>
@@ -2882,6 +2899,438 @@
                                                 </tr>
                                             </table>
                                         </div>
+                                        <div id="operadata-segment-5" class="tab-pane">
+                                            <table class="col-sm-12 table1 operadata-tab2" border="1">
+                                                <tr>
+                                                    <td class="operadata-tab1-width">
+                                                        <div class="operadata-tab2-box">
+                                                            <table class="operadata-tab2-left">
+                                                                <tr>
+                                                                    <!-- <td rowspan="11">CA(K)</td> -->
+                                                                    <td class="gray">
+                                                                        <div class="operadata-tab2-box-jin1">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td rowspan="11">CA(K)</td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="operadata-tab2-box-jin2">
+                                                                            <table>
+                                                                                <thead>
+                                                                                <tr style="height: 66px;" class="gray">
+                                                                                    <td rowspan="2">BU</td>
+                                                                                </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                <tr class="operadata-left">
+                                                                                    <td>Think Pad</td>
+                                                                                </tr>
+                                                                                <tr class="operadata-left">
+                                                                                    <td>Lenovo NB</td>
+                                                                                </tr>
+                                                                                <tr class="operadata-left">
+                                                                                    <td>Commercial DT</td>
+                                                                                </tr>
+                                                                                <tr class="operadata-left">
+                                                                                    <td>Consumer DT</td>
+                                                                                </tr>
+                                                                                <tr class="operadata-left">
+                                                                                    <td>Workstation</td>
+                                                                                </tr>
+                                                                                <tr class="operadata-left">
+                                                                                    <td>Chrome</td>
+                                                                                </tr>
+                                                                                <tr class="operadata-left">
+                                                                                    <td>Server</td>
+                                                                                </tr>
+                                                                                <tr class="operadata-left">
+                                                                                    <td>Accessories</td>
+                                                                                </tr>
+                                                                                <tr class="operadata-left">
+                                                                                    <td>Visual</td>
+                                                                                </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="operadata-tab2-box1">
+                                                            <table class="operadata-tab2-right">
+                                                                <thead class="gray">
+                                                                <tr>
+                                                                    <!-- <td rowspan="2" style="width: 200px;">BU</td> -->
+                                                                    <td>PRC</td>
+                                                                    <td colspan="8">AP</td>
+                                                                    <td colspan="18">EMEA</td>
+                                                                    <td>NA</td>
+                                                                    <td>LAS</td>
+                                                                    <td>Brazil</td>
+                                                                    <td>TOP</td>
+                                                                    <td rowspan="2">Global Total</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>China</td>
+                                                                    <td>HTK</td>
+                                                                    <td>ID</td>
+                                                                    <td>SEA</td>
+                                                                    <td>India</td>
+                                                                    <td>Japan</td>
+                                                                    <td>ANZ</td>
+                                                                    <td>HQ</td>
+                                                                    <td>Total</td>
+                                                                    <td>Italy</td>
+                                                                    <td>Israel</td>
+                                                                    <td>Iberia</td>
+                                                                    <td>France</td>
+                                                                    <td>UKI</td>
+                                                                    <td>Nordics</td>
+                                                                    <td>BeneIux</td>
+                                                                    <td>MEA</td>
+                                                                    <td>Turkey</td>
+                                                                    <td>Russia</td>
+                                                                    <td>EECA</td>
+                                                                    <td>GAT</td>
+                                                                    <td>CZ / SK</td>
+                                                                    <td>CH</td>
+                                                                    <td>Phland</td>
+                                                                    <td>SEE</td>
+                                                                    <td>HQ</td>
+                                                                    <td>Total</td>
+                                                                    <td>NA</td>
+                                                                    <td>LAS</td>
+                                                                    <td>Brazil</td>
+                                                                    <td>TOP</td>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr class="operadata-left">
+                                                                    <!-- <td>Think Pad</td> -->
+                                                                    <td>692</td>
+                                                                    <td>68</td>
+                                                                    <td>8</td>
+                                                                    <td>64</td>
+                                                                    <td>75</td>
+                                                                    <td>141</td>
+                                                                    <td>69</td>
+                                                                    <td class="operdata-negative">3</td>
+                                                                    <td>421</td>
+                                                                    <td>24</td>
+                                                                    <td>11</td>
+                                                                    <td>22</td>
+                                                                    <td>95</td>
+                                                                    <td>157</td>
+                                                                    <td>169</td>
+                                                                    <td>48</td>
+                                                                    <td>94</td>
+                                                                    <td>14</td>
+                                                                    <td>20</td>
+                                                                    <td>9</td>
+                                                                    <td>187</td>
+                                                                    <td>12</td>
+                                                                    <td>31</td>
+                                                                    <td>21</td>
+                                                                    <td>23</td>
+                                                                    <td>-</td>
+                                                                    <td>936</td>
+                                                                    <td>783</td>
+                                                                    <td>68</td>
+                                                                    <td>24</td>
+                                                                    <td></td>
+                                                                    <td>2,9</td>
+                                                                </tr>
+                                                                <tr class="operadata-left">
+                                                                    <!-- <td>Lenovo NB</td> -->
+                                                                    <td>1,5</td>
+                                                                    <td>65</td>
+                                                                    <td>119</td>
+                                                                    <td>179</td>
+                                                                    <td>314</td>
+                                                                    <td>89</td>
+                                                                    <td>55</td>
+                                                                    <td class="operdata-negative">7</td>
+                                                                    <td>815</td>
+                                                                    <td>85</td>
+                                                                    <td>21</td>
+                                                                    <td>157</td>
+                                                                    <td>166</td>
+                                                                    <td>274</td>
+                                                                    <td>150</td>
+                                                                    <td>75</td>
+                                                                    <td>269</td>
+                                                                    <td>77</td>
+                                                                    <td>200</td>
+                                                                    <td>102</td>
+                                                                    <td>231</td>
+                                                                    <td>47</td>
+                                                                    <td>17</td>
+                                                                    <td>94</td>
+                                                                    <td>116</td>
+                                                                    <td>-</td>
+                                                                    <td>2,1</td>
+                                                                    <td>1,4</td>
+                                                                    <td>310</td>
+                                                                    <td>162</td>
+                                                                    <td></td>
+                                                                    <td>6,2</td>
+                                                                </tr>
+                                                                <tr class="operadata-left">
+                                                                    <!-- <td>Commercial DT</td> -->
+                                                                    <td>2,5</td>
+                                                                    <td>47</td>
+                                                                    <td>23</td>
+                                                                    <td>62</td>
+                                                                    <td>86</td>
+                                                                    <td>58</td>
+                                                                    <td>27</td>
+                                                                    <td>0</td>
+                                                                    <td>302</td>
+                                                                    <td>35</td>
+                                                                    <td>18</td>
+                                                                    <td>41</td>
+                                                                    <td>111</td>
+                                                                    <td>58</td>
+                                                                    <td>51</td>
+                                                                    <td>22</td>
+                                                                    <td>95</td>
+                                                                    <td>15</td>
+                                                                    <td>48</td>
+                                                                    <td>7</td>
+                                                                    <td>91</td>
+                                                                    <td>12</td>
+                                                                    <td>11</td>
+                                                                    <td>9</td>
+                                                                    <td>27</td>
+                                                                    <td>-</td>
+                                                                    <td>650</td>
+                                                                    <td>374</td>
+                                                                    <td>95</td>
+                                                                    <td>55</td>
+                                                                    <td></td>
+                                                                    <td>3,9</td>
+                                                                </tr>
+                                                                <tr class="operadata-left">
+                                                                    <!-- <td>Consumer DT</td> -->
+                                                                    <td>392</td>
+                                                                    <td>6</td>
+                                                                    <td>32</td>
+                                                                    <td>20</td>
+                                                                    <td>35</td>
+                                                                    <td>14</td>
+                                                                    <td>6</td>
+                                                                    <td>-</td>
+                                                                    <td>114</td>
+                                                                    <td>6</td>
+                                                                    <td>2</td>
+                                                                    <td>13</td>
+                                                                    <td>12</td>
+                                                                    <td>23</td>
+                                                                    <td>21</td>
+                                                                    <td>5</td>
+                                                                    <td>10</td>
+                                                                    <td>14</td>
+                                                                    <td>20</td>
+                                                                    <td>7</td>
+                                                                    <td>14</td>
+                                                                    <td>5</td>
+                                                                    <td>1</td>
+                                                                    <td>15</td>
+                                                                    <td>4</td>
+                                                                    <td>-</td>
+                                                                    <td>172</td>
+                                                                    <td>69</td>
+                                                                    <td>56</td>
+                                                                    <td>-</td>
+                                                                    <td></td>
+                                                                    <td>803</td>
+                                                                </tr>
+                                                                <tr class="operadata-left">
+                                                                    <!-- <td>Workstation</td> -->
+                                                                    <td>44</td>
+                                                                    <td>2</td>
+                                                                    <td>0</td>
+                                                                    <td>1</td>
+                                                                    <td>3</td>
+                                                                    <td>4</td>
+                                                                    <td>2</td>
+                                                                    <td>-</td>
+                                                                    <td>12</td>
+                                                                    <td>1</td>
+                                                                    <td>0</td>
+                                                                    <td>1</td>
+                                                                    <td>4</td>
+                                                                    <td>4</td>
+                                                                    <td>3</td>
+                                                                    <td>1</td>
+                                                                    <td>2</td>
+                                                                    <td>0</td>
+                                                                    <td>1</td>
+                                                                    <td>0</td>
+                                                                    <td>6</td>
+                                                                    <td>0</td>
+                                                                    <td>1</td>
+                                                                    <td>0</td>
+                                                                    <td>1</td>
+                                                                    <td>-</td>
+                                                                    <td>25</td>
+                                                                    <td>34</td>
+                                                                    <td>3</td>
+                                                                    <td>0</td>
+                                                                    <td></td>
+                                                                    <td>118</td>
+                                                                </tr>
+                                                                <tr class="operadata-left">
+                                                                    <!-- <td>Chrome</td> -->
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>23</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr class="operadata-left">
+                                                                    <!-- <td>Server</td> -->
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>52</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr class="operadata-left">
+                                                                    <!-- <td>Accessories</td> -->
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>3</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr class="operadata-left">
+                                                                    <!-- <td>Visual</td> -->
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>-</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>1</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -2901,6 +3350,9 @@
                             </button>
                             <button class="btn btn-xs" uib-tooltip="Upload" tooltip-append-to-body="true">
                                 <i class="fa fa-upload"></i>
+                            </button>
+                            <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true">
+                                <i class="fa fa-download"></i>
                             </button>
                             <button class="btn btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true">
                                 <i class="fa fa-send-o"></i>

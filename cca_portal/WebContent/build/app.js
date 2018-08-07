@@ -267,7 +267,8 @@ if (appConfig.voice_command) {
 }
 
 appConfig.apiRootUrl = 'api';
-appConfig.baseUrl="http://10.99.123.10:8080/lenovo-ccf-prod";
+//appConfig.baseUrl="http://10.99.123.10:8080/ccf-prod";
+appConfig.baseUrl="https://mcmt.lenovo.com/ccf-prod";
 //appConfig.baseUrl="http://10.116.19.116:8080";
 appConfig.limit = 10;
 appConfig.page =1;
@@ -1671,6 +1672,18 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                 }
             }
         })
+        .state('app.OperationData.Bizdatamaintenance.CAmanualupload', {
+            url: '/OperationData/Bizdatamaintenance/CAmanualupload',
+            data: {
+                title: 'CA manual upload'
+            },
+            views: {
+                "content@app": {
+                    templateUrl: 'app/OperationData/views/CAmanualupload.html',
+                    controller: 'CAmanualuploadCtrl',
+                }
+            }
+        })
         .state('app.OperationData.Bizdatamaintenance.Markupmaintenance', {
             url: '/OperationData/Bizdatamaintenance/Markupmaintenance',
             data: {
@@ -2297,7 +2310,7 @@ $templateCache.put("app/dashboard/todo/todo-widget.tpl.html","<div id=\"todo-wid
 $templateCache.put("app/layout/language/language-selector.tpl.html","<ul class=\"header-dropdown-list hidden-xs ng-cloak\" ng-controller=\"LanguagesCtrl\">\r\n    <li class=\"dropdown\" dropdown>\r\n        <a class=\"dropdown-toggle\"  data-toggle=\"dropdown\" href> <img src=\"styles/img/blank.gif\" class=\"flag flag-{{currentLanguage.key}}\" alt=\"{{currentLanguage.alt}}\"> <span> {{currentLanguage.title}} </span>\r\n            <i class=\"fa fa-angle-down\"></i> </a>\r\n        <ul class=\"dropdown-menu pull-right\">\r\n            <li ng-class=\"{active: language==currentLanguage}\" ng-repeat=\"language in languages\">\r\n                <a ng-click=\"selectLanguage(language)\" ><img src=\"styles/img/blank.gif\" class=\"flag flag-{{language.key}}\"\r\n                                                   alt=\"{{language.alt}}\"> {{language.title}}</a>\r\n            </li>\r\n        </ul>\r\n    </li>\r\n</ul>");
 $templateCache.put("app/layout/partials/footer.tpl.html","<div class=\"page-footer\">\r\n    <div class=\"row\">\r\n        <div class=\"col-xs-12 col-sm-6\">\r\n            <span class=\"txt-color-white\">SmartAdmin WebApp © 2016</span>\r\n        </div>\r\n\r\n        <div class=\"col-xs-6 col-sm-6 text-right hidden-xs\">\r\n            <div class=\"txt-color-white inline-block\">\r\n                <i class=\"txt-color-blueLight hidden-mobile\">Last account activity <i class=\"fa fa-clock-o\"></i>\r\n                    <strong>52 mins ago &nbsp;</strong> </i>\r\n\r\n                <div class=\"btn-group dropup\">\r\n                    <button class=\"btn btn-xs dropdown-toggle bg-color-blue txt-color-white\" data-toggle=\"dropdown\">\r\n                        <i class=\"fa fa-link\"></i> <span class=\"caret\"></span>\r\n                    </button>\r\n                    <ul class=\"dropdown-menu pull-right text-left\">\r\n                        <li>\r\n                            <div class=\"padding-5\">\r\n                                <p class=\"txt-color-darken font-sm no-margin\">Download Progress</p>\r\n\r\n                                <div class=\"progress progress-micro no-margin\">\r\n                                    <div class=\"progress-bar progress-bar-success\" style=\"width: 50%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"divider\"></li>\r\n                        <li>\r\n                            <div class=\"padding-5\">\r\n                                <p class=\"txt-color-darken font-sm no-margin\">Server Load</p>\r\n\r\n                                <div class=\"progress progress-micro no-margin\">\r\n                                    <div class=\"progress-bar progress-bar-success\" style=\"width: 20%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"divider\"></li>\r\n                        <li>\r\n                            <div class=\"padding-5\">\r\n                                <p class=\"txt-color-darken font-sm no-margin\">Memory Load <span class=\"text-danger\">*critical*</span>\r\n                                </p>\r\n\r\n                                <div class=\"progress progress-micro no-margin\">\r\n                                    <div class=\"progress-bar progress-bar-danger\" style=\"width: 70%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"divider\"></li>\r\n                        <li>\r\n                            <div class=\"padding-5\">\r\n                                <button class=\"btn btn-block btn-default\">refresh</button>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 $templateCache.put("app/layout/partials/header.tpl.html","<header id=\"header\">\r\n<div id=\"logo-group\">\r\n\r\n    <!-- PLACE YOUR LOGO HERE -->\r\n    <span id=\"logo\"> <img src=\"styles/img/comment/logo1.png\" alt=\"SmartAdmin\" style=\"width: 100%;height: 49px;padding-left: 0\"> </span>\r\n    <!-- END LOGO PLACEHOLDER -->\r\n\r\n    <!-- Note: The activity badge color changes when clicked and resets the number to 0\r\n    Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->\r\n    <!--<span id=\"activity\" class=\"activity-dropdown\" activities-dropdown-toggle>\r\n        <i class=\"fa fa-user\"></i> \r\n        <b class=\"badge bg-color-red\">21</b> \r\n    </span>-->\r\n    <div smart-include=\"app/dashboard/activities/activities.html\"></div>\r\n</div>\r\n\r\n\r\n<!--<recent-projects></recent-projects>-->\r\n\r\n\r\n\r\n<!-- pulled right: nav area -->\r\n<div class=\"pull-right\">\r\n\r\n    <!-- collapse menu button -->\r\n    <div id=\"hide-menu\" class=\"btn-header pull-right\">\r\n        <span> <a toggle-menu title=\"Collapse Menu\"><i\r\n                class=\"fa fa-reorder\"></i></a> </span>\r\n    </div>\r\n    <!-- end collapse menu -->\r\n\r\n    <!-- #MOBILE -->\r\n    <!-- Top menu profile link : this shows only when top menu is active -->\r\n    <ul id=\"mobile-profile-img\" class=\"header-dropdown-list hidden-xs padding-5\">\r\n        <li class=\"\">\r\n            <a href=\"#\" class=\"dropdown-toggle no-margin userdropdown\" data-toggle=\"dropdown\">\r\n                <img src=\"styles/img/avatars/sunny.png\" alt=\"John Doe\" class=\"online\"/>\r\n            </a>\r\n            <ul class=\"dropdown-menu pull-right\">\r\n                <li>\r\n                    <a href-void class=\"padding-10 padding-top-0 padding-bottom-0\"><i\r\n                            class=\"fa fa-cog\"></i> Setting</a>\r\n                </li>\r\n                <li class=\"divider\"></li>\r\n                <li>\r\n                    <a ui-sref=\"app.appViews.profileDemo\" class=\"padding-10 padding-top-0 padding-bottom-0\"> <i class=\"fa fa-user\"></i>\r\n                        <u>P</u>rofile</a>\r\n                </li>\r\n                <li class=\"divider\"></li>\r\n                <li>\r\n                    <a href-void class=\"padding-10 padding-top-0 padding-bottom-0\"\r\n                       data-action=\"toggleShortcut\"><i class=\"fa fa-arrow-down\"></i> <u>S</u>hortcut</a>\r\n                </li>\r\n                <li class=\"divider\"></li>\r\n                <li>\r\n                    <a href-void class=\"padding-10 padding-top-0 padding-bottom-0\"\r\n                       data-action=\"launchFullscreen\"><i class=\"fa fa-arrows-alt\"></i> Full <u>S</u>creen</a>\r\n                </li>\r\n                <li class=\"divider\"></li>\r\n                <li>\r\n                    <a href=\"#/login\" class=\"padding-10 padding-top-5 padding-bottom-5\" data-action=\"userLogout\"><i\r\n                            class=\"fa fa-sign-out fa-lg\"></i> <strong><u>L</u>ogout</strong></a>\r\n                </li>\r\n            </ul>\r\n        </li>\r\n    </ul>\r\n\r\n    <!-- logout button -->\r\n    <!-- <div id=\"logout\" class=\"btn-header transparent pull-right\">\r\n         <span> <a ui-sref=\"login\" title=\"Sign Out\" data-action=\"userLogout\"\r\n                   data-logout-msg=\"You can improve your security further after logging out by closing this opened browser\"><i\r\n                 class=\"fa fa-sign-out\"></i></a> </span>\r\n     </div>-->\r\n    <!-- end logout button -->\r\n\r\n    <!-- search mobile button (this is hidden till mobile view port) -->\r\n    <div id=\"search-mobile\" class=\"btn-header transparent pull-right\" data-search-mobile>\r\n        <span> <a href=\"#\" title=\"Search\"><i class=\"fa fa-search\"></i></a> </span>\r\n    </div>\r\n    <!-- end search mobile button -->\r\n\r\n    <!-- input: search field -->\r\n    <form action=\"#/search\" class=\"header-search pull-right\">\r\n        <input id=\"search-fld\" type=\"text\" name=\"param\" placeholder=\"Search\" data-autocomplete=\'[\r\n					\"ActionScript\",\r\n					\"AppleScript\",\r\n					\"Asp\",\r\n					\"BASIC\",\r\n					\"C\",\r\n					\"C++\",\r\n					\"Clojure\",\r\n					\"COBOL\",\r\n					\"ColdFusion\",\r\n					\"Erlang\",\r\n					\"Fortran\",\r\n					\"Groovy\",\r\n					\"Haskell\",\r\n					\"Java\",\r\n					\"JavaScript\",\r\n					\"Lisp\",\r\n					\"Perl\",\r\n					\"PHP\",\r\n					\"Python\",\r\n					\"Ruby\",\r\n					\"Scala\",\r\n					\"Scheme\"]\'>\r\n        <button type=\"submit\">\r\n            <i class=\"fa fa-search\"></i>\r\n        </button>\r\n        <a href=\"$\" id=\"cancel-search-js\" title=\"Cancel Search\"><i class=\"fa fa-times\"></i></a>\r\n    </form>\r\n    <!-- end input: search field -->\r\n\r\n    <!-- fullscreen button -->\r\n    <!--<div id=\"fullscreen\" class=\"btn-header transparent pull-right\">\r\n        <span> <a full-screen title=\"Full Screen\"><i\r\n                class=\"fa fa-arrows-alt\"></i></a> </span>\r\n    </div>-->\r\n    <!-- end fullscreen button -->\r\n\r\n    <!-- #Voice Command: Start Speech -->\r\n    <!--<div id=\"speech-btn\" class=\"btn-header transparent pull-right hidden-sm hidden-xs\">\r\n        <div>\r\n            <a title=\"Voice Command\" id=\"voice-command-btn\" speech-recognition><i class=\"fa fa-microphone\"></i></a>\r\n\r\n            <div class=\"popover bottom\">\r\n                <div class=\"arrow\"></div>\r\n                <div class=\"popover-content\">\r\n                    <h4 class=\"vc-title\">Voice command activated <br>\r\n                        <small>Please speak clearly into the mic</small>\r\n                    </h4>\r\n                    <h4 class=\"vc-title-error text-center\">\r\n                        <i class=\"fa fa-microphone-slash\"></i> Voice command failed\r\n                        <br>\r\n                        <small class=\"txt-color-red\">Must <strong>\"Allow\"</strong> Microphone</small>\r\n                        <br>\r\n                        <small class=\"txt-color-red\">Must have <strong>Internet Connection</strong></small>\r\n                    </h4>\r\n                    <a href-void class=\"btn btn-success\" id=\"speech-help-btn\">See Commands</a>\r\n                    <a href-void class=\"btn bg-color-purple txt-color-white\"\r\n                       onclick=\"$(\'#speech-btn .popover\').fadeOut(50);\">Close Popup</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>-->\r\n    <!-- end voice command -->\r\n\r\n\r\n\r\n    <!-- multiple lang dropdown : find all flags in the flags page -->\r\n    <language-selector></language-selector>\r\n    <!-- end multiple lang -->\r\n\r\n</div>\r\n<!-- end pulled right: nav area -->\r\n\r\n</header>");
-$templateCache.put("app/layout/partials/navigation.tpl.html","<aside id=\"left-panel\">\r\n\r\n    <!-- User info -->\r\n    <div login-info></div>\r\n    <!-- end user info -->\r\n\r\n    <nav>\r\n        <!-- NOTE: Notice the gaps after each icon usage <i></i>..\r\n        Please note that these links work a bit different than\r\n        traditional href=\"\" links. See documentation for details.\r\n        -->\r\n\r\n        <ul data-smart-menu>\r\n            <!--自己-->\r\n            <li data-menu-collapse>\r\n                <a href=\"#\" title=\"Control Point\"><i class=\"fa fa-lg fa-fw fa-desktop\"></i> <span\r\n                        class=\"menu-item-parent\">{{getWord(\'Control Point\')}}</span></a>\r\n                <ul>\r\n                    <li data-ui-sref-active=\"active\">\r\n                        <a data-ui-sref=\"app.ControlPoint.Costinterlockschedule\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Cost interlock schedule\')}}</a>\r\n                    </li>\r\n                    <li data-ui-sref-active=\"active\">\r\n                        <a data-ui-sref=\"app.ControlPoint.CycleVersioncontrol\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Cycle & Version control\')}}</a>\r\n                    </li>\r\n                    <li data-ui-sref-active=\"active\">\r\n                        <a data-ui-sref=\"app.ControlPoint.Taskqueue\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Task queue\')}}</a>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-cube\"></i> <span class=\"menu-item-parent\">{{getWord(\'Basic data\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Master data maintenance\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.Segmentmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Segment maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.BUmaintenance\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'BU maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.Commoditymaintenance\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'Commodity maintena...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.OtherCategorymasterdata\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Other category maste...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.DataMapping\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Data Mapping\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Data source detail\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.Markupdetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Markup detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.EBRQtydetail\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'EBR/宇宙版 Qty detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.CFEBMCdetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CFE BMC detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.BPCCAdetail\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'BPC CA detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.BPCBMCForecastdetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'BPC BMC Forecast detail\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-bar-chart\"></i> <span class=\"menu-item-parent\">{{getWord(\'Operational Data\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Deal maintenance\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Dealmaintenance.Dealmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Deal maintenance\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Biz data maintenance\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.CAmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CA maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.Markupmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Markup maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.CycleQtQ\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Cycle QtQ\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.ConsumptionBasemaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Consumption Base...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.Othercategorymaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Other category main...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.Alliancefundmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Alliance fund main...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.QTQPNtakedown\"><i class=\"fa fa-leaf\"></i> {{getWord(\'QTQ PN take down\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-pencil-square-o\"></i> <span class=\"menu-item-parent\">{{getWord(\'Validation\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Validation\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.CAAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CA Accumulation\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.MarkupAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Markup Accumulation\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.CycleQtQAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Cycle QtQ Accumula...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.ConsumptionbaseAccumulation-detail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Consumption base...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.OthercategoryAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Other category A...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.AlliancefundAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Alliance fund Accumu...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.QTQPNtakedownAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'QTQ PN take down...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.Outtapedetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Out tape detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.ResultcheckingbyMTM\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Result checking by...\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\">\r\n                    <i class=\"fa fa-lg fa-fw fa-th\"></i> <span class=\"menu-item-parent\">{{getWord(\'Report\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Report\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.InOutSummaryQtQ\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'In+Out Summary QtQ\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.OuttapeSummary\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'Out tape Summary\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.OuttapeBUSummary\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'Out tape BU Summary\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.QTQPNtakedown\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'QTQ PN take down\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n            <!--smartadmin的ui-->\r\n\r\n        </ul>\r\n\r\n        <!-- NOTE: This allows you to pull menu items from server -->\r\n        <!-- <ul data-smart-menu-items=\"/api/menu-items.json\"></ul> -->\r\n    </nav>\r\n\r\n  <span class=\"minifyme\" data-action=\"minifyMenu\" minify-menu>\r\n    <i class=\"fa fa-arrow-circle-left hit\"></i>\r\n  </span>\r\n\r\n</aside>");
+$templateCache.put("app/layout/partials/navigation.tpl.html","<aside id=\"left-panel\">\r\n\r\n    <!-- User info -->\r\n    <div login-info></div>\r\n    <!-- end user info -->\r\n\r\n    <nav>\r\n        <!-- NOTE: Notice the gaps after each icon usage <i></i>..\r\n        Please note that these links work a bit different than\r\n        traditional href=\"\" links. See documentation for details.\r\n        -->\r\n\r\n        <ul data-smart-menu>\r\n            <!--自己-->\r\n            <li data-menu-collapse>\r\n                <a href=\"#\" title=\"Control Point\"><i class=\"fa fa-lg fa-fw fa-desktop\"></i> <span\r\n                        class=\"menu-item-parent\">{{getWord(\'Control Point\')}}</span></a>\r\n                <ul>\r\n                    <li data-ui-sref-active=\"active\">\r\n                        <a data-ui-sref=\"app.ControlPoint.Costinterlockschedule\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Cost interlock schedule\')}}</a>\r\n                    </li>\r\n                    <li data-ui-sref-active=\"active\">\r\n                        <a data-ui-sref=\"app.ControlPoint.CycleVersioncontrol\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Cycle & Version control\')}}</a>\r\n                    </li>\r\n                    <li data-ui-sref-active=\"active\">\r\n                        <a data-ui-sref=\"app.ControlPoint.Taskqueue\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Task queue\')}}</a>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-cube\"></i> <span class=\"menu-item-parent\">{{getWord(\'Basic data\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Master data maintenance\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.Segmentmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Segment maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.BUmaintenance\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'BU maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.Commoditymaintenance\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'Commodity maintena...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.OtherCategorymasterdata\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Other category maste...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.DataMapping\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Data Mapping\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Data source detail\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.Markupdetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Markup detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.EBRQtydetail\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'EBR/宇宙版 Qty detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.CFEBMCdetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CFE BMC detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.BPCCAdetail\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'BPC CA detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.BPCBMCForecastdetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'BPC BMC Forecast detail\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-bar-chart\"></i> <span class=\"menu-item-parent\">{{getWord(\'Operational Data\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Deal maintenance\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Dealmaintenance.Dealmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Deal maintenance\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Biz data maintenance\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.CAmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CA maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.CAmanualupload\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CA manual upload\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.Markupmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Markup maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.CycleQtQ\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Cycle QtQ\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.ConsumptionBasemaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Consumption Base...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.Othercategorymaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Other category main...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.Alliancefundmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Alliance fund main...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.QTQPNtakedown\"><i class=\"fa fa-leaf\"></i> {{getWord(\'QTQ PN take down\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-pencil-square-o\"></i> <span class=\"menu-item-parent\">{{getWord(\'Validation\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Validation\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.CAAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CA Accumulation\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.MarkupAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Markup Accumulation\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.CycleQtQAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Cycle QtQ Accumula...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.ConsumptionbaseAccumulation-detail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Consumption base...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.OthercategoryAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Other category A...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.AlliancefundAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Alliance fund Accumu...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.QTQPNtakedownAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'QTQ PN take down...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.Outtapedetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Out tape detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.ResultcheckingbyMTM\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Result checking by...\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\">\r\n                    <i class=\"fa fa-lg fa-fw fa-th\"></i> <span class=\"menu-item-parent\">{{getWord(\'Report\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Report\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.InOutSummaryQtQ\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'In+Out Summary QtQ\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.OuttapeSummary\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'Out tape Summary\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.OuttapeBUSummary\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'Out tape BU Summary\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.QTQPNtakedown\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'QTQ PN take down\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n            <!--smartadmin的ui-->\r\n\r\n        </ul>\r\n\r\n        <!-- NOTE: This allows you to pull menu items from server -->\r\n        <!-- <ul data-smart-menu-items=\"/api/menu-items.json\"></ul> -->\r\n    </nav>\r\n\r\n  <span class=\"minifyme\" data-action=\"minifyMenu\" minify-menu>\r\n    <i class=\"fa fa-arrow-circle-left hit\"></i>\r\n  </span>\r\n\r\n</aside>");
 $templateCache.put("app/layout/partials/sub-header.tpl.html","<div class=\"col-xs-12 col-sm-5 col-md-5 col-lg-8\" data-sparkline-container>\r\n    <ul id=\"sparks\" class=\"\">\r\n        <li class=\"sparks-info\">\r\n            <h5> My Income <span class=\"txt-color-blue\">$47,171</span></h5>\r\n            <div class=\"sparkline txt-color-blue hidden-mobile hidden-md hidden-sm\">\r\n                1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471\r\n            </div>\r\n        </li>\r\n        <li class=\"sparks-info\">\r\n            <h5> Site Traffic <span class=\"txt-color-purple\"><i class=\"fa fa-arrow-circle-up\"></i>&nbsp;45%</span></h5>\r\n            <div class=\"sparkline txt-color-purple hidden-mobile hidden-md hidden-sm\">\r\n                110,150,300,130,400,240,220,310,220,300, 270, 210\r\n            </div>\r\n        </li>\r\n        <li class=\"sparks-info\">\r\n            <h5> Site Orders <span class=\"txt-color-greenDark\"><i class=\"fa fa-shopping-cart\"></i>&nbsp;2447</span></h5>\r\n            <div class=\"sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm\">\r\n                110,150,300,130,400,240,220,310,220,300, 270, 210\r\n            </div>\r\n        </li>\r\n    </ul>\r\n</div>\r\n			");
 $templateCache.put("app/layout/partials/voice-commands.tpl.html","<!-- TRIGGER BUTTON:\r\n<a href=\"/my-ajax-page.html\" data-toggle=\"modal\" data-target=\"#remoteModal\" class=\"btn btn-default\">Open Modal</a>  -->\r\n\r\n<!-- MODAL PLACE HOLDER\r\n<div class=\"modal fade\" id=\"remoteModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"remoteModalLabel\" aria-hidden=\"true\">\r\n<div class=\"modal-dialog\">\r\n<div class=\"modal-content\"></div>\r\n</div>\r\n</div>   -->\r\n<!--////////////////////////////////////-->\r\n\r\n<!--<div class=\"modal-header\">\r\n<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n&times;\r\n</button>\r\n<h4 class=\"modal-title\" id=\"myModalLabel\">Command List</h4>\r\n</div>-->\r\n<div class=\"modal-body\">\r\n\r\n	<h1><i class=\"fa fa-microphone text-muted\"></i>&nbsp;&nbsp; SmartAdmin Voice Command</h1>\r\n	<hr class=\"simple\">\r\n	<h5>Instruction</h5>\r\n\r\n	Click <span class=\"text-success\">\"Allow\"</span> to access your microphone and activate Voice Command.\r\n	You will notice a <span class=\"text-primary\"><strong>BLUE</strong> Flash</span> on the microphone icon indicating activation.\r\n	The icon will appear <span class=\"text-danger\"><strong>RED</strong></span> <span class=\"label label-danger\"><i class=\"fa fa-microphone fa-lg\"></i></span> if you <span class=\"text-danger\">\"Deny\"</span> access or don\'t have any microphone installed.\r\n	<br>\r\n	<br>\r\n	As a security precaution, your browser will disconnect the microphone every 60 to 120 seconds (sooner if not being used). In which case Voice Command will prompt you again to <span class=\"text-success\">\"Allow\"</span> or <span class=\"text-danger\">\"Deny\"</span> access to your microphone.\r\n	<br>\r\n	<br>\r\n	If you host your page over <strong>http<span class=\"text-success\">s</span></strong> (secure socket layer) protocol you can wave this security measure and have an unintrupted Voice Command.\r\n	<br>\r\n	<br>\r\n	<h5>Commands</h5>\r\n	<ul>\r\n		<li>\r\n			<strong>\'show\' </strong> then say the <strong>*page*</strong> you want to go to. For example <strong>\"show inbox\"</strong> or <strong>\"show calendar\"</strong>\r\n		</li>\r\n		<li>\r\n			<strong>\'mute\' </strong> - mutes all sound effects for the theme.\r\n		</li>\r\n		<li>\r\n			<strong>\'sound on\'</strong> - unmutes all sound effects for the theme.\r\n		</li>\r\n		<li>\r\n			<span class=\"text-danger\"><strong>\'stop\'</strong></span> - deactivates voice command.\r\n		</li>\r\n		<li>\r\n			<span class=\"text-primary\"><strong>\'help\'</strong></span> - brings up the command list\r\n		</li>\r\n		<li>\r\n			<span class=\"text-danger\"><strong>\'got it\'</strong></span> - closes help modal\r\n		</li>\r\n		<li>\r\n			<strong>\'hide navigation\'</strong> - toggle navigation collapse\r\n		</li>\r\n		<li>\r\n			<strong>\'show navigation\'</strong> - toggle navigation to open (can be used again to close)\r\n		</li>\r\n		<li>\r\n			<strong>\'scroll up\'</strong> - scrolls to the top of the page\r\n		</li>\r\n		<li>\r\n			<strong>\'scroll down\'</strong> - scrollts to the bottom of the page\r\n		</li>\r\n		<li>\r\n			<strong>\'go back\' </strong> - goes back in history (history -1 click)\r\n		</li>\r\n		<li>\r\n			<strong>\'logout\'</strong> - logs you out\r\n		</li>\r\n	</ul>\r\n	<br>\r\n	<h5>Adding your own commands</h5>\r\n	Voice Command supports up to 80 languages. Adding your own commands is extreamly easy. All commands are stored inside <strong>app.config.js</strong> file under the <code>var commands = {...}</code>. \r\n\r\n	<hr class=\"simple\">\r\n	<div class=\"text-right\">\r\n		<button type=\"button\" class=\"btn btn-success btn-lg\" data-dismiss=\"modal\">\r\n			Got it!\r\n		</button>\r\n	</div>\r\n\r\n</div>\r\n<!--<div class=\"modal-footer\">\r\n<button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Got it!</button>\r\n</div> -->");
 $templateCache.put("app/layout/shortcut/shortcut.tpl.html","<div id=\"shortcut\">\r\n	<ul>\r\n		<li>\r\n			<a href=\"#/inbox/\" class=\"jarvismetro-tile big-cubes bg-color-blue\"> <span class=\"iconbox\"> <i class=\"fa fa-envelope fa-4x\"></i> <span>Mail <span class=\"label pull-right bg-color-darken\">14</span></span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/calendar\" class=\"jarvismetro-tile big-cubes bg-color-orangeDark\"> <span class=\"iconbox\"> <i class=\"fa fa-calendar fa-4x\"></i> <span>Calendar</span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/maps\" class=\"jarvismetro-tile big-cubes bg-color-purple\"> <span class=\"iconbox\"> <i class=\"fa fa-map-marker fa-4x\"></i> <span>Maps</span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/invoice\" class=\"jarvismetro-tile big-cubes bg-color-blueDark\"> <span class=\"iconbox\"> <i class=\"fa fa-book fa-4x\"></i> <span>Invoice <span class=\"label pull-right bg-color-darken\">99</span></span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/gallery\" class=\"jarvismetro-tile big-cubes bg-color-greenLight\"> <span class=\"iconbox\"> <i class=\"fa fa-picture-o fa-4x\"></i> <span>Gallery </span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/profile\" class=\"jarvismetro-tile big-cubes selected bg-color-pinkDark\"> <span class=\"iconbox\"> <i class=\"fa fa-user fa-4x\"></i> <span>My Profile </span> </span> </a>\r\n		</li>\r\n	</ul>\r\n</div>");
@@ -5481,6 +5494,774 @@ angular.module('app.maps').factory('SmartMapStyle', function ($q, $http, APP_CON
 
 
 });
+"use strict";
+
+angular.module('app.OperationData').controller('AlliancefundmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+})
+"use strict";
+
+angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
+    $scope.ww = true;
+    $scope.sw1 = false;
+    $scope.sw2 = false;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+            $scope.sw1 = true;
+            $scope.sw2 = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+            $scope.sw1 = false;
+            $scope.sw2 = false;
+        }
+    }
+
+    $scope.btnSV = function(flag){
+        if(flag == 's1'){
+            $scope.sw2 = true;
+            $scope.sw1 = false;
+        }else if(flag == 's2') {
+            $scope.sw1 = true;
+            $scope.sw2 = false;
+        }
+    }
+
+})
+"use strict";
+
+angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($scope,$state,$stateParams,$location) {
+
+
+})
+"use strict";
+
+angular.module('app.OperationData').controller('ConsumptionBasemaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+})
+"use strict";
+
+angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,$state,$stateParams,$location,OperationDataService,$http,$log,$rootScope,$timeout) {
+
+    //初始化Select-EBR Data
+    $scope.ebr =  'EBR_DATE';
+    $scope.dataMoth = [];
+    OperationDataService.getSelect($scope.ebr).then(function(data){
+        if(data.code == 0){
+            $scope.ebrdata = data.result;
+            for(var i=0;i< $scope.ebrdata.length;i++){
+                $scope.dataMoth.push({data:$scope.ebrdata[i]});
+            }
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+    //初始化Select-CFE Data
+    $scope.cfe = 'CFE_CYCLE';
+    OperationDataService.getSelect($scope.cfe).then(function(data){
+        if(data.code == 0){
+            $scope.cfedata = data.result;
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+    //初始化Cycle Choose
+    OperationDataService.getSelectCycle().then(function(data){
+        if(data.code == 0){
+            $scope.cycledata = data.cycle;
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+    //多选控件
+    $scope.Sel = true;
+    $(document).bind('click',function(){
+        $scope.Sel = true;
+    });
+    $scope.openSel = function($event){
+        $scope.Sel = false;
+        $event.stopPropagation();
+    };
+    $scope.arr = [];
+    $scope.One = function(m){
+        m.isChecked = !m.isChecked;
+        if(m.isChecked){
+            $scope.arr.push(m.data);
+        }else {
+            for(var i=0;i<$scope.arr.length;i++){
+                if($scope.arr[i] == m.data){
+                    $scope.arr.splice(i,1);
+                    break;
+                }
+            }
+        }
+        console.log($scope.arr);
+        $scope.EBRData = $scope.arr.join(',');
+    };
+
+    //第二部分tab信息展示
+    $scope.getPage = function(){
+        OperationDataService.getExecute2().then(function(data){
+            console.log(data);
+            if(data.code == 0){
+                //$scope.noData = false;
+                $scope.tablist = data.result;
+                $("#tabExample").dataTable().fnDestroy();
+                $timeout(function () {
+                    $('#tabExample').dataTable({
+                        "scrollY": 160,
+                        "scrollX": true,
+                        "dom": '<"top">rt<"bottom"><"clear">',
+                        "scrollCollapse": true,
+                        "jQueryUI": true,
+                        // "pagingType":   "simple_numbers",
+                        stateSave: true,
+                        "paging": false,
+                        "ordering": false,
+                        "bLengthChange": true,
+                        //"order": [[ 3, "desc" ]]
+                    });
+                });
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        });
+    }
+    $scope.getPage();
+
+    //点击Execute执行
+    //$scope.noData = true;
+    $scope.getExecute = function(){
+        $scope.taskId = '';
+        $scope.search = {
+            cycleName : $scope.CycleChoose,
+            cfeCycle : $scope.CFEData,
+            month : $scope.EBRData,
+            user : $rootScope.user
+        }
+        console.log($scope.search);
+        if(!$scope.EBRData || !$scope.CFEData){
+            alert("请选择条件！");
+        }else {
+            OperationDataService.getExecute($scope.search).then(function(data){
+                if(data.code == 0){
+                    alert(data.result);
+                    $scope.getPage();
+                }else {
+                    alert(data.msg);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+        }
+    };
+
+    $scope.WW = true;
+    $scope.PRC = true;
+    //单击整行选中
+    $scope.trClick = function($event,id,status,cycleName){
+        $($("#tabExample input:radio")).removeAttr("checked");
+        $($event.target).parent().find("input:radio").prop("checked",true);
+        $scope.taskId = id;
+        console.log($scope.taskId)
+        $scope.status = status;
+        console.log($scope.status)
+        $scope.cyclename = cycleName;
+        console.log($scope.cyclename)
+        //$scope.SearchTaskId(a,b,c)
+    }
+    //单选获得taskId
+   /* $scope.SearchTaskId = function(id,cycleName,status){
+        $scope.taskId = id;
+        $scope.status = status;
+        $scope.cyclename = cycleName;
+    };*/
+
+    //点击Search
+    $scope.SearchTab = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'){
+            $scope.PRCWW = false;
+            $scope.TaskID =  $scope.taskId;
+            $scope.CyclName = $scope.cyclename;
+            $scope.WW = false;
+            $scope.PRC = true;
+
+            //WW
+           // $("#PRCExample").dataTable().fnDestroy();
+            OperationDataService.getWw($scope.TaskID).then(function(data){
+                if(data.code == 0){
+                    $scope.WwList = data.result;
+                    $scope.wwTable();
+                    console.log($scope.TaskID);
+                    console.log($scope.CyclName);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+
+            //PRC
+            OperationDataService.getPrc($scope.TaskID).then(function(data) {
+                if (data.code == 0) {
+                    $scope.PrcList = data.result;
+                    console.log($scope.PrcList);
+                    $scope.prcTalbe();
+                }
+                console.log(data)
+            } ,function(data){
+                console.log(data);
+            });
+        }else {
+            alert("暂未执行成功，无法查看！");
+        }
+    };
+
+
+    //
+    $scope.DelParticular = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
+            if(confirm('确认要删除？')) {
+                console.log($scope.taskid);
+                $scope.taskid = {
+                    uuid: $scope.taskId
+                };
+                OperationDataService.DelParticular($scope.taskid).then(function (data) {
+                    if (data.code == 0) {
+                        alert("删除成功！");
+                        $scope.taskId = '';
+                        $scope.getPage();
+                        //$("#tabExample").dataTable().fnDestroy();
+                        $scope.PRCWW = true;
+                    }else {
+                        alert(data.msg);
+                    }
+                    console.log(data);
+                }, function (data) {
+                    console.log(data);
+                });
+            }
+        }else {
+            alert("还未执行完成！");
+        }
+    };
+
+
+
+
+    $scope.wwTable = function(){
+        $("#WWExample").dataTable().fnDestroy();
+        $timeout(function () {
+            $('#WWExample thead tr').eq(1).find('td').each(function() {
+                var title = $('#WWExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table = $('#WWExample').DataTable({
+                //"processing": true,
+                "scrollY": 400,
+                "scrollX": true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                //"dom": '<"top"i>rt<"bottom"flp><"clear">',
+                "scrollCollapse": true,
+                //"jQueryUI": true,
+                // "pagingType":   "simple_numbers",
+                //stateSave: true,
+                //"pagingType":   "full_numbers",
+                "paging": false,
+                "ordering": false,
+                //"lengthChange": true,
+                "autoWidth": false,
+                "data" :  $scope.WwList,
+                "columns":[
+                    { "data": "qtr" },
+                    { "data": "zfingeo" },
+                    { "data": "zregion2" },
+                    { "data": "cfeBu" },
+                    { "data": "cfeSegment" },
+                    { "data": "invQty",render: $.fn.dataTable.render.number( ',', '.')},
+                    { "data": "cfeCycle" },
+                    { "data": "lqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqBmc",  render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "lqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCqTtl",render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                ]
+            });
+            table.columns().eq(0).each(function(colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function() {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+    }
+
+    $scope.prcTalbe = function(id){
+        $("#PRCExample").dataTable().fnDestroy();
+        $timeout(function () {
+            $('#PRCExample thead tr').eq(1).find('td').each(function() {
+                var title = $('#PRCExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table =$('#PRCExample').DataTable({
+                //"processing": true,
+                "scrollY": 400,
+                "scrollX": true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                "scrollCollapse": true,
+                //"jQueryUI": true,
+                // "pagingType":   "simple_numbers",
+                //stateSave: true,
+                "paging": false,
+                "ordering": false,
+                //"lengthChange": true,
+                "autoWidth": false,
+                "data" : $scope.PrcList,
+                "columns": [
+                    { "data": "qtr" },
+                    { "data": "zfingeo" },
+                    { "data": "cfeBu" },
+                    { "data": "cfePrcSegment" },
+                    { "data": "invQty" ,render: $.fn.dataTable.render.number( ',', '.')},
+                    { "data": "cfeCycle" },
+                    { "data": "lqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "lqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }}
+                ]
+            });
+            table.columns().eq(0).each(function(colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function() {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+
+    }
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.WW = false;
+            $scope.PRC = true;
+            $scope.wwTable();
+        }else if(flag == 'p'){
+            $scope.WW = true;
+            $scope.PRC = false;
+            $scope.prcTalbe();
+        }
+    };
+
+
+    //点击Validate
+    $scope.getValidate = function(){
+        $scope.validate = {
+            zcycle_name : $scope.CyclName,
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
+        };
+        console.log($scope.validate)
+        OperationDataService.getValidate($scope.validate).then(function (data) {
+            if(data.code == 0){
+                alert('成功！');
+                $scope.getPage();
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
+
+    //WW时Download Summary
+    $scope.getWWDownLoadSum = function(){
+        $('#ws2').css('display','block');
+        $('#ws1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            OperationDataService.getWwSum($scope.TaskID).then(function (data) {
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+                $('#ws1').css('display','block');
+                $('#ws2').css('display','none');
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+
+    //Prc时Download Summary
+    $scope.getPRCDownLoadSum = function(){
+        $('#ps2').css('display','block');
+        $('#ps1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            OperationDataService.getPrcSum($scope.TaskID).then(function (data) {
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+                $('#ps1').css('display','block');
+                $('#ps2').css('display','none');
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+    //WW时Download Detail
+    $scope.getWWDownLoadDet = function(){
+        $('#wd2').css('display','block');
+        $('#wd1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            OperationDataService.getWwDet($scope.TaskID).then(function (data) {
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+                $('#wd1').css('display','block');
+                $('#wd2').css('display','none');
+                console.log(data);
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+
+    //Prc时Download Detail
+    $scope.getPRCDownLoadDet = function(){
+        $('#pd2').css('display','block');
+        $('#pd1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            OperationDataService.getPrcDet($scope.TaskID).then(function (data) {
+                $('#pd1').css('display','block');
+                $('#pd2').css('display','none');
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+});
+"use strict";
+
+angular.module('app.OperationData').controller('DealmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
+    $scope.del = function(){
+        if(confirm('确认要删除？')){
+
+        }
+    }
+})
+"use strict";
+
+angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
+
+    //Actual与Forecast选择展示
+    $scope.atc = true;
+    $scope.wpSel = function(){
+        if($scope.CycleSelect == 'Actual'){
+            $scope.atc = true;
+            $scope.aww = true;
+            $scope.fww = true;
+        }else if($scope.CycleSelect =='Forecast'){
+            $scope.atc = false;
+            $scope.aww = true;
+            $scope.fww = true;
+        }
+    }
+
+    //Actual中PRC与WW的切换
+    $scope.aww = true;
+    $scope.btnSwitchA = function(flag){
+        if(flag == 'w'){
+            $scope.aww = false;
+        }else if(flag == 'p'){
+            $scope.aww = true;
+        }
+    }
+
+    //Actual中PRC与WW的切换
+    $scope.fww = true;
+    $scope.btnSwitchF = function(flag){
+        if(flag == 'w'){
+            $scope.fww = false;
+        }else if(flag == 'p'){
+            $scope.fww = true;
+        }
+    }
+
+
+})
+"use strict";
+
+angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+})
+"use strict";
+
+angular.module('app.OperationData').controller('OPQTQPNtakedownCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.s1 = true;
+    $scope.s2 = false;
+    $scope.w1 = true;
+    $scope.w2 = false;
+    $scope.c1 = false;
+    $scope.c2 = false;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            //PRC与WW切换
+            $scope.ww = false;
+            //大表切换
+            $scope.w2 = true;
+            $scope.w1 = false;
+            //两个按钮功能切换
+            $scope.s1 = false;
+            $scope.s2 = true;
+            //小表隐藏
+            $scope.c1 = false;
+            $scope.c2 = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+            $scope.w1 = true;
+            $scope.w2 = false;
+            $scope.s1 = true;
+            $scope.s2 = false;
+            $scope.c1 = false;
+            $scope.c2 = false;
+        }
+    }
+
+    $scope.btnSV1 = function(flag){
+        if(flag == 'd'){
+            //$scope.ww = true;
+            $scope.w1 = true;
+            $scope.c1 = false;
+
+        }else if(flag == 's'){
+            //$scope.ww = false;
+            $scope.w1 = false;
+            $scope.c1 = true;
+        }
+    }
+    $scope.btnSV2 = function(flag){
+        if(flag == 'd'){
+            $scope.w2 = true;
+            $scope.c2 = false;
+        }else if(flag == 's'){
+            $scope.w2 = false;
+            $scope.c2 = true;
+        }
+    }
+})
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -8244,626 +9025,6 @@ d(j,n)}}if(c){e=0;for(a=c.length;e<a;e++)d(e,c[e])}}function N(a,b,c,d){var e=a.
         _fnSplitObjNotation:La,_fnGetObjectDataFn:R,_fnSetObjectDataFn:S,_fnGetDataMaster:Ma,_fnClearTable:pa,_fnDeleteIndex:qa,_fnInvalidate:da,_fnGetRowElements:Ka,_fnCreateTr:Ja,_fnBuildHead:mb,_fnDrawHead:fa,_fnDraw:O,_fnReDraw:T,_fnAddOptionsHtml:pb,_fnDetectHeader:ea,_fnGetUniqueThs:ta,_fnFeatureHtmlFilter:rb,_fnFilterComplete:ga,_fnFilterCustom:Ab,_fnFilterColumn:zb,_fnFilter:yb,_fnFilterCreateSearch:Ra,_fnEscapeRegex:Sa,_fnFilterData:Bb,_fnFeatureHtmlInfo:ub,_fnUpdateInfo:Eb,_fnInfoMacros:Fb,_fnInitialise:ha,
         _fnInitComplete:wa,_fnLengthChange:Ta,_fnFeatureHtmlLength:qb,_fnFeatureHtmlPaginate:vb,_fnPageChange:Va,_fnFeatureHtmlProcessing:sb,_fnProcessingDisplay:C,_fnFeatureHtmlTable:tb,_fnScrollDraw:ma,_fnApplyToChildren:I,_fnCalculateColumnWidths:Ha,_fnThrottle:Qa,_fnConvertToWidth:Gb,_fnGetWidestNode:Hb,_fnGetMaxLenString:Ib,_fnStringToCss:v,_fnSortFlatten:W,_fnSort:ob,_fnSortAria:Kb,_fnSortListener:Xa,_fnSortAttachListener:Oa,_fnSortingClasses:ya,_fnSortData:Jb,_fnSaveState:za,_fnLoadState:Lb,_fnSettingsFromNode:Aa,
         _fnLog:K,_fnMap:F,_fnBindAction:Ya,_fnCallbackReg:z,_fnCallbackFire:s,_fnLengthOverflow:Ua,_fnRenderer:Pa,_fnDataSource:y,_fnRowAttributes:Na,_fnCalculateEnd:function(){}});h.fn.dataTable=m;m.$=h;h.fn.dataTableSettings=m.settings;h.fn.dataTableExt=m.ext;h.fn.DataTable=function(a){return h(this).dataTable(a).api()};h.each(m,function(a,b){h.fn.DataTable[a]=b});return h.fn.dataTable});
-"use strict";
-
-angular.module('app.OperationData').controller('AlliancefundmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-})
-"use strict";
-
-angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-    $scope.ww = true;
-    $scope.sw1 = false;
-    $scope.sw2 = false;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-            $scope.sw1 = true;
-            $scope.sw2 = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-            $scope.sw1 = false;
-            $scope.sw2 = false;
-        }
-    }
-
-    $scope.btnSV = function(flag){
-        if(flag == 's1'){
-            $scope.sw2 = true;
-            $scope.sw1 = false;
-        }else if(flag == 's2') {
-            $scope.sw1 = true;
-            $scope.sw2 = false;
-        }
-    }
-
-})
-"use strict";
-
-angular.module('app.OperationData').controller('ConsumptionBasemaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-})
-"use strict";
-
-angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,$state,$stateParams,$location,OperationDataService,$http,$log,$rootScope,$timeout) {
-
-    //初始化Select-EBR Data
-    $scope.ebr =  'EBR_DATE';
-    $scope.dataMoth = [];
-    OperationDataService.getSelect($scope.ebr).then(function(data){
-        if(data.code == 0){
-            $scope.ebrdata = data.result;
-            for(var i=0;i< $scope.ebrdata.length;i++){
-                $scope.dataMoth.push({data:$scope.ebrdata[i]});
-            }
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-    //初始化Select-CFE Data
-    $scope.cfe = 'CFE_CYCLE';
-    OperationDataService.getSelect($scope.cfe).then(function(data){
-        if(data.code == 0){
-            $scope.cfedata = data.result;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
-    //初始化Cycle Choose
-    OperationDataService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.cycle;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
-    //多选控件
-    $scope.Sel = true;
-    $(document).bind('click',function(){
-        $scope.Sel = true;
-    });
-    $scope.openSel = function($event){
-        $scope.Sel = false;
-        $event.stopPropagation();
-    };
-    $scope.arr = [];
-    $scope.One = function(m){
-        m.isChecked = !m.isChecked;
-        if(m.isChecked){
-            $scope.arr.push(m.data);
-        }else {
-            for(var i=0;i<$scope.arr.length;i++){
-                if($scope.arr[i] == m.data){
-                    $scope.arr.splice(i,1);
-                    break;
-                }
-            }
-        }
-        console.log($scope.arr);
-        $scope.EBRData = $scope.arr.join(',');
-    };
-
-    //第二部分tab信息展示
-    $scope.getPage = function(){
-        OperationDataService.getExecute2().then(function(data){
-            console.log(data);
-            if(data.code == 0){
-                //$scope.noData = false;
-                $scope.tablist = data.result;
-                $("#tabExample").dataTable().fnDestroy();
-                $timeout(function () {
-                    $('#tabExample').dataTable({
-                        "scrollY": 160,
-                        "scrollX": true,
-                        "dom": '<"top">rt<"bottom"><"clear">',
-                        "scrollCollapse": true,
-                        "jQueryUI": true,
-                        // "pagingType":   "simple_numbers",
-                        stateSave: true,
-                        "paging": false,
-                        "ordering": false,
-                        "bLengthChange": true,
-                        //"order": [[ 3, "desc" ]]
-                    });
-                });
-            }
-            console.log(data);
-        },function(data){
-            console.log(data);
-        });
-    }
-    $scope.getPage();
-
-    //点击Execute执行
-    //$scope.noData = true;
-    $scope.getExecute = function(){
-        $scope.taskId = '';
-        $scope.search = {
-            cycleName : $scope.CycleChoose,
-            cfeCycle : $scope.CFEData,
-            month : $scope.EBRData,
-            user : $rootScope.user
-        }
-        console.log($scope.search);
-        if(!$scope.EBRData || !$scope.CFEData){
-            alert("请选择条件！");
-        }else {
-            OperationDataService.getExecute($scope.search).then(function(data){
-                if(data.code == 0){
-                    alert(data.result);
-                    $scope.getPage();
-                }else {
-                    alert(data.msg);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-        }
-    };
-
-    $scope.WW = true;
-    $scope.PRC = true;
-    //单击整行选中
-    $scope.trClick = function($event,id,status,cycleName){
-        $($("#tabExample input:radio")).removeAttr("checked");
-        $($event.target).parent().find("input:radio").prop("checked",true);
-        $scope.taskId = id;
-        console.log($scope.taskId)
-        $scope.status = status;
-        console.log($scope.status)
-        $scope.cyclename = cycleName;
-        console.log($scope.cyclename)
-        //$scope.SearchTaskId(a,b,c)
-    }
-    //单选获得taskId
-   /* $scope.SearchTaskId = function(id,cycleName,status){
-        $scope.taskId = id;
-        $scope.status = status;
-        $scope.cyclename = cycleName;
-    };*/
-
-    //点击Search
-    $scope.SearchTab = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'){
-            $scope.PRCWW = false;
-            $scope.TaskID =  $scope.taskId;
-            $scope.CyclName = $scope.cyclename;
-            $scope.WW = false;
-            $scope.PRC = true;
-
-            //WW
-           // $("#PRCExample").dataTable().fnDestroy();
-            OperationDataService.getWw($scope.TaskID).then(function(data){
-                if(data.code == 0){
-                    $scope.WwList = data.result;
-                    $scope.wwTable();
-                    console.log($scope.TaskID);
-                    console.log($scope.CyclName);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-
-            //PRC
-            OperationDataService.getPrc($scope.TaskID).then(function(data) {
-                if (data.code == 0) {
-                    $scope.PrcList = data.result;
-                    console.log($scope.PrcList);
-                    $scope.prcTalbe();
-                }
-                console.log(data)
-            } ,function(data){
-                console.log(data);
-            });
-        }else {
-            alert("暂未执行成功，无法查看！");
-        }
-    };
-
-
-    //删除某一项
-    $scope.DelParticular = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
-            if(confirm('确认要删除？')) {
-                console.log($scope.taskid);
-                $scope.taskid = {
-                    uuid: $scope.taskId
-                };
-                OperationDataService.DelParticular($scope.taskid).then(function (data) {
-                    if (data.code == 0) {
-                        alert("删除成功！");
-                        $scope.taskId = '';
-                        $scope.getPage();
-                        //$("#tabExample").dataTable().fnDestroy();
-                        $scope.PRCWW = true;
-                    }
-                    console.log(data);
-                }, function (data) {
-                    console.log(data);
-                });
-            }
-        }else {
-            alert("还未执行完成！");
-        }
-    };
-
-
-
-
-    $scope.wwTable = function(){
-        $("#WWExample").dataTable().fnDestroy();
-        $timeout(function () {
-            $('#WWExample thead tr').eq(1).find('td').each(function() {
-                var title = $('#WWExample thead tr td').eq($(this).index()).text();
-                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-            });
-            var table = $('#WWExample').DataTable({
-                //"processing": true,
-                "scrollY": 400,
-                "scrollX": true,
-                "dom": '<"top">rt<"bottom"><"clear">',
-                //"dom": '<"top"i>rt<"bottom"flp><"clear">',
-                "scrollCollapse": true,
-                //"jQueryUI": true,
-                // "pagingType":   "simple_numbers",
-                //stateSave: true,
-                //"pagingType":   "full_numbers",
-                "paging": false,
-                "ordering": false,
-                //"lengthChange": true,
-                "autoWidth": false,
-                "data" :  $scope.WwList,
-                "columns":[
-                    { "data": "qtr" },
-                    { "data": "zfingeo" },
-                    { "data": "zregion2" },
-                    { "data": "cfeBu" },
-                    { "data": "cfeSegment" },
-                    { "data": "invQty" },
-                    { "data": "cfeCycle" },
-                    { "data": "lqBmc" },
-                    { "data": "cqBmc" },
-                    { "data": "nqBmc" },
-                    { "data": "cqLq" },
-                    { "data": "nqCq" },
-                    { "data": "lqTtl" },
-                    { "data": "cqTtl" },
-                    { "data": "nqTtl" },
-                    { "data": "cqLqTtl" },
-                    { "data": "nqCqTtl" },
-                ]
-            });
-            table.columns().eq(0).each(function(colIdx) {
-                $('input', table.column(colIdx).header()).on('keyup change', function() {
-                    table
-                        .column(colIdx)
-                        .search(this.value)
-                        .draw();
-                });
-            });
-        });
-    }
-
-    $scope.prcTalbe = function(id){
-        $("#PRCExample").dataTable().fnDestroy();
-        $timeout(function () {
-            $('#PRCExample thead tr').eq(1).find('td').each(function() {
-                var title = $('#PRCExample thead tr td').eq($(this).index()).text();
-                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-            });
-            var table =$('#PRCExample').DataTable({
-                //"processing": true,
-                "scrollY": 400,
-                "scrollX": true,
-                "dom": '<"top">rt<"bottom"><"clear">',
-                "scrollCollapse": true,
-                //"jQueryUI": true,
-                // "pagingType":   "simple_numbers",
-                //stateSave: true,
-                "paging": false,
-                "ordering": false,
-                //"lengthChange": true,
-                "autoWidth": false,
-                "data" : $scope.PrcList,
-                "columns": [
-                    { "data": "qtr" },
-                    { "data": "zfingeo" },
-                    { "data": "cfeBu" },
-                    { "data": "cfePrcSegment" },
-                    { "data": "invQty" },
-                    { "data": "cfeCycle" },
-                    { "data": "lqBmc" },
-                    { "data": "cqBmc" },
-                    { "data": "nqBmc" },
-                    { "data": "cqLq" },
-                    { "data": "nqCq" },
-                    { "data": "lqTtl" },
-                    { "data": "cqTtl" },
-                    { "data": "nqTtl" },
-                    { "data": "cqLqTtl" },
-                    { "data": "nqCqTtl" }
-                ]
-            });
-            table.columns().eq(0).each(function(colIdx) {
-                $('input', table.column(colIdx).header()).on('keyup change', function() {
-                    table
-                        .column(colIdx)
-                        .search(this.value)
-                        .draw();
-                });
-            });
-        });
-
-    }
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.WW = false;
-            $scope.PRC = true;
-            $scope.wwTable();
-        }else if(flag == 'p'){
-            $scope.WW = true;
-            $scope.PRC = false;
-            $scope.prcTalbe();
-        }
-    };
-
-
-    //点击Validate
-    $scope.getValidate = function(){
-        $scope.validate = {
-            zcycle_name : $scope.CyclName,
-            zuuid : $scope.TaskID,
-            user : $rootScope.user
-        };
-        console.log($scope.validate)
-        OperationDataService.getValidate($scope.validate).then(function (data) {
-            if(data.code == 0){
-                alert('成功！');
-                $scope.getPage();
-            }else {
-                alert(data.msg);
-            }
-            console.log(data);
-        }, function (data) {
-            console.log(data);
-        });
-    };
-
-    //WW时Download Summary
-    $scope.getWWDownLoadSum = function(){
-        $('#ws2').css('display','block');
-        $('#ws1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            OperationDataService.getWwSum($scope.TaskID).then(function (data) {
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-                $('#ws1').css('display','block');
-                $('#ws2').css('display','none');
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-
-    //Prc时Download Summary
-    $scope.getPRCDownLoadSum = function(){
-        $('#ps2').css('display','block');
-        $('#ps1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            OperationDataService.getPrcSum($scope.TaskID).then(function (data) {
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-                $('#ps1').css('display','block');
-                $('#ps2').css('display','none');
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-    //WW时Download Detail
-    $scope.getWWDownLoadDet = function(){
-        $('#wd2').css('display','block');
-        $('#wd1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            OperationDataService.getWwDet($scope.TaskID).then(function (data) {
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-                $('#wd1').css('display','block');
-                $('#wd2').css('display','none');
-                console.log(data);
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-
-    //Prc时Download Detail
-    $scope.getPRCDownLoadDet = function(){
-        $('#pd2').css('display','block');
-        $('#pd1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            OperationDataService.getPrcDet($scope.TaskID).then(function (data) {
-                $('#pd1').css('display','block');
-                $('#pd2').css('display','none');
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-});
-"use strict";
-
-angular.module('app.OperationData').controller('DealmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-    $scope.del = function(){
-        if(confirm('确认要删除？')){
-
-        }
-    }
-})
-"use strict";
-
-angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-
-    //Actual与Forecast选择展示
-    $scope.atc = true;
-    $scope.wpSel = function(){
-        if($scope.CycleSelect == 'Actual'){
-            $scope.atc = true;
-            $scope.aww = true;
-            $scope.fww = true;
-        }else if($scope.CycleSelect =='Forecast'){
-            $scope.atc = false;
-            $scope.aww = true;
-            $scope.fww = true;
-        }
-    }
-
-    //Actual中PRC与WW的切换
-    $scope.aww = true;
-    $scope.btnSwitchA = function(flag){
-        if(flag == 'w'){
-            $scope.aww = false;
-        }else if(flag == 'p'){
-            $scope.aww = true;
-        }
-    }
-
-    //Actual中PRC与WW的切换
-    $scope.fww = true;
-    $scope.btnSwitchF = function(flag){
-        if(flag == 'w'){
-            $scope.fww = false;
-        }else if(flag == 'p'){
-            $scope.fww = true;
-        }
-    }
-
-
-})
-"use strict";
-
-angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-})
-"use strict";
-
-angular.module('app.OperationData').controller('OPQTQPNtakedownCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.s1 = true;
-    $scope.s2 = false;
-    $scope.w1 = true;
-    $scope.w2 = false;
-    $scope.c1 = false;
-    $scope.c2 = false;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            //PRC与WW切换
-            $scope.ww = false;
-            //大表切换
-            $scope.w2 = true;
-            $scope.w1 = false;
-            //两个按钮功能切换
-            $scope.s1 = false;
-            $scope.s2 = true;
-            //小表隐藏
-            $scope.c1 = false;
-            $scope.c2 = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-            $scope.w1 = true;
-            $scope.w2 = false;
-            $scope.s1 = true;
-            $scope.s2 = false;
-            $scope.c1 = false;
-            $scope.c2 = false;
-        }
-    }
-
-    $scope.btnSV1 = function(flag){
-        if(flag == 'd'){
-            //$scope.ww = true;
-            $scope.w1 = true;
-            $scope.c1 = false;
-
-        }else if(flag == 's'){
-            //$scope.ww = false;
-            $scope.w1 = false;
-            $scope.c1 = true;
-        }
-    }
-    $scope.btnSV2 = function(flag){
-        if(flag == 'd'){
-            $scope.w2 = true;
-            $scope.c2 = false;
-        }else if(flag == 's'){
-            $scope.w2 = false;
-            $scope.c2 = true;
-        }
-    }
-})
 angular.module('app.OperationData').service("OperationDataService", function($http, $q , APP_CONFIG) {
 
     //第一部分Select中第二第三个框
