@@ -267,10 +267,6 @@ if (appConfig.voice_command) {
 }
 
 appConfig.apiRootUrl = 'api';
-<<<<<<< HEAD
-=======
-//appConfig.baseUrl="http://10.99.123.10:8080/ccf-prod";
->>>>>>> branch 'master' of https://github.com/zhoud134134/lenovo_pro/
 appConfig.baseUrl="https://mcmt.lenovo.com/ccf-prod";
 //appConfig.baseUrl="http://10.116.19.116:8080";
 appConfig.limit = 10;
