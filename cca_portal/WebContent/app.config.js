@@ -268,6 +268,8 @@ if (appConfig.voice_command) {
 
 appConfig.apiRootUrl = 'api';
 appConfig.baseUrl="https://mcmt.lenovo.com/ccf-prod";
+//appConfig.baseUrl="https://mcmt.lenovo.com/ccf-dev";
+
 //appConfig.baseUrl="http://10.116.19.116:8080";
 appConfig.limit = 10;
 appConfig.page =1;
