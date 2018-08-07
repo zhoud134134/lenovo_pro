@@ -185,7 +185,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
     };
 
 
-    //删除某一项
+    //
     $scope.DelParticular = function(){
         if(!$scope.taskId){
             alert("请选择项！");
@@ -202,6 +202,8 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
                         $scope.getPage();
                         //$("#tabExample").dataTable().fnDestroy();
                         $scope.PRCWW = true;
+                    }else {
+                        alert(data.msg);
                     }
                     console.log(data);
                 }, function (data) {
@@ -245,18 +247,88 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
                     { "data": "zregion2" },
                     { "data": "cfeBu" },
                     { "data": "cfeSegment" },
-                    { "data": "invQty" },
+                    { "data": "invQty",render: $.fn.dataTable.render.number( ',', '.')},
                     { "data": "cfeCycle" },
-                    { "data": "lqBmc" },
-                    { "data": "cqBmc" },
-                    { "data": "nqBmc" },
-                    { "data": "cqLq" },
-                    { "data": "nqCq" },
-                    { "data": "lqTtl" },
-                    { "data": "cqTtl" },
-                    { "data": "nqTtl" },
-                    { "data": "cqLqTtl" },
-                    { "data": "nqCqTtl" },
+                    { "data": "lqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqBmc",  render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "lqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCqTtl",render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
                 ]
             });
             table.columns().eq(0).each(function(colIdx) {
@@ -296,18 +368,88 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
                     { "data": "zfingeo" },
                     { "data": "cfeBu" },
                     { "data": "cfePrcSegment" },
-                    { "data": "invQty" },
+                    { "data": "invQty" ,render: $.fn.dataTable.render.number( ',', '.')},
                     { "data": "cfeCycle" },
-                    { "data": "lqBmc" },
-                    { "data": "cqBmc" },
-                    { "data": "nqBmc" },
-                    { "data": "cqLq" },
-                    { "data": "nqCq" },
-                    { "data": "lqTtl" },
-                    { "data": "cqTtl" },
-                    { "data": "nqTtl" },
-                    { "data": "cqLqTtl" },
-                    { "data": "nqCqTtl" }
+                    { "data": "lqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "lqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }}
                 ]
             });
             table.columns().eq(0).each(function(colIdx) {

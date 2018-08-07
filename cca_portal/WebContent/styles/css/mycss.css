@@ -31,6 +31,9 @@
 .jarviswidget .tab-fun-btn2 button {
     margin-right: 5px;
 }
+.mup-tabbtn .tab-fun-btn {
+    margin-left: -13px;
+}
 
 .form-group-m label {
     margin: 0;
@@ -449,9 +452,13 @@
 table.dataTable thead .sorting_asc {
     background: none;
 }
+.tab-sear thead tr:nth-of-type(2) td{
+    padding: 6px;
+}
 .tab-sear thead input {
     height: 25px;
     font-weight: 100;
+    padding-left: 3px;
 }
 
 
@@ -498,4 +505,16 @@ table.dataTable thead .sorting_asc {
 }
 .tab-point tbody tr{
     cursor: pointer;
+}
+.table-ca{
+    line-height: 30px;
+    text-align: center;
+    font-size: 13px;
+}
+.table-ca tr:nth-of-type(1),
+.table-ca tr:nth-of-type(2),
+.table-ca tr td:nth-of-type(1) {
+    background: #F3F5F6;
+    font-weight: 600;
+    font-size: 12px;
 }
