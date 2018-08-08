@@ -228,3 +228,15 @@ article {
     table-layout: fixed;
     border: 1px solid #ddd;
 }
+.operadata-segment-con{
+    border: none !important;
+    border-top: 1px solid #fff !important;
+}
+.operadata-tab2-bord{
+    border-top: 0.02px solid #fff;
+    border-left: 0.02px solid #fff;
+    /* border-right: 0.02px solid #fff; */
+}
+.operadata-tab2-box-jin2{
+    border-right: 0px solid #fff;
+}
