@@ -69,6 +69,7 @@ article {
     text-align: center;
     overflow-x: scroll;
     margin-top: 6px;
+    margin-bottom: 10px;
     line-height: 32px;
     border: 1px solid #ddd;
 }
@@ -201,33 +202,51 @@ article {
 .summary-tab-width1{
     width: 460px;
 }
+.report-summary-border{
+    border-collapse: separate !important;
+    border-spacing: 0 20px;
+}
 /* 公用 end */
-/* table {
-    table-layout: fixed;
-    border-collapse: collapse;
-} */
-
+/*report 第二部分的内容*/
 .summary {
     width: 100% !important;
     /* height: 500px; */
     overflow-x: scroll !important;
-    border: none;
 }
 
-.summary table {
-    width: 3600px;
-    border: none;
-    overflow-x: scroll;
-    border-collapse: collapse;
+.summary .summary-report {
+    width: 3800px;
+    /*overflow-x: scroll;*/
     table-layout: fixed;
+    border-collapse: collapse;
     text-align: center;
 }
-.summary table td {
-    line-height: 30px;
-    border-collapse: collapse;
-    table-layout: fixed;
+.summary .summary-report tr td table tr{
     border: 1px solid #ddd;
 }
+.summary .summary-report tr td {
+    line-height: 30px;
+    /*border-collapse: collapse;*/
+    /*table-layout: fixed;*/
+    word-break: break-all;
+    border: 1px solid #ddd;
+}
+/*report 第二部分 左边固定的*/
+.summary-report-left{
+    /*border: 1px solid #ddd;*/
+    width: 461px;
+    text-align: center;
+    background:#fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.summary .summary-report-left tr td {
+    line-height: 30px;
+    word-break: break-all;
+    border: 1px solid #ddd;
+}
+
 .operadata-segment-con{
     border: none !important;
     border-top: 1px solid #fff !important;
@@ -240,3 +259,7 @@ article {
 .operadata-tab2-box-jin2{
     border-right: 0px solid #fff;
 }
+
+
+
+
