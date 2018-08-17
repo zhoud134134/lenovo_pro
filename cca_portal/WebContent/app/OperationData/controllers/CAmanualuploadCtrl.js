@@ -17,16 +17,16 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
         }
     }
 
-    $scope.btnSV = function (flag) {
-        if (flag == 's1') {
-            $scope.sw2 = true;
-            $scope.sw1 = false;
-            $scope.ww=false;
-        } else if (flag == 's2') {
-            $scope.sw1 = true;
-            $scope.sw2 = false;
-            $scope.ww=false;
-        }
-    }
+    //$scope.btnSV = function (flag) {
+    //    if (flag == 's1') {
+    //        $scope.sw2 = true;
+    //        $scope.sw1 = false;
+    //        $scope.ww=false;
+    //    } else if (flag == 's2') {
+    //        $scope.sw1 = true;
+    //        $scope.sw2 = false;
+    //        $scope.ww=false;
+    //    }
+    //}
 
 })

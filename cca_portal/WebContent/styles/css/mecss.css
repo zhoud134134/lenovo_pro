@@ -169,6 +169,11 @@ article {
 .operadata-tab3 table tr {
     height: 30px !important;
 }
+.table-camain{
+    line-height: 30px;
+    text-align: center;
+    font-size: 13px;
+}
 
 /* report 第二模块 */
 /* 公用样式 */
