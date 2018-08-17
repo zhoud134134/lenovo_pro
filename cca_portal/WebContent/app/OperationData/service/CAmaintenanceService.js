@@ -1,0 +1,113 @@
+/**
+ * Created by Qinglanhui on 2018/8/13.
+ */
+angular.module('app.OperationData').service("CAmaintenanceService", function($http, $q , APP_CONFIG) {
+    //Select第一个框Cycle
+    this.getSelectCycle = function() {
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
+            url : APP_CONFIG.baseUrl +'/api/mcm/',
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    //点击Execute执行
+    this.getExecute = function(page) {
+        console.log(page)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
+            url : APP_CONFIG.baseUrl +'/api/routine/CAMaintenance',
+            transformRequest: function(obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            params : page
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    //获取第二部分表格数据
+    this.getExecute2 = function() {
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/CAMaintenanceBmc/',
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+    //请求Prc的数据
+    this.getPrc = function(id) {
+        console.log(id);
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/dm/ca/prc/'+id,
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    //请求Ww的数据
+    this.getWw = function(id) {
+        console.log(id)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/dm/ca/ww/'+id,
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+    //Prc时的Download
+    this.getPrcDown = function(id) {
+        console.log(id)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/dm/ca/loadexcel/prc/'+id,
+            responseType : 'arraybuffer'
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+})
