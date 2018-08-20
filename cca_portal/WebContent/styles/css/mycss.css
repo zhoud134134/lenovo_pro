@@ -518,3 +518,9 @@ table.dataTable thead .sorting_asc {
     font-weight: 600;
     font-size: 12px;
 }
+
+.btn-back {
+    background-color: #3276b1;
+    border-color: #2c699d;
+    color: #fff;
+}

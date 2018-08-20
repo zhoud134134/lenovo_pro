@@ -23,16 +23,12 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                         "scrollX": true,
                         "dom": '<"top">rt<"bottom"><"clear">',
                         "scrollCollapse": true,
-                        "jQueryUI": true,
+                        //"jQueryUI": true,
                         // "pagingType":   "simple_numbers",
                         stateSave: true,
                         "paging": false,
                         "ordering": false,
-                        "bLengthChange": true,
-                        //"order": [[ 3, "desc" ]]
-                        "fixedColumns":{
-                            leftColumns: 2,
-                        }
+                        "bLengthChange": true
                     });
                 });
             }

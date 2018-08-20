@@ -2924,9 +2924,10 @@ angular.module('app.layout').controller('navCtrl', function ($scope,$state,$stat
     navService.getUser().then(function(data){
         if(data.code == 0){
             $scope.user = data.result;
-            //$scope.user = {"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"]}
-            if(!$scope.user.thumbnailphoto){
-                $scope.user.thumbnailphoto = 'styles/img/avatars/sunny.png';
+           // $scope.user = {"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"],"thumbnailphoto" : []}
+
+            if(!$scope.user.thumbnailphoto[0]){
+                $scope.user.thumbnailphoto[0] = 'styles/img/avatars/sunny.png';
             }
         }
             /*displayname
@@ -4621,311 +4622,6 @@ angular.module('app.eCommerce').controller('OrdersDemoCtrl', function ($scope, o
         "order": [[1, 'asc']]
     }
 });
-"use strict";
-
-angular.module('app.graphs').controller('FlotCtrl', function ($scope) {
-
-
-    $scope.salesChartData = [
-        [1196463600000, 0],
-        [1196550000000, 0],
-        [1196636400000, 0],
-        [1196722800000, 77],
-        [1196809200000, 3636],
-        [1196895600000, 3575],
-        [1196982000000, 2736],
-        [1197068400000, 1086],
-        [1197154800000, 676],
-        [1197241200000, 1205],
-        [1197327600000, 906],
-        [1197414000000, 710],
-        [1197500400000, 639],
-        [1197586800000, 540],
-        [1197673200000, 435],
-        [1197759600000, 301],
-        [1197846000000, 575],
-        [1197932400000, 481],
-        [1198018800000, 591],
-        [1198105200000, 608],
-        [1198191600000, 459],
-        [1198278000000, 234],
-        [1198364400000, 1352],
-        [1198450800000, 686],
-        [1198537200000, 279],
-        [1198623600000, 449],
-        [1198710000000, 468],
-        [1198796400000, 392],
-        [1198882800000, 282],
-        [1198969200000, 208],
-        [1199055600000, 229],
-        [1199142000000, 177],
-        [1199228400000, 374],
-        [1199314800000, 436],
-        [1199401200000, 404],
-        [1199487600000, 253],
-        [1199574000000, 218],
-        [1199660400000, 476],
-        [1199746800000, 462],
-        [1199833200000, 500],
-        [1199919600000, 700],
-        [1200006000000, 750],
-        [1200092400000, 600],
-        [1200178800000, 500],
-        [1200265200000, 900],
-        [1200351600000, 930],
-        [1200438000000, 1200],
-        [1200524400000, 980],
-        [1200610800000, 950],
-        [1200697200000, 900],
-        [1200783600000, 1000],
-        [1200870000000, 1050],
-        [1200956400000, 1150],
-        [1201042800000, 1100],
-        [1201129200000, 1200],
-        [1201215600000, 1300],
-        [1201302000000, 1700],
-        [1201388400000, 1450],
-        [1201474800000, 1500],
-        [1201561200000, 546],
-        [1201647600000, 614],
-        [1201734000000, 954],
-        [1201820400000, 1700],
-        [1201906800000, 1800],
-        [1201993200000, 1900],
-        [1202079600000, 2000],
-        [1202166000000, 2100],
-        [1202252400000, 2200],
-        [1202338800000, 2300],
-        [1202425200000, 2400],
-        [1202511600000, 2550],
-        [1202598000000, 2600],
-        [1202684400000, 2500],
-        [1202770800000, 2700],
-        [1202857200000, 2750],
-        [1202943600000, 2800],
-        [1203030000000, 3245],
-        [1203116400000, 3345],
-        [1203202800000, 3000],
-        [1203289200000, 3200],
-        [1203375600000, 3300],
-        [1203462000000, 3400],
-        [1203548400000, 3600],
-        [1203634800000, 3700],
-        [1203721200000, 3800],
-        [1203807600000, 4000],
-        [1203894000000, 4500]
-    ]
-        .map(function (item) {
-            return [
-                item[0] + 60 * 60 * 1000,
-                item[1]
-            ]
-        });
-
-    $scope.barChartData = _.range(3).map(function (barNum) {
-        return {
-            data: _.range(12).map(function (i) {
-                return [i, parseInt(Math.random() * 30)]
-            }),
-            bars: {
-                show: true,
-                barWidth: 0.2,
-                order: barNum + 1
-            }
-        }
-    });
-
-    $scope.horizontalBarChartData = _.range(3).map(function (barNum) {
-        return {
-            data: _.range(4).map(function (i) {
-                return [i, parseInt(Math.random() * 30)]
-            }),
-            bars: {
-                horizontal: true,
-                show: true,
-                barWidth: 0.2,
-                order: barNum + 1
-            }
-        }
-    });
-
-    $scope.sinChartData = [
-        {
-            data: _.range(16).map(function (i) {
-                return [i, Math.sin(i)];
-            }),
-            label: "sin(x)"
-        },
-        {
-            data: _.range(16).map(function (i) {
-                return [i, Math.cos(i)];
-            }),
-            label: "cos(x)"
-        }
-    ];
-
-
-    // fill chart
-
-    var males = {
-        '15%' : [[2, 88.0], [3, 93.3], [4, 102.0], [5, 108.5], [6, 115.7], [7, 115.6], [8, 124.6], [9, 130.3], [10, 134.3], [11, 141.4], [12, 146.5], [13, 151.7], [14, 159.9], [15, 165.4], [16, 167.8], [17, 168.7], [18, 169.5], [19, 168.0]],
-        '90%' : [[2, 96.8], [3, 105.2], [4, 113.9], [5, 120.8], [6, 127.0], [7, 133.1], [8, 139.1], [9, 143.9], [10, 151.3], [11, 161.1], [12, 164.8], [13, 173.5], [14, 179.0], [15, 182.0], [16, 186.9], [17, 185.2], [18, 186.3], [19, 186.6]],
-        '25%' : [[2, 89.2], [3, 94.9], [4, 104.4], [5, 111.4], [6, 117.5], [7, 120.2], [8, 127.1], [9, 132.9], [10, 136.8], [11, 144.4], [12, 149.5], [13, 154.1], [14, 163.1], [15, 169.2], [16, 170.4], [17, 171.2], [18, 172.4], [19, 170.8]],
-        '10%' : [[2, 86.9], [3, 92.6], [4, 99.9], [5, 107.0], [6, 114.0], [7, 113.5], [8, 123.6], [9, 129.2], [10, 133.0], [11, 140.6], [12, 145.2], [13, 149.7], [14, 158.4], [15, 163.5], [16, 166.9], [17, 167.5], [18, 167.1], [19, 165.3]],
-        'mean' : [[2, 91.9], [3, 98.5], [4, 107.1], [5, 114.4], [6, 120.6], [7, 124.7], [8, 131.1], [9, 136.8], [10, 142.3], [11, 150.0], [12, 154.7], [13, 161.9], [14, 168.7], [15, 173.6], [16, 175.9], [17, 176.6], [18, 176.8], [19, 176.7]],
-        '75%' : [[2, 94.5], [3, 102.1], [4, 110.8], [5, 117.9], [6, 124.0], [7, 129.3], [8, 134.6], [9, 141.4], [10, 147.0], [11, 156.1], [12, 160.3], [13, 168.3], [14, 174.7], [15, 178.0], [16, 180.2], [17, 181.7], [18, 181.3], [19, 182.5]],
-        '85%' : [[2, 96.2], [3, 103.8], [4, 111.8], [5, 119.6], [6, 125.6], [7, 131.5], [8, 138.0], [9, 143.3], [10, 149.3], [11, 159.8], [12, 162.5], [13, 171.3], [14, 177.5], [15, 180.2], [16, 183.8], [17, 183.4], [18, 183.5], [19, 185.5]],
-        '50%' : [[2, 91.9], [3, 98.2], [4, 106.8], [5, 114.6], [6, 120.8], [7, 125.2], [8, 130.3], [9, 137.1], [10, 141.5], [11, 149.4], [12, 153.9], [13, 162.2], [14, 169.0], [15, 174.8], [16, 176.0], [17, 176.8], [18, 176.4], [19, 177.4]]
-    };
-
-    var females = {
-        '15%' : [[2, 84.8], [3, 93.7], [4, 100.6], [5, 105.8], [6, 113.3], [7, 119.3], [8, 124.3], [9, 131.4], [10, 136.9], [11, 143.8], [12, 149.4], [13, 151.2], [14, 152.3], [15, 155.9], [16, 154.7], [17, 157.0], [18, 156.1], [19, 155.4]],
-        '90%' : [[2, 95.6], [3, 104.1], [4, 111.9], [5, 119.6], [6, 127.6], [7, 133.1], [8, 138.7], [9, 147.1], [10, 152.8], [11, 161.3], [12, 166.6], [13, 167.9], [14, 169.3], [15, 170.1], [16, 172.4], [17, 169.2], [18, 171.1], [19, 172.4]],
-        '25%' : [[2, 87.2], [3, 95.9], [4, 101.9], [5, 107.4], [6, 114.8], [7, 121.4], [8, 126.8], [9, 133.4], [10, 138.6], [11, 146.2], [12, 152.0], [13, 153.8], [14, 155.7], [15, 158.4], [16, 157.0], [17, 158.5], [18, 158.4], [19, 158.1]],
-        '10%' : [[2, 84.0], [3, 91.9], [4, 99.2], [5, 105.2], [6, 112.7], [7, 118.0], [8, 123.3], [9, 130.2], [10, 135.0], [11, 141.1], [12, 148.3], [13, 150.0], [14, 150.7], [15, 154.3], [16, 153.6], [17, 155.6], [18, 154.7], [19, 153.1]],
-        'mean' : [[2, 90.2], [3, 98.3], [4, 105.2], [5, 112.2], [6, 119.0], [7, 125.8], [8, 131.3], [9, 138.6], [10, 144.2], [11, 151.3], [12, 156.7], [13, 158.6], [14, 160.5], [15, 162.1], [16, 162.9], [17, 162.2], [18, 163.0], [19, 163.1]],
-        '75%' : [[2, 93.2], [3, 101.5], [4, 107.9], [5, 116.6], [6, 122.8], [7, 129.3], [8, 135.2], [9, 143.7], [10, 148.7], [11, 156.9], [12, 160.8], [13, 163.0], [14, 165.0], [15, 165.8], [16, 168.7], [17, 166.2], [18, 167.6], [19, 168.0]],
-        '85%' : [[2, 94.5], [3, 102.8], [4, 110.4], [5, 119.0], [6, 125.7], [7, 131.5], [8, 137.9], [9, 146.0], [10, 151.3], [11, 159.9], [12, 164.0], [13, 166.5], [14, 167.5], [15, 168.5], [16, 171.5], [17, 168.0], [18, 169.8], [19, 170.3]],
-        '50%' : [[2, 90.2], [3, 98.1], [4, 105.2], [5, 111.7], [6, 118.2], [7, 125.6], [8, 130.5], [9, 138.3], [10, 143.7], [11, 151.4], [12, 156.7], [13, 157.7], [14, 161.0], [15, 162.0], [16, 162.8], [17, 162.2], [18, 162.8], [19, 163.3]]
-    };
-
-    $scope.fillChartData = [{
-        label : 'female mean',
-        data : females['mean'],
-        lines : {
-            show : true
-        },
-        color : "rgb(255,50,50)"
-    }, {
-        id : 'f15%',
-        data : females['15%'],
-        lines : {
-            show : true,
-            lineWidth : 0,
-            fill : false
-        },
-        color : "rgb(255,50,50)"
-    }, {
-        id : 'f25%',
-        data : females['25%'],
-        lines : {
-            show : true,
-            lineWidth : 0,
-            fill : 0.2
-        },
-        color : "rgb(255,50,50)",
-        fillBetween : 'f15%'
-    }, {
-        id : 'f50%',
-        data : females['50%'],
-        lines : {
-            show : true,
-            lineWidth : 0.5,
-            fill : 0.4,
-            shadowSize : 0
-        },
-        color : "rgb(255,50,50)",
-        fillBetween : 'f25%'
-    }, {
-        id : 'f75%',
-        data : females['75%'],
-        lines : {
-            show : true,
-            lineWidth : 0,
-            fill : 0.4
-        },
-        color : "rgb(255,50,50)",
-        fillBetween : 'f50%'
-    }, {
-        id : 'f85%',
-        data : females['85%'],
-        lines : {
-            show : true,
-            lineWidth : 0,
-            fill : 0.2
-        },
-        color : "rgb(255,50,50)",
-        fillBetween : 'f75%'
-    }, {
-        label : 'male mean',
-        data : males['mean'],
-        lines : {
-            show : true
-        },
-        color : "rgb(50,50,255)"
-    }, {
-        id : 'm15%',
-        data : males['15%'],
-        lines : {
-            show : true,
-            lineWidth : 0,
-            fill : false
-        },
-        color : "rgb(50,50,255)"
-    }, {
-        id : 'm25%',
-        data : males['25%'],
-        lines : {
-            show : true,
-            lineWidth : 0,
-            fill : 0.2
-        },
-        color : "rgb(50,50,255)",
-        fillBetween : 'm15%'
-    }, {
-        id : 'm50%',
-        data : males['50%'],
-        lines : {
-            show : true,
-            lineWidth : 0.5,
-            fill : 0.4,
-            shadowSize : 0
-        },
-        color : "rgb(50,50,255)",
-        fillBetween : 'm25%'
-    }, {
-        id : 'm75%',
-        data : males['75%'],
-        lines : {
-            show : true,
-            lineWidth : 0,
-            fill : 0.4
-        },
-        color : "rgb(50,50,255)",
-        fillBetween : 'm50%'
-    }, {
-        id : 'm85%',
-        data : males['85%'],
-        lines : {
-            show : true,
-            lineWidth : 0,
-            fill : 0.2
-        },
-        color : "rgb(50,50,255)",
-        fillBetween : 'm75%'
-    }];
-
-
-
-    //
-    $scope.pieChartData = _.range(Math.floor(Math.random() * 10) + 1).map(function(i){
-        return {
-            label : "Series" + (i + 1),
-            data : Math.floor(Math.random() * 100) + 1
-        }
-    });
-
-    var pageviews = [[1, 75], [3, 87], [4, 93], [5, 127], [6, 116], [7, 137], [8, 135], [9, 130], [10, 167], [11, 169], [12, 179], [13, 185], [14, 176], [15, 180], [16, 174], [17, 193], [18, 186], [19, 177], [20, 153], [21, 149], [22, 130], [23, 100], [24, 50]];
-    var visitors = [[1, 65], [3, 50], [4, 73], [5, 100], [6, 95], [7, 103], [8, 111], [9, 97], [10, 125], [11, 100], [12, 95], [13, 141], [14, 126], [15, 131], [16, 146], [17, 158], [18, 160], [19, 151], [20, 125], [21, 110], [22, 100], [23, 85], [24, 37]];
-
-    $scope.siteStatsData = [{
-        data : pageviews,
-        label : "Your pageviews"
-    }, {
-        data : visitors,
-        label : "Site visitors"
-    }];
-});
 
 "use strict";
 
@@ -5231,6 +4927,311 @@ angular.module('app.forms').controller('ModalDemoCtrl', function($scope, $modalI
     $scope.closeModal = function(){
         $modalInstance.dismiss('cancel');
     }
+});
+"use strict";
+
+angular.module('app.graphs').controller('FlotCtrl', function ($scope) {
+
+
+    $scope.salesChartData = [
+        [1196463600000, 0],
+        [1196550000000, 0],
+        [1196636400000, 0],
+        [1196722800000, 77],
+        [1196809200000, 3636],
+        [1196895600000, 3575],
+        [1196982000000, 2736],
+        [1197068400000, 1086],
+        [1197154800000, 676],
+        [1197241200000, 1205],
+        [1197327600000, 906],
+        [1197414000000, 710],
+        [1197500400000, 639],
+        [1197586800000, 540],
+        [1197673200000, 435],
+        [1197759600000, 301],
+        [1197846000000, 575],
+        [1197932400000, 481],
+        [1198018800000, 591],
+        [1198105200000, 608],
+        [1198191600000, 459],
+        [1198278000000, 234],
+        [1198364400000, 1352],
+        [1198450800000, 686],
+        [1198537200000, 279],
+        [1198623600000, 449],
+        [1198710000000, 468],
+        [1198796400000, 392],
+        [1198882800000, 282],
+        [1198969200000, 208],
+        [1199055600000, 229],
+        [1199142000000, 177],
+        [1199228400000, 374],
+        [1199314800000, 436],
+        [1199401200000, 404],
+        [1199487600000, 253],
+        [1199574000000, 218],
+        [1199660400000, 476],
+        [1199746800000, 462],
+        [1199833200000, 500],
+        [1199919600000, 700],
+        [1200006000000, 750],
+        [1200092400000, 600],
+        [1200178800000, 500],
+        [1200265200000, 900],
+        [1200351600000, 930],
+        [1200438000000, 1200],
+        [1200524400000, 980],
+        [1200610800000, 950],
+        [1200697200000, 900],
+        [1200783600000, 1000],
+        [1200870000000, 1050],
+        [1200956400000, 1150],
+        [1201042800000, 1100],
+        [1201129200000, 1200],
+        [1201215600000, 1300],
+        [1201302000000, 1700],
+        [1201388400000, 1450],
+        [1201474800000, 1500],
+        [1201561200000, 546],
+        [1201647600000, 614],
+        [1201734000000, 954],
+        [1201820400000, 1700],
+        [1201906800000, 1800],
+        [1201993200000, 1900],
+        [1202079600000, 2000],
+        [1202166000000, 2100],
+        [1202252400000, 2200],
+        [1202338800000, 2300],
+        [1202425200000, 2400],
+        [1202511600000, 2550],
+        [1202598000000, 2600],
+        [1202684400000, 2500],
+        [1202770800000, 2700],
+        [1202857200000, 2750],
+        [1202943600000, 2800],
+        [1203030000000, 3245],
+        [1203116400000, 3345],
+        [1203202800000, 3000],
+        [1203289200000, 3200],
+        [1203375600000, 3300],
+        [1203462000000, 3400],
+        [1203548400000, 3600],
+        [1203634800000, 3700],
+        [1203721200000, 3800],
+        [1203807600000, 4000],
+        [1203894000000, 4500]
+    ]
+        .map(function (item) {
+            return [
+                item[0] + 60 * 60 * 1000,
+                item[1]
+            ]
+        });
+
+    $scope.barChartData = _.range(3).map(function (barNum) {
+        return {
+            data: _.range(12).map(function (i) {
+                return [i, parseInt(Math.random() * 30)]
+            }),
+            bars: {
+                show: true,
+                barWidth: 0.2,
+                order: barNum + 1
+            }
+        }
+    });
+
+    $scope.horizontalBarChartData = _.range(3).map(function (barNum) {
+        return {
+            data: _.range(4).map(function (i) {
+                return [i, parseInt(Math.random() * 30)]
+            }),
+            bars: {
+                horizontal: true,
+                show: true,
+                barWidth: 0.2,
+                order: barNum + 1
+            }
+        }
+    });
+
+    $scope.sinChartData = [
+        {
+            data: _.range(16).map(function (i) {
+                return [i, Math.sin(i)];
+            }),
+            label: "sin(x)"
+        },
+        {
+            data: _.range(16).map(function (i) {
+                return [i, Math.cos(i)];
+            }),
+            label: "cos(x)"
+        }
+    ];
+
+
+    // fill chart
+
+    var males = {
+        '15%' : [[2, 88.0], [3, 93.3], [4, 102.0], [5, 108.5], [6, 115.7], [7, 115.6], [8, 124.6], [9, 130.3], [10, 134.3], [11, 141.4], [12, 146.5], [13, 151.7], [14, 159.9], [15, 165.4], [16, 167.8], [17, 168.7], [18, 169.5], [19, 168.0]],
+        '90%' : [[2, 96.8], [3, 105.2], [4, 113.9], [5, 120.8], [6, 127.0], [7, 133.1], [8, 139.1], [9, 143.9], [10, 151.3], [11, 161.1], [12, 164.8], [13, 173.5], [14, 179.0], [15, 182.0], [16, 186.9], [17, 185.2], [18, 186.3], [19, 186.6]],
+        '25%' : [[2, 89.2], [3, 94.9], [4, 104.4], [5, 111.4], [6, 117.5], [7, 120.2], [8, 127.1], [9, 132.9], [10, 136.8], [11, 144.4], [12, 149.5], [13, 154.1], [14, 163.1], [15, 169.2], [16, 170.4], [17, 171.2], [18, 172.4], [19, 170.8]],
+        '10%' : [[2, 86.9], [3, 92.6], [4, 99.9], [5, 107.0], [6, 114.0], [7, 113.5], [8, 123.6], [9, 129.2], [10, 133.0], [11, 140.6], [12, 145.2], [13, 149.7], [14, 158.4], [15, 163.5], [16, 166.9], [17, 167.5], [18, 167.1], [19, 165.3]],
+        'mean' : [[2, 91.9], [3, 98.5], [4, 107.1], [5, 114.4], [6, 120.6], [7, 124.7], [8, 131.1], [9, 136.8], [10, 142.3], [11, 150.0], [12, 154.7], [13, 161.9], [14, 168.7], [15, 173.6], [16, 175.9], [17, 176.6], [18, 176.8], [19, 176.7]],
+        '75%' : [[2, 94.5], [3, 102.1], [4, 110.8], [5, 117.9], [6, 124.0], [7, 129.3], [8, 134.6], [9, 141.4], [10, 147.0], [11, 156.1], [12, 160.3], [13, 168.3], [14, 174.7], [15, 178.0], [16, 180.2], [17, 181.7], [18, 181.3], [19, 182.5]],
+        '85%' : [[2, 96.2], [3, 103.8], [4, 111.8], [5, 119.6], [6, 125.6], [7, 131.5], [8, 138.0], [9, 143.3], [10, 149.3], [11, 159.8], [12, 162.5], [13, 171.3], [14, 177.5], [15, 180.2], [16, 183.8], [17, 183.4], [18, 183.5], [19, 185.5]],
+        '50%' : [[2, 91.9], [3, 98.2], [4, 106.8], [5, 114.6], [6, 120.8], [7, 125.2], [8, 130.3], [9, 137.1], [10, 141.5], [11, 149.4], [12, 153.9], [13, 162.2], [14, 169.0], [15, 174.8], [16, 176.0], [17, 176.8], [18, 176.4], [19, 177.4]]
+    };
+
+    var females = {
+        '15%' : [[2, 84.8], [3, 93.7], [4, 100.6], [5, 105.8], [6, 113.3], [7, 119.3], [8, 124.3], [9, 131.4], [10, 136.9], [11, 143.8], [12, 149.4], [13, 151.2], [14, 152.3], [15, 155.9], [16, 154.7], [17, 157.0], [18, 156.1], [19, 155.4]],
+        '90%' : [[2, 95.6], [3, 104.1], [4, 111.9], [5, 119.6], [6, 127.6], [7, 133.1], [8, 138.7], [9, 147.1], [10, 152.8], [11, 161.3], [12, 166.6], [13, 167.9], [14, 169.3], [15, 170.1], [16, 172.4], [17, 169.2], [18, 171.1], [19, 172.4]],
+        '25%' : [[2, 87.2], [3, 95.9], [4, 101.9], [5, 107.4], [6, 114.8], [7, 121.4], [8, 126.8], [9, 133.4], [10, 138.6], [11, 146.2], [12, 152.0], [13, 153.8], [14, 155.7], [15, 158.4], [16, 157.0], [17, 158.5], [18, 158.4], [19, 158.1]],
+        '10%' : [[2, 84.0], [3, 91.9], [4, 99.2], [5, 105.2], [6, 112.7], [7, 118.0], [8, 123.3], [9, 130.2], [10, 135.0], [11, 141.1], [12, 148.3], [13, 150.0], [14, 150.7], [15, 154.3], [16, 153.6], [17, 155.6], [18, 154.7], [19, 153.1]],
+        'mean' : [[2, 90.2], [3, 98.3], [4, 105.2], [5, 112.2], [6, 119.0], [7, 125.8], [8, 131.3], [9, 138.6], [10, 144.2], [11, 151.3], [12, 156.7], [13, 158.6], [14, 160.5], [15, 162.1], [16, 162.9], [17, 162.2], [18, 163.0], [19, 163.1]],
+        '75%' : [[2, 93.2], [3, 101.5], [4, 107.9], [5, 116.6], [6, 122.8], [7, 129.3], [8, 135.2], [9, 143.7], [10, 148.7], [11, 156.9], [12, 160.8], [13, 163.0], [14, 165.0], [15, 165.8], [16, 168.7], [17, 166.2], [18, 167.6], [19, 168.0]],
+        '85%' : [[2, 94.5], [3, 102.8], [4, 110.4], [5, 119.0], [6, 125.7], [7, 131.5], [8, 137.9], [9, 146.0], [10, 151.3], [11, 159.9], [12, 164.0], [13, 166.5], [14, 167.5], [15, 168.5], [16, 171.5], [17, 168.0], [18, 169.8], [19, 170.3]],
+        '50%' : [[2, 90.2], [3, 98.1], [4, 105.2], [5, 111.7], [6, 118.2], [7, 125.6], [8, 130.5], [9, 138.3], [10, 143.7], [11, 151.4], [12, 156.7], [13, 157.7], [14, 161.0], [15, 162.0], [16, 162.8], [17, 162.2], [18, 162.8], [19, 163.3]]
+    };
+
+    $scope.fillChartData = [{
+        label : 'female mean',
+        data : females['mean'],
+        lines : {
+            show : true
+        },
+        color : "rgb(255,50,50)"
+    }, {
+        id : 'f15%',
+        data : females['15%'],
+        lines : {
+            show : true,
+            lineWidth : 0,
+            fill : false
+        },
+        color : "rgb(255,50,50)"
+    }, {
+        id : 'f25%',
+        data : females['25%'],
+        lines : {
+            show : true,
+            lineWidth : 0,
+            fill : 0.2
+        },
+        color : "rgb(255,50,50)",
+        fillBetween : 'f15%'
+    }, {
+        id : 'f50%',
+        data : females['50%'],
+        lines : {
+            show : true,
+            lineWidth : 0.5,
+            fill : 0.4,
+            shadowSize : 0
+        },
+        color : "rgb(255,50,50)",
+        fillBetween : 'f25%'
+    }, {
+        id : 'f75%',
+        data : females['75%'],
+        lines : {
+            show : true,
+            lineWidth : 0,
+            fill : 0.4
+        },
+        color : "rgb(255,50,50)",
+        fillBetween : 'f50%'
+    }, {
+        id : 'f85%',
+        data : females['85%'],
+        lines : {
+            show : true,
+            lineWidth : 0,
+            fill : 0.2
+        },
+        color : "rgb(255,50,50)",
+        fillBetween : 'f75%'
+    }, {
+        label : 'male mean',
+        data : males['mean'],
+        lines : {
+            show : true
+        },
+        color : "rgb(50,50,255)"
+    }, {
+        id : 'm15%',
+        data : males['15%'],
+        lines : {
+            show : true,
+            lineWidth : 0,
+            fill : false
+        },
+        color : "rgb(50,50,255)"
+    }, {
+        id : 'm25%',
+        data : males['25%'],
+        lines : {
+            show : true,
+            lineWidth : 0,
+            fill : 0.2
+        },
+        color : "rgb(50,50,255)",
+        fillBetween : 'm15%'
+    }, {
+        id : 'm50%',
+        data : males['50%'],
+        lines : {
+            show : true,
+            lineWidth : 0.5,
+            fill : 0.4,
+            shadowSize : 0
+        },
+        color : "rgb(50,50,255)",
+        fillBetween : 'm25%'
+    }, {
+        id : 'm75%',
+        data : males['75%'],
+        lines : {
+            show : true,
+            lineWidth : 0,
+            fill : 0.4
+        },
+        color : "rgb(50,50,255)",
+        fillBetween : 'm50%'
+    }, {
+        id : 'm85%',
+        data : males['85%'],
+        lines : {
+            show : true,
+            lineWidth : 0,
+            fill : 0.2
+        },
+        color : "rgb(50,50,255)",
+        fillBetween : 'm75%'
+    }];
+
+
+
+    //
+    $scope.pieChartData = _.range(Math.floor(Math.random() * 10) + 1).map(function(i){
+        return {
+            label : "Series" + (i + 1),
+            data : Math.floor(Math.random() * 100) + 1
+        }
+    });
+
+    var pageviews = [[1, 75], [3, 87], [4, 93], [5, 127], [6, 116], [7, 137], [8, 135], [9, 130], [10, 167], [11, 169], [12, 179], [13, 185], [14, 176], [15, 180], [16, 174], [17, 193], [18, 186], [19, 177], [20, 153], [21, 149], [22, 130], [23, 100], [24, 50]];
+    var visitors = [[1, 65], [3, 50], [4, 73], [5, 100], [6, 95], [7, 103], [8, 111], [9, 97], [10, 125], [11, 100], [12, 95], [13, 141], [14, 126], [15, 131], [16, 146], [17, 158], [18, 160], [19, 151], [20, 125], [21, 110], [22, 100], [23, 85], [24, 37]];
+
+    $scope.siteStatsData = [{
+        data : pageviews,
+        label : "Your pageviews"
+    }, {
+        data : visitors,
+        label : "Site visitors"
+    }];
 });
 "use strict";
 
@@ -5580,16 +5581,12 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                         "scrollX": true,
                         "dom": '<"top">rt<"bottom"><"clear">',
                         "scrollCollapse": true,
-                        "jQueryUI": true,
+                        //"jQueryUI": true,
                         // "pagingType":   "simple_numbers",
                         stateSave: true,
                         "paging": false,
                         "ordering": false,
-                        "bLengthChange": true,
-                        //"order": [[ 3, "desc" ]]
-                        "fixedColumns":{
-                            leftColumns: 2,
-                        }
+                        "bLengthChange": true
                     });
                 });
             }
@@ -13289,6 +13286,355 @@ angular.module('app.tables').controller('JqGridCtrl', function ($scope) {
 
     }
 });
+"use strict";
+
+angular.module('app.ui').controller('GeneralElementsCtrl', function ($scope, $sce) {
+    /*
+     * Smart Notifications
+     */
+    $scope.eg1 = function () {
+
+        $.bigBox({
+            title: "Big Information box",
+            content: "This message will dissapear in 6 seconds!",
+            color: "#C46A69",
+            //timeout: 6000,
+            icon: "fa fa-warning shake animated",
+            number: "1",
+            timeout: 6000
+        });
+    };
+
+    $scope.eg2 = function () {
+
+        $.bigBox({
+            title: "Big Information box",
+            content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+            color: "#3276B1",
+            //timeout: 8000,
+            icon: "fa fa-bell swing animated",
+            number: "2"
+        });
+
+    };
+
+    $scope.eg3 = function () {
+
+        $.bigBox({
+            title: "Shield is up and running!",
+            content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+            color: "#C79121",
+            //timeout: 8000,
+            icon: "fa fa-shield fadeInLeft animated",
+            number: "3"
+        });
+
+    };
+
+    $scope.eg4 = function () {
+
+        $.bigBox({
+            title: "Success Message Example",
+            content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+            color: "#739E73",
+            //timeout: 8000,
+            icon: "fa fa-check",
+            number: "4"
+        }, function () {
+            $scope.closedthis();
+        });
+
+    };
+
+
+    $scope.eg5 = function() {
+
+        $.smallBox({
+            title: "Ding Dong!",
+            content: "Someone's at the door...shall one get it sir? <p class='text-align-right'><a href-void class='btn btn-primary btn-sm'>Yes</a> <a href-void class='btn btn-danger btn-sm'>No</a></p>",
+            color: "#296191",
+            //timeout: 8000,
+            icon: "fa fa-bell swing animated"
+        });
+    };
+
+
+    $scope.eg6 = function() {
+
+        $.smallBox({
+            title: "Big Information box",
+            content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+            color: "#5384AF",
+            //timeout: 8000,
+            icon: "fa fa-bell"
+        });
+
+    };
+
+    $scope.eg7 = function() {
+
+        $.smallBox({
+            title: "James Simmons liked your comment",
+            content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+            color: "#296191",
+            iconSmall: "fa fa-thumbs-up bounce animated",
+            timeout: 4000
+        });
+
+    };
+
+    $scope.closedthis = function() {
+        $.smallBox({
+            title: "Great! You just closed that last alert!",
+            content: "This message will be gone in 5 seconds!",
+            color: "#739E73",
+            iconSmall: "fa fa-cloud",
+            timeout: 5000
+        });
+    };
+
+    /*
+     * SmartAlerts
+     */
+    // With Callback
+    $scope.smartModEg1 =  function () {
+        $.SmartMessageBox({
+            title: "Smart Alert!",
+            content: "This is a confirmation box. Can be programmed for button callback",
+            buttons: '[No][Yes]'
+        }, function (ButtonPressed) {
+            if (ButtonPressed === "Yes") {
+
+                $.smallBox({
+                    title: "Callback function",
+                    content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
+                    color: "#659265",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 4000
+                });
+            }
+            if (ButtonPressed === "No") {
+                $.smallBox({
+                    title: "Callback function",
+                    content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
+                    color: "#C46A69",
+                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                    timeout: 4000
+                });
+            }
+
+        });
+    };
+
+    // With Input
+    $scope.smartModEg2 =  function () {
+        $.SmartMessageBox({
+            title: "Smart Alert: Input",
+            content: "Please enter your user name",
+            buttons: "[Accept]",
+            input: "text",
+            placeholder: "Enter your user name"
+        }, function (ButtonPress, Value) {
+            alert(ButtonPress + " " + Value);
+        });
+    };
+
+    // With Buttons
+    $scope.smartModEg3 =  function () {
+        $.SmartMessageBox({
+            title: "Smart Notification: Buttons",
+            content: "Lots of buttons to go...",
+            buttons: '[Need?][You][Do][Buttons][Many][How]'
+        });
+
+    }
+    // With Select
+    $scope.smartModEg4 =  function () {
+        $.SmartMessageBox({
+            title: "Smart Alert: Select",
+            content: "You can even create a group of options.",
+            buttons: "[Done]",
+            input: "select",
+            options: "[Costa Rica][United States][Autralia][Spain]"
+        }, function (ButtonPress, Value) {
+            alert(ButtonPress + " " + Value);
+        });
+
+    };
+
+    // With Login
+    $scope.smartModEg5 =  function () {
+
+        $.SmartMessageBox({
+            title: "Login form",
+            content: "Please enter your user name",
+            buttons: "[Cancel][Accept]",
+            input: "text",
+            placeholder: "Enter your user name"
+        }, function (ButtonPress, Value) {
+            if (ButtonPress == "Cancel") {
+                alert("Why did you cancel that? :(");
+                return 0;
+            }
+
+            var Value1 = Value.toUpperCase();
+            var ValueOriginal = Value;
+            $.SmartMessageBox({
+                title: "Hey! <strong>" + Value1 + ",</strong>",
+                content: "And now please provide your password:",
+                buttons: "[Login]",
+                input: "password",
+                placeholder: "Password"
+            }, function (ButtonPress, Value) {
+                alert("Username: " + ValueOriginal + " and your password is: " + Value);
+            });
+        });
+
+    };
+
+    $scope.tabsPopoverContent = $sce.trustAsHtml("<ul id='popup-tab' class='nav nav-tabs bordered'><li class='active'><a href='#pop-1' data-toggle='tab'>Active Tab </a></li><li><a href='#pop-2' data-toggle='tab'>Tab 2</a></li></ul><div id='popup-tab-content' class='tab-content padding-10'><div class='tab-pane fade in active' id='pop-1'><p>I have six locks on my door all in a row. When I go out, I lock every other one. I figure no matter how long somebody stands there picking the locks, they are always locking three.</p></div><div class='tab-pane fade' id='pop-2'><p>Food truck fixie locavore, accusamus mcsweeneys marfa nulla single-origin coffee squid. wes anderson artisan four loko farm-to-table craft beer twee.</p></div></div>")
+
+    $scope.formPopoverContent = $sce.trustAsHtml("<form action='/api/plug' style='min-width:170px'><div class='checkbox'><label><input type='checkbox' class='checkbox style-0' checked='checked'><span>Read</span></label></div><div class='checkbox'><label><input type='checkbox' class='checkbox style-0'><span>Write</span></label></div><div class='checkbox'><label><input type='checkbox' class='checkbox style-0'><span>Execute</span></label></div><div class='form-actions'><div class='row'><div class='col-md-12'><button class='btn btn-primary btn-sm' type='submit'>SAVE</button></div></div></div></form>")
+
+});
+
+"use strict";
+
+
+angular.module('app.ui').controller('JquiCtrl', function ($scope) {
+    $scope.demoAutocompleteWords = [
+        "ActionScript",
+        "AppleScript",
+        "Asp",
+        "BASIC",
+        "C",
+        "C++",
+        "Clojure",
+        "COBOL",
+        "ColdFusion",
+        "Erlang",
+        "Fortran",
+        "Groovy",
+        "Haskell",
+        "Java",
+        "JavaScript",
+        "Lisp",
+        "Perl",
+        "PHP",
+        "Python",
+        "Ruby",
+        "Scala",
+        "Scheme"];
+
+
+    $scope.demoAjaxAutocomplete = '';
+
+
+    $scope.modalDemo1 = function(){
+        console.log('modalDemo1');
+    }
+
+    $scope.modalDemo2 = function(){
+        console.log('modalDemo2');
+    }
+
+
+});
+"use strict";
+
+
+angular.module('app.ui').controller('TreeviewCtrl', function ($scope) {
+    $scope.demoTree1 = [
+        {"content": "<span><i class=\"fa fa-lg fa-calendar\"></i> 2013, Week 2</span>", "expanded": true, "children": [
+            {"content": "<span class=\"label label-success\"><i class=\"fa fa-lg fa-plus-circle\"></i> Monday, January 7: 8.00 hours</span>", "expanded": true, "children": [
+                {"content": "<span><i class=\"fa fa-clock-o\"></i> 8.00</span> &ndash; <a> Changed CSS to accomodate...</a>"}
+            ]},
+            {"content": "<span><i class=\"fa fa-clock-o\"></i> 8.00</span> &ndash; <a> Changed CSS to accomodate...</a>"},
+            {"content": "<span class=\"label label-success\"><i class=\"fa fa-lg fa-minus-circle\"></i> Tuesday, January 8: 8.00 hours</span>", "expanded": true, "children": [
+                {"content": "<span><i class=\"fa fa-clock-o\"></i> 6.00</span> &ndash; <a> Altered code...</a>"},
+                {"content": "<span><i class=\"fa fa-clock-o\"></i> 2.00</span> &ndash; <a> Simplified our approach to...</a>"}
+            ]},
+            {"content": "<span><i class=\"fa fa-clock-o\"></i> 6.00</span> &ndash; <a> Altered code...</a>"},
+            {"content": "<span><i class=\"fa fa-clock-o\"></i> 2.00</span> &ndash; <a> Simplified our approach to...</a>"},
+            {"content": "<span class=\"label label-warning\"><i class=\"fa fa-lg fa-minus-circle\"></i> Wednesday, January 9: 6.00 hours</span>", "children": [
+                {"content": "<span><i class=\"fa fa-clock-o\"></i> 3.00</span> &ndash; <a> Fixed bug caused by...</a>"},
+                {"content": "<span><i class=\"fa fa-clock-o\"></i> 3.00</span> &ndash; <a> Comitting latest code to Git...</a>"}
+            ]},
+            {"content": "<span><i class=\"fa fa-clock-o\"></i> 3.00</span> &ndash; <a> Fixed bug caused by...</a>"},
+            {"content": "<span><i class=\"fa fa-clock-o\"></i> 3.00</span> &ndash; <a> Comitting latest code to Git...</a>"},
+            {"content": "<span class=\"label label-danger\"><i class=\"fa fa-lg fa-minus-circle\"></i> Wednesday, January 9: 4.00 hours</span>", "children": [
+                {"content": "<span><i class=\"fa fa-clock-o\"></i> 2.00</span> &ndash; <a> Create component that...</a>"}
+            ]},
+            {"content": "<span><i class=\"fa fa-clock-o\"></i> 2.00</span> &ndash; <a> Create component that...</a>"}
+        ]},
+        {"content": "<span><i class=\"fa fa-lg fa-calendar\"></i> 2013, Week 3</span>", "children": [
+            {"content": "<span class=\"label label-success\"><i class=\"fa fa-lg fa-minus-circle\"></i> Monday, January 14: 8.00 hours</span>", "children": [
+                {"content": "<span><i class=\"fa fa-clock-o\"></i> 7.75</span> &ndash; <a> Writing documentation...</a>"},
+                {"content": "<span><i class=\"fa fa-clock-o\"></i> 0.25</span> &ndash; <a> Reverting code back to...</a>"}
+            ]},
+            {"content": "<span><i class=\"fa fa-clock-o\"></i> 7.75</span> &ndash; <a> Writing documentation...</a>"},
+            {"content": "<span><i class=\"fa fa-clock-o\"></i> 0.25</span> &ndash; <a> Reverting code back to...</a>"}
+        ]}
+    ]
+
+    $scope.demoTree2 = [
+        {"content": "<span><i class=\"fa fa-lg fa-folder-open\"></i> Parent</span>", "expanded": true, "children": [
+            {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Administrators</span>", "expanded": true, "children": [
+                {"content": "<span> <label class=\"checkbox inline-block\"><input type=\"checkbox\" name=\"checkbox-inline\"><i></i>Michael.Jackson</label> </span>"},
+                {"content": "<span> <label class=\"checkbox inline-block\"><input type=\"checkbox\" checked=\"checked\" name=\"checkbox-inline\"><i></i>Sunny.Ahmed</label> </span>"},
+                {"content": "<span> <label class=\"checkbox inline-block\"><input type=\"checkbox\" checked=\"checked\" name=\"checkbox-inline\"><i></i>Jackie.Chan</label> </span>"}
+            ]},
+            {"content": "<span> <label class=\"checkbox inline-block\"><input type=\"checkbox\" name=\"checkbox-inline\"><i></i>Michael.Jackson</label> </span>"},
+            {"content": "<span> <label class=\"checkbox inline-block\"><input type=\"checkbox\" checked=\"checked\" name=\"checkbox-inline\"><i></i>Sunny.Ahmed</label> </span>"},
+            {"content": "<span> <label class=\"checkbox inline-block\"><input type=\"checkbox\" checked=\"checked\" name=\"checkbox-inline\"><i></i>Jackie.Chan</label> </span>"},
+            {"content": "<span><i class=\"fa fa-lg fa-minus-circle\"></i> Child</span>", "expanded": true, "children": [
+                {"content": "<span><i class=\"icon-leaf\"></i> Grand Child</span>"},
+                {"content": "<span><i class=\"icon-leaf\"></i> Grand Child</span>"},
+                {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Grand Child</span>",  "children": [
+                    {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Great Grand Child</span>", "children": [
+                        {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
+                        {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"}
+                    ]},
+                    {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
+                    {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
+                    {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"},
+                    {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"}
+                ]},
+                {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Great Grand Child</span>", "children": [
+                    {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
+                    {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"}
+                ]},
+                {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
+                {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
+                {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"},
+                {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"}
+            ]},
+            {"content": "<span><i class=\"icon-leaf\"></i> Grand Child</span>"},
+            {"content": "<span><i class=\"icon-leaf\"></i> Grand Child</span>"},
+            {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Grand Child</span>", "children": [
+                {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Great Grand Child</span>", "children": [
+                    {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
+                    {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"}
+                ]},
+                {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
+                {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
+                {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"},
+                {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"}
+            ]},
+            {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Great Grand Child</span>", "children": [
+                {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
+                {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"}
+            ]},
+            {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
+            {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
+            {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"},
+            {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"}
+        ]},
+        {"content": "<span><i class=\"fa fa-lg fa-folder-open\"></i> Parent2</span>", "children": [
+            {"content": "<span><i class=\"icon-leaf\"></i> Child</span>"}
+        ]}
+    ]
+});
 'use strict';
 
 angular.module('app.ui').directive('smartClassFilter', function () {
@@ -13911,355 +14257,6 @@ angular.module('app.Validation').controller('ResultcheckingbyMTMCtrl', function 
         }
     }
 })
-"use strict";
-
-angular.module('app.ui').controller('GeneralElementsCtrl', function ($scope, $sce) {
-    /*
-     * Smart Notifications
-     */
-    $scope.eg1 = function () {
-
-        $.bigBox({
-            title: "Big Information box",
-            content: "This message will dissapear in 6 seconds!",
-            color: "#C46A69",
-            //timeout: 6000,
-            icon: "fa fa-warning shake animated",
-            number: "1",
-            timeout: 6000
-        });
-    };
-
-    $scope.eg2 = function () {
-
-        $.bigBox({
-            title: "Big Information box",
-            content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-            color: "#3276B1",
-            //timeout: 8000,
-            icon: "fa fa-bell swing animated",
-            number: "2"
-        });
-
-    };
-
-    $scope.eg3 = function () {
-
-        $.bigBox({
-            title: "Shield is up and running!",
-            content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-            color: "#C79121",
-            //timeout: 8000,
-            icon: "fa fa-shield fadeInLeft animated",
-            number: "3"
-        });
-
-    };
-
-    $scope.eg4 = function () {
-
-        $.bigBox({
-            title: "Success Message Example",
-            content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-            color: "#739E73",
-            //timeout: 8000,
-            icon: "fa fa-check",
-            number: "4"
-        }, function () {
-            $scope.closedthis();
-        });
-
-    };
-
-
-    $scope.eg5 = function() {
-
-        $.smallBox({
-            title: "Ding Dong!",
-            content: "Someone's at the door...shall one get it sir? <p class='text-align-right'><a href-void class='btn btn-primary btn-sm'>Yes</a> <a href-void class='btn btn-danger btn-sm'>No</a></p>",
-            color: "#296191",
-            //timeout: 8000,
-            icon: "fa fa-bell swing animated"
-        });
-    };
-
-
-    $scope.eg6 = function() {
-
-        $.smallBox({
-            title: "Big Information box",
-            content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-            color: "#5384AF",
-            //timeout: 8000,
-            icon: "fa fa-bell"
-        });
-
-    };
-
-    $scope.eg7 = function() {
-
-        $.smallBox({
-            title: "James Simmons liked your comment",
-            content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-            color: "#296191",
-            iconSmall: "fa fa-thumbs-up bounce animated",
-            timeout: 4000
-        });
-
-    };
-
-    $scope.closedthis = function() {
-        $.smallBox({
-            title: "Great! You just closed that last alert!",
-            content: "This message will be gone in 5 seconds!",
-            color: "#739E73",
-            iconSmall: "fa fa-cloud",
-            timeout: 5000
-        });
-    };
-
-    /*
-     * SmartAlerts
-     */
-    // With Callback
-    $scope.smartModEg1 =  function () {
-        $.SmartMessageBox({
-            title: "Smart Alert!",
-            content: "This is a confirmation box. Can be programmed for button callback",
-            buttons: '[No][Yes]'
-        }, function (ButtonPressed) {
-            if (ButtonPressed === "Yes") {
-
-                $.smallBox({
-                    title: "Callback function",
-                    content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
-                    color: "#659265",
-                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                    timeout: 4000
-                });
-            }
-            if (ButtonPressed === "No") {
-                $.smallBox({
-                    title: "Callback function",
-                    content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
-                    color: "#C46A69",
-                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                    timeout: 4000
-                });
-            }
-
-        });
-    };
-
-    // With Input
-    $scope.smartModEg2 =  function () {
-        $.SmartMessageBox({
-            title: "Smart Alert: Input",
-            content: "Please enter your user name",
-            buttons: "[Accept]",
-            input: "text",
-            placeholder: "Enter your user name"
-        }, function (ButtonPress, Value) {
-            alert(ButtonPress + " " + Value);
-        });
-    };
-
-    // With Buttons
-    $scope.smartModEg3 =  function () {
-        $.SmartMessageBox({
-            title: "Smart Notification: Buttons",
-            content: "Lots of buttons to go...",
-            buttons: '[Need?][You][Do][Buttons][Many][How]'
-        });
-
-    }
-    // With Select
-    $scope.smartModEg4 =  function () {
-        $.SmartMessageBox({
-            title: "Smart Alert: Select",
-            content: "You can even create a group of options.",
-            buttons: "[Done]",
-            input: "select",
-            options: "[Costa Rica][United States][Autralia][Spain]"
-        }, function (ButtonPress, Value) {
-            alert(ButtonPress + " " + Value);
-        });
-
-    };
-
-    // With Login
-    $scope.smartModEg5 =  function () {
-
-        $.SmartMessageBox({
-            title: "Login form",
-            content: "Please enter your user name",
-            buttons: "[Cancel][Accept]",
-            input: "text",
-            placeholder: "Enter your user name"
-        }, function (ButtonPress, Value) {
-            if (ButtonPress == "Cancel") {
-                alert("Why did you cancel that? :(");
-                return 0;
-            }
-
-            var Value1 = Value.toUpperCase();
-            var ValueOriginal = Value;
-            $.SmartMessageBox({
-                title: "Hey! <strong>" + Value1 + ",</strong>",
-                content: "And now please provide your password:",
-                buttons: "[Login]",
-                input: "password",
-                placeholder: "Password"
-            }, function (ButtonPress, Value) {
-                alert("Username: " + ValueOriginal + " and your password is: " + Value);
-            });
-        });
-
-    };
-
-    $scope.tabsPopoverContent = $sce.trustAsHtml("<ul id='popup-tab' class='nav nav-tabs bordered'><li class='active'><a href='#pop-1' data-toggle='tab'>Active Tab </a></li><li><a href='#pop-2' data-toggle='tab'>Tab 2</a></li></ul><div id='popup-tab-content' class='tab-content padding-10'><div class='tab-pane fade in active' id='pop-1'><p>I have six locks on my door all in a row. When I go out, I lock every other one. I figure no matter how long somebody stands there picking the locks, they are always locking three.</p></div><div class='tab-pane fade' id='pop-2'><p>Food truck fixie locavore, accusamus mcsweeneys marfa nulla single-origin coffee squid. wes anderson artisan four loko farm-to-table craft beer twee.</p></div></div>")
-
-    $scope.formPopoverContent = $sce.trustAsHtml("<form action='/api/plug' style='min-width:170px'><div class='checkbox'><label><input type='checkbox' class='checkbox style-0' checked='checked'><span>Read</span></label></div><div class='checkbox'><label><input type='checkbox' class='checkbox style-0'><span>Write</span></label></div><div class='checkbox'><label><input type='checkbox' class='checkbox style-0'><span>Execute</span></label></div><div class='form-actions'><div class='row'><div class='col-md-12'><button class='btn btn-primary btn-sm' type='submit'>SAVE</button></div></div></div></form>")
-
-});
-
-"use strict";
-
-
-angular.module('app.ui').controller('JquiCtrl', function ($scope) {
-    $scope.demoAutocompleteWords = [
-        "ActionScript",
-        "AppleScript",
-        "Asp",
-        "BASIC",
-        "C",
-        "C++",
-        "Clojure",
-        "COBOL",
-        "ColdFusion",
-        "Erlang",
-        "Fortran",
-        "Groovy",
-        "Haskell",
-        "Java",
-        "JavaScript",
-        "Lisp",
-        "Perl",
-        "PHP",
-        "Python",
-        "Ruby",
-        "Scala",
-        "Scheme"];
-
-
-    $scope.demoAjaxAutocomplete = '';
-
-
-    $scope.modalDemo1 = function(){
-        console.log('modalDemo1');
-    }
-
-    $scope.modalDemo2 = function(){
-        console.log('modalDemo2');
-    }
-
-
-});
-"use strict";
-
-
-angular.module('app.ui').controller('TreeviewCtrl', function ($scope) {
-    $scope.demoTree1 = [
-        {"content": "<span><i class=\"fa fa-lg fa-calendar\"></i> 2013, Week 2</span>", "expanded": true, "children": [
-            {"content": "<span class=\"label label-success\"><i class=\"fa fa-lg fa-plus-circle\"></i> Monday, January 7: 8.00 hours</span>", "expanded": true, "children": [
-                {"content": "<span><i class=\"fa fa-clock-o\"></i> 8.00</span> &ndash; <a> Changed CSS to accomodate...</a>"}
-            ]},
-            {"content": "<span><i class=\"fa fa-clock-o\"></i> 8.00</span> &ndash; <a> Changed CSS to accomodate...</a>"},
-            {"content": "<span class=\"label label-success\"><i class=\"fa fa-lg fa-minus-circle\"></i> Tuesday, January 8: 8.00 hours</span>", "expanded": true, "children": [
-                {"content": "<span><i class=\"fa fa-clock-o\"></i> 6.00</span> &ndash; <a> Altered code...</a>"},
-                {"content": "<span><i class=\"fa fa-clock-o\"></i> 2.00</span> &ndash; <a> Simplified our approach to...</a>"}
-            ]},
-            {"content": "<span><i class=\"fa fa-clock-o\"></i> 6.00</span> &ndash; <a> Altered code...</a>"},
-            {"content": "<span><i class=\"fa fa-clock-o\"></i> 2.00</span> &ndash; <a> Simplified our approach to...</a>"},
-            {"content": "<span class=\"label label-warning\"><i class=\"fa fa-lg fa-minus-circle\"></i> Wednesday, January 9: 6.00 hours</span>", "children": [
-                {"content": "<span><i class=\"fa fa-clock-o\"></i> 3.00</span> &ndash; <a> Fixed bug caused by...</a>"},
-                {"content": "<span><i class=\"fa fa-clock-o\"></i> 3.00</span> &ndash; <a> Comitting latest code to Git...</a>"}
-            ]},
-            {"content": "<span><i class=\"fa fa-clock-o\"></i> 3.00</span> &ndash; <a> Fixed bug caused by...</a>"},
-            {"content": "<span><i class=\"fa fa-clock-o\"></i> 3.00</span> &ndash; <a> Comitting latest code to Git...</a>"},
-            {"content": "<span class=\"label label-danger\"><i class=\"fa fa-lg fa-minus-circle\"></i> Wednesday, January 9: 4.00 hours</span>", "children": [
-                {"content": "<span><i class=\"fa fa-clock-o\"></i> 2.00</span> &ndash; <a> Create component that...</a>"}
-            ]},
-            {"content": "<span><i class=\"fa fa-clock-o\"></i> 2.00</span> &ndash; <a> Create component that...</a>"}
-        ]},
-        {"content": "<span><i class=\"fa fa-lg fa-calendar\"></i> 2013, Week 3</span>", "children": [
-            {"content": "<span class=\"label label-success\"><i class=\"fa fa-lg fa-minus-circle\"></i> Monday, January 14: 8.00 hours</span>", "children": [
-                {"content": "<span><i class=\"fa fa-clock-o\"></i> 7.75</span> &ndash; <a> Writing documentation...</a>"},
-                {"content": "<span><i class=\"fa fa-clock-o\"></i> 0.25</span> &ndash; <a> Reverting code back to...</a>"}
-            ]},
-            {"content": "<span><i class=\"fa fa-clock-o\"></i> 7.75</span> &ndash; <a> Writing documentation...</a>"},
-            {"content": "<span><i class=\"fa fa-clock-o\"></i> 0.25</span> &ndash; <a> Reverting code back to...</a>"}
-        ]}
-    ]
-
-    $scope.demoTree2 = [
-        {"content": "<span><i class=\"fa fa-lg fa-folder-open\"></i> Parent</span>", "expanded": true, "children": [
-            {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Administrators</span>", "expanded": true, "children": [
-                {"content": "<span> <label class=\"checkbox inline-block\"><input type=\"checkbox\" name=\"checkbox-inline\"><i></i>Michael.Jackson</label> </span>"},
-                {"content": "<span> <label class=\"checkbox inline-block\"><input type=\"checkbox\" checked=\"checked\" name=\"checkbox-inline\"><i></i>Sunny.Ahmed</label> </span>"},
-                {"content": "<span> <label class=\"checkbox inline-block\"><input type=\"checkbox\" checked=\"checked\" name=\"checkbox-inline\"><i></i>Jackie.Chan</label> </span>"}
-            ]},
-            {"content": "<span> <label class=\"checkbox inline-block\"><input type=\"checkbox\" name=\"checkbox-inline\"><i></i>Michael.Jackson</label> </span>"},
-            {"content": "<span> <label class=\"checkbox inline-block\"><input type=\"checkbox\" checked=\"checked\" name=\"checkbox-inline\"><i></i>Sunny.Ahmed</label> </span>"},
-            {"content": "<span> <label class=\"checkbox inline-block\"><input type=\"checkbox\" checked=\"checked\" name=\"checkbox-inline\"><i></i>Jackie.Chan</label> </span>"},
-            {"content": "<span><i class=\"fa fa-lg fa-minus-circle\"></i> Child</span>", "expanded": true, "children": [
-                {"content": "<span><i class=\"icon-leaf\"></i> Grand Child</span>"},
-                {"content": "<span><i class=\"icon-leaf\"></i> Grand Child</span>"},
-                {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Grand Child</span>",  "children": [
-                    {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Great Grand Child</span>", "children": [
-                        {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
-                        {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"}
-                    ]},
-                    {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
-                    {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
-                    {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"},
-                    {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"}
-                ]},
-                {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Great Grand Child</span>", "children": [
-                    {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
-                    {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"}
-                ]},
-                {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
-                {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
-                {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"},
-                {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"}
-            ]},
-            {"content": "<span><i class=\"icon-leaf\"></i> Grand Child</span>"},
-            {"content": "<span><i class=\"icon-leaf\"></i> Grand Child</span>"},
-            {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Grand Child</span>", "children": [
-                {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Great Grand Child</span>", "children": [
-                    {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
-                    {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"}
-                ]},
-                {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
-                {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
-                {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"},
-                {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"}
-            ]},
-            {"content": "<span><i class=\"fa fa-lg fa-plus-circle\"></i> Great Grand Child</span>", "children": [
-                {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
-                {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"}
-            ]},
-            {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
-            {"content": "<span><i class=\"icon-leaf\"></i> Great great Grand Child</span>"},
-            {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"},
-            {"content": "<span><i class=\"icon-leaf\"></i> Great Grand Child</span>"}
-        ]},
-        {"content": "<span><i class=\"fa fa-lg fa-folder-open\"></i> Parent2</span>", "children": [
-            {"content": "<span><i class=\"icon-leaf\"></i> Child</span>"}
-        ]}
-    ]
-});
 "use strict";
 
 angular.module('app.auth').directive('facebookSignin', function ($rootScope, ezfb) {
@@ -17218,6 +17215,127 @@ angular.module('app.graphs').directive('vectorMap', function () {
 });
 'use strict';
 
+angular.module('app.tables').directive('jqGrid', function ($compile) {
+    var jqGridCounter = 0;
+
+    return {
+        replace: true,
+        restrict: 'E',
+        scope: {
+            gridData: '='
+        },
+        template: '<div>' +
+            '<table></table>' +
+            '<div class="jqgrid-pagination"></div>' +
+            '</div>',
+        controller: function($scope, $element){
+            $scope.editRow  = function(row){
+                $element.find('table').editRow(row);
+            };
+            $scope.saveRow  = function(row){
+                $element.find('table').saveRow(row);
+            };
+            $scope.restoreRow  = function(row){
+                $element.find('table').restoreRow(row);
+            };
+        },
+        link: function (scope, element) {
+            var gridNumber = jqGridCounter++;
+            var wrapperId = 'jqgrid-' + gridNumber;
+            element.attr('id', wrapperId);
+
+            var tableId = 'jqgrid-table-' + gridNumber;
+            var table = element.find('table');
+            table.attr('id', tableId);
+
+            var pagerId = 'jqgrid-pager-' + gridNumber;
+            element.find('.jqgrid-pagination').attr('id', pagerId);
+
+
+            table.jqGrid({
+                data : scope.gridData.data,
+                datatype : "local",
+                height : 'auto',
+                colNames : scope.gridData.colNames || [],
+                colModel : scope.gridData.colModel || [],
+                rowNum : 10,
+                rowList : [10, 20, 30],
+                pager : '#' + pagerId,
+                sortname : 'id',
+                toolbarfilter : true,
+                viewrecords : true,
+                sortorder : "asc",
+                gridComplete : function() {
+                    var ids = table.jqGrid('getDataIDs');
+                    for (var i = 0; i < ids.length; i++) {
+                        var cl = ids[i];
+                        var be = "<button class='btn btn-xs btn-default' uib-tooltip='Edit Row' tooltip-append-to-body='true' ng-click='editRow("+ cl +")'><i class='fa fa-pencil'></i></button>";
+
+                        var se = "<button class='btn btn-xs btn-default' uib-tooltip='Save Row' tooltip-append-to-body='true' ng-click='saveRow("+ cl +")'><i class='fa fa-save'></i></button>";
+
+                        var ca = "<button class='btn btn-xs btn-default' uib-tooltip='Cancel' tooltip-append-to-body='true' ng-click='restoreRow("+ cl +")'><i class='fa fa-times'></i></button>";
+
+                        table.jqGrid('setRowData', ids[i], {
+                            act : be + se + ca
+                        });
+                    }
+                },
+                editurl : "dummy.html",
+                caption : "SmartAdmin jQgrid Skin",
+                multiselect : true,
+                autowidth : true
+
+            });
+            table.jqGrid('navGrid', '#' + pagerId, {
+                edit : false,
+                add : false,
+                del : true
+            });
+            table.jqGrid('inlineNav', '#' + pagerId);
+
+
+            element.find(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+            element.find(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+            element.find(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+            element.find(".ui-jqgrid-pager").removeClass("ui-state-default");
+            element.find(".ui-jqgrid").removeClass("ui-widget-content");
+
+            // add classes
+            element.find(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
+            element.find(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
+
+            element.find(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
+            element.find(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+            element.find(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+            element.find(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+            element.find(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+            element.find(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+            element.find(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
+            element.find(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
+
+            element.find(".ui-icon.ui-icon-seek-prev").wrap("<div class='btn btn-sm btn-default'></div>");
+            element.find(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
+
+            element.find(".ui-icon.ui-icon-seek-first").wrap("<div class='btn btn-sm btn-default'></div>");
+            element.find(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");
+
+            element.find(".ui-icon.ui-icon-seek-next").wrap("<div class='btn btn-sm btn-default'></div>");
+            element.find(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
+
+            element.find(".ui-icon.ui-icon-seek-end").wrap("<div class='btn btn-sm btn-default'></div>");
+            element.find(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
+
+            $(window).on('resize.jqGrid', function() {
+               table.jqGrid('setGridWidth', $("#content").width());
+            });
+
+
+            $compile(element.contents())(scope);
+        }
+    }
+});
+'use strict';
+
 angular.module('app.tables').directive('datatableBasic', function ($compile) {
     return {
         restrict: 'A',
@@ -17513,127 +17631,6 @@ angular.module('app.tables').directive('datatableTableTools', function () {
                     responsiveHelper.respond();
                 }
             });
-        }
-    }
-});
-'use strict';
-
-angular.module('app.tables').directive('jqGrid', function ($compile) {
-    var jqGridCounter = 0;
-
-    return {
-        replace: true,
-        restrict: 'E',
-        scope: {
-            gridData: '='
-        },
-        template: '<div>' +
-            '<table></table>' +
-            '<div class="jqgrid-pagination"></div>' +
-            '</div>',
-        controller: function($scope, $element){
-            $scope.editRow  = function(row){
-                $element.find('table').editRow(row);
-            };
-            $scope.saveRow  = function(row){
-                $element.find('table').saveRow(row);
-            };
-            $scope.restoreRow  = function(row){
-                $element.find('table').restoreRow(row);
-            };
-        },
-        link: function (scope, element) {
-            var gridNumber = jqGridCounter++;
-            var wrapperId = 'jqgrid-' + gridNumber;
-            element.attr('id', wrapperId);
-
-            var tableId = 'jqgrid-table-' + gridNumber;
-            var table = element.find('table');
-            table.attr('id', tableId);
-
-            var pagerId = 'jqgrid-pager-' + gridNumber;
-            element.find('.jqgrid-pagination').attr('id', pagerId);
-
-
-            table.jqGrid({
-                data : scope.gridData.data,
-                datatype : "local",
-                height : 'auto',
-                colNames : scope.gridData.colNames || [],
-                colModel : scope.gridData.colModel || [],
-                rowNum : 10,
-                rowList : [10, 20, 30],
-                pager : '#' + pagerId,
-                sortname : 'id',
-                toolbarfilter : true,
-                viewrecords : true,
-                sortorder : "asc",
-                gridComplete : function() {
-                    var ids = table.jqGrid('getDataIDs');
-                    for (var i = 0; i < ids.length; i++) {
-                        var cl = ids[i];
-                        var be = "<button class='btn btn-xs btn-default' uib-tooltip='Edit Row' tooltip-append-to-body='true' ng-click='editRow("+ cl +")'><i class='fa fa-pencil'></i></button>";
-
-                        var se = "<button class='btn btn-xs btn-default' uib-tooltip='Save Row' tooltip-append-to-body='true' ng-click='saveRow("+ cl +")'><i class='fa fa-save'></i></button>";
-
-                        var ca = "<button class='btn btn-xs btn-default' uib-tooltip='Cancel' tooltip-append-to-body='true' ng-click='restoreRow("+ cl +")'><i class='fa fa-times'></i></button>";
-
-                        table.jqGrid('setRowData', ids[i], {
-                            act : be + se + ca
-                        });
-                    }
-                },
-                editurl : "dummy.html",
-                caption : "SmartAdmin jQgrid Skin",
-                multiselect : true,
-                autowidth : true
-
-            });
-            table.jqGrid('navGrid', '#' + pagerId, {
-                edit : false,
-                add : false,
-                del : true
-            });
-            table.jqGrid('inlineNav', '#' + pagerId);
-
-
-            element.find(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
-            element.find(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
-            element.find(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
-            element.find(".ui-jqgrid-pager").removeClass("ui-state-default");
-            element.find(".ui-jqgrid").removeClass("ui-widget-content");
-
-            // add classes
-            element.find(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
-            element.find(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
-
-            element.find(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
-            element.find(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
-            element.find(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
-            element.find(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
-            element.find(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
-            element.find(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
-            element.find(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
-            element.find(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
-
-            element.find(".ui-icon.ui-icon-seek-prev").wrap("<div class='btn btn-sm btn-default'></div>");
-            element.find(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
-
-            element.find(".ui-icon.ui-icon-seek-first").wrap("<div class='btn btn-sm btn-default'></div>");
-            element.find(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");
-
-            element.find(".ui-icon.ui-icon-seek-next").wrap("<div class='btn btn-sm btn-default'></div>");
-            element.find(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
-
-            element.find(".ui-icon.ui-icon-seek-end").wrap("<div class='btn btn-sm btn-default'></div>");
-            element.find(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
-
-            $(window).on('resize.jqGrid', function() {
-               table.jqGrid('setGridWidth', $("#content").width());
-            });
-
-
-            $compile(element.contents())(scope);
         }
     }
 });

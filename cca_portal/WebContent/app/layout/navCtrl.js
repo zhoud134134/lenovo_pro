@@ -5,9 +5,10 @@ angular.module('app.layout').controller('navCtrl', function ($scope,$state,$stat
     navService.getUser().then(function(data){
         if(data.code == 0){
             $scope.user = data.result;
-            //$scope.user = {"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"]}
-            if(!$scope.user.thumbnailphoto){
-                $scope.user.thumbnailphoto = 'styles/img/avatars/sunny.png';
+           // $scope.user = {"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"],"thumbnailphoto" : []}
+
+            if(!$scope.user.thumbnailphoto[0]){
+                $scope.user.thumbnailphoto[0] = 'styles/img/avatars/sunny.png';
             }
         }
             /*displayname
