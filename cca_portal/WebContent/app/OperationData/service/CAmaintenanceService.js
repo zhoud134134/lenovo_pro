@@ -59,6 +59,33 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
         return d.promise;
     }
 
+    //删除第二部分某一项
+    this.DelItem = function(id) {
+        console.log(id)
+        var d = $q.defer();
+        $http({
+            method : 'DELETE',
+            url : APP_CONFIG.baseUrl + '/api/caMaintenanceUUid/',
+            /*transformRequest: function(obj) {
+             var str = [];
+             for (var s in obj) {
+             str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+             }
+             return str.join("&");
+             },*/
+            params : id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+
     //请求Prc的数据
     this.getPrc = function(id) {
         console.log(id);
@@ -109,5 +136,28 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
         });
         return d.promise;
     }
-
+//Validate按钮功能
+    this.getValidate = function(v) {
+        console.log(v)
+        var d = $q.defer();
+        $http({
+            method : 'PUT',
+            url : APP_CONFIG.baseUrl + '/api/publish/',
+            transformRequest: function(obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            params : v,
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
 })

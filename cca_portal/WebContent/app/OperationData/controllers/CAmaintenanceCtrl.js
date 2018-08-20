@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($scope,$state,$stateParams,$rootScope,APP_CONFIG,CAmaintenanceService) {
+angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($scope,$state,$timeout,$stateParams,$rootScope,APP_CONFIG,CAmaintenanceService) {
     //初始化Cycle Choose
     CAmaintenanceService.getSelectCycle().then(function(data){
         if(data.code == 0){
@@ -16,6 +16,25 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         CAmaintenanceService.getExecute2().then(function(data){
             if(data.code == 0){
                 $scope.tablist = data.result;
+                $("#tabExample1").dataTable().fnDestroy();
+                $timeout(function () {
+                    $('#tabExample1').dataTable({
+                        "scrollY": 160,
+                        "scrollX": true,
+                        "dom": '<"top">rt<"bottom"><"clear">',
+                        "scrollCollapse": true,
+                        "jQueryUI": true,
+                        // "pagingType":   "simple_numbers",
+                        stateSave: true,
+                        "paging": false,
+                        "ordering": false,
+                        "bLengthChange": true,
+                        //"order": [[ 3, "desc" ]]
+                        "fixedColumns":{
+                            leftColumns: 2,
+                        }
+                    });
+                });
             }
             console.log(data);
         },function(data){
@@ -66,12 +85,10 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         if(!$scope.taskId){
             alert("请选择项！");
         }else if($scope.status =='Success' || $scope.status =='Publish'){
-            //$scope.PRCWW=false;
+            $scope.PRCww=true;
 
             $scope.TaskID =  $scope.taskId;
             $scope.CycleName = $scope.cyclename;
-
-            //$scope.ww=true;
 
             //WW
             CAmaintenanceService.getWw($scope.TaskID).then(function(data){
@@ -98,6 +115,35 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             alert("暂未执行成功，无法查看！");
         }
     };
+    //删除
+    $scope.DelOneItem = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
+            if(confirm('确认要删除？')) {
+                console.log($scope.taskid);
+                $scope.taskid = {
+                    uuid: $scope.taskId
+                };
+                CAmaintenanceService.DelItem($scope.taskid).then(function (data) {
+                    if (data.code == 0) {
+                        alert("删除成功！");
+                        $scope.taskId = '';
+                        $scope.getPage();
+                        //$("#tabExample").dataTable().fnDestroy();
+                        //$scope.PRCWW = true;
+                    }else {
+                        alert(data.msg);
+                    }
+                    console.log(data);
+                }, function (data) {
+                    console.log(data);
+                });
+            }
+        }else {
+            alert("还未执行完成！");
+        }
+    };
 
     //prc时的Download
     $scope.getPRCDownLoad = function(){
@@ -117,6 +163,27 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         })
         }
     }
+
+    //点击Validate
+    $scope.getValidate = function(){
+        $scope.validate = {
+            zcycle_name : $scope.CycleName,
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
+        };
+        console.log($scope.validate)
+        CAmaintenanceService.getValidate($scope.validate).then(function (data) {
+            if(data.code == 0){
+                alert('成功！');
+                $scope.getPage();
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
 
     //button 切换
     $scope.sw1 = true;

@@ -35,8 +35,8 @@
                 <div>
                     <div class="widget-body no-padding">
                         <div class="table-responsive table-border-tb">
-                            <div style="height: 160px;overflow-y: scroll;">
-                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" id="tabExample" style="table-layout: fixed;">
+                            <div style="height: 160px;">
+                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" id="tabExample1" style="table-layout: fixed;">
                                     <thead class="table-thead">
                                         <tr>
                                             <td width="19px"></td>
@@ -68,7 +68,7 @@
                             </div>
                             <div class="col-sm-4 tab-fun-btn2">
                                 <button class="btn btn-primary btn-sm" ng-click="SearchTab()">Search</button>
-                                <button class="btn btn-primary btn-sm">Delete</button>
+                                <button class="btn btn-primary btn-sm" ng-click="DelOneItem()">Delete</button>
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                 </div>
             </div>
             <!-- 第四部分 -->
-            <div class="mup-tabbtn">
+            <div class="mup-tabbtn" ng-show="PRCww">
                 <!--PRC   switch to ww的时候显示的-->
                 <!--PRC-->
                 <div ng-show="ww">
@@ -264,7 +264,7 @@
                         <button class="btn btn-primary btn-xs" uib-tooltip="Download" tooltip-append-to-body="true"  ng-click="getPRCDownLoad()">
                             <i class="fa fa-download"></i>
                         </button>
-                        <button class="btn btn-primary btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true">
+                        <button class="btn btn-primary btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()">
                             <i class="fa fa-send-o"></i>
                         </button>
                     </div>
@@ -3279,7 +3279,7 @@
                         <button class="btn btn-primary btn-xs" uib-tooltip="Download" tooltip-append-to-body="true"  ng-click="downLoad()">
                             <i class="fa fa-download"></i>
                         </button>
-                        <button class="btn btn-primary btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true">
+                        <button class="btn btn-primary btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()">
                             <i class="fa fa-send-o"></i>
                         </button>
                     </div>
