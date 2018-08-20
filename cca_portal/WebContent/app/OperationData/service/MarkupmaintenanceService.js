@@ -1,22 +1,5 @@
-angular.module('app.OperationData').service("OperationDataService", function($http, $q , APP_CONFIG) {
+angular.module('app.OperationData').service("MarkupmaintenanceService", function($http, $q , APP_CONFIG) {
 
-    //第一部分Select中第二第三个框
-    this.getSelect = function(type) {
-        console.log(type)
-        var d = $q.defer();
-        $http({
-            method : 'GET',
-            //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
-            url : APP_CONFIG.baseUrl +'/api/cycle/zfiscper/'+type,
-        }).then(function successCallback(response) {
-            // 请求成功执行代码
-            d.resolve(response.data);
-        }, function errorCallback(response) {
-            // 请求失败执行代码
-            d.reject("error");
-        });
-        return d.promise;
-    }
     //Select第一个框Cycle
     this.getSelectCycle = function() {
         var d = $q.defer();
@@ -42,7 +25,7 @@ angular.module('app.OperationData').service("OperationDataService", function($ht
         $http({
             method : 'GET',
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
-            url : APP_CONFIG.baseUrl +'/api/routine/funCreateTskId',
+            url : APP_CONFIG.baseUrl +'/api/routine/markupBmc',
             transformRequest: function(obj) {
                 var str = [];
                 for (var s in obj) {
@@ -66,7 +49,7 @@ angular.module('app.OperationData').service("OperationDataService", function($ht
         var d = $q.defer();
         $http({
             method : 'GET',
-            url : APP_CONFIG.baseUrl + '/api/bmc/',
+            url : APP_CONFIG.baseUrl + '/api/markupBmc/',
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -84,13 +67,6 @@ angular.module('app.OperationData').service("OperationDataService", function($ht
         $http({
             method : 'DELETE',
             url : APP_CONFIG.baseUrl + '/api/uuid/',
-            /*transformRequest: function(obj) {
-                var str = [];
-                for (var s in obj) {
-                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
-                }
-                return str.join("&");
-            },*/
             params : id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function successCallback(response) {
@@ -104,13 +80,13 @@ angular.module('app.OperationData').service("OperationDataService", function($ht
     }
 
 
-    //请求Prc的数据
-    this.getPrc = function(id) {
+    //请求Ww的数据
+    this.getWw = function(id) {
         console.log(id)
         var d = $q.defer();
         $http({
             method : 'GET',
-            url : APP_CONFIG.baseUrl + '/api/bmc/summary/prc/'+id,
+            url : APP_CONFIG.baseUrl + '/api/dm/markup/ww/'+id,
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -121,13 +97,13 @@ angular.module('app.OperationData').service("OperationDataService", function($ht
         return d.promise;
     }
 
-    //请求Ww的数据
-    this.getWw = function(id) {
+    //请求Prc的数据
+    this.getPrc = function(id) {
         console.log(id)
         var d = $q.defer();
         $http({
             method : 'GET',
-            url : APP_CONFIG.baseUrl + '/api/bmc/summary/row/'+id,
+            url : APP_CONFIG.baseUrl + '/api/dm/markup/prc/'+id,
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -137,6 +113,8 @@ angular.module('app.OperationData').service("OperationDataService", function($ht
         });
         return d.promise;
     }
+
+
 
 
     //Validate按钮功能

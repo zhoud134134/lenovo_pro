@@ -1,4 +1,4 @@
-angular.module('app.OperationData').service("OperationDataService", function($http, $q , APP_CONFIG) {
+angular.module('app.OperationData').service("CycleQTQService", function($http, $q , APP_CONFIG) {
 
     //第一部分Select中第二第三个框
     this.getSelect = function(type) {
@@ -85,12 +85,12 @@ angular.module('app.OperationData').service("OperationDataService", function($ht
             method : 'DELETE',
             url : APP_CONFIG.baseUrl + '/api/uuid/',
             /*transformRequest: function(obj) {
-                var str = [];
-                for (var s in obj) {
-                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
-                }
-                return str.join("&");
-            },*/
+             var str = [];
+             for (var s in obj) {
+             str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+             }
+             return str.join("&");
+             },*/
             params : id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function successCallback(response) {
@@ -147,12 +147,12 @@ angular.module('app.OperationData').service("OperationDataService", function($ht
             method : 'PUT',
             url : APP_CONFIG.baseUrl + '/api/publish/',
             transformRequest: function(obj) {
-             var str = [];
-             for (var s in obj) {
-             str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
-             }
-             return str.join("&");
-             },
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
             params : v,
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -261,5 +261,6 @@ angular.module('app.OperationData').service("OperationDataService", function($ht
         });
         return d.promise;
     }
+
 
 });

@@ -1,11 +1,11 @@
 "use strict";
 
-angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,$state,$stateParams,$location,OperationDataService,$http,$log,$rootScope,$timeout) {
+angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,$state,$stateParams,$location,CycleQTQService,$http,$log,$rootScope,$timeout) {
 
     //初始化Select-EBR Data
     $scope.ebr =  'EBR_DATE';
     $scope.dataMoth = [];
-    OperationDataService.getSelect($scope.ebr).then(function(data){
+    CycleQTQService.getSelect($scope.ebr).then(function(data){
         if(data.code == 0){
             $scope.ebrdata = data.result;
             for(var i=0;i< $scope.ebrdata.length;i++){
@@ -18,7 +18,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
     });
     //初始化Select-CFE Data
     $scope.cfe = 'CFE_CYCLE';
-    OperationDataService.getSelect($scope.cfe).then(function(data){
+    CycleQTQService.getSelect($scope.cfe).then(function(data){
         if(data.code == 0){
             $scope.cfedata = data.result;
         }
@@ -28,9 +28,9 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
     });
 
     //初始化Cycle Choose
-    OperationDataService.getSelectCycle().then(function(data){
+    CycleQTQService.getSelectCycle().then(function(data){
         if(data.code == 0){
-            $scope.cycledata = data.cycle;
+            $scope.cycledata = data.result;
         }
         console.log(data);
     },function(data){
@@ -65,7 +65,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
 
     //第二部分tab信息展示
     $scope.getPage = function(){
-        OperationDataService.getExecute2().then(function(data){
+        CycleQTQService.getExecute2().then(function(data){
             console.log(data);
             if(data.code == 0){
                 //$scope.noData = false;
@@ -108,7 +108,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
         if(!$scope.EBRData || !$scope.CFEData){
             alert("请选择条件！");
         }else {
-            OperationDataService.getExecute($scope.search).then(function(data){
+            CycleQTQService.getExecute($scope.search).then(function(data){
                 if(data.code == 0){
                     alert(data.result);
                     $scope.getPage();
@@ -156,7 +156,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
 
             //WW
            // $("#PRCExample").dataTable().fnDestroy();
-            OperationDataService.getWw($scope.TaskID).then(function(data){
+            CycleQTQService.getWw($scope.TaskID).then(function(data){
                 if(data.code == 0){
                     $scope.WwList = data.result;
                     $scope.wwTable();
@@ -169,7 +169,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
             });
 
             //PRC
-            OperationDataService.getPrc($scope.TaskID).then(function(data) {
+            CycleQTQService.getPrc($scope.TaskID).then(function(data) {
                 if (data.code == 0) {
                     $scope.PrcList = data.result;
                     console.log($scope.PrcList);
@@ -185,7 +185,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
     };
 
 
-    //
+    //删除
     $scope.DelParticular = function(){
         if(!$scope.taskId){
             alert("请选择项！");
@@ -195,7 +195,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
                 $scope.taskid = {
                     uuid: $scope.taskId
                 };
-                OperationDataService.DelParticular($scope.taskid).then(function (data) {
+                CycleQTQService.DelParticular($scope.taskid).then(function (data) {
                     if (data.code == 0) {
                         alert("删除成功！");
                         $scope.taskId = '';
@@ -477,6 +477,24 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
         }
     };
 
+    //点击Segment
+    $scope.getSegment = function(){
+        $scope.validate = {
+            cycleName : $scope.CyclName,
+        };
+        console.log($scope.validate)
+        CycleQTQService.getSegment($scope.validate,$scope.TaskID).then(function (data) {
+            if(data.code == 0){
+                alert('成功！');
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
+
 
     //点击Validate
     $scope.getValidate = function(){
@@ -486,7 +504,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
             user : $rootScope.user
         };
         console.log($scope.validate)
-        OperationDataService.getValidate($scope.validate).then(function (data) {
+        CycleQTQService.getValidate($scope.validate).then(function (data) {
             if(data.code == 0){
                 alert('成功！');
                 $scope.getPage();
@@ -506,7 +524,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
         if(!$scope.TaskID){
             return;
         }else {
-            OperationDataService.getWwSum($scope.TaskID).then(function (data) {
+            CycleQTQService.getWwSum($scope.TaskID).then(function (data) {
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                 var objectUrl = URL.createObjectURL(blob);
                 var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
@@ -528,7 +546,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
         if(!$scope.TaskID){
             return;
         }else {
-            OperationDataService.getPrcSum($scope.TaskID).then(function (data) {
+            CycleQTQService.getPrcSum($scope.TaskID).then(function (data) {
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                 var objectUrl = URL.createObjectURL(blob);
                 var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
@@ -549,7 +567,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
         if(!$scope.TaskID){
             return;
         }else {
-            OperationDataService.getWwDet($scope.TaskID).then(function (data) {
+            CycleQTQService.getWwDet($scope.TaskID).then(function (data) {
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                 var objectUrl = URL.createObjectURL(blob);
                 var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
@@ -572,7 +590,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
         if(!$scope.TaskID){
             return;
         }else {
-            OperationDataService.getPrcDet($scope.TaskID).then(function (data) {
+            CycleQTQService.getPrcDet($scope.TaskID).then(function (data) {
                 $('#pd1').css('display','block');
                 $('#pd2').css('display','none');
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});

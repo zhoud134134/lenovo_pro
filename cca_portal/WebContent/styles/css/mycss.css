@@ -21,8 +21,8 @@
     height: 27px;
     font-size: 14px;
     color: #fff;
-    background-color: #3276b1;
-    border-color: #2c699d;
+    /*background-color: #3276b1;*/
+    /*border-color: #2c699d;*/
     margin-right: 5px;
 }
 .jarviswidget .tab-fun-btn2 {
@@ -473,8 +473,8 @@ table.dataTable thead .sorting_asc {
     height: 27px;
     font-size: 14px;
     color: #fff;
-    background-color: #3276b1;
-    border-color: #2c699d;
+    /*background-color: #3276b1;*/
+    /*border-color: #2c699d;*/
     margin-right: 5px;
 }
 .table-mark-style tr td {

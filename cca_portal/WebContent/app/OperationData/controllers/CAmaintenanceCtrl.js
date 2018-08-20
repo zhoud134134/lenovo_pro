@@ -4,7 +4,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
     //初始化Cycle Choose
     CAmaintenanceService.getSelectCycle().then(function(data){
         if(data.code == 0){
-            $scope.cycledata = data.cycle;
+            $scope.cycledata = data.result;
         }
         console.log(data);
     },function(data){
