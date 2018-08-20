@@ -20,15 +20,13 @@
                         <div class="col-sm-6 form-group-m">
                             <label>Cycle choose:</label>
                             <div class="for-sel">
-                                <select class="form-control" ng-model="CycleSelect" ng-change="wpSel()">
-                                    <option value="Actual">Q1M3 Actual</option>
-                                    <option value="Forecast">Q1M4 Forecast</option>
+                                <select class="form-control" ng-model="CycleChoose" ng-options="x for x in cycledata">
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4 tab-serch-btn">
-                        <button class="btn btn-primary searchbtn">Execute</button>
+                        <button class="btn btn-primary searchbtn" ng-click="getExecute()">Execute</button>
                     </div>
                 </div>
             </div>
@@ -38,7 +36,7 @@
                     <div class="widget-body no-padding">
                         <div class="table-responsive table-border-tb">
                             <div style="height: 160px;overflow-y: scroll;">
-                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;">
+                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-point" id="tabExample" style="table-layout: fixed;">
                                     <thead class="table-thead">
                                     <tr>
                                         <td width="19px"></td>
@@ -51,100 +49,30 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
+                                    <tr ng-repeat="tab in tablist" ng-click="trClick($event,tab.taskId,tab.status,tab.cycleName)">
                                         <td>
                                             <label class="radio">
                                                 <input type="radio" name="radio-inline">
                                                 <i></i>
                                             </label>
                                         </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:19px;">
-                                            <label class="radio">
-                                                <input type="radio" name="radio-inline">
-                                                <i></i>
-                                            </label>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:19px;">
-                                            <label class="radio">
-                                                <input type="radio" name="radio-inline">
-                                                <i></i>
-                                            </label>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:19px;">
-                                            <label class="radio">
-                                                <input type="radio" name="radio-inline">
-                                                <i></i>
-                                            </label>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:19px;">
-                                            <label class="radio">
-                                                <input type="radio" name="radio-inline">
-                                                <i></i>
-                                            </label>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{tab.cycleName}}</td>
+                                        <td>{{tab.taskName}}</td>
+                                        <td>{{tab.status}}</td>
+                                        <td>{{tab.sysCreatedBy}}</td>
+                                        <td>{{tab.sysCreatedDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>{{tab.sysEndDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
 
                             </div>
                             <div class="col-sm-4 tab-fun-btn2">
-                                <button class="btn btn-primary btn-sm">Search</button>
-                                <button class="btn btn-primary btn-sm">Delete</button>
+                                <button class="btn btn-primary btn-sm" ng-click="SearchTab()">Search</button>
+                                <button class="btn btn-primary btn-sm" ng-click="DelParticular()">Delete</button>
                             </div>
                             <div class="col-sm-8">
                                 <div class="table-pagination">
-                                    <!--<div class="M-box"></div>-->
-                                    <!--<ul class="pagination">
-                                            <li class="disabled">
-                                                <a href="javascript:void(0)" class="previous">Previous</a></li>
-                                            <li></li>
-                                            <li class="active"><a href="javascript:void(0)">1</a></li>
-                                            <li><a href="javascript:void(0)">2</a></li>
-                                            <li><a href="javascript:void(0)">3</a></li>
-                                            <li><a href="javascript:void(0)">4</a></li>
-                                            <li><a href="javascript:void(0)">5</a></li>
-                                            <li class="disabled"><a href="javascript:void(0)">??</a></li>
-                                            <li><a href="javascript:void(0)">10</a></li>
-                                            <li><a href="javascript:void(0)"class="next">Next</a></li>
-                                        </ul>-->
                                 </div>
                             </div>
                         </div>
@@ -162,1039 +90,1042 @@
                 </header>
             </div>
            <!--第四部分-->
-            <!--Actual-->
-            <div ng-show="atc">
-                <!--WW-->
-                <div class="mup-tabbtn" ng-show="aww">
-                    <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
-                        <header>
-                            <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                            <h2>Exclude Visual & Accessory</h2>
-                        </header>
-                        <div>
-                            <div class="widget-body no-padding">
-                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;">
-                                    <thead class="table-thead">
-                                    <tr>
-                                        <td>XXX+BMC $M（Exclude Visual & Accessory）</td>
-                                        <td>PRC</td>
-                                        <td>AP</td>
-                                        <td>EMEA</td>
-                                        <td>NA</td>
-                                        <td>Brazil</td>
-                                        <td>LAS</td>
-                                        <td>HQ</td>
-                                        <td>Total</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Consumer</td>
-                                        <td>701.8</td>
-                                        <td>321.9</td>
-                                        <td>679.6</td>
-                                        <td>388.7</td>
-                                        <td>55.2</td>
-                                        <td>102.5</td>
-                                        <td></td>
-                                        <td>2249.7</td>
-                                    </tr>
-                                    <tr>
-                                        <td>SMB</td>
-                                        <td>701.8</td>
-                                        <td>195.0</td>
-                                        <td>416.7</td>
-                                        <td>348.9</td>
-                                        <td>16.2</td>
-                                        <td>51.9</td>
-                                        <td></td>
-                                        <td>1669.9</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Commercial</td>
-                                        <td>981.9</td>
-                                        <td>283.6</td>
-                                        <td>799.4</td>
-                                        <td>742.9</td>
-                                        <td>35.1</td>
-                                        <td>52.7</td>
-                                        <td></td>
-                                        <td>2895.5</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Others</td>
-                                        <td>981.9</td>
-                                        <td>283.6</td>
-                                        <td>799.4</td>
-                                        <td>742.9</td>
-                                        <td>35.1</td>
-                                        <td>52.7</td>
-                                        <td></td>
-                                        <td>2895.5</td>
-                                    </tr>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td>Total</td>
-                                        <td>2288.9</td>
-                                        <td>800.5</td>
-                                        <td>1895.7</td>
-                                        <td>1516.5</td>
-                                        <td>106.5</td>
-                                        <td>207.1</td>
-                                        <td></td>
-                                        <td>6815.16</td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
-                                <hr/>
-                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;margin-top: 15px;">
-                                    <thead class="table-thead">
-                                    <tr>
-                                        <td>XXX+Markup in Tape $M (Exclude Visual & Accessory）</td>
-                                        <td>PRC</td>
-                                        <td>AP</td>
-                                        <td>EMEA</td>
-                                        <td>NA</td>
-                                        <td>Brazil</td>
-                                        <td>LAS</td>
-                                        <td>HQ</td>
-                                        <td>Total</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Consumer</td>
-                                        <td>701.8</td>
-                                        <td>321.9</td>
-                                        <td>679.6</td>
-                                        <td>388.7</td>
-                                        <td>55.2</td>
-                                        <td>102.5</td>
-                                        <td></td>
-                                        <td>2249.7</td>
-                                    </tr>
-                                    <tr>
-                                        <td>SMB</td>
-                                        <td>701.8</td>
-                                        <td>195.0</td>
-                                        <td>416.7</td>
-                                        <td>348.9</td>
-                                        <td>16.2</td>
-                                        <td>51.9</td>
-                                        <td></td>
-                                        <td>1669.9</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Commercial</td>
-                                        <td>981.9</td>
-                                        <td>283.6</td>
-                                        <td>799.4</td>
-                                        <td>742.9</td>
-                                        <td>35.1</td>
-                                        <td>52.7</td>
-                                        <td></td>
-                                        <td>2895.5</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Others</td>
-                                        <td>981.9</td>
-                                        <td>283.6</td>
-                                        <td>799.4</td>
-                                        <td>742.9</td>
-                                        <td>35.1</td>
-                                        <td>52.7</td>
-                                        <td></td>
-                                        <td>2895.5</td>
-                                    </tr>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td>Total</td>
-                                        <td>2288.9</td>
-                                        <td>800.5</td>
-                                        <td>1895.7</td>
-                                        <td>1516.5</td>
-                                        <td>106.5</td>
-                                        <td>207.1</td>
-                                        <td></td>
-                                        <td>6815.16</td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
+            <div ng-show="markTab">
+                <!--Actual-->
+                <div ng-show="atc">
+                    <!--WW-->
+                    <div class="mup-tabbtn" ng-show="aww">
+                        <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
+                                <h2>Exclude Visual & Accessory</h2>
+                            </header>
+                            <div>
+                                <div class="widget-body no-padding">
+                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;">
+                                        <thead class="table-thead">
+                                        <tr>
+                                            <td>XXX+BMC $M（Exclude Visual & Accessory）</td>
+                                            <td>PRC</td>
+                                            <td>AP</td>
+                                            <td>EMEA</td>
+                                            <td>NA</td>
+                                            <td>Brazil</td>
+                                            <td>LAS</td>
+                                            <td>HQ</td>
+                                            <td>Total</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Consumer</td>
+                                            <td>701.8</td>
+                                            <td>321.9</td>
+                                            <td>679.6</td>
+                                            <td>388.7</td>
+                                            <td>55.2</td>
+                                            <td>102.5</td>
+                                            <td></td>
+                                            <td>2249.7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>SMB</td>
+                                            <td>701.8</td>
+                                            <td>195.0</td>
+                                            <td>416.7</td>
+                                            <td>348.9</td>
+                                            <td>16.2</td>
+                                            <td>51.9</td>
+                                            <td></td>
+                                            <td>1669.9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Commercial</td>
+                                            <td>981.9</td>
+                                            <td>283.6</td>
+                                            <td>799.4</td>
+                                            <td>742.9</td>
+                                            <td>35.1</td>
+                                            <td>52.7</td>
+                                            <td></td>
+                                            <td>2895.5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Others</td>
+                                            <td>981.9</td>
+                                            <td>283.6</td>
+                                            <td>799.4</td>
+                                            <td>742.9</td>
+                                            <td>35.1</td>
+                                            <td>52.7</td>
+                                            <td></td>
+                                            <td>2895.5</td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td>2288.9</td>
+                                            <td>800.5</td>
+                                            <td>1895.7</td>
+                                            <td>1516.5</td>
+                                            <td>106.5</td>
+                                            <td>207.1</td>
+                                            <td></td>
+                                            <td>6815.16</td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                    <hr/>
+                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;margin-top: 15px;">
+                                        <thead class="table-thead">
+                                        <tr>
+                                            <td>XXX+Markup in Tape $M (Exclude Visual & Accessory）</td>
+                                            <td>PRC</td>
+                                            <td>AP</td>
+                                            <td>EMEA</td>
+                                            <td>NA</td>
+                                            <td>Brazil</td>
+                                            <td>LAS</td>
+                                            <td>HQ</td>
+                                            <td>Total</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Consumer</td>
+                                            <td>701.8</td>
+                                            <td>321.9</td>
+                                            <td>679.6</td>
+                                            <td>388.7</td>
+                                            <td>55.2</td>
+                                            <td>102.5</td>
+                                            <td></td>
+                                            <td>2249.7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>SMB</td>
+                                            <td>701.8</td>
+                                            <td>195.0</td>
+                                            <td>416.7</td>
+                                            <td>348.9</td>
+                                            <td>16.2</td>
+                                            <td>51.9</td>
+                                            <td></td>
+                                            <td>1669.9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Commercial</td>
+                                            <td>981.9</td>
+                                            <td>283.6</td>
+                                            <td>799.4</td>
+                                            <td>742.9</td>
+                                            <td>35.1</td>
+                                            <td>52.7</td>
+                                            <td></td>
+                                            <td>2895.5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Others</td>
+                                            <td>981.9</td>
+                                            <td>283.6</td>
+                                            <td>799.4</td>
+                                            <td>742.9</td>
+                                            <td>35.1</td>
+                                            <td>52.7</td>
+                                            <td></td>
+                                            <td>2895.5</td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td>2288.9</td>
+                                            <td>800.5</td>
+                                            <td>1895.7</td>
+                                            <td>1516.5</td>
+                                            <td>106.5</td>
+                                            <td>207.1</td>
+                                            <td></td>
+                                            <td>6815.16</td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false">
-                        <header>
-                            <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                            <h2>Visual & Accessory only</h2>
-                        </header>
-                        <div>
-                            <div class="widget-body no-padding">
-                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;">
-                                    <thead class="table-thead">
-                                    <tr>
-                                        <td>XXX+BMC $M（Visual & Accessory only）</td>
-                                        <td>PRC</td>
-                                        <td>AP</td>
-                                        <td>EMEA</td>
-                                        <td>NA</td>
-                                        <td>Brazil</td>
-                                        <td>LAS</td>
-                                        <td>HQ</td>
-                                        <td>Total</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Consumer</td>
-                                        <td>701.8</td>
-                                        <td>321.9</td>
-                                        <td>679.6</td>
-                                        <td>388.7</td>
-                                        <td>55.2</td>
-                                        <td>102.5</td>
-                                        <td></td>
-                                        <td>2249.7</td>
-                                    </tr>
-                                    <tr>
-                                        <td>SMB</td>
-                                        <td>701.8</td>
-                                        <td>195.0</td>
-                                        <td>416.7</td>
-                                        <td>348.9</td>
-                                        <td>16.2</td>
-                                        <td>51.9</td>
-                                        <td></td>
-                                        <td>1669.9</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Commercial</td>
-                                        <td>981.9</td>
-                                        <td>283.6</td>
-                                        <td>799.4</td>
-                                        <td>742.9</td>
-                                        <td>35.1</td>
-                                        <td>52.7</td>
-                                        <td></td>
-                                        <td>2895.5</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Others</td>
-                                        <td>981.9</td>
-                                        <td>283.6</td>
-                                        <td>799.4</td>
-                                        <td>742.9</td>
-                                        <td>35.1</td>
-                                        <td>52.7</td>
-                                        <td></td>
-                                        <td>2895.5</td>
-                                    </tr>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td>Total</td>
-                                        <td>2288.9</td>
-                                        <td>800.5</td>
-                                        <td>1895.7</td>
-                                        <td>1516.5</td>
-                                        <td>106.5</td>
-                                        <td>207.1</td>
-                                        <td></td>
-                                        <td>6815.16</td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
-                                <hr/>
-                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;margin-top: 15px;">
-                                    <thead class="table-thead">
-                                    <tr>
-                                        <td>XXX+Markup in Tape $M(Visual & Accessory only）</td>
-                                        <td>PRC</td>
-                                        <td>AP</td>
-                                        <td>EMEA</td>
-                                        <td>NA</td>
-                                        <td>Brazil</td>
-                                        <td>LAS</td>
-                                        <td>HQ</td>
-                                        <td>Total</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Consumer</td>
-                                        <td>701.8</td>
-                                        <td>321.9</td>
-                                        <td>679.6</td>
-                                        <td>388.7</td>
-                                        <td>55.2</td>
-                                        <td>102.5</td>
-                                        <td></td>
-                                        <td>2249.7</td>
-                                    </tr>
-                                    <tr>
-                                        <td>SMB</td>
-                                        <td>701.8</td>
-                                        <td>195.0</td>
-                                        <td>416.7</td>
-                                        <td>348.9</td>
-                                        <td>16.2</td>
-                                        <td>51.9</td>
-                                        <td></td>
-                                        <td>1669.9</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Commercial</td>
-                                        <td>981.9</td>
-                                        <td>283.6</td>
-                                        <td>799.4</td>
-                                        <td>742.9</td>
-                                        <td>35.1</td>
-                                        <td>52.7</td>
-                                        <td></td>
-                                        <td>2895.5</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Others</td>
-                                        <td>981.9</td>
-                                        <td>283.6</td>
-                                        <td>799.4</td>
-                                        <td>742.9</td>
-                                        <td>35.1</td>
-                                        <td>52.7</td>
-                                        <td></td>
-                                        <td>2895.5</td>
-                                    </tr>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td>Total</td>
-                                        <td>2288.9</td>
-                                        <td>800.5</td>
-                                        <td>1895.7</td>
-                                        <td>1516.5</td>
-                                        <td>106.5</td>
-                                        <td>207.1</td>
-                                        <td></td>
-                                        <td>6815.16</td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
+                        <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
+                                <h2>Visual & Accessory only</h2>
+                            </header>
+                            <div>
+                                <div class="widget-body no-padding">
+                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;">
+                                        <thead class="table-thead">
+                                        <tr>
+                                            <td>XXX+BMC $M（Visual & Accessory only）</td>
+                                            <td>PRC</td>
+                                            <td>AP</td>
+                                            <td>EMEA</td>
+                                            <td>NA</td>
+                                            <td>Brazil</td>
+                                            <td>LAS</td>
+                                            <td>HQ</td>
+                                            <td>Total</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Consumer</td>
+                                            <td>701.8</td>
+                                            <td>321.9</td>
+                                            <td>679.6</td>
+                                            <td>388.7</td>
+                                            <td>55.2</td>
+                                            <td>102.5</td>
+                                            <td></td>
+                                            <td>2249.7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>SMB</td>
+                                            <td>701.8</td>
+                                            <td>195.0</td>
+                                            <td>416.7</td>
+                                            <td>348.9</td>
+                                            <td>16.2</td>
+                                            <td>51.9</td>
+                                            <td></td>
+                                            <td>1669.9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Commercial</td>
+                                            <td>981.9</td>
+                                            <td>283.6</td>
+                                            <td>799.4</td>
+                                            <td>742.9</td>
+                                            <td>35.1</td>
+                                            <td>52.7</td>
+                                            <td></td>
+                                            <td>2895.5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Others</td>
+                                            <td>981.9</td>
+                                            <td>283.6</td>
+                                            <td>799.4</td>
+                                            <td>742.9</td>
+                                            <td>35.1</td>
+                                            <td>52.7</td>
+                                            <td></td>
+                                            <td>2895.5</td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td>2288.9</td>
+                                            <td>800.5</td>
+                                            <td>1895.7</td>
+                                            <td>1516.5</td>
+                                            <td>106.5</td>
+                                            <td>207.1</td>
+                                            <td></td>
+                                            <td>6815.16</td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                    <hr/>
+                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;margin-top: 15px;">
+                                        <thead class="table-thead">
+                                        <tr>
+                                            <td>XXX+Markup in Tape $M(Visual & Accessory only）</td>
+                                            <td>PRC</td>
+                                            <td>AP</td>
+                                            <td>EMEA</td>
+                                            <td>NA</td>
+                                            <td>Brazil</td>
+                                            <td>LAS</td>
+                                            <td>HQ</td>
+                                            <td>Total</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Consumer</td>
+                                            <td>701.8</td>
+                                            <td>321.9</td>
+                                            <td>679.6</td>
+                                            <td>388.7</td>
+                                            <td>55.2</td>
+                                            <td>102.5</td>
+                                            <td></td>
+                                            <td>2249.7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>SMB</td>
+                                            <td>701.8</td>
+                                            <td>195.0</td>
+                                            <td>416.7</td>
+                                            <td>348.9</td>
+                                            <td>16.2</td>
+                                            <td>51.9</td>
+                                            <td></td>
+                                            <td>1669.9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Commercial</td>
+                                            <td>981.9</td>
+                                            <td>283.6</td>
+                                            <td>799.4</td>
+                                            <td>742.9</td>
+                                            <td>35.1</td>
+                                            <td>52.7</td>
+                                            <td></td>
+                                            <td>2895.5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Others</td>
+                                            <td>981.9</td>
+                                            <td>283.6</td>
+                                            <td>799.4</td>
+                                            <td>742.9</td>
+                                            <td>35.1</td>
+                                            <td>52.7</td>
+                                            <td></td>
+                                            <td>2895.5</td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td>2288.9</td>
+                                            <td>800.5</td>
+                                            <td>1895.7</td>
+                                            <td>1516.5</td>
+                                            <td>106.5</td>
+                                            <td>207.1</td>
+                                            <td></td>
+                                            <td>6815.16</td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="col-sm-4 tab-fun-btn">
+
+                            <button class="btn btn-primary btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true" ng-click="btnSwitchA('w')" ><i class="fa fa-refresh"></i></button>
+
+                            <button class="btn btn-primary btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
+
+                            <button class="btn btn-primary btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none"></i></button>
+                        </div>
                     </div>
+                    <!--PRC-->
+                    <div class="mup-tabbtn" ng-show="!aww">
+                        <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
+                                <h2>PRC Related</h2>
+                            </header>
+                            <div>
+                                <div class="widget-body no-padding">
+                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo tab-viMid" style="table-layout: fixed;">
+                                        <thead class="table-thead">
+                                        <tr>
+                                            <td>XXX+PRC</td>
+                                            <td>Think-T</td>
+                                            <td>T-Model</td>
+                                            <td>REL</td>
+                                            <td>Consumer</td>
+                                            <td>YT</td>
+                                            <td>Total</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>BMC $M（Exclude Visual & Accessory）</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>3508.9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Markup in Tape $M（Exclude Visual & Accessory）</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>3508.9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>BMC $M（Visual & Accessory only）</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>3508.9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Markup in Tape $M（Visual & Accessory only）</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>701.8</td>
+                                            <td>3508.9</td>
+                                        </tr>
 
-                    <div class="col-sm-4 tab-fun-btn">
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td>2807.2</td>
+                                            <td>2807.2</td>
+                                            <td>2807.2</td>
+                                            <td>2807.2</td>
+                                            <td>2807.2</td>
+                                            <td>14035.8</td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
-                        <button class="btn btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true" ng-click="btnSwitchA('w')" ><i class="fa fa-refresh"></i></button>
+                        <div class="col-sm-4 tab-fun-btn">
 
-                        <button class="btn btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
+                            <button class="btn btn-primary btn-xs" uib-tooltip="Switch to WW" tooltip-append-to-body="true" ng-click="btnSwitchA('p')" ><i class="fa fa-refresh"></i></button>
 
-                        <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none"></i></button>
+                            <button class="btn btn-primary btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
+
+                            <button class="btn btn-primary btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none"></i></button>
+                        </div>
                     </div>
                 </div>
-                <!--PRC-->
-                <div class="mup-tabbtn" ng-show="!aww">
-                    <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
-                        <header>
-                            <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                            <h2>PRC Related</h2>
-                        </header>
-                        <div>
-                            <div class="widget-body no-padding">
-                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo tab-viMid" style="table-layout: fixed;">
-                                    <thead class="table-thead">
-                                    <tr>
-                                        <td>XXX+PRC</td>
-                                        <td>Think-T</td>
-                                        <td>T-Model</td>
-                                        <td>REL</td>
-                                        <td>Consumer</td>
-                                        <td>YT</td>
-                                        <td>Total</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>BMC $M（Exclude Visual & Accessory）</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>3508.9</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Markup in Tape $M（Exclude Visual & Accessory）</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>3508.9</td>
-                                    </tr>
-                                    <tr>
-                                        <td>BMC $M（Visual & Accessory only）</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>3508.9</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Markup in Tape $M（Visual & Accessory only）</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>701.8</td>
-                                        <td>3508.9</td>
-                                    </tr>
+                <!--Forecast-->
+                <div ng-show="!atc">
 
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td>Total</td>
-                                        <td>2807.2</td>
-                                        <td>2807.2</td>
-                                        <td>2807.2</td>
-                                        <td>2807.2</td>
-                                        <td>2807.2</td>
-                                        <td>14035.8</td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
+                    <div class="mup-tabbtn report-tab" ng-show="!fww">
+                        <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
+                                <h2>PRC</h2>
+                            </header>
+                            <div>
+                                <div class="widget-body no-padding">
+                                    <table class="table-bordered smart-form has-tickbox table-hover table-mark" style="width: 100%;table-layout: fixed;">
+                                        <thead class="table-thead">
+                                        <tr>
+                                            <td rowspan="2">XXX+BMC $M</td>
+                                            <td colspan="5">PRC</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Think-T</td>
+                                            <td>T-Model</td>
+                                            <td>REL</td>
+                                            <td>Consumer</td>
+                                            <td>YT</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Think Pad</td>
+                                            <td>692</td>
+                                            <td>692</td>
+                                            <td>692</td>
+                                            <td>692</td>
+                                            <td>692</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lenovo NB</td>
+                                            <td>1474</td>
+                                            <td>1474</td>
+                                            <td>1474</td>
+                                            <td>1474</td>
+                                            <td>1474</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Commercial DT</td>
+                                            <td>2474</td>
+                                            <td>2474</td>
+                                            <td>2474</td>
+                                            <td>2474</td>
+                                            <td>2474</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Consumer DT</td>
+                                            <td>392</td>
+                                            <td>392</td>
+                                            <td>392</td>
+                                            <td>392</td>
+                                            <td>392</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Workstation</td>
+                                            <td>44</td>
+                                            <td>44</td>
+                                            <td>44</td>
+                                            <td>44</td>
+                                            <td>44</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Chrome</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Server</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Accessories</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Visual</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td>WW</td>
+                                            <td>5076</td>
+                                            <td>5076</td>
+                                            <td>5076</td>
+                                            <td>5076</td>
+                                            <td>5076</td>
+                                        </tr>
+                                        </tfoot>
+
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-sm-4 tab-fun-btn">
 
-                        <button class="btn btn-xs" uib-tooltip="Switch to WW" tooltip-append-to-body="true" ng-click="btnSwitchA('p')" ><i class="fa fa-refresh"></i></button>
+                        <div class="col-sm-4 tab-fun-btn">
 
-                        <button class="btn btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
+                            <button class="btn btn-primary btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true" ng-click="btnSwitchF('p')" ><i class="fa fa-refresh"></i></button>
 
-                        <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none"></i></button>
-                    </div>
-                </div>
-            </div>
-            <!--Forecast-->
-            <div ng-show="!atc">
+                            <button class="btn btn-primary btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
 
-                <div class="mup-tabbtn report-tab" ng-show="fww">
-                    <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
-                        <header>
-                            <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                            <h2>PRC</h2>
-                        </header>
-                        <div>
-                            <div class="widget-body no-padding">
-                                <table class="table-bordered smart-form has-tickbox table-hover table-mark" style="width: 100%;table-layout: fixed;">
-                                    <thead class="table-thead">
-                                    <tr>
-                                        <td rowspan="2">XXX+BMC $M</td>
-                                        <td colspan="5">PRC</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Think-T</td>
-                                        <td>T-Model</td>
-                                        <td>REL</td>
-                                        <td>Consumer</td>
-                                        <td>YT</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Think Pad</td>
-                                        <td>692</td>
-                                        <td>692</td>
-                                        <td>692</td>
-                                        <td>692</td>
-                                        <td>692</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Lenovo NB</td>
-                                        <td>1474</td>
-                                        <td>1474</td>
-                                        <td>1474</td>
-                                        <td>1474</td>
-                                        <td>1474</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Commercial DT</td>
-                                        <td>2474</td>
-                                        <td>2474</td>
-                                        <td>2474</td>
-                                        <td>2474</td>
-                                        <td>2474</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Consumer DT</td>
-                                        <td>392</td>
-                                        <td>392</td>
-                                        <td>392</td>
-                                        <td>392</td>
-                                        <td>392</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Workstation</td>
-                                        <td>44</td>
-                                        <td>44</td>
-                                        <td>44</td>
-                                        <td>44</td>
-                                        <td>44</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Chrome</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Server</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Accessories</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Visual</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td>WW</td>
-                                        <td>5076</td>
-                                        <td>5076</td>
-                                        <td>5076</td>
-                                        <td>5076</td>
-                                        <td>5076</td>
-                                    </tr>
-                                    </tfoot>
-
-                                </table>
-                            </div>
+                            <button class="btn btn-primary btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none" ></i></button>
                         </div>
                     </div>
+                    <div class="mup-tabbtn" id="operadata-segment-tab" style="margin-top: 10px;" ng-show="fww">
 
-
-                    <div class="col-sm-4 tab-fun-btn">
-
-                        <button class="btn btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true" ng-click="btnSwitchF('w')" ><i class="fa fa-refresh"></i></button>
-
-                        <button class="btn btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
-
-                        <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none" ></i></button>
-                    </div>
-                </div>
-                <div class="mup-tabbtn" id="operadata-segment-tab" style="margin-top: 10px;" ng-show="!fww">
-
-                    <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
-                        <header>
-                            <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                            <h2>XXX Segment</h2>
-                        </header>
-                        <div>
-                            <div class="widget-body no-padding">
-                                <ul class="nav nav-tabs bordered">
-                                    <li class="active ">
-                                        <a href="#operadata-segment-1" data-toggle="tab"> <i class="fa fa-university"></i> Con</a>
-                                    </li>
-                                    <li>
-                                        <a href="#operadata-segment-2" data-toggle="tab"> <i class="fa fa-bookmark"></i> SMB</a>
-                                    </li>
-                                    <li>
-                                        <a href="#operadata-segment-3" data-toggle="tab"> <i class="fa fa-life-bouy"></i> REL</a>
-                                    </li>
-                                    <li>
-                                        <a href="#operadata-segment-3" data-toggle="tab">Others</a>
-                                    </li>
-                                    <li>
-                                        <a href="#operadata-segment-3" data-toggle="tab"> <i class="fa fa-reorder"></i> TTL</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content " style="overflow: auto;width: 100%;">
-                                    <div id="operadata-segment-1" class="tab-pane active">
-                                        <table class="col-sm-12 table-mark table-mark-style tab-abc" id="abctable" border="1" style="border: 1px solid #ddd;white-space: nowrap;">
-                                            <thead>
-                                            <tr>
-                                                <td rowspan="2">XXX+BMC $M</td>
-                                                <td>PRC</td>
-                                                <td colspan="8">AP</td>
-                                                <td colspan="18">EMEA</td>
-                                                <td>NA</td>
-                                                <td>LAS</td>
-                                                <td>Brazil</td>
-                                                <td rowspan="2">Top</td>
-                                                <td rowspan="2">Global Total</td>
-                                            </tr>
-                                            <tr>
-                                                <td>China</td>
-                                                <td>HTK</td>
-                                                <td>ID</td>
-                                                <td>SEA</td>
-                                                <td>India</td>
-                                                <td>Japan</td>
-                                                <td>ANZ</td>
-                                                <td>HQ</td>
-                                                <td>Total</td>
-                                                <td>Italy</td>
-                                                <td>Israel</td>
-                                                <td>Iberia</td>
-                                                <td>France</td>
-                                                <td>UKI</td>
-                                                <td>Nordics</td>
-                                                <td>Benelux</td>
-                                                <td>MEA</td>
-                                                <td>Turkey</td>
-                                                <td>Russia</td>
-                                                <td>EECA</td>
-                                                <td>GAT</td>
-                                                <td>CZ / SK</td>
-                                                <td>CH</td>
-                                                <td>Poland</td>
-                                                <td>SEE</td>
-                                                <td>HQ</td>
-                                                <td>Total</td>
-                                                <td>US/CA</td>
-                                                <td>LAS</td>
-                                                <td>Brazil</td>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>Think Pad</td>
-                                                <td>11</td>
-                                                <td>22</td>
-                                                <td>33</td>
-                                                <td>44</td>
-                                                <td>55</td>
-                                                <td>6</td>
-                                                <td>777</td>
-                                                <td>8888</td>
-                                                <td>6</td>
-                                                <td>66</td>
-                                                <td>555</td>
-                                                <td>44</td>
-                                                <td>333</td>
-                                                <td>44</td>
-                                                <td>22</td>
-                                                <td>111</td>
-                                                <td>33</td>
-                                                <td>444</td>
-                                                <td>555</td>
-                                                <td>666</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>666</td>
-                                                <td>888</td>
-                                                <td>555</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>88</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Lenovo NB</td>
-                                                <td>11</td>
-                                                <td>22</td>
-                                                <td>33</td>
-                                                <td>44</td>
-                                                <td>55</td>
-                                                <td>6</td>
-                                                <td>777</td>
-                                                <td>8888</td>
-                                                <td>6</td>
-                                                <td>66</td>
-                                                <td>555</td>
-                                                <td>44</td>
-                                                <td>333</td>
-                                                <td>44</td>
-                                                <td>22</td>
-                                                <td>111</td>
-                                                <td>33</td>
-                                                <td>444</td>
-                                                <td>555</td>
-                                                <td>666</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>666</td>
-                                                <td>888</td>
-                                                <td>555</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>88</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Commercial DT</td>
-                                                <td>11</td>
-                                                <td>22</td>
-                                                <td>33</td>
-                                                <td>44</td>
-                                                <td>55</td>
-                                                <td>6</td>
-                                                <td>777</td>
-                                                <td>8888</td>
-                                                <td>6</td>
-                                                <td>66</td>
-                                                <td>555</td>
-                                                <td>44</td>
-                                                <td>333</td>
-                                                <td>44</td>
-                                                <td>22</td>
-                                                <td>111</td>
-                                                <td>33</td>
-                                                <td>444</td>
-                                                <td>555</td>
-                                                <td>666</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>666</td>
-                                                <td>888</td>
-                                                <td>555</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>88</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Consumer DT</td>
-                                                <td>11</td>
-                                                <td>22</td>
-                                                <td>33</td>
-                                                <td>44</td>
-                                                <td>55</td>
-                                                <td>6</td>
-                                                <td>777</td>
-                                                <td>8888</td>
-                                                <td>6</td>
-                                                <td>66</td>
-                                                <td>555</td>
-                                                <td>44</td>
-                                                <td>333</td>
-                                                <td>44</td>
-                                                <td>22</td>
-                                                <td>111</td>
-                                                <td>33</td>
-                                                <td>444</td>
-                                                <td>555</td>
-                                                <td>666</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>666</td>
-                                                <td>888</td>
-                                                <td>555</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>88</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Workstation</td>
-                                                <td>11</td>
-                                                <td>22</td>
-                                                <td>33</td>
-                                                <td>44</td>
-                                                <td>55</td>
-                                                <td>6</td>
-                                                <td>777</td>
-                                                <td>8888</td>
-                                                <td>6</td>
-                                                <td>66</td>
-                                                <td>555</td>
-                                                <td>44</td>
-                                                <td>333</td>
-                                                <td>44</td>
-                                                <td>22</td>
-                                                <td>111</td>
-                                                <td>33</td>
-                                                <td>444</td>
-                                                <td>555</td>
-                                                <td>666</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>666</td>
-                                                <td>888</td>
-                                                <td>555</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>88</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Chrome</td>
-                                                <td>11</td>
-                                                <td>22</td>
-                                                <td>33</td>
-                                                <td>44</td>
-                                                <td>55</td>
-                                                <td>6</td>
-                                                <td>777</td>
-                                                <td>8888</td>
-                                                <td>6</td>
-                                                <td>66</td>
-                                                <td>555</td>
-                                                <td>44</td>
-                                                <td>333</td>
-                                                <td>44</td>
-                                                <td>22</td>
-                                                <td>111</td>
-                                                <td>33</td>
-                                                <td>444</td>
-                                                <td>555</td>
-                                                <td>666</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>666</td>
-                                                <td>888</td>
-                                                <td>555</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>88</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Server</td>
-                                                <td>11</td>
-                                                <td>22</td>
-                                                <td>33</td>
-                                                <td>44</td>
-                                                <td>55</td>
-                                                <td>6</td>
-                                                <td>777</td>
-                                                <td>8888</td>
-                                                <td>6</td>
-                                                <td>66</td>
-                                                <td>555</td>
-                                                <td>44</td>
-                                                <td>333</td>
-                                                <td>44</td>
-                                                <td>22</td>
-                                                <td>111</td>
-                                                <td>33</td>
-                                                <td>444</td>
-                                                <td>555</td>
-                                                <td>666</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>666</td>
-                                                <td>888</td>
-                                                <td>555</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>88</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Accessories</td>
-                                                <td>11</td>
-                                                <td>22</td>
-                                                <td>33</td>
-                                                <td>44</td>
-                                                <td>55</td>
-                                                <td>6</td>
-                                                <td>777</td>
-                                                <td>8888</td>
-                                                <td>6</td>
-                                                <td>66</td>
-                                                <td>555</td>
-                                                <td>44</td>
-                                                <td>333</td>
-                                                <td>44</td>
-                                                <td>22</td>
-                                                <td>111</td>
-                                                <td>33</td>
-                                                <td>444</td>
-                                                <td>555</td>
-                                                <td>666</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>666</td>
-                                                <td>888</td>
-                                                <td>555</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>88</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Visual</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <td>WW</td>
-                                                <td>11</td>
-                                                <td>22</td>
-                                                <td>33</td>
-                                                <td>44</td>
-                                                <td>55</td>
-                                                <td>6</td>
-                                                <td>777</td>
-                                                <td>8888</td>
-                                                <td>6</td>
-                                                <td>66</td>
-                                                <td>555</td>
-                                                <td>44</td>
-                                                <td>333</td>
-                                                <td>44</td>
-                                                <td>22</td>
-                                                <td>111</td>
-                                                <td>33</td>
-                                                <td>444</td>
-                                                <td>555</td>
-                                                <td>666</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>777</td>
-                                                <td>888</td>
-                                                <td>666</td>
-                                                <td>888</td>
-                                                <td>555</td>
-                                                <td>99</td>
-                                                <td>00</td>
-                                                <td>88</td>
-                                            </tr>
-                                            </tfoot>
-                                        </table>
-                                        <table class="col-sm-12 table-mark table-mark-style"  border="1" style="border: 1px solid #ddd;white-space: nowrap;width: 202px;position: absolute;top: 40px;left: 0;">
-                                            <thead>
-                                            <tr style="height: 62px;">
-                                                <td rowspan="2">XXX+BMC $M</td>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>Think Pad</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Lenovo NB</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Commercial DT</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Consumer DT</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Workstation</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Chrome</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Server</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Accessories</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Visual</td>
-                                            </tr>
-                                            </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <td>WW</td>
-                                            </tr>
-                                            </tfoot>
-                                        </table>
+                        <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
+                                <h2>XXX Segment</h2>
+                            </header>
+                            <div>
+                                <div class="widget-body no-padding">
+                                    <ul class="nav nav-tabs bordered">
+                                        <li class="active ">
+                                            <a href="#operadata-segment-1" data-toggle="tab"> <i class="fa fa-university"></i> Con</a>
+                                        </li>
+                                        <li>
+                                            <a href="#operadata-segment-2" data-toggle="tab"> <i class="fa fa-bookmark"></i> SMB</a>
+                                        </li>
+                                        <li>
+                                            <a href="#operadata-segment-3" data-toggle="tab"> <i class="fa fa-life-bouy"></i> REL</a>
+                                        </li>
+                                        <li>
+                                            <a href="#operadata-segment-3" data-toggle="tab">Others</a>
+                                        </li>
+                                        <li>
+                                            <a href="#operadata-segment-3" data-toggle="tab"> <i class="fa fa-reorder"></i> TTL</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content " style="overflow: auto;width: 100%;">
+                                        <div id="operadata-segment-1" class="tab-pane active">
+                                            <table class="col-sm-12 table-mark table-mark-style tab-abc" id="abctable" border="1" style="border: 1px solid #ddd;white-space: nowrap;">
+                                                <thead>
+                                                <tr>
+                                                    <td rowspan="2">XXX+BMC $M</td>
+                                                    <td>PRC</td>
+                                                    <td colspan="8">AP</td>
+                                                    <td colspan="18">EMEA</td>
+                                                    <td>NA</td>
+                                                    <td>LAS</td>
+                                                    <td>Brazil</td>
+                                                    <td rowspan="2">Top</td>
+                                                    <td rowspan="2">Global Total</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>China</td>
+                                                    <td>HTK</td>
+                                                    <td>ID</td>
+                                                    <td>SEA</td>
+                                                    <td>India</td>
+                                                    <td>Japan</td>
+                                                    <td>ANZ</td>
+                                                    <td>HQ</td>
+                                                    <td>Total</td>
+                                                    <td>Italy</td>
+                                                    <td>Israel</td>
+                                                    <td>Iberia</td>
+                                                    <td>France</td>
+                                                    <td>UKI</td>
+                                                    <td>Nordics</td>
+                                                    <td>Benelux</td>
+                                                    <td>MEA</td>
+                                                    <td>Turkey</td>
+                                                    <td>Russia</td>
+                                                    <td>EECA</td>
+                                                    <td>GAT</td>
+                                                    <td>CZ / SK</td>
+                                                    <td>CH</td>
+                                                    <td>Poland</td>
+                                                    <td>SEE</td>
+                                                    <td>HQ</td>
+                                                    <td>Total</td>
+                                                    <td>US/CA</td>
+                                                    <td>LAS</td>
+                                                    <td>Brazil</td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>Think Pad</td>
+                                                    <td>11</td>
+                                                    <td>22</td>
+                                                    <td>33</td>
+                                                    <td>44</td>
+                                                    <td>55</td>
+                                                    <td>6</td>
+                                                    <td>777</td>
+                                                    <td>8888</td>
+                                                    <td>6</td>
+                                                    <td>66</td>
+                                                    <td>555</td>
+                                                    <td>44</td>
+                                                    <td>333</td>
+                                                    <td>44</td>
+                                                    <td>22</td>
+                                                    <td>111</td>
+                                                    <td>33</td>
+                                                    <td>444</td>
+                                                    <td>555</td>
+                                                    <td>666</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>666</td>
+                                                    <td>888</td>
+                                                    <td>555</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>88</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lenovo NB</td>
+                                                    <td>11</td>
+                                                    <td>22</td>
+                                                    <td>33</td>
+                                                    <td>44</td>
+                                                    <td>55</td>
+                                                    <td>6</td>
+                                                    <td>777</td>
+                                                    <td>8888</td>
+                                                    <td>6</td>
+                                                    <td>66</td>
+                                                    <td>555</td>
+                                                    <td>44</td>
+                                                    <td>333</td>
+                                                    <td>44</td>
+                                                    <td>22</td>
+                                                    <td>111</td>
+                                                    <td>33</td>
+                                                    <td>444</td>
+                                                    <td>555</td>
+                                                    <td>666</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>666</td>
+                                                    <td>888</td>
+                                                    <td>555</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>88</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Commercial DT</td>
+                                                    <td>11</td>
+                                                    <td>22</td>
+                                                    <td>33</td>
+                                                    <td>44</td>
+                                                    <td>55</td>
+                                                    <td>6</td>
+                                                    <td>777</td>
+                                                    <td>8888</td>
+                                                    <td>6</td>
+                                                    <td>66</td>
+                                                    <td>555</td>
+                                                    <td>44</td>
+                                                    <td>333</td>
+                                                    <td>44</td>
+                                                    <td>22</td>
+                                                    <td>111</td>
+                                                    <td>33</td>
+                                                    <td>444</td>
+                                                    <td>555</td>
+                                                    <td>666</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>666</td>
+                                                    <td>888</td>
+                                                    <td>555</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>88</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Consumer DT</td>
+                                                    <td>11</td>
+                                                    <td>22</td>
+                                                    <td>33</td>
+                                                    <td>44</td>
+                                                    <td>55</td>
+                                                    <td>6</td>
+                                                    <td>777</td>
+                                                    <td>8888</td>
+                                                    <td>6</td>
+                                                    <td>66</td>
+                                                    <td>555</td>
+                                                    <td>44</td>
+                                                    <td>333</td>
+                                                    <td>44</td>
+                                                    <td>22</td>
+                                                    <td>111</td>
+                                                    <td>33</td>
+                                                    <td>444</td>
+                                                    <td>555</td>
+                                                    <td>666</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>666</td>
+                                                    <td>888</td>
+                                                    <td>555</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>88</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Workstation</td>
+                                                    <td>11</td>
+                                                    <td>22</td>
+                                                    <td>33</td>
+                                                    <td>44</td>
+                                                    <td>55</td>
+                                                    <td>6</td>
+                                                    <td>777</td>
+                                                    <td>8888</td>
+                                                    <td>6</td>
+                                                    <td>66</td>
+                                                    <td>555</td>
+                                                    <td>44</td>
+                                                    <td>333</td>
+                                                    <td>44</td>
+                                                    <td>22</td>
+                                                    <td>111</td>
+                                                    <td>33</td>
+                                                    <td>444</td>
+                                                    <td>555</td>
+                                                    <td>666</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>666</td>
+                                                    <td>888</td>
+                                                    <td>555</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>88</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Chrome</td>
+                                                    <td>11</td>
+                                                    <td>22</td>
+                                                    <td>33</td>
+                                                    <td>44</td>
+                                                    <td>55</td>
+                                                    <td>6</td>
+                                                    <td>777</td>
+                                                    <td>8888</td>
+                                                    <td>6</td>
+                                                    <td>66</td>
+                                                    <td>555</td>
+                                                    <td>44</td>
+                                                    <td>333</td>
+                                                    <td>44</td>
+                                                    <td>22</td>
+                                                    <td>111</td>
+                                                    <td>33</td>
+                                                    <td>444</td>
+                                                    <td>555</td>
+                                                    <td>666</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>666</td>
+                                                    <td>888</td>
+                                                    <td>555</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>88</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Server</td>
+                                                    <td>11</td>
+                                                    <td>22</td>
+                                                    <td>33</td>
+                                                    <td>44</td>
+                                                    <td>55</td>
+                                                    <td>6</td>
+                                                    <td>777</td>
+                                                    <td>8888</td>
+                                                    <td>6</td>
+                                                    <td>66</td>
+                                                    <td>555</td>
+                                                    <td>44</td>
+                                                    <td>333</td>
+                                                    <td>44</td>
+                                                    <td>22</td>
+                                                    <td>111</td>
+                                                    <td>33</td>
+                                                    <td>444</td>
+                                                    <td>555</td>
+                                                    <td>666</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>666</td>
+                                                    <td>888</td>
+                                                    <td>555</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>88</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Accessories</td>
+                                                    <td>11</td>
+                                                    <td>22</td>
+                                                    <td>33</td>
+                                                    <td>44</td>
+                                                    <td>55</td>
+                                                    <td>6</td>
+                                                    <td>777</td>
+                                                    <td>8888</td>
+                                                    <td>6</td>
+                                                    <td>66</td>
+                                                    <td>555</td>
+                                                    <td>44</td>
+                                                    <td>333</td>
+                                                    <td>44</td>
+                                                    <td>22</td>
+                                                    <td>111</td>
+                                                    <td>33</td>
+                                                    <td>444</td>
+                                                    <td>555</td>
+                                                    <td>666</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>666</td>
+                                                    <td>888</td>
+                                                    <td>555</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>88</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Visual</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td>WW</td>
+                                                    <td>11</td>
+                                                    <td>22</td>
+                                                    <td>33</td>
+                                                    <td>44</td>
+                                                    <td>55</td>
+                                                    <td>6</td>
+                                                    <td>777</td>
+                                                    <td>8888</td>
+                                                    <td>6</td>
+                                                    <td>66</td>
+                                                    <td>555</td>
+                                                    <td>44</td>
+                                                    <td>333</td>
+                                                    <td>44</td>
+                                                    <td>22</td>
+                                                    <td>111</td>
+                                                    <td>33</td>
+                                                    <td>444</td>
+                                                    <td>555</td>
+                                                    <td>666</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>777</td>
+                                                    <td>888</td>
+                                                    <td>666</td>
+                                                    <td>888</td>
+                                                    <td>555</td>
+                                                    <td>99</td>
+                                                    <td>00</td>
+                                                    <td>88</td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                            <table class="col-sm-12 table-mark table-mark-style"  border="1" style="border: 1px solid #ddd;white-space: nowrap;width: 202px;position: absolute;top: 40px;left: 0;">
+                                                <thead>
+                                                <tr style="height: 62px;">
+                                                    <td rowspan="2">XXX+BMC $M</td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>Think Pad</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lenovo NB</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Commercial DT</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Consumer DT</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Workstation</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Chrome</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Server</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Accessories</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Visual</td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td>WW</td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-sm-4 tab-fun-btn">
+
+                            <button class="btn btn-primary btn-xs" uib-tooltip="Switch to WW" tooltip-append-to-body="true" ng-click="btnSwitchF('w')" ><i class="fa fa-refresh"></i></button>
+
+                            <button class="btn btn-primary btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
+
+                            <button class="btn btn-primary btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none" ></i></button>
+                        </div>
                     </div>
 
-                    <div class="col-sm-4 tab-fun-btn">
 
-                        <button class="btn btn-xs" uib-tooltip="Switch to WW" tooltip-append-to-body="true" ng-click="btnSwitchF('p')" ><i class="fa fa-refresh"></i></button>
 
-                        <button class="btn btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
-
-                        <button class="btn btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none" ></i></button>
-                    </div>
                 </div>
-
-
-
             </div>
+
 
 
         </article>
