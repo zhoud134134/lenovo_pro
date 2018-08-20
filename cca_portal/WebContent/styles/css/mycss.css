@@ -522,5 +522,5 @@ table.dataTable thead .sorting_asc {
 .btn-back {
     background-color: #3276b1;
     border-color: #2c699d;
-    color: #fff;
+    color: #fff !important;
 }
