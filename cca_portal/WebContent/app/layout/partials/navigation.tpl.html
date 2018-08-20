@@ -1,7 +1,16 @@
-<aside id="left-panel">
+<aside id="left-panel" ng-controller="navCtrl">
 
     <!-- User info -->
-    <div login-info></div>
+    <div class="login-info ng-cloak">
+    <span> <!-- User image size is adjusted inside CSS, it should stay as it -->
+        <a  href="" toggle-shortcut>
+            <img ng-src="{{user.thumbnailphoto[0]}}" alt="me" class="online">
+                <span>{{user.displayname[0]}}
+                </span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+     </span>
+    </div>
     <!-- end user info -->
 
     <nav>
