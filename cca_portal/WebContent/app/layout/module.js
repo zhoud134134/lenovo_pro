@@ -42,7 +42,21 @@ angular.module('app.layout', ['ui.router'])
                 //htmlId: 'extr-page'
             },
         })
+        .state('Jurisdiction', {
+            url : '/Jurisdiction',
+            views: {
+                root: {
+                    templateUrl: 'app/layout/JurisdictionPage.html',
+                    controller: 'JurisdictionCtrl',
+                }
+            },
+            data: {
+                title: 'Jurisdiction',
+                htmlId: 'extr-page'
+            },
+        })
 
+    //$urlRouterProvider.otherwise('/Jurisdiction');
     $urlRouterProvider.otherwise('/indexPage');
         //$urlRouterProvider.otherwise('/dashboard');
 

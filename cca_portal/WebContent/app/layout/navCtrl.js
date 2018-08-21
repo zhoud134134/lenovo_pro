@@ -31,3 +31,10 @@ angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, 
 
 
 })
+
+angular.module('app.layout').controller('JurisdictionCtrl', function ($scope,$rootScope, $state, $stateParams, $location, navService) {
+
+    $scope.aaa = "11111111111111";
+
+
+})
