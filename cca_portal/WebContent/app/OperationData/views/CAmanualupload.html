@@ -7,7 +7,7 @@
     <section id="widget-grid" widget-grid>
         <article class="col-sm-12">
             <!-- 第一部分 -->
-            <div jarvis-widget data-widget-color="darken" data-widget-editbutton="false" data-widget-fullscreenbutton="false"
+            <div jarvis-widget data-widget-color="Light Blue" data-widget-editbutton="false" data-widget-fullscreenbutton="false"
                 data-widget-deletebutton="false">
                 <header>
                     <span class="widget-icon">
@@ -31,7 +31,7 @@
                             <div class="model-file">
                                     <input type="text" class="file-route col-sm-8" ng-model="myfilesVal"/>
                                     <div class="model-file-btn col-sm-4">
-                                        <button type="button" class="btn btn-back">browse</button>
+                                        <button type="button" class="btn btn-back">Browse</button>
                                         <input type="file" name="file" ngf-select="true" ng-model="myfiles" ngf-accept="'.xlsx,.xls'" ng-change="fileChange()"/>
                                     </div>
                             </div>
@@ -169,19 +169,16 @@
                     </div>
                     <div class="col-sm-4 tab-fun-btn">
                         <button class="btn btn-back btn-xs" uib-tooltip="Shift View" tooltip-append-to-body="true" ng-click="btnSV('s1')" ng-show="sw1">
-                            <i class="fa fa-refresh"></i>
+                            <i class="fa fa-exchange"></i>
                         </button>
                         <button class="btn btn-back btn-xs" uib-tooltip="Shift View" tooltip-append-to-body="true" ng-click="btnSV('s2')" ng-show="!sw1">
-                            <i class="fa fa-refresh"></i>
+                            <i class="fa fa-exchange"></i>
                         </button>
                         <button class="btn btn-back btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true" ng-click="btnSwitch('w')" ng-show="!ww">
                             <i class="fa fa-refresh"></i>
                         </button>
                         <button class="btn btn-back btn-xs" uib-tooltip="Switch to WW" tooltip-append-to-body="true" ng-click="btnSwitch('p')" ng-show="ww">
                             <i class="fa fa-refresh"></i>
-                        </button>
-                        <button class="btn btn-back btn-xs" uib-tooltip="Upload" tooltip-append-to-body="true">
-                            <i class="fa fa-upload"></i>
                         </button>
                         <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true"  ng-click="getPRCDownLoad()">
                             <i class="fa fa-download"></i>
@@ -1006,7 +1003,7 @@
                                     </li>
                                     <li>
                                         <a href="#operadata-segment-5" data-toggle="tab" aria-expanded="false">
-                                            <i class="fa fa-lg fa-life-bouy"></i>
+                                            <i class="fa fa-lg fa-code-fork"></i>
                                             <span class="hidden-mobile hidden-tablet">Others</span>
                                         </a>
                                     </li>
@@ -3184,19 +3181,16 @@
                     </div>
                     <div class="col-sm-4 tab-fun-btn">
                         <button class="btn btn-back btn-xs" uib-tooltip="Shift View" tooltip-append-to-body="true" ng-click="btnSV('s1')" ng-show="!sw1">
-                            <i class="fa fa-refresh"></i>
+                            <i class="fa fa-exchange"></i>
                         </button>
                         <button class="btn btn-back btn-xs" uib-tooltip="Shift View" tooltip-append-to-body="true" ng-click="btnSV('s2')" ng-show="sw1">
-                            <i class="fa fa-refresh"></i>
+                            <i class="fa fa-exchange"></i>
                         </button>
                         <button class="btn btn-back btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true" ng-click="btnSwitch('w')" ng-show="!ww">
                             <i class="fa fa-refresh"></i>
                         </button>
                         <button class="btn btn-back btn-xs" uib-tooltip="Switch to WW" tooltip-append-to-body="true" ng-click="btnSwitsch('p')" ng-show="ww">
                             <i class="fa fa-refresh"></i>
-                        </button>
-                        <button class="btn btn-back btn-xs" uib-tooltip="Upload" tooltip-append-to-body="true">
-                            <i class="fa fa-upload"></i>
                         </button>
                         <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true"  ng-click="downLoad()">
                             <i class="fa fa-download"></i>

@@ -14,7 +14,7 @@ angular.module('app.layout').controller('navCtrl', function ($scope, $state, $st
                 $scope.imgUser = false;
                 $scope.user.thumbnailphoto[0] = 'data:image/jpg;base64,' + data.result.thumbnailphoto[0];
             }
-        }
+        } 
         /*displayname
          ITcode
          telephone

@@ -479,7 +479,8 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
 
     //点击Segment
     $scope.getSegment = function(){
-        $scope.validate = {
+        //切换复杂表
+       /* $scope.validate = {
             cycleName : $scope.CyclName,
         };
         console.log($scope.validate)
@@ -492,7 +493,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
             console.log(data);
         }, function (data) {
             console.log(data);
-        });
+        });*/
     };
 
 
@@ -506,6 +507,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
         console.log($scope.validate)
         CycleQTQService.getValidate($scope.validate).then(function (data) {
             if(data.code == 0){
+                console.log(data)
                 alert('成功！');
                 $scope.getPage();
             }else {
