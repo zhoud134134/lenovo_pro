@@ -52,7 +52,7 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             cycleName : $scope.CycleChoose,
             user : $rootScope.user
         }
-        console.log($scope.search);
+        console.log($rootScope.user);
         if(!$scope.CycleChoose){
             alert("请选择条件！");
         }else {

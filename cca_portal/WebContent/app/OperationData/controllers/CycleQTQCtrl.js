@@ -104,7 +104,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
             month : $scope.EBRData,
             user : $rootScope.user
         }
-        console.log($scope.search);
+        console.log($rootScope.user);
         if(!$scope.EBRData || !$scope.CFEData){
             alert("请选择条件！");
         }else {
@@ -504,7 +504,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
             zuuid : $scope.TaskID,
             user : $rootScope.user
         };
-        console.log($scope.validate)
+        console.log($rootScope.user)
         CycleQTQService.getValidate($scope.validate).then(function (data) {
             if(data.code == 0){
                 console.log(data)

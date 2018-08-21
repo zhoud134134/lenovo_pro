@@ -105,7 +105,7 @@ angular.module('app', [
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     // editableOptions.theme = 'bs3';
-        $rootScope.user = '123';
+    //    $rootScope.user = '123';
 
 });
 

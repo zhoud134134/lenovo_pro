@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.Basicdata').controller('BUmaintenanceCtrl', function ($scope,$state,$stateParams,BUmaintenanceService,APP_CONFIG,Upload) {
+angular.module('app.Basicdata').controller('BUmaintenanceCtrl', function ($scope,$rootScope,$state,$stateParams,BUmaintenanceService,APP_CONFIG,Upload) {
 
     //加载页面、搜索功能
     $scope.SegmentSel = '';
@@ -137,7 +137,7 @@ angular.module('app.Basicdata').controller('BUmaintenanceCtrl', function ($scope
             url:APP_CONFIG.baseUrl+ '/api/bmt/attachments',
             data : {
                 file : $scope.myfiles,
-                username : APP_CONFIG.Name
+                username : $rootScope.user
             }
         }).success(function (data, status, headers, config) {
             if(data.code == 0){

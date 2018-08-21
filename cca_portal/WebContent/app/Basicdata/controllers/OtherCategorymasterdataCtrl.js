@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.Basicdata').controller('OtherCategorymasterdataCtrl', function ($scope,$state,$stateParams,$location,OtherCategorymasterdataService,APP_CONFIG,Upload) {
+angular.module('app.Basicdata').controller('OtherCategorymasterdataCtrl', function ($scope,$rootScope,$state,$stateParams,$location,OtherCategorymasterdataService,APP_CONFIG,Upload) {
 
     //加载页面、搜索功能
     $scope.OtherSel = '';
@@ -120,7 +120,7 @@ angular.module('app.Basicdata').controller('OtherCategorymasterdataCtrl', functi
             url:APP_CONFIG.baseUrl+ '/api/ocm/attachments',
             data : {
                 file : $scope.myfiles,
-                username : APP_CONFIG.Name
+                username : $rootScope.user
             }
         }).success(function (data, status, headers, config) {
             if(data.code == 0){

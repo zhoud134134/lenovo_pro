@@ -46,7 +46,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             cycleName : $scope.CycleChoose,
             user : $rootScope.user
         }
-        console.log($scope.search);
+        console.log($rootScope.user);
         if(!$scope.CycleChoose){
             alert("请选择条件！");
         }else {
@@ -167,7 +167,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             zuuid : $scope.TaskID,
             user : $rootScope.user
         };
-        console.log($scope.validate)
+        console.log($rootScope.user)
         CAmaintenanceService.getValidate($scope.validate).then(function (data) {
             if(data.code == 0){
                 alert('成功！');

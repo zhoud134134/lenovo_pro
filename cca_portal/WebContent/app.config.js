@@ -273,7 +273,7 @@ appConfig.baseUrl="https://mcmt.lenovo.com/ccf-prod";
 //appConfig.baseUrl="http://10.116.19.116:8080";
 appConfig.limit = 10;
 appConfig.page =1;
-appConfig.Name =1;
+//appConfig.Name =1;
 window.appConfig = appConfig;
 
 /*
