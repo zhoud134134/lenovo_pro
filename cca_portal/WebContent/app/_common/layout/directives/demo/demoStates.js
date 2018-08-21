@@ -107,7 +107,7 @@ angular.module('SmartAdmin.Layout').directive('demoStates', function ($rootScope
             };
 
 
-            if($scope.smartSkin != "smart-style-0"){
+            if($scope.smartSkin != "smart-style-2"){
                 $scope.setSkin(_.find($scope.skins, {name: $scope.smartSkin}))
             }
 

@@ -524,3 +524,13 @@ table.dataTable thead .sorting_asc {
     border-color: #2c699d;
     color: #fff !important;
 }
+.smart-style-2 .login-info a span {
+    padding: 0;
+    font-size: 14px!important;
+    max-width: 110px;
+}
+.smart-style-2 .login-info span {
+    padding: 5px 6px 7px;
+    background: #FFF;
+    border-radius: 4px;
+}

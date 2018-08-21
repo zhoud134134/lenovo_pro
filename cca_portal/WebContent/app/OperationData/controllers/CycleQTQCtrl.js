@@ -124,6 +124,8 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
 
     $scope.WW = true;
     $scope.PRC = true;
+    $scope.WWShift = true;
+    $scope.PRCShift = true;
     //单击整行选中
     $scope.trClick = function($event,id,status,cycleName){
         $($("#tabExample input:radio")).removeAttr("checked");
@@ -477,8 +479,12 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
         }
     };
 
-    //点击Segment
-    $scope.getSegment = function(){
+    //点击WW中的Shift view
+    $scope.getSegmentWW = function(){
+        $scope.WW = true;
+        $scope.PRC = true;
+        $scope.WWShift = false;
+        $scope.PRCShift = true;
         //切换复杂表
        /* $scope.validate = {
             cycleName : $scope.CyclName,
@@ -495,6 +501,27 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
             console.log(data);
         });*/
     };
+    //点击PRC中的Shift view
+    $scope.getSegmentPRC = function(){
+        $scope.WW = true;
+        $scope.PRC = true;
+        $scope.WWShift = true;
+        $scope.PRCShift = false;
+    }
+    //点击WW的中Shift view的Shift view
+    $scope.getWWShift = function(){
+        $scope.WW = false;
+        $scope.PRC = true;
+        $scope.WWShift = true;
+        $scope.PRCShift = true;
+    }
+//点击PRC的中Shift view的Shift view
+    $scope.getPRCShift = function(){
+        $scope.WW = true;
+        $scope.PRC = false;
+        $scope.WWShift = true;
+        $scope.PRCShift = true;
+    }
 
 
     //点击Validate
