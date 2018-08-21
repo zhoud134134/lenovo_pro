@@ -150,13 +150,32 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
             var objectUrl = URL.createObjectURL(blob);
-            var aForExcel = $("<a><span class='forExcel'>����excel</span></a>").attr("href",objectUrl);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
             $("body").append(aForExcel);
             $(".forExcel").click();
             aForExcel.remove();
         },function(data){
             console.log(data);
         })
+        }
+    }
+
+    //ww时的Download
+    $scope.getWWDownLoad = function(){
+        if(!$scope.TaskID){
+            return;
+        }else{
+            CAmaintenanceService.getWwDown($scope.TaskID).then(function(data){
+                console.log(data);
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+            },function(data){
+                console.log(data);
+            })
         }
     }
 
