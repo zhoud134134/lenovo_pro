@@ -3,13 +3,12 @@
     <!-- User info -->
     <div class="login-info ng-cloak">
     <span> <!-- User image size is adjusted inside CSS, it should stay as it -->
-        <a  href="" toggle-shortcut>
+        <a  href="">
             <img ng-src="{{userData.thumbnailphoto}}" alt="me" class="online" ng-show="imgUser">
 
             <img ng-src="{{userData.thumbnailphoto[0]}}" alt="me" class="online" ng-show="!imgUser">
                 <span>{{userData.displayname[0]}}
                 </span>
-            <i class="fa fa-angle-down"></i>
         </a>
      </span>
     </div>
