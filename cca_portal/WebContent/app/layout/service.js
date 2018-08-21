@@ -4,7 +4,7 @@ angular.module('app.layout').service("navService", function($http, $q , APP_CONF
     this.getUser = function(type) {
         var d = $q.defer();
         $http({
-            method : 'POST',
+            method : 'GET',
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
             url : APP_CONFIG.baseUrl +'/adfs/user',
         }).then(function successCallback(response) {
