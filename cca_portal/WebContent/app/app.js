@@ -100,12 +100,42 @@ angular.module('app', [
 .constant('APP_CONFIG', window.appConfig)
 
 .run(function ($rootScope
-    , $state, $stateParams
+    , $state, $stateParams,navService
     ) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     // editableOptions.theme = 'bs3';
     //    $rootScope.user = '123';
+
+        $rootScope.$on('$stateChangeStart',function($event, toState, toParams, fromState, fromParams,$timeout){
+            //event：该事件的基本信息
+            //toState:我们可以得到当前路由的信息，比如路由名称，url,视图的控制器，模板路径等等
+            //toParams:我们可以得到当前路由的参数
+            //fromState：我们可以得到上一个路由的信息，比如路由名称，url,视图的控制器，模板路径等等
+            //fromParams：我们可以得到上一个路由的参数
+            /*可以触发的事件包括：
+            stateChangeStart当状态改变开始的时候被触发
+            $stateChangeSuccess当状态改变成功后被触发
+            $stateChangeError当状态改变遇到错误时被触发，错误通常是目标无法载入，需要预载入的数据无法被载入等*/
+
+           if (!$rootScope.userResult) {
+               window.location.href='http://mcmt.lenovo.com';
+            }
+           /*if (toState.name != 'login') {
+                alert(1)
+               $state.transitionTo("login", null, {notify:false});
+               $state.go("login");
+                event.preventDefault();
+
+                //window.location.href='http://mcmt.lenovo.com';
+            }else {
+               alert(2)
+           }*/
+
+
+
+
+        });
 
 });
 

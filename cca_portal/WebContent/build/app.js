@@ -397,12 +397,42 @@ angular.module('app', [
 .constant('APP_CONFIG', window.appConfig)
 
 .run(function ($rootScope
-    , $state, $stateParams
+    , $state, $stateParams,navService
     ) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     // editableOptions.theme = 'bs3';
     //    $rootScope.user = '123';
+
+        $rootScope.$on('$stateChangeStart',function($event, toState, toParams, fromState, fromParams,$timeout){
+            //event：该事件的基本信息
+            //toState:我们可以得到当前路由的信息，比如路由名称，url,视图的控制器，模板路径等等
+            //toParams:我们可以得到当前路由的参数
+            //fromState：我们可以得到上一个路由的信息，比如路由名称，url,视图的控制器，模板路径等等
+            //fromParams：我们可以得到上一个路由的参数
+            /*可以触发的事件包括：
+            stateChangeStart当状态改变开始的时候被触发
+            $stateChangeSuccess当状态改变成功后被触发
+            $stateChangeError当状态改变遇到错误时被触发，错误通常是目标无法载入，需要预载入的数据无法被载入等*/
+
+           if (!$rootScope.userResult) {
+               window.location.href='http://mcmt.lenovo.com';
+            }
+           /*if (toState.name != 'login') {
+                alert(1)
+               $state.transitionTo("login", null, {notify:false});
+               $state.go("login");
+                event.preventDefault();
+
+                //window.location.href='http://mcmt.lenovo.com';
+            }else {
+               alert(2)
+           }*/
+
+
+
+
+        });
 
 });
 
@@ -2936,6 +2966,7 @@ angular.module('app.forms').value('formsCommon', {
 angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, $state, $stateParams, $location, navService) {
 
     navService.getUser().then(function (data) {
+        $rootScope.userResult = data.result;
         if (data.code == 0) {
             var data = {"result":{"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"]},"code":0}
              $scope.userData = data.result;
@@ -18914,6 +18945,43 @@ angular.module('SmartAdmin.Layout').directive('stateBreadcrumbs', function ($roo
         }
     }
 });
+
+"use strict";
+
+angular.module('SmartAdmin.UI').directive('smartPopoverHtml', function () {
+    return {
+        restrict: "A",
+        link: function(scope, element, attributes){
+            var options = {};
+            options.content = attributes.smartPopoverHtml;
+            options.placement = attributes.popoverPlacement || 'top';
+            options.html = true;
+            options.trigger =  attributes.popoverTrigger || 'click';
+            options.title =  attributes.popoverTitle || attributes.title;
+            element.popover(options)
+
+        }
+
+    };
+});
+
+
+"use strict";
+
+angular.module('SmartAdmin.UI').directive('smartTooltipHtml', function () {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attributes){
+                element.tooltip({
+                    placement: attributes.tooltipPlacement || 'top',
+                    html: true,
+                    title: attributes.smartTooltipHtml
+                })
+            }
+        };
+    }
+);
+
 'use strict';
 
 angular.module('SmartAdmin.Layout').factory('lazyScript', function($q, $http){
@@ -19058,43 +19126,6 @@ angular.module('SmartAdmin.Layout').factory('SmartCss', function ($rootScope, $t
 
 
 
-
-
-"use strict";
-
-angular.module('SmartAdmin.UI').directive('smartPopoverHtml', function () {
-    return {
-        restrict: "A",
-        link: function(scope, element, attributes){
-            var options = {};
-            options.content = attributes.smartPopoverHtml;
-            options.placement = attributes.popoverPlacement || 'top';
-            options.html = true;
-            options.trigger =  attributes.popoverTrigger || 'click';
-            options.title =  attributes.popoverTitle || attributes.title;
-            element.popover(options)
-
-        }
-
-    };
-});
-
-
-"use strict";
-
-angular.module('SmartAdmin.UI').directive('smartTooltipHtml', function () {
-        return {
-            restrict: 'A',
-            link: function(scope, element, attributes){
-                element.tooltip({
-                    placement: attributes.tooltipPlacement || 'top',
-                    html: true,
-                    title: attributes.smartTooltipHtml
-                })
-            }
-        };
-    }
-);
 
 "use strict";
 
