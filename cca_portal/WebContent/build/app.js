@@ -2346,6 +2346,11 @@ angular.module('app.chat', ['ngSanitize'])
 
     angular.module('SmartAdmin.Forms', []);
 })();
+(function(){
+    "use strict";
+
+    angular.module('SmartAdmin.Layout', []);
+})();
 angular.module("app").run(["$templateCache", function($templateCache) {$templateCache.put("app/dashboard/live-feeds.tpl.html","<div jarvis-widget id=\"live-feeds-widget\" data-widget-togglebutton=\"false\" data-widget-editbutton=\"false\"\r\n     data-widget-fullscreenbutton=\"false\" data-widget-colorbutton=\"false\" data-widget-deletebutton=\"false\">\r\n<!-- widget options:\r\nusage: <div class=\"jarviswidget\" id=\"wid-id-0\" data-widget-editbutton=\"false\">\r\n\r\ndata-widget-colorbutton=\"false\"\r\ndata-widget-editbutton=\"false\"\r\ndata-widget-togglebutton=\"false\"\r\ndata-widget-deletebutton=\"false\"\r\ndata-widget-fullscreenbutton=\"false\"\r\ndata-widget-custombutton=\"false\"\r\ndata-widget-collapsed=\"true\"\r\ndata-widget-sortable=\"false\"\r\n\r\n-->\r\n<header>\r\n    <span class=\"widget-icon\"> <i class=\"glyphicon glyphicon-stats txt-color-darken\"></i> </span>\r\n\r\n    <h2>Live Feeds </h2>\r\n\r\n    <ul class=\"nav nav-tabs pull-right in\" id=\"myTab\">\r\n        <li class=\"active\">\r\n            <a data-toggle=\"tab\" href=\"#s1\"><i class=\"fa fa-clock-o\"></i> <span class=\"hidden-mobile hidden-tablet\">Live Stats</span></a>\r\n        </li>\r\n\r\n        <li>\r\n            <a data-toggle=\"tab\" href=\"#s2\"><i class=\"fa fa-facebook\"></i> <span class=\"hidden-mobile hidden-tablet\">Social Network</span></a>\r\n        </li>\r\n\r\n        <li>\r\n            <a data-toggle=\"tab\" href=\"#s3\"><i class=\"fa fa-dollar\"></i> <span class=\"hidden-mobile hidden-tablet\">Revenue</span></a>\r\n        </li>\r\n    </ul>\r\n\r\n</header>\r\n\r\n<!-- widget div-->\r\n<div class=\"no-padding\">\r\n\r\n    <div class=\"widget-body\">\r\n        <!-- content -->\r\n        <div id=\"myTabContent\" class=\"tab-content\">\r\n            <div class=\"tab-pane fade active in padding-10 no-padding-bottom\" id=\"s1\">\r\n                <div class=\"row no-space\">\r\n                    <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8\">\r\n														<span class=\"demo-liveupdate-1\"> <span\r\n                                                                class=\"onoffswitch-title\">Live switch</span> <span\r\n                                                                class=\"onoffswitch\">\r\n																<input type=\"checkbox\" name=\"start_interval\" ng-model=\"autoUpdate\"\r\n                                                                       class=\"onoffswitch-checkbox\" id=\"start_interval\">\r\n																<label class=\"onoffswitch-label\" for=\"start_interval\">\r\n                                                                    <span class=\"onoffswitch-inner\"\r\n                                                                          data-swchon-text=\"ON\"\r\n                                                                          data-swchoff-text=\"OFF\"></span>\r\n                                                                    <span class=\"onoffswitch-switch\"></span>\r\n                                                                </label> </span> </span>\r\n\r\n                        <div id=\"updating-chart\" class=\"chart-large txt-color-blue\" flot-basic flot-data=\"liveStats\" flot-options=\"liveStatsOptions\"></div>\r\n\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4 show-stats\">\r\n\r\n                        <div class=\"row\">\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> My Tasks <span\r\n                                    class=\"pull-right\">130/200</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blueDark\" style=\"width: 65%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> Transfered <span\r\n                                    class=\"pull-right\">440 GB</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blue\" style=\"width: 34%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> Bugs Squashed<span\r\n                                    class=\"pull-right\">77%</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blue\" style=\"width: 77%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> User Testing <span\r\n                                    class=\"pull-right\">7 Days</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-greenLight\" style=\"width: 84%;\"></div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <span class=\"show-stat-buttons\"> <span class=\"col-xs-12 col-sm-6 col-md-6 col-lg-6\"> <a\r\n                                    href-void class=\"btn btn-default btn-block hidden-xs\">Generate PDF</a> </span> <span\r\n                                    class=\"col-xs-12 col-sm-6 col-md-6 col-lg-6\"> <a href-void\r\n                                                                                     class=\"btn btn-default btn-block hidden-xs\">Report\r\n                                a bug</a> </span> </span>\r\n\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"show-stat-microcharts\" data-sparkline-container data-easy-pie-chart-container>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n\r\n                        <div class=\"easy-pie-chart txt-color-orangeDark\" data-percent=\"33\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">35</span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Server Load <i class=\"fa fa-caret-up icon-color-bad\"></i> </span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-greenLight\"><i class=\"fa fa-caret-up\"></i> 97%</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blueLight\"><i class=\"fa fa-caret-down\"></i> 44%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-greenLight hidden-sm hidden-md pull-right\"\r\n                             data-sparkline-type=\"line\" data-sparkline-height=\"33px\" data-sparkline-width=\"70px\"\r\n                             data-fill-color=\"transparent\">\r\n                            130, 187, 250, 257, 200, 210, 300, 270, 363, 247, 270, 363, 247\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-greenLight\" data-percent=\"78.9\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">78.9 </span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Disk Space <i class=\"fa fa-caret-down icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-blueDark\"><i class=\"fa fa-caret-up\"></i> 76%</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blue\"><i class=\"fa fa-caret-down\"></i> 3%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-blue hidden-sm hidden-md pull-right\" data-sparkline-type=\"line\"\r\n                             data-sparkline-height=\"33px\" data-sparkline-width=\"70px\" data-fill-color=\"transparent\">\r\n                            257, 200, 210, 300, 270, 363, 130, 187, 250, 247, 270, 363, 247\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-blue\" data-percent=\"23\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">23 </span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Transfered <i class=\"fa fa-caret-up icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-darken\">10GB</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blueDark\"><i class=\"fa fa-caret-up\"></i> 10%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-darken hidden-sm hidden-md pull-right\"\r\n                             data-sparkline-type=\"line\" data-sparkline-height=\"33px\" data-sparkline-width=\"70px\"\r\n                             data-fill-color=\"transparent\">\r\n                            200, 210, 363, 247, 300, 270, 130, 187, 250, 257, 363, 247, 270\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-darken\" data-percent=\"36\" data-pie-size=\"50\">\r\n                            <span class=\"percent degree-sign\">36 <i class=\"fa fa-caret-up\"></i></span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Temperature <i\r\n                                class=\"fa fa-caret-down icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-red\"><i class=\"fa fa-caret-up\"></i> 124</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blue\"><i class=\"fa fa-caret-down\"></i> 40 F</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-red hidden-sm hidden-md pull-right\" data-sparkline-type=\"line\"\r\n                             data-sparkline-height=\"33px\" data-sparkline-width=\"70px\" data-fill-color=\"transparent\">\r\n                            2700, 3631, 2471, 2700, 3631, 2471, 1300, 1877, 2500, 2577, 2000, 2100, 3000\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n            <!-- end s1 tab pane -->\r\n\r\n            <div class=\"tab-pane fade\" id=\"s2\">\r\n                <div class=\"widget-body-toolbar bg-color-white\">\r\n\r\n                    <form class=\"form-inline\" role=\"form\">\r\n\r\n                        <div class=\"form-group\">\r\n                            <label class=\"sr-only\" for=\"s123\">Show From</label>\r\n                            <input type=\"email\" class=\"form-control input-sm\" id=\"s123\" placeholder=\"Show From\">\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <input type=\"email\" class=\"form-control input-sm\" id=\"s124\" placeholder=\"To\">\r\n                        </div>\r\n\r\n                        <div class=\"btn-group hidden-phone pull-right\">\r\n                            <a class=\"btn dropdown-toggle btn-xs btn-default\" data-toggle=\"dropdown\"><i\r\n                                    class=\"fa fa-cog\"></i> More <span class=\"caret\"> </span> </a>\r\n                            <ul class=\"dropdown-menu pull-right\">\r\n                                <li>\r\n                                    <a href-void><i class=\"fa fa-file-text-alt\"></i> Export to PDF</a>\r\n                                </li>\r\n                                <li>\r\n                                    <a href-void><i class=\"fa fa-question-sign\"></i> Help</a>\r\n                                </li>\r\n                            </ul>\r\n                        </div>\r\n\r\n                    </form>\r\n\r\n                </div>\r\n                <div class=\"padding-10\">\r\n                    <div id=\"statsChart\" class=\"chart-large has-legend-unique\" flot-basic flot-data=\"statsData\" flot-options=\"statsDisplayOptions\"></div>\r\n                </div>\r\n\r\n            </div>\r\n            <!-- end s2 tab pane -->\r\n\r\n            <div class=\"tab-pane fade\" id=\"s3\">\r\n\r\n                <div class=\"widget-body-toolbar bg-color-white smart-form\" id=\"rev-toggles\">\r\n\r\n                    <div class=\"inline-group\">\r\n\r\n                        <label for=\"gra-0\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-0\" ng-model=\"targetsShow\">\r\n                            <i></i> Target </label>\r\n                        <label for=\"gra-1\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-1\" ng-model=\"actualsShow\">\r\n                            <i></i> Actual </label>\r\n                        <label for=\"gra-2\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-2\" ng-model=\"signupsShow\">\r\n                            <i></i> Signups </label>\r\n                    </div>\r\n\r\n                    <div class=\"btn-group hidden-phone pull-right\">\r\n                        <a class=\"btn dropdown-toggle btn-xs btn-default\" data-toggle=\"dropdown\"><i\r\n                                class=\"fa fa-cog\"></i> More <span class=\"caret\"> </span> </a>\r\n                        <ul class=\"dropdown-menu pull-right\">\r\n                            <li>\r\n                                <a href-void><i class=\"fa fa-file-text-alt\"></i> Export to PDF</a>\r\n                            </li>\r\n                            <li>\r\n                                <a href-void><i class=\"fa fa-question-sign\"></i> Help</a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <div class=\"padding-10\">\r\n                    <div id=\"flotcontainer\" class=\"chart-large has-legend-unique\" flot-basic flot-data=\"revenewData\" flot-options=\"revenewDisplayOptions\" ></div>\r\n                </div>\r\n            </div>\r\n            <!-- end s3 tab pane -->\r\n        </div>\r\n\r\n        <!-- end content -->\r\n    </div>\r\n\r\n</div>\r\n<!-- end widget div -->\r\n</div>\r\n");
 $templateCache.put("app/layout/layout.tpl.html","<!-- HEADER -->\r\n<div data-smart-include=\"app/layout/partials/header.tpl.html\" class=\"placeholder-header\"></div>\r\n<!-- END HEADER -->\r\n\r\n\r\n<!-- Left panel : Navigation area -->\r\n<!-- Note: This width of the aside area can be adjusted through LESS variables -->\r\n<div data-smart-include=\"app/layout/partials/navigation.tpl.html\" class=\"placeholder-left-panel\"></div>\r\n\r\n<!-- END NAVIGATION -->\r\n\r\n<!-- MAIN PANEL -->\r\n<div id=\"main\" role=\"main\">\r\n    <demo-states></demo-states>\r\n\r\n    <!-- RIBBON -->\r\n    <div id=\"ribbon\">\r\n\r\n				<span class=\"ribbon-button-alignment\">\r\n					<span id=\"refresh\" class=\"btn btn-ribbon\" reset-widgets\r\n                          tooltip-placement=\"bottom\"\r\n                          smart-tooltip-html=\"<i class=\'text-warning fa fa-warning\'></i> Warning! This will reset all your widget settings.\">\r\n						<i class=\"fa fa-refresh\"></i>\r\n					</span>\r\n				</span>\r\n\r\n        <!-- breadcrumb -->\r\n        <state-breadcrumbs></state-breadcrumbs>\r\n        <!-- end breadcrumb -->\r\n\r\n\r\n    </div>\r\n    <!-- END RIBBON -->\r\n\r\n\r\n    <div data-smart-router-animation-wrap=\"content content@app\" data-wrap-for=\"#content\">\r\n        <div data-ui-view=\"content\" data-autoscroll=\"false\"></div>\r\n    </div>\r\n\r\n</div>\r\n<!-- END MAIN PANEL -->\r\n\r\n<!-- PAGE FOOTER -->\r\n<div data-smart-include=\"app/layout/partials/footer.tpl.html\"></div>\r\n\r\n<div data-smart-include=\"app/layout/shortcut/shortcut.tpl.html\"></div>\r\n\r\n<!-- END PAGE FOOTER -->\r\n\r\n\r\n");
 $templateCache.put("app/auth/directives/login-info.tpl.html","<div class=\"login-info ng-cloak\">\r\n    <span> <!-- User image size is adjusted inside CSS, it should stay as it -->\r\n        <a  href=\"\">\r\n            <img ng-src=\"{{user.picture}}\" alt=\"me\" class=\"online\">\r\n                <span>{{user.username}}\r\n                </span>\r\n        </a>\r\n     </span>\r\n</div>");
@@ -2372,11 +2377,6 @@ $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-profile-form.tpl.html","<form id=\"profileForm\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <label>Email address</label>\r\n            <input type=\"text\" class=\"form-control\" name=\"email\" />\r\n        </div>\r\n    </fieldset>\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label>Password</label>\r\n            <input type=\"password\" class=\"form-control\" name=\"password\" />\r\n        </div>\r\n    </fieldset>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>\r\n");
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-toggling-form.tpl.html","<form id=\"togglingForm\" method=\"post\" class=\"form-horizontal\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Full name <sup>*</sup></label>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"firstName\" placeholder=\"First name\" />\r\n            </div>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"lastName\" placeholder=\"Last name\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Company <sup>*</sup></label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"text\" class=\"form-control\" name=\"company\"\r\n                       required data-bv-notempty-message=\"The company name is required\" />\r\n            </div>\r\n            <div class=\"col-lg-2\">\r\n                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"#jobInfo\">\r\n                    Add more info\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <!-- These fields will not be validated as long as they are not visible -->\r\n    <div id=\"jobInfo\" style=\"display: none;\">\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Job title <sup>*</sup></label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"job\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Department <sup>*</sup></label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"department\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Mobile phone <sup>*</sup></label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"text\" class=\"form-control\" name=\"mobilePhone\" />\r\n            </div>\r\n            <div class=\"col-lg-2\">\r\n                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"#phoneInfo\">\r\n                    Add more phone numbers\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n    <!-- These fields will not be validated as long as they are not visible -->\r\n    <div id=\"phoneInfo\" style=\"display: none;\">\r\n\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Home phone</label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"homePhone\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Office phone</label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"officePhone\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>");
 $templateCache.put("app/_common/layout/directives/demo/demo-states.tpl.html","<div class=\"demo\"><span id=\"demo-setting\"><i class=\"fa fa-cog txt-color-blueDark\"></i></span>\r\n\r\n    <form>\r\n        <legend class=\"no-padding margin-bottom-10\">Layout Options</legend>\r\n        <section>\r\n            <label><input type=\"checkbox\" ng-model=\"fixedHeader\"\r\n                          class=\"checkbox style-0\"><span>Fixed Header</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedNavigation\"\r\n                          class=\"checkbox style-0\"><span>Fixed Navigation</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedRibbon\"\r\n                          class=\"checkbox style-0\"><span>Fixed Ribbon</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedPageFooter\"\r\n                          class=\"checkbox style-0\"><span>Fixed Footer</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"insideContainer\"\r\n                          class=\"checkbox style-0\"><span>Inside <b>.container</b></span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"rtl\"\r\n                          class=\"checkbox style-0\"><span>RTL</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"menuOnTop\"\r\n                          class=\"checkbox style-0\"><span>Menu on <b>top</b></span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"colorblindFriendly\"\r\n                          class=\"checkbox style-0\"><span>For Colorblind <div\r\n                    class=\"font-xs text-right\">(experimental)\r\n            </div></span>\r\n            </label><span id=\"smart-bgimages\"></span></section>\r\n        <section><h6 class=\"margin-top-10 semi-bold margin-bottom-5\">Clear Localstorage</h6><a\r\n                ng-click=\"factoryReset()\" class=\"btn btn-xs btn-block btn-primary\" id=\"reset-smart-widget\"><i\r\n                class=\"fa fa-refresh\"></i> Factory Reset</a></section>\r\n\r\n        <h6 class=\"margin-top-10 semi-bold margin-bottom-5\">SmartAdmin Skins</h6>\r\n\r\n\r\n        <section id=\"smart-styles\">\r\n            <a ng-repeat=\"skin in skins\" ng-click=\"setSkin(skin)\" class=\"{{skin.class}}\" style=\"{{skin.style}}\"><i ng-if=\"skin.name == $parent.smartSkin\" class=\"fa fa-check fa-fw\"></i> {{skin.label}} <sup ng-if=\"skin.beta\">beta</sup></a>\r\n        </section>\r\n    </form>\r\n</div>");}]);
-(function(){
-    "use strict";
-
-    angular.module('SmartAdmin.Layout', []);
-})();
 (function(){
     "use strict";
 
@@ -4475,6 +4475,28 @@ angular.module('app.ControlPoint').controller('CycleVersioncontrolCtrl', functio
 angular.module('app.ControlPoint').controller('TaskqueueCtrl', function ($scope,$state,$stateParams,$location) {
 
 })
+'use strict';
+
+angular.module('app.eCommerce').controller('OrdersDemoCtrl', function ($scope, orders) {
+
+    $scope.orders = orders.data;
+
+    $scope.tableOptions =  {
+        "data": orders.data.data,
+//            "bDestroy": true,
+        "iDisplayLength": 15,
+        columns: [
+            {data: "orderId"},
+            {data: "customerId"},
+            {data: "purchase"},
+            {data: "delivery"},
+            {data: "basePrice"},
+            {data: "postalZip"},
+            {data: "status"}
+        ],
+        "order": [[1, 'asc']]
+    }
+});
 "use strict";	
 
 angular.module('app').controller("ActivitiesCtrl", function ActivitiesCtrl($scope, $log, activityService){
@@ -4659,28 +4681,6 @@ angular.module('app').controller('TodoCtrl', function ($scope, $timeout, Todo) {
 
     };
 
-});
-'use strict';
-
-angular.module('app.eCommerce').controller('OrdersDemoCtrl', function ($scope, orders) {
-
-    $scope.orders = orders.data;
-
-    $scope.tableOptions =  {
-        "data": orders.data.data,
-//            "bDestroy": true,
-        "iDisplayLength": 15,
-        columns: [
-            {data: "orderId"},
-            {data: "customerId"},
-            {data: "purchase"},
-            {data: "delivery"},
-            {data: "basePrice"},
-            {data: "postalZip"},
-            {data: "status"}
-        ],
-        "order": [[1, 'asc']]
-    }
 });
 
 "use strict";
@@ -13147,259 +13147,6 @@ d(j,n)}}if(c){e=0;for(a=c.length;e<a;e++)d(e,c[e])}}function N(a,b,c,d){var e=a.
         _fnSplitObjNotation:La,_fnGetObjectDataFn:R,_fnSetObjectDataFn:S,_fnGetDataMaster:Ma,_fnClearTable:pa,_fnDeleteIndex:qa,_fnInvalidate:da,_fnGetRowElements:Ka,_fnCreateTr:Ja,_fnBuildHead:mb,_fnDrawHead:fa,_fnDraw:O,_fnReDraw:T,_fnAddOptionsHtml:pb,_fnDetectHeader:ea,_fnGetUniqueThs:ta,_fnFeatureHtmlFilter:rb,_fnFilterComplete:ga,_fnFilterCustom:Ab,_fnFilterColumn:zb,_fnFilter:yb,_fnFilterCreateSearch:Ra,_fnEscapeRegex:Sa,_fnFilterData:Bb,_fnFeatureHtmlInfo:ub,_fnUpdateInfo:Eb,_fnInfoMacros:Fb,_fnInitialise:ha,
         _fnInitComplete:wa,_fnLengthChange:Ta,_fnFeatureHtmlLength:qb,_fnFeatureHtmlPaginate:vb,_fnPageChange:Va,_fnFeatureHtmlProcessing:sb,_fnProcessingDisplay:C,_fnFeatureHtmlTable:tb,_fnScrollDraw:ma,_fnApplyToChildren:I,_fnCalculateColumnWidths:Ha,_fnThrottle:Qa,_fnConvertToWidth:Gb,_fnGetWidestNode:Hb,_fnGetMaxLenString:Ib,_fnStringToCss:v,_fnSortFlatten:W,_fnSort:ob,_fnSortAria:Kb,_fnSortListener:Xa,_fnSortAttachListener:Oa,_fnSortingClasses:ya,_fnSortData:Jb,_fnSaveState:za,_fnLoadState:Lb,_fnSettingsFromNode:Aa,
         _fnLog:K,_fnMap:F,_fnBindAction:Ya,_fnCallbackReg:z,_fnCallbackFire:s,_fnLengthOverflow:Ua,_fnRenderer:Pa,_fnDataSource:y,_fnRowAttributes:Na,_fnCalculateEnd:function(){}});h.fn.dataTable=m;m.$=h;h.fn.dataTableSettings=m.settings;h.fn.dataTableExt=m.ext;h.fn.DataTable=function(a){return h(this).dataTable(a).api()};h.each(m,function(a,b){h.fn.DataTable[a]=b});return h.fn.dataTable});
-/**
- * Created by griga on 2/9/16.
- */
-
-
-angular.module('app.tables').controller('DatatablesCtrl', function(DTOptionsBuilder, DTColumnBuilder){
-
-
-    this.standardOptions = DTOptionsBuilder
-        .fromSource('api/tables/datatables.standard.json')
-         //Add Bootstrap compatibility
-        .withDOM("<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-            "t" +
-            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>")
-        .withBootstrap();
-    this.standardColumns = [
-        DTColumnBuilder.newColumn('id').withClass('text-danger'),
-        DTColumnBuilder.newColumn('name'),
-        DTColumnBuilder.newColumn('phone'),
-        DTColumnBuilder.newColumn('company'),
-        DTColumnBuilder.newColumn('zip'),
-        DTColumnBuilder.newColumn('city'),
-        DTColumnBuilder.newColumn('date')
-    ];
-
-
-});
-'use strict';
-
-angular.module('app.tables').controller('JqGridCtrl', function ($scope) {
-    $scope.gridData = {
-        data: [
-            {
-                id: "1",
-                date: "2007-10-01",
-                name: "test",
-                note: "note",
-                amount: "200.00",
-                tax: "10.00",
-                total: "210.00"
-            },
-            {
-                id: "2",
-                date: "2007-10-02",
-                name: "test2",
-                note: "note2",
-                amount: "300.00",
-                tax: "20.00",
-                total: "320.00"
-            },
-            {
-                id: "3",
-                date: "2007-09-01",
-                name: "test3",
-                note: "note3",
-                amount: "400.00",
-                tax: "30.00",
-                total: "430.00"
-            },
-            {
-                id: "4",
-                date: "2007-10-04",
-                name: "test",
-                note: "note",
-                amount: "200.00",
-                tax: "10.00",
-                total: "210.00"
-            },
-            {
-                id: "5",
-                date: "2007-10-05",
-                name: "test2",
-                note: "note2",
-                amount: "300.00",
-                tax: "20.00",
-                total: "320.00"
-            },
-            {
-                id: "6",
-                date: "2007-09-06",
-                name: "test3",
-                note: "note3",
-                amount: "400.00",
-                tax: "30.00",
-                total: "430.00"
-            },
-            {
-                id: "7",
-                date: "2007-10-04",
-                name: "test",
-                note: "note",
-                amount: "200.00",
-                tax: "10.00",
-                total: "210.00"
-            },
-            {
-                id: "8",
-                date: "2007-10-03",
-                name: "test2",
-                note: "note2",
-                amount: "300.00",
-                tax: "20.00",
-                total: "320.00"
-            },
-            {
-                id: "9",
-                date: "2007-09-01",
-                name: "test3",
-                note: "note3",
-                amount: "400.00",
-                tax: "30.00",
-                total: "430.00"
-            },
-            {
-                id: "10",
-                date: "2007-10-01",
-                name: "test",
-                note: "note",
-                amount: "200.00",
-                tax: "10.00",
-                total: "210.00"
-            },
-            {
-                id: "11",
-                date: "2007-10-02",
-                name: "test2",
-                note: "note2",
-                amount: "300.00",
-                tax: "20.00",
-                total: "320.00"
-            },
-            {
-                id: "12",
-                date: "2007-09-01",
-                name: "test3",
-                note: "note3",
-                amount: "400.00",
-                tax: "30.00",
-                total: "430.00"
-            },
-            {
-                id: "13",
-                date: "2007-10-04",
-                name: "test",
-                note: "note",
-                amount: "200.00",
-                tax: "10.00",
-                total: "210.00"
-            },
-            {
-                id: "14",
-                date: "2007-10-05",
-                name: "test2",
-                note: "note2",
-                amount: "300.00",
-                tax: "20.00",
-                total: "320.00"
-            },
-            {
-                id: "15",
-                date: "2007-09-06",
-                name: "test3",
-                note: "note3",
-                amount: "400.00",
-                tax: "30.00",
-                total: "430.00"
-            },
-            {
-                id: "16",
-                date: "2007-10-04",
-                name: "test",
-                note: "note",
-                amount: "200.00",
-                tax: "10.00",
-                total: "210.00"
-            },
-            {
-                id: "17",
-                date: "2007-10-03",
-                name: "test2",
-                note: "note2",
-                amount: "300.00",
-                tax: "20.00",
-                total: "320.00"
-            },
-            {
-                id: "18",
-                date: "2007-09-01",
-                name: "test3",
-                note: "note3",
-                amount: "400.00",
-                tax: "30.00",
-                total: "430.00"
-            }
-        ],
-        colNames: ['Actions', 'Inv No', 'Date', 'Client', 'Amount', 'Tax', 'Total', 'Notes'],
-        colModel: [
-            {
-                name: 'act',
-                index: 'act',
-                sortable: false
-            },
-            {
-                name: 'id',
-                index: 'id'
-            },
-            {
-                name: 'date',
-                index: 'date',
-                editable: true
-            },
-            {
-                name: 'name',
-                index: 'name',
-                editable: true
-            },
-            {
-                name: 'amount',
-                index: 'amount',
-                align: "right",
-                editable: true
-            },
-            {
-                name: 'tax',
-                index: 'tax',
-                align: "right",
-                editable: true
-            },
-            {
-                name: 'total',
-                index: 'total',
-                align: "right",
-                editable: true
-            },
-            {
-                name: 'note',
-                index: 'note',
-                sortable: false,
-                editable: true
-            }
-        ]
-    }
-
-
-    $scope.getSelection = function(){
-        alert(jQuery('table').jqGrid('getGridParam', 'selarrrow'));
-    };
-
-    $scope.selectRow = function(row){
-       jQuery('table').jqGrid('setSelection', row);
-
-    }
-});
 "use strict";
 
 angular.module('app.ui').controller('GeneralElementsCtrl', function ($scope, $sce) {
@@ -14371,6 +14118,259 @@ angular.module('app.Validation').controller('ResultcheckingbyMTMCtrl', function 
         }
     }
 })
+/**
+ * Created by griga on 2/9/16.
+ */
+
+
+angular.module('app.tables').controller('DatatablesCtrl', function(DTOptionsBuilder, DTColumnBuilder){
+
+
+    this.standardOptions = DTOptionsBuilder
+        .fromSource('api/tables/datatables.standard.json')
+         //Add Bootstrap compatibility
+        .withDOM("<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+            "t" +
+            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>")
+        .withBootstrap();
+    this.standardColumns = [
+        DTColumnBuilder.newColumn('id').withClass('text-danger'),
+        DTColumnBuilder.newColumn('name'),
+        DTColumnBuilder.newColumn('phone'),
+        DTColumnBuilder.newColumn('company'),
+        DTColumnBuilder.newColumn('zip'),
+        DTColumnBuilder.newColumn('city'),
+        DTColumnBuilder.newColumn('date')
+    ];
+
+
+});
+'use strict';
+
+angular.module('app.tables').controller('JqGridCtrl', function ($scope) {
+    $scope.gridData = {
+        data: [
+            {
+                id: "1",
+                date: "2007-10-01",
+                name: "test",
+                note: "note",
+                amount: "200.00",
+                tax: "10.00",
+                total: "210.00"
+            },
+            {
+                id: "2",
+                date: "2007-10-02",
+                name: "test2",
+                note: "note2",
+                amount: "300.00",
+                tax: "20.00",
+                total: "320.00"
+            },
+            {
+                id: "3",
+                date: "2007-09-01",
+                name: "test3",
+                note: "note3",
+                amount: "400.00",
+                tax: "30.00",
+                total: "430.00"
+            },
+            {
+                id: "4",
+                date: "2007-10-04",
+                name: "test",
+                note: "note",
+                amount: "200.00",
+                tax: "10.00",
+                total: "210.00"
+            },
+            {
+                id: "5",
+                date: "2007-10-05",
+                name: "test2",
+                note: "note2",
+                amount: "300.00",
+                tax: "20.00",
+                total: "320.00"
+            },
+            {
+                id: "6",
+                date: "2007-09-06",
+                name: "test3",
+                note: "note3",
+                amount: "400.00",
+                tax: "30.00",
+                total: "430.00"
+            },
+            {
+                id: "7",
+                date: "2007-10-04",
+                name: "test",
+                note: "note",
+                amount: "200.00",
+                tax: "10.00",
+                total: "210.00"
+            },
+            {
+                id: "8",
+                date: "2007-10-03",
+                name: "test2",
+                note: "note2",
+                amount: "300.00",
+                tax: "20.00",
+                total: "320.00"
+            },
+            {
+                id: "9",
+                date: "2007-09-01",
+                name: "test3",
+                note: "note3",
+                amount: "400.00",
+                tax: "30.00",
+                total: "430.00"
+            },
+            {
+                id: "10",
+                date: "2007-10-01",
+                name: "test",
+                note: "note",
+                amount: "200.00",
+                tax: "10.00",
+                total: "210.00"
+            },
+            {
+                id: "11",
+                date: "2007-10-02",
+                name: "test2",
+                note: "note2",
+                amount: "300.00",
+                tax: "20.00",
+                total: "320.00"
+            },
+            {
+                id: "12",
+                date: "2007-09-01",
+                name: "test3",
+                note: "note3",
+                amount: "400.00",
+                tax: "30.00",
+                total: "430.00"
+            },
+            {
+                id: "13",
+                date: "2007-10-04",
+                name: "test",
+                note: "note",
+                amount: "200.00",
+                tax: "10.00",
+                total: "210.00"
+            },
+            {
+                id: "14",
+                date: "2007-10-05",
+                name: "test2",
+                note: "note2",
+                amount: "300.00",
+                tax: "20.00",
+                total: "320.00"
+            },
+            {
+                id: "15",
+                date: "2007-09-06",
+                name: "test3",
+                note: "note3",
+                amount: "400.00",
+                tax: "30.00",
+                total: "430.00"
+            },
+            {
+                id: "16",
+                date: "2007-10-04",
+                name: "test",
+                note: "note",
+                amount: "200.00",
+                tax: "10.00",
+                total: "210.00"
+            },
+            {
+                id: "17",
+                date: "2007-10-03",
+                name: "test2",
+                note: "note2",
+                amount: "300.00",
+                tax: "20.00",
+                total: "320.00"
+            },
+            {
+                id: "18",
+                date: "2007-09-01",
+                name: "test3",
+                note: "note3",
+                amount: "400.00",
+                tax: "30.00",
+                total: "430.00"
+            }
+        ],
+        colNames: ['Actions', 'Inv No', 'Date', 'Client', 'Amount', 'Tax', 'Total', 'Notes'],
+        colModel: [
+            {
+                name: 'act',
+                index: 'act',
+                sortable: false
+            },
+            {
+                name: 'id',
+                index: 'id'
+            },
+            {
+                name: 'date',
+                index: 'date',
+                editable: true
+            },
+            {
+                name: 'name',
+                index: 'name',
+                editable: true
+            },
+            {
+                name: 'amount',
+                index: 'amount',
+                align: "right",
+                editable: true
+            },
+            {
+                name: 'tax',
+                index: 'tax',
+                align: "right",
+                editable: true
+            },
+            {
+                name: 'total',
+                index: 'total',
+                align: "right",
+                editable: true
+            },
+            {
+                name: 'note',
+                index: 'note',
+                sortable: false,
+                editable: true
+            }
+        ]
+    }
+
+
+    $scope.getSelection = function(){
+        alert(jQuery('table').jqGrid('getGridParam', 'selarrrow'));
+    };
+
+    $scope.selectRow = function(row){
+       jQuery('table').jqGrid('setSelection', row);
+
+    }
+});
 "use strict";
 
 angular.module('app.auth').directive('facebookSignin', function ($rootScope, ezfb) {
@@ -15640,6 +15640,18 @@ angular.module('app.graphs').directive('dygraphsNoRollTimestamp', function (Dygr
         }
     }
 });
+'use strict';
+
+angular.module('app.graphs').directive('highchartTable', function (lazyScript) {
+    return {
+        restrict: 'A',
+        link: function (scope, element) {
+            lazyScript.register('build/vendor.graphs.js').then(function(){
+                element.highchartTable();
+            })
+        }
+    }
+});
 "use strict";
 
 angular.module('app.graphs').directive('flotAutoUpdatingChart', function($timeout, FlotConfig){
@@ -16079,18 +16091,6 @@ angular.module('app.graphs').directive('flotSiteStatsChart', function(FlotConfig
                 }
             });
 
-        }
-    }
-});
-'use strict';
-
-angular.module('app.graphs').directive('highchartTable', function (lazyScript) {
-    return {
-        restrict: 'A',
-        link: function (scope, element) {
-            lazyScript.register('build/vendor.graphs.js').then(function(){
-                element.highchartTable();
-            })
         }
     }
 });
@@ -17327,427 +17327,6 @@ angular.module('app.graphs').directive('vectorMap', function () {
         }
     }
 });
-'use strict';
-
-angular.module('app.tables').directive('datatableBasic', function ($compile) {
-    return {
-        restrict: 'A',
-        scope: {
-            tableOptions: '='
-        },
-        link: function (scope, element, attributes) {
-            /* // DOM Position key index //
-
-             l - Length changing (dropdown)
-             f - Filtering input (search)
-             t - The Table! (datatable)
-             i - Information (records)
-             p - Pagination (paging)
-             r - pRocessing
-             < and > - div elements
-             <"#id" and > - div with an id
-             <"class" and > - div with a class
-             <"#id.class" and > - div with an id and class
-
-             Also see: http://legacy.datatables.net/usage/features
-             */
-
-            var options = {
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                    "t" +
-                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                oLanguage:{
-                    "sSearch": "<span class='input-group-addon input-sm'><i class='glyphicon glyphicon-search'></i></span> ",
-                    "sLengthMenu": "_MENU_"
-                },
-                "autoWidth": false,
-                "smartResponsiveHelper": null,
-                "preDrawCallback": function () {
-                    // Initialize the responsive datatables helper once.
-                    if (!this.smartResponsiveHelper) {
-                        this.smartResponsiveHelper = new ResponsiveDatatablesHelper(element, {
-                            tablet: 1024,
-                            phone: 480
-                        });
-                    }
-                },
-                "rowCallback": function (nRow) {
-                    this.smartResponsiveHelper.createExpandIcon(nRow);
-                },
-                "drawCallback": function (oSettings) {
-                    this.smartResponsiveHelper.respond();
-                }
-            };
-
-            if(attributes.tableOptions){
-                options = angular.extend(options, scope.tableOptions)
-            }
-
-            var _dataTable;
-
-            var childFormat = element.find('.smart-datatable-child-format');
-            if(childFormat.length){
-                var childFormatTemplate = childFormat.remove().html();
-                element.on('click', childFormat.data('childControl'), function () {
-                    var tr = $(this).closest('tr');
-
-                    var row = _dataTable.row( tr );
-                    if ( row.child.isShown() ) {
-                        // This row is already open - close it
-                        row.child.hide();
-                        tr.removeClass('shown');
-                    }
-                    else {
-                        // Open this row
-                        var childScope = scope.$new();
-                        childScope.d = row.data();
-                        var html = $compile(childFormatTemplate)(childScope);
-                        row.child( html ).show();
-                        tr.addClass('shown');
-                    }
-                })
-            }
-
-
-
-            _dataTable =  element.DataTable(options);
-
-            if(attributes.bindFilters){
-                element.parent().find("div.toolbar").html('<div class="text-right"><img src="styles/img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
-
-                element.on( 'keyup change', 'thead th input[type=text]', function () {
-
-                    _dataTable
-                        .column( $(this).parent().index()+':visible' )
-                        .search( this.value )
-                        .draw();
-
-                } );
-            }
-        }
-    }
-});
-'use strict';
-
-angular.module('app.tables').directive('datatableColumnFilter', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attributes) {
-            /* // DOM Position key index //
-
-             l - Length changing (dropdown)
-             f - Filtering input (search)
-             t - The Table! (datatable)
-             i - Information (records)
-             p - Pagination (paging)
-             r - pRocessing
-             < and > - div elements
-             <"#id" and > - div with an id
-             <"class" and > - div with a class
-             <"#id.class" and > - div with an id and class
-
-             Also see: http://legacy.datatables.net/usage/features
-             */
-
-            var responsiveHelper = undefined;
-
-            var breakpointDefinition = {
-                tablet: 1024,
-                phone: 480
-            };
-
-            var otable = element.DataTable({
-                //"bFilter": false,
-                //"bInfo": false,
-                //"bLengthChange": false
-                //"bAutoWidth": false,
-                //"bPaginate": false,
-                //"bStateSave": true // saves sort state using localStorage
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>"+
-                    "t"+
-                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                oLanguage:{
-                    "sSearch": "<span class='input-group-addon input-sm'><i class='glyphicon glyphicon-search'></i></span> "
-                },
-                "autoWidth" : false,
-                "preDrawCallback" : function() {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper) {
-                        responsiveHelper = new ResponsiveDatatablesHelper(element, breakpointDefinition);
-                    }
-                },
-                "rowCallback" : function(nRow) {
-                    responsiveHelper.createExpandIcon(nRow);
-                },
-                "drawCallback" : function(oSettings) {
-                    responsiveHelper.respond();
-                }
-
-            });
-
-            // custom toolbar
-            element.parent().find("div.toolbar").html('<div class="text-right"><img src="styles/img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
-
-            // Apply the filter
-            element.on( 'keyup change', 'thead th input[type=text]', function () {
-
-                otable
-                    .column( $(this).parent().index()+':visible' )
-                    .search( this.value )
-                    .draw();
-
-            } );
-        }
-    }
-});
-'use strict';
-
-angular.module('app.tables').directive('datatableColumnReorder', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, element) {
-            /* // DOM Position key index //
-
-             l - Length changing (dropdown)
-             f - Filtering input (search)
-             t - The Table! (datatable)
-             i - Information (records)
-             p - Pagination (paging)
-             r - pRocessing
-             < and > - div elements
-             <"#id" and > - div with an id
-             <"class" and > - div with a class
-             <"#id.class" and > - div with an id and class
-
-             Also see: http://legacy.datatables.net/usage/features
-             */
-
-            var responsiveHelper = undefined;
-
-            var breakpointDefinition = {
-                tablet: 1024,
-                phone: 480
-            };
-
-            element.dataTable({
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 hidden-xs'C>r>" +
-                    "t" +
-                    "<'dt-toolbar-footer'<'col-sm-6 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                oLanguage: {
-                    "sSearch": "<span class='input-group-addon input-sm'><i class='glyphicon glyphicon-search'></i></span> "
-                },
-                "autoWidth": false,
-                "preDrawCallback": function () {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper) {
-                        responsiveHelper = new ResponsiveDatatablesHelper(element, breakpointDefinition);
-                    }
-                },
-                "rowCallback": function (nRow) {
-                    responsiveHelper.createExpandIcon(nRow);
-                },
-                "drawCallback": function (oSettings) {
-                    responsiveHelper.respond();
-                }
-            });
-        }
-    }
-});
-'use strict';
-
-angular.module('app.tables').directive('datatableTableTools', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attributes) {
-            /* // DOM Position key index //
-
-             l - Length changing (dropdown)
-             f - Filtering input (search)
-             t - The Table! (datatable)
-             i - Information (records)
-             p - Pagination (paging)
-             r - pRocessing
-             < and > - div elements
-             <"#id" and > - div with an id
-             <"class" and > - div with a class
-             <"#id.class" and > - div with an id and class
-
-             Also see: http://legacy.datatables.net/usage/features
-             */
-            var responsiveHelper = undefined;
-
-            var breakpointDefinition = {
-                tablet: 1024,
-                phone: 480
-            };
-
-            element.dataTable({
-                // Tabletools options:
-                //   https://datatables.net/extensions/tabletools/button_options
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 hidden-xs'T>r>" +
-                    "t" +
-                    "<'dt-toolbar-footer'<'col-sm-6 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                oLanguage:{
-                    "sSearch": "<span class='input-group-addon input-sm'><i class='glyphicon glyphicon-search'></i></span> "
-                },
-
-                sFilterInput:  "form-control",
-                "oTableTools": {
-                    "aButtons": [
-                        "copy",
-                        "csv",
-                        "xls",
-                        {
-                            "sExtends": "pdf",
-                            "sTitle": "SmartAdmin_PDF",
-                            "sPdfMessage": "SmartAdmin PDF Export",
-                            "sPdfSize": "letter"
-                        },
-                        {
-                            "sExtends": "print",
-                            "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
-                        }
-                    ],
-                    "sSwfPath": "bower_components/datatables-tabletools/swf/copy_csv_xls_pdf.swf"
-                },
-                "autoWidth": false,
-                preDrawCallback: function () {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper) {
-                        responsiveHelper = new ResponsiveDatatablesHelper(element, breakpointDefinition);
-                    }
-                },
-                rowCallback: function (nRow) {
-                    responsiveHelper.createExpandIcon(nRow);
-                },
-                drawCallback: function (oSettings) {
-                    responsiveHelper.respond();
-                }
-            });
-        }
-    }
-});
-'use strict';
-
-angular.module('app.tables').directive('jqGrid', function ($compile) {
-    var jqGridCounter = 0;
-
-    return {
-        replace: true,
-        restrict: 'E',
-        scope: {
-            gridData: '='
-        },
-        template: '<div>' +
-            '<table></table>' +
-            '<div class="jqgrid-pagination"></div>' +
-            '</div>',
-        controller: function($scope, $element){
-            $scope.editRow  = function(row){
-                $element.find('table').editRow(row);
-            };
-            $scope.saveRow  = function(row){
-                $element.find('table').saveRow(row);
-            };
-            $scope.restoreRow  = function(row){
-                $element.find('table').restoreRow(row);
-            };
-        },
-        link: function (scope, element) {
-            var gridNumber = jqGridCounter++;
-            var wrapperId = 'jqgrid-' + gridNumber;
-            element.attr('id', wrapperId);
-
-            var tableId = 'jqgrid-table-' + gridNumber;
-            var table = element.find('table');
-            table.attr('id', tableId);
-
-            var pagerId = 'jqgrid-pager-' + gridNumber;
-            element.find('.jqgrid-pagination').attr('id', pagerId);
-
-
-            table.jqGrid({
-                data : scope.gridData.data,
-                datatype : "local",
-                height : 'auto',
-                colNames : scope.gridData.colNames || [],
-                colModel : scope.gridData.colModel || [],
-                rowNum : 10,
-                rowList : [10, 20, 30],
-                pager : '#' + pagerId,
-                sortname : 'id',
-                toolbarfilter : true,
-                viewrecords : true,
-                sortorder : "asc",
-                gridComplete : function() {
-                    var ids = table.jqGrid('getDataIDs');
-                    for (var i = 0; i < ids.length; i++) {
-                        var cl = ids[i];
-                        var be = "<button class='btn btn-xs btn-default' uib-tooltip='Edit Row' tooltip-append-to-body='true' ng-click='editRow("+ cl +")'><i class='fa fa-pencil'></i></button>";
-
-                        var se = "<button class='btn btn-xs btn-default' uib-tooltip='Save Row' tooltip-append-to-body='true' ng-click='saveRow("+ cl +")'><i class='fa fa-save'></i></button>";
-
-                        var ca = "<button class='btn btn-xs btn-default' uib-tooltip='Cancel' tooltip-append-to-body='true' ng-click='restoreRow("+ cl +")'><i class='fa fa-times'></i></button>";
-
-                        table.jqGrid('setRowData', ids[i], {
-                            act : be + se + ca
-                        });
-                    }
-                },
-                editurl : "dummy.html",
-                caption : "SmartAdmin jQgrid Skin",
-                multiselect : true,
-                autowidth : true
-
-            });
-            table.jqGrid('navGrid', '#' + pagerId, {
-                edit : false,
-                add : false,
-                del : true
-            });
-            table.jqGrid('inlineNav', '#' + pagerId);
-
-
-            element.find(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
-            element.find(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
-            element.find(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
-            element.find(".ui-jqgrid-pager").removeClass("ui-state-default");
-            element.find(".ui-jqgrid").removeClass("ui-widget-content");
-
-            // add classes
-            element.find(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
-            element.find(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
-
-            element.find(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
-            element.find(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
-            element.find(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
-            element.find(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
-            element.find(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
-            element.find(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
-            element.find(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
-            element.find(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
-
-            element.find(".ui-icon.ui-icon-seek-prev").wrap("<div class='btn btn-sm btn-default'></div>");
-            element.find(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
-
-            element.find(".ui-icon.ui-icon-seek-first").wrap("<div class='btn btn-sm btn-default'></div>");
-            element.find(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");
-
-            element.find(".ui-icon.ui-icon-seek-next").wrap("<div class='btn btn-sm btn-default'></div>");
-            element.find(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
-
-            element.find(".ui-icon.ui-icon-seek-end").wrap("<div class='btn btn-sm btn-default'></div>");
-            element.find(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
-
-            $(window).on('resize.jqGrid', function() {
-               table.jqGrid('setGridWidth', $("#content").width());
-            });
-
-
-            $compile(element.contents())(scope);
-        }
-    }
-});
 "use strict";
 
 angular.module('SmartAdmin.Layout').directive('fullScreen', function(){
@@ -18945,43 +18524,6 @@ angular.module('SmartAdmin.Layout').directive('stateBreadcrumbs', function ($roo
         }
     }
 });
-
-"use strict";
-
-angular.module('SmartAdmin.UI').directive('smartPopoverHtml', function () {
-    return {
-        restrict: "A",
-        link: function(scope, element, attributes){
-            var options = {};
-            options.content = attributes.smartPopoverHtml;
-            options.placement = attributes.popoverPlacement || 'top';
-            options.html = true;
-            options.trigger =  attributes.popoverTrigger || 'click';
-            options.title =  attributes.popoverTitle || attributes.title;
-            element.popover(options)
-
-        }
-
-    };
-});
-
-
-"use strict";
-
-angular.module('SmartAdmin.UI').directive('smartTooltipHtml', function () {
-        return {
-            restrict: 'A',
-            link: function(scope, element, attributes){
-                element.tooltip({
-                    placement: attributes.tooltipPlacement || 'top',
-                    html: true,
-                    title: attributes.smartTooltipHtml
-                })
-            }
-        };
-    }
-);
-
 'use strict';
 
 angular.module('SmartAdmin.Layout').factory('lazyScript', function($q, $http){
@@ -19127,6 +18669,464 @@ angular.module('SmartAdmin.Layout').factory('SmartCss', function ($rootScope, $t
 
 
 
+
+"use strict";
+
+angular.module('SmartAdmin.UI').directive('smartPopoverHtml', function () {
+    return {
+        restrict: "A",
+        link: function(scope, element, attributes){
+            var options = {};
+            options.content = attributes.smartPopoverHtml;
+            options.placement = attributes.popoverPlacement || 'top';
+            options.html = true;
+            options.trigger =  attributes.popoverTrigger || 'click';
+            options.title =  attributes.popoverTitle || attributes.title;
+            element.popover(options)
+
+        }
+
+    };
+});
+
+
+"use strict";
+
+angular.module('SmartAdmin.UI').directive('smartTooltipHtml', function () {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attributes){
+                element.tooltip({
+                    placement: attributes.tooltipPlacement || 'top',
+                    html: true,
+                    title: attributes.smartTooltipHtml
+                })
+            }
+        };
+    }
+);
+
+'use strict';
+
+angular.module('app.tables').directive('datatableBasic', function ($compile) {
+    return {
+        restrict: 'A',
+        scope: {
+            tableOptions: '='
+        },
+        link: function (scope, element, attributes) {
+            /* // DOM Position key index //
+
+             l - Length changing (dropdown)
+             f - Filtering input (search)
+             t - The Table! (datatable)
+             i - Information (records)
+             p - Pagination (paging)
+             r - pRocessing
+             < and > - div elements
+             <"#id" and > - div with an id
+             <"class" and > - div with a class
+             <"#id.class" and > - div with an id and class
+
+             Also see: http://legacy.datatables.net/usage/features
+             */
+
+            var options = {
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                oLanguage:{
+                    "sSearch": "<span class='input-group-addon input-sm'><i class='glyphicon glyphicon-search'></i></span> ",
+                    "sLengthMenu": "_MENU_"
+                },
+                "autoWidth": false,
+                "smartResponsiveHelper": null,
+                "preDrawCallback": function () {
+                    // Initialize the responsive datatables helper once.
+                    if (!this.smartResponsiveHelper) {
+                        this.smartResponsiveHelper = new ResponsiveDatatablesHelper(element, {
+                            tablet: 1024,
+                            phone: 480
+                        });
+                    }
+                },
+                "rowCallback": function (nRow) {
+                    this.smartResponsiveHelper.createExpandIcon(nRow);
+                },
+                "drawCallback": function (oSettings) {
+                    this.smartResponsiveHelper.respond();
+                }
+            };
+
+            if(attributes.tableOptions){
+                options = angular.extend(options, scope.tableOptions)
+            }
+
+            var _dataTable;
+
+            var childFormat = element.find('.smart-datatable-child-format');
+            if(childFormat.length){
+                var childFormatTemplate = childFormat.remove().html();
+                element.on('click', childFormat.data('childControl'), function () {
+                    var tr = $(this).closest('tr');
+
+                    var row = _dataTable.row( tr );
+                    if ( row.child.isShown() ) {
+                        // This row is already open - close it
+                        row.child.hide();
+                        tr.removeClass('shown');
+                    }
+                    else {
+                        // Open this row
+                        var childScope = scope.$new();
+                        childScope.d = row.data();
+                        var html = $compile(childFormatTemplate)(childScope);
+                        row.child( html ).show();
+                        tr.addClass('shown');
+                    }
+                })
+            }
+
+
+
+            _dataTable =  element.DataTable(options);
+
+            if(attributes.bindFilters){
+                element.parent().find("div.toolbar").html('<div class="text-right"><img src="styles/img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
+
+                element.on( 'keyup change', 'thead th input[type=text]', function () {
+
+                    _dataTable
+                        .column( $(this).parent().index()+':visible' )
+                        .search( this.value )
+                        .draw();
+
+                } );
+            }
+        }
+    }
+});
+'use strict';
+
+angular.module('app.tables').directive('datatableColumnFilter', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attributes) {
+            /* // DOM Position key index //
+
+             l - Length changing (dropdown)
+             f - Filtering input (search)
+             t - The Table! (datatable)
+             i - Information (records)
+             p - Pagination (paging)
+             r - pRocessing
+             < and > - div elements
+             <"#id" and > - div with an id
+             <"class" and > - div with a class
+             <"#id.class" and > - div with an id and class
+
+             Also see: http://legacy.datatables.net/usage/features
+             */
+
+            var responsiveHelper = undefined;
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+
+            var otable = element.DataTable({
+                //"bFilter": false,
+                //"bInfo": false,
+                //"bLengthChange": false
+                //"bAutoWidth": false,
+                //"bPaginate": false,
+                //"bStateSave": true // saves sort state using localStorage
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>"+
+                    "t"+
+                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                oLanguage:{
+                    "sSearch": "<span class='input-group-addon input-sm'><i class='glyphicon glyphicon-search'></i></span> "
+                },
+                "autoWidth" : false,
+                "preDrawCallback" : function() {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper) {
+                        responsiveHelper = new ResponsiveDatatablesHelper(element, breakpointDefinition);
+                    }
+                },
+                "rowCallback" : function(nRow) {
+                    responsiveHelper.createExpandIcon(nRow);
+                },
+                "drawCallback" : function(oSettings) {
+                    responsiveHelper.respond();
+                }
+
+            });
+
+            // custom toolbar
+            element.parent().find("div.toolbar").html('<div class="text-right"><img src="styles/img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
+
+            // Apply the filter
+            element.on( 'keyup change', 'thead th input[type=text]', function () {
+
+                otable
+                    .column( $(this).parent().index()+':visible' )
+                    .search( this.value )
+                    .draw();
+
+            } );
+        }
+    }
+});
+'use strict';
+
+angular.module('app.tables').directive('datatableColumnReorder', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element) {
+            /* // DOM Position key index //
+
+             l - Length changing (dropdown)
+             f - Filtering input (search)
+             t - The Table! (datatable)
+             i - Information (records)
+             p - Pagination (paging)
+             r - pRocessing
+             < and > - div elements
+             <"#id" and > - div with an id
+             <"class" and > - div with a class
+             <"#id.class" and > - div with an id and class
+
+             Also see: http://legacy.datatables.net/usage/features
+             */
+
+            var responsiveHelper = undefined;
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+
+            element.dataTable({
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 hidden-xs'C>r>" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                oLanguage: {
+                    "sSearch": "<span class='input-group-addon input-sm'><i class='glyphicon glyphicon-search'></i></span> "
+                },
+                "autoWidth": false,
+                "preDrawCallback": function () {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper) {
+                        responsiveHelper = new ResponsiveDatatablesHelper(element, breakpointDefinition);
+                    }
+                },
+                "rowCallback": function (nRow) {
+                    responsiveHelper.createExpandIcon(nRow);
+                },
+                "drawCallback": function (oSettings) {
+                    responsiveHelper.respond();
+                }
+            });
+        }
+    }
+});
+'use strict';
+
+angular.module('app.tables').directive('datatableTableTools', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attributes) {
+            /* // DOM Position key index //
+
+             l - Length changing (dropdown)
+             f - Filtering input (search)
+             t - The Table! (datatable)
+             i - Information (records)
+             p - Pagination (paging)
+             r - pRocessing
+             < and > - div elements
+             <"#id" and > - div with an id
+             <"class" and > - div with a class
+             <"#id.class" and > - div with an id and class
+
+             Also see: http://legacy.datatables.net/usage/features
+             */
+            var responsiveHelper = undefined;
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+
+            element.dataTable({
+                // Tabletools options:
+                //   https://datatables.net/extensions/tabletools/button_options
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 hidden-xs'T>r>" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                oLanguage:{
+                    "sSearch": "<span class='input-group-addon input-sm'><i class='glyphicon glyphicon-search'></i></span> "
+                },
+
+                sFilterInput:  "form-control",
+                "oTableTools": {
+                    "aButtons": [
+                        "copy",
+                        "csv",
+                        "xls",
+                        {
+                            "sExtends": "pdf",
+                            "sTitle": "SmartAdmin_PDF",
+                            "sPdfMessage": "SmartAdmin PDF Export",
+                            "sPdfSize": "letter"
+                        },
+                        {
+                            "sExtends": "print",
+                            "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
+                        }
+                    ],
+                    "sSwfPath": "bower_components/datatables-tabletools/swf/copy_csv_xls_pdf.swf"
+                },
+                "autoWidth": false,
+                preDrawCallback: function () {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper) {
+                        responsiveHelper = new ResponsiveDatatablesHelper(element, breakpointDefinition);
+                    }
+                },
+                rowCallback: function (nRow) {
+                    responsiveHelper.createExpandIcon(nRow);
+                },
+                drawCallback: function (oSettings) {
+                    responsiveHelper.respond();
+                }
+            });
+        }
+    }
+});
+'use strict';
+
+angular.module('app.tables').directive('jqGrid', function ($compile) {
+    var jqGridCounter = 0;
+
+    return {
+        replace: true,
+        restrict: 'E',
+        scope: {
+            gridData: '='
+        },
+        template: '<div>' +
+            '<table></table>' +
+            '<div class="jqgrid-pagination"></div>' +
+            '</div>',
+        controller: function($scope, $element){
+            $scope.editRow  = function(row){
+                $element.find('table').editRow(row);
+            };
+            $scope.saveRow  = function(row){
+                $element.find('table').saveRow(row);
+            };
+            $scope.restoreRow  = function(row){
+                $element.find('table').restoreRow(row);
+            };
+        },
+        link: function (scope, element) {
+            var gridNumber = jqGridCounter++;
+            var wrapperId = 'jqgrid-' + gridNumber;
+            element.attr('id', wrapperId);
+
+            var tableId = 'jqgrid-table-' + gridNumber;
+            var table = element.find('table');
+            table.attr('id', tableId);
+
+            var pagerId = 'jqgrid-pager-' + gridNumber;
+            element.find('.jqgrid-pagination').attr('id', pagerId);
+
+
+            table.jqGrid({
+                data : scope.gridData.data,
+                datatype : "local",
+                height : 'auto',
+                colNames : scope.gridData.colNames || [],
+                colModel : scope.gridData.colModel || [],
+                rowNum : 10,
+                rowList : [10, 20, 30],
+                pager : '#' + pagerId,
+                sortname : 'id',
+                toolbarfilter : true,
+                viewrecords : true,
+                sortorder : "asc",
+                gridComplete : function() {
+                    var ids = table.jqGrid('getDataIDs');
+                    for (var i = 0; i < ids.length; i++) {
+                        var cl = ids[i];
+                        var be = "<button class='btn btn-xs btn-default' uib-tooltip='Edit Row' tooltip-append-to-body='true' ng-click='editRow("+ cl +")'><i class='fa fa-pencil'></i></button>";
+
+                        var se = "<button class='btn btn-xs btn-default' uib-tooltip='Save Row' tooltip-append-to-body='true' ng-click='saveRow("+ cl +")'><i class='fa fa-save'></i></button>";
+
+                        var ca = "<button class='btn btn-xs btn-default' uib-tooltip='Cancel' tooltip-append-to-body='true' ng-click='restoreRow("+ cl +")'><i class='fa fa-times'></i></button>";
+
+                        table.jqGrid('setRowData', ids[i], {
+                            act : be + se + ca
+                        });
+                    }
+                },
+                editurl : "dummy.html",
+                caption : "SmartAdmin jQgrid Skin",
+                multiselect : true,
+                autowidth : true
+
+            });
+            table.jqGrid('navGrid', '#' + pagerId, {
+                edit : false,
+                add : false,
+                del : true
+            });
+            table.jqGrid('inlineNav', '#' + pagerId);
+
+
+            element.find(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+            element.find(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+            element.find(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+            element.find(".ui-jqgrid-pager").removeClass("ui-state-default");
+            element.find(".ui-jqgrid").removeClass("ui-widget-content");
+
+            // add classes
+            element.find(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
+            element.find(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
+
+            element.find(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
+            element.find(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+            element.find(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+            element.find(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+            element.find(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+            element.find(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+            element.find(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
+            element.find(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
+
+            element.find(".ui-icon.ui-icon-seek-prev").wrap("<div class='btn btn-sm btn-default'></div>");
+            element.find(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
+
+            element.find(".ui-icon.ui-icon-seek-first").wrap("<div class='btn btn-sm btn-default'></div>");
+            element.find(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");
+
+            element.find(".ui-icon.ui-icon-seek-next").wrap("<div class='btn btn-sm btn-default'></div>");
+            element.find(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
+
+            element.find(".ui-icon.ui-icon-seek-end").wrap("<div class='btn btn-sm btn-default'></div>");
+            element.find(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
+
+            $(window).on('resize.jqGrid', function() {
+               table.jqGrid('setGridWidth', $("#content").width());
+            });
+
+
+            $compile(element.contents())(scope);
+        }
+    }
+});
 "use strict";
 
 
