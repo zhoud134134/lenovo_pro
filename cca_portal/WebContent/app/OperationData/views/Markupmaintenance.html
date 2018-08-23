@@ -89,7 +89,7 @@
                     <h2>Result</h2>
                 </header>
             </div>
-           <!--第四部分-->
+            <!--第四部分-->
             <div ng-show="markTab">
                 <!--Actual-->
                 <div ng-show="atc">
@@ -105,74 +105,20 @@
                                     <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;">
                                         <thead class="table-thead">
                                         <tr>
-                                            <td style="word-break:break-all">XXX+BMC $M（Exclude Visual,Accessory,Workstation）</td>
-                                            <td>PRC</td>
-                                            <td>AP</td>
-                                            <td>EMEA</td>
-                                            <td>NA</td>
-                                            <td>Brazil</td>
-                                            <td>LAS</td>
-                                            <td>HQ</td>
-                                            <td>Total</td>
+                                            <td style="word-break:break-all" ng-repeat="t in tab1_1thead">{{t}}</td>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>Consumer</td>
-                                            <td>701.8</td>
-                                            <td>321.9</td>
-                                            <td>679.6</td>
-                                            <td>388.7</td>
-                                            <td>55.2</td>
-                                            <td>102.5</td>
-                                            <td></td>
-                                            <td>2249.7</td>
+                                        <tr ng-repeat="t in tab1_1_tbody">
+                                            <td>{{t.segment}}</td>
+                                            <td ng-repeat="n in t.arr track by $index">{{n}}</td>
                                         </tr>
-                                        <tr>
-                                            <td>SMB</td>
-                                            <td>701.8</td>
-                                            <td>195.0</td>
-                                            <td>416.7</td>
-                                            <td>348.9</td>
-                                            <td>16.2</td>
-                                            <td>51.9</td>
-                                            <td></td>
-                                            <td>1669.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Commercial</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Others</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
+
                                         </tbody>
                                         <tfoot>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td>2288.9</td>
-                                            <td>800.5</td>
-                                            <td>1895.7</td>
-                                            <td>1516.5</td>
-                                            <td>106.5</td>
-                                            <td>207.1</td>
-                                            <td></td>
-                                            <td>6815.16</td>
+                                        <tr ng-repeat="t in tab1_1_tfoot">
+                                            <td>{{t.segment}}</td>
+                                            <td ng-repeat="n in t.arr track by $index">{{n}}</td>
                                         </tr>
                                         </tfoot>
                                     </table>
@@ -180,74 +126,20 @@
                                     <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;margin-top: 15px;">
                                         <thead class="table-thead">
                                         <tr>
-                                            <td style="word-break:break-all">XXX+Markup in Tape $M (Exclude Visual,Accessory,Workstation）</td>
-                                            <td>PRC</td>
-                                            <td>AP</td>
-                                            <td>EMEA</td>
-                                            <td>NA</td>
-                                            <td>Brazil</td>
-                                            <td>LAS</td>
-                                            <td>HQ</td>
-                                            <td>Total</td>
+                                            <td style="word-break:break-all" ng-repeat="t in tab1_2thead">{{t}}</td>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>Consumer</td>
-                                            <td>701.8</td>
-                                            <td>321.9</td>
-                                            <td>679.6</td>
-                                            <td>388.7</td>
-                                            <td>55.2</td>
-                                            <td>102.5</td>
-                                            <td></td>
-                                            <td>2249.7</td>
+                                        <tr ng-repeat="t in tab1_2_tbody">
+                                            <td>{{t.segment}}</td>
+                                            <td ng-repeat="n in t.arr track by $index">{{n | number}}</td>
                                         </tr>
-                                        <tr>
-                                            <td>SMB</td>
-                                            <td>701.8</td>
-                                            <td>195.0</td>
-                                            <td>416.7</td>
-                                            <td>348.9</td>
-                                            <td>16.2</td>
-                                            <td>51.9</td>
-                                            <td></td>
-                                            <td>1669.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Commercial</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Others</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
+
                                         </tbody>
                                         <tfoot>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td>2288.9</td>
-                                            <td>800.5</td>
-                                            <td>1895.7</td>
-                                            <td>1516.5</td>
-                                            <td>106.5</td>
-                                            <td>207.1</td>
-                                            <td></td>
-                                            <td>6815.16</td>
+                                        <tr ng-repeat="t in tab1_2_tfoot">
+                                            <td>{{t.segment}}</td>
+                                            <td ng-repeat="n in t.arr track by $index">{{n | number}}</td>
                                         </tr>
                                         </tfoot>
                                     </table>

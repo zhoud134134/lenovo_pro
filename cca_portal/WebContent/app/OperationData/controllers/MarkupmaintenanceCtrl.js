@@ -108,8 +108,26 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             MarkupmaintenanceService.getWw($scope.TaskID).then(function(data){
                 if(data.code == 0){
                     console.log(data)
-                   // $scope.WwList = data.result;
-                    //$scope.wwTable();
+                    $scope.only = data.result.only;
+                    $scope.master = data.result.master;
+
+                    //第一模块的第一个表thead
+                    $scope.tab1_1thead = ['XXX+BMC $M（Exclude Visual & Accessory）'].concat($rootScope.Markupthead);
+                    //第一模块的第二个表thead
+                    $scope.tab1_2thead = ['XXX+Markup in Tape $M (Exclude Visual,Accessory,Workstation）'].concat($rootScope.Markupthead);
+                    //第一模块的第一个表整体
+                    $scope.tab1_1 = $rootScope.SortUnique($scope.only,$rootScope.Markuptbody,$scope.tab1_1thead,'bmc');
+                    //第一模块的第二个表整体
+                    $scope.tab1_2 = $rootScope.SortUnique($scope.only,$rootScope.Markuptbody,$scope.tab1_2thead,'mark45');
+                    //第一模块的第一个表tbody
+                    $scope.tab1_1_tbody = $scope.tab1_1.slice(0,$scope.tab1_1.length-1)
+                    //第一模块的第一个表tfoot
+                    $scope.tab1_1_tfoot = $scope.tab1_1.slice($scope.tab1_1.length-1)
+                    //第一模块的第二个表tbody
+                    $scope.tab1_2_tbody = $scope.tab1_2.slice(0,$scope.tab1_2.length-1)
+                    //第一模块的第二个表tfoot
+                    $scope.tab1_2_tfoot = $scope.tab1_2.slice($scope.tab1_2.length-1)
+
                 }
                 console.log(data);
             },function(data){
@@ -117,16 +135,16 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             });
 
             //PRC
-           /* MarkupmaintenanceService.getPrc($scope.TaskID).then(function(data) {
-                if (data.code == 0) {
-                    $scope.PrcList = data.result;
-                    console.log($scope.PrcList);
-                    $scope.prcTalbe();
-                }
-                console.log(data)
-            } ,function(data){
-                console.log(data);
-            });*/
+            /* MarkupmaintenanceService.getPrc($scope.TaskID).then(function(data) {
+             if (data.code == 0) {
+             $scope.PrcList = data.result;
+             console.log($scope.PrcList);
+             $scope.prcTalbe();
+             }
+             console.log(data)
+             } ,function(data){
+             console.log(data);
+             });*/
         }else {
             alert("暂未执行成功，无法查看！");
         }
