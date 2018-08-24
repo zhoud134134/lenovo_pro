@@ -112,7 +112,13 @@ angular.module('app', [
                 if(!data.result){
                     window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
                 }else {
-                    sessionStorage.setItem("userResult", JSON.stringify(data.result));
+                    if(data.result.status == '-1'){
+                        alert('没有权限！');
+                        window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
+                    }else {
+                        sessionStorage.setItem("userResult", JSON.stringify(data.result));
+                    }
+
                 }
             }
 

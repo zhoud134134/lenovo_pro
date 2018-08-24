@@ -268,9 +268,7 @@ if (appConfig.voice_command) {
 
 appConfig.apiRootUrl = 'api';
 appConfig.baseUrl="https://mcmt.lenovo.com/ccf-prod";
-//appConfig.baseUrl="https://mcmt.lenovo.com/ccf-dev";
-
-//appConfig.baseUrl="http://10.116.19.116:8080";
+//appConfig.baseUrl="http://10.99.123.10:8080/ccf-prod";
 appConfig.limit = 10;
 appConfig.page =1;
 //appConfig.Name =1;
@@ -409,7 +407,13 @@ angular.module('app', [
                 if(!data.result){
                     window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
                 }else {
-                    sessionStorage.setItem("userResult", JSON.stringify(data.result));
+                    if(data.result.status == '-1'){
+                        alert('没有权限！');
+                        window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
+                    }else {
+                        sessionStorage.setItem("userResult", JSON.stringify(data.result));
+                    }
+
                 }
             }
 
