@@ -8,6 +8,9 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
             method : 'GET',
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
             url : APP_CONFIG.baseUrl +'/api/cycle/zfiscper/'+type,
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -24,6 +27,9 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
             method : 'GET',
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
             url : APP_CONFIG.baseUrl +'/api/mcm/',
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -43,6 +49,9 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
             method : 'GET',
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
             url : APP_CONFIG.baseUrl +'/api/routine/funCreateTskId',
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
             transformRequest: function(obj) {
                 var str = [];
                 for (var s in obj) {
@@ -67,6 +76,9 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
         $http({
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/',
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -84,6 +96,10 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
         $http({
             method : 'DELETE',
             url : APP_CONFIG.baseUrl + '/api/uuid/',
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token"),
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
             /*transformRequest: function(obj) {
                 var str = [];
                 for (var s in obj) {
@@ -92,7 +108,6 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
                 return str.join("&");
             },*/
             params : id,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -111,6 +126,9 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
         $http({
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/summary/prc/'+id,
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -128,6 +146,9 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
         $http({
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/summary/row/'+id,
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -153,6 +174,9 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
              }
              return str.join("&");
              },
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
             params : v,
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -171,6 +195,9 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
         $http({
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/summary/loadexcel/row/'+id,
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -189,6 +216,9 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
         $http({
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/summary/loadexcel/prc/'+id,
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -207,6 +237,9 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
         $http({
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/detail/loadexcel/row/'+id,
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -225,6 +258,9 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
         $http({
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/detail/loadexcel/prc/'+id,
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -243,6 +279,9 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
         $http({
             method : 'GET',
             url : 'http://10.99.123.10:8080/ccf-prod/api/FYCGData/',
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);

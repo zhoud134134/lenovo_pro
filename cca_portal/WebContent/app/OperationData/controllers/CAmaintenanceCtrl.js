@@ -148,6 +148,8 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         }else{
         CAmaintenanceService.getPrcDown($scope.TaskID).then(function(data){
             console.log(data);
+            //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
+            //而使用“application/vnd.openxmlformats-officedocument.spreadsheetml.sheet”则会保存为xlsx
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
             var objectUrl = URL.createObjectURL(blob);
             var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
