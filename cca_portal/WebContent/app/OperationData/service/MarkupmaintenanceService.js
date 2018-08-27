@@ -8,7 +8,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
             url: APP_CONFIG.baseUrl + '/api/mcm/',
             headers: {
-                'token': sessionStorage.getItem("token")
+                'token': 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -37,7 +37,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
                 return str.join("&");
             },
             headers: {
-                'token': sessionStorage.getItem("token")
+                'token': 'Bearer '+ sessionStorage.getItem("token")
             },
             params: page
         }).then(function successCallback(response) {
@@ -57,7 +57,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
             method: 'GET',
             url: APP_CONFIG.baseUrl + '/api/markupBmc/',
             headers: {
-                'token': sessionStorage.getItem("token")
+                'token': 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -79,7 +79,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
             params: id,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'token': sessionStorage.getItem("token")
+                'token': 'Bearer '+ sessionStorage.getItem("token")
             }
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -100,7 +100,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
             method: 'GET',
             url: APP_CONFIG.baseUrl + '/api/dm/markup/ww/' + id,
             headers: {
-                'token': sessionStorage.getItem("token")
+                'token': 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -120,7 +120,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
             method: 'GET',
             url: APP_CONFIG.baseUrl + '/api/dm/markup/prc/' + id,
             headers: {
-                'token': sessionStorage.getItem("token")
+                'token': 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -148,7 +148,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
                 return str.join("&");
             },
             headers: {
-                'token': sessionStorage.getItem("token")
+                'token': 'Bearer '+ sessionStorage.getItem("token")
             },
             params: v,
         }).then(function successCallback(response) {
@@ -169,7 +169,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
             method: 'GET',
             url: APP_CONFIG.baseUrl + '/api/bmc/summary/loadexcel/row/' + id,
             headers: {
-                'token': sessionStorage.getItem("token")
+                'token': 'Bearer '+ sessionStorage.getItem("token")
             },
             responseType: 'arraybuffer'
         }).then(function successCallback(response) {
@@ -190,7 +190,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
             method: 'GET',
             url: APP_CONFIG.baseUrl + '/api/bmc/summary/loadexcel/prc/' + id,
             headers: {
-                'token': sessionStorage.getItem("token")
+                'token': 'Bearer '+ sessionStorage.getItem("token")
             },
             responseType: 'arraybuffer'
         }).then(function successCallback(response) {
@@ -211,7 +211,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
             method: 'GET',
             url: APP_CONFIG.baseUrl + '/api/bmc/detail/loadexcel/row/' + id,
             headers: {
-                'token': sessionStorage.getItem("token")
+                'token': 'Bearer '+ sessionStorage.getItem("token")
             },
             responseType: 'arraybuffer'
         }).then(function successCallback(response) {
@@ -232,7 +232,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
             method: 'GET',
             url: APP_CONFIG.baseUrl + '/api/bmc/detail/loadexcel/prc/' + id,
             headers: {
-                'token': sessionStorage.getItem("token")
+                'token': 'Bearer '+ sessionStorage.getItem("token")
             },
             responseType: 'arraybuffer'
         }).then(function successCallback(response) {
@@ -261,7 +261,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
                 return str.join("&");
             },
             headers: {
-                'token': sessionStorage.getItem("token")
+                'token': 'Bearer '+ sessionStorage.getItem("token")
             },
             params: s,
         }).then(function successCallback(response) {
