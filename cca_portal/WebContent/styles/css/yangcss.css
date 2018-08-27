@@ -1,0 +1,66 @@
+.yangtab-content{
+    margin-top: 5px;
+}
+
+#demoTable td,#demoTable th{
+    text-align: center;
+    height:30px;
+    min-width:100px;
+    font-family:"Helvetica Neue", "Microsoft Yahei", Arial, sans-serif;
+    font-size:12px;
+}
+#demoTable th{
+    background: #F3F5F6;
+    border: 1px solid rgb(221, 221, 221);
+}
+@media screen and (min-width: 1500px) {
+    #demoTable td,#demoTable th{
+        /*height:30px;*/
+        /*width:10%;*/
+
+    }
+}
+#demoTable td{
+    background:#fff;
+    text-align: center;
+    border: 1px solid rgb(221, 221, 221);
+}
+
+.fakeContainer {
+    margin: 5px 20px 20px 20px;
+    border: none;
+    overflow: hidden;
+}
+.my_width{
+    /*width:100%;*/
+    overflow:hidden;
+    padding:0 20px;
+}
+.first_div{
+    display:block;
+    margin:0 auto;
+}
+/*表格上方查询等功能的样式*/
+.radius{
+    border-radius:8px;
+}
+#widget-grid .tab-fun-btn {
+    padding: 10px 0 5px 10px;
+}
+#widget-grid .tab-fun-btn button {
+    width: 35px;
+    height: 27px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #3276b1;
+    border-color: #2c699d;
+    margin-right: 5px;
+
+
+}
+ .mup-tabbtn {
+    background: #fff;
+    padding: 15px 10px 10px 10px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
