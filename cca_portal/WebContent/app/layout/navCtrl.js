@@ -19,7 +19,7 @@ angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, 
         $rootScope.user =  $scope.userData.ITcode[0];
         console.log($rootScope.user)
     }else {
-        window.location.href='https://mcmt.lenovo.com/ccf-prod/index?'+new Date();
+        window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
     }
 
 

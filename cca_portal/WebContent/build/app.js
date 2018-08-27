@@ -405,11 +405,11 @@ angular.module('app', [
             console.log(data)
             if (data.code == 0) {
                 if(!data.result){
-                    window.location.href='https://mcmt.lenovo.com/ccf-prod/index?'+ new Date();
+                    window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
                 }else {
                     if(data.result.status == '-1'){
                         alert('Ê≤°ÊúâÊùÉÈôêÔºÅ');
-                        window.location.href='https://mcmt.lenovo.com/ccf-prod/index?'+ new Date();
+                        window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
                     }else {
                         sessionStorage.setItem("userResult", JSON.stringify(data.result));
                     }
@@ -2471,6 +2471,11 @@ angular.module('app.chat', ['ngSanitize'])
 
     angular.module('SmartAdmin.Forms', []);
 })();
+(function(){
+    "use strict";
+
+    angular.module('SmartAdmin.Layout', []);
+})();
 angular.module("app").run(["$templateCache", function($templateCache) {$templateCache.put("app/dashboard/live-feeds.tpl.html","<div jarvis-widget id=\"live-feeds-widget\" data-widget-togglebutton=\"false\" data-widget-editbutton=\"false\"\r\n     data-widget-fullscreenbutton=\"false\" data-widget-colorbutton=\"false\" data-widget-deletebutton=\"false\">\r\n<!-- widget options:\r\nusage: <div class=\"jarviswidget\" id=\"wid-id-0\" data-widget-editbutton=\"false\">\r\n\r\ndata-widget-colorbutton=\"false\"\r\ndata-widget-editbutton=\"false\"\r\ndata-widget-togglebutton=\"false\"\r\ndata-widget-deletebutton=\"false\"\r\ndata-widget-fullscreenbutton=\"false\"\r\ndata-widget-custombutton=\"false\"\r\ndata-widget-collapsed=\"true\"\r\ndata-widget-sortable=\"false\"\r\n\r\n-->\r\n<header>\r\n    <span class=\"widget-icon\"> <i class=\"glyphicon glyphicon-stats txt-color-darken\"></i> </span>\r\n\r\n    <h2>Live Feeds </h2>\r\n\r\n    <ul class=\"nav nav-tabs pull-right in\" id=\"myTab\">\r\n        <li class=\"active\">\r\n            <a data-toggle=\"tab\" href=\"#s1\"><i class=\"fa fa-clock-o\"></i> <span class=\"hidden-mobile hidden-tablet\">Live Stats</span></a>\r\n        </li>\r\n\r\n        <li>\r\n            <a data-toggle=\"tab\" href=\"#s2\"><i class=\"fa fa-facebook\"></i> <span class=\"hidden-mobile hidden-tablet\">Social Network</span></a>\r\n        </li>\r\n\r\n        <li>\r\n            <a data-toggle=\"tab\" href=\"#s3\"><i class=\"fa fa-dollar\"></i> <span class=\"hidden-mobile hidden-tablet\">Revenue</span></a>\r\n        </li>\r\n    </ul>\r\n\r\n</header>\r\n\r\n<!-- widget div-->\r\n<div class=\"no-padding\">\r\n\r\n    <div class=\"widget-body\">\r\n        <!-- content -->\r\n        <div id=\"myTabContent\" class=\"tab-content\">\r\n            <div class=\"tab-pane fade active in padding-10 no-padding-bottom\" id=\"s1\">\r\n                <div class=\"row no-space\">\r\n                    <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8\">\r\n														<span class=\"demo-liveupdate-1\"> <span\r\n                                                                class=\"onoffswitch-title\">Live switch</span> <span\r\n                                                                class=\"onoffswitch\">\r\n																<input type=\"checkbox\" name=\"start_interval\" ng-model=\"autoUpdate\"\r\n                                                                       class=\"onoffswitch-checkbox\" id=\"start_interval\">\r\n																<label class=\"onoffswitch-label\" for=\"start_interval\">\r\n                                                                    <span class=\"onoffswitch-inner\"\r\n                                                                          data-swchon-text=\"ON\"\r\n                                                                          data-swchoff-text=\"OFF\"></span>\r\n                                                                    <span class=\"onoffswitch-switch\"></span>\r\n                                                                </label> </span> </span>\r\n\r\n                        <div id=\"updating-chart\" class=\"chart-large txt-color-blue\" flot-basic flot-data=\"liveStats\" flot-options=\"liveStatsOptions\"></div>\r\n\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4 show-stats\">\r\n\r\n                        <div class=\"row\">\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> My Tasks <span\r\n                                    class=\"pull-right\">130/200</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blueDark\" style=\"width: 65%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> Transfered <span\r\n                                    class=\"pull-right\">440 GB</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blue\" style=\"width: 34%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> Bugs Squashed<span\r\n                                    class=\"pull-right\">77%</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blue\" style=\"width: 77%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> User Testing <span\r\n                                    class=\"pull-right\">7 Days</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-greenLight\" style=\"width: 84%;\"></div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <span class=\"show-stat-buttons\"> <span class=\"col-xs-12 col-sm-6 col-md-6 col-lg-6\"> <a\r\n                                    href-void class=\"btn btn-default btn-block hidden-xs\">Generate PDF</a> </span> <span\r\n                                    class=\"col-xs-12 col-sm-6 col-md-6 col-lg-6\"> <a href-void\r\n                                                                                     class=\"btn btn-default btn-block hidden-xs\">Report\r\n                                a bug</a> </span> </span>\r\n\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"show-stat-microcharts\" data-sparkline-container data-easy-pie-chart-container>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n\r\n                        <div class=\"easy-pie-chart txt-color-orangeDark\" data-percent=\"33\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">35</span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Server Load <i class=\"fa fa-caret-up icon-color-bad\"></i> </span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-greenLight\"><i class=\"fa fa-caret-up\"></i> 97%</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blueLight\"><i class=\"fa fa-caret-down\"></i> 44%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-greenLight hidden-sm hidden-md pull-right\"\r\n                             data-sparkline-type=\"line\" data-sparkline-height=\"33px\" data-sparkline-width=\"70px\"\r\n                             data-fill-color=\"transparent\">\r\n                            130, 187, 250, 257, 200, 210, 300, 270, 363, 247, 270, 363, 247\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-greenLight\" data-percent=\"78.9\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">78.9 </span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Disk Space <i class=\"fa fa-caret-down icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-blueDark\"><i class=\"fa fa-caret-up\"></i> 76%</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blue\"><i class=\"fa fa-caret-down\"></i> 3%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-blue hidden-sm hidden-md pull-right\" data-sparkline-type=\"line\"\r\n                             data-sparkline-height=\"33px\" data-sparkline-width=\"70px\" data-fill-color=\"transparent\">\r\n                            257, 200, 210, 300, 270, 363, 130, 187, 250, 247, 270, 363, 247\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-blue\" data-percent=\"23\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">23 </span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Transfered <i class=\"fa fa-caret-up icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-darken\">10GB</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blueDark\"><i class=\"fa fa-caret-up\"></i> 10%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-darken hidden-sm hidden-md pull-right\"\r\n                             data-sparkline-type=\"line\" data-sparkline-height=\"33px\" data-sparkline-width=\"70px\"\r\n                             data-fill-color=\"transparent\">\r\n                            200, 210, 363, 247, 300, 270, 130, 187, 250, 257, 363, 247, 270\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-darken\" data-percent=\"36\" data-pie-size=\"50\">\r\n                            <span class=\"percent degree-sign\">36 <i class=\"fa fa-caret-up\"></i></span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Temperature <i\r\n                                class=\"fa fa-caret-down icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-red\"><i class=\"fa fa-caret-up\"></i> 124</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blue\"><i class=\"fa fa-caret-down\"></i> 40 F</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-red hidden-sm hidden-md pull-right\" data-sparkline-type=\"line\"\r\n                             data-sparkline-height=\"33px\" data-sparkline-width=\"70px\" data-fill-color=\"transparent\">\r\n                            2700, 3631, 2471, 2700, 3631, 2471, 1300, 1877, 2500, 2577, 2000, 2100, 3000\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n            <!-- end s1 tab pane -->\r\n\r\n            <div class=\"tab-pane fade\" id=\"s2\">\r\n                <div class=\"widget-body-toolbar bg-color-white\">\r\n\r\n                    <form class=\"form-inline\" role=\"form\">\r\n\r\n                        <div class=\"form-group\">\r\n                            <label class=\"sr-only\" for=\"s123\">Show From</label>\r\n                            <input type=\"email\" class=\"form-control input-sm\" id=\"s123\" placeholder=\"Show From\">\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <input type=\"email\" class=\"form-control input-sm\" id=\"s124\" placeholder=\"To\">\r\n                        </div>\r\n\r\n                        <div class=\"btn-group hidden-phone pull-right\">\r\n                            <a class=\"btn dropdown-toggle btn-xs btn-default\" data-toggle=\"dropdown\"><i\r\n                                    class=\"fa fa-cog\"></i> More <span class=\"caret\"> </span> </a>\r\n                            <ul class=\"dropdown-menu pull-right\">\r\n                                <li>\r\n                                    <a href-void><i class=\"fa fa-file-text-alt\"></i> Export to PDF</a>\r\n                                </li>\r\n                                <li>\r\n                                    <a href-void><i class=\"fa fa-question-sign\"></i> Help</a>\r\n                                </li>\r\n                            </ul>\r\n                        </div>\r\n\r\n                    </form>\r\n\r\n                </div>\r\n                <div class=\"padding-10\">\r\n                    <div id=\"statsChart\" class=\"chart-large has-legend-unique\" flot-basic flot-data=\"statsData\" flot-options=\"statsDisplayOptions\"></div>\r\n                </div>\r\n\r\n            </div>\r\n            <!-- end s2 tab pane -->\r\n\r\n            <div class=\"tab-pane fade\" id=\"s3\">\r\n\r\n                <div class=\"widget-body-toolbar bg-color-white smart-form\" id=\"rev-toggles\">\r\n\r\n                    <div class=\"inline-group\">\r\n\r\n                        <label for=\"gra-0\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-0\" ng-model=\"targetsShow\">\r\n                            <i></i> Target </label>\r\n                        <label for=\"gra-1\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-1\" ng-model=\"actualsShow\">\r\n                            <i></i> Actual </label>\r\n                        <label for=\"gra-2\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-2\" ng-model=\"signupsShow\">\r\n                            <i></i> Signups </label>\r\n                    </div>\r\n\r\n                    <div class=\"btn-group hidden-phone pull-right\">\r\n                        <a class=\"btn dropdown-toggle btn-xs btn-default\" data-toggle=\"dropdown\"><i\r\n                                class=\"fa fa-cog\"></i> More <span class=\"caret\"> </span> </a>\r\n                        <ul class=\"dropdown-menu pull-right\">\r\n                            <li>\r\n                                <a href-void><i class=\"fa fa-file-text-alt\"></i> Export to PDF</a>\r\n                            </li>\r\n                            <li>\r\n                                <a href-void><i class=\"fa fa-question-sign\"></i> Help</a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <div class=\"padding-10\">\r\n                    <div id=\"flotcontainer\" class=\"chart-large has-legend-unique\" flot-basic flot-data=\"revenewData\" flot-options=\"revenewDisplayOptions\" ></div>\r\n                </div>\r\n            </div>\r\n            <!-- end s3 tab pane -->\r\n        </div>\r\n\r\n        <!-- end content -->\r\n    </div>\r\n\r\n</div>\r\n<!-- end widget div -->\r\n</div>\r\n");
 $templateCache.put("app/layout/layout.tpl.html","<!-- HEADER -->\r\n<div data-smart-include=\"app/layout/partials/header.tpl.html\" class=\"placeholder-header\"></div>\r\n<!-- END HEADER -->\r\n\r\n\r\n<!-- Left panel : Navigation area -->\r\n<!-- Note: This width of the aside area can be adjusted through LESS variables -->\r\n<div data-smart-include=\"app/layout/partials/navigation.tpl.html\" class=\"placeholder-left-panel\"></div>\r\n\r\n<!-- END NAVIGATION -->\r\n\r\n<!-- MAIN PANEL -->\r\n<div id=\"main\" role=\"main\">\r\n    <demo-states></demo-states>\r\n\r\n    <!-- RIBBON -->\r\n    <div id=\"ribbon\">\r\n\r\n				<span class=\"ribbon-button-alignment\">\r\n					<span id=\"refresh\" class=\"btn btn-ribbon\" reset-widgets\r\n                          tooltip-placement=\"bottom\"\r\n                          smart-tooltip-html=\"<i class=\'text-warning fa fa-warning\'></i> Warning! This will reset all your widget settings.\">\r\n						<i class=\"fa fa-refresh\"></i>\r\n					</span>\r\n				</span>\r\n\r\n        <!-- breadcrumb -->\r\n        <state-breadcrumbs></state-breadcrumbs>\r\n        <!-- end breadcrumb -->\r\n\r\n\r\n    </div>\r\n    <!-- END RIBBON -->\r\n\r\n\r\n    <div data-smart-router-animation-wrap=\"content content@app\" data-wrap-for=\"#content\">\r\n        <div data-ui-view=\"content\" data-autoscroll=\"false\"></div>\r\n    </div>\r\n\r\n</div>\r\n<!-- END MAIN PANEL -->\r\n\r\n<!-- PAGE FOOTER -->\r\n<div data-smart-include=\"app/layout/partials/footer.tpl.html\"></div>\r\n\r\n<div data-smart-include=\"app/layout/shortcut/shortcut.tpl.html\"></div>\r\n\r\n<!-- END PAGE FOOTER -->\r\n\r\n\r\n");
 $templateCache.put("app/auth/directives/login-info.tpl.html","<div class=\"login-info ng-cloak\">\r\n    <span> <!-- User image size is adjusted inside CSS, it should stay as it -->\r\n        <a  href=\"\">\r\n            <img ng-src=\"{{user.picture}}\" alt=\"me\" class=\"online\">\r\n                <span>{{user.username}}\r\n                </span>\r\n        </a>\r\n     </span>\r\n</div>");
@@ -2489,19 +2494,14 @@ $templateCache.put("app/dashboard/chat/directives/aside-chat-widget.tpl.html","<
 $templateCache.put("app/dashboard/chat/directives/chat-users.tpl.html","<div id=\"chat-container\" ng-class=\"{open: open}\">\r\n    <span class=\"chat-list-open-close\" ng-click=\"openToggle()\"><i class=\"fa fa-user\"></i><b>!</b></span>\r\n\r\n    <div class=\"chat-list-body custom-scroll\">\r\n        <ul id=\"chat-users\">\r\n            <li ng-repeat=\"chatUser in chatUsers | filter: chatUserFilter\">\r\n                <a ng-click=\"messageTo(chatUser)\"><img ng-src=\"{{chatUser.picture}}\">{{chatUser.username}} <span\r\n                        class=\"badge badge-inverse\">{{chatUser.username.length}}</span><span class=\"state\"><i\r\n                        class=\"fa fa-circle txt-color-green pull-right\"></i></span></a>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n    <div class=\"chat-list-footer\">\r\n        <div class=\"control-group\">\r\n            <form class=\"smart-form\">\r\n                <section>\r\n                    <label class=\"input\" >\r\n                        <input type=\"text\" ng-model=\"chatUserFilter\" id=\"filter-chat-list\" placeholder=\"Filter\">\r\n                    </label>\r\n                </section>\r\n            </form>\r\n        </div>\r\n    </div>\r\n</div>");
 $templateCache.put("app/dashboard/chat/directives/chat-widget.tpl.html","<div id=\"chat-widget\" jarvis-widget data-widget-color=\"blueDark\" data-widget-editbutton=\"false\"\r\n     data-widget-fullscreenbutton=\"false\">\r\n\r\n\r\n    <header>\r\n        <span class=\"widget-icon\"> <i class=\"fa fa-comments txt-color-white\"></i> </span>\r\n\r\n        <h2> SmartMessage </h2>\r\n\r\n        <div class=\"widget-toolbar\">\r\n            <!-- add: non-hidden - to disable auto hide -->\r\n\r\n            <div class=\"btn-group\" data-dropdown>\r\n                <button class=\"btn dropdown-toggle btn-xs btn-success\" data-toggle=\"dropdown\">\r\n                    Status <i class=\"fa fa-caret-down\"></i>\r\n                </button>\r\n                <ul class=\"dropdown-menu pull-right js-status-update\">\r\n                    <li>\r\n                        <a href-void><i class=\"fa fa-circle txt-color-green\"></i> Online</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href-void><i class=\"fa fa-circle txt-color-red\"></i> Busy</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href-void><i class=\"fa fa-circle txt-color-orange\"></i> Away</a>\r\n                    </li>\r\n                    <li class=\"divider\"></li>\r\n                    <li>\r\n                        <a href-void><i class=\"fa fa-power-off\"></i> Log Off</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </header>\r\n\r\n    <!-- widget div-->\r\n    <div>\r\n        <div class=\"widget-body widget-hide-overflow no-padding\">\r\n            <!-- content goes here -->\r\n\r\n            <chat-users></chat-users>\r\n\r\n            <!-- CHAT BODY -->\r\n            <div id=\"chat-body\" class=\"chat-body custom-scroll\">\r\n                <ul>\r\n                    <li class=\"message\" ng-repeat=\"message in chatMessages\">\r\n                        <img class=\"message-picture online\" ng-src=\"{{message.user.picture}}\">\r\n\r\n                        <div class=\"message-text\">\r\n                            <time>\r\n                                {{message.date | date }}\r\n                            </time>\r\n                            <a ng-click=\"messageTo(message.user)\" class=\"username\">{{message.user.username}}</a>\r\n                            <div ng-bind-html=\"message.body\"></div>\r\n\r\n                        </div>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n\r\n            <!-- CHAT FOOTER -->\r\n            <div class=\"chat-footer\">\r\n\r\n                <!-- CHAT TEXTAREA -->\r\n                <div class=\"textarea-div\">\r\n\r\n                    <div class=\"typearea\">\r\n                        <textarea placeholder=\"Write a reply...\" id=\"textarea-expand\"\r\n                                  class=\"custom-scroll\" ng-model=\"newMessage\"></textarea>\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <!-- CHAT REPLY/SEND -->\r\n											<span class=\"textarea-controls\">\r\n												<button class=\"btn btn-sm btn-primary pull-right\" ng-click=\"sendMessage()\">\r\n                                                    Reply\r\n                                                </button> <span class=\"pull-right smart-form\"\r\n                                                                style=\"margin-top: 3px; margin-right: 10px;\"> <label\r\n                                                    class=\"checkbox pull-right\">\r\n                                                <input type=\"checkbox\" name=\"subscription\" id=\"subscription\">\r\n                                                <i></i>Press <strong> ENTER </strong> to send </label> </span> <a\r\n                                                    href-void class=\"pull-left\"><i\r\n                                                    class=\"fa fa-camera fa-fw fa-lg\"></i></a> </span>\r\n\r\n            </div>\r\n\r\n            <!-- end content -->\r\n        </div>\r\n\r\n    </div>\r\n    <!-- end widget div -->\r\n</div>");
 $templateCache.put("app/dashboard/todo/directives/todo-list.tpl.html","<div>\r\n    <h5 class=\"todo-group-title\"><i class=\"fa fa-{{icon}}\"></i> {{title}} (\r\n        <small class=\"num-of-tasks\">{{scopeItems.length}}</small>\r\n        )\r\n    </h5>\r\n    <ul class=\"todo\">\r\n        <li ng-class=\"{complete: todo.completedAt}\" ng-repeat=\"todo in todos | orderBy: todo._id | filter: filter  track by todo._id\" >\r\n    	<span class=\"handle\"> <label class=\"checkbox\">\r\n            <input type=\"checkbox\" ng-click=\"todo.toggle()\" ng-checked=\"todo.completedAt\"\r\n                   name=\"checkbox-inline\">\r\n            <i></i> </label> </span>\r\n\r\n            <p>\r\n                <strong>Ticket #{{$index + 1}}</strong> - {{todo.title}}\r\n                <span class=\"text-muted\" ng-if=\"todo.description\">{{todo.description}}</span>\r\n                <span class=\"date\">{{todo.createdAt | date}} &dash; <a ng-click=\"deleteTodo(todo)\" class=\"text-muted\"><i\r\n                        class=\"fa fa-trash\"></i></a></span>\r\n\r\n            </p>\r\n        </li>\r\n    </ul>\r\n</div>");
-$templateCache.put("app/_common/layout/directives/demo/demo-states.tpl.html","<div class=\"demo\"><span id=\"demo-setting\"><i class=\"fa fa-cog txt-color-blueDark\"></i></span>\r\n\r\n    <form>\r\n        <legend class=\"no-padding margin-bottom-10\">Layout Options</legend>\r\n        <section>\r\n            <label><input type=\"checkbox\" ng-model=\"fixedHeader\"\r\n                          class=\"checkbox style-0\"><span>Fixed Header</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedNavigation\"\r\n                          class=\"checkbox style-0\"><span>Fixed Navigation</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedRibbon\"\r\n                          class=\"checkbox style-0\"><span>Fixed Ribbon</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedPageFooter\"\r\n                          class=\"checkbox style-0\"><span>Fixed Footer</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"insideContainer\"\r\n                          class=\"checkbox style-0\"><span>Inside <b>.container</b></span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"rtl\"\r\n                          class=\"checkbox style-0\"><span>RTL</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"menuOnTop\"\r\n                          class=\"checkbox style-0\"><span>Menu on <b>top</b></span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"colorblindFriendly\"\r\n                          class=\"checkbox style-0\"><span>For Colorblind <div\r\n                    class=\"font-xs text-right\">(experimental)\r\n            </div></span>\r\n            </label><span id=\"smart-bgimages\"></span></section>\r\n        <section><h6 class=\"margin-top-10 semi-bold margin-bottom-5\">Clear Localstorage</h6><a\r\n                ng-click=\"factoryReset()\" class=\"btn btn-xs btn-block btn-primary\" id=\"reset-smart-widget\"><i\r\n                class=\"fa fa-refresh\"></i> Factory Reset</a></section>\r\n\r\n        <h6 class=\"margin-top-10 semi-bold margin-bottom-5\">SmartAdmin Skins</h6>\r\n\r\n\r\n        <section id=\"smart-styles\">\r\n            <a ng-repeat=\"skin in skins\" ng-click=\"setSkin(skin)\" class=\"{{skin.class}}\" style=\"{{skin.style}}\"><i ng-if=\"skin.name == $parent.smartSkin\" class=\"fa fa-check fa-fw\"></i> {{skin.label}} <sup ng-if=\"skin.beta\">beta</sup></a>\r\n        </section>\r\n    </form>\r\n</div>");
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-attribute-form.tpl.html","<form id=\"attributeForm\" class=\"form-horizontal\"\r\n      data-bv-message=\"This value is not valid\"\r\n      data-bv-feedbackicons-valid=\"glyphicon glyphicon-ok\"\r\n      data-bv-feedbackicons-invalid=\"glyphicon glyphicon-remove\"\r\n      data-bv-feedbackicons-validating=\"glyphicon glyphicon-refresh\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Set validator options via HTML attributes\r\n        </legend>\r\n\r\n        <div class=\"alert alert-warning\">\r\n            <code>&lt; input\r\n                data-bv-validatorname\r\n                data-bv-validatorname-validatoroption=\"...\" / &gt;</code>\r\n\r\n            <br>\r\n            <br>\r\n            More validator options can be found here:\r\n            <a href=\"http://bootstrapvalidator.com/validators/\" target=\"_blank\">http://bootstrapvalidator.com/validators/</a>\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Full name</label>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"firstName\" placeholder=\"First name\"\r\n                       data-bv-notempty=\"true\"\r\n                       data-bv-notempty-message=\"The first name is required and cannot be empty\" />\r\n            </div>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"lastName\" placeholder=\"Last name\"\r\n                       data-bv-notempty=\"true\"\r\n                       data-bv-notempty-message=\"The last name is required and cannot be empty\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Username</label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"text\" class=\"form-control\" name=\"username\"\r\n                       data-bv-message=\"The username is not valid\"\r\n\r\n                       data-bv-notempty=\"true\"\r\n                       data-bv-notempty-message=\"The username is required and cannot be empty\"\r\n\r\n                       data-bv-regexp=\"true\"\r\n                       data-bv-regexp-regexp=\"^[a-zA-Z0-9_\\.]+$\"\r\n                       data-bv-regexp-message=\"The username can only consist of alphabetical, number, dot and underscore\"\r\n\r\n                       data-bv-stringlength=\"true\"\r\n                       data-bv-stringlength-min=\"6\"\r\n                       data-bv-stringlength-max=\"30\"\r\n                       data-bv-stringlength-message=\"The username must be more than 6 and less than 30 characters long\"\r\n\r\n                       data-bv-different=\"true\"\r\n                       data-bv-different-field=\"password\"\r\n                       data-bv-different-message=\"The username and password cannot be the same as each other\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Email address</label>\r\n            <div class=\"col-lg-5\">\r\n                <input class=\"form-control\" name=\"email\" type=\"email\"\r\n                       data-bv-emailaddress=\"true\"\r\n                       data-bv-emailaddress-message=\"The input is not a valid email address\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Password</label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"password\" class=\"form-control\" name=\"password\"\r\n                       data-bv-notempty=\"true\"\r\n                       data-bv-notempty-message=\"The password is required and cannot be empty\"\r\n\r\n                       data-bv-identical=\"true\"\r\n                       data-bv-identical-field=\"confirmPassword\"\r\n                       data-bv-identical-message=\"The password and its confirm are not the same\"\r\n\r\n                       data-bv-different=\"true\"\r\n                       data-bv-different-field=\"username\"\r\n                       data-bv-different-message=\"The password cannot be the same as username\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Retype password</label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"password\" class=\"form-control\" name=\"confirmPassword\"\r\n                       data-bv-notempty=\"true\"\r\n                       data-bv-notempty-message=\"The confirm password is required and cannot be empty\"\r\n\r\n                       data-bv-identical=\"true\"\r\n                       data-bv-identical-field=\"password\"\r\n                       data-bv-identical-message=\"The password and its confirm are not the same\"\r\n\r\n                       data-bv-different=\"true\"\r\n                       data-bv-different-field=\"username\"\r\n                       data-bv-different-message=\"The password cannot be the same as username\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Languages</label>\r\n            <div class=\"col-lg-5\">\r\n                <div class=\"checkbox\">\r\n                    <label>\r\n                        <input type=\"checkbox\" name=\"languages[]\" value=\"english\"\r\n                               data-bv-message=\"Please specify at least one language you can speak\"\r\n                               data-bv-notempty=\"true\" />\r\n                        English </label>\r\n                </div>\r\n                <div class=\"checkbox\">\r\n                    <label>\r\n                        <input type=\"checkbox\" name=\"languages[]\" value=\"french\" />\r\n                        French </label>\r\n                </div>\r\n                <div class=\"checkbox\">\r\n                    <label>\r\n                        <input type=\"checkbox\" name=\"languages[]\" value=\"german\" />\r\n                        German </label>\r\n                </div>\r\n                <div class=\"checkbox\">\r\n                    <label>\r\n                        <input type=\"checkbox\" name=\"languages[]\" value=\"russian\" />\r\n                        Russian </label>\r\n                </div>\r\n                <div class=\"checkbox\">\r\n                    <label>\r\n                        <input type=\"checkbox\" name=\"languages[]\" value=\"other\" />\r\n                        Other </label>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</form>\r\n     ");
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-button-group-form.tpl.html","<form id=\"buttonGroupForm\" method=\"post\" class=\"form-horizontal\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Gender</label>\r\n            <div class=\"col-lg-9\">\r\n                <div class=\"btn-group\" data-toggle=\"buttons\">\r\n                    <label class=\"btn btn-default\">\r\n                        <input type=\"radio\" name=\"gender\" value=\"male\" />\r\n                        Male </label>\r\n                    <label class=\"btn btn-default\">\r\n                        <input type=\"radio\" name=\"gender\" value=\"female\" />\r\n                        Female </label>\r\n                    <label class=\"btn btn-default\">\r\n                        <input type=\"radio\" name=\"gender\" value=\"other\" />\r\n                        Other </label>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Languages</label>\r\n            <div class=\"col-lg-9\">\r\n                <div class=\"btn-group\" data-toggle=\"buttons\">\r\n                    <label class=\"btn btn-default\">\r\n                        <input type=\"checkbox\" name=\"languages[]\" value=\"english\" />\r\n                        English </label>\r\n                    <label class=\"btn btn-default\">\r\n                        <input type=\"checkbox\" name=\"languages[]\" value=\"german\" />\r\n                        German </label>\r\n                    <label class=\"btn btn-default\">\r\n                        <input type=\"checkbox\" name=\"languages[]\" value=\"french\" />\r\n                        French </label>\r\n                    <label class=\"btn btn-default\">\r\n                        <input type=\"checkbox\" name=\"languages[]\" value=\"russian\" />\r\n                        Russian </label>\r\n                    <label class=\"btn btn-default\">\r\n                        <input type=\"checkbox\" name=\"languages[]\" value=\"italian\">\r\n                        Italian </label>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</form>\r\n");
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-contact-form.tpl.html","<form id=\"contactForm\" method=\"post\" class=\"form-horizontal\">\r\n\r\n    <fieldset>\r\n        <legend>Showing messages in custom area</legend>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-md-3 control-label\">Full name</label>\r\n            <div class=\"col-md-6\">\r\n                <input type=\"text\" class=\"form-control\" name=\"fullName\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-md-3 control-label\">Email</label>\r\n            <div class=\"col-md-6\">\r\n                <input type=\"text\" class=\"form-control\" name=\"email\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-md-3 control-label\">Title</label>\r\n            <div class=\"col-md-6\">\r\n                <input type=\"text\" class=\"form-control\" name=\"title\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-md-3 control-label\">Content</label>\r\n            <div class=\"col-md-6\">\r\n                <textarea class=\"form-control\" name=\"content\" rows=\"5\"></textarea>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <!-- #messages is where the messages are placed inside -->\r\n        <div class=\"form-group\">\r\n            <div class=\"col-md-9 col-md-offset-3\">\r\n                <div id=\"messages\"></div>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</form>\r\n");
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-movie-form.tpl.html","\r\n<form id=\"movieForm\" method=\"post\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-8\">\r\n                    <label class=\"control-label\">Movie title</label>\r\n                    <input type=\"text\" class=\"form-control\" name=\"title\" />\r\n                </div>\r\n\r\n                <div class=\"col-md-4 selectContainer\">\r\n                    <label class=\"control-label\">Genre</label>\r\n                    <select class=\"form-control\" name=\"genre\">\r\n                        <option value=\"\">Choose a genre</option>\r\n                        <option value=\"action\">Action</option>\r\n                        <option value=\"comedy\">Comedy</option>\r\n                        <option value=\"horror\">Horror</option>\r\n                        <option value=\"romance\">Romance</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-12 col-md-4\">\r\n                    <label class=\"control-label\">Director</label>\r\n                    <input type=\"text\" class=\"form-control\" name=\"director\" />\r\n                </div>\r\n\r\n                <div class=\"col-sm-12 col-md-4\">\r\n                    <label class=\"control-label\">Writer</label>\r\n                    <input type=\"text\" class=\"form-control\" name=\"writer\" />\r\n                </div>\r\n\r\n                <div class=\"col-sm-12 col-md-4\">\r\n                    <label class=\"control-label\">Producer</label>\r\n                    <input type=\"text\" class=\"form-control\" name=\"producer\" />\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-12 col-md-6\">\r\n                    <label class=\"control-label\">Website</label>\r\n                    <input type=\"text\" class=\"form-control\" name=\"website\" />\r\n                </div>\r\n\r\n                <div class=\"col-sm-12 col-md-6\">\r\n                    <label class=\"control-label\">Youtube trailer</label>\r\n                    <input type=\"text\" class=\"form-control\" name=\"trailer\" />\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"control-label\">Review</label>\r\n            <textarea class=\"form-control\" name=\"review\" rows=\"8\"></textarea>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-12 col-md-12\">\r\n                    <label class=\"control-label\">Rating</label>\r\n                </div>\r\n\r\n                <div class=\"col-sm-12 col-md-10\">\r\n\r\n                    <label class=\"radio radio-inline no-margin\">\r\n                        <input type=\"radio\" name=\"rating\" value=\"terrible\" class=\"radiobox style-2\" />\r\n                        <span>Terrible</span> </label>\r\n\r\n                    <label class=\"radio radio-inline\">\r\n                        <input type=\"radio\" name=\"rating\" value=\"watchable\" class=\"radiobox style-2\" />\r\n                        <span>Watchable</span> </label>\r\n                    <label class=\"radio radio-inline\">\r\n                        <input type=\"radio\" name=\"rating\" value=\"best\" class=\"radiobox style-2\" />\r\n                        <span>Best ever</span> </label>\r\n\r\n                </div>\r\n\r\n            </div>\r\n\r\n        </div>\r\n    </fieldset>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</form>\r\n\r\n ");
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-product-form.tpl.html","<form id=\"productForm\" class=\"form-horizontal\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-xs-2 col-lg-3 control-label\">Price</label>\r\n            <div class=\"col-xs-9 col-lg-6 inputGroupContainer\">\r\n                <div class=\"input-group\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"price\" />\r\n                    <span class=\"input-group-addon\">$</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-xs-2 col-lg-3 control-label\">Amount</label>\r\n            <div class=\"col-xs-9 col-lg-6 inputGroupContainer\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\">&#8364;</span>\r\n                    <input type=\"text\" class=\"form-control\" name=\"amount\" />\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-xs-2 col-lg-3 control-label\">Color</label>\r\n            <div class=\"col-xs-9 col-lg-6 selectContainer\">\r\n                <select class=\"form-control\" name=\"color\">\r\n                    <option value=\"\">Choose a color</option>\r\n                    <option value=\"blue\">Blue</option>\r\n                    <option value=\"green\">Green</option>\r\n                    <option value=\"red\">Red</option>\r\n                    <option value=\"yellow\">Yellow</option>\r\n                    <option value=\"white\">White</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-xs-2 col-lg-3 control-label\">Size</label>\r\n            <div class=\"col-xs-9 col-lg-6 selectContainer\">\r\n                <select class=\"form-control\" name=\"size\">\r\n                    <option value=\"\">Choose a size</option>\r\n                    <option value=\"S\">S</option>\r\n                    <option value=\"M\">M</option>\r\n                    <option value=\"L\">L</option>\r\n                    <option value=\"XL\">XL</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>\r\n\r\n");
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-profile-form.tpl.html","<form id=\"profileForm\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <label>Email address</label>\r\n            <input type=\"text\" class=\"form-control\" name=\"email\" />\r\n        </div>\r\n    </fieldset>\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label>Password</label>\r\n            <input type=\"password\" class=\"form-control\" name=\"password\" />\r\n        </div>\r\n    </fieldset>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>\r\n");
-$templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-toggling-form.tpl.html","<form id=\"togglingForm\" method=\"post\" class=\"form-horizontal\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Full name <sup>*</sup></label>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"firstName\" placeholder=\"First name\" />\r\n            </div>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"lastName\" placeholder=\"Last name\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Company <sup>*</sup></label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"text\" class=\"form-control\" name=\"company\"\r\n                       required data-bv-notempty-message=\"The company name is required\" />\r\n            </div>\r\n            <div class=\"col-lg-2\">\r\n                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"#jobInfo\">\r\n                    Add more info\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <!-- These fields will not be validated as long as they are not visible -->\r\n    <div id=\"jobInfo\" style=\"display: none;\">\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Job title <sup>*</sup></label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"job\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Department <sup>*</sup></label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"department\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Mobile phone <sup>*</sup></label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"text\" class=\"form-control\" name=\"mobilePhone\" />\r\n            </div>\r\n            <div class=\"col-lg-2\">\r\n                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"#phoneInfo\">\r\n                    Add more phone numbers\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n    <!-- These fields will not be validated as long as they are not visible -->\r\n    <div id=\"phoneInfo\" style=\"display: none;\">\r\n\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Home phone</label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"homePhone\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Office phone</label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"officePhone\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>");}]);
-(function(){
-    "use strict";
-
-    angular.module('SmartAdmin.Layout', []);
-})();
+$templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-toggling-form.tpl.html","<form id=\"togglingForm\" method=\"post\" class=\"form-horizontal\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Full name <sup>*</sup></label>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"firstName\" placeholder=\"First name\" />\r\n            </div>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"lastName\" placeholder=\"Last name\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Company <sup>*</sup></label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"text\" class=\"form-control\" name=\"company\"\r\n                       required data-bv-notempty-message=\"The company name is required\" />\r\n            </div>\r\n            <div class=\"col-lg-2\">\r\n                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"#jobInfo\">\r\n                    Add more info\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <!-- These fields will not be validated as long as they are not visible -->\r\n    <div id=\"jobInfo\" style=\"display: none;\">\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Job title <sup>*</sup></label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"job\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Department <sup>*</sup></label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"department\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Mobile phone <sup>*</sup></label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"text\" class=\"form-control\" name=\"mobilePhone\" />\r\n            </div>\r\n            <div class=\"col-lg-2\">\r\n                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"#phoneInfo\">\r\n                    Add more phone numbers\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n    <!-- These fields will not be validated as long as they are not visible -->\r\n    <div id=\"phoneInfo\" style=\"display: none;\">\r\n\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Home phone</label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"homePhone\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Office phone</label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"officePhone\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>");
+$templateCache.put("app/_common/layout/directives/demo/demo-states.tpl.html","<div class=\"demo\"><span id=\"demo-setting\"><i class=\"fa fa-cog txt-color-blueDark\"></i></span>\r\n\r\n    <form>\r\n        <legend class=\"no-padding margin-bottom-10\">Layout Options</legend>\r\n        <section>\r\n            <label><input type=\"checkbox\" ng-model=\"fixedHeader\"\r\n                          class=\"checkbox style-0\"><span>Fixed Header</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedNavigation\"\r\n                          class=\"checkbox style-0\"><span>Fixed Navigation</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedRibbon\"\r\n                          class=\"checkbox style-0\"><span>Fixed Ribbon</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedPageFooter\"\r\n                          class=\"checkbox style-0\"><span>Fixed Footer</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"insideContainer\"\r\n                          class=\"checkbox style-0\"><span>Inside <b>.container</b></span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"rtl\"\r\n                          class=\"checkbox style-0\"><span>RTL</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"menuOnTop\"\r\n                          class=\"checkbox style-0\"><span>Menu on <b>top</b></span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"colorblindFriendly\"\r\n                          class=\"checkbox style-0\"><span>For Colorblind <div\r\n                    class=\"font-xs text-right\">(experimental)\r\n            </div></span>\r\n            </label><span id=\"smart-bgimages\"></span></section>\r\n        <section><h6 class=\"margin-top-10 semi-bold margin-bottom-5\">Clear Localstorage</h6><a\r\n                ng-click=\"factoryReset()\" class=\"btn btn-xs btn-block btn-primary\" id=\"reset-smart-widget\"><i\r\n                class=\"fa fa-refresh\"></i> Factory Reset</a></section>\r\n\r\n        <h6 class=\"margin-top-10 semi-bold margin-bottom-5\">SmartAdmin Skins</h6>\r\n\r\n\r\n        <section id=\"smart-styles\">\r\n            <a ng-repeat=\"skin in skins\" ng-click=\"setSkin(skin)\" class=\"{{skin.class}}\" style=\"{{skin.style}}\"><i ng-if=\"skin.name == $parent.smartSkin\" class=\"fa fa-check fa-fw\"></i> {{skin.label}} <sup ng-if=\"skin.beta\">beta</sup></a>\r\n        </section>\r\n    </form>\r\n</div>");}]);
 (function(){
     "use strict";
 
@@ -3107,7 +3107,7 @@ angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, 
         $rootScope.user =  $scope.userData.ITcode[0];
         console.log($rootScope.user)
     }else {
-        window.location.href='https://mcmt.lenovo.com/ccf-prod/index?'+new Date();
+        window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
     }
 
 
@@ -3187,27 +3187,6 @@ angular.module('app.auth').directive('loginInfo', function(User){
     }
 })
 
-
-
-'use strict';
-
-angular.module('app.auth').factory('User', function ($http, $q, APP_CONFIG) {
-    var dfd = $q.defer();
-
-    var UserModel = {
-        initialized: dfd.promise,
-        username: undefined,
-        picture: undefined
-    };
-     $http.get(APP_CONFIG.apiRootUrl + '/user.json').then(function(response){
-         UserModel.username = response.data.username;
-         UserModel.picture= response.data.picture;
-         dfd.resolve(UserModel)
-     });
-
-    return UserModel;
-});
-
 "use strict";
 
 angular.module('app.auth').controller('LoginCtrl', function ($scope, $state, GooglePlus, User, ezfb) {
@@ -3230,6 +3209,27 @@ angular.module('app.auth').controller('LoginCtrl', function ($scope, $state, Goo
         });
     });
 })
+
+
+
+'use strict';
+
+angular.module('app.auth').factory('User', function ($http, $q, APP_CONFIG) {
+    var dfd = $q.defer();
+
+    var UserModel = {
+        initialized: dfd.promise,
+        username: undefined,
+        picture: undefined
+    };
+     $http.get(APP_CONFIG.apiRootUrl + '/user.json').then(function(response){
+         UserModel.username = response.data.username;
+         UserModel.picture= response.data.picture;
+         dfd.resolve(UserModel)
+     });
+
+    return UserModel;
+});
 
 "use strict";
 
@@ -4330,12 +4330,6 @@ angular.module('app.calendar').controller('CalendarCtrl', function ($scope, $log
 
 });
 
-
-"use strict";
-
-angular.module('app.calendar').factory('CalendarEvent', function($resource, APP_CONFIG){
-    return $resource( APP_CONFIG.apiRootUrl + '/events.json', {_id:'@id'})
-});
 "use strict";
 
 angular.module('app.calendar').directive('dragableEvent', function ($log) {
@@ -4493,6 +4487,12 @@ angular.module('app.calendar').directive('fullCalendar', function (CalendarEvent
             };
         }
     }
+});
+
+"use strict";
+
+angular.module('app.calendar').factory('CalendarEvent', function($resource, APP_CONFIG){
+    return $resource( APP_CONFIG.apiRootUrl + '/events.json', {_id:'@id'})
 });
 "use strict";
 
@@ -5551,6 +5551,42 @@ angular.module('app').directive('toggleShortcut', function($log,$timeout) {
 		link:link
 	}
 })
+'use strict';
+
+angular.module('app.maps').controller('MapsDemoCtrl',
+    function ($scope, $http, $q, SmartMapStyle, uiGmapGoogleMapApi) {
+
+
+        $scope.styles = SmartMapStyle.styles;
+
+        $scope.setType = function (key) {
+            SmartMapStyle.getMapType(key).then(function (type) {
+                $scope.map.control.getGMap().mapTypes.set(key, type);
+                $scope.map.control.getGMap().setMapTypeId(key);
+            });
+            $scope.currentType = key;
+        };
+
+
+        $scope.map = {
+            center: {latitude: 45, longitude: -73},
+            zoom: 8,
+            control: {}
+        };
+
+
+        uiGmapGoogleMapApi.then(function (maps) {
+
+            })
+            .then(function () {
+                return SmartMapStyle.getMapType('colorful')
+            }).then(function () {
+            $scope.setType('colorful')
+        });
+
+
+
+    });
 "use strict";
 
 
@@ -5601,42 +5637,6 @@ angular.module('app.maps').factory('SmartMapStyle', function ($q, $http, APP_CON
 
 
 });
-'use strict';
-
-angular.module('app.maps').controller('MapsDemoCtrl',
-    function ($scope, $http, $q, SmartMapStyle, uiGmapGoogleMapApi) {
-
-
-        $scope.styles = SmartMapStyle.styles;
-
-        $scope.setType = function (key) {
-            SmartMapStyle.getMapType(key).then(function (type) {
-                $scope.map.control.getGMap().mapTypes.set(key, type);
-                $scope.map.control.getGMap().setMapTypeId(key);
-            });
-            $scope.currentType = key;
-        };
-
-
-        $scope.map = {
-            center: {latitude: 45, longitude: -73},
-            zoom: 8,
-            control: {}
-        };
-
-
-        uiGmapGoogleMapApi.then(function (maps) {
-
-            })
-            .then(function () {
-                return SmartMapStyle.getMapType('colorful')
-            }).then(function () {
-            $scope.setType('colorful')
-        });
-
-
-
-    });
 "use strict";
 
 angular.module('app.OperationData').controller('AlliancefundmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
@@ -6844,6 +6844,2551 @@ angular.module('app.OperationData').controller('OPQTQPNtakedownCtrl', function (
         }
     }
 })
+/*!
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under the MIT license
+ */
+
+if (typeof jQuery === 'undefined') {
+  throw new Error('Bootstrap\'s JavaScript requires jQuery')
+}
+
++function ($) {
+  'use strict';
+  var version = $.fn.jquery.split(' ')[0].split('.')
+  if ((version[0] < 2 && version[1] < 9) || (version[0] == 1 && version[1] == 9 && version[2] < 1) || (version[0] > 3)) {
+    throw new Error('Bootstrap\'s JavaScript requires jQuery version 1.9.1 or higher, but lower than version 4')
+  }
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: alert.js v3.3.7
+ * http://getbootstrap.com/javascript/#alerts
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // ALERT CLASS DEFINITION
+  // ======================
+
+  var dismiss = '[data-dismiss="alert"]'
+  var Alert   = function (el) {
+    $(el).on('click', dismiss, this.close)
+  }
+
+  Alert.VERSION = '3.3.7'
+
+  Alert.TRANSITION_DURATION = 150
+
+  Alert.prototype.close = function (e) {
+    var $this    = $(this)
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = $(selector === '#' ? [] : selector)
+
+    if (e) e.preventDefault()
+
+    if (!$parent.length) {
+      $parent = $this.closest('.alert')
+    }
+
+    $parent.trigger(e = $.Event('close.bs.alert'))
+
+    if (e.isDefaultPrevented()) return
+
+    $parent.removeClass('in')
+
+    function removeElement() {
+      // detach from parent, fire event then clean up data
+      $parent.detach().trigger('closed.bs.alert').remove()
+    }
+
+    $.support.transition && $parent.hasClass('fade') ?
+      $parent
+        .one('bsTransitionEnd', removeElement)
+        .emulateTransitionEnd(Alert.TRANSITION_DURATION) :
+      removeElement()
+  }
+
+
+  // ALERT PLUGIN DEFINITION
+  // =======================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.alert')
+
+      if (!data) $this.data('bs.alert', (data = new Alert(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  var old = $.fn.alert
+
+  $.fn.alert             = Plugin
+  $.fn.alert.Constructor = Alert
+
+
+  // ALERT NO CONFLICT
+  // =================
+
+  $.fn.alert.noConflict = function () {
+    $.fn.alert = old
+    return this
+  }
+
+
+  // ALERT DATA-API
+  // ==============
+
+  $(document).on('click.bs.alert.data-api', dismiss, Alert.prototype.close)
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: button.js v3.3.7
+ * http://getbootstrap.com/javascript/#buttons
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // BUTTON PUBLIC CLASS DEFINITION
+  // ==============================
+
+  var Button = function (element, options) {
+    this.$element  = $(element)
+    this.options   = $.extend({}, Button.DEFAULTS, options)
+    this.isLoading = false
+  }
+
+  Button.VERSION  = '3.3.7'
+
+  Button.DEFAULTS = {
+    loadingText: 'loading...'
+  }
+
+  Button.prototype.setState = function (state) {
+    var d    = 'disabled'
+    var $el  = this.$element
+    var val  = $el.is('input') ? 'val' : 'html'
+    var data = $el.data()
+
+    state += 'Text'
+
+    if (data.resetText == null) $el.data('resetText', $el[val]())
+
+    // push to event loop to allow forms to submit
+    setTimeout($.proxy(function () {
+      $el[val](data[state] == null ? this.options[state] : data[state])
+
+      if (state == 'loadingText') {
+        this.isLoading = true
+        $el.addClass(d).attr(d, d).prop(d, true)
+      } else if (this.isLoading) {
+        this.isLoading = false
+        $el.removeClass(d).removeAttr(d).prop(d, false)
+      }
+    }, this), 0)
+  }
+
+  Button.prototype.toggle = function () {
+    var changed = true
+    var $parent = this.$element.closest('[data-toggle="buttons"]')
+
+    if ($parent.length) {
+      var $input = this.$element.find('input')
+      if ($input.prop('type') == 'radio') {
+        if ($input.prop('checked')) changed = false
+        $parent.find('.active').removeClass('active')
+        this.$element.addClass('active')
+      } else if ($input.prop('type') == 'checkbox') {
+        if (($input.prop('checked')) !== this.$element.hasClass('active')) changed = false
+        this.$element.toggleClass('active')
+      }
+      $input.prop('checked', this.$element.hasClass('active'))
+      if (changed) $input.trigger('change')
+    } else {
+      this.$element.attr('aria-pressed', !this.$element.hasClass('active'))
+      this.$element.toggleClass('active')
+    }
+  }
+
+
+  // BUTTON PLUGIN DEFINITION
+  // ========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.button')
+      var options = typeof option == 'object' && option
+
+      if (!data) $this.data('bs.button', (data = new Button(this, options)))
+
+      if (option == 'toggle') data.toggle()
+      else if (option) data.setState(option)
+    })
+  }
+
+  var old = $.fn.button
+
+  $.fn.button             = Plugin
+  $.fn.button.Constructor = Button
+
+
+  // BUTTON NO CONFLICT
+  // ==================
+
+  $.fn.button.noConflict = function () {
+    $.fn.button = old
+    return this
+  }
+
+
+  // BUTTON DATA-API
+  // ===============
+
+  $(document)
+    .on('click.bs.button.data-api', '[data-toggle^="button"]', function (e) {
+      var $btn = $(e.target).closest('.btn')
+      Plugin.call($btn, 'toggle')
+      if (!($(e.target).is('input[type="radio"], input[type="checkbox"]'))) {
+        // Prevent double click on radios, and the double selections (so cancellation) on checkboxes
+        e.preventDefault()
+        // The target component still receive the focus
+        if ($btn.is('input,button')) $btn.trigger('focus')
+        else $btn.find('input:visible,button:visible').first().trigger('focus')
+      }
+    })
+    .on('focus.bs.button.data-api blur.bs.button.data-api', '[data-toggle^="button"]', function (e) {
+      $(e.target).closest('.btn').toggleClass('focus', /^focus(in)?$/.test(e.type))
+    })
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: carousel.js v3.3.7
+ * http://getbootstrap.com/javascript/#carousel
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CAROUSEL CLASS DEFINITION
+  // =========================
+
+  var Carousel = function (element, options) {
+    this.$element    = $(element)
+    this.$indicators = this.$element.find('.carousel-indicators')
+    this.options     = options
+    this.paused      = null
+    this.sliding     = null
+    this.interval    = null
+    this.$active     = null
+    this.$items      = null
+
+    this.options.keyboard && this.$element.on('keydown.bs.carousel', $.proxy(this.keydown, this))
+
+    this.options.pause == 'hover' && !('ontouchstart' in document.documentElement) && this.$element
+      .on('mouseenter.bs.carousel', $.proxy(this.pause, this))
+      .on('mouseleave.bs.carousel', $.proxy(this.cycle, this))
+  }
+
+  Carousel.VERSION  = '3.3.7'
+
+  Carousel.TRANSITION_DURATION = 600
+
+  Carousel.DEFAULTS = {
+    interval: 5000,
+    pause: 'hover',
+    wrap: true,
+    keyboard: true
+  }
+
+  Carousel.prototype.keydown = function (e) {
+    if (/input|textarea/i.test(e.target.tagName)) return
+    switch (e.which) {
+      case 37: this.prev(); break
+      case 39: this.next(); break
+      default: return
+    }
+
+    e.preventDefault()
+  }
+
+  Carousel.prototype.cycle = function (e) {
+    e || (this.paused = false)
+
+    this.interval && clearInterval(this.interval)
+
+    this.options.interval
+      && !this.paused
+      && (this.interval = setInterval($.proxy(this.next, this), this.options.interval))
+
+    return this
+  }
+
+  Carousel.prototype.getItemIndex = function (item) {
+    this.$items = item.parent().children('.item')
+    return this.$items.index(item || this.$active)
+  }
+
+  Carousel.prototype.getItemForDirection = function (direction, active) {
+    var activeIndex = this.getItemIndex(active)
+    var willWrap = (direction == 'prev' && activeIndex === 0)
+                || (direction == 'next' && activeIndex == (this.$items.length - 1))
+    if (willWrap && !this.options.wrap) return active
+    var delta = direction == 'prev' ? -1 : 1
+    var itemIndex = (activeIndex + delta) % this.$items.length
+    return this.$items.eq(itemIndex)
+  }
+
+  Carousel.prototype.to = function (pos) {
+    var that        = this
+    var activeIndex = this.getItemIndex(this.$active = this.$element.find('.item.active'))
+
+    if (pos > (this.$items.length - 1) || pos < 0) return
+
+    if (this.sliding)       return this.$element.one('slid.bs.carousel', function () { that.to(pos) }) // yes, "slid"
+    if (activeIndex == pos) return this.pause().cycle()
+
+    return this.slide(pos > activeIndex ? 'next' : 'prev', this.$items.eq(pos))
+  }
+
+  Carousel.prototype.pause = function (e) {
+    e || (this.paused = true)
+
+    if (this.$element.find('.next, .prev').length && $.support.transition) {
+      this.$element.trigger($.support.transition.end)
+      this.cycle(true)
+    }
+
+    this.interval = clearInterval(this.interval)
+
+    return this
+  }
+
+  Carousel.prototype.next = function () {
+    if (this.sliding) return
+    return this.slide('next')
+  }
+
+  Carousel.prototype.prev = function () {
+    if (this.sliding) return
+    return this.slide('prev')
+  }
+
+  Carousel.prototype.slide = function (type, next) {
+    var $active   = this.$element.find('.item.active')
+    var $next     = next || this.getItemForDirection(type, $active)
+    var isCycling = this.interval
+    var direction = type == 'next' ? 'left' : 'right'
+    var that      = this
+
+    if ($next.hasClass('active')) return (this.sliding = false)
+
+    var relatedTarget = $next[0]
+    var slideEvent = $.Event('slide.bs.carousel', {
+      relatedTarget: relatedTarget,
+      direction: direction
+    })
+    this.$element.trigger(slideEvent)
+    if (slideEvent.isDefaultPrevented()) return
+
+    this.sliding = true
+
+    isCycling && this.pause()
+
+    if (this.$indicators.length) {
+      this.$indicators.find('.active').removeClass('active')
+      var $nextIndicator = $(this.$indicators.children()[this.getItemIndex($next)])
+      $nextIndicator && $nextIndicator.addClass('active')
+    }
+
+    var slidEvent = $.Event('slid.bs.carousel', { relatedTarget: relatedTarget, direction: direction }) // yes, "slid"
+    if ($.support.transition && this.$element.hasClass('slide')) {
+      $next.addClass(type)
+      $next[0].offsetWidth // force reflow
+      $active.addClass(direction)
+      $next.addClass(direction)
+      $active
+        .one('bsTransitionEnd', function () {
+          $next.removeClass([type, direction].join(' ')).addClass('active')
+          $active.removeClass(['active', direction].join(' '))
+          that.sliding = false
+          setTimeout(function () {
+            that.$element.trigger(slidEvent)
+          }, 0)
+        })
+        .emulateTransitionEnd(Carousel.TRANSITION_DURATION)
+    } else {
+      $active.removeClass('active')
+      $next.addClass('active')
+      this.sliding = false
+      this.$element.trigger(slidEvent)
+    }
+
+    isCycling && this.cycle()
+
+    return this
+  }
+
+
+  // CAROUSEL PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.carousel')
+      var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
+      var action  = typeof option == 'string' ? option : options.slide
+
+      if (!data) $this.data('bs.carousel', (data = new Carousel(this, options)))
+      if (typeof option == 'number') data.to(option)
+      else if (action) data[action]()
+      else if (options.interval) data.pause().cycle()
+    })
+  }
+
+  var old = $.fn.carousel
+
+  $.fn.carousel             = Plugin
+  $.fn.carousel.Constructor = Carousel
+
+
+  // CAROUSEL NO CONFLICT
+  // ====================
+
+  $.fn.carousel.noConflict = function () {
+    $.fn.carousel = old
+    return this
+  }
+
+
+  // CAROUSEL DATA-API
+  // =================
+
+  var clickHandler = function (e) {
+    var href
+    var $this   = $(this)
+    var $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) // strip for ie7
+    if (!$target.hasClass('carousel')) return
+    var options = $.extend({}, $target.data(), $this.data())
+    var slideIndex = $this.attr('data-slide-to')
+    if (slideIndex) options.interval = false
+
+    Plugin.call($target, options)
+
+    if (slideIndex) {
+      $target.data('bs.carousel').to(slideIndex)
+    }
+
+    e.preventDefault()
+  }
+
+  $(document)
+    .on('click.bs.carousel.data-api', '[data-slide]', clickHandler)
+    .on('click.bs.carousel.data-api', '[data-slide-to]', clickHandler)
+
+  $(window).on('load', function () {
+    $('[data-ride="carousel"]').each(function () {
+      var $carousel = $(this)
+      Plugin.call($carousel, $carousel.data())
+    })
+  })
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: dropdown.js v3.3.7
+ * http://getbootstrap.com/javascript/#dropdowns
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // DROPDOWN CLASS DEFINITION
+  // =========================
+
+  var backdrop = '.dropdown-backdrop'
+  var toggle   = '[data-toggle="dropdown"]'
+  var Dropdown = function (element) {
+    $(element).on('click.bs.dropdown', this.toggle)
+  }
+
+  Dropdown.VERSION = '3.3.7'
+
+  function getParent($this) {
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = selector && $(selector)
+
+    return $parent && $parent.length ? $parent : $this.parent()
+  }
+
+  function clearMenus(e) {
+    if (e && e.which === 3) return
+    $(backdrop).remove()
+    $(toggle).each(function () {
+      var $this         = $(this)
+      var $parent       = getParent($this)
+      var relatedTarget = { relatedTarget: this }
+
+      if (!$parent.hasClass('open')) return
+
+      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
+
+      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this.attr('aria-expanded', 'false')
+      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
+    })
+  }
+
+  Dropdown.prototype.toggle = function (e) {
+    var $this = $(this)
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    clearMenus()
+
+    if (isActive) {
+      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
+        // if mobile we use a backdrop because click events don't delegate
+        $(document.createElement('div'))
+          .addClass('dropdown-backdrop')
+          .insertAfter($(this))
+          .on('click', clearMenus)
+      }
+
+      var relatedTarget = { relatedTarget: this }
+      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this
+        .trigger('focus')
+        .attr('aria-expanded', 'true')
+
+      $parent
+        .toggleClass('open')
+        .trigger($.Event('shown.bs.dropdown', relatedTarget))
+    }
+
+    return false
+  }
+
+  Dropdown.prototype.keydown = function (e) {
+    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
+
+    var $this = $(this)
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    if (!isActive && e.which != 27 || isActive && e.which == 27) {
+      if (e.which == 27) $parent.find(toggle).trigger('focus')
+      return $this.trigger('click')
+    }
+
+    var desc = ' li:not(.disabled):visible a'
+    var $items = $parent.find('.dropdown-menu' + desc)
+
+    if (!$items.length) return
+
+    var index = $items.index(e.target)
+
+    if (e.which == 38 && index > 0)                 index--         // up
+    if (e.which == 40 && index < $items.length - 1) index++         // down
+    if (!~index)                                    index = 0
+
+    $items.eq(index).trigger('focus')
+  }
+
+
+  // DROPDOWN PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.dropdown')
+
+      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  var old = $.fn.dropdown
+
+  $.fn.dropdown             = Plugin
+  $.fn.dropdown.Constructor = Dropdown
+
+
+  // DROPDOWN NO CONFLICT
+  // ====================
+
+  $.fn.dropdown.noConflict = function () {
+    $.fn.dropdown = old
+    return this
+  }
+
+
+  // APPLY TO STANDARD DROPDOWN ELEMENTS
+  // ===================================
+
+  $(document)
+    .on('click.bs.dropdown.data-api', clearMenus)
+    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
+    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
+    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: modal.js v3.3.7
+ * http://getbootstrap.com/javascript/#modals
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // MODAL CLASS DEFINITION
+  // ======================
+
+  var Modal = function (element, options) {
+    this.options             = options
+    this.$body               = $(document.body)
+    this.$element            = $(element)
+    this.$dialog             = this.$element.find('.modal-dialog')
+    this.$backdrop           = null
+    this.isShown             = null
+    this.originalBodyPad     = null
+    this.scrollbarWidth      = 0
+    this.ignoreBackdropClick = false
+
+    if (this.options.remote) {
+      this.$element
+        .find('.modal-content')
+        .load(this.options.remote, $.proxy(function () {
+          this.$element.trigger('loaded.bs.modal')
+        }, this))
+    }
+  }
+
+  Modal.VERSION  = '3.3.7'
+
+  Modal.TRANSITION_DURATION = 300
+  Modal.BACKDROP_TRANSITION_DURATION = 150
+
+  Modal.DEFAULTS = {
+    backdrop: true,
+    keyboard: true,
+    show: true
+  }
+
+  Modal.prototype.toggle = function (_relatedTarget) {
+    return this.isShown ? this.hide() : this.show(_relatedTarget)
+  }
+
+  Modal.prototype.show = function (_relatedTarget) {
+    var that = this
+    var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
+
+    this.$element.trigger(e)
+
+    if (this.isShown || e.isDefaultPrevented()) return
+
+    this.isShown = true
+
+    this.checkScrollbar()
+    this.setScrollbar()
+    this.$body.addClass('modal-open')
+
+    this.escape()
+    this.resize()
+
+    this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
+
+    this.$dialog.on('mousedown.dismiss.bs.modal', function () {
+      that.$element.one('mouseup.dismiss.bs.modal', function (e) {
+        if ($(e.target).is(that.$element)) that.ignoreBackdropClick = true
+      })
+    })
+
+    this.backdrop(function () {
+      var transition = $.support.transition && that.$element.hasClass('fade')
+
+      if (!that.$element.parent().length) {
+        that.$element.appendTo(that.$body) // don't move modals dom position
+      }
+
+      that.$element
+        .show()
+        .scrollTop(0)
+
+      that.adjustDialog()
+
+      if (transition) {
+        that.$element[0].offsetWidth // force reflow
+      }
+
+      that.$element.addClass('in')
+
+      that.enforceFocus()
+
+      var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
+
+      transition ?
+        that.$dialog // wait for modal to slide in
+          .one('bsTransitionEnd', function () {
+            that.$element.trigger('focus').trigger(e)
+          })
+          .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
+        that.$element.trigger('focus').trigger(e)
+    })
+  }
+
+  Modal.prototype.hide = function (e) {
+    if (e) e.preventDefault()
+
+    e = $.Event('hide.bs.modal')
+
+    this.$element.trigger(e)
+
+    if (!this.isShown || e.isDefaultPrevented()) return
+
+    this.isShown = false
+
+    this.escape()
+    this.resize()
+
+    $(document).off('focusin.bs.modal')
+
+    this.$element
+      .removeClass('in')
+      .off('click.dismiss.bs.modal')
+      .off('mouseup.dismiss.bs.modal')
+
+    this.$dialog.off('mousedown.dismiss.bs.modal')
+
+    $.support.transition && this.$element.hasClass('fade') ?
+      this.$element
+        .one('bsTransitionEnd', $.proxy(this.hideModal, this))
+        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
+      this.hideModal()
+  }
+
+  Modal.prototype.enforceFocus = function () {
+    $(document)
+      .off('focusin.bs.modal') // guard against infinite focus loop
+      .on('focusin.bs.modal', $.proxy(function (e) {
+        if (document !== e.target &&
+            this.$element[0] !== e.target &&
+            !this.$element.has(e.target).length) {
+          this.$element.trigger('focus')
+        }
+      }, this))
+  }
+
+  Modal.prototype.escape = function () {
+    if (this.isShown && this.options.keyboard) {
+      this.$element.on('keydown.dismiss.bs.modal', $.proxy(function (e) {
+        e.which == 27 && this.hide()
+      }, this))
+    } else if (!this.isShown) {
+      this.$element.off('keydown.dismiss.bs.modal')
+    }
+  }
+
+  Modal.prototype.resize = function () {
+    if (this.isShown) {
+      $(window).on('resize.bs.modal', $.proxy(this.handleUpdate, this))
+    } else {
+      $(window).off('resize.bs.modal')
+    }
+  }
+
+  Modal.prototype.hideModal = function () {
+    var that = this
+    this.$element.hide()
+    this.backdrop(function () {
+      that.$body.removeClass('modal-open')
+      that.resetAdjustments()
+      that.resetScrollbar()
+      that.$element.trigger('hidden.bs.modal')
+    })
+  }
+
+  Modal.prototype.removeBackdrop = function () {
+    this.$backdrop && this.$backdrop.remove()
+    this.$backdrop = null
+  }
+
+  Modal.prototype.backdrop = function (callback) {
+    var that = this
+    var animate = this.$element.hasClass('fade') ? 'fade' : ''
+
+    if (this.isShown && this.options.backdrop) {
+      var doAnimate = $.support.transition && animate
+
+      this.$backdrop = $(document.createElement('div'))
+        .addClass('modal-backdrop ' + animate)
+        .appendTo(this.$body)
+
+      this.$element.on('click.dismiss.bs.modal', $.proxy(function (e) {
+        if (this.ignoreBackdropClick) {
+          this.ignoreBackdropClick = false
+          return
+        }
+        if (e.target !== e.currentTarget) return
+        this.options.backdrop == 'static'
+          ? this.$element[0].focus()
+          : this.hide()
+      }, this))
+
+      if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
+
+      this.$backdrop.addClass('in')
+
+      if (!callback) return
+
+      doAnimate ?
+        this.$backdrop
+          .one('bsTransitionEnd', callback)
+          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
+        callback()
+
+    } else if (!this.isShown && this.$backdrop) {
+      this.$backdrop.removeClass('in')
+
+      var callbackRemove = function () {
+        that.removeBackdrop()
+        callback && callback()
+      }
+      $.support.transition && this.$element.hasClass('fade') ?
+        this.$backdrop
+          .one('bsTransitionEnd', callbackRemove)
+          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
+        callbackRemove()
+
+    } else if (callback) {
+      callback()
+    }
+  }
+
+  // these following methods are used to handle overflowing modals
+
+  Modal.prototype.handleUpdate = function () {
+    this.adjustDialog()
+  }
+
+  Modal.prototype.adjustDialog = function () {
+    var modalIsOverflowing = this.$element[0].scrollHeight > document.documentElement.clientHeight
+
+    this.$element.css({
+      paddingLeft:  !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
+      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
+    })
+  }
+
+  Modal.prototype.resetAdjustments = function () {
+    this.$element.css({
+      paddingLeft: '',
+      paddingRight: ''
+    })
+  }
+
+  Modal.prototype.checkScrollbar = function () {
+    var fullWindowWidth = window.innerWidth
+    if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
+      var documentElementRect = document.documentElement.getBoundingClientRect()
+      fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left)
+    }
+    this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth
+    this.scrollbarWidth = this.measureScrollbar()
+  }
+
+  Modal.prototype.setScrollbar = function () {
+    var bodyPad = parseInt((this.$body.css('padding-right') || 0), 10)
+    this.originalBodyPad = document.body.style.paddingRight || ''
+    if (this.bodyIsOverflowing) this.$body.css('padding-right', bodyPad + this.scrollbarWidth)
+  }
+
+  Modal.prototype.resetScrollbar = function () {
+    this.$body.css('padding-right', this.originalBodyPad)
+  }
+
+  Modal.prototype.measureScrollbar = function () { // thx walsh
+    var scrollDiv = document.createElement('div')
+    scrollDiv.className = 'modal-scrollbar-measure'
+    this.$body.append(scrollDiv)
+    var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth
+    this.$body[0].removeChild(scrollDiv)
+    return scrollbarWidth
+  }
+
+
+  // MODAL PLUGIN DEFINITION
+  // =======================
+
+  function Plugin(option, _relatedTarget) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.modal')
+      var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
+      if (typeof option == 'string') data[option](_relatedTarget)
+      else if (options.show) data.show(_relatedTarget)
+    })
+  }
+
+  var old = $.fn.modal
+
+  $.fn.modal             = Plugin
+  $.fn.modal.Constructor = Modal
+
+
+  // MODAL NO CONFLICT
+  // =================
+
+  $.fn.modal.noConflict = function () {
+    $.fn.modal = old
+    return this
+  }
+
+
+  // MODAL DATA-API
+  // ==============
+
+  $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
+    var $this   = $(this)
+    var href    = $this.attr('href')
+    var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
+    var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
+
+    if ($this.is('a')) e.preventDefault()
+
+    $target.one('show.bs.modal', function (showEvent) {
+      if (showEvent.isDefaultPrevented()) return // only register focus restorer if modal will actually get shown
+      $target.one('hidden.bs.modal', function () {
+        $this.is(':visible') && $this.trigger('focus')
+      })
+    })
+    Plugin.call($target, option, this)
+  })
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: tooltip.js v3.3.7
+ * http://getbootstrap.com/javascript/#tooltip
+ * Inspired by the original jQuery.tipsy by Jason Frame
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // TOOLTIP PUBLIC CLASS DEFINITION
+  // ===============================
+
+  var Tooltip = function (element, options) {
+    this.type       = null
+    this.options    = null
+    this.enabled    = null
+    this.timeout    = null
+    this.hoverState = null
+    this.$element   = null
+    this.inState    = null
+
+    this.init('tooltip', element, options)
+  }
+
+  Tooltip.VERSION  = '3.3.7'
+
+  Tooltip.TRANSITION_DURATION = 150
+
+  Tooltip.DEFAULTS = {
+    animation: true,
+    placement: 'top',
+    selector: false,
+    template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
+    trigger: 'hover focus',
+    title: '',
+    delay: 0,
+    html: false,
+    container: false,
+    viewport: {
+      selector: 'body',
+      padding: 0
+    }
+  }
+
+  Tooltip.prototype.init = function (type, element, options) {
+    this.enabled   = true
+    this.type      = type
+    this.$element  = $(element)
+    this.options   = this.getOptions(options)
+    this.$viewport = this.options.viewport && $($.isFunction(this.options.viewport) ? this.options.viewport.call(this, this.$element) : (this.options.viewport.selector || this.options.viewport))
+    this.inState   = { click: false, hover: false, focus: false }
+
+    if (this.$element[0] instanceof document.constructor && !this.options.selector) {
+      throw new Error('`selector` option must be specified when initializing ' + this.type + ' on the window.document object!')
+    }
+
+    var triggers = this.options.trigger.split(' ')
+
+    for (var i = triggers.length; i--;) {
+      var trigger = triggers[i]
+
+      if (trigger == 'click') {
+        this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this))
+      } else if (trigger != 'manual') {
+        var eventIn  = trigger == 'hover' ? 'mouseenter' : 'focusin'
+        var eventOut = trigger == 'hover' ? 'mouseleave' : 'focusout'
+
+        this.$element.on(eventIn  + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
+        this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
+      }
+    }
+
+    this.options.selector ?
+      (this._options = $.extend({}, this.options, { trigger: 'manual', selector: '' })) :
+      this.fixTitle()
+  }
+
+  Tooltip.prototype.getDefaults = function () {
+    return Tooltip.DEFAULTS
+  }
+
+  Tooltip.prototype.getOptions = function (options) {
+    options = $.extend({}, this.getDefaults(), this.$element.data(), options)
+
+    if (options.delay && typeof options.delay == 'number') {
+      options.delay = {
+        show: options.delay,
+        hide: options.delay
+      }
+    }
+
+    return options
+  }
+
+  Tooltip.prototype.getDelegateOptions = function () {
+    var options  = {}
+    var defaults = this.getDefaults()
+
+    this._options && $.each(this._options, function (key, value) {
+      if (defaults[key] != value) options[key] = value
+    })
+
+    return options
+  }
+
+  Tooltip.prototype.enter = function (obj) {
+    var self = obj instanceof this.constructor ?
+      obj : $(obj.currentTarget).data('bs.' + this.type)
+
+    if (!self) {
+      self = new this.constructor(obj.currentTarget, this.getDelegateOptions())
+      $(obj.currentTarget).data('bs.' + this.type, self)
+    }
+
+    if (obj instanceof $.Event) {
+      self.inState[obj.type == 'focusin' ? 'focus' : 'hover'] = true
+    }
+
+    if (self.tip().hasClass('in') || self.hoverState == 'in') {
+      self.hoverState = 'in'
+      return
+    }
+
+    clearTimeout(self.timeout)
+
+    self.hoverState = 'in'
+
+    if (!self.options.delay || !self.options.delay.show) return self.show()
+
+    self.timeout = setTimeout(function () {
+      if (self.hoverState == 'in') self.show()
+    }, self.options.delay.show)
+  }
+
+  Tooltip.prototype.isInStateTrue = function () {
+    for (var key in this.inState) {
+      if (this.inState[key]) return true
+    }
+
+    return false
+  }
+
+  Tooltip.prototype.leave = function (obj) {
+    var self = obj instanceof this.constructor ?
+      obj : $(obj.currentTarget).data('bs.' + this.type)
+
+    if (!self) {
+      self = new this.constructor(obj.currentTarget, this.getDelegateOptions())
+      $(obj.currentTarget).data('bs.' + this.type, self)
+    }
+
+    if (obj instanceof $.Event) {
+      self.inState[obj.type == 'focusout' ? 'focus' : 'hover'] = false
+    }
+
+    if (self.isInStateTrue()) return
+
+    clearTimeout(self.timeout)
+
+    self.hoverState = 'out'
+
+    if (!self.options.delay || !self.options.delay.hide) return self.hide()
+
+    self.timeout = setTimeout(function () {
+      if (self.hoverState == 'out') self.hide()
+    }, self.options.delay.hide)
+  }
+
+  Tooltip.prototype.show = function () {
+    var e = $.Event('show.bs.' + this.type)
+
+    if (this.hasContent() && this.enabled) {
+      this.$element.trigger(e)
+
+      var inDom = $.contains(this.$element[0].ownerDocument.documentElement, this.$element[0])
+      if (e.isDefaultPrevented() || !inDom) return
+      var that = this
+
+      var $tip = this.tip()
+
+      var tipId = this.getUID(this.type)
+
+      this.setContent()
+      $tip.attr('id', tipId)
+      this.$element.attr('aria-describedby', tipId)
+
+      if (this.options.animation) $tip.addClass('fade')
+
+      var placement = typeof this.options.placement == 'function' ?
+        this.options.placement.call(this, $tip[0], this.$element[0]) :
+        this.options.placement
+
+      var autoToken = /\s?auto?\s?/i
+      var autoPlace = autoToken.test(placement)
+      if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
+
+      $tip
+        .detach()
+        .css({ top: 0, left: 0, display: 'block' })
+        .addClass(placement)
+        .data('bs.' + this.type, this)
+
+      this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
+      this.$element.trigger('inserted.bs.' + this.type)
+
+      var pos          = this.getPosition()
+      var actualWidth  = $tip[0].offsetWidth
+      var actualHeight = $tip[0].offsetHeight
+
+      if (autoPlace) {
+        var orgPlacement = placement
+        var viewportDim = this.getPosition(this.$viewport)
+
+        placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top'    :
+                    placement == 'top'    && pos.top    - actualHeight < viewportDim.top    ? 'bottom' :
+                    placement == 'right'  && pos.right  + actualWidth  > viewportDim.width  ? 'left'   :
+                    placement == 'left'   && pos.left   - actualWidth  < viewportDim.left   ? 'right'  :
+                    placement
+
+        $tip
+          .removeClass(orgPlacement)
+          .addClass(placement)
+      }
+
+      var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight)
+
+      this.applyPlacement(calculatedOffset, placement)
+
+      var complete = function () {
+        var prevHoverState = that.hoverState
+        that.$element.trigger('shown.bs.' + that.type)
+        that.hoverState = null
+
+        if (prevHoverState == 'out') that.leave(that)
+      }
+
+      $.support.transition && this.$tip.hasClass('fade') ?
+        $tip
+          .one('bsTransitionEnd', complete)
+          .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
+        complete()
+    }
+  }
+
+  Tooltip.prototype.applyPlacement = function (offset, placement) {
+    var $tip   = this.tip()
+    var width  = $tip[0].offsetWidth
+    var height = $tip[0].offsetHeight
+
+    // manually read margins because getBoundingClientRect includes difference
+    var marginTop = parseInt($tip.css('margin-top'), 10)
+    var marginLeft = parseInt($tip.css('margin-left'), 10)
+
+    // we must check for NaN for ie 8/9
+    if (isNaN(marginTop))  marginTop  = 0
+    if (isNaN(marginLeft)) marginLeft = 0
+
+    offset.top  += marginTop
+    offset.left += marginLeft
+
+    // $.fn.offset doesn't round pixel values
+    // so we use setOffset directly with our own function B-0
+    $.offset.setOffset($tip[0], $.extend({
+      using: function (props) {
+        $tip.css({
+          top: Math.round(props.top),
+          left: Math.round(props.left)
+        })
+      }
+    }, offset), 0)
+
+    $tip.addClass('in')
+
+    // check to see if placing tip in new offset caused the tip to resize itself
+    var actualWidth  = $tip[0].offsetWidth
+    var actualHeight = $tip[0].offsetHeight
+
+    if (placement == 'top' && actualHeight != height) {
+      offset.top = offset.top + height - actualHeight
+    }
+
+    var delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight)
+
+    if (delta.left) offset.left += delta.left
+    else offset.top += delta.top
+
+    var isVertical          = /top|bottom/.test(placement)
+    var arrowDelta          = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight
+    var arrowOffsetPosition = isVertical ? 'offsetWidth' : 'offsetHeight'
+
+    $tip.offset(offset)
+    this.replaceArrow(arrowDelta, $tip[0][arrowOffsetPosition], isVertical)
+  }
+
+  Tooltip.prototype.replaceArrow = function (delta, dimension, isVertical) {
+    this.arrow()
+      .css(isVertical ? 'left' : 'top', 50 * (1 - delta / dimension) + '%')
+      .css(isVertical ? 'top' : 'left', '')
+  }
+
+  Tooltip.prototype.setContent = function () {
+    var $tip  = this.tip()
+    var title = this.getTitle()
+
+    $tip.find('.tooltip-inner')[this.options.html ? 'html' : 'text'](title)
+    $tip.removeClass('fade in top bottom left right')
+  }
+
+  Tooltip.prototype.hide = function (callback) {
+    var that = this
+    var $tip = $(this.$tip)
+    var e    = $.Event('hide.bs.' + this.type)
+
+    function complete() {
+      if (that.hoverState != 'in') $tip.detach()
+      if (that.$element) { // TODO: Check whether guarding this code with this `if` is really necessary.
+        that.$element
+          .removeAttr('aria-describedby')
+          .trigger('hidden.bs.' + that.type)
+      }
+      callback && callback()
+    }
+
+    this.$element.trigger(e)
+
+    if (e.isDefaultPrevented()) return
+
+    $tip.removeClass('in')
+
+    $.support.transition && $tip.hasClass('fade') ?
+      $tip
+        .one('bsTransitionEnd', complete)
+        .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
+      complete()
+
+    this.hoverState = null
+
+    return this
+  }
+
+  Tooltip.prototype.fixTitle = function () {
+    var $e = this.$element
+    if ($e.attr('title') || typeof $e.attr('data-original-title') != 'string') {
+      $e.attr('data-original-title', $e.attr('title') || '').attr('title', '')
+    }
+  }
+
+  Tooltip.prototype.hasContent = function () {
+    return this.getTitle()
+  }
+
+  Tooltip.prototype.getPosition = function ($element) {
+    $element   = $element || this.$element
+
+    var el     = $element[0]
+    var isBody = el.tagName == 'BODY'
+
+    var elRect    = el.getBoundingClientRect()
+    if (elRect.width == null) {
+      // width and height are missing in IE8, so compute them manually; see https://github.com/twbs/bootstrap/issues/14093
+      elRect = $.extend({}, elRect, { width: elRect.right - elRect.left, height: elRect.bottom - elRect.top })
+    }
+    var isSvg = window.SVGElement && el instanceof window.SVGElement
+    // Avoid using $.offset() on SVGs since it gives incorrect results in jQuery 3.
+    // See https://github.com/twbs/bootstrap/issues/20280
+    var elOffset  = isBody ? { top: 0, left: 0 } : (isSvg ? null : $element.offset())
+    var scroll    = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
+    var outerDims = isBody ? { width: $(window).width(), height: $(window).height() } : null
+
+    return $.extend({}, elRect, scroll, outerDims, elOffset)
+  }
+
+  Tooltip.prototype.getCalculatedOffset = function (placement, pos, actualWidth, actualHeight) {
+    return placement == 'bottom' ? { top: pos.top + pos.height,   left: pos.left + pos.width / 2 - actualWidth / 2 } :
+           placement == 'top'    ? { top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2 } :
+           placement == 'left'   ? { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth } :
+        /* placement == 'right' */ { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width }
+
+  }
+
+  Tooltip.prototype.getViewportAdjustedDelta = function (placement, pos, actualWidth, actualHeight) {
+    var delta = { top: 0, left: 0 }
+    if (!this.$viewport) return delta
+
+    var viewportPadding = this.options.viewport && this.options.viewport.padding || 0
+    var viewportDimensions = this.getPosition(this.$viewport)
+
+    if (/right|left/.test(placement)) {
+      var topEdgeOffset    = pos.top - viewportPadding - viewportDimensions.scroll
+      var bottomEdgeOffset = pos.top + viewportPadding - viewportDimensions.scroll + actualHeight
+      if (topEdgeOffset < viewportDimensions.top) { // top overflow
+        delta.top = viewportDimensions.top - topEdgeOffset
+      } else if (bottomEdgeOffset > viewportDimensions.top + viewportDimensions.height) { // bottom overflow
+        delta.top = viewportDimensions.top + viewportDimensions.height - bottomEdgeOffset
+      }
+    } else {
+      var leftEdgeOffset  = pos.left - viewportPadding
+      var rightEdgeOffset = pos.left + viewportPadding + actualWidth
+      if (leftEdgeOffset < viewportDimensions.left) { // left overflow
+        delta.left = viewportDimensions.left - leftEdgeOffset
+      } else if (rightEdgeOffset > viewportDimensions.right) { // right overflow
+        delta.left = viewportDimensions.left + viewportDimensions.width - rightEdgeOffset
+      }
+    }
+
+    return delta
+  }
+
+  Tooltip.prototype.getTitle = function () {
+    var title
+    var $e = this.$element
+    var o  = this.options
+
+    title = $e.attr('data-original-title')
+      || (typeof o.title == 'function' ? o.title.call($e[0]) :  o.title)
+
+    return title
+  }
+
+  Tooltip.prototype.getUID = function (prefix) {
+    do prefix += ~~(Math.random() * 1000000)
+    while (document.getElementById(prefix))
+    return prefix
+  }
+
+  Tooltip.prototype.tip = function () {
+    if (!this.$tip) {
+      this.$tip = $(this.options.template)
+      if (this.$tip.length != 1) {
+        throw new Error(this.type + ' `template` option must consist of exactly 1 top-level element!')
+      }
+    }
+    return this.$tip
+  }
+
+  Tooltip.prototype.arrow = function () {
+    return (this.$arrow = this.$arrow || this.tip().find('.tooltip-arrow'))
+  }
+
+  Tooltip.prototype.enable = function () {
+    this.enabled = true
+  }
+
+  Tooltip.prototype.disable = function () {
+    this.enabled = false
+  }
+
+  Tooltip.prototype.toggleEnabled = function () {
+    this.enabled = !this.enabled
+  }
+
+  Tooltip.prototype.toggle = function (e) {
+    var self = this
+    if (e) {
+      self = $(e.currentTarget).data('bs.' + this.type)
+      if (!self) {
+        self = new this.constructor(e.currentTarget, this.getDelegateOptions())
+        $(e.currentTarget).data('bs.' + this.type, self)
+      }
+    }
+
+    if (e) {
+      self.inState.click = !self.inState.click
+      if (self.isInStateTrue()) self.enter(self)
+      else self.leave(self)
+    } else {
+      self.tip().hasClass('in') ? self.leave(self) : self.enter(self)
+    }
+  }
+
+  Tooltip.prototype.destroy = function () {
+    var that = this
+    clearTimeout(this.timeout)
+    this.hide(function () {
+      that.$element.off('.' + that.type).removeData('bs.' + that.type)
+      if (that.$tip) {
+        that.$tip.detach()
+      }
+      that.$tip = null
+      that.$arrow = null
+      that.$viewport = null
+      that.$element = null
+    })
+  }
+
+
+  // TOOLTIP PLUGIN DEFINITION
+  // =========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.tooltip')
+      var options = typeof option == 'object' && option
+
+      if (!data && /destroy|hide/.test(option)) return
+      if (!data) $this.data('bs.tooltip', (data = new Tooltip(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.tooltip
+
+  $.fn.tooltip             = Plugin
+  $.fn.tooltip.Constructor = Tooltip
+
+
+  // TOOLTIP NO CONFLICT
+  // ===================
+
+  $.fn.tooltip.noConflict = function () {
+    $.fn.tooltip = old
+    return this
+  }
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: popover.js v3.3.7
+ * http://getbootstrap.com/javascript/#popovers
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // POPOVER PUBLIC CLASS DEFINITION
+  // ===============================
+
+  var Popover = function (element, options) {
+    this.init('popover', element, options)
+  }
+
+  if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js')
+
+  Popover.VERSION  = '3.3.7'
+
+  Popover.DEFAULTS = $.extend({}, $.fn.tooltip.Constructor.DEFAULTS, {
+    placement: 'right',
+    trigger: 'click',
+    content: '',
+    template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+  })
+
+
+  // NOTE: POPOVER EXTENDS tooltip.js
+  // ================================
+
+  Popover.prototype = $.extend({}, $.fn.tooltip.Constructor.prototype)
+
+  Popover.prototype.constructor = Popover
+
+  Popover.prototype.getDefaults = function () {
+    return Popover.DEFAULTS
+  }
+
+  Popover.prototype.setContent = function () {
+    var $tip    = this.tip()
+    var title   = this.getTitle()
+    var content = this.getContent()
+
+    $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
+    $tip.find('.popover-content').children().detach().end()[ // we use append for html objects to maintain js events
+      this.options.html ? (typeof content == 'string' ? 'html' : 'append') : 'text'
+    ](content)
+
+    $tip.removeClass('fade top bottom left right in')
+
+    // IE8 doesn't accept hiding via the `:empty` pseudo selector, we have to do
+    // this manually by checking the contents.
+    if (!$tip.find('.popover-title').html()) $tip.find('.popover-title').hide()
+  }
+
+  Popover.prototype.hasContent = function () {
+    return this.getTitle() || this.getContent()
+  }
+
+  Popover.prototype.getContent = function () {
+    var $e = this.$element
+    var o  = this.options
+
+    return $e.attr('data-content')
+      || (typeof o.content == 'function' ?
+            o.content.call($e[0]) :
+            o.content)
+  }
+
+  Popover.prototype.arrow = function () {
+    return (this.$arrow = this.$arrow || this.tip().find('.arrow'))
+  }
+
+
+  // POPOVER PLUGIN DEFINITION
+  // =========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.popover')
+      var options = typeof option == 'object' && option
+
+      if (!data && /destroy|hide/.test(option)) return
+      if (!data) $this.data('bs.popover', (data = new Popover(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.popover
+
+  $.fn.popover             = Plugin
+  $.fn.popover.Constructor = Popover
+
+
+  // POPOVER NO CONFLICT
+  // ===================
+
+  $.fn.popover.noConflict = function () {
+    $.fn.popover = old
+    return this
+  }
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: scrollspy.js v3.3.7
+ * http://getbootstrap.com/javascript/#scrollspy
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // SCROLLSPY CLASS DEFINITION
+  // ==========================
+
+  function ScrollSpy(element, options) {
+    this.$body          = $(document.body)
+    this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+    this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+    this.selector       = (this.options.target || '') + ' .nav li > a'
+    this.offsets        = []
+    this.targets        = []
+    this.activeTarget   = null
+    this.scrollHeight   = 0
+
+    this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+    this.refresh()
+    this.process()
+  }
+
+  ScrollSpy.VERSION  = '3.3.7'
+
+  ScrollSpy.DEFAULTS = {
+    offset: 10
+  }
+
+  ScrollSpy.prototype.getScrollHeight = function () {
+    return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+  }
+
+  ScrollSpy.prototype.refresh = function () {
+    var that          = this
+    var offsetMethod  = 'offset'
+    var offsetBase    = 0
+
+    this.offsets      = []
+    this.targets      = []
+    this.scrollHeight = this.getScrollHeight()
+
+    if (!$.isWindow(this.$scrollElement[0])) {
+      offsetMethod = 'position'
+      offsetBase   = this.$scrollElement.scrollTop()
+    }
+
+    this.$body
+      .find(this.selector)
+      .map(function () {
+        var $el   = $(this)
+        var href  = $el.data('target') || $el.attr('href')
+        var $href = /^#./.test(href) && $(href)
+
+        return ($href
+          && $href.length
+          && $href.is(':visible')
+          && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+      })
+      .sort(function (a, b) { return a[0] - b[0] })
+      .each(function () {
+        that.offsets.push(this[0])
+        that.targets.push(this[1])
+      })
+  }
+
+  ScrollSpy.prototype.process = function () {
+    var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+    var scrollHeight = this.getScrollHeight()
+    var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+    var offsets      = this.offsets
+    var targets      = this.targets
+    var activeTarget = this.activeTarget
+    var i
+
+    if (this.scrollHeight != scrollHeight) {
+      this.refresh()
+    }
+
+    if (scrollTop >= maxScroll) {
+      return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+    }
+
+    if (activeTarget && scrollTop < offsets[0]) {
+      this.activeTarget = null
+      return this.clear()
+    }
+
+    for (i = offsets.length; i--;) {
+      activeTarget != targets[i]
+        && scrollTop >= offsets[i]
+        && (offsets[i + 1] === undefined || scrollTop < offsets[i + 1])
+        && this.activate(targets[i])
+    }
+  }
+
+  ScrollSpy.prototype.activate = function (target) {
+    this.activeTarget = target
+
+    this.clear()
+
+    var selector = this.selector +
+      '[data-target="' + target + '"],' +
+      this.selector + '[href="' + target + '"]'
+
+    var active = $(selector)
+      .parents('li')
+      .addClass('active')
+
+    if (active.parent('.dropdown-menu').length) {
+      active = active
+        .closest('li.dropdown')
+        .addClass('active')
+    }
+
+    active.trigger('activate.bs.scrollspy')
+  }
+
+  ScrollSpy.prototype.clear = function () {
+    $(this.selector)
+      .parentsUntil(this.options.target, '.active')
+      .removeClass('active')
+  }
+
+
+  // SCROLLSPY PLUGIN DEFINITION
+  // ===========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.scrollspy')
+      var options = typeof option == 'object' && option
+
+      if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.scrollspy
+
+  $.fn.scrollspy             = Plugin
+  $.fn.scrollspy.Constructor = ScrollSpy
+
+
+  // SCROLLSPY NO CONFLICT
+  // =====================
+
+  $.fn.scrollspy.noConflict = function () {
+    $.fn.scrollspy = old
+    return this
+  }
+
+
+  // SCROLLSPY DATA-API
+  // ==================
+
+  $(window).on('load.bs.scrollspy.data-api', function () {
+    $('[data-spy="scroll"]').each(function () {
+      var $spy = $(this)
+      Plugin.call($spy, $spy.data())
+    })
+  })
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: tab.js v3.3.7
+ * http://getbootstrap.com/javascript/#tabs
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // TAB CLASS DEFINITION
+  // ====================
+
+  var Tab = function (element) {
+    // jscs:disable requireDollarBeforejQueryAssignment
+    this.element = $(element)
+    // jscs:enable requireDollarBeforejQueryAssignment
+  }
+
+  Tab.VERSION = '3.3.7'
+
+  Tab.TRANSITION_DURATION = 150
+
+  Tab.prototype.show = function () {
+    var $this    = this.element
+    var $ul      = $this.closest('ul:not(.dropdown-menu)')
+    var selector = $this.data('target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    if ($this.parent('li').hasClass('active')) return
+
+    var $previous = $ul.find('.active:last a')
+    var hideEvent = $.Event('hide.bs.tab', {
+      relatedTarget: $this[0]
+    })
+    var showEvent = $.Event('show.bs.tab', {
+      relatedTarget: $previous[0]
+    })
+
+    $previous.trigger(hideEvent)
+    $this.trigger(showEvent)
+
+    if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return
+
+    var $target = $(selector)
+
+    this.activate($this.closest('li'), $ul)
+    this.activate($target, $target.parent(), function () {
+      $previous.trigger({
+        type: 'hidden.bs.tab',
+        relatedTarget: $this[0]
+      })
+      $this.trigger({
+        type: 'shown.bs.tab',
+        relatedTarget: $previous[0]
+      })
+    })
+  }
+
+  Tab.prototype.activate = function (element, container, callback) {
+    var $active    = container.find('> .active')
+    var transition = callback
+      && $.support.transition
+      && ($active.length && $active.hasClass('fade') || !!container.find('> .fade').length)
+
+    function next() {
+      $active
+        .removeClass('active')
+        .find('> .dropdown-menu > .active')
+          .removeClass('active')
+        .end()
+        .find('[data-toggle="tab"]')
+          .attr('aria-expanded', false)
+
+      element
+        .addClass('active')
+        .find('[data-toggle="tab"]')
+          .attr('aria-expanded', true)
+
+      if (transition) {
+        element[0].offsetWidth // reflow for transition
+        element.addClass('in')
+      } else {
+        element.removeClass('fade')
+      }
+
+      if (element.parent('.dropdown-menu').length) {
+        element
+          .closest('li.dropdown')
+            .addClass('active')
+          .end()
+          .find('[data-toggle="tab"]')
+            .attr('aria-expanded', true)
+      }
+
+      callback && callback()
+    }
+
+    $active.length && transition ?
+      $active
+        .one('bsTransitionEnd', next)
+        .emulateTransitionEnd(Tab.TRANSITION_DURATION) :
+      next()
+
+    $active.removeClass('in')
+  }
+
+
+  // TAB PLUGIN DEFINITION
+  // =====================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.tab')
+
+      if (!data) $this.data('bs.tab', (data = new Tab(this)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.tab
+
+  $.fn.tab             = Plugin
+  $.fn.tab.Constructor = Tab
+
+
+  // TAB NO CONFLICT
+  // ===============
+
+  $.fn.tab.noConflict = function () {
+    $.fn.tab = old
+    return this
+  }
+
+
+  // TAB DATA-API
+  // ============
+
+  var clickHandler = function (e) {
+    e.preventDefault()
+    Plugin.call($(this), 'show')
+  }
+
+  $(document)
+    .on('click.bs.tab.data-api', '[data-toggle="tab"]', clickHandler)
+    .on('click.bs.tab.data-api', '[data-toggle="pill"]', clickHandler)
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: affix.js v3.3.7
+ * http://getbootstrap.com/javascript/#affix
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // AFFIX CLASS DEFINITION
+  // ======================
+
+  var Affix = function (element, options) {
+    this.options = $.extend({}, Affix.DEFAULTS, options)
+
+    this.$target = $(this.options.target)
+      .on('scroll.bs.affix.data-api', $.proxy(this.checkPosition, this))
+      .on('click.bs.affix.data-api',  $.proxy(this.checkPositionWithEventLoop, this))
+
+    this.$element     = $(element)
+    this.affixed      = null
+    this.unpin        = null
+    this.pinnedOffset = null
+
+    this.checkPosition()
+  }
+
+  Affix.VERSION  = '3.3.7'
+
+  Affix.RESET    = 'affix affix-top affix-bottom'
+
+  Affix.DEFAULTS = {
+    offset: 0,
+    target: window
+  }
+
+  Affix.prototype.getState = function (scrollHeight, height, offsetTop, offsetBottom) {
+    var scrollTop    = this.$target.scrollTop()
+    var position     = this.$element.offset()
+    var targetHeight = this.$target.height()
+
+    if (offsetTop != null && this.affixed == 'top') return scrollTop < offsetTop ? 'top' : false
+
+    if (this.affixed == 'bottom') {
+      if (offsetTop != null) return (scrollTop + this.unpin <= position.top) ? false : 'bottom'
+      return (scrollTop + targetHeight <= scrollHeight - offsetBottom) ? false : 'bottom'
+    }
+
+    var initializing   = this.affixed == null
+    var colliderTop    = initializing ? scrollTop : position.top
+    var colliderHeight = initializing ? targetHeight : height
+
+    if (offsetTop != null && scrollTop <= offsetTop) return 'top'
+    if (offsetBottom != null && (colliderTop + colliderHeight >= scrollHeight - offsetBottom)) return 'bottom'
+
+    return false
+  }
+
+  Affix.prototype.getPinnedOffset = function () {
+    if (this.pinnedOffset) return this.pinnedOffset
+    this.$element.removeClass(Affix.RESET).addClass('affix')
+    var scrollTop = this.$target.scrollTop()
+    var position  = this.$element.offset()
+    return (this.pinnedOffset = position.top - scrollTop)
+  }
+
+  Affix.prototype.checkPositionWithEventLoop = function () {
+    setTimeout($.proxy(this.checkPosition, this), 1)
+  }
+
+  Affix.prototype.checkPosition = function () {
+    if (!this.$element.is(':visible')) return
+
+    var height       = this.$element.height()
+    var offset       = this.options.offset
+    var offsetTop    = offset.top
+    var offsetBottom = offset.bottom
+    var scrollHeight = Math.max($(document).height(), $(document.body).height())
+
+    if (typeof offset != 'object')         offsetBottom = offsetTop = offset
+    if (typeof offsetTop == 'function')    offsetTop    = offset.top(this.$element)
+    if (typeof offsetBottom == 'function') offsetBottom = offset.bottom(this.$element)
+
+    var affix = this.getState(scrollHeight, height, offsetTop, offsetBottom)
+
+    if (this.affixed != affix) {
+      if (this.unpin != null) this.$element.css('top', '')
+
+      var affixType = 'affix' + (affix ? '-' + affix : '')
+      var e         = $.Event(affixType + '.bs.affix')
+
+      this.$element.trigger(e)
+
+      if (e.isDefaultPrevented()) return
+
+      this.affixed = affix
+      this.unpin = affix == 'bottom' ? this.getPinnedOffset() : null
+
+      this.$element
+        .removeClass(Affix.RESET)
+        .addClass(affixType)
+        .trigger(affixType.replace('affix', 'affixed') + '.bs.affix')
+    }
+
+    if (affix == 'bottom') {
+      this.$element.offset({
+        top: scrollHeight - height - offsetBottom
+      })
+    }
+  }
+
+
+  // AFFIX PLUGIN DEFINITION
+  // =======================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.affix')
+      var options = typeof option == 'object' && option
+
+      if (!data) $this.data('bs.affix', (data = new Affix(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.affix
+
+  $.fn.affix             = Plugin
+  $.fn.affix.Constructor = Affix
+
+
+  // AFFIX NO CONFLICT
+  // =================
+
+  $.fn.affix.noConflict = function () {
+    $.fn.affix = old
+    return this
+  }
+
+
+  // AFFIX DATA-API
+  // ==============
+
+  $(window).on('load', function () {
+    $('[data-spy="affix"]').each(function () {
+      var $spy = $(this)
+      var data = $spy.data()
+
+      data.offset = data.offset || {}
+
+      if (data.offsetBottom != null) data.offset.bottom = data.offsetBottom
+      if (data.offsetTop    != null) data.offset.top    = data.offsetTop
+
+      Plugin.call($spy, data)
+    })
+  })
+
+}(jQuery);
+
+/*!
+ DataTables 1.10.15
+ ?2008-2017 SpryMedia Ltd - datatables.net/license
+ */
+(function(h){"function"===typeof define&&define.amd?define(["jquery"],function(E){return h(E,window,document)}):"object"===typeof exports?module.exports=function(E,H){E||(E=window);H||(H="undefined"!==typeof window?require("jquery"):require("jquery")(E));return h(H,E,E.document)}:h(jQuery,window,document)})(function(h,E,H,k){function Y(a){var b,c,d={};h.each(a,function(e){if((b=e.match(/^([^A-Z]+?)([A-Z])/))&&-1!=="a aa ai ao as b fn i m o s ".indexOf(b[1]+" "))c=e.replace(b[0],b[2].toLowerCase()),
+    d[c]=e,"o"===b[1]&&Y(a[e])});a._hungarianMap=d}function J(a,b,c){a._hungarianMap||Y(a);var d;h.each(b,function(e){d=a._hungarianMap[e];if(d!==k&&(c||b[d]===k))"o"===d.charAt(0)?(b[d]||(b[d]={}),h.extend(!0,b[d],b[e]),J(a[d],b[d],c)):b[d]=b[e]})}function Fa(a){var b=m.defaults.oLanguage,c=a.sZeroRecords;!a.sEmptyTable&&(c&&"No data available in table"===b.sEmptyTable)&&F(a,a,"sZeroRecords","sEmptyTable");!a.sLoadingRecords&&(c&&"Loading..."===b.sLoadingRecords)&&F(a,a,"sZeroRecords","sLoadingRecords");
+    a.sInfoThousands&&(a.sThousands=a.sInfoThousands);(a=a.sDecimal)&&fb(a)}function gb(a){A(a,"ordering","bSort");A(a,"orderMulti","bSortMulti");A(a,"orderClasses","bSortClasses");A(a,"orderCellsTop","bSortCellsTop");A(a,"order","aaSorting");A(a,"orderFixed","aaSortingFixed");A(a,"paging","bPaginate");A(a,"pagingType","sPaginationType");A(a,"pageLength","iDisplayLength");A(a,"searching","bFilter");"boolean"===typeof a.sScrollX&&(a.sScrollX=a.sScrollX?"100%":"");"boolean"===typeof a.scrollX&&(a.scrollX=
+    a.scrollX?"100%":"");if(a=a.aoSearchCols)for(var b=0,c=a.length;b<c;b++)a[b]&&J(m.models.oSearch,a[b])}function hb(a){A(a,"orderable","bSortable");A(a,"orderData","aDataSort");A(a,"orderSequence","asSorting");A(a,"orderDataType","sortDataType");var b=a.aDataSort;"number"===typeof b&&!h.isArray(b)&&(a.aDataSort=[b])}function ib(a){if(!m.__browser){var b={};m.__browser=b;var c=h("<div/>").css({position:"fixed",top:0,left:-1*h(E).scrollLeft(),height:1,width:1,overflow:"hidden"}).append(h("<div/>").css({position:"absolute",
+    top:1,left:1,width:100,overflow:"scroll"}).append(h("<div/>").css({width:"100%",height:10}))).appendTo("body"),d=c.children(),e=d.children();b.barWidth=d[0].offsetWidth-d[0].clientWidth;b.bScrollOversize=100===e[0].offsetWidth&&100!==d[0].clientWidth;b.bScrollbarLeft=1!==Math.round(e.offset().left);b.bBounding=c[0].getBoundingClientRect().width?!0:!1;c.remove()}h.extend(a.oBrowser,m.__browser);a.oScroll.iBarWidth=m.__browser.barWidth}function jb(a,b,c,d,e,f){var g,j=!1;c!==k&&(g=c,j=!0);for(;d!==
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     e;)a.hasOwnProperty(d)&&(g=j?b(g,a[d],d,a):a[d],j=!0,d+=f);return g}function Ga(a,b){var c=m.defaults.column,d=a.aoColumns.length,c=h.extend({},m.models.oColumn,c,{nTh:b?b:H.createElement("th"),sTitle:c.sTitle?c.sTitle:b?b.innerHTML:"",aDataSort:c.aDataSort?c.aDataSort:[d],mData:c.mData?c.mData:d,idx:d});a.aoColumns.push(c);c=a.aoPreSearchCols;c[d]=h.extend({},m.models.oSearch,c[d]);la(a,d,h(b).data())}function la(a,b,c){var b=a.aoColumns[b],d=a.oClasses,e=h(b.nTh);if(!b.sWidthOrig){b.sWidthOrig=
+    e.attr("width")||null;var f=(e.attr("style")||"").match(/width:\s*(\d+[pxem%]+)/);f&&(b.sWidthOrig=f[1])}c!==k&&null!==c&&(hb(c),J(m.defaults.column,c),c.mDataProp!==k&&!c.mData&&(c.mData=c.mDataProp),c.sType&&(b._sManualType=c.sType),c.className&&!c.sClass&&(c.sClass=c.className),h.extend(b,c),F(b,c,"sWidth","sWidthOrig"),c.iDataSort!==k&&(b.aDataSort=[c.iDataSort]),F(b,c,"aDataSort"));var g=b.mData,j=R(g),i=b.mRender?R(b.mRender):null,c=function(a){return"string"===typeof a&&-1!==a.indexOf("@")};
+    b._bAttrSrc=h.isPlainObject(g)&&(c(g.sort)||c(g.type)||c(g.filter));b._setter=null;b.fnGetData=function(a,b,c){var d=j(a,b,k,c);return i&&b?i(d,b,a,c):d};b.fnSetData=function(a,b,c){return S(g)(a,b,c)};"number"!==typeof g&&(a._rowReadObject=!0);a.oFeatures.bSort||(b.bSortable=!1,e.addClass(d.sSortableNone));a=-1!==h.inArray("asc",b.asSorting);c=-1!==h.inArray("desc",b.asSorting);!b.bSortable||!a&&!c?(b.sSortingClass=d.sSortableNone,b.sSortingClassJUI=""):a&&!c?(b.sSortingClass=d.sSortableAsc,b.sSortingClassJUI=
+        d.sSortJUIAscAllowed):!a&&c?(b.sSortingClass=d.sSortableDesc,b.sSortingClassJUI=d.sSortJUIDescAllowed):(b.sSortingClass=d.sSortable,b.sSortingClassJUI=d.sSortJUI)}function Z(a){if(!1!==a.oFeatures.bAutoWidth){var b=a.aoColumns;Ha(a);for(var c=0,d=b.length;c<d;c++)b[c].nTh.style.width=b[c].sWidth}b=a.oScroll;(""!==b.sY||""!==b.sX)&&ma(a);s(a,null,"column-sizing",[a])}function $(a,b){var c=na(a,"bVisible");return"number"===typeof c[b]?c[b]:null}function aa(a,b){var c=na(a,"bVisible"),c=h.inArray(b,
+    c);return-1!==c?c:null}function ba(a){var b=0;h.each(a.aoColumns,function(a,d){d.bVisible&&"none"!==h(d.nTh).css("display")&&b++});return b}function na(a,b){var c=[];h.map(a.aoColumns,function(a,e){a[b]&&c.push(e)});return c}function Ia(a){var b=a.aoColumns,c=a.aoData,d=m.ext.type.detect,e,f,g,j,i,h,l,q,r;e=0;for(f=b.length;e<f;e++)if(l=b[e],r=[],!l.sType&&l._sManualType)l.sType=l._sManualType;else if(!l.sType){g=0;for(j=d.length;g<j;g++){i=0;for(h=c.length;i<h;i++){r[i]===k&&(r[i]=B(a,i,e,"type"));
+    q=d[g](r[i],a);if(!q&&g!==d.length-1)break;if("html"===q)break}if(q){l.sType=q;break}}l.sType||(l.sType="string")}}function kb(a,b,c,d){var e,f,g,j,i,n,l=a.aoColumns;if(b)for(e=b.length-1;0<=e;e--){n=b[e];var q=n.targets!==k?n.targets:n.aTargets;h.isArray(q)||(q=[q]);f=0;for(g=q.length;f<g;f++)if("number"===typeof q[f]&&0<=q[f]){for(;l.length<=q[f];)Ga(a);d(q[f],n)}else if("number"===typeof q[f]&&0>q[f])d(l.length+q[f],n);else if("string"===typeof q[f]){j=0;for(i=l.length;j<i;j++)("_all"==q[f]||h(l[j].nTh).hasClass(q[f]))&&
+d(j,n)}}if(c){e=0;for(a=c.length;e<a;e++)d(e,c[e])}}function N(a,b,c,d){var e=a.aoData.length,f=h.extend(!0,{},m.models.oRow,{src:c?"dom":"data",idx:e});f._aData=b;a.aoData.push(f);for(var g=a.aoColumns,j=0,i=g.length;j<i;j++)g[j].sType=null;a.aiDisplayMaster.push(e);b=a.rowIdFn(b);b!==k&&(a.aIds[b]=f);(c||!a.oFeatures.bDeferRender)&&Ja(a,e,c,d);return e}function oa(a,b){var c;b instanceof h||(b=h(b));return b.map(function(b,e){c=Ka(a,e);return N(a,c.data,e,c.cells)})}function B(a,b,c,d){var e=a.iDraw,
+    f=a.aoColumns[c],g=a.aoData[b]._aData,j=f.sDefaultContent,i=f.fnGetData(g,d,{settings:a,row:b,col:c});if(i===k)return a.iDrawError!=e&&null===j&&(K(a,0,"Requested unknown parameter "+("function"==typeof f.mData?"{function}":"'"+f.mData+"'")+" for row "+b+", column "+c,4),a.iDrawError=e),j;if((i===g||null===i)&&null!==j&&d!==k)i=j;else if("function"===typeof i)return i.call(g);return null===i&&"display"==d?"":i}function lb(a,b,c,d){a.aoColumns[c].fnSetData(a.aoData[b]._aData,d,{settings:a,row:b,col:c})}
+    function La(a){return h.map(a.match(/(\\.|[^\.])+/g)||[""],function(a){return a.replace(/\\\./g,".")})}function R(a){if(h.isPlainObject(a)){var b={};h.each(a,function(a,c){c&&(b[a]=R(c))});return function(a,c,f,g){var j=b[c]||b._;return j!==k?j(a,c,f,g):a}}if(null===a)return function(a){return a};if("function"===typeof a)return function(b,c,f,g){return a(b,c,f,g)};if("string"===typeof a&&(-1!==a.indexOf(".")||-1!==a.indexOf("[")||-1!==a.indexOf("("))){var c=function(a,b,f){var g,j;if(""!==f){j=La(f);
+        for(var i=0,n=j.length;i<n;i++){f=j[i].match(ca);g=j[i].match(V);if(f){j[i]=j[i].replace(ca,"");""!==j[i]&&(a=a[j[i]]);g=[];j.splice(0,i+1);j=j.join(".");if(h.isArray(a)){i=0;for(n=a.length;i<n;i++)g.push(c(a[i],b,j))}a=f[0].substring(1,f[0].length-1);a=""===a?g:g.join(a);break}else if(g){j[i]=j[i].replace(V,"");a=a[j[i]]();continue}if(null===a||a[j[i]]===k)return k;a=a[j[i]]}}return a};return function(b,e){return c(b,e,a)}}return function(b){return b[a]}}function S(a){if(h.isPlainObject(a))return S(a._);
+        if(null===a)return function(){};if("function"===typeof a)return function(b,d,e){a(b,"set",d,e)};if("string"===typeof a&&(-1!==a.indexOf(".")||-1!==a.indexOf("[")||-1!==a.indexOf("("))){var b=function(a,d,e){var e=La(e),f;f=e[e.length-1];for(var g,j,i=0,n=e.length-1;i<n;i++){g=e[i].match(ca);j=e[i].match(V);if(g){e[i]=e[i].replace(ca,"");a[e[i]]=[];f=e.slice();f.splice(0,i+1);g=f.join(".");if(h.isArray(d)){j=0;for(n=d.length;j<n;j++)f={},b(f,d[j],g),a[e[i]].push(f)}else a[e[i]]=d;return}j&&(e[i]=e[i].replace(V,
+            ""),a=a[e[i]](d));if(null===a[e[i]]||a[e[i]]===k)a[e[i]]={};a=a[e[i]]}if(f.match(V))a[f.replace(V,"")](d);else a[f.replace(ca,"")]=d};return function(c,d){return b(c,d,a)}}return function(b,d){b[a]=d}}function Ma(a){return D(a.aoData,"_aData")}function pa(a){a.aoData.length=0;a.aiDisplayMaster.length=0;a.aiDisplay.length=0;a.aIds={}}function qa(a,b,c){for(var d=-1,e=0,f=a.length;e<f;e++)a[e]==b?d=e:a[e]>b&&a[e]--; -1!=d&&c===k&&a.splice(d,1)}function da(a,b,c,d){var e=a.aoData[b],f,g=function(c,d){for(;c.childNodes.length;)c.removeChild(c.firstChild);
+        c.innerHTML=B(a,b,d,"display")};if("dom"===c||(!c||"auto"===c)&&"dom"===e.src)e._aData=Ka(a,e,d,d===k?k:e._aData).data;else{var j=e.anCells;if(j)if(d!==k)g(j[d],d);else{c=0;for(f=j.length;c<f;c++)g(j[c],c)}}e._aSortData=null;e._aFilterData=null;g=a.aoColumns;if(d!==k)g[d].sType=null;else{c=0;for(f=g.length;c<f;c++)g[c].sType=null;Na(a,e)}}function Ka(a,b,c,d){var e=[],f=b.firstChild,g,j,i=0,n,l=a.aoColumns,q=a._rowReadObject,d=d!==k?d:q?{}:[],r=function(a,b){if("string"===typeof a){var c=a.indexOf("@");
+        -1!==c&&(c=a.substring(c+1),S(a)(d,b.getAttribute(c)))}},m=function(a){if(c===k||c===i)j=l[i],n=h.trim(a.innerHTML),j&&j._bAttrSrc?(S(j.mData._)(d,n),r(j.mData.sort,a),r(j.mData.type,a),r(j.mData.filter,a)):q?(j._setter||(j._setter=S(j.mData)),j._setter(d,n)):d[i]=n;i++};if(f)for(;f;){g=f.nodeName.toUpperCase();if("TD"==g||"TH"==g)m(f),e.push(f);f=f.nextSibling}else{e=b.anCells;f=0;for(g=e.length;f<g;f++)m(e[f])}if(b=b.firstChild?b:b.nTr)(b=b.getAttribute("id"))&&S(a.rowId)(d,b);return{data:d,cells:e}}
+    function Ja(a,b,c,d){var e=a.aoData[b],f=e._aData,g=[],j,i,n,l,q;if(null===e.nTr){j=c||H.createElement("tr");e.nTr=j;e.anCells=g;j._DT_RowIndex=b;Na(a,e);l=0;for(q=a.aoColumns.length;l<q;l++){n=a.aoColumns[l];i=c?d[l]:H.createElement(n.sCellType);i._DT_CellIndex={row:b,column:l};g.push(i);if((!c||n.mRender||n.mData!==l)&&(!h.isPlainObject(n.mData)||n.mData._!==l+".display"))i.innerHTML=B(a,b,l,"display");n.sClass&&(i.className+=" "+n.sClass);n.bVisible&&!c?j.appendChild(i):!n.bVisible&&c&&i.parentNode.removeChild(i);
+        n.fnCreatedCell&&n.fnCreatedCell.call(a.oInstance,i,B(a,b,l),f,b,l)}s(a,"aoRowCreatedCallback",null,[j,f,b])}e.nTr.setAttribute("role","row")}function Na(a,b){var c=b.nTr,d=b._aData;if(c){var e=a.rowIdFn(d);e&&(c.id=e);d.DT_RowClass&&(e=d.DT_RowClass.split(" "),b.__rowc=b.__rowc?sa(b.__rowc.concat(e)):e,h(c).removeClass(b.__rowc.join(" ")).addClass(d.DT_RowClass));d.DT_RowAttr&&h(c).attr(d.DT_RowAttr);d.DT_RowData&&h(c).data(d.DT_RowData)}}function mb(a){var b,c,d,e,f,g=a.nTHead,j=a.nTFoot,i=0===
+        h("th, td",g).length,n=a.oClasses,l=a.aoColumns;i&&(e=h("<tr/>").appendTo(g));b=0;for(c=l.length;b<c;b++)f=l[b],d=h(f.nTh).addClass(f.sClass),i&&d.appendTo(e),a.oFeatures.bSort&&(d.addClass(f.sSortingClass),!1!==f.bSortable&&(d.attr("tabindex",a.iTabIndex).attr("aria-controls",a.sTableId),Oa(a,f.nTh,b))),f.sTitle!=d[0].innerHTML&&d.html(f.sTitle),Pa(a,"header")(a,d,f,n);i&&ea(a.aoHeader,g);h(g).find(">tr").attr("role","row");h(g).find(">tr>th, >tr>td").addClass(n.sHeaderTH);h(j).find(">tr>th, >tr>td").addClass(n.sFooterTH);
+        if(null!==j){a=a.aoFooter[0];b=0;for(c=a.length;b<c;b++)f=l[b],f.nTf=a[b].cell,f.sClass&&h(f.nTf).addClass(f.sClass)}}function fa(a,b,c){var d,e,f,g=[],j=[],i=a.aoColumns.length,n;if(b){c===k&&(c=!1);d=0;for(e=b.length;d<e;d++){g[d]=b[d].slice();g[d].nTr=b[d].nTr;for(f=i-1;0<=f;f--)!a.aoColumns[f].bVisible&&!c&&g[d].splice(f,1);j.push([])}d=0;for(e=g.length;d<e;d++){if(a=g[d].nTr)for(;f=a.firstChild;)a.removeChild(f);f=0;for(b=g[d].length;f<b;f++)if(n=i=1,j[d][f]===k){a.appendChild(g[d][f].cell);
+        for(j[d][f]=1;g[d+i]!==k&&g[d][f].cell==g[d+i][f].cell;)j[d+i][f]=1,i++;for(;g[d][f+n]!==k&&g[d][f].cell==g[d][f+n].cell;){for(c=0;c<i;c++)j[d+c][f+n]=1;n++}h(g[d][f].cell).attr("rowspan",i).attr("colspan",n)}}}}function O(a){var b=s(a,"aoPreDrawCallback","preDraw",[a]);if(-1!==h.inArray(!1,b))C(a,!1);else{var b=[],c=0,d=a.asStripeClasses,e=d.length,f=a.oLanguage,g=a.iInitDisplayStart,j="ssp"==y(a),i=a.aiDisplay;a.bDrawing=!0;g!==k&&-1!==g&&(a._iDisplayStart=j?g:g>=a.fnRecordsDisplay()?0:g,a.iInitDisplayStart=
+        -1);var g=a._iDisplayStart,n=a.fnDisplayEnd();if(a.bDeferLoading)a.bDeferLoading=!1,a.iDraw++,C(a,!1);else if(j){if(!a.bDestroying&&!nb(a))return}else a.iDraw++;if(0!==i.length){f=j?a.aoData.length:n;for(j=j?0:g;j<f;j++){var l=i[j],q=a.aoData[l];null===q.nTr&&Ja(a,l);l=q.nTr;if(0!==e){var r=d[c%e];q._sRowStripe!=r&&(h(l).removeClass(q._sRowStripe).addClass(r),q._sRowStripe=r)}s(a,"aoRowCallback",null,[l,q._aData,c,j]);b.push(l);c++}}else c=f.sZeroRecords,1==a.iDraw&&"ajax"==y(a)?c=f.sLoadingRecords:
+    f.sEmptyTable&&0===a.fnRecordsTotal()&&(c=f.sEmptyTable),b[0]=h("<tr/>",{"class":e?d[0]:""}).append(h("<td />",{valign:"top",colSpan:ba(a),"class":a.oClasses.sRowEmpty}).html(c))[0];s(a,"aoHeaderCallback","header",[h(a.nTHead).children("tr")[0],Ma(a),g,n,i]);s(a,"aoFooterCallback","footer",[h(a.nTFoot).children("tr")[0],Ma(a),g,n,i]);d=h(a.nTBody);d.children().detach();d.append(h(b));s(a,"aoDrawCallback","draw",[a]);a.bSorted=!1;a.bFiltered=!1;a.bDrawing=!1}}function T(a,b){var c=a.oFeatures,d=c.bFilter;
+        c.bSort&&ob(a);d?ga(a,a.oPreviousSearch):a.aiDisplay=a.aiDisplayMaster.slice();!0!==b&&(a._iDisplayStart=0);a._drawHold=b;O(a);a._drawHold=!1}function pb(a){var b=a.oClasses,c=h(a.nTable),c=h("<div/>").insertBefore(c),d=a.oFeatures,e=h("<div/>",{id:a.sTableId+"_wrapper","class":b.sWrapper+(a.nTFoot?"":" "+b.sNoFooter)});a.nHolding=c[0];a.nTableWrapper=e[0];a.nTableReinsertBefore=a.nTable.nextSibling;for(var f=a.sDom.split(""),g,j,i,n,l,q,k=0;k<f.length;k++){g=null;j=f[k];if("<"==j){i=h("<div/>")[0];
+        n=f[k+1];if("'"==n||'"'==n){l="";for(q=2;f[k+q]!=n;)l+=f[k+q],q++;"H"==l?l=b.sJUIHeader:"F"==l&&(l=b.sJUIFooter);-1!=l.indexOf(".")?(n=l.split("."),i.id=n[0].substr(1,n[0].length-1),i.className=n[1]):"#"==l.charAt(0)?i.id=l.substr(1,l.length-1):i.className=l;k+=q}e.append(i);e=h(i)}else if(">"==j)e=e.parent();else if("l"==j&&d.bPaginate&&d.bLengthChange)g=qb(a);else if("f"==j&&d.bFilter)g=rb(a);else if("r"==j&&d.bProcessing)g=sb(a);else if("t"==j)g=tb(a);else if("i"==j&&d.bInfo)g=ub(a);else if("p"==
+        j&&d.bPaginate)g=vb(a);else if(0!==m.ext.feature.length){i=m.ext.feature;q=0;for(n=i.length;q<n;q++)if(j==i[q].cFeature){g=i[q].fnInit(a);break}}g&&(i=a.aanFeatures,i[j]||(i[j]=[]),i[j].push(g),e.append(g))}c.replaceWith(e);a.nHolding=null}function ea(a,b){var c=h(b).children("tr"),d,e,f,g,j,i,n,l,q,k;a.splice(0,a.length);f=0;for(i=c.length;f<i;f++)a.push([]);f=0;for(i=c.length;f<i;f++){d=c[f];for(e=d.firstChild;e;){if("TD"==e.nodeName.toUpperCase()||"TH"==e.nodeName.toUpperCase()){l=1*e.getAttribute("colspan");
+        q=1*e.getAttribute("rowspan");l=!l||0===l||1===l?1:l;q=!q||0===q||1===q?1:q;g=0;for(j=a[f];j[g];)g++;n=g;k=1===l?!0:!1;for(j=0;j<l;j++)for(g=0;g<q;g++)a[f+g][n+j]={cell:e,unique:k},a[f+g].nTr=d}e=e.nextSibling}}}function ta(a,b,c){var d=[];c||(c=a.aoHeader,b&&(c=[],ea(c,b)));for(var b=0,e=c.length;b<e;b++)for(var f=0,g=c[b].length;f<g;f++)if(c[b][f].unique&&(!d[f]||!a.bSortCellsTop))d[f]=c[b][f].cell;return d}function ua(a,b,c){s(a,"aoServerParams","serverParams",[b]);if(b&&h.isArray(b)){var d={},
+        e=/(.*?)\[\]$/;h.each(b,function(a,b){var c=b.name.match(e);c?(c=c[0],d[c]||(d[c]=[]),d[c].push(b.value)):d[b.name]=b.value});b=d}var f,g=a.ajax,j=a.oInstance,i=function(b){s(a,null,"xhr",[a,b,a.jqXHR]);c(b)};if(h.isPlainObject(g)&&g.data){f=g.data;var n=h.isFunction(f)?f(b,a):f,b=h.isFunction(f)&&n?n:h.extend(!0,b,n);delete g.data}n={data:b,success:function(b){var c=b.error||b.sError;c&&K(a,0,c);a.json=b;i(b)},dataType:"json",cache:!1,type:a.sServerMethod,error:function(b,c){var d=s(a,null,"xhr",
+        [a,null,a.jqXHR]);-1===h.inArray(!0,d)&&("parsererror"==c?K(a,0,"Invalid JSON response",1):4===b.readyState&&K(a,0,"Ajax error",7));C(a,!1)}};a.oAjaxData=b;s(a,null,"preXhr",[a,b]);a.fnServerData?a.fnServerData.call(j,a.sAjaxSource,h.map(b,function(a,b){return{name:b,value:a}}),i,a):a.sAjaxSource||"string"===typeof g?a.jqXHR=h.ajax(h.extend(n,{url:g||a.sAjaxSource})):h.isFunction(g)?a.jqXHR=g.call(j,b,i,a):(a.jqXHR=h.ajax(h.extend(n,g)),g.data=f)}function nb(a){return a.bAjaxDataGet?(a.iDraw++,C(a,
+        !0),ua(a,wb(a),function(b){xb(a,b)}),!1):!0}function wb(a){var b=a.aoColumns,c=b.length,d=a.oFeatures,e=a.oPreviousSearch,f=a.aoPreSearchCols,g,j=[],i,n,l,k=W(a);g=a._iDisplayStart;i=!1!==d.bPaginate?a._iDisplayLength:-1;var r=function(a,b){j.push({name:a,value:b})};r("sEcho",a.iDraw);r("iColumns",c);r("sColumns",D(b,"sName").join(","));r("iDisplayStart",g);r("iDisplayLength",i);var ra={draw:a.iDraw,columns:[],order:[],start:g,length:i,search:{value:e.sSearch,regex:e.bRegex}};for(g=0;g<c;g++)n=b[g],
+        l=f[g],i="function"==typeof n.mData?"function":n.mData,ra.columns.push({data:i,name:n.sName,searchable:n.bSearchable,orderable:n.bSortable,search:{value:l.sSearch,regex:l.bRegex}}),r("mDataProp_"+g,i),d.bFilter&&(r("sSearch_"+g,l.sSearch),r("bRegex_"+g,l.bRegex),r("bSearchable_"+g,n.bSearchable)),d.bSort&&r("bSortable_"+g,n.bSortable);d.bFilter&&(r("sSearch",e.sSearch),r("bRegex",e.bRegex));d.bSort&&(h.each(k,function(a,b){ra.order.push({column:b.col,dir:b.dir});r("iSortCol_"+a,b.col);r("sSortDir_"+
+        a,b.dir)}),r("iSortingCols",k.length));b=m.ext.legacy.ajax;return null===b?a.sAjaxSource?j:ra:b?j:ra}function xb(a,b){var c=va(a,b),d=b.sEcho!==k?b.sEcho:b.draw,e=b.iTotalRecords!==k?b.iTotalRecords:b.recordsTotal,f=b.iTotalDisplayRecords!==k?b.iTotalDisplayRecords:b.recordsFiltered;if(d){if(1*d<a.iDraw)return;a.iDraw=1*d}pa(a);a._iRecordsTotal=parseInt(e,10);a._iRecordsDisplay=parseInt(f,10);d=0;for(e=c.length;d<e;d++)N(a,c[d]);a.aiDisplay=a.aiDisplayMaster.slice();a.bAjaxDataGet=!1;O(a);a._bInitComplete||
+    wa(a,b);a.bAjaxDataGet=!0;C(a,!1)}function va(a,b){var c=h.isPlainObject(a.ajax)&&a.ajax.dataSrc!==k?a.ajax.dataSrc:a.sAjaxDataProp;return"data"===c?b.aaData||b[c]:""!==c?R(c)(b):b}function rb(a){var b=a.oClasses,c=a.sTableId,d=a.oLanguage,e=a.oPreviousSearch,f=a.aanFeatures,g='<input type="search" class="'+b.sFilterInput+'"/>',j=d.sSearch,j=j.match(/_INPUT_/)?j.replace("_INPUT_",g):j+g,b=h("<div/>",{id:!f.f?c+"_filter":null,"class":b.sFilter}).append(h("<label/>").append(j)),f=function(){var b=!this.value?
+        "":this.value;b!=e.sSearch&&(ga(a,{sSearch:b,bRegex:e.bRegex,bSmart:e.bSmart,bCaseInsensitive:e.bCaseInsensitive}),a._iDisplayStart=0,O(a))},g=null!==a.searchDelay?a.searchDelay:"ssp"===y(a)?400:0,i=h("input",b).val(e.sSearch).attr("placeholder",d.sSearchPlaceholder).on("keyup.DT search.DT input.DT paste.DT cut.DT",g?Qa(f,g):f).on("keypress.DT",function(a){if(13==a.keyCode)return!1}).attr("aria-controls",c);h(a.nTable).on("search.dt.DT",function(b,c){if(a===c)try{i[0]!==H.activeElement&&i.val(e.sSearch)}catch(d){}});
+        return b[0]}function ga(a,b,c){var d=a.oPreviousSearch,e=a.aoPreSearchCols,f=function(a){d.sSearch=a.sSearch;d.bRegex=a.bRegex;d.bSmart=a.bSmart;d.bCaseInsensitive=a.bCaseInsensitive};Ia(a);if("ssp"!=y(a)){yb(a,b.sSearch,c,b.bEscapeRegex!==k?!b.bEscapeRegex:b.bRegex,b.bSmart,b.bCaseInsensitive);f(b);for(b=0;b<e.length;b++)zb(a,e[b].sSearch,b,e[b].bEscapeRegex!==k?!e[b].bEscapeRegex:e[b].bRegex,e[b].bSmart,e[b].bCaseInsensitive);Ab(a)}else f(b);a.bFiltered=!0;s(a,null,"search",[a])}function Ab(a){for(var b=
+        m.ext.search,c=a.aiDisplay,d,e,f=0,g=b.length;f<g;f++){for(var j=[],i=0,n=c.length;i<n;i++)e=c[i],d=a.aoData[e],b[f](a,d._aFilterData,e,d._aData,i)&&j.push(e);c.length=0;h.merge(c,j)}}function zb(a,b,c,d,e,f){if(""!==b){for(var g=[],j=a.aiDisplay,d=Ra(b,d,e,f),e=0;e<j.length;e++)b=a.aoData[j[e]]._aFilterData[c],d.test(b)&&g.push(j[e]);a.aiDisplay=g}}function yb(a,b,c,d,e,f){var d=Ra(b,d,e,f),f=a.oPreviousSearch.sSearch,g=a.aiDisplayMaster,j,e=[];0!==m.ext.search.length&&(c=!0);j=Bb(a);if(0>=b.length)a.aiDisplay=
+        g.slice();else{if(j||c||f.length>b.length||0!==b.indexOf(f)||a.bSorted)a.aiDisplay=g.slice();b=a.aiDisplay;for(c=0;c<b.length;c++)d.test(a.aoData[b[c]]._sFilterRow)&&e.push(b[c]);a.aiDisplay=e}}function Ra(a,b,c,d){a=b?a:Sa(a);c&&(a="^(?=.*?"+h.map(a.match(/"[^"]+"|[^ ]+/g)||[""],function(a){if('"'===a.charAt(0))var b=a.match(/^"(.*)"$/),a=b?b[1]:a;return a.replace('"',"")}).join(")(?=.*?")+").*$");return RegExp(a,d?"i":"")}function Bb(a){var b=a.aoColumns,c,d,e,f,g,j,i,h,l=m.ext.type.search;c=!1;
+        d=0;for(f=a.aoData.length;d<f;d++)if(h=a.aoData[d],!h._aFilterData){j=[];e=0;for(g=b.length;e<g;e++)c=b[e],c.bSearchable?(i=B(a,d,e,"filter"),l[c.sType]&&(i=l[c.sType](i)),null===i&&(i=""),"string"!==typeof i&&i.toString&&(i=i.toString())):i="",i.indexOf&&-1!==i.indexOf("&")&&(xa.innerHTML=i,i=$b?xa.textContent:xa.innerText),i.replace&&(i=i.replace(/[\r\n]/g,"")),j.push(i);h._aFilterData=j;h._sFilterRow=j.join("  ");c=!0}return c}function Cb(a){return{search:a.sSearch,smart:a.bSmart,regex:a.bRegex,
+        caseInsensitive:a.bCaseInsensitive}}function Db(a){return{sSearch:a.search,bSmart:a.smart,bRegex:a.regex,bCaseInsensitive:a.caseInsensitive}}function ub(a){var b=a.sTableId,c=a.aanFeatures.i,d=h("<div/>",{"class":a.oClasses.sInfo,id:!c?b+"_info":null});c||(a.aoDrawCallback.push({fn:Eb,sName:"information"}),d.attr("role","status").attr("aria-live","polite"),h(a.nTable).attr("aria-describedby",b+"_info"));return d[0]}function Eb(a){var b=a.aanFeatures.i;if(0!==b.length){var c=a.oLanguage,d=a._iDisplayStart+
+        1,e=a.fnDisplayEnd(),f=a.fnRecordsTotal(),g=a.fnRecordsDisplay(),j=g?c.sInfo:c.sInfoEmpty;g!==f&&(j+=" "+c.sInfoFiltered);j+=c.sInfoPostFix;j=Fb(a,j);c=c.fnInfoCallback;null!==c&&(j=c.call(a.oInstance,a,d,e,f,g,j));h(b).html(j)}}function Fb(a,b){var c=a.fnFormatNumber,d=a._iDisplayStart+1,e=a._iDisplayLength,f=a.fnRecordsDisplay(),g=-1===e;return b.replace(/_START_/g,c.call(a,d)).replace(/_END_/g,c.call(a,a.fnDisplayEnd())).replace(/_MAX_/g,c.call(a,a.fnRecordsTotal())).replace(/_TOTAL_/g,c.call(a,
+        f)).replace(/_PAGE_/g,c.call(a,g?1:Math.ceil(d/e))).replace(/_PAGES_/g,c.call(a,g?1:Math.ceil(f/e)))}function ha(a){var b,c,d=a.iInitDisplayStart,e=a.aoColumns,f;c=a.oFeatures;var g=a.bDeferLoading;if(a.bInitialised){pb(a);mb(a);fa(a,a.aoHeader);fa(a,a.aoFooter);C(a,!0);c.bAutoWidth&&Ha(a);b=0;for(c=e.length;b<c;b++)f=e[b],f.sWidth&&(f.nTh.style.width=v(f.sWidth));s(a,null,"preInit",[a]);T(a);e=y(a);if("ssp"!=e||g)"ajax"==e?ua(a,[],function(c){var f=va(a,c);for(b=0;b<f.length;b++)N(a,f[b]);a.iInitDisplayStart=
+        d;T(a);C(a,!1);wa(a,c)},a):(C(a,!1),wa(a))}else setTimeout(function(){ha(a)},200)}function wa(a,b){a._bInitComplete=!0;(b||a.oInit.aaData)&&Z(a);s(a,null,"plugin-init",[a,b]);s(a,"aoInitComplete","init",[a,b])}function Ta(a,b){var c=parseInt(b,10);a._iDisplayLength=c;Ua(a);s(a,null,"length",[a,c])}function qb(a){for(var b=a.oClasses,c=a.sTableId,d=a.aLengthMenu,e=h.isArray(d[0]),f=e?d[0]:d,d=e?d[1]:d,e=h("<select/>",{name:c+"_length","aria-controls":c,"class":b.sLengthSelect}),g=0,j=f.length;g<j;g++)e[0][g]=
+        new Option(d[g],f[g]);var i=h("<div><label/></div>").addClass(b.sLength);a.aanFeatures.l||(i[0].id=c+"_length");i.children().append(a.oLanguage.sLengthMenu.replace("_MENU_",e[0].outerHTML));h("select",i).val(a._iDisplayLength).on("change.DT",function(){Ta(a,h(this).val());O(a)});h(a.nTable).on("length.dt.DT",function(b,c,d){a===c&&h("select",i).val(d)});return i[0]}function vb(a){var b=a.sPaginationType,c=m.ext.pager[b],d="function"===typeof c,e=function(a){O(a)},b=h("<div/>").addClass(a.oClasses.sPaging+
+        b)[0],f=a.aanFeatures;d||c.fnInit(a,b,e);f.p||(b.id=a.sTableId+"_paginate",a.aoDrawCallback.push({fn:function(a){if(d){var b=a._iDisplayStart,i=a._iDisplayLength,h=a.fnRecordsDisplay(),l=-1===i,b=l?0:Math.ceil(b/i),i=l?1:Math.ceil(h/i),h=c(b,i),k,l=0;for(k=f.p.length;l<k;l++)Pa(a,"pageButton")(a,f.p[l],l,h,b,i)}else c.fnUpdate(a,e)},sName:"pagination"}));return b}function Va(a,b,c){var d=a._iDisplayStart,e=a._iDisplayLength,f=a.fnRecordsDisplay();0===f||-1===e?d=0:"number"===typeof b?(d=b*e,d>f&&
+    (d=0)):"first"==b?d=0:"previous"==b?(d=0<=e?d-e:0,0>d&&(d=0)):"next"==b?d+e<f&&(d+=e):"last"==b?d=Math.floor((f-1)/e)*e:K(a,0,"Unknown paging action: "+b,5);b=a._iDisplayStart!==d;a._iDisplayStart=d;b&&(s(a,null,"page",[a]),c&&O(a));return b}function sb(a){return h("<div/>",{id:!a.aanFeatures.r?a.sTableId+"_processing":null,"class":a.oClasses.sProcessing}).html(a.oLanguage.sProcessing).insertBefore(a.nTable)[0]}function C(a,b){a.oFeatures.bProcessing&&h(a.aanFeatures.r).css("display",b?"block":"none");
+        s(a,null,"processing",[a,b])}function tb(a){var b=h(a.nTable);b.attr("role","grid");var c=a.oScroll;if(""===c.sX&&""===c.sY)return a.nTable;var d=c.sX,e=c.sY,f=a.oClasses,g=b.children("caption"),j=g.length?g[0]._captionSide:null,i=h(b[0].cloneNode(!1)),n=h(b[0].cloneNode(!1)),l=b.children("tfoot");l.length||(l=null);i=h("<div/>",{"class":f.sScrollWrapper}).append(h("<div/>",{"class":f.sScrollHead}).css({overflow:"hidden",position:"relative",border:0,width:d?!d?null:v(d):"100%"}).append(h("<div/>",
+        {"class":f.sScrollHeadInner}).css({"box-sizing":"content-box",width:c.sXInner||"100%"}).append(i.removeAttr("id").css("margin-left",0).append("top"===j?g:null).append(b.children("thead"))))).append(h("<div/>",{"class":f.sScrollBody}).css({position:"relative",overflow:"auto",width:!d?null:v(d)}).append(b));l&&i.append(h("<div/>",{"class":f.sScrollFoot}).css({overflow:"hidden",border:0,width:d?!d?null:v(d):"100%"}).append(h("<div/>",{"class":f.sScrollFootInner}).append(n.removeAttr("id").css("margin-left",
+        0).append("bottom"===j?g:null).append(b.children("tfoot")))));var b=i.children(),k=b[0],f=b[1],r=l?b[2]:null;if(d)h(f).on("scroll.DT",function(){var a=this.scrollLeft;k.scrollLeft=a;l&&(r.scrollLeft=a)});h(f).css(e&&c.bCollapse?"max-height":"height",e);a.nScrollHead=k;a.nScrollBody=f;a.nScrollFoot=r;a.aoDrawCallback.push({fn:ma,sName:"scrolling"});return i[0]}function ma(a){var b=a.oScroll,c=b.sX,d=b.sXInner,e=b.sY,b=b.iBarWidth,f=h(a.nScrollHead),g=f[0].style,j=f.children("div"),i=j[0].style,n=j.children("table"),
+        j=a.nScrollBody,l=h(j),q=j.style,r=h(a.nScrollFoot).children("div"),m=r.children("table"),p=h(a.nTHead),o=h(a.nTable),t=o[0],s=t.style,u=a.nTFoot?h(a.nTFoot):null,x=a.oBrowser,U=x.bScrollOversize,ac=D(a.aoColumns,"nTh"),P,L,Q,w,Wa=[],y=[],z=[],A=[],B,C=function(a){a=a.style;a.paddingTop="0";a.paddingBottom="0";a.borderTopWidth="0";a.borderBottomWidth="0";a.height=0};L=j.scrollHeight>j.clientHeight;if(a.scrollBarVis!==L&&a.scrollBarVis!==k)a.scrollBarVis=L,Z(a);else{a.scrollBarVis=L;o.children("thead, tfoot").remove();
+        u&&(Q=u.clone().prependTo(o),P=u.find("tr"),Q=Q.find("tr"));w=p.clone().prependTo(o);p=p.find("tr");L=w.find("tr");w.find("th, td").removeAttr("tabindex");c||(q.width="100%",f[0].style.width="100%");h.each(ta(a,w),function(b,c){B=$(a,b);c.style.width=a.aoColumns[B].sWidth});u&&I(function(a){a.style.width=""},Q);f=o.outerWidth();if(""===c){s.width="100%";if(U&&(o.find("tbody").height()>j.offsetHeight||"scroll"==l.css("overflow-y")))s.width=v(o.outerWidth()-b);f=o.outerWidth()}else""!==d&&(s.width=
+            v(d),f=o.outerWidth());I(C,L);I(function(a){z.push(a.innerHTML);Wa.push(v(h(a).css("width")))},L);I(function(a,b){if(h.inArray(a,ac)!==-1)a.style.width=Wa[b]},p);h(L).height(0);u&&(I(C,Q),I(function(a){A.push(a.innerHTML);y.push(v(h(a).css("width")))},Q),I(function(a,b){a.style.width=y[b]},P),h(Q).height(0));I(function(a,b){a.innerHTML='<div class="dataTables_sizing" style="height:0;overflow:hidden;">'+z[b]+"</div>";a.style.width=Wa[b]},L);u&&I(function(a,b){a.innerHTML='<div class="dataTables_sizing" style="height:0;overflow:hidden;">'+
+            A[b]+"</div>";a.style.width=y[b]},Q);if(o.outerWidth()<f){P=j.scrollHeight>j.offsetHeight||"scroll"==l.css("overflow-y")?f+b:f;if(U&&(j.scrollHeight>j.offsetHeight||"scroll"==l.css("overflow-y")))s.width=v(P-b);(""===c||""!==d)&&K(a,1,"Possible column misalignment",6)}else P="100%";q.width=v(P);g.width=v(P);u&&(a.nScrollFoot.style.width=v(P));!e&&U&&(q.height=v(t.offsetHeight+b));c=o.outerWidth();n[0].style.width=v(c);i.width=v(c);d=o.height()>j.clientHeight||"scroll"==l.css("overflow-y");e="padding"+
+            (x.bScrollbarLeft?"Left":"Right");i[e]=d?b+"px":"0px";u&&(m[0].style.width=v(c),r[0].style.width=v(c),r[0].style[e]=d?b+"px":"0px");o.children("colgroup").insertBefore(o.children("thead"));l.scroll();if((a.bSorted||a.bFiltered)&&!a._drawHold)j.scrollTop=0}}function I(a,b,c){for(var d=0,e=0,f=b.length,g,j;e<f;){g=b[e].firstChild;for(j=c?c[e].firstChild:null;g;)1===g.nodeType&&(c?a(g,j,d):a(g,d),d++),g=g.nextSibling,j=c?j.nextSibling:null;e++}}function Ha(a){var b=a.nTable,c=a.aoColumns,d=a.oScroll,
+        e=d.sY,f=d.sX,g=d.sXInner,j=c.length,i=na(a,"bVisible"),n=h("th",a.nTHead),l=b.getAttribute("width"),k=b.parentNode,r=!1,m,p,o=a.oBrowser,d=o.bScrollOversize;(m=b.style.width)&&-1!==m.indexOf("%")&&(l=m);for(m=0;m<i.length;m++)p=c[i[m]],null!==p.sWidth&&(p.sWidth=Gb(p.sWidthOrig,k),r=!0);if(d||!r&&!f&&!e&&j==ba(a)&&j==n.length)for(m=0;m<j;m++)i=$(a,m),null!==i&&(c[i].sWidth=v(n.eq(m).width()));else{j=h(b).clone().css("visibility","hidden").removeAttr("id");j.find("tbody tr").remove();var t=h("<tr/>").appendTo(j.find("tbody"));
+        j.find("thead, tfoot").remove();j.append(h(a.nTHead).clone()).append(h(a.nTFoot).clone());j.find("tfoot th, tfoot td").css("width","");n=ta(a,j.find("thead")[0]);for(m=0;m<i.length;m++)p=c[i[m]],n[m].style.width=null!==p.sWidthOrig&&""!==p.sWidthOrig?v(p.sWidthOrig):"",p.sWidthOrig&&f&&h(n[m]).append(h("<div/>").css({width:p.sWidthOrig,margin:0,padding:0,border:0,height:1}));if(a.aoData.length)for(m=0;m<i.length;m++)r=i[m],p=c[r],h(Hb(a,r)).clone(!1).append(p.sContentPadding).appendTo(t);h("[name]",
+            j).removeAttr("name");p=h("<div/>").css(f||e?{position:"absolute",top:0,left:0,height:1,right:0,overflow:"hidden"}:{}).append(j).appendTo(k);f&&g?j.width(g):f?(j.css("width","auto"),j.removeAttr("width"),j.width()<k.clientWidth&&l&&j.width(k.clientWidth)):e?j.width(k.clientWidth):l&&j.width(l);for(m=e=0;m<i.length;m++)k=h(n[m]),g=k.outerWidth()-k.width(),k=o.bBounding?Math.ceil(n[m].getBoundingClientRect().width):k.outerWidth(),e+=k,c[i[m]].sWidth=v(k-g);b.style.width=v(e);p.remove()}l&&(b.style.width=
+        v(l));if((l||f)&&!a._reszEvt)b=function(){h(E).on("resize.DT-"+a.sInstance,Qa(function(){Z(a)}))},d?setTimeout(b,1E3):b(),a._reszEvt=!0}function Gb(a,b){if(!a)return 0;var c=h("<div/>").css("width",v(a)).appendTo(b||H.body),d=c[0].offsetWidth;c.remove();return d}function Hb(a,b){var c=Ib(a,b);if(0>c)return null;var d=a.aoData[c];return!d.nTr?h("<td/>").html(B(a,c,b,"display"))[0]:d.anCells[b]}function Ib(a,b){for(var c,d=-1,e=-1,f=0,g=a.aoData.length;f<g;f++)c=B(a,f,b,"display")+"",c=c.replace(bc,
+        ""),c=c.replace(/&nbsp;/g," "),c.length>d&&(d=c.length,e=f);return e}function v(a){return null===a?"0px":"number"==typeof a?0>a?"0px":a+"px":a.match(/\d$/)?a+"px":a}function W(a){var b,c,d=[],e=a.aoColumns,f,g,j,i;b=a.aaSortingFixed;c=h.isPlainObject(b);var n=[];f=function(a){a.length&&!h.isArray(a[0])?n.push(a):h.merge(n,a)};h.isArray(b)&&f(b);c&&b.pre&&f(b.pre);f(a.aaSorting);c&&b.post&&f(b.post);for(a=0;a<n.length;a++){i=n[a][0];f=e[i].aDataSort;b=0;for(c=f.length;b<c;b++)g=f[b],j=e[g].sType||
+        "string",n[a]._idx===k&&(n[a]._idx=h.inArray(n[a][1],e[g].asSorting)),d.push({src:i,col:g,dir:n[a][1],index:n[a]._idx,type:j,formatter:m.ext.type.order[j+"-pre"]})}return d}function ob(a){var b,c,d=[],e=m.ext.type.order,f=a.aoData,g=0,j,i=a.aiDisplayMaster,h;Ia(a);h=W(a);b=0;for(c=h.length;b<c;b++)j=h[b],j.formatter&&g++,Jb(a,j.col);if("ssp"!=y(a)&&0!==h.length){b=0;for(c=i.length;b<c;b++)d[i[b]]=b;g===h.length?i.sort(function(a,b){var c,e,g,j,i=h.length,k=f[a]._aSortData,m=f[b]._aSortData;for(g=
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               0;g<i;g++)if(j=h[g],c=k[j.col],e=m[j.col],c=c<e?-1:c>e?1:0,0!==c)return"asc"===j.dir?c:-c;c=d[a];e=d[b];return c<e?-1:c>e?1:0}):i.sort(function(a,b){var c,g,j,i,k=h.length,m=f[a]._aSortData,p=f[b]._aSortData;for(j=0;j<k;j++)if(i=h[j],c=m[i.col],g=p[i.col],i=e[i.type+"-"+i.dir]||e["string-"+i.dir],c=i(c,g),0!==c)return c;c=d[a];g=d[b];return c<g?-1:c>g?1:0})}a.bSorted=!0}function Kb(a){for(var b,c,d=a.aoColumns,e=W(a),a=a.oLanguage.oAria,f=0,g=d.length;f<g;f++){c=d[f];var j=c.asSorting;b=c.sTitle.replace(/<.*?>/g,
+        "");var i=c.nTh;i.removeAttribute("aria-sort");c.bSortable&&(0<e.length&&e[0].col==f?(i.setAttribute("aria-sort","asc"==e[0].dir?"ascending":"descending"),c=j[e[0].index+1]||j[0]):c=j[0],b+="asc"===c?a.sSortAscending:a.sSortDescending);i.setAttribute("aria-label",b)}}function Xa(a,b,c,d){var e=a.aaSorting,f=a.aoColumns[b].asSorting,g=function(a,b){var c=a._idx;c===k&&(c=h.inArray(a[1],f));return c+1<f.length?c+1:b?null:0};"number"===typeof e[0]&&(e=a.aaSorting=[e]);c&&a.oFeatures.bSortMulti?(c=h.inArray(b,
+        D(e,"0")),-1!==c?(b=g(e[c],!0),null===b&&1===e.length&&(b=0),null===b?e.splice(c,1):(e[c][1]=f[b],e[c]._idx=b)):(e.push([b,f[0],0]),e[e.length-1]._idx=0)):e.length&&e[0][0]==b?(b=g(e[0]),e.length=1,e[0][1]=f[b],e[0]._idx=b):(e.length=0,e.push([b,f[0]]),e[0]._idx=0);T(a);"function"==typeof d&&d(a)}function Oa(a,b,c,d){var e=a.aoColumns[c];Ya(b,{},function(b){!1!==e.bSortable&&(a.oFeatures.bProcessing?(C(a,!0),setTimeout(function(){Xa(a,c,b.shiftKey,d);"ssp"!==y(a)&&C(a,!1)},0)):Xa(a,c,b.shiftKey,d))})}
+    function ya(a){var b=a.aLastSort,c=a.oClasses.sSortColumn,d=W(a),e=a.oFeatures,f,g;if(e.bSort&&e.bSortClasses){e=0;for(f=b.length;e<f;e++)g=b[e].src,h(D(a.aoData,"anCells",g)).removeClass(c+(2>e?e+1:3));e=0;for(f=d.length;e<f;e++)g=d[e].src,h(D(a.aoData,"anCells",g)).addClass(c+(2>e?e+1:3))}a.aLastSort=d}function Jb(a,b){var c=a.aoColumns[b],d=m.ext.order[c.sSortDataType],e;d&&(e=d.call(a.oInstance,a,b,aa(a,b)));for(var f,g=m.ext.type.order[c.sType+"-pre"],j=0,i=a.aoData.length;j<i;j++)if(c=a.aoData[j],
+        c._aSortData||(c._aSortData=[]),!c._aSortData[b]||d)f=d?e[j]:B(a,j,b,"sort"),c._aSortData[b]=g?g(f):f}function za(a){if(a.oFeatures.bStateSave&&!a.bDestroying){var b={time:+new Date,start:a._iDisplayStart,length:a._iDisplayLength,order:h.extend(!0,[],a.aaSorting),search:Cb(a.oPreviousSearch),columns:h.map(a.aoColumns,function(b,d){return{visible:b.bVisible,search:Cb(a.aoPreSearchCols[d])}})};s(a,"aoStateSaveParams","stateSaveParams",[a,b]);a.oSavedState=b;a.fnStateSaveCallback.call(a.oInstance,a,
+        b)}}function Lb(a,b,c){var d,e,f=a.aoColumns,b=function(b){if(b&&b.time){var g=s(a,"aoStateLoadParams","stateLoadParams",[a,b]);if(-1===h.inArray(!1,g)&&(g=a.iStateDuration,!(0<g&&b.time<+new Date-1E3*g)&&!(b.columns&&f.length!==b.columns.length))){a.oLoadedState=h.extend(!0,{},b);b.start!==k&&(a._iDisplayStart=b.start,a.iInitDisplayStart=b.start);b.length!==k&&(a._iDisplayLength=b.length);b.order!==k&&(a.aaSorting=[],h.each(b.order,function(b,c){a.aaSorting.push(c[0]>=f.length?[0,c[1]]:c)}));b.search!==
+    k&&h.extend(a.oPreviousSearch,Db(b.search));if(b.columns){d=0;for(e=b.columns.length;d<e;d++)g=b.columns[d],g.visible!==k&&(f[d].bVisible=g.visible),g.search!==k&&h.extend(a.aoPreSearchCols[d],Db(g.search))}s(a,"aoStateLoaded","stateLoaded",[a,b])}}c()};if(a.oFeatures.bStateSave){var g=a.fnStateLoadCallback.call(a.oInstance,a,b);g!==k&&b(g)}else c()}function Aa(a){var b=m.settings,a=h.inArray(a,D(b,"nTable"));return-1!==a?b[a]:null}function K(a,b,c,d){c="DataTables warning: "+(a?"table id="+a.sTableId+
+        " - ":"")+c;d&&(c+=". For more information about this error, please see http://datatables.net/tn/"+d);if(b)E.console&&console.log&&console.log(c);else if(b=m.ext,b=b.sErrMode||b.errMode,a&&s(a,null,"error",[a,d,c]),"alert"==b)alert(c);else{if("throw"==b)throw Error(c);"function"==typeof b&&b(a,d,c)}}function F(a,b,c,d){h.isArray(c)?h.each(c,function(c,d){h.isArray(d)?F(a,b,d[0],d[1]):F(a,b,d)}):(d===k&&(d=c),b[c]!==k&&(a[d]=b[c]))}function Mb(a,b,c){var d,e;for(e in b)b.hasOwnProperty(e)&&(d=b[e],
+        h.isPlainObject(d)?(h.isPlainObject(a[e])||(a[e]={}),h.extend(!0,a[e],d)):a[e]=c&&"data"!==e&&"aaData"!==e&&h.isArray(d)?d.slice():d);return a}function Ya(a,b,c){h(a).on("click.DT",b,function(b){a.blur();c(b)}).on("keypress.DT",b,function(a){13===a.which&&(a.preventDefault(),c(a))}).on("selectstart.DT",function(){return!1})}function z(a,b,c,d){c&&a[b].push({fn:c,sName:d})}function s(a,b,c,d){var e=[];b&&(e=h.map(a[b].slice().reverse(),function(b){return b.fn.apply(a.oInstance,d)}));null!==c&&(b=h.Event(c+
+        ".dt"),h(a.nTable).trigger(b,d),e.push(b.result));return e}function Ua(a){var b=a._iDisplayStart,c=a.fnDisplayEnd(),d=a._iDisplayLength;b>=c&&(b=c-d);b-=b%d;if(-1===d||0>b)b=0;a._iDisplayStart=b}function Pa(a,b){var c=a.renderer,d=m.ext.renderer[b];return h.isPlainObject(c)&&c[b]?d[c[b]]||d._:"string"===typeof c?d[c]||d._:d._}function y(a){return a.oFeatures.bServerSide?"ssp":a.ajax||a.sAjaxSource?"ajax":"dom"}function ia(a,b){var c=[],c=Nb.numbers_length,d=Math.floor(c/2);b<=c?c=X(0,b):a<=d?(c=X(0,
+        c-2),c.push("ellipsis"),c.push(b-1)):(a>=b-1-d?c=X(b-(c-2),b):(c=X(a-d+2,a+d-1),c.push("ellipsis"),c.push(b-1)),c.splice(0,0,"ellipsis"),c.splice(0,0,0));c.DT_el="span";return c}function fb(a){h.each({num:function(b){return Ba(b,a)},"num-fmt":function(b){return Ba(b,a,Za)},"html-num":function(b){return Ba(b,a,Ca)},"html-num-fmt":function(b){return Ba(b,a,Ca,Za)}},function(b,c){x.type.order[b+a+"-pre"]=c;b.match(/^html\-/)&&(x.type.search[b+a]=x.type.search.html)})}function Ob(a){return function(){var b=
+        [Aa(this[m.ext.iApiIndex])].concat(Array.prototype.slice.call(arguments));return m.ext.internal[a].apply(this,b)}}var m=function(a){this.$=function(a,b){return this.api(!0).$(a,b)};this._=function(a,b){return this.api(!0).rows(a,b).data()};this.api=function(a){return a?new t(Aa(this[x.iApiIndex])):new t(this)};this.fnAddData=function(a,b){var c=this.api(!0),d=h.isArray(a)&&(h.isArray(a[0])||h.isPlainObject(a[0]))?c.rows.add(a):c.row.add(a);(b===k||b)&&c.draw();return d.flatten().toArray()};this.fnAdjustColumnSizing=
+        function(a){var b=this.api(!0).columns.adjust(),c=b.settings()[0],d=c.oScroll;a===k||a?b.draw(!1):(""!==d.sX||""!==d.sY)&&ma(c)};this.fnClearTable=function(a){var b=this.api(!0).clear();(a===k||a)&&b.draw()};this.fnClose=function(a){this.api(!0).row(a).child.hide()};this.fnDeleteRow=function(a,b,c){var d=this.api(!0),a=d.rows(a),e=a.settings()[0],h=e.aoData[a[0][0]];a.remove();b&&b.call(this,e,h);(c===k||c)&&d.draw();return h};this.fnDestroy=function(a){this.api(!0).destroy(a)};this.fnDraw=function(a){this.api(!0).draw(a)};
+        this.fnFilter=function(a,b,c,d,e,h){e=this.api(!0);null===b||b===k?e.search(a,c,d,h):e.column(b).search(a,c,d,h);e.draw()};this.fnGetData=function(a,b){var c=this.api(!0);if(a!==k){var d=a.nodeName?a.nodeName.toLowerCase():"";return b!==k||"td"==d||"th"==d?c.cell(a,b).data():c.row(a).data()||null}return c.data().toArray()};this.fnGetNodes=function(a){var b=this.api(!0);return a!==k?b.row(a).node():b.rows().nodes().flatten().toArray()};this.fnGetPosition=function(a){var b=this.api(!0),c=a.nodeName.toUpperCase();
+            return"TR"==c?b.row(a).index():"TD"==c||"TH"==c?(a=b.cell(a).index(),[a.row,a.columnVisible,a.column]):null};this.fnIsOpen=function(a){return this.api(!0).row(a).child.isShown()};this.fnOpen=function(a,b,c){return this.api(!0).row(a).child(b,c).show().child()[0]};this.fnPageChange=function(a,b){var c=this.api(!0).page(a);(b===k||b)&&c.draw(!1)};this.fnSetColumnVis=function(a,b,c){a=this.api(!0).column(a).visible(b);(c===k||c)&&a.columns.adjust().draw()};this.fnSettings=function(){return Aa(this[x.iApiIndex])};
+        this.fnSort=function(a){this.api(!0).order(a).draw()};this.fnSortListener=function(a,b,c){this.api(!0).order.listener(a,b,c)};this.fnUpdate=function(a,b,c,d,e){var h=this.api(!0);c===k||null===c?h.row(b).data(a):h.cell(b,c).data(a);(e===k||e)&&h.columns.adjust();(d===k||d)&&h.draw();return 0};this.fnVersionCheck=x.fnVersionCheck;var b=this,c=a===k,d=this.length;c&&(a={});this.oApi=this.internal=x.internal;for(var e in m.ext.internal)e&&(this[e]=Ob(e));this.each(function(){var e={},g=1<d?Mb(e,a,!0):
+            a,j=0,i,e=this.getAttribute("id"),n=!1,l=m.defaults,q=h(this);if("table"!=this.nodeName.toLowerCase())K(null,0,"Non-table node initialisation ("+this.nodeName+")",2);else{gb(l);hb(l.column);J(l,l,!0);J(l.column,l.column,!0);J(l,h.extend(g,q.data()));var r=m.settings,j=0;for(i=r.length;j<i;j++){var p=r[j];if(p.nTable==this||p.nTHead.parentNode==this||p.nTFoot&&p.nTFoot.parentNode==this){var t=g.bRetrieve!==k?g.bRetrieve:l.bRetrieve;if(c||t)return p.oInstance;if(g.bDestroy!==k?g.bDestroy:l.bDestroy){p.oInstance.fnDestroy();
+            break}else{K(p,0,"Cannot reinitialise DataTable",3);return}}if(p.sTableId==this.id){r.splice(j,1);break}}if(null===e||""===e)this.id=e="DataTables_Table_"+m.ext._unique++;var o=h.extend(!0,{},m.models.oSettings,{sDestroyWidth:q[0].style.width,sInstance:e,sTableId:e});o.nTable=this;o.oApi=b.internal;o.oInit=g;r.push(o);o.oInstance=1===b.length?b:q.dataTable();gb(g);g.oLanguage&&Fa(g.oLanguage);g.aLengthMenu&&!g.iDisplayLength&&(g.iDisplayLength=h.isArray(g.aLengthMenu[0])?g.aLengthMenu[0][0]:g.aLengthMenu[0]);
+            g=Mb(h.extend(!0,{},l),g);F(o.oFeatures,g,"bPaginate bLengthChange bFilter bSort bSortMulti bInfo bProcessing bAutoWidth bSortClasses bServerSide bDeferRender".split(" "));F(o,g,["asStripeClasses","ajax","fnServerData","fnFormatNumber","sServerMethod","aaSorting","aaSortingFixed","aLengthMenu","sPaginationType","sAjaxSource","sAjaxDataProp","iStateDuration","sDom","bSortCellsTop","iTabIndex","fnStateLoadCallback","fnStateSaveCallback","renderer","searchDelay","rowId",["iCookieDuration","iStateDuration"],
+                ["oSearch","oPreviousSearch"],["aoSearchCols","aoPreSearchCols"],["iDisplayLength","_iDisplayLength"],["bJQueryUI","bJUI"]]);F(o.oScroll,g,[["sScrollX","sX"],["sScrollXInner","sXInner"],["sScrollY","sY"],["bScrollCollapse","bCollapse"]]);F(o.oLanguage,g,"fnInfoCallback");z(o,"aoDrawCallback",g.fnDrawCallback,"user");z(o,"aoServerParams",g.fnServerParams,"user");z(o,"aoStateSaveParams",g.fnStateSaveParams,"user");z(o,"aoStateLoadParams",g.fnStateLoadParams,"user");z(o,"aoStateLoaded",g.fnStateLoaded,
+                "user");z(o,"aoRowCallback",g.fnRowCallback,"user");z(o,"aoRowCreatedCallback",g.fnCreatedRow,"user");z(o,"aoHeaderCallback",g.fnHeaderCallback,"user");z(o,"aoFooterCallback",g.fnFooterCallback,"user");z(o,"aoInitComplete",g.fnInitComplete,"user");z(o,"aoPreDrawCallback",g.fnPreDrawCallback,"user");o.rowIdFn=R(g.rowId);ib(o);var u=o.oClasses;g.bJQueryUI?(h.extend(u,m.ext.oJUIClasses,g.oClasses),g.sDom===l.sDom&&"lfrtip"===l.sDom&&(o.sDom='<"H"lfr>t<"F"ip>'),o.renderer)?h.isPlainObject(o.renderer)&&
+            !o.renderer.header&&(o.renderer.header="jqueryui"):o.renderer="jqueryui":h.extend(u,m.ext.classes,g.oClasses);q.addClass(u.sTable);o.iInitDisplayStart===k&&(o.iInitDisplayStart=g.iDisplayStart,o._iDisplayStart=g.iDisplayStart);null!==g.iDeferLoading&&(o.bDeferLoading=!0,e=h.isArray(g.iDeferLoading),o._iRecordsDisplay=e?g.iDeferLoading[0]:g.iDeferLoading,o._iRecordsTotal=e?g.iDeferLoading[1]:g.iDeferLoading);var v=o.oLanguage;h.extend(!0,v,g.oLanguage);v.sUrl&&(h.ajax({dataType:"json",url:v.sUrl,success:function(a){Fa(a);
+                J(l.oLanguage,a);h.extend(true,v,a);ha(o)},error:function(){ha(o)}}),n=!0);null===g.asStripeClasses&&(o.asStripeClasses=[u.sStripeOdd,u.sStripeEven]);var e=o.asStripeClasses,x=q.children("tbody").find("tr").eq(0);-1!==h.inArray(!0,h.map(e,function(a){return x.hasClass(a)}))&&(h("tbody tr",this).removeClass(e.join(" ")),o.asDestroyStripes=e.slice());e=[];r=this.getElementsByTagName("thead");0!==r.length&&(ea(o.aoHeader,r[0]),e=ta(o));if(null===g.aoColumns){r=[];j=0;for(i=e.length;j<i;j++)r.push(null)}else r=
+                g.aoColumns;j=0;for(i=r.length;j<i;j++)Ga(o,e?e[j]:null);kb(o,g.aoColumnDefs,r,function(a,b){la(o,a,b)});if(x.length){var w=function(a,b){return a.getAttribute("data-"+b)!==null?b:null};h(x[0]).children("th, td").each(function(a,b){var c=o.aoColumns[a];if(c.mData===a){var d=w(b,"sort")||w(b,"order"),e=w(b,"filter")||w(b,"search");if(d!==null||e!==null){c.mData={_:a+".display",sort:d!==null?a+".@data-"+d:k,type:d!==null?a+".@data-"+d:k,filter:e!==null?a+".@data-"+e:k};la(o,a)}}})}var U=o.oFeatures,
+                e=function(){if(g.aaSorting===k){var a=o.aaSorting;j=0;for(i=a.length;j<i;j++)a[j][1]=o.aoColumns[j].asSorting[0]}ya(o);U.bSort&&z(o,"aoDrawCallback",function(){if(o.bSorted){var a=W(o),b={};h.each(a,function(a,c){b[c.src]=c.dir});s(o,null,"order",[o,a,b]);Kb(o)}});z(o,"aoDrawCallback",function(){(o.bSorted||y(o)==="ssp"||U.bDeferRender)&&ya(o)},"sc");var a=q.children("caption").each(function(){this._captionSide=h(this).css("caption-side")}),b=q.children("thead");b.length===0&&(b=h("<thead/>").appendTo(q));
+                    o.nTHead=b[0];b=q.children("tbody");b.length===0&&(b=h("<tbody/>").appendTo(q));o.nTBody=b[0];b=q.children("tfoot");if(b.length===0&&a.length>0&&(o.oScroll.sX!==""||o.oScroll.sY!==""))b=h("<tfoot/>").appendTo(q);if(b.length===0||b.children().length===0)q.addClass(u.sNoFooter);else if(b.length>0){o.nTFoot=b[0];ea(o.aoFooter,o.nTFoot)}if(g.aaData)for(j=0;j<g.aaData.length;j++)N(o,g.aaData[j]);else(o.bDeferLoading||y(o)=="dom")&&oa(o,h(o.nTBody).children("tr"));o.aiDisplay=o.aiDisplayMaster.slice();
+                    o.bInitialised=true;n===false&&ha(o)};g.bStateSave?(U.bStateSave=!0,z(o,"aoDrawCallback",za,"state_save"),Lb(o,g,e)):e()}});b=null;return this},x,t,p,u,$a={},Pb=/[\r\n]/g,Ca=/<.*?>/g,cc=/^\d{2,4}[\.\/\-]\d{1,2}[\.\/\-]\d{1,2}([T ]{1}\d{1,2}[:\.]\d{2}([\.:]\d{2})?)?$/,dc=RegExp("(\\/|\\.|\\*|\\+|\\?|\\||\\(|\\)|\\[|\\]|\\{|\\}|\\\\|\\$|\\^|\\-)","g"),Za=/[',$?¢„?%\u2009\u202F\u20BD\u20a9\u20BArfk]/gi,M=function(a){return!a||!0===a||"-"===a?!0:!1},Qb=function(a){var b=parseInt(a,10);return!isNaN(b)&&
+    isFinite(a)?b:null},Rb=function(a,b){$a[b]||($a[b]=RegExp(Sa(b),"g"));return"string"===typeof a&&"."!==b?a.replace(/\./g,"").replace($a[b],"."):a},ab=function(a,b,c){var d="string"===typeof a;if(M(a))return!0;b&&d&&(a=Rb(a,b));c&&d&&(a=a.replace(Za,""));return!isNaN(parseFloat(a))&&isFinite(a)},Sb=function(a,b,c){return M(a)?!0:!(M(a)||"string"===typeof a)?null:ab(a.replace(Ca,""),b,c)?!0:null},D=function(a,b,c){var d=[],e=0,f=a.length;if(c!==k)for(;e<f;e++)a[e]&&a[e][b]&&d.push(a[e][b][c]);else for(;e<
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              f;e++)a[e]&&d.push(a[e][b]);return d},ja=function(a,b,c,d){var e=[],f=0,g=b.length;if(d!==k)for(;f<g;f++)a[b[f]][c]&&e.push(a[b[f]][c][d]);else for(;f<g;f++)e.push(a[b[f]][c]);return e},X=function(a,b){var c=[],d;b===k?(b=0,d=a):(d=b,b=a);for(var e=b;e<d;e++)c.push(e);return c},Tb=function(a){for(var b=[],c=0,d=a.length;c<d;c++)a[c]&&b.push(a[c]);return b},sa=function(a){var b;a:{if(!(2>a.length)){b=a.slice().sort();for(var c=b[0],d=1,e=b.length;d<e;d++){if(b[d]===c){b=!1;break a}c=b[d]}}b=!0}if(b)return a.slice();
+        b=[];var e=a.length,f,g=0,d=0;a:for(;d<e;d++){c=a[d];for(f=0;f<g;f++)if(b[f]===c)continue a;b.push(c);g++}return b};m.util={throttle:function(a,b){var c=b!==k?b:200,d,e;return function(){var b=this,g=+new Date,h=arguments;d&&g<d+c?(clearTimeout(e),e=setTimeout(function(){d=k;a.apply(b,h)},c)):(d=g,a.apply(b,h))}},escapeRegex:function(a){return a.replace(dc,"\\$1")}};var A=function(a,b,c){a[b]!==k&&(a[c]=a[b])},ca=/\[.*?\]$/,V=/\(\)$/,Sa=m.util.escapeRegex,xa=h("<div>")[0],$b=xa.textContent!==k,bc=
+        /<.*?>/g,Qa=m.util.throttle,Ub=[],w=Array.prototype,ec=function(a){var b,c,d=m.settings,e=h.map(d,function(a){return a.nTable});if(a){if(a.nTable&&a.oApi)return[a];if(a.nodeName&&"table"===a.nodeName.toLowerCase())return b=h.inArray(a,e),-1!==b?[d[b]]:null;if(a&&"function"===typeof a.settings)return a.settings().toArray();"string"===typeof a?c=h(a):a instanceof h&&(c=a)}else return[];if(c)return c.map(function(){b=h.inArray(this,e);return-1!==b?d[b]:null}).toArray()};t=function(a,b){if(!(this instanceof
+        t))return new t(a,b);var c=[],d=function(a){(a=ec(a))&&(c=c.concat(a))};if(h.isArray(a))for(var e=0,f=a.length;e<f;e++)d(a[e]);else d(a);this.context=sa(c);b&&h.merge(this,b);this.selector={rows:null,cols:null,opts:null};t.extend(this,this,Ub)};m.Api=t;h.extend(t.prototype,{any:function(){return 0!==this.count()},concat:w.concat,context:[],count:function(){return this.flatten().length},each:function(a){for(var b=0,c=this.length;b<c;b++)a.call(this,this[b],b,this);return this},eq:function(a){var b=
+        this.context;return b.length>a?new t(b[a],this[a]):null},filter:function(a){var b=[];if(w.filter)b=w.filter.call(this,a,this);else for(var c=0,d=this.length;c<d;c++)a.call(this,this[c],c,this)&&b.push(this[c]);return new t(this.context,b)},flatten:function(){var a=[];return new t(this.context,a.concat.apply(a,this.toArray()))},join:w.join,indexOf:w.indexOf||function(a,b){for(var c=b||0,d=this.length;c<d;c++)if(this[c]===a)return c;return-1},iterator:function(a,b,c,d){var e=[],f,g,h,i,n,l=this.context,
+        m,p,u=this.selector;"string"===typeof a&&(d=c,c=b,b=a,a=!1);g=0;for(h=l.length;g<h;g++){var s=new t(l[g]);if("table"===b)f=c.call(s,l[g],g),f!==k&&e.push(f);else if("columns"===b||"rows"===b)f=c.call(s,l[g],this[g],g),f!==k&&e.push(f);else if("column"===b||"column-rows"===b||"row"===b||"cell"===b){p=this[g];"column-rows"===b&&(m=Da(l[g],u.opts));i=0;for(n=p.length;i<n;i++)f=p[i],f="cell"===b?c.call(s,l[g],f.row,f.column,g,i):c.call(s,l[g],f,g,i,m),f!==k&&e.push(f)}}return e.length||d?(a=new t(l,a?
+        e.concat.apply([],e):e),b=a.selector,b.rows=u.rows,b.cols=u.cols,b.opts=u.opts,a):this},lastIndexOf:w.lastIndexOf||function(a,b){return this.indexOf.apply(this.toArray.reverse(),arguments)},length:0,map:function(a){var b=[];if(w.map)b=w.map.call(this,a,this);else for(var c=0,d=this.length;c<d;c++)b.push(a.call(this,this[c],c));return new t(this.context,b)},pluck:function(a){return this.map(function(b){return b[a]})},pop:w.pop,push:w.push,reduce:w.reduce||function(a,b){return jb(this,a,b,0,this.length,
+        1)},reduceRight:w.reduceRight||function(a,b){return jb(this,a,b,this.length-1,-1,-1)},reverse:w.reverse,selector:null,shift:w.shift,slice:function(){return new t(this.context,this)},sort:w.sort,splice:w.splice,toArray:function(){return w.slice.call(this)},to$:function(){return h(this)},toJQuery:function(){return h(this)},unique:function(){return new t(this.context,sa(this))},unshift:w.unshift});t.extend=function(a,b,c){if(c.length&&b&&(b instanceof t||b.__dt_wrapper)){var d,e,f,g=function(a,b,c){return function(){var d=
+        b.apply(a,arguments);t.extend(d,d,c.methodExt);return d}};d=0;for(e=c.length;d<e;d++)f=c[d],b[f.name]="function"===typeof f.val?g(a,f.val,f):h.isPlainObject(f.val)?{}:f.val,b[f.name].__dt_wrapper=!0,t.extend(a,b[f.name],f.propExt)}};t.register=p=function(a,b){if(h.isArray(a))for(var c=0,d=a.length;c<d;c++)t.register(a[c],b);else for(var e=a.split("."),f=Ub,g,j,c=0,d=e.length;c<d;c++){g=(j=-1!==e[c].indexOf("()"))?e[c].replace("()",""):e[c];var i;a:{i=0;for(var n=f.length;i<n;i++)if(f[i].name===g){i=
+        f[i];break a}i=null}i||(i={name:g,val:{},methodExt:[],propExt:[]},f.push(i));c===d-1?i.val=b:f=j?i.methodExt:i.propExt}};t.registerPlural=u=function(a,b,c){t.register(a,c);t.register(b,function(){var a=c.apply(this,arguments);return a===this?this:a instanceof t?a.length?h.isArray(a[0])?new t(a.context,a[0]):a[0]:k:a})};p("tables()",function(a){var b;if(a){b=t;var c=this.context;if("number"===typeof a)a=[c[a]];else var d=h.map(c,function(a){return a.nTable}),a=h(d).filter(a).map(function(){var a=h.inArray(this,
+        d);return c[a]}).toArray();b=new b(a)}else b=this;return b});p("table()",function(a){var a=this.tables(a),b=a.context;return b.length?new t(b[0]):a});u("tables().nodes()","table().node()",function(){return this.iterator("table",function(a){return a.nTable},1)});u("tables().body()","table().body()",function(){return this.iterator("table",function(a){return a.nTBody},1)});u("tables().header()","table().header()",function(){return this.iterator("table",function(a){return a.nTHead},1)});u("tables().footer()",
+        "table().footer()",function(){return this.iterator("table",function(a){return a.nTFoot},1)});u("tables().containers()","table().container()",function(){return this.iterator("table",function(a){return a.nTableWrapper},1)});p("draw()",function(a){return this.iterator("table",function(b){"page"===a?O(b):("string"===typeof a&&(a="full-hold"===a?!1:!0),T(b,!1===a))})});p("page()",function(a){return a===k?this.page.info().page:this.iterator("table",function(b){Va(b,a)})});p("page.info()",function(){if(0===
+        this.context.length)return k;var a=this.context[0],b=a._iDisplayStart,c=a.oFeatures.bPaginate?a._iDisplayLength:-1,d=a.fnRecordsDisplay(),e=-1===c;return{page:e?0:Math.floor(b/c),pages:e?1:Math.ceil(d/c),start:b,end:a.fnDisplayEnd(),length:c,recordsTotal:a.fnRecordsTotal(),recordsDisplay:d,serverSide:"ssp"===y(a)}});p("page.len()",function(a){return a===k?0!==this.context.length?this.context[0]._iDisplayLength:k:this.iterator("table",function(b){Ta(b,a)})});var Vb=function(a,b,c){if(c){var d=new t(a);
+        d.one("draw",function(){c(d.ajax.json())})}if("ssp"==y(a))T(a,b);else{C(a,!0);var e=a.jqXHR;e&&4!==e.readyState&&e.abort();ua(a,[],function(c){pa(a);for(var c=va(a,c),d=0,e=c.length;d<e;d++)N(a,c[d]);T(a,b);C(a,!1)})}};p("ajax.json()",function(){var a=this.context;if(0<a.length)return a[0].json});p("ajax.params()",function(){var a=this.context;if(0<a.length)return a[0].oAjaxData});p("ajax.reload()",function(a,b){return this.iterator("table",function(c){Vb(c,!1===b,a)})});p("ajax.url()",function(a){var b=
+        this.context;if(a===k){if(0===b.length)return k;b=b[0];return b.ajax?h.isPlainObject(b.ajax)?b.ajax.url:b.ajax:b.sAjaxSource}return this.iterator("table",function(b){h.isPlainObject(b.ajax)?b.ajax.url=a:b.ajax=a})});p("ajax.url().load()",function(a,b){return this.iterator("table",function(c){Vb(c,!1===b,a)})});var bb=function(a,b,c,d,e){var f=[],g,j,i,n,l,m;i=typeof b;if(!b||"string"===i||"function"===i||b.length===k)b=[b];i=0;for(n=b.length;i<n;i++){j=b[i]&&b[i].split&&!b[i].match(/[\[\(:]/)?b[i].split(","):
+        [b[i]];l=0;for(m=j.length;l<m;l++)(g=c("string"===typeof j[l]?h.trim(j[l]):j[l]))&&g.length&&(f=f.concat(g))}a=x.selector[a];if(a.length){i=0;for(n=a.length;i<n;i++)f=a[i](d,e,f)}return sa(f)},cb=function(a){a||(a={});a.filter&&a.search===k&&(a.search=a.filter);return h.extend({search:"none",order:"current",page:"all"},a)},db=function(a){for(var b=0,c=a.length;b<c;b++)if(0<a[b].length)return a[0]=a[b],a[0].length=1,a.length=1,a.context=[a.context[b]],a;a.length=0;return a},Da=function(a,b){var c,
+        d,e,f=[],g=a.aiDisplay;c=a.aiDisplayMaster;var j=b.search;d=b.order;e=b.page;if("ssp"==y(a))return"removed"===j?[]:X(0,c.length);if("current"==e){c=a._iDisplayStart;for(d=a.fnDisplayEnd();c<d;c++)f.push(g[c])}else if("current"==d||"applied"==d)f="none"==j?c.slice():"applied"==j?g.slice():h.map(c,function(a){return-1===h.inArray(a,g)?a:null});else if("index"==d||"original"==d){c=0;for(d=a.aoData.length;c<d;c++)"none"==j?f.push(c):(e=h.inArray(c,g),(-1===e&&"removed"==j||0<=e&&"applied"==j)&&f.push(c))}return f};
+    p("rows()",function(a,b){a===k?a="":h.isPlainObject(a)&&(b=a,a="");var b=cb(b),c=this.iterator("table",function(c){var e=b,f;return bb("row",a,function(a){var b=Qb(a);if(b!==null&&!e)return[b];f||(f=Da(c,e));if(b!==null&&h.inArray(b,f)!==-1)return[b];if(a===null||a===k||a==="")return f;if(typeof a==="function")return h.map(f,function(b){var e=c.aoData[b];return a(b,e._aData,e.nTr)?b:null});b=Tb(ja(c.aoData,f,"nTr"));if(a.nodeName){if(a._DT_RowIndex!==k)return[a._DT_RowIndex];if(a._DT_CellIndex)return[a._DT_CellIndex.row];
+        b=h(a).closest("*[data-dt-row]");return b.length?[b.data("dt-row")]:[]}if(typeof a==="string"&&a.charAt(0)==="#"){var i=c.aIds[a.replace(/^#/,"")];if(i!==k)return[i.idx]}return h(b).filter(a).map(function(){return this._DT_RowIndex}).toArray()},c,e)},1);c.selector.rows=a;c.selector.opts=b;return c});p("rows().nodes()",function(){return this.iterator("row",function(a,b){return a.aoData[b].nTr||k},1)});p("rows().data()",function(){return this.iterator(!0,"rows",function(a,b){return ja(a.aoData,b,"_aData")},
+        1)});u("rows().cache()","row().cache()",function(a){return this.iterator("row",function(b,c){var d=b.aoData[c];return"search"===a?d._aFilterData:d._aSortData},1)});u("rows().invalidate()","row().invalidate()",function(a){return this.iterator("row",function(b,c){da(b,c,a)})});u("rows().indexes()","row().index()",function(){return this.iterator("row",function(a,b){return b},1)});u("rows().ids()","row().id()",function(a){for(var b=[],c=this.context,d=0,e=c.length;d<e;d++)for(var f=0,g=this[d].length;f<
+    g;f++){var h=c[d].rowIdFn(c[d].aoData[this[d][f]]._aData);b.push((!0===a?"#":"")+h)}return new t(c,b)});u("rows().remove()","row().remove()",function(){var a=this;this.iterator("row",function(b,c,d){var e=b.aoData,f=e[c],g,h,i,n,l;e.splice(c,1);g=0;for(h=e.length;g<h;g++)if(i=e[g],l=i.anCells,null!==i.nTr&&(i.nTr._DT_RowIndex=g),null!==l){i=0;for(n=l.length;i<n;i++)l[i]._DT_CellIndex.row=g}qa(b.aiDisplayMaster,c);qa(b.aiDisplay,c);qa(a[d],c,!1);Ua(b);c=b.rowIdFn(f._aData);c!==k&&delete b.aIds[c]});
+        this.iterator("table",function(a){for(var c=0,d=a.aoData.length;c<d;c++)a.aoData[c].idx=c});return this});p("rows.add()",function(a){var b=this.iterator("table",function(b){var c,f,g,h=[];f=0;for(g=a.length;f<g;f++)c=a[f],c.nodeName&&"TR"===c.nodeName.toUpperCase()?h.push(oa(b,c)[0]):h.push(N(b,c));return h},1),c=this.rows(-1);c.pop();h.merge(c,b);return c});p("row()",function(a,b){return db(this.rows(a,b))});p("row().data()",function(a){var b=this.context;if(a===k)return b.length&&this.length?b[0].aoData[this[0]]._aData:
+        k;b[0].aoData[this[0]]._aData=a;da(b[0],this[0],"data");return this});p("row().node()",function(){var a=this.context;return a.length&&this.length?a[0].aoData[this[0]].nTr||null:null});p("row.add()",function(a){a instanceof h&&a.length&&(a=a[0]);var b=this.iterator("table",function(b){return a.nodeName&&"TR"===a.nodeName.toUpperCase()?oa(b,a)[0]:N(b,a)});return this.row(b[0])});var eb=function(a,b){var c=a.context;if(c.length&&(c=c[0].aoData[b!==k?b:a[0]])&&c._details)c._details.remove(),c._detailsShow=
+        k,c._details=k},Wb=function(a,b){var c=a.context;if(c.length&&a.length){var d=c[0].aoData[a[0]];if(d._details){(d._detailsShow=b)?d._details.insertAfter(d.nTr):d._details.detach();var e=c[0],f=new t(e),g=e.aoData;f.off("draw.dt.DT_details column-visibility.dt.DT_details destroy.dt.DT_details");0<D(g,"_details").length&&(f.on("draw.dt.DT_details",function(a,b){e===b&&f.rows({page:"current"}).eq(0).each(function(a){a=g[a];a._detailsShow&&a._details.insertAfter(a.nTr)})}),f.on("column-visibility.dt.DT_details",
+        function(a,b){if(e===b)for(var c,d=ba(b),f=0,h=g.length;f<h;f++)c=g[f],c._details&&c._details.children("td[colspan]").attr("colspan",d)}),f.on("destroy.dt.DT_details",function(a,b){if(e===b)for(var c=0,d=g.length;c<d;c++)g[c]._details&&eb(f,c)}))}}};p("row().child()",function(a,b){var c=this.context;if(a===k)return c.length&&this.length?c[0].aoData[this[0]]._details:k;if(!0===a)this.child.show();else if(!1===a)eb(this);else if(c.length&&this.length){var d=c[0],c=c[0].aoData[this[0]],e=[],f=function(a,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                b){if(h.isArray(a)||a instanceof h)for(var c=0,k=a.length;c<k;c++)f(a[c],b);else a.nodeName&&"tr"===a.nodeName.toLowerCase()?e.push(a):(c=h("<tr><td/></tr>").addClass(b),h("td",c).addClass(b).html(a)[0].colSpan=ba(d),e.push(c[0]))};f(a,b);c._details&&c._details.detach();c._details=h(e);c._detailsShow&&c._details.insertAfter(c.nTr)}return this});p(["row().child.show()","row().child().show()"],function(){Wb(this,!0);return this});p(["row().child.hide()","row().child().hide()"],function(){Wb(this,!1);
+        return this});p(["row().child.remove()","row().child().remove()"],function(){eb(this);return this});p("row().child.isShown()",function(){var a=this.context;return a.length&&this.length?a[0].aoData[this[0]]._detailsShow||!1:!1});var fc=/^([^:]+):(name|visIdx|visible)$/,Xb=function(a,b,c,d,e){for(var c=[],d=0,f=e.length;d<f;d++)c.push(B(a,e[d],b));return c};p("columns()",function(a,b){a===k?a="":h.isPlainObject(a)&&(b=a,a="");var b=cb(b),c=this.iterator("table",function(c){var e=a,f=b,g=c.aoColumns,
+        j=D(g,"sName"),i=D(g,"nTh");return bb("column",e,function(a){var b=Qb(a);if(a==="")return X(g.length);if(b!==null)return[b>=0?b:g.length+b];if(typeof a==="function"){var e=Da(c,f);return h.map(g,function(b,f){return a(f,Xb(c,f,0,0,e),i[f])?f:null})}var k=typeof a==="string"?a.match(fc):"";if(k)switch(k[2]){case "visIdx":case "visible":b=parseInt(k[1],10);if(b<0){var m=h.map(g,function(a,b){return a.bVisible?b:null});return[m[m.length+b]]}return[$(c,b)];case "name":return h.map(j,function(a,b){return a===
+    k[1]?b:null});default:return[]}if(a.nodeName&&a._DT_CellIndex)return[a._DT_CellIndex.column];b=h(i).filter(a).map(function(){return h.inArray(this,i)}).toArray();if(b.length||!a.nodeName)return b;b=h(a).closest("*[data-dt-column]");return b.length?[b.data("dt-column")]:[]},c,f)},1);c.selector.cols=a;c.selector.opts=b;return c});u("columns().header()","column().header()",function(){return this.iterator("column",function(a,b){return a.aoColumns[b].nTh},1)});u("columns().footer()","column().footer()",
+        function(){return this.iterator("column",function(a,b){return a.aoColumns[b].nTf},1)});u("columns().data()","column().data()",function(){return this.iterator("column-rows",Xb,1)});u("columns().dataSrc()","column().dataSrc()",function(){return this.iterator("column",function(a,b){return a.aoColumns[b].mData},1)});u("columns().cache()","column().cache()",function(a){return this.iterator("column-rows",function(b,c,d,e,f){return ja(b.aoData,f,"search"===a?"_aFilterData":"_aSortData",c)},1)});u("columns().nodes()",
+        "column().nodes()",function(){return this.iterator("column-rows",function(a,b,c,d,e){return ja(a.aoData,e,"anCells",b)},1)});u("columns().visible()","column().visible()",function(a,b){var c=this.iterator("column",function(b,c){if(a===k)return b.aoColumns[c].bVisible;var f=b.aoColumns,g=f[c],j=b.aoData,i,n,l;if(a!==k&&g.bVisible!==a){if(a){var m=h.inArray(!0,D(f,"bVisible"),c+1);i=0;for(n=j.length;i<n;i++)l=j[i].nTr,f=j[i].anCells,l&&l.insertBefore(f[c],f[m]||null)}else h(D(b.aoData,"anCells",c)).detach();
+        g.bVisible=a;fa(b,b.aoHeader);fa(b,b.aoFooter);za(b)}});a!==k&&(this.iterator("column",function(c,e){s(c,null,"column-visibility",[c,e,a,b])}),(b===k||b)&&this.columns.adjust());return c});u("columns().indexes()","column().index()",function(a){return this.iterator("column",function(b,c){return"visible"===a?aa(b,c):c},1)});p("columns.adjust()",function(){return this.iterator("table",function(a){Z(a)},1)});p("column.index()",function(a,b){if(0!==this.context.length){var c=this.context[0];if("fromVisible"===
+        a||"toData"===a)return $(c,b);if("fromData"===a||"toVisible"===a)return aa(c,b)}});p("column()",function(a,b){return db(this.columns(a,b))});p("cells()",function(a,b,c){h.isPlainObject(a)&&(a.row===k?(c=a,a=null):(c=b,b=null));h.isPlainObject(b)&&(c=b,b=null);if(null===b||b===k)return this.iterator("table",function(b){var d=a,e=cb(c),f=b.aoData,g=Da(b,e),j=Tb(ja(f,g,"anCells")),i=h([].concat.apply([],j)),l,n=b.aoColumns.length,m,p,u,t,s,v;return bb("cell",d,function(a){var c=typeof a==="function";
+        if(a===null||a===k||c){m=[];p=0;for(u=g.length;p<u;p++){l=g[p];for(t=0;t<n;t++){s={row:l,column:t};if(c){v=f[l];a(s,B(b,l,t),v.anCells?v.anCells[t]:null)&&m.push(s)}else m.push(s)}}return m}if(h.isPlainObject(a))return[a];c=i.filter(a).map(function(a,b){return{row:b._DT_CellIndex.row,column:b._DT_CellIndex.column}}).toArray();if(c.length||!a.nodeName)return c;v=h(a).closest("*[data-dt-row]");return v.length?[{row:v.data("dt-row"),column:v.data("dt-column")}]:[]},b,e)});var d=this.columns(b,c),e=this.rows(a,
+        c),f,g,j,i,n,l=this.iterator("table",function(a,b){f=[];g=0;for(j=e[b].length;g<j;g++){i=0;for(n=d[b].length;i<n;i++)f.push({row:e[b][g],column:d[b][i]})}return f},1);h.extend(l.selector,{cols:b,rows:a,opts:c});return l});u("cells().nodes()","cell().node()",function(){return this.iterator("cell",function(a,b,c){return(a=a.aoData[b])&&a.anCells?a.anCells[c]:k},1)});p("cells().data()",function(){return this.iterator("cell",function(a,b,c){return B(a,b,c)},1)});u("cells().cache()","cell().cache()",function(a){a=
+        "search"===a?"_aFilterData":"_aSortData";return this.iterator("cell",function(b,c,d){return b.aoData[c][a][d]},1)});u("cells().render()","cell().render()",function(a){return this.iterator("cell",function(b,c,d){return B(b,c,d,a)},1)});u("cells().indexes()","cell().index()",function(){return this.iterator("cell",function(a,b,c){return{row:b,column:c,columnVisible:aa(a,c)}},1)});u("cells().invalidate()","cell().invalidate()",function(a){return this.iterator("cell",function(b,c,d){da(b,c,a,d)})});p("cell()",
+        function(a,b,c){return db(this.cells(a,b,c))});p("cell().data()",function(a){var b=this.context,c=this[0];if(a===k)return b.length&&c.length?B(b[0],c[0].row,c[0].column):k;lb(b[0],c[0].row,c[0].column,a);da(b[0],c[0].row,"data",c[0].column);return this});p("order()",function(a,b){var c=this.context;if(a===k)return 0!==c.length?c[0].aaSorting:k;"number"===typeof a?a=[[a,b]]:a.length&&!h.isArray(a[0])&&(a=Array.prototype.slice.call(arguments));return this.iterator("table",function(b){b.aaSorting=a.slice()})});
+    p("order.listener()",function(a,b,c){return this.iterator("table",function(d){Oa(d,a,b,c)})});p("order.fixed()",function(a){if(!a){var b=this.context,b=b.length?b[0].aaSortingFixed:k;return h.isArray(b)?{pre:b}:b}return this.iterator("table",function(b){b.aaSortingFixed=h.extend(!0,{},a)})});p(["columns().order()","column().order()"],function(a){var b=this;return this.iterator("table",function(c,d){var e=[];h.each(b[d],function(b,c){e.push([c,a])});c.aaSorting=e})});p("search()",function(a,b,c,d){var e=
+        this.context;return a===k?0!==e.length?e[0].oPreviousSearch.sSearch:k:this.iterator("table",function(e){e.oFeatures.bFilter&&ga(e,h.extend({},e.oPreviousSearch,{sSearch:a+"",bRegex:null===b?!1:b,bSmart:null===c?!0:c,bCaseInsensitive:null===d?!0:d}),1)})});u("columns().search()","column().search()",function(a,b,c,d){return this.iterator("column",function(e,f){var g=e.aoPreSearchCols;if(a===k)return g[f].sSearch;e.oFeatures.bFilter&&(h.extend(g[f],{sSearch:a+"",bRegex:null===b?!1:b,bSmart:null===c?
+        !0:c,bCaseInsensitive:null===d?!0:d}),ga(e,e.oPreviousSearch,1))})});p("state()",function(){return this.context.length?this.context[0].oSavedState:null});p("state.clear()",function(){return this.iterator("table",function(a){a.fnStateSaveCallback.call(a.oInstance,a,{})})});p("state.loaded()",function(){return this.context.length?this.context[0].oLoadedState:null});p("state.save()",function(){return this.iterator("table",function(a){za(a)})});m.versionCheck=m.fnVersionCheck=function(a){for(var b=m.version.split("."),
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         a=a.split("."),c,d,e=0,f=a.length;e<f;e++)if(c=parseInt(b[e],10)||0,d=parseInt(a[e],10)||0,c!==d)return c>d;return!0};m.isDataTable=m.fnIsDataTable=function(a){var b=h(a).get(0),c=!1;if(a instanceof m.Api)return!0;h.each(m.settings,function(a,e){var f=e.nScrollHead?h("table",e.nScrollHead)[0]:null,g=e.nScrollFoot?h("table",e.nScrollFoot)[0]:null;if(e.nTable===b||f===b||g===b)c=!0});return c};m.tables=m.fnTables=function(a){var b=!1;h.isPlainObject(a)&&(b=a.api,a=a.visible);var c=h.map(m.settings,
+        function(b){if(!a||a&&h(b.nTable).is(":visible"))return b.nTable});return b?new t(c):c};m.camelToHungarian=J;p("$()",function(a,b){var c=this.rows(b).nodes(),c=h(c);return h([].concat(c.filter(a).toArray(),c.find(a).toArray()))});h.each(["on","one","off"],function(a,b){p(b+"()",function(){var a=Array.prototype.slice.call(arguments);a[0]=h.map(a[0].split(/\s/),function(a){return!a.match(/\.dt\b/)?a+".dt":a}).join(" ");var d=h(this.tables().nodes());d[b].apply(d,a);return this})});p("clear()",function(){return this.iterator("table",
+        function(a){pa(a)})});p("settings()",function(){return new t(this.context,this.context)});p("init()",function(){var a=this.context;return a.length?a[0].oInit:null});p("data()",function(){return this.iterator("table",function(a){return D(a.aoData,"_aData")}).flatten()});p("destroy()",function(a){a=a||!1;return this.iterator("table",function(b){var c=b.nTableWrapper.parentNode,d=b.oClasses,e=b.nTable,f=b.nTBody,g=b.nTHead,j=b.nTFoot,i=h(e),f=h(f),k=h(b.nTableWrapper),l=h.map(b.aoData,function(a){return a.nTr}),
+        p;b.bDestroying=!0;s(b,"aoDestroyCallback","destroy",[b]);a||(new t(b)).columns().visible(!0);k.off(".DT").find(":not(tbody *)").off(".DT");h(E).off(".DT-"+b.sInstance);e!=g.parentNode&&(i.children("thead").detach(),i.append(g));j&&e!=j.parentNode&&(i.children("tfoot").detach(),i.append(j));b.aaSorting=[];b.aaSortingFixed=[];ya(b);h(l).removeClass(b.asStripeClasses.join(" "));h("th, td",g).removeClass(d.sSortable+" "+d.sSortableAsc+" "+d.sSortableDesc+" "+d.sSortableNone);b.bJUI&&(h("th span."+d.sSortIcon+
+        ", td span."+d.sSortIcon,g).detach(),h("th, td",g).each(function(){var a=h("div."+d.sSortJUIWrapper,this);h(this).append(a.contents());a.detach()}));f.children().detach();f.append(l);g=a?"remove":"detach";i[g]();k[g]();!a&&c&&(c.insertBefore(e,b.nTableReinsertBefore),i.css("width",b.sDestroyWidth).removeClass(d.sTable),(p=b.asDestroyStripes.length)&&f.children().each(function(a){h(this).addClass(b.asDestroyStripes[a%p])}));c=h.inArray(b,m.settings);-1!==c&&m.settings.splice(c,1)})});h.each(["column",
+        "row","cell"],function(a,b){p(b+"s().every()",function(a){var d=this.selector.opts,e=this;return this.iterator(b,function(f,g,h,i,m){a.call(e[b](g,"cell"===b?h:d,"cell"===b?d:k),g,h,i,m)})})});p("i18n()",function(a,b,c){var d=this.context[0],a=R(a)(d.oLanguage);a===k&&(a=b);c!==k&&h.isPlainObject(a)&&(a=a[c]!==k?a[c]:a._);return a.replace("%d",c)});m.version="1.10.15";m.settings=[];m.models={};m.models.oSearch={bCaseInsensitive:!0,sSearch:"",bRegex:!1,bSmart:!0};m.models.oRow={nTr:null,anCells:null,
+        _aData:[],_aSortData:null,_aFilterData:null,_sFilterRow:null,_sRowStripe:"",src:null,idx:-1};m.models.oColumn={idx:null,aDataSort:null,asSorting:null,bSearchable:null,bSortable:null,bVisible:null,_sManualType:null,_bAttrSrc:!1,fnCreatedCell:null,fnGetData:null,fnSetData:null,mData:null,mRender:null,nTh:null,nTf:null,sClass:null,sContentPadding:null,sDefaultContent:null,sName:null,sSortDataType:"std",sSortingClass:null,sSortingClassJUI:null,sTitle:null,sType:null,sWidth:null,sWidthOrig:null};m.defaults=
+    {aaData:null,aaSorting:[[0,"asc"]],aaSortingFixed:[],ajax:null,aLengthMenu:[10,25,50,100],aoColumns:null,aoColumnDefs:null,aoSearchCols:[],asStripeClasses:null,bAutoWidth:!0,bDeferRender:!1,bDestroy:!1,bFilter:!0,bInfo:!0,bJQueryUI:!1,bLengthChange:!0,bPaginate:!0,bProcessing:!1,bRetrieve:!1,bScrollCollapse:!1,bServerSide:!1,bSort:!0,bSortMulti:!0,bSortCellsTop:!1,bSortClasses:!0,bStateSave:!1,fnCreatedRow:null,fnDrawCallback:null,fnFooterCallback:null,fnFormatNumber:function(a){return a.toString().replace(/\B(?=(\d{3})+(?!\d))/g,
+        this.oLanguage.sThousands)},fnHeaderCallback:null,fnInfoCallback:null,fnInitComplete:null,fnPreDrawCallback:null,fnRowCallback:null,fnServerData:null,fnServerParams:null,fnStateLoadCallback:function(a){try{return JSON.parse((-1===a.iStateDuration?sessionStorage:localStorage).getItem("DataTables_"+a.sInstance+"_"+location.pathname))}catch(b){}},fnStateLoadParams:null,fnStateLoaded:null,fnStateSaveCallback:function(a,b){try{(-1===a.iStateDuration?sessionStorage:localStorage).setItem("DataTables_"+a.sInstance+
+        "_"+location.pathname,JSON.stringify(b))}catch(c){}},fnStateSaveParams:null,iStateDuration:7200,iDeferLoading:null,iDisplayLength:10,iDisplayStart:0,iTabIndex:0,oClasses:{},oLanguage:{oAria:{sSortAscending:": activate to sort column ascending",sSortDescending:": activate to sort column descending"},oPaginate:{sFirst:"First",sLast:"Last",sNext:"Next",sPrevious:"Previous"},sEmptyTable:"No data available in table",sInfo:"Showing _START_ to _END_ of _TOTAL_ entries",sInfoEmpty:"Showing 0 to 0 of 0 entries",
+        sInfoFiltered:"(filtered from _MAX_ total entries)",sInfoPostFix:"",sDecimal:"",sThousands:",",sLengthMenu:"Show _MENU_ entries",sLoadingRecords:"Loading...",sProcessing:"Processing...",sSearch:"Search:",sSearchPlaceholder:"",sUrl:"",sZeroRecords:"No matching records found"},oSearch:h.extend({},m.models.oSearch),sAjaxDataProp:"data",sAjaxSource:null,sDom:"lfrtip",searchDelay:null,sPaginationType:"simple_numbers",sScrollX:"",sScrollXInner:"",sScrollY:"",sServerMethod:"GET",renderer:null,rowId:"DT_RowId"};
+    Y(m.defaults);m.defaults.column={aDataSort:null,iDataSort:-1,asSorting:["asc","desc"],bSearchable:!0,bSortable:!0,bVisible:!0,fnCreatedCell:null,mData:null,mRender:null,sCellType:"td",sClass:"",sContentPadding:"",sDefaultContent:null,sName:"",sSortDataType:"std",sTitle:null,sType:null,sWidth:null};Y(m.defaults.column);m.models.oSettings={oFeatures:{bAutoWidth:null,bDeferRender:null,bFilter:null,bInfo:null,bLengthChange:null,bPaginate:null,bProcessing:null,bServerSide:null,bSort:null,bSortMulti:null,
+        bSortClasses:null,bStateSave:null},oScroll:{bCollapse:null,iBarWidth:0,sX:null,sXInner:null,sY:null},oLanguage:{fnInfoCallback:null},oBrowser:{bScrollOversize:!1,bScrollbarLeft:!1,bBounding:!1,barWidth:0},ajax:null,aanFeatures:[],aoData:[],aiDisplay:[],aiDisplayMaster:[],aIds:{},aoColumns:[],aoHeader:[],aoFooter:[],oPreviousSearch:{},aoPreSearchCols:[],aaSorting:null,aaSortingFixed:[],asStripeClasses:null,asDestroyStripes:[],sDestroyWidth:0,aoRowCallback:[],aoHeaderCallback:[],aoFooterCallback:[],
+        aoDrawCallback:[],aoRowCreatedCallback:[],aoPreDrawCallback:[],aoInitComplete:[],aoStateSaveParams:[],aoStateLoadParams:[],aoStateLoaded:[],sTableId:"",nTable:null,nTHead:null,nTFoot:null,nTBody:null,nTableWrapper:null,bDeferLoading:!1,bInitialised:!1,aoOpenRows:[],sDom:null,searchDelay:null,sPaginationType:"two_button",iStateDuration:0,aoStateSave:[],aoStateLoad:[],oSavedState:null,oLoadedState:null,sAjaxSource:null,sAjaxDataProp:null,bAjaxDataGet:!0,jqXHR:null,json:k,oAjaxData:k,fnServerData:null,
+        aoServerParams:[],sServerMethod:null,fnFormatNumber:null,aLengthMenu:null,iDraw:0,bDrawing:!1,iDrawError:-1,_iDisplayLength:10,_iDisplayStart:0,_iRecordsTotal:0,_iRecordsDisplay:0,bJUI:null,oClasses:{},bFiltered:!1,bSorted:!1,bSortCellsTop:null,oInit:null,aoDestroyCallback:[],fnRecordsTotal:function(){return"ssp"==y(this)?1*this._iRecordsTotal:this.aiDisplayMaster.length},fnRecordsDisplay:function(){return"ssp"==y(this)?1*this._iRecordsDisplay:this.aiDisplay.length},fnDisplayEnd:function(){var a=
+            this._iDisplayLength,b=this._iDisplayStart,c=b+a,d=this.aiDisplay.length,e=this.oFeatures,f=e.bPaginate;return e.bServerSide?!1===f||-1===a?b+d:Math.min(b+a,this._iRecordsDisplay):!f||c>d||-1===a?d:c},oInstance:null,sInstance:null,iTabIndex:0,nScrollHead:null,nScrollFoot:null,aLastSort:[],oPlugins:{},rowIdFn:null,rowId:null};m.ext=x={buttons:{},classes:{},builder:"-source-",errMode:"alert",feature:[],search:[],selector:{cell:[],column:[],row:[]},internal:{},legacy:{ajax:null},pager:{},renderer:{pageButton:{},
+        header:{}},order:{},type:{detect:[],search:{},order:{}},_unique:0,fnVersionCheck:m.fnVersionCheck,iApiIndex:0,oJUIClasses:{},sVersion:m.version};h.extend(x,{afnFiltering:x.search,aTypes:x.type.detect,ofnSearch:x.type.search,oSort:x.type.order,afnSortData:x.order,aoFeatures:x.feature,oApi:x.internal,oStdClasses:x.classes,oPagination:x.pager});h.extend(m.ext.classes,{sTable:"dataTable",sNoFooter:"no-footer",sPageButton:"paginate_button",sPageButtonActive:"current",sPageButtonDisabled:"disabled",sStripeOdd:"odd",
+        sStripeEven:"even",sRowEmpty:"dataTables_empty",sWrapper:"dataTables_wrapper",sFilter:"dataTables_filter",sInfo:"dataTables_info",sPaging:"dataTables_paginate paging_",sLength:"dataTables_length",sProcessing:"dataTables_processing",sSortAsc:"sorting_asc",sSortDesc:"sorting_desc",sSortable:"sorting",sSortableAsc:"sorting_asc_disabled",sSortableDesc:"sorting_desc_disabled",sSortableNone:"sorting_disabled",sSortColumn:"sorting_",sFilterInput:"",sLengthSelect:"",sScrollWrapper:"dataTables_scroll",sScrollHead:"dataTables_scrollHead",
+        sScrollHeadInner:"dataTables_scrollHeadInner",sScrollBody:"dataTables_scrollBody",sScrollFoot:"dataTables_scrollFoot",sScrollFootInner:"dataTables_scrollFootInner",sHeaderTH:"",sFooterTH:"",sSortJUIAsc:"",sSortJUIDesc:"",sSortJUI:"",sSortJUIAscAllowed:"",sSortJUIDescAllowed:"",sSortJUIWrapper:"",sSortIcon:"",sJUIHeader:"",sJUIFooter:""});var Ea="",Ea="",G=Ea+"ui-state-default",ka=Ea+"css_right ui-icon ui-icon-",Yb=Ea+"fg-toolbar ui-toolbar ui-widget-header ui-helper-clearfix";h.extend(m.ext.oJUIClasses,
+        m.ext.classes,{sPageButton:"fg-button ui-button "+G,sPageButtonActive:"ui-state-disabled",sPageButtonDisabled:"ui-state-disabled",sPaging:"dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_",sSortAsc:G+" sorting_asc",sSortDesc:G+" sorting_desc",sSortable:G+" sorting",sSortableAsc:G+" sorting_asc_disabled",sSortableDesc:G+" sorting_desc_disabled",sSortableNone:G+" sorting_disabled",sSortJUIAsc:ka+"triangle-1-n",sSortJUIDesc:ka+"triangle-1-s",sSortJUI:ka+"carat-2-n-s",
+            sSortJUIAscAllowed:ka+"carat-1-n",sSortJUIDescAllowed:ka+"carat-1-s",sSortJUIWrapper:"DataTables_sort_wrapper",sSortIcon:"DataTables_sort_icon",sScrollHead:"dataTables_scrollHead "+G,sScrollFoot:"dataTables_scrollFoot "+G,sHeaderTH:G,sFooterTH:G,sJUIHeader:Yb+" ui-corner-tl ui-corner-tr",sJUIFooter:Yb+" ui-corner-bl ui-corner-br"});var Nb=m.ext.pager;h.extend(Nb,{simple:function(){return["previous","next"]},full:function(){return["first","previous","next","last"]},numbers:function(a,b){return[ia(a,
+        b)]},simple_numbers:function(a,b){return["previous",ia(a,b),"next"]},full_numbers:function(a,b){return["first","previous",ia(a,b),"next","last"]},first_last_numbers:function(a,b){return["first",ia(a,b),"last"]},_numbers:ia,numbers_length:7});h.extend(!0,m.ext.renderer,{pageButton:{_:function(a,b,c,d,e,f){var g=a.oClasses,j=a.oLanguage.oPaginate,i=a.oLanguage.oAria.paginate||{},m,l,p=0,r=function(b,d){var k,t,u,s,v=function(b){Va(a,b.data.action,true)};k=0;for(t=d.length;k<t;k++){s=d[k];if(h.isArray(s)){u=
+        h("<"+(s.DT_el||"div")+"/>").appendTo(b);r(u,s)}else{m=null;l="";switch(s){case "ellipsis":b.append('<span class="ellipsis">&#x2026;</span>');break;case "first":m=j.sFirst;l=s+(e>0?"":" "+g.sPageButtonDisabled);break;case "previous":m=j.sPrevious;l=s+(e>0?"":" "+g.sPageButtonDisabled);break;case "next":m=j.sNext;l=s+(e<f-1?"":" "+g.sPageButtonDisabled);break;case "last":m=j.sLast;l=s+(e<f-1?"":" "+g.sPageButtonDisabled);break;default:m=s+1;l=e===s?g.sPageButtonActive:""}if(m!==null){u=h("<a>",{"class":g.sPageButton+
+    " "+l,"aria-controls":a.sTableId,"aria-label":i[s],"data-dt-idx":p,tabindex:a.iTabIndex,id:c===0&&typeof s==="string"?a.sTableId+"_"+s:null}).html(m).appendTo(b);Ya(u,{action:s},v);p++}}}},t;try{t=h(b).find(H.activeElement).data("dt-idx")}catch(u){}r(h(b).empty(),d);t!==k&&h(b).find("[data-dt-idx="+t+"]").focus()}}});h.extend(m.ext.type.detect,[function(a,b){var c=b.oLanguage.sDecimal;return ab(a,c)?"num"+c:null},function(a){if(a&&!(a instanceof Date)&&!cc.test(a))return null;var b=Date.parse(a);
+        return null!==b&&!isNaN(b)||M(a)?"date":null},function(a,b){var c=b.oLanguage.sDecimal;return ab(a,c,!0)?"num-fmt"+c:null},function(a,b){var c=b.oLanguage.sDecimal;return Sb(a,c)?"html-num"+c:null},function(a,b){var c=b.oLanguage.sDecimal;return Sb(a,c,!0)?"html-num-fmt"+c:null},function(a){return M(a)||"string"===typeof a&&-1!==a.indexOf("<")?"html":null}]);h.extend(m.ext.type.search,{html:function(a){return M(a)?a:"string"===typeof a?a.replace(Pb," ").replace(Ca,""):""},string:function(a){return M(a)?
+        a:"string"===typeof a?a.replace(Pb," "):a}});var Ba=function(a,b,c,d){if(0!==a&&(!a||"-"===a))return-Infinity;b&&(a=Rb(a,b));a.replace&&(c&&(a=a.replace(c,"")),d&&(a=a.replace(d,"")));return 1*a};h.extend(x.type.order,{"date-pre":function(a){return Date.parse(a)||-Infinity},"html-pre":function(a){return M(a)?"":a.replace?a.replace(/<.*?>/g,"").toLowerCase():a+""},"string-pre":function(a){return M(a)?"":"string"===typeof a?a.toLowerCase():!a.toString?"":a.toString()},"string-asc":function(a,b){return a<
+    b?-1:a>b?1:0},"string-desc":function(a,b){return a<b?1:a>b?-1:0}});fb("");h.extend(!0,m.ext.renderer,{header:{_:function(a,b,c,d){h(a.nTable).on("order.dt.DT",function(e,f,g,h){if(a===f){e=c.idx;b.removeClass(c.sSortingClass+" "+d.sSortAsc+" "+d.sSortDesc).addClass(h[e]=="asc"?d.sSortAsc:h[e]=="desc"?d.sSortDesc:c.sSortingClass)}})},jqueryui:function(a,b,c,d){h("<div/>").addClass(d.sSortJUIWrapper).append(b.contents()).append(h("<span/>").addClass(d.sSortIcon+" "+c.sSortingClassJUI)).appendTo(b);
+        h(a.nTable).on("order.dt.DT",function(e,f,g,h){if(a===f){e=c.idx;b.removeClass(d.sSortAsc+" "+d.sSortDesc).addClass(h[e]=="asc"?d.sSortAsc:h[e]=="desc"?d.sSortDesc:c.sSortingClass);b.find("span."+d.sSortIcon).removeClass(d.sSortJUIAsc+" "+d.sSortJUIDesc+" "+d.sSortJUI+" "+d.sSortJUIAscAllowed+" "+d.sSortJUIDescAllowed).addClass(h[e]=="asc"?d.sSortJUIAsc:h[e]=="desc"?d.sSortJUIDesc:c.sSortingClassJUI)}})}}});var Zb=function(a){return"string"===typeof a?a.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,
+        "&quot;"):a};m.render={number:function(a,b,c,d,e){return{display:function(f){if("number"!==typeof f&&"string"!==typeof f)return f;var g=0>f?"-":"",h=parseFloat(f);if(isNaN(h))return Zb(f);h=h.toFixed(c);f=Math.abs(h);h=parseInt(f,10);f=c?b+(f-h).toFixed(c).substring(2):"";return g+(d||"")+h.toString().replace(/\B(?=(\d{3})+(?!\d))/g,a)+f+(e||"")}}},text:function(){return{display:Zb}}};h.extend(m.ext.internal,{_fnExternApiFunc:Ob,_fnBuildAjax:ua,_fnAjaxUpdate:nb,_fnAjaxParameters:wb,_fnAjaxUpdateDraw:xb,
+        _fnAjaxDataSrc:va,_fnAddColumn:Ga,_fnColumnOptions:la,_fnAdjustColumnSizing:Z,_fnVisibleToColumnIndex:$,_fnColumnIndexToVisible:aa,_fnVisbleColumns:ba,_fnGetColumns:na,_fnColumnTypes:Ia,_fnApplyColumnDefs:kb,_fnHungarianMap:Y,_fnCamelToHungarian:J,_fnLanguageCompat:Fa,_fnBrowserDetect:ib,_fnAddData:N,_fnAddTr:oa,_fnNodeToDataIndex:function(a,b){return b._DT_RowIndex!==k?b._DT_RowIndex:null},_fnNodeToColumnIndex:function(a,b,c){return h.inArray(c,a.aoData[b].anCells)},_fnGetCellData:B,_fnSetCellData:lb,
+        _fnSplitObjNotation:La,_fnGetObjectDataFn:R,_fnSetObjectDataFn:S,_fnGetDataMaster:Ma,_fnClearTable:pa,_fnDeleteIndex:qa,_fnInvalidate:da,_fnGetRowElements:Ka,_fnCreateTr:Ja,_fnBuildHead:mb,_fnDrawHead:fa,_fnDraw:O,_fnReDraw:T,_fnAddOptionsHtml:pb,_fnDetectHeader:ea,_fnGetUniqueThs:ta,_fnFeatureHtmlFilter:rb,_fnFilterComplete:ga,_fnFilterCustom:Ab,_fnFilterColumn:zb,_fnFilter:yb,_fnFilterCreateSearch:Ra,_fnEscapeRegex:Sa,_fnFilterData:Bb,_fnFeatureHtmlInfo:ub,_fnUpdateInfo:Eb,_fnInfoMacros:Fb,_fnInitialise:ha,
+        _fnInitComplete:wa,_fnLengthChange:Ta,_fnFeatureHtmlLength:qb,_fnFeatureHtmlPaginate:vb,_fnPageChange:Va,_fnFeatureHtmlProcessing:sb,_fnProcessingDisplay:C,_fnFeatureHtmlTable:tb,_fnScrollDraw:ma,_fnApplyToChildren:I,_fnCalculateColumnWidths:Ha,_fnThrottle:Qa,_fnConvertToWidth:Gb,_fnGetWidestNode:Hb,_fnGetMaxLenString:Ib,_fnStringToCss:v,_fnSortFlatten:W,_fnSort:ob,_fnSortAria:Kb,_fnSortListener:Xa,_fnSortAttachListener:Oa,_fnSortingClasses:ya,_fnSortData:Jb,_fnSaveState:za,_fnLoadState:Lb,_fnSettingsFromNode:Aa,
+        _fnLog:K,_fnMap:F,_fnBindAction:Ya,_fnCallbackReg:z,_fnCallbackFire:s,_fnLengthOverflow:Ua,_fnRenderer:Pa,_fnDataSource:y,_fnRowAttributes:Na,_fnCalculateEnd:function(){}});h.fn.dataTable=m;m.$=h;h.fn.dataTableSettings=m.settings;h.fn.dataTableExt=m.ext;h.fn.DataTable=function(a){return h(this).dataTable(a).api()};h.each(m,function(a,b){h.fn.DataTable[a]=b});return h.fn.dataTable});
 /**
  * Created by Qinglanhui on 2018/8/13.
  */
@@ -10683,2551 +13228,6 @@ angular.module('app.tables').controller('JqGridCtrl', function ($scope) {
 
     }
 });
-/*!
- * Bootstrap v3.3.7 (http://getbootstrap.com)
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under the MIT license
- */
-
-if (typeof jQuery === 'undefined') {
-  throw new Error('Bootstrap\'s JavaScript requires jQuery')
-}
-
-+function ($) {
-  'use strict';
-  var version = $.fn.jquery.split(' ')[0].split('.')
-  if ((version[0] < 2 && version[1] < 9) || (version[0] == 1 && version[1] == 9 && version[2] < 1) || (version[0] > 3)) {
-    throw new Error('Bootstrap\'s JavaScript requires jQuery version 1.9.1 or higher, but lower than version 4')
-  }
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: transition.js v3.3.7
- * http://getbootstrap.com/javascript/#transitions
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
-  // ============================================================
-
-  function transitionEnd() {
-    var el = document.createElement('bootstrap')
-
-    var transEndEventNames = {
-      WebkitTransition : 'webkitTransitionEnd',
-      MozTransition    : 'transitionend',
-      OTransition      : 'oTransitionEnd otransitionend',
-      transition       : 'transitionend'
-    }
-
-    for (var name in transEndEventNames) {
-      if (el.style[name] !== undefined) {
-        return { end: transEndEventNames[name] }
-      }
-    }
-
-    return false // explicit for ie8 (  ._.)
-  }
-
-  // http://blog.alexmaccaw.com/css-transitions
-  $.fn.emulateTransitionEnd = function (duration) {
-    var called = false
-    var $el = this
-    $(this).one('bsTransitionEnd', function () { called = true })
-    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
-    setTimeout(callback, duration)
-    return this
-  }
-
-  $(function () {
-    $.support.transition = transitionEnd()
-
-    if (!$.support.transition) return
-
-    $.event.special.bsTransitionEnd = {
-      bindType: $.support.transition.end,
-      delegateType: $.support.transition.end,
-      handle: function (e) {
-        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
-      }
-    }
-  })
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: alert.js v3.3.7
- * http://getbootstrap.com/javascript/#alerts
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // ALERT CLASS DEFINITION
-  // ======================
-
-  var dismiss = '[data-dismiss="alert"]'
-  var Alert   = function (el) {
-    $(el).on('click', dismiss, this.close)
-  }
-
-  Alert.VERSION = '3.3.7'
-
-  Alert.TRANSITION_DURATION = 150
-
-  Alert.prototype.close = function (e) {
-    var $this    = $(this)
-    var selector = $this.attr('data-target')
-
-    if (!selector) {
-      selector = $this.attr('href')
-      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
-    }
-
-    var $parent = $(selector === '#' ? [] : selector)
-
-    if (e) e.preventDefault()
-
-    if (!$parent.length) {
-      $parent = $this.closest('.alert')
-    }
-
-    $parent.trigger(e = $.Event('close.bs.alert'))
-
-    if (e.isDefaultPrevented()) return
-
-    $parent.removeClass('in')
-
-    function removeElement() {
-      // detach from parent, fire event then clean up data
-      $parent.detach().trigger('closed.bs.alert').remove()
-    }
-
-    $.support.transition && $parent.hasClass('fade') ?
-      $parent
-        .one('bsTransitionEnd', removeElement)
-        .emulateTransitionEnd(Alert.TRANSITION_DURATION) :
-      removeElement()
-  }
-
-
-  // ALERT PLUGIN DEFINITION
-  // =======================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this = $(this)
-      var data  = $this.data('bs.alert')
-
-      if (!data) $this.data('bs.alert', (data = new Alert(this)))
-      if (typeof option == 'string') data[option].call($this)
-    })
-  }
-
-  var old = $.fn.alert
-
-  $.fn.alert             = Plugin
-  $.fn.alert.Constructor = Alert
-
-
-  // ALERT NO CONFLICT
-  // =================
-
-  $.fn.alert.noConflict = function () {
-    $.fn.alert = old
-    return this
-  }
-
-
-  // ALERT DATA-API
-  // ==============
-
-  $(document).on('click.bs.alert.data-api', dismiss, Alert.prototype.close)
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: button.js v3.3.7
- * http://getbootstrap.com/javascript/#buttons
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // BUTTON PUBLIC CLASS DEFINITION
-  // ==============================
-
-  var Button = function (element, options) {
-    this.$element  = $(element)
-    this.options   = $.extend({}, Button.DEFAULTS, options)
-    this.isLoading = false
-  }
-
-  Button.VERSION  = '3.3.7'
-
-  Button.DEFAULTS = {
-    loadingText: 'loading...'
-  }
-
-  Button.prototype.setState = function (state) {
-    var d    = 'disabled'
-    var $el  = this.$element
-    var val  = $el.is('input') ? 'val' : 'html'
-    var data = $el.data()
-
-    state += 'Text'
-
-    if (data.resetText == null) $el.data('resetText', $el[val]())
-
-    // push to event loop to allow forms to submit
-    setTimeout($.proxy(function () {
-      $el[val](data[state] == null ? this.options[state] : data[state])
-
-      if (state == 'loadingText') {
-        this.isLoading = true
-        $el.addClass(d).attr(d, d).prop(d, true)
-      } else if (this.isLoading) {
-        this.isLoading = false
-        $el.removeClass(d).removeAttr(d).prop(d, false)
-      }
-    }, this), 0)
-  }
-
-  Button.prototype.toggle = function () {
-    var changed = true
-    var $parent = this.$element.closest('[data-toggle="buttons"]')
-
-    if ($parent.length) {
-      var $input = this.$element.find('input')
-      if ($input.prop('type') == 'radio') {
-        if ($input.prop('checked')) changed = false
-        $parent.find('.active').removeClass('active')
-        this.$element.addClass('active')
-      } else if ($input.prop('type') == 'checkbox') {
-        if (($input.prop('checked')) !== this.$element.hasClass('active')) changed = false
-        this.$element.toggleClass('active')
-      }
-      $input.prop('checked', this.$element.hasClass('active'))
-      if (changed) $input.trigger('change')
-    } else {
-      this.$element.attr('aria-pressed', !this.$element.hasClass('active'))
-      this.$element.toggleClass('active')
-    }
-  }
-
-
-  // BUTTON PLUGIN DEFINITION
-  // ========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.button')
-      var options = typeof option == 'object' && option
-
-      if (!data) $this.data('bs.button', (data = new Button(this, options)))
-
-      if (option == 'toggle') data.toggle()
-      else if (option) data.setState(option)
-    })
-  }
-
-  var old = $.fn.button
-
-  $.fn.button             = Plugin
-  $.fn.button.Constructor = Button
-
-
-  // BUTTON NO CONFLICT
-  // ==================
-
-  $.fn.button.noConflict = function () {
-    $.fn.button = old
-    return this
-  }
-
-
-  // BUTTON DATA-API
-  // ===============
-
-  $(document)
-    .on('click.bs.button.data-api', '[data-toggle^="button"]', function (e) {
-      var $btn = $(e.target).closest('.btn')
-      Plugin.call($btn, 'toggle')
-      if (!($(e.target).is('input[type="radio"], input[type="checkbox"]'))) {
-        // Prevent double click on radios, and the double selections (so cancellation) on checkboxes
-        e.preventDefault()
-        // The target component still receive the focus
-        if ($btn.is('input,button')) $btn.trigger('focus')
-        else $btn.find('input:visible,button:visible').first().trigger('focus')
-      }
-    })
-    .on('focus.bs.button.data-api blur.bs.button.data-api', '[data-toggle^="button"]', function (e) {
-      $(e.target).closest('.btn').toggleClass('focus', /^focus(in)?$/.test(e.type))
-    })
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: carousel.js v3.3.7
- * http://getbootstrap.com/javascript/#carousel
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // CAROUSEL CLASS DEFINITION
-  // =========================
-
-  var Carousel = function (element, options) {
-    this.$element    = $(element)
-    this.$indicators = this.$element.find('.carousel-indicators')
-    this.options     = options
-    this.paused      = null
-    this.sliding     = null
-    this.interval    = null
-    this.$active     = null
-    this.$items      = null
-
-    this.options.keyboard && this.$element.on('keydown.bs.carousel', $.proxy(this.keydown, this))
-
-    this.options.pause == 'hover' && !('ontouchstart' in document.documentElement) && this.$element
-      .on('mouseenter.bs.carousel', $.proxy(this.pause, this))
-      .on('mouseleave.bs.carousel', $.proxy(this.cycle, this))
-  }
-
-  Carousel.VERSION  = '3.3.7'
-
-  Carousel.TRANSITION_DURATION = 600
-
-  Carousel.DEFAULTS = {
-    interval: 5000,
-    pause: 'hover',
-    wrap: true,
-    keyboard: true
-  }
-
-  Carousel.prototype.keydown = function (e) {
-    if (/input|textarea/i.test(e.target.tagName)) return
-    switch (e.which) {
-      case 37: this.prev(); break
-      case 39: this.next(); break
-      default: return
-    }
-
-    e.preventDefault()
-  }
-
-  Carousel.prototype.cycle = function (e) {
-    e || (this.paused = false)
-
-    this.interval && clearInterval(this.interval)
-
-    this.options.interval
-      && !this.paused
-      && (this.interval = setInterval($.proxy(this.next, this), this.options.interval))
-
-    return this
-  }
-
-  Carousel.prototype.getItemIndex = function (item) {
-    this.$items = item.parent().children('.item')
-    return this.$items.index(item || this.$active)
-  }
-
-  Carousel.prototype.getItemForDirection = function (direction, active) {
-    var activeIndex = this.getItemIndex(active)
-    var willWrap = (direction == 'prev' && activeIndex === 0)
-                || (direction == 'next' && activeIndex == (this.$items.length - 1))
-    if (willWrap && !this.options.wrap) return active
-    var delta = direction == 'prev' ? -1 : 1
-    var itemIndex = (activeIndex + delta) % this.$items.length
-    return this.$items.eq(itemIndex)
-  }
-
-  Carousel.prototype.to = function (pos) {
-    var that        = this
-    var activeIndex = this.getItemIndex(this.$active = this.$element.find('.item.active'))
-
-    if (pos > (this.$items.length - 1) || pos < 0) return
-
-    if (this.sliding)       return this.$element.one('slid.bs.carousel', function () { that.to(pos) }) // yes, "slid"
-    if (activeIndex == pos) return this.pause().cycle()
-
-    return this.slide(pos > activeIndex ? 'next' : 'prev', this.$items.eq(pos))
-  }
-
-  Carousel.prototype.pause = function (e) {
-    e || (this.paused = true)
-
-    if (this.$element.find('.next, .prev').length && $.support.transition) {
-      this.$element.trigger($.support.transition.end)
-      this.cycle(true)
-    }
-
-    this.interval = clearInterval(this.interval)
-
-    return this
-  }
-
-  Carousel.prototype.next = function () {
-    if (this.sliding) return
-    return this.slide('next')
-  }
-
-  Carousel.prototype.prev = function () {
-    if (this.sliding) return
-    return this.slide('prev')
-  }
-
-  Carousel.prototype.slide = function (type, next) {
-    var $active   = this.$element.find('.item.active')
-    var $next     = next || this.getItemForDirection(type, $active)
-    var isCycling = this.interval
-    var direction = type == 'next' ? 'left' : 'right'
-    var that      = this
-
-    if ($next.hasClass('active')) return (this.sliding = false)
-
-    var relatedTarget = $next[0]
-    var slideEvent = $.Event('slide.bs.carousel', {
-      relatedTarget: relatedTarget,
-      direction: direction
-    })
-    this.$element.trigger(slideEvent)
-    if (slideEvent.isDefaultPrevented()) return
-
-    this.sliding = true
-
-    isCycling && this.pause()
-
-    if (this.$indicators.length) {
-      this.$indicators.find('.active').removeClass('active')
-      var $nextIndicator = $(this.$indicators.children()[this.getItemIndex($next)])
-      $nextIndicator && $nextIndicator.addClass('active')
-    }
-
-    var slidEvent = $.Event('slid.bs.carousel', { relatedTarget: relatedTarget, direction: direction }) // yes, "slid"
-    if ($.support.transition && this.$element.hasClass('slide')) {
-      $next.addClass(type)
-      $next[0].offsetWidth // force reflow
-      $active.addClass(direction)
-      $next.addClass(direction)
-      $active
-        .one('bsTransitionEnd', function () {
-          $next.removeClass([type, direction].join(' ')).addClass('active')
-          $active.removeClass(['active', direction].join(' '))
-          that.sliding = false
-          setTimeout(function () {
-            that.$element.trigger(slidEvent)
-          }, 0)
-        })
-        .emulateTransitionEnd(Carousel.TRANSITION_DURATION)
-    } else {
-      $active.removeClass('active')
-      $next.addClass('active')
-      this.sliding = false
-      this.$element.trigger(slidEvent)
-    }
-
-    isCycling && this.cycle()
-
-    return this
-  }
-
-
-  // CAROUSEL PLUGIN DEFINITION
-  // ==========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.carousel')
-      var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
-      var action  = typeof option == 'string' ? option : options.slide
-
-      if (!data) $this.data('bs.carousel', (data = new Carousel(this, options)))
-      if (typeof option == 'number') data.to(option)
-      else if (action) data[action]()
-      else if (options.interval) data.pause().cycle()
-    })
-  }
-
-  var old = $.fn.carousel
-
-  $.fn.carousel             = Plugin
-  $.fn.carousel.Constructor = Carousel
-
-
-  // CAROUSEL NO CONFLICT
-  // ====================
-
-  $.fn.carousel.noConflict = function () {
-    $.fn.carousel = old
-    return this
-  }
-
-
-  // CAROUSEL DATA-API
-  // =================
-
-  var clickHandler = function (e) {
-    var href
-    var $this   = $(this)
-    var $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) // strip for ie7
-    if (!$target.hasClass('carousel')) return
-    var options = $.extend({}, $target.data(), $this.data())
-    var slideIndex = $this.attr('data-slide-to')
-    if (slideIndex) options.interval = false
-
-    Plugin.call($target, options)
-
-    if (slideIndex) {
-      $target.data('bs.carousel').to(slideIndex)
-    }
-
-    e.preventDefault()
-  }
-
-  $(document)
-    .on('click.bs.carousel.data-api', '[data-slide]', clickHandler)
-    .on('click.bs.carousel.data-api', '[data-slide-to]', clickHandler)
-
-  $(window).on('load', function () {
-    $('[data-ride="carousel"]').each(function () {
-      var $carousel = $(this)
-      Plugin.call($carousel, $carousel.data())
-    })
-  })
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: collapse.js v3.3.7
- * http://getbootstrap.com/javascript/#collapse
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-/* jshint latedef: false */
-
-+function ($) {
-  'use strict';
-
-  // COLLAPSE PUBLIC CLASS DEFINITION
-  // ================================
-
-  var Collapse = function (element, options) {
-    this.$element      = $(element)
-    this.options       = $.extend({}, Collapse.DEFAULTS, options)
-    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
-                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
-    this.transitioning = null
-
-    if (this.options.parent) {
-      this.$parent = this.getParent()
-    } else {
-      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
-    }
-
-    if (this.options.toggle) this.toggle()
-  }
-
-  Collapse.VERSION  = '3.3.7'
-
-  Collapse.TRANSITION_DURATION = 350
-
-  Collapse.DEFAULTS = {
-    toggle: true
-  }
-
-  Collapse.prototype.dimension = function () {
-    var hasWidth = this.$element.hasClass('width')
-    return hasWidth ? 'width' : 'height'
-  }
-
-  Collapse.prototype.show = function () {
-    if (this.transitioning || this.$element.hasClass('in')) return
-
-    var activesData
-    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
-
-    if (actives && actives.length) {
-      activesData = actives.data('bs.collapse')
-      if (activesData && activesData.transitioning) return
-    }
-
-    var startEvent = $.Event('show.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
-
-    if (actives && actives.length) {
-      Plugin.call(actives, 'hide')
-      activesData || actives.data('bs.collapse', null)
-    }
-
-    var dimension = this.dimension()
-
-    this.$element
-      .removeClass('collapse')
-      .addClass('collapsing')[dimension](0)
-      .attr('aria-expanded', true)
-
-    this.$trigger
-      .removeClass('collapsed')
-      .attr('aria-expanded', true)
-
-    this.transitioning = 1
-
-    var complete = function () {
-      this.$element
-        .removeClass('collapsing')
-        .addClass('collapse in')[dimension]('')
-      this.transitioning = 0
-      this.$element
-        .trigger('shown.bs.collapse')
-    }
-
-    if (!$.support.transition) return complete.call(this)
-
-    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
-
-    this.$element
-      .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
-  }
-
-  Collapse.prototype.hide = function () {
-    if (this.transitioning || !this.$element.hasClass('in')) return
-
-    var startEvent = $.Event('hide.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
-
-    var dimension = this.dimension()
-
-    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
-
-    this.$element
-      .addClass('collapsing')
-      .removeClass('collapse in')
-      .attr('aria-expanded', false)
-
-    this.$trigger
-      .addClass('collapsed')
-      .attr('aria-expanded', false)
-
-    this.transitioning = 1
-
-    var complete = function () {
-      this.transitioning = 0
-      this.$element
-        .removeClass('collapsing')
-        .addClass('collapse')
-        .trigger('hidden.bs.collapse')
-    }
-
-    if (!$.support.transition) return complete.call(this)
-
-    this.$element
-      [dimension](0)
-      .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
-  }
-
-  Collapse.prototype.toggle = function () {
-    this[this.$element.hasClass('in') ? 'hide' : 'show']()
-  }
-
-  Collapse.prototype.getParent = function () {
-    return $(this.options.parent)
-      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
-      .each($.proxy(function (i, element) {
-        var $element = $(element)
-        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
-      }, this))
-      .end()
-  }
-
-  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
-    var isOpen = $element.hasClass('in')
-
-    $element.attr('aria-expanded', isOpen)
-    $trigger
-      .toggleClass('collapsed', !isOpen)
-      .attr('aria-expanded', isOpen)
-  }
-
-  function getTargetFromTrigger($trigger) {
-    var href
-    var target = $trigger.attr('data-target')
-      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
-
-    return $(target)
-  }
-
-
-  // COLLAPSE PLUGIN DEFINITION
-  // ==========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.collapse')
-      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
-
-      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
-      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.collapse
-
-  $.fn.collapse             = Plugin
-  $.fn.collapse.Constructor = Collapse
-
-
-  // COLLAPSE NO CONFLICT
-  // ====================
-
-  $.fn.collapse.noConflict = function () {
-    $.fn.collapse = old
-    return this
-  }
-
-
-  // COLLAPSE DATA-API
-  // =================
-
-  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
-    var $this   = $(this)
-
-    if (!$this.attr('data-target')) e.preventDefault()
-
-    var $target = getTargetFromTrigger($this)
-    var data    = $target.data('bs.collapse')
-    var option  = data ? 'toggle' : $this.data()
-
-    Plugin.call($target, option)
-  })
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: dropdown.js v3.3.7
- * http://getbootstrap.com/javascript/#dropdowns
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // DROPDOWN CLASS DEFINITION
-  // =========================
-
-  var backdrop = '.dropdown-backdrop'
-  var toggle   = '[data-toggle="dropdown"]'
-  var Dropdown = function (element) {
-    $(element).on('click.bs.dropdown', this.toggle)
-  }
-
-  Dropdown.VERSION = '3.3.7'
-
-  function getParent($this) {
-    var selector = $this.attr('data-target')
-
-    if (!selector) {
-      selector = $this.attr('href')
-      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
-    }
-
-    var $parent = selector && $(selector)
-
-    return $parent && $parent.length ? $parent : $this.parent()
-  }
-
-  function clearMenus(e) {
-    if (e && e.which === 3) return
-    $(backdrop).remove()
-    $(toggle).each(function () {
-      var $this         = $(this)
-      var $parent       = getParent($this)
-      var relatedTarget = { relatedTarget: this }
-
-      if (!$parent.hasClass('open')) return
-
-      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
-
-      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
-
-      if (e.isDefaultPrevented()) return
-
-      $this.attr('aria-expanded', 'false')
-      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
-    })
-  }
-
-  Dropdown.prototype.toggle = function (e) {
-    var $this = $(this)
-
-    if ($this.is('.disabled, :disabled')) return
-
-    var $parent  = getParent($this)
-    var isActive = $parent.hasClass('open')
-
-    clearMenus()
-
-    if (isActive) {
-      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
-        // if mobile we use a backdrop because click events don't delegate
-        $(document.createElement('div'))
-          .addClass('dropdown-backdrop')
-          .insertAfter($(this))
-          .on('click', clearMenus)
-      }
-
-      var relatedTarget = { relatedTarget: this }
-      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
-
-      if (e.isDefaultPrevented()) return
-
-      $this
-        .trigger('focus')
-        .attr('aria-expanded', 'true')
-
-      $parent
-        .toggleClass('open')
-        .trigger($.Event('shown.bs.dropdown', relatedTarget))
-    }
-
-    return false
-  }
-
-  Dropdown.prototype.keydown = function (e) {
-    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
-
-    var $this = $(this)
-
-    e.preventDefault()
-    e.stopPropagation()
-
-    if ($this.is('.disabled, :disabled')) return
-
-    var $parent  = getParent($this)
-    var isActive = $parent.hasClass('open')
-
-    if (!isActive && e.which != 27 || isActive && e.which == 27) {
-      if (e.which == 27) $parent.find(toggle).trigger('focus')
-      return $this.trigger('click')
-    }
-
-    var desc = ' li:not(.disabled):visible a'
-    var $items = $parent.find('.dropdown-menu' + desc)
-
-    if (!$items.length) return
-
-    var index = $items.index(e.target)
-
-    if (e.which == 38 && index > 0)                 index--         // up
-    if (e.which == 40 && index < $items.length - 1) index++         // down
-    if (!~index)                                    index = 0
-
-    $items.eq(index).trigger('focus')
-  }
-
-
-  // DROPDOWN PLUGIN DEFINITION
-  // ==========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this = $(this)
-      var data  = $this.data('bs.dropdown')
-
-      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
-      if (typeof option == 'string') data[option].call($this)
-    })
-  }
-
-  var old = $.fn.dropdown
-
-  $.fn.dropdown             = Plugin
-  $.fn.dropdown.Constructor = Dropdown
-
-
-  // DROPDOWN NO CONFLICT
-  // ====================
-
-  $.fn.dropdown.noConflict = function () {
-    $.fn.dropdown = old
-    return this
-  }
-
-
-  // APPLY TO STANDARD DROPDOWN ELEMENTS
-  // ===================================
-
-  $(document)
-    .on('click.bs.dropdown.data-api', clearMenus)
-    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
-    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
-    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
-    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: modal.js v3.3.7
- * http://getbootstrap.com/javascript/#modals
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // MODAL CLASS DEFINITION
-  // ======================
-
-  var Modal = function (element, options) {
-    this.options             = options
-    this.$body               = $(document.body)
-    this.$element            = $(element)
-    this.$dialog             = this.$element.find('.modal-dialog')
-    this.$backdrop           = null
-    this.isShown             = null
-    this.originalBodyPad     = null
-    this.scrollbarWidth      = 0
-    this.ignoreBackdropClick = false
-
-    if (this.options.remote) {
-      this.$element
-        .find('.modal-content')
-        .load(this.options.remote, $.proxy(function () {
-          this.$element.trigger('loaded.bs.modal')
-        }, this))
-    }
-  }
-
-  Modal.VERSION  = '3.3.7'
-
-  Modal.TRANSITION_DURATION = 300
-  Modal.BACKDROP_TRANSITION_DURATION = 150
-
-  Modal.DEFAULTS = {
-    backdrop: true,
-    keyboard: true,
-    show: true
-  }
-
-  Modal.prototype.toggle = function (_relatedTarget) {
-    return this.isShown ? this.hide() : this.show(_relatedTarget)
-  }
-
-  Modal.prototype.show = function (_relatedTarget) {
-    var that = this
-    var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
-
-    this.$element.trigger(e)
-
-    if (this.isShown || e.isDefaultPrevented()) return
-
-    this.isShown = true
-
-    this.checkScrollbar()
-    this.setScrollbar()
-    this.$body.addClass('modal-open')
-
-    this.escape()
-    this.resize()
-
-    this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
-
-    this.$dialog.on('mousedown.dismiss.bs.modal', function () {
-      that.$element.one('mouseup.dismiss.bs.modal', function (e) {
-        if ($(e.target).is(that.$element)) that.ignoreBackdropClick = true
-      })
-    })
-
-    this.backdrop(function () {
-      var transition = $.support.transition && that.$element.hasClass('fade')
-
-      if (!that.$element.parent().length) {
-        that.$element.appendTo(that.$body) // don't move modals dom position
-      }
-
-      that.$element
-        .show()
-        .scrollTop(0)
-
-      that.adjustDialog()
-
-      if (transition) {
-        that.$element[0].offsetWidth // force reflow
-      }
-
-      that.$element.addClass('in')
-
-      that.enforceFocus()
-
-      var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
-
-      transition ?
-        that.$dialog // wait for modal to slide in
-          .one('bsTransitionEnd', function () {
-            that.$element.trigger('focus').trigger(e)
-          })
-          .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
-        that.$element.trigger('focus').trigger(e)
-    })
-  }
-
-  Modal.prototype.hide = function (e) {
-    if (e) e.preventDefault()
-
-    e = $.Event('hide.bs.modal')
-
-    this.$element.trigger(e)
-
-    if (!this.isShown || e.isDefaultPrevented()) return
-
-    this.isShown = false
-
-    this.escape()
-    this.resize()
-
-    $(document).off('focusin.bs.modal')
-
-    this.$element
-      .removeClass('in')
-      .off('click.dismiss.bs.modal')
-      .off('mouseup.dismiss.bs.modal')
-
-    this.$dialog.off('mousedown.dismiss.bs.modal')
-
-    $.support.transition && this.$element.hasClass('fade') ?
-      this.$element
-        .one('bsTransitionEnd', $.proxy(this.hideModal, this))
-        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
-      this.hideModal()
-  }
-
-  Modal.prototype.enforceFocus = function () {
-    $(document)
-      .off('focusin.bs.modal') // guard against infinite focus loop
-      .on('focusin.bs.modal', $.proxy(function (e) {
-        if (document !== e.target &&
-            this.$element[0] !== e.target &&
-            !this.$element.has(e.target).length) {
-          this.$element.trigger('focus')
-        }
-      }, this))
-  }
-
-  Modal.prototype.escape = function () {
-    if (this.isShown && this.options.keyboard) {
-      this.$element.on('keydown.dismiss.bs.modal', $.proxy(function (e) {
-        e.which == 27 && this.hide()
-      }, this))
-    } else if (!this.isShown) {
-      this.$element.off('keydown.dismiss.bs.modal')
-    }
-  }
-
-  Modal.prototype.resize = function () {
-    if (this.isShown) {
-      $(window).on('resize.bs.modal', $.proxy(this.handleUpdate, this))
-    } else {
-      $(window).off('resize.bs.modal')
-    }
-  }
-
-  Modal.prototype.hideModal = function () {
-    var that = this
-    this.$element.hide()
-    this.backdrop(function () {
-      that.$body.removeClass('modal-open')
-      that.resetAdjustments()
-      that.resetScrollbar()
-      that.$element.trigger('hidden.bs.modal')
-    })
-  }
-
-  Modal.prototype.removeBackdrop = function () {
-    this.$backdrop && this.$backdrop.remove()
-    this.$backdrop = null
-  }
-
-  Modal.prototype.backdrop = function (callback) {
-    var that = this
-    var animate = this.$element.hasClass('fade') ? 'fade' : ''
-
-    if (this.isShown && this.options.backdrop) {
-      var doAnimate = $.support.transition && animate
-
-      this.$backdrop = $(document.createElement('div'))
-        .addClass('modal-backdrop ' + animate)
-        .appendTo(this.$body)
-
-      this.$element.on('click.dismiss.bs.modal', $.proxy(function (e) {
-        if (this.ignoreBackdropClick) {
-          this.ignoreBackdropClick = false
-          return
-        }
-        if (e.target !== e.currentTarget) return
-        this.options.backdrop == 'static'
-          ? this.$element[0].focus()
-          : this.hide()
-      }, this))
-
-      if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
-
-      this.$backdrop.addClass('in')
-
-      if (!callback) return
-
-      doAnimate ?
-        this.$backdrop
-          .one('bsTransitionEnd', callback)
-          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
-        callback()
-
-    } else if (!this.isShown && this.$backdrop) {
-      this.$backdrop.removeClass('in')
-
-      var callbackRemove = function () {
-        that.removeBackdrop()
-        callback && callback()
-      }
-      $.support.transition && this.$element.hasClass('fade') ?
-        this.$backdrop
-          .one('bsTransitionEnd', callbackRemove)
-          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
-        callbackRemove()
-
-    } else if (callback) {
-      callback()
-    }
-  }
-
-  // these following methods are used to handle overflowing modals
-
-  Modal.prototype.handleUpdate = function () {
-    this.adjustDialog()
-  }
-
-  Modal.prototype.adjustDialog = function () {
-    var modalIsOverflowing = this.$element[0].scrollHeight > document.documentElement.clientHeight
-
-    this.$element.css({
-      paddingLeft:  !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
-      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
-    })
-  }
-
-  Modal.prototype.resetAdjustments = function () {
-    this.$element.css({
-      paddingLeft: '',
-      paddingRight: ''
-    })
-  }
-
-  Modal.prototype.checkScrollbar = function () {
-    var fullWindowWidth = window.innerWidth
-    if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
-      var documentElementRect = document.documentElement.getBoundingClientRect()
-      fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left)
-    }
-    this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth
-    this.scrollbarWidth = this.measureScrollbar()
-  }
-
-  Modal.prototype.setScrollbar = function () {
-    var bodyPad = parseInt((this.$body.css('padding-right') || 0), 10)
-    this.originalBodyPad = document.body.style.paddingRight || ''
-    if (this.bodyIsOverflowing) this.$body.css('padding-right', bodyPad + this.scrollbarWidth)
-  }
-
-  Modal.prototype.resetScrollbar = function () {
-    this.$body.css('padding-right', this.originalBodyPad)
-  }
-
-  Modal.prototype.measureScrollbar = function () { // thx walsh
-    var scrollDiv = document.createElement('div')
-    scrollDiv.className = 'modal-scrollbar-measure'
-    this.$body.append(scrollDiv)
-    var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth
-    this.$body[0].removeChild(scrollDiv)
-    return scrollbarWidth
-  }
-
-
-  // MODAL PLUGIN DEFINITION
-  // =======================
-
-  function Plugin(option, _relatedTarget) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.modal')
-      var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
-
-      if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
-      if (typeof option == 'string') data[option](_relatedTarget)
-      else if (options.show) data.show(_relatedTarget)
-    })
-  }
-
-  var old = $.fn.modal
-
-  $.fn.modal             = Plugin
-  $.fn.modal.Constructor = Modal
-
-
-  // MODAL NO CONFLICT
-  // =================
-
-  $.fn.modal.noConflict = function () {
-    $.fn.modal = old
-    return this
-  }
-
-
-  // MODAL DATA-API
-  // ==============
-
-  $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
-    var $this   = $(this)
-    var href    = $this.attr('href')
-    var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
-    var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
-
-    if ($this.is('a')) e.preventDefault()
-
-    $target.one('show.bs.modal', function (showEvent) {
-      if (showEvent.isDefaultPrevented()) return // only register focus restorer if modal will actually get shown
-      $target.one('hidden.bs.modal', function () {
-        $this.is(':visible') && $this.trigger('focus')
-      })
-    })
-    Plugin.call($target, option, this)
-  })
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: tooltip.js v3.3.7
- * http://getbootstrap.com/javascript/#tooltip
- * Inspired by the original jQuery.tipsy by Jason Frame
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // TOOLTIP PUBLIC CLASS DEFINITION
-  // ===============================
-
-  var Tooltip = function (element, options) {
-    this.type       = null
-    this.options    = null
-    this.enabled    = null
-    this.timeout    = null
-    this.hoverState = null
-    this.$element   = null
-    this.inState    = null
-
-    this.init('tooltip', element, options)
-  }
-
-  Tooltip.VERSION  = '3.3.7'
-
-  Tooltip.TRANSITION_DURATION = 150
-
-  Tooltip.DEFAULTS = {
-    animation: true,
-    placement: 'top',
-    selector: false,
-    template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
-    trigger: 'hover focus',
-    title: '',
-    delay: 0,
-    html: false,
-    container: false,
-    viewport: {
-      selector: 'body',
-      padding: 0
-    }
-  }
-
-  Tooltip.prototype.init = function (type, element, options) {
-    this.enabled   = true
-    this.type      = type
-    this.$element  = $(element)
-    this.options   = this.getOptions(options)
-    this.$viewport = this.options.viewport && $($.isFunction(this.options.viewport) ? this.options.viewport.call(this, this.$element) : (this.options.viewport.selector || this.options.viewport))
-    this.inState   = { click: false, hover: false, focus: false }
-
-    if (this.$element[0] instanceof document.constructor && !this.options.selector) {
-      throw new Error('`selector` option must be specified when initializing ' + this.type + ' on the window.document object!')
-    }
-
-    var triggers = this.options.trigger.split(' ')
-
-    for (var i = triggers.length; i--;) {
-      var trigger = triggers[i]
-
-      if (trigger == 'click') {
-        this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this))
-      } else if (trigger != 'manual') {
-        var eventIn  = trigger == 'hover' ? 'mouseenter' : 'focusin'
-        var eventOut = trigger == 'hover' ? 'mouseleave' : 'focusout'
-
-        this.$element.on(eventIn  + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
-        this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
-      }
-    }
-
-    this.options.selector ?
-      (this._options = $.extend({}, this.options, { trigger: 'manual', selector: '' })) :
-      this.fixTitle()
-  }
-
-  Tooltip.prototype.getDefaults = function () {
-    return Tooltip.DEFAULTS
-  }
-
-  Tooltip.prototype.getOptions = function (options) {
-    options = $.extend({}, this.getDefaults(), this.$element.data(), options)
-
-    if (options.delay && typeof options.delay == 'number') {
-      options.delay = {
-        show: options.delay,
-        hide: options.delay
-      }
-    }
-
-    return options
-  }
-
-  Tooltip.prototype.getDelegateOptions = function () {
-    var options  = {}
-    var defaults = this.getDefaults()
-
-    this._options && $.each(this._options, function (key, value) {
-      if (defaults[key] != value) options[key] = value
-    })
-
-    return options
-  }
-
-  Tooltip.prototype.enter = function (obj) {
-    var self = obj instanceof this.constructor ?
-      obj : $(obj.currentTarget).data('bs.' + this.type)
-
-    if (!self) {
-      self = new this.constructor(obj.currentTarget, this.getDelegateOptions())
-      $(obj.currentTarget).data('bs.' + this.type, self)
-    }
-
-    if (obj instanceof $.Event) {
-      self.inState[obj.type == 'focusin' ? 'focus' : 'hover'] = true
-    }
-
-    if (self.tip().hasClass('in') || self.hoverState == 'in') {
-      self.hoverState = 'in'
-      return
-    }
-
-    clearTimeout(self.timeout)
-
-    self.hoverState = 'in'
-
-    if (!self.options.delay || !self.options.delay.show) return self.show()
-
-    self.timeout = setTimeout(function () {
-      if (self.hoverState == 'in') self.show()
-    }, self.options.delay.show)
-  }
-
-  Tooltip.prototype.isInStateTrue = function () {
-    for (var key in this.inState) {
-      if (this.inState[key]) return true
-    }
-
-    return false
-  }
-
-  Tooltip.prototype.leave = function (obj) {
-    var self = obj instanceof this.constructor ?
-      obj : $(obj.currentTarget).data('bs.' + this.type)
-
-    if (!self) {
-      self = new this.constructor(obj.currentTarget, this.getDelegateOptions())
-      $(obj.currentTarget).data('bs.' + this.type, self)
-    }
-
-    if (obj instanceof $.Event) {
-      self.inState[obj.type == 'focusout' ? 'focus' : 'hover'] = false
-    }
-
-    if (self.isInStateTrue()) return
-
-    clearTimeout(self.timeout)
-
-    self.hoverState = 'out'
-
-    if (!self.options.delay || !self.options.delay.hide) return self.hide()
-
-    self.timeout = setTimeout(function () {
-      if (self.hoverState == 'out') self.hide()
-    }, self.options.delay.hide)
-  }
-
-  Tooltip.prototype.show = function () {
-    var e = $.Event('show.bs.' + this.type)
-
-    if (this.hasContent() && this.enabled) {
-      this.$element.trigger(e)
-
-      var inDom = $.contains(this.$element[0].ownerDocument.documentElement, this.$element[0])
-      if (e.isDefaultPrevented() || !inDom) return
-      var that = this
-
-      var $tip = this.tip()
-
-      var tipId = this.getUID(this.type)
-
-      this.setContent()
-      $tip.attr('id', tipId)
-      this.$element.attr('aria-describedby', tipId)
-
-      if (this.options.animation) $tip.addClass('fade')
-
-      var placement = typeof this.options.placement == 'function' ?
-        this.options.placement.call(this, $tip[0], this.$element[0]) :
-        this.options.placement
-
-      var autoToken = /\s?auto?\s?/i
-      var autoPlace = autoToken.test(placement)
-      if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
-
-      $tip
-        .detach()
-        .css({ top: 0, left: 0, display: 'block' })
-        .addClass(placement)
-        .data('bs.' + this.type, this)
-
-      this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
-      this.$element.trigger('inserted.bs.' + this.type)
-
-      var pos          = this.getPosition()
-      var actualWidth  = $tip[0].offsetWidth
-      var actualHeight = $tip[0].offsetHeight
-
-      if (autoPlace) {
-        var orgPlacement = placement
-        var viewportDim = this.getPosition(this.$viewport)
-
-        placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top'    :
-                    placement == 'top'    && pos.top    - actualHeight < viewportDim.top    ? 'bottom' :
-                    placement == 'right'  && pos.right  + actualWidth  > viewportDim.width  ? 'left'   :
-                    placement == 'left'   && pos.left   - actualWidth  < viewportDim.left   ? 'right'  :
-                    placement
-
-        $tip
-          .removeClass(orgPlacement)
-          .addClass(placement)
-      }
-
-      var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight)
-
-      this.applyPlacement(calculatedOffset, placement)
-
-      var complete = function () {
-        var prevHoverState = that.hoverState
-        that.$element.trigger('shown.bs.' + that.type)
-        that.hoverState = null
-
-        if (prevHoverState == 'out') that.leave(that)
-      }
-
-      $.support.transition && this.$tip.hasClass('fade') ?
-        $tip
-          .one('bsTransitionEnd', complete)
-          .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
-        complete()
-    }
-  }
-
-  Tooltip.prototype.applyPlacement = function (offset, placement) {
-    var $tip   = this.tip()
-    var width  = $tip[0].offsetWidth
-    var height = $tip[0].offsetHeight
-
-    // manually read margins because getBoundingClientRect includes difference
-    var marginTop = parseInt($tip.css('margin-top'), 10)
-    var marginLeft = parseInt($tip.css('margin-left'), 10)
-
-    // we must check for NaN for ie 8/9
-    if (isNaN(marginTop))  marginTop  = 0
-    if (isNaN(marginLeft)) marginLeft = 0
-
-    offset.top  += marginTop
-    offset.left += marginLeft
-
-    // $.fn.offset doesn't round pixel values
-    // so we use setOffset directly with our own function B-0
-    $.offset.setOffset($tip[0], $.extend({
-      using: function (props) {
-        $tip.css({
-          top: Math.round(props.top),
-          left: Math.round(props.left)
-        })
-      }
-    }, offset), 0)
-
-    $tip.addClass('in')
-
-    // check to see if placing tip in new offset caused the tip to resize itself
-    var actualWidth  = $tip[0].offsetWidth
-    var actualHeight = $tip[0].offsetHeight
-
-    if (placement == 'top' && actualHeight != height) {
-      offset.top = offset.top + height - actualHeight
-    }
-
-    var delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight)
-
-    if (delta.left) offset.left += delta.left
-    else offset.top += delta.top
-
-    var isVertical          = /top|bottom/.test(placement)
-    var arrowDelta          = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight
-    var arrowOffsetPosition = isVertical ? 'offsetWidth' : 'offsetHeight'
-
-    $tip.offset(offset)
-    this.replaceArrow(arrowDelta, $tip[0][arrowOffsetPosition], isVertical)
-  }
-
-  Tooltip.prototype.replaceArrow = function (delta, dimension, isVertical) {
-    this.arrow()
-      .css(isVertical ? 'left' : 'top', 50 * (1 - delta / dimension) + '%')
-      .css(isVertical ? 'top' : 'left', '')
-  }
-
-  Tooltip.prototype.setContent = function () {
-    var $tip  = this.tip()
-    var title = this.getTitle()
-
-    $tip.find('.tooltip-inner')[this.options.html ? 'html' : 'text'](title)
-    $tip.removeClass('fade in top bottom left right')
-  }
-
-  Tooltip.prototype.hide = function (callback) {
-    var that = this
-    var $tip = $(this.$tip)
-    var e    = $.Event('hide.bs.' + this.type)
-
-    function complete() {
-      if (that.hoverState != 'in') $tip.detach()
-      if (that.$element) { // TODO: Check whether guarding this code with this `if` is really necessary.
-        that.$element
-          .removeAttr('aria-describedby')
-          .trigger('hidden.bs.' + that.type)
-      }
-      callback && callback()
-    }
-
-    this.$element.trigger(e)
-
-    if (e.isDefaultPrevented()) return
-
-    $tip.removeClass('in')
-
-    $.support.transition && $tip.hasClass('fade') ?
-      $tip
-        .one('bsTransitionEnd', complete)
-        .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
-      complete()
-
-    this.hoverState = null
-
-    return this
-  }
-
-  Tooltip.prototype.fixTitle = function () {
-    var $e = this.$element
-    if ($e.attr('title') || typeof $e.attr('data-original-title') != 'string') {
-      $e.attr('data-original-title', $e.attr('title') || '').attr('title', '')
-    }
-  }
-
-  Tooltip.prototype.hasContent = function () {
-    return this.getTitle()
-  }
-
-  Tooltip.prototype.getPosition = function ($element) {
-    $element   = $element || this.$element
-
-    var el     = $element[0]
-    var isBody = el.tagName == 'BODY'
-
-    var elRect    = el.getBoundingClientRect()
-    if (elRect.width == null) {
-      // width and height are missing in IE8, so compute them manually; see https://github.com/twbs/bootstrap/issues/14093
-      elRect = $.extend({}, elRect, { width: elRect.right - elRect.left, height: elRect.bottom - elRect.top })
-    }
-    var isSvg = window.SVGElement && el instanceof window.SVGElement
-    // Avoid using $.offset() on SVGs since it gives incorrect results in jQuery 3.
-    // See https://github.com/twbs/bootstrap/issues/20280
-    var elOffset  = isBody ? { top: 0, left: 0 } : (isSvg ? null : $element.offset())
-    var scroll    = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
-    var outerDims = isBody ? { width: $(window).width(), height: $(window).height() } : null
-
-    return $.extend({}, elRect, scroll, outerDims, elOffset)
-  }
-
-  Tooltip.prototype.getCalculatedOffset = function (placement, pos, actualWidth, actualHeight) {
-    return placement == 'bottom' ? { top: pos.top + pos.height,   left: pos.left + pos.width / 2 - actualWidth / 2 } :
-           placement == 'top'    ? { top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2 } :
-           placement == 'left'   ? { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth } :
-        /* placement == 'right' */ { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width }
-
-  }
-
-  Tooltip.prototype.getViewportAdjustedDelta = function (placement, pos, actualWidth, actualHeight) {
-    var delta = { top: 0, left: 0 }
-    if (!this.$viewport) return delta
-
-    var viewportPadding = this.options.viewport && this.options.viewport.padding || 0
-    var viewportDimensions = this.getPosition(this.$viewport)
-
-    if (/right|left/.test(placement)) {
-      var topEdgeOffset    = pos.top - viewportPadding - viewportDimensions.scroll
-      var bottomEdgeOffset = pos.top + viewportPadding - viewportDimensions.scroll + actualHeight
-      if (topEdgeOffset < viewportDimensions.top) { // top overflow
-        delta.top = viewportDimensions.top - topEdgeOffset
-      } else if (bottomEdgeOffset > viewportDimensions.top + viewportDimensions.height) { // bottom overflow
-        delta.top = viewportDimensions.top + viewportDimensions.height - bottomEdgeOffset
-      }
-    } else {
-      var leftEdgeOffset  = pos.left - viewportPadding
-      var rightEdgeOffset = pos.left + viewportPadding + actualWidth
-      if (leftEdgeOffset < viewportDimensions.left) { // left overflow
-        delta.left = viewportDimensions.left - leftEdgeOffset
-      } else if (rightEdgeOffset > viewportDimensions.right) { // right overflow
-        delta.left = viewportDimensions.left + viewportDimensions.width - rightEdgeOffset
-      }
-    }
-
-    return delta
-  }
-
-  Tooltip.prototype.getTitle = function () {
-    var title
-    var $e = this.$element
-    var o  = this.options
-
-    title = $e.attr('data-original-title')
-      || (typeof o.title == 'function' ? o.title.call($e[0]) :  o.title)
-
-    return title
-  }
-
-  Tooltip.prototype.getUID = function (prefix) {
-    do prefix += ~~(Math.random() * 1000000)
-    while (document.getElementById(prefix))
-    return prefix
-  }
-
-  Tooltip.prototype.tip = function () {
-    if (!this.$tip) {
-      this.$tip = $(this.options.template)
-      if (this.$tip.length != 1) {
-        throw new Error(this.type + ' `template` option must consist of exactly 1 top-level element!')
-      }
-    }
-    return this.$tip
-  }
-
-  Tooltip.prototype.arrow = function () {
-    return (this.$arrow = this.$arrow || this.tip().find('.tooltip-arrow'))
-  }
-
-  Tooltip.prototype.enable = function () {
-    this.enabled = true
-  }
-
-  Tooltip.prototype.disable = function () {
-    this.enabled = false
-  }
-
-  Tooltip.prototype.toggleEnabled = function () {
-    this.enabled = !this.enabled
-  }
-
-  Tooltip.prototype.toggle = function (e) {
-    var self = this
-    if (e) {
-      self = $(e.currentTarget).data('bs.' + this.type)
-      if (!self) {
-        self = new this.constructor(e.currentTarget, this.getDelegateOptions())
-        $(e.currentTarget).data('bs.' + this.type, self)
-      }
-    }
-
-    if (e) {
-      self.inState.click = !self.inState.click
-      if (self.isInStateTrue()) self.enter(self)
-      else self.leave(self)
-    } else {
-      self.tip().hasClass('in') ? self.leave(self) : self.enter(self)
-    }
-  }
-
-  Tooltip.prototype.destroy = function () {
-    var that = this
-    clearTimeout(this.timeout)
-    this.hide(function () {
-      that.$element.off('.' + that.type).removeData('bs.' + that.type)
-      if (that.$tip) {
-        that.$tip.detach()
-      }
-      that.$tip = null
-      that.$arrow = null
-      that.$viewport = null
-      that.$element = null
-    })
-  }
-
-
-  // TOOLTIP PLUGIN DEFINITION
-  // =========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.tooltip')
-      var options = typeof option == 'object' && option
-
-      if (!data && /destroy|hide/.test(option)) return
-      if (!data) $this.data('bs.tooltip', (data = new Tooltip(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.tooltip
-
-  $.fn.tooltip             = Plugin
-  $.fn.tooltip.Constructor = Tooltip
-
-
-  // TOOLTIP NO CONFLICT
-  // ===================
-
-  $.fn.tooltip.noConflict = function () {
-    $.fn.tooltip = old
-    return this
-  }
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: popover.js v3.3.7
- * http://getbootstrap.com/javascript/#popovers
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // POPOVER PUBLIC CLASS DEFINITION
-  // ===============================
-
-  var Popover = function (element, options) {
-    this.init('popover', element, options)
-  }
-
-  if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js')
-
-  Popover.VERSION  = '3.3.7'
-
-  Popover.DEFAULTS = $.extend({}, $.fn.tooltip.Constructor.DEFAULTS, {
-    placement: 'right',
-    trigger: 'click',
-    content: '',
-    template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-  })
-
-
-  // NOTE: POPOVER EXTENDS tooltip.js
-  // ================================
-
-  Popover.prototype = $.extend({}, $.fn.tooltip.Constructor.prototype)
-
-  Popover.prototype.constructor = Popover
-
-  Popover.prototype.getDefaults = function () {
-    return Popover.DEFAULTS
-  }
-
-  Popover.prototype.setContent = function () {
-    var $tip    = this.tip()
-    var title   = this.getTitle()
-    var content = this.getContent()
-
-    $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
-    $tip.find('.popover-content').children().detach().end()[ // we use append for html objects to maintain js events
-      this.options.html ? (typeof content == 'string' ? 'html' : 'append') : 'text'
-    ](content)
-
-    $tip.removeClass('fade top bottom left right in')
-
-    // IE8 doesn't accept hiding via the `:empty` pseudo selector, we have to do
-    // this manually by checking the contents.
-    if (!$tip.find('.popover-title').html()) $tip.find('.popover-title').hide()
-  }
-
-  Popover.prototype.hasContent = function () {
-    return this.getTitle() || this.getContent()
-  }
-
-  Popover.prototype.getContent = function () {
-    var $e = this.$element
-    var o  = this.options
-
-    return $e.attr('data-content')
-      || (typeof o.content == 'function' ?
-            o.content.call($e[0]) :
-            o.content)
-  }
-
-  Popover.prototype.arrow = function () {
-    return (this.$arrow = this.$arrow || this.tip().find('.arrow'))
-  }
-
-
-  // POPOVER PLUGIN DEFINITION
-  // =========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.popover')
-      var options = typeof option == 'object' && option
-
-      if (!data && /destroy|hide/.test(option)) return
-      if (!data) $this.data('bs.popover', (data = new Popover(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.popover
-
-  $.fn.popover             = Plugin
-  $.fn.popover.Constructor = Popover
-
-
-  // POPOVER NO CONFLICT
-  // ===================
-
-  $.fn.popover.noConflict = function () {
-    $.fn.popover = old
-    return this
-  }
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: scrollspy.js v3.3.7
- * http://getbootstrap.com/javascript/#scrollspy
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // SCROLLSPY CLASS DEFINITION
-  // ==========================
-
-  function ScrollSpy(element, options) {
-    this.$body          = $(document.body)
-    this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
-    this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
-    this.selector       = (this.options.target || '') + ' .nav li > a'
-    this.offsets        = []
-    this.targets        = []
-    this.activeTarget   = null
-    this.scrollHeight   = 0
-
-    this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
-    this.refresh()
-    this.process()
-  }
-
-  ScrollSpy.VERSION  = '3.3.7'
-
-  ScrollSpy.DEFAULTS = {
-    offset: 10
-  }
-
-  ScrollSpy.prototype.getScrollHeight = function () {
-    return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
-  }
-
-  ScrollSpy.prototype.refresh = function () {
-    var that          = this
-    var offsetMethod  = 'offset'
-    var offsetBase    = 0
-
-    this.offsets      = []
-    this.targets      = []
-    this.scrollHeight = this.getScrollHeight()
-
-    if (!$.isWindow(this.$scrollElement[0])) {
-      offsetMethod = 'position'
-      offsetBase   = this.$scrollElement.scrollTop()
-    }
-
-    this.$body
-      .find(this.selector)
-      .map(function () {
-        var $el   = $(this)
-        var href  = $el.data('target') || $el.attr('href')
-        var $href = /^#./.test(href) && $(href)
-
-        return ($href
-          && $href.length
-          && $href.is(':visible')
-          && [[$href[offsetMethod]().top + offsetBase, href]]) || null
-      })
-      .sort(function (a, b) { return a[0] - b[0] })
-      .each(function () {
-        that.offsets.push(this[0])
-        that.targets.push(this[1])
-      })
-  }
-
-  ScrollSpy.prototype.process = function () {
-    var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
-    var scrollHeight = this.getScrollHeight()
-    var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
-    var offsets      = this.offsets
-    var targets      = this.targets
-    var activeTarget = this.activeTarget
-    var i
-
-    if (this.scrollHeight != scrollHeight) {
-      this.refresh()
-    }
-
-    if (scrollTop >= maxScroll) {
-      return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
-    }
-
-    if (activeTarget && scrollTop < offsets[0]) {
-      this.activeTarget = null
-      return this.clear()
-    }
-
-    for (i = offsets.length; i--;) {
-      activeTarget != targets[i]
-        && scrollTop >= offsets[i]
-        && (offsets[i + 1] === undefined || scrollTop < offsets[i + 1])
-        && this.activate(targets[i])
-    }
-  }
-
-  ScrollSpy.prototype.activate = function (target) {
-    this.activeTarget = target
-
-    this.clear()
-
-    var selector = this.selector +
-      '[data-target="' + target + '"],' +
-      this.selector + '[href="' + target + '"]'
-
-    var active = $(selector)
-      .parents('li')
-      .addClass('active')
-
-    if (active.parent('.dropdown-menu').length) {
-      active = active
-        .closest('li.dropdown')
-        .addClass('active')
-    }
-
-    active.trigger('activate.bs.scrollspy')
-  }
-
-  ScrollSpy.prototype.clear = function () {
-    $(this.selector)
-      .parentsUntil(this.options.target, '.active')
-      .removeClass('active')
-  }
-
-
-  // SCROLLSPY PLUGIN DEFINITION
-  // ===========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.scrollspy')
-      var options = typeof option == 'object' && option
-
-      if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.scrollspy
-
-  $.fn.scrollspy             = Plugin
-  $.fn.scrollspy.Constructor = ScrollSpy
-
-
-  // SCROLLSPY NO CONFLICT
-  // =====================
-
-  $.fn.scrollspy.noConflict = function () {
-    $.fn.scrollspy = old
-    return this
-  }
-
-
-  // SCROLLSPY DATA-API
-  // ==================
-
-  $(window).on('load.bs.scrollspy.data-api', function () {
-    $('[data-spy="scroll"]').each(function () {
-      var $spy = $(this)
-      Plugin.call($spy, $spy.data())
-    })
-  })
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: tab.js v3.3.7
- * http://getbootstrap.com/javascript/#tabs
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // TAB CLASS DEFINITION
-  // ====================
-
-  var Tab = function (element) {
-    // jscs:disable requireDollarBeforejQueryAssignment
-    this.element = $(element)
-    // jscs:enable requireDollarBeforejQueryAssignment
-  }
-
-  Tab.VERSION = '3.3.7'
-
-  Tab.TRANSITION_DURATION = 150
-
-  Tab.prototype.show = function () {
-    var $this    = this.element
-    var $ul      = $this.closest('ul:not(.dropdown-menu)')
-    var selector = $this.data('target')
-
-    if (!selector) {
-      selector = $this.attr('href')
-      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
-    }
-
-    if ($this.parent('li').hasClass('active')) return
-
-    var $previous = $ul.find('.active:last a')
-    var hideEvent = $.Event('hide.bs.tab', {
-      relatedTarget: $this[0]
-    })
-    var showEvent = $.Event('show.bs.tab', {
-      relatedTarget: $previous[0]
-    })
-
-    $previous.trigger(hideEvent)
-    $this.trigger(showEvent)
-
-    if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return
-
-    var $target = $(selector)
-
-    this.activate($this.closest('li'), $ul)
-    this.activate($target, $target.parent(), function () {
-      $previous.trigger({
-        type: 'hidden.bs.tab',
-        relatedTarget: $this[0]
-      })
-      $this.trigger({
-        type: 'shown.bs.tab',
-        relatedTarget: $previous[0]
-      })
-    })
-  }
-
-  Tab.prototype.activate = function (element, container, callback) {
-    var $active    = container.find('> .active')
-    var transition = callback
-      && $.support.transition
-      && ($active.length && $active.hasClass('fade') || !!container.find('> .fade').length)
-
-    function next() {
-      $active
-        .removeClass('active')
-        .find('> .dropdown-menu > .active')
-          .removeClass('active')
-        .end()
-        .find('[data-toggle="tab"]')
-          .attr('aria-expanded', false)
-
-      element
-        .addClass('active')
-        .find('[data-toggle="tab"]')
-          .attr('aria-expanded', true)
-
-      if (transition) {
-        element[0].offsetWidth // reflow for transition
-        element.addClass('in')
-      } else {
-        element.removeClass('fade')
-      }
-
-      if (element.parent('.dropdown-menu').length) {
-        element
-          .closest('li.dropdown')
-            .addClass('active')
-          .end()
-          .find('[data-toggle="tab"]')
-            .attr('aria-expanded', true)
-      }
-
-      callback && callback()
-    }
-
-    $active.length && transition ?
-      $active
-        .one('bsTransitionEnd', next)
-        .emulateTransitionEnd(Tab.TRANSITION_DURATION) :
-      next()
-
-    $active.removeClass('in')
-  }
-
-
-  // TAB PLUGIN DEFINITION
-  // =====================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this = $(this)
-      var data  = $this.data('bs.tab')
-
-      if (!data) $this.data('bs.tab', (data = new Tab(this)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.tab
-
-  $.fn.tab             = Plugin
-  $.fn.tab.Constructor = Tab
-
-
-  // TAB NO CONFLICT
-  // ===============
-
-  $.fn.tab.noConflict = function () {
-    $.fn.tab = old
-    return this
-  }
-
-
-  // TAB DATA-API
-  // ============
-
-  var clickHandler = function (e) {
-    e.preventDefault()
-    Plugin.call($(this), 'show')
-  }
-
-  $(document)
-    .on('click.bs.tab.data-api', '[data-toggle="tab"]', clickHandler)
-    .on('click.bs.tab.data-api', '[data-toggle="pill"]', clickHandler)
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: affix.js v3.3.7
- * http://getbootstrap.com/javascript/#affix
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // AFFIX CLASS DEFINITION
-  // ======================
-
-  var Affix = function (element, options) {
-    this.options = $.extend({}, Affix.DEFAULTS, options)
-
-    this.$target = $(this.options.target)
-      .on('scroll.bs.affix.data-api', $.proxy(this.checkPosition, this))
-      .on('click.bs.affix.data-api',  $.proxy(this.checkPositionWithEventLoop, this))
-
-    this.$element     = $(element)
-    this.affixed      = null
-    this.unpin        = null
-    this.pinnedOffset = null
-
-    this.checkPosition()
-  }
-
-  Affix.VERSION  = '3.3.7'
-
-  Affix.RESET    = 'affix affix-top affix-bottom'
-
-  Affix.DEFAULTS = {
-    offset: 0,
-    target: window
-  }
-
-  Affix.prototype.getState = function (scrollHeight, height, offsetTop, offsetBottom) {
-    var scrollTop    = this.$target.scrollTop()
-    var position     = this.$element.offset()
-    var targetHeight = this.$target.height()
-
-    if (offsetTop != null && this.affixed == 'top') return scrollTop < offsetTop ? 'top' : false
-
-    if (this.affixed == 'bottom') {
-      if (offsetTop != null) return (scrollTop + this.unpin <= position.top) ? false : 'bottom'
-      return (scrollTop + targetHeight <= scrollHeight - offsetBottom) ? false : 'bottom'
-    }
-
-    var initializing   = this.affixed == null
-    var colliderTop    = initializing ? scrollTop : position.top
-    var colliderHeight = initializing ? targetHeight : height
-
-    if (offsetTop != null && scrollTop <= offsetTop) return 'top'
-    if (offsetBottom != null && (colliderTop + colliderHeight >= scrollHeight - offsetBottom)) return 'bottom'
-
-    return false
-  }
-
-  Affix.prototype.getPinnedOffset = function () {
-    if (this.pinnedOffset) return this.pinnedOffset
-    this.$element.removeClass(Affix.RESET).addClass('affix')
-    var scrollTop = this.$target.scrollTop()
-    var position  = this.$element.offset()
-    return (this.pinnedOffset = position.top - scrollTop)
-  }
-
-  Affix.prototype.checkPositionWithEventLoop = function () {
-    setTimeout($.proxy(this.checkPosition, this), 1)
-  }
-
-  Affix.prototype.checkPosition = function () {
-    if (!this.$element.is(':visible')) return
-
-    var height       = this.$element.height()
-    var offset       = this.options.offset
-    var offsetTop    = offset.top
-    var offsetBottom = offset.bottom
-    var scrollHeight = Math.max($(document).height(), $(document.body).height())
-
-    if (typeof offset != 'object')         offsetBottom = offsetTop = offset
-    if (typeof offsetTop == 'function')    offsetTop    = offset.top(this.$element)
-    if (typeof offsetBottom == 'function') offsetBottom = offset.bottom(this.$element)
-
-    var affix = this.getState(scrollHeight, height, offsetTop, offsetBottom)
-
-    if (this.affixed != affix) {
-      if (this.unpin != null) this.$element.css('top', '')
-
-      var affixType = 'affix' + (affix ? '-' + affix : '')
-      var e         = $.Event(affixType + '.bs.affix')
-
-      this.$element.trigger(e)
-
-      if (e.isDefaultPrevented()) return
-
-      this.affixed = affix
-      this.unpin = affix == 'bottom' ? this.getPinnedOffset() : null
-
-      this.$element
-        .removeClass(Affix.RESET)
-        .addClass(affixType)
-        .trigger(affixType.replace('affix', 'affixed') + '.bs.affix')
-    }
-
-    if (affix == 'bottom') {
-      this.$element.offset({
-        top: scrollHeight - height - offsetBottom
-      })
-    }
-  }
-
-
-  // AFFIX PLUGIN DEFINITION
-  // =======================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.affix')
-      var options = typeof option == 'object' && option
-
-      if (!data) $this.data('bs.affix', (data = new Affix(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.affix
-
-  $.fn.affix             = Plugin
-  $.fn.affix.Constructor = Affix
-
-
-  // AFFIX NO CONFLICT
-  // =================
-
-  $.fn.affix.noConflict = function () {
-    $.fn.affix = old
-    return this
-  }
-
-
-  // AFFIX DATA-API
-  // ==============
-
-  $(window).on('load', function () {
-    $('[data-spy="affix"]').each(function () {
-      var $spy = $(this)
-      var data = $spy.data()
-
-      data.offset = data.offset || {}
-
-      if (data.offsetBottom != null) data.offset.bottom = data.offsetBottom
-      if (data.offsetTop    != null) data.offset.top    = data.offsetTop
-
-      Plugin.call($spy, data)
-    })
-  })
-
-}(jQuery);
-
-/*!
- DataTables 1.10.15
- ?2008-2017 SpryMedia Ltd - datatables.net/license
- */
-(function(h){"function"===typeof define&&define.amd?define(["jquery"],function(E){return h(E,window,document)}):"object"===typeof exports?module.exports=function(E,H){E||(E=window);H||(H="undefined"!==typeof window?require("jquery"):require("jquery")(E));return h(H,E,E.document)}:h(jQuery,window,document)})(function(h,E,H,k){function Y(a){var b,c,d={};h.each(a,function(e){if((b=e.match(/^([^A-Z]+?)([A-Z])/))&&-1!=="a aa ai ao as b fn i m o s ".indexOf(b[1]+" "))c=e.replace(b[0],b[2].toLowerCase()),
-    d[c]=e,"o"===b[1]&&Y(a[e])});a._hungarianMap=d}function J(a,b,c){a._hungarianMap||Y(a);var d;h.each(b,function(e){d=a._hungarianMap[e];if(d!==k&&(c||b[d]===k))"o"===d.charAt(0)?(b[d]||(b[d]={}),h.extend(!0,b[d],b[e]),J(a[d],b[d],c)):b[d]=b[e]})}function Fa(a){var b=m.defaults.oLanguage,c=a.sZeroRecords;!a.sEmptyTable&&(c&&"No data available in table"===b.sEmptyTable)&&F(a,a,"sZeroRecords","sEmptyTable");!a.sLoadingRecords&&(c&&"Loading..."===b.sLoadingRecords)&&F(a,a,"sZeroRecords","sLoadingRecords");
-    a.sInfoThousands&&(a.sThousands=a.sInfoThousands);(a=a.sDecimal)&&fb(a)}function gb(a){A(a,"ordering","bSort");A(a,"orderMulti","bSortMulti");A(a,"orderClasses","bSortClasses");A(a,"orderCellsTop","bSortCellsTop");A(a,"order","aaSorting");A(a,"orderFixed","aaSortingFixed");A(a,"paging","bPaginate");A(a,"pagingType","sPaginationType");A(a,"pageLength","iDisplayLength");A(a,"searching","bFilter");"boolean"===typeof a.sScrollX&&(a.sScrollX=a.sScrollX?"100%":"");"boolean"===typeof a.scrollX&&(a.scrollX=
-    a.scrollX?"100%":"");if(a=a.aoSearchCols)for(var b=0,c=a.length;b<c;b++)a[b]&&J(m.models.oSearch,a[b])}function hb(a){A(a,"orderable","bSortable");A(a,"orderData","aDataSort");A(a,"orderSequence","asSorting");A(a,"orderDataType","sortDataType");var b=a.aDataSort;"number"===typeof b&&!h.isArray(b)&&(a.aDataSort=[b])}function ib(a){if(!m.__browser){var b={};m.__browser=b;var c=h("<div/>").css({position:"fixed",top:0,left:-1*h(E).scrollLeft(),height:1,width:1,overflow:"hidden"}).append(h("<div/>").css({position:"absolute",
-    top:1,left:1,width:100,overflow:"scroll"}).append(h("<div/>").css({width:"100%",height:10}))).appendTo("body"),d=c.children(),e=d.children();b.barWidth=d[0].offsetWidth-d[0].clientWidth;b.bScrollOversize=100===e[0].offsetWidth&&100!==d[0].clientWidth;b.bScrollbarLeft=1!==Math.round(e.offset().left);b.bBounding=c[0].getBoundingClientRect().width?!0:!1;c.remove()}h.extend(a.oBrowser,m.__browser);a.oScroll.iBarWidth=m.__browser.barWidth}function jb(a,b,c,d,e,f){var g,j=!1;c!==k&&(g=c,j=!0);for(;d!==
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     e;)a.hasOwnProperty(d)&&(g=j?b(g,a[d],d,a):a[d],j=!0,d+=f);return g}function Ga(a,b){var c=m.defaults.column,d=a.aoColumns.length,c=h.extend({},m.models.oColumn,c,{nTh:b?b:H.createElement("th"),sTitle:c.sTitle?c.sTitle:b?b.innerHTML:"",aDataSort:c.aDataSort?c.aDataSort:[d],mData:c.mData?c.mData:d,idx:d});a.aoColumns.push(c);c=a.aoPreSearchCols;c[d]=h.extend({},m.models.oSearch,c[d]);la(a,d,h(b).data())}function la(a,b,c){var b=a.aoColumns[b],d=a.oClasses,e=h(b.nTh);if(!b.sWidthOrig){b.sWidthOrig=
-    e.attr("width")||null;var f=(e.attr("style")||"").match(/width:\s*(\d+[pxem%]+)/);f&&(b.sWidthOrig=f[1])}c!==k&&null!==c&&(hb(c),J(m.defaults.column,c),c.mDataProp!==k&&!c.mData&&(c.mData=c.mDataProp),c.sType&&(b._sManualType=c.sType),c.className&&!c.sClass&&(c.sClass=c.className),h.extend(b,c),F(b,c,"sWidth","sWidthOrig"),c.iDataSort!==k&&(b.aDataSort=[c.iDataSort]),F(b,c,"aDataSort"));var g=b.mData,j=R(g),i=b.mRender?R(b.mRender):null,c=function(a){return"string"===typeof a&&-1!==a.indexOf("@")};
-    b._bAttrSrc=h.isPlainObject(g)&&(c(g.sort)||c(g.type)||c(g.filter));b._setter=null;b.fnGetData=function(a,b,c){var d=j(a,b,k,c);return i&&b?i(d,b,a,c):d};b.fnSetData=function(a,b,c){return S(g)(a,b,c)};"number"!==typeof g&&(a._rowReadObject=!0);a.oFeatures.bSort||(b.bSortable=!1,e.addClass(d.sSortableNone));a=-1!==h.inArray("asc",b.asSorting);c=-1!==h.inArray("desc",b.asSorting);!b.bSortable||!a&&!c?(b.sSortingClass=d.sSortableNone,b.sSortingClassJUI=""):a&&!c?(b.sSortingClass=d.sSortableAsc,b.sSortingClassJUI=
-        d.sSortJUIAscAllowed):!a&&c?(b.sSortingClass=d.sSortableDesc,b.sSortingClassJUI=d.sSortJUIDescAllowed):(b.sSortingClass=d.sSortable,b.sSortingClassJUI=d.sSortJUI)}function Z(a){if(!1!==a.oFeatures.bAutoWidth){var b=a.aoColumns;Ha(a);for(var c=0,d=b.length;c<d;c++)b[c].nTh.style.width=b[c].sWidth}b=a.oScroll;(""!==b.sY||""!==b.sX)&&ma(a);s(a,null,"column-sizing",[a])}function $(a,b){var c=na(a,"bVisible");return"number"===typeof c[b]?c[b]:null}function aa(a,b){var c=na(a,"bVisible"),c=h.inArray(b,
-    c);return-1!==c?c:null}function ba(a){var b=0;h.each(a.aoColumns,function(a,d){d.bVisible&&"none"!==h(d.nTh).css("display")&&b++});return b}function na(a,b){var c=[];h.map(a.aoColumns,function(a,e){a[b]&&c.push(e)});return c}function Ia(a){var b=a.aoColumns,c=a.aoData,d=m.ext.type.detect,e,f,g,j,i,h,l,q,r;e=0;for(f=b.length;e<f;e++)if(l=b[e],r=[],!l.sType&&l._sManualType)l.sType=l._sManualType;else if(!l.sType){g=0;for(j=d.length;g<j;g++){i=0;for(h=c.length;i<h;i++){r[i]===k&&(r[i]=B(a,i,e,"type"));
-    q=d[g](r[i],a);if(!q&&g!==d.length-1)break;if("html"===q)break}if(q){l.sType=q;break}}l.sType||(l.sType="string")}}function kb(a,b,c,d){var e,f,g,j,i,n,l=a.aoColumns;if(b)for(e=b.length-1;0<=e;e--){n=b[e];var q=n.targets!==k?n.targets:n.aTargets;h.isArray(q)||(q=[q]);f=0;for(g=q.length;f<g;f++)if("number"===typeof q[f]&&0<=q[f]){for(;l.length<=q[f];)Ga(a);d(q[f],n)}else if("number"===typeof q[f]&&0>q[f])d(l.length+q[f],n);else if("string"===typeof q[f]){j=0;for(i=l.length;j<i;j++)("_all"==q[f]||h(l[j].nTh).hasClass(q[f]))&&
-d(j,n)}}if(c){e=0;for(a=c.length;e<a;e++)d(e,c[e])}}function N(a,b,c,d){var e=a.aoData.length,f=h.extend(!0,{},m.models.oRow,{src:c?"dom":"data",idx:e});f._aData=b;a.aoData.push(f);for(var g=a.aoColumns,j=0,i=g.length;j<i;j++)g[j].sType=null;a.aiDisplayMaster.push(e);b=a.rowIdFn(b);b!==k&&(a.aIds[b]=f);(c||!a.oFeatures.bDeferRender)&&Ja(a,e,c,d);return e}function oa(a,b){var c;b instanceof h||(b=h(b));return b.map(function(b,e){c=Ka(a,e);return N(a,c.data,e,c.cells)})}function B(a,b,c,d){var e=a.iDraw,
-    f=a.aoColumns[c],g=a.aoData[b]._aData,j=f.sDefaultContent,i=f.fnGetData(g,d,{settings:a,row:b,col:c});if(i===k)return a.iDrawError!=e&&null===j&&(K(a,0,"Requested unknown parameter "+("function"==typeof f.mData?"{function}":"'"+f.mData+"'")+" for row "+b+", column "+c,4),a.iDrawError=e),j;if((i===g||null===i)&&null!==j&&d!==k)i=j;else if("function"===typeof i)return i.call(g);return null===i&&"display"==d?"":i}function lb(a,b,c,d){a.aoColumns[c].fnSetData(a.aoData[b]._aData,d,{settings:a,row:b,col:c})}
-    function La(a){return h.map(a.match(/(\\.|[^\.])+/g)||[""],function(a){return a.replace(/\\\./g,".")})}function R(a){if(h.isPlainObject(a)){var b={};h.each(a,function(a,c){c&&(b[a]=R(c))});return function(a,c,f,g){var j=b[c]||b._;return j!==k?j(a,c,f,g):a}}if(null===a)return function(a){return a};if("function"===typeof a)return function(b,c,f,g){return a(b,c,f,g)};if("string"===typeof a&&(-1!==a.indexOf(".")||-1!==a.indexOf("[")||-1!==a.indexOf("("))){var c=function(a,b,f){var g,j;if(""!==f){j=La(f);
-        for(var i=0,n=j.length;i<n;i++){f=j[i].match(ca);g=j[i].match(V);if(f){j[i]=j[i].replace(ca,"");""!==j[i]&&(a=a[j[i]]);g=[];j.splice(0,i+1);j=j.join(".");if(h.isArray(a)){i=0;for(n=a.length;i<n;i++)g.push(c(a[i],b,j))}a=f[0].substring(1,f[0].length-1);a=""===a?g:g.join(a);break}else if(g){j[i]=j[i].replace(V,"");a=a[j[i]]();continue}if(null===a||a[j[i]]===k)return k;a=a[j[i]]}}return a};return function(b,e){return c(b,e,a)}}return function(b){return b[a]}}function S(a){if(h.isPlainObject(a))return S(a._);
-        if(null===a)return function(){};if("function"===typeof a)return function(b,d,e){a(b,"set",d,e)};if("string"===typeof a&&(-1!==a.indexOf(".")||-1!==a.indexOf("[")||-1!==a.indexOf("("))){var b=function(a,d,e){var e=La(e),f;f=e[e.length-1];for(var g,j,i=0,n=e.length-1;i<n;i++){g=e[i].match(ca);j=e[i].match(V);if(g){e[i]=e[i].replace(ca,"");a[e[i]]=[];f=e.slice();f.splice(0,i+1);g=f.join(".");if(h.isArray(d)){j=0;for(n=d.length;j<n;j++)f={},b(f,d[j],g),a[e[i]].push(f)}else a[e[i]]=d;return}j&&(e[i]=e[i].replace(V,
-            ""),a=a[e[i]](d));if(null===a[e[i]]||a[e[i]]===k)a[e[i]]={};a=a[e[i]]}if(f.match(V))a[f.replace(V,"")](d);else a[f.replace(ca,"")]=d};return function(c,d){return b(c,d,a)}}return function(b,d){b[a]=d}}function Ma(a){return D(a.aoData,"_aData")}function pa(a){a.aoData.length=0;a.aiDisplayMaster.length=0;a.aiDisplay.length=0;a.aIds={}}function qa(a,b,c){for(var d=-1,e=0,f=a.length;e<f;e++)a[e]==b?d=e:a[e]>b&&a[e]--; -1!=d&&c===k&&a.splice(d,1)}function da(a,b,c,d){var e=a.aoData[b],f,g=function(c,d){for(;c.childNodes.length;)c.removeChild(c.firstChild);
-        c.innerHTML=B(a,b,d,"display")};if("dom"===c||(!c||"auto"===c)&&"dom"===e.src)e._aData=Ka(a,e,d,d===k?k:e._aData).data;else{var j=e.anCells;if(j)if(d!==k)g(j[d],d);else{c=0;for(f=j.length;c<f;c++)g(j[c],c)}}e._aSortData=null;e._aFilterData=null;g=a.aoColumns;if(d!==k)g[d].sType=null;else{c=0;for(f=g.length;c<f;c++)g[c].sType=null;Na(a,e)}}function Ka(a,b,c,d){var e=[],f=b.firstChild,g,j,i=0,n,l=a.aoColumns,q=a._rowReadObject,d=d!==k?d:q?{}:[],r=function(a,b){if("string"===typeof a){var c=a.indexOf("@");
-        -1!==c&&(c=a.substring(c+1),S(a)(d,b.getAttribute(c)))}},m=function(a){if(c===k||c===i)j=l[i],n=h.trim(a.innerHTML),j&&j._bAttrSrc?(S(j.mData._)(d,n),r(j.mData.sort,a),r(j.mData.type,a),r(j.mData.filter,a)):q?(j._setter||(j._setter=S(j.mData)),j._setter(d,n)):d[i]=n;i++};if(f)for(;f;){g=f.nodeName.toUpperCase();if("TD"==g||"TH"==g)m(f),e.push(f);f=f.nextSibling}else{e=b.anCells;f=0;for(g=e.length;f<g;f++)m(e[f])}if(b=b.firstChild?b:b.nTr)(b=b.getAttribute("id"))&&S(a.rowId)(d,b);return{data:d,cells:e}}
-    function Ja(a,b,c,d){var e=a.aoData[b],f=e._aData,g=[],j,i,n,l,q;if(null===e.nTr){j=c||H.createElement("tr");e.nTr=j;e.anCells=g;j._DT_RowIndex=b;Na(a,e);l=0;for(q=a.aoColumns.length;l<q;l++){n=a.aoColumns[l];i=c?d[l]:H.createElement(n.sCellType);i._DT_CellIndex={row:b,column:l};g.push(i);if((!c||n.mRender||n.mData!==l)&&(!h.isPlainObject(n.mData)||n.mData._!==l+".display"))i.innerHTML=B(a,b,l,"display");n.sClass&&(i.className+=" "+n.sClass);n.bVisible&&!c?j.appendChild(i):!n.bVisible&&c&&i.parentNode.removeChild(i);
-        n.fnCreatedCell&&n.fnCreatedCell.call(a.oInstance,i,B(a,b,l),f,b,l)}s(a,"aoRowCreatedCallback",null,[j,f,b])}e.nTr.setAttribute("role","row")}function Na(a,b){var c=b.nTr,d=b._aData;if(c){var e=a.rowIdFn(d);e&&(c.id=e);d.DT_RowClass&&(e=d.DT_RowClass.split(" "),b.__rowc=b.__rowc?sa(b.__rowc.concat(e)):e,h(c).removeClass(b.__rowc.join(" ")).addClass(d.DT_RowClass));d.DT_RowAttr&&h(c).attr(d.DT_RowAttr);d.DT_RowData&&h(c).data(d.DT_RowData)}}function mb(a){var b,c,d,e,f,g=a.nTHead,j=a.nTFoot,i=0===
-        h("th, td",g).length,n=a.oClasses,l=a.aoColumns;i&&(e=h("<tr/>").appendTo(g));b=0;for(c=l.length;b<c;b++)f=l[b],d=h(f.nTh).addClass(f.sClass),i&&d.appendTo(e),a.oFeatures.bSort&&(d.addClass(f.sSortingClass),!1!==f.bSortable&&(d.attr("tabindex",a.iTabIndex).attr("aria-controls",a.sTableId),Oa(a,f.nTh,b))),f.sTitle!=d[0].innerHTML&&d.html(f.sTitle),Pa(a,"header")(a,d,f,n);i&&ea(a.aoHeader,g);h(g).find(">tr").attr("role","row");h(g).find(">tr>th, >tr>td").addClass(n.sHeaderTH);h(j).find(">tr>th, >tr>td").addClass(n.sFooterTH);
-        if(null!==j){a=a.aoFooter[0];b=0;for(c=a.length;b<c;b++)f=l[b],f.nTf=a[b].cell,f.sClass&&h(f.nTf).addClass(f.sClass)}}function fa(a,b,c){var d,e,f,g=[],j=[],i=a.aoColumns.length,n;if(b){c===k&&(c=!1);d=0;for(e=b.length;d<e;d++){g[d]=b[d].slice();g[d].nTr=b[d].nTr;for(f=i-1;0<=f;f--)!a.aoColumns[f].bVisible&&!c&&g[d].splice(f,1);j.push([])}d=0;for(e=g.length;d<e;d++){if(a=g[d].nTr)for(;f=a.firstChild;)a.removeChild(f);f=0;for(b=g[d].length;f<b;f++)if(n=i=1,j[d][f]===k){a.appendChild(g[d][f].cell);
-        for(j[d][f]=1;g[d+i]!==k&&g[d][f].cell==g[d+i][f].cell;)j[d+i][f]=1,i++;for(;g[d][f+n]!==k&&g[d][f].cell==g[d][f+n].cell;){for(c=0;c<i;c++)j[d+c][f+n]=1;n++}h(g[d][f].cell).attr("rowspan",i).attr("colspan",n)}}}}function O(a){var b=s(a,"aoPreDrawCallback","preDraw",[a]);if(-1!==h.inArray(!1,b))C(a,!1);else{var b=[],c=0,d=a.asStripeClasses,e=d.length,f=a.oLanguage,g=a.iInitDisplayStart,j="ssp"==y(a),i=a.aiDisplay;a.bDrawing=!0;g!==k&&-1!==g&&(a._iDisplayStart=j?g:g>=a.fnRecordsDisplay()?0:g,a.iInitDisplayStart=
-        -1);var g=a._iDisplayStart,n=a.fnDisplayEnd();if(a.bDeferLoading)a.bDeferLoading=!1,a.iDraw++,C(a,!1);else if(j){if(!a.bDestroying&&!nb(a))return}else a.iDraw++;if(0!==i.length){f=j?a.aoData.length:n;for(j=j?0:g;j<f;j++){var l=i[j],q=a.aoData[l];null===q.nTr&&Ja(a,l);l=q.nTr;if(0!==e){var r=d[c%e];q._sRowStripe!=r&&(h(l).removeClass(q._sRowStripe).addClass(r),q._sRowStripe=r)}s(a,"aoRowCallback",null,[l,q._aData,c,j]);b.push(l);c++}}else c=f.sZeroRecords,1==a.iDraw&&"ajax"==y(a)?c=f.sLoadingRecords:
-    f.sEmptyTable&&0===a.fnRecordsTotal()&&(c=f.sEmptyTable),b[0]=h("<tr/>",{"class":e?d[0]:""}).append(h("<td />",{valign:"top",colSpan:ba(a),"class":a.oClasses.sRowEmpty}).html(c))[0];s(a,"aoHeaderCallback","header",[h(a.nTHead).children("tr")[0],Ma(a),g,n,i]);s(a,"aoFooterCallback","footer",[h(a.nTFoot).children("tr")[0],Ma(a),g,n,i]);d=h(a.nTBody);d.children().detach();d.append(h(b));s(a,"aoDrawCallback","draw",[a]);a.bSorted=!1;a.bFiltered=!1;a.bDrawing=!1}}function T(a,b){var c=a.oFeatures,d=c.bFilter;
-        c.bSort&&ob(a);d?ga(a,a.oPreviousSearch):a.aiDisplay=a.aiDisplayMaster.slice();!0!==b&&(a._iDisplayStart=0);a._drawHold=b;O(a);a._drawHold=!1}function pb(a){var b=a.oClasses,c=h(a.nTable),c=h("<div/>").insertBefore(c),d=a.oFeatures,e=h("<div/>",{id:a.sTableId+"_wrapper","class":b.sWrapper+(a.nTFoot?"":" "+b.sNoFooter)});a.nHolding=c[0];a.nTableWrapper=e[0];a.nTableReinsertBefore=a.nTable.nextSibling;for(var f=a.sDom.split(""),g,j,i,n,l,q,k=0;k<f.length;k++){g=null;j=f[k];if("<"==j){i=h("<div/>")[0];
-        n=f[k+1];if("'"==n||'"'==n){l="";for(q=2;f[k+q]!=n;)l+=f[k+q],q++;"H"==l?l=b.sJUIHeader:"F"==l&&(l=b.sJUIFooter);-1!=l.indexOf(".")?(n=l.split("."),i.id=n[0].substr(1,n[0].length-1),i.className=n[1]):"#"==l.charAt(0)?i.id=l.substr(1,l.length-1):i.className=l;k+=q}e.append(i);e=h(i)}else if(">"==j)e=e.parent();else if("l"==j&&d.bPaginate&&d.bLengthChange)g=qb(a);else if("f"==j&&d.bFilter)g=rb(a);else if("r"==j&&d.bProcessing)g=sb(a);else if("t"==j)g=tb(a);else if("i"==j&&d.bInfo)g=ub(a);else if("p"==
-        j&&d.bPaginate)g=vb(a);else if(0!==m.ext.feature.length){i=m.ext.feature;q=0;for(n=i.length;q<n;q++)if(j==i[q].cFeature){g=i[q].fnInit(a);break}}g&&(i=a.aanFeatures,i[j]||(i[j]=[]),i[j].push(g),e.append(g))}c.replaceWith(e);a.nHolding=null}function ea(a,b){var c=h(b).children("tr"),d,e,f,g,j,i,n,l,q,k;a.splice(0,a.length);f=0;for(i=c.length;f<i;f++)a.push([]);f=0;for(i=c.length;f<i;f++){d=c[f];for(e=d.firstChild;e;){if("TD"==e.nodeName.toUpperCase()||"TH"==e.nodeName.toUpperCase()){l=1*e.getAttribute("colspan");
-        q=1*e.getAttribute("rowspan");l=!l||0===l||1===l?1:l;q=!q||0===q||1===q?1:q;g=0;for(j=a[f];j[g];)g++;n=g;k=1===l?!0:!1;for(j=0;j<l;j++)for(g=0;g<q;g++)a[f+g][n+j]={cell:e,unique:k},a[f+g].nTr=d}e=e.nextSibling}}}function ta(a,b,c){var d=[];c||(c=a.aoHeader,b&&(c=[],ea(c,b)));for(var b=0,e=c.length;b<e;b++)for(var f=0,g=c[b].length;f<g;f++)if(c[b][f].unique&&(!d[f]||!a.bSortCellsTop))d[f]=c[b][f].cell;return d}function ua(a,b,c){s(a,"aoServerParams","serverParams",[b]);if(b&&h.isArray(b)){var d={},
-        e=/(.*?)\[\]$/;h.each(b,function(a,b){var c=b.name.match(e);c?(c=c[0],d[c]||(d[c]=[]),d[c].push(b.value)):d[b.name]=b.value});b=d}var f,g=a.ajax,j=a.oInstance,i=function(b){s(a,null,"xhr",[a,b,a.jqXHR]);c(b)};if(h.isPlainObject(g)&&g.data){f=g.data;var n=h.isFunction(f)?f(b,a):f,b=h.isFunction(f)&&n?n:h.extend(!0,b,n);delete g.data}n={data:b,success:function(b){var c=b.error||b.sError;c&&K(a,0,c);a.json=b;i(b)},dataType:"json",cache:!1,type:a.sServerMethod,error:function(b,c){var d=s(a,null,"xhr",
-        [a,null,a.jqXHR]);-1===h.inArray(!0,d)&&("parsererror"==c?K(a,0,"Invalid JSON response",1):4===b.readyState&&K(a,0,"Ajax error",7));C(a,!1)}};a.oAjaxData=b;s(a,null,"preXhr",[a,b]);a.fnServerData?a.fnServerData.call(j,a.sAjaxSource,h.map(b,function(a,b){return{name:b,value:a}}),i,a):a.sAjaxSource||"string"===typeof g?a.jqXHR=h.ajax(h.extend(n,{url:g||a.sAjaxSource})):h.isFunction(g)?a.jqXHR=g.call(j,b,i,a):(a.jqXHR=h.ajax(h.extend(n,g)),g.data=f)}function nb(a){return a.bAjaxDataGet?(a.iDraw++,C(a,
-        !0),ua(a,wb(a),function(b){xb(a,b)}),!1):!0}function wb(a){var b=a.aoColumns,c=b.length,d=a.oFeatures,e=a.oPreviousSearch,f=a.aoPreSearchCols,g,j=[],i,n,l,k=W(a);g=a._iDisplayStart;i=!1!==d.bPaginate?a._iDisplayLength:-1;var r=function(a,b){j.push({name:a,value:b})};r("sEcho",a.iDraw);r("iColumns",c);r("sColumns",D(b,"sName").join(","));r("iDisplayStart",g);r("iDisplayLength",i);var ra={draw:a.iDraw,columns:[],order:[],start:g,length:i,search:{value:e.sSearch,regex:e.bRegex}};for(g=0;g<c;g++)n=b[g],
-        l=f[g],i="function"==typeof n.mData?"function":n.mData,ra.columns.push({data:i,name:n.sName,searchable:n.bSearchable,orderable:n.bSortable,search:{value:l.sSearch,regex:l.bRegex}}),r("mDataProp_"+g,i),d.bFilter&&(r("sSearch_"+g,l.sSearch),r("bRegex_"+g,l.bRegex),r("bSearchable_"+g,n.bSearchable)),d.bSort&&r("bSortable_"+g,n.bSortable);d.bFilter&&(r("sSearch",e.sSearch),r("bRegex",e.bRegex));d.bSort&&(h.each(k,function(a,b){ra.order.push({column:b.col,dir:b.dir});r("iSortCol_"+a,b.col);r("sSortDir_"+
-        a,b.dir)}),r("iSortingCols",k.length));b=m.ext.legacy.ajax;return null===b?a.sAjaxSource?j:ra:b?j:ra}function xb(a,b){var c=va(a,b),d=b.sEcho!==k?b.sEcho:b.draw,e=b.iTotalRecords!==k?b.iTotalRecords:b.recordsTotal,f=b.iTotalDisplayRecords!==k?b.iTotalDisplayRecords:b.recordsFiltered;if(d){if(1*d<a.iDraw)return;a.iDraw=1*d}pa(a);a._iRecordsTotal=parseInt(e,10);a._iRecordsDisplay=parseInt(f,10);d=0;for(e=c.length;d<e;d++)N(a,c[d]);a.aiDisplay=a.aiDisplayMaster.slice();a.bAjaxDataGet=!1;O(a);a._bInitComplete||
-    wa(a,b);a.bAjaxDataGet=!0;C(a,!1)}function va(a,b){var c=h.isPlainObject(a.ajax)&&a.ajax.dataSrc!==k?a.ajax.dataSrc:a.sAjaxDataProp;return"data"===c?b.aaData||b[c]:""!==c?R(c)(b):b}function rb(a){var b=a.oClasses,c=a.sTableId,d=a.oLanguage,e=a.oPreviousSearch,f=a.aanFeatures,g='<input type="search" class="'+b.sFilterInput+'"/>',j=d.sSearch,j=j.match(/_INPUT_/)?j.replace("_INPUT_",g):j+g,b=h("<div/>",{id:!f.f?c+"_filter":null,"class":b.sFilter}).append(h("<label/>").append(j)),f=function(){var b=!this.value?
-        "":this.value;b!=e.sSearch&&(ga(a,{sSearch:b,bRegex:e.bRegex,bSmart:e.bSmart,bCaseInsensitive:e.bCaseInsensitive}),a._iDisplayStart=0,O(a))},g=null!==a.searchDelay?a.searchDelay:"ssp"===y(a)?400:0,i=h("input",b).val(e.sSearch).attr("placeholder",d.sSearchPlaceholder).on("keyup.DT search.DT input.DT paste.DT cut.DT",g?Qa(f,g):f).on("keypress.DT",function(a){if(13==a.keyCode)return!1}).attr("aria-controls",c);h(a.nTable).on("search.dt.DT",function(b,c){if(a===c)try{i[0]!==H.activeElement&&i.val(e.sSearch)}catch(d){}});
-        return b[0]}function ga(a,b,c){var d=a.oPreviousSearch,e=a.aoPreSearchCols,f=function(a){d.sSearch=a.sSearch;d.bRegex=a.bRegex;d.bSmart=a.bSmart;d.bCaseInsensitive=a.bCaseInsensitive};Ia(a);if("ssp"!=y(a)){yb(a,b.sSearch,c,b.bEscapeRegex!==k?!b.bEscapeRegex:b.bRegex,b.bSmart,b.bCaseInsensitive);f(b);for(b=0;b<e.length;b++)zb(a,e[b].sSearch,b,e[b].bEscapeRegex!==k?!e[b].bEscapeRegex:e[b].bRegex,e[b].bSmart,e[b].bCaseInsensitive);Ab(a)}else f(b);a.bFiltered=!0;s(a,null,"search",[a])}function Ab(a){for(var b=
-        m.ext.search,c=a.aiDisplay,d,e,f=0,g=b.length;f<g;f++){for(var j=[],i=0,n=c.length;i<n;i++)e=c[i],d=a.aoData[e],b[f](a,d._aFilterData,e,d._aData,i)&&j.push(e);c.length=0;h.merge(c,j)}}function zb(a,b,c,d,e,f){if(""!==b){for(var g=[],j=a.aiDisplay,d=Ra(b,d,e,f),e=0;e<j.length;e++)b=a.aoData[j[e]]._aFilterData[c],d.test(b)&&g.push(j[e]);a.aiDisplay=g}}function yb(a,b,c,d,e,f){var d=Ra(b,d,e,f),f=a.oPreviousSearch.sSearch,g=a.aiDisplayMaster,j,e=[];0!==m.ext.search.length&&(c=!0);j=Bb(a);if(0>=b.length)a.aiDisplay=
-        g.slice();else{if(j||c||f.length>b.length||0!==b.indexOf(f)||a.bSorted)a.aiDisplay=g.slice();b=a.aiDisplay;for(c=0;c<b.length;c++)d.test(a.aoData[b[c]]._sFilterRow)&&e.push(b[c]);a.aiDisplay=e}}function Ra(a,b,c,d){a=b?a:Sa(a);c&&(a="^(?=.*?"+h.map(a.match(/"[^"]+"|[^ ]+/g)||[""],function(a){if('"'===a.charAt(0))var b=a.match(/^"(.*)"$/),a=b?b[1]:a;return a.replace('"',"")}).join(")(?=.*?")+").*$");return RegExp(a,d?"i":"")}function Bb(a){var b=a.aoColumns,c,d,e,f,g,j,i,h,l=m.ext.type.search;c=!1;
-        d=0;for(f=a.aoData.length;d<f;d++)if(h=a.aoData[d],!h._aFilterData){j=[];e=0;for(g=b.length;e<g;e++)c=b[e],c.bSearchable?(i=B(a,d,e,"filter"),l[c.sType]&&(i=l[c.sType](i)),null===i&&(i=""),"string"!==typeof i&&i.toString&&(i=i.toString())):i="",i.indexOf&&-1!==i.indexOf("&")&&(xa.innerHTML=i,i=$b?xa.textContent:xa.innerText),i.replace&&(i=i.replace(/[\r\n]/g,"")),j.push(i);h._aFilterData=j;h._sFilterRow=j.join("  ");c=!0}return c}function Cb(a){return{search:a.sSearch,smart:a.bSmart,regex:a.bRegex,
-        caseInsensitive:a.bCaseInsensitive}}function Db(a){return{sSearch:a.search,bSmart:a.smart,bRegex:a.regex,bCaseInsensitive:a.caseInsensitive}}function ub(a){var b=a.sTableId,c=a.aanFeatures.i,d=h("<div/>",{"class":a.oClasses.sInfo,id:!c?b+"_info":null});c||(a.aoDrawCallback.push({fn:Eb,sName:"information"}),d.attr("role","status").attr("aria-live","polite"),h(a.nTable).attr("aria-describedby",b+"_info"));return d[0]}function Eb(a){var b=a.aanFeatures.i;if(0!==b.length){var c=a.oLanguage,d=a._iDisplayStart+
-        1,e=a.fnDisplayEnd(),f=a.fnRecordsTotal(),g=a.fnRecordsDisplay(),j=g?c.sInfo:c.sInfoEmpty;g!==f&&(j+=" "+c.sInfoFiltered);j+=c.sInfoPostFix;j=Fb(a,j);c=c.fnInfoCallback;null!==c&&(j=c.call(a.oInstance,a,d,e,f,g,j));h(b).html(j)}}function Fb(a,b){var c=a.fnFormatNumber,d=a._iDisplayStart+1,e=a._iDisplayLength,f=a.fnRecordsDisplay(),g=-1===e;return b.replace(/_START_/g,c.call(a,d)).replace(/_END_/g,c.call(a,a.fnDisplayEnd())).replace(/_MAX_/g,c.call(a,a.fnRecordsTotal())).replace(/_TOTAL_/g,c.call(a,
-        f)).replace(/_PAGE_/g,c.call(a,g?1:Math.ceil(d/e))).replace(/_PAGES_/g,c.call(a,g?1:Math.ceil(f/e)))}function ha(a){var b,c,d=a.iInitDisplayStart,e=a.aoColumns,f;c=a.oFeatures;var g=a.bDeferLoading;if(a.bInitialised){pb(a);mb(a);fa(a,a.aoHeader);fa(a,a.aoFooter);C(a,!0);c.bAutoWidth&&Ha(a);b=0;for(c=e.length;b<c;b++)f=e[b],f.sWidth&&(f.nTh.style.width=v(f.sWidth));s(a,null,"preInit",[a]);T(a);e=y(a);if("ssp"!=e||g)"ajax"==e?ua(a,[],function(c){var f=va(a,c);for(b=0;b<f.length;b++)N(a,f[b]);a.iInitDisplayStart=
-        d;T(a);C(a,!1);wa(a,c)},a):(C(a,!1),wa(a))}else setTimeout(function(){ha(a)},200)}function wa(a,b){a._bInitComplete=!0;(b||a.oInit.aaData)&&Z(a);s(a,null,"plugin-init",[a,b]);s(a,"aoInitComplete","init",[a,b])}function Ta(a,b){var c=parseInt(b,10);a._iDisplayLength=c;Ua(a);s(a,null,"length",[a,c])}function qb(a){for(var b=a.oClasses,c=a.sTableId,d=a.aLengthMenu,e=h.isArray(d[0]),f=e?d[0]:d,d=e?d[1]:d,e=h("<select/>",{name:c+"_length","aria-controls":c,"class":b.sLengthSelect}),g=0,j=f.length;g<j;g++)e[0][g]=
-        new Option(d[g],f[g]);var i=h("<div><label/></div>").addClass(b.sLength);a.aanFeatures.l||(i[0].id=c+"_length");i.children().append(a.oLanguage.sLengthMenu.replace("_MENU_",e[0].outerHTML));h("select",i).val(a._iDisplayLength).on("change.DT",function(){Ta(a,h(this).val());O(a)});h(a.nTable).on("length.dt.DT",function(b,c,d){a===c&&h("select",i).val(d)});return i[0]}function vb(a){var b=a.sPaginationType,c=m.ext.pager[b],d="function"===typeof c,e=function(a){O(a)},b=h("<div/>").addClass(a.oClasses.sPaging+
-        b)[0],f=a.aanFeatures;d||c.fnInit(a,b,e);f.p||(b.id=a.sTableId+"_paginate",a.aoDrawCallback.push({fn:function(a){if(d){var b=a._iDisplayStart,i=a._iDisplayLength,h=a.fnRecordsDisplay(),l=-1===i,b=l?0:Math.ceil(b/i),i=l?1:Math.ceil(h/i),h=c(b,i),k,l=0;for(k=f.p.length;l<k;l++)Pa(a,"pageButton")(a,f.p[l],l,h,b,i)}else c.fnUpdate(a,e)},sName:"pagination"}));return b}function Va(a,b,c){var d=a._iDisplayStart,e=a._iDisplayLength,f=a.fnRecordsDisplay();0===f||-1===e?d=0:"number"===typeof b?(d=b*e,d>f&&
-    (d=0)):"first"==b?d=0:"previous"==b?(d=0<=e?d-e:0,0>d&&(d=0)):"next"==b?d+e<f&&(d+=e):"last"==b?d=Math.floor((f-1)/e)*e:K(a,0,"Unknown paging action: "+b,5);b=a._iDisplayStart!==d;a._iDisplayStart=d;b&&(s(a,null,"page",[a]),c&&O(a));return b}function sb(a){return h("<div/>",{id:!a.aanFeatures.r?a.sTableId+"_processing":null,"class":a.oClasses.sProcessing}).html(a.oLanguage.sProcessing).insertBefore(a.nTable)[0]}function C(a,b){a.oFeatures.bProcessing&&h(a.aanFeatures.r).css("display",b?"block":"none");
-        s(a,null,"processing",[a,b])}function tb(a){var b=h(a.nTable);b.attr("role","grid");var c=a.oScroll;if(""===c.sX&&""===c.sY)return a.nTable;var d=c.sX,e=c.sY,f=a.oClasses,g=b.children("caption"),j=g.length?g[0]._captionSide:null,i=h(b[0].cloneNode(!1)),n=h(b[0].cloneNode(!1)),l=b.children("tfoot");l.length||(l=null);i=h("<div/>",{"class":f.sScrollWrapper}).append(h("<div/>",{"class":f.sScrollHead}).css({overflow:"hidden",position:"relative",border:0,width:d?!d?null:v(d):"100%"}).append(h("<div/>",
-        {"class":f.sScrollHeadInner}).css({"box-sizing":"content-box",width:c.sXInner||"100%"}).append(i.removeAttr("id").css("margin-left",0).append("top"===j?g:null).append(b.children("thead"))))).append(h("<div/>",{"class":f.sScrollBody}).css({position:"relative",overflow:"auto",width:!d?null:v(d)}).append(b));l&&i.append(h("<div/>",{"class":f.sScrollFoot}).css({overflow:"hidden",border:0,width:d?!d?null:v(d):"100%"}).append(h("<div/>",{"class":f.sScrollFootInner}).append(n.removeAttr("id").css("margin-left",
-        0).append("bottom"===j?g:null).append(b.children("tfoot")))));var b=i.children(),k=b[0],f=b[1],r=l?b[2]:null;if(d)h(f).on("scroll.DT",function(){var a=this.scrollLeft;k.scrollLeft=a;l&&(r.scrollLeft=a)});h(f).css(e&&c.bCollapse?"max-height":"height",e);a.nScrollHead=k;a.nScrollBody=f;a.nScrollFoot=r;a.aoDrawCallback.push({fn:ma,sName:"scrolling"});return i[0]}function ma(a){var b=a.oScroll,c=b.sX,d=b.sXInner,e=b.sY,b=b.iBarWidth,f=h(a.nScrollHead),g=f[0].style,j=f.children("div"),i=j[0].style,n=j.children("table"),
-        j=a.nScrollBody,l=h(j),q=j.style,r=h(a.nScrollFoot).children("div"),m=r.children("table"),p=h(a.nTHead),o=h(a.nTable),t=o[0],s=t.style,u=a.nTFoot?h(a.nTFoot):null,x=a.oBrowser,U=x.bScrollOversize,ac=D(a.aoColumns,"nTh"),P,L,Q,w,Wa=[],y=[],z=[],A=[],B,C=function(a){a=a.style;a.paddingTop="0";a.paddingBottom="0";a.borderTopWidth="0";a.borderBottomWidth="0";a.height=0};L=j.scrollHeight>j.clientHeight;if(a.scrollBarVis!==L&&a.scrollBarVis!==k)a.scrollBarVis=L,Z(a);else{a.scrollBarVis=L;o.children("thead, tfoot").remove();
-        u&&(Q=u.clone().prependTo(o),P=u.find("tr"),Q=Q.find("tr"));w=p.clone().prependTo(o);p=p.find("tr");L=w.find("tr");w.find("th, td").removeAttr("tabindex");c||(q.width="100%",f[0].style.width="100%");h.each(ta(a,w),function(b,c){B=$(a,b);c.style.width=a.aoColumns[B].sWidth});u&&I(function(a){a.style.width=""},Q);f=o.outerWidth();if(""===c){s.width="100%";if(U&&(o.find("tbody").height()>j.offsetHeight||"scroll"==l.css("overflow-y")))s.width=v(o.outerWidth()-b);f=o.outerWidth()}else""!==d&&(s.width=
-            v(d),f=o.outerWidth());I(C,L);I(function(a){z.push(a.innerHTML);Wa.push(v(h(a).css("width")))},L);I(function(a,b){if(h.inArray(a,ac)!==-1)a.style.width=Wa[b]},p);h(L).height(0);u&&(I(C,Q),I(function(a){A.push(a.innerHTML);y.push(v(h(a).css("width")))},Q),I(function(a,b){a.style.width=y[b]},P),h(Q).height(0));I(function(a,b){a.innerHTML='<div class="dataTables_sizing" style="height:0;overflow:hidden;">'+z[b]+"</div>";a.style.width=Wa[b]},L);u&&I(function(a,b){a.innerHTML='<div class="dataTables_sizing" style="height:0;overflow:hidden;">'+
-            A[b]+"</div>";a.style.width=y[b]},Q);if(o.outerWidth()<f){P=j.scrollHeight>j.offsetHeight||"scroll"==l.css("overflow-y")?f+b:f;if(U&&(j.scrollHeight>j.offsetHeight||"scroll"==l.css("overflow-y")))s.width=v(P-b);(""===c||""!==d)&&K(a,1,"Possible column misalignment",6)}else P="100%";q.width=v(P);g.width=v(P);u&&(a.nScrollFoot.style.width=v(P));!e&&U&&(q.height=v(t.offsetHeight+b));c=o.outerWidth();n[0].style.width=v(c);i.width=v(c);d=o.height()>j.clientHeight||"scroll"==l.css("overflow-y");e="padding"+
-            (x.bScrollbarLeft?"Left":"Right");i[e]=d?b+"px":"0px";u&&(m[0].style.width=v(c),r[0].style.width=v(c),r[0].style[e]=d?b+"px":"0px");o.children("colgroup").insertBefore(o.children("thead"));l.scroll();if((a.bSorted||a.bFiltered)&&!a._drawHold)j.scrollTop=0}}function I(a,b,c){for(var d=0,e=0,f=b.length,g,j;e<f;){g=b[e].firstChild;for(j=c?c[e].firstChild:null;g;)1===g.nodeType&&(c?a(g,j,d):a(g,d),d++),g=g.nextSibling,j=c?j.nextSibling:null;e++}}function Ha(a){var b=a.nTable,c=a.aoColumns,d=a.oScroll,
-        e=d.sY,f=d.sX,g=d.sXInner,j=c.length,i=na(a,"bVisible"),n=h("th",a.nTHead),l=b.getAttribute("width"),k=b.parentNode,r=!1,m,p,o=a.oBrowser,d=o.bScrollOversize;(m=b.style.width)&&-1!==m.indexOf("%")&&(l=m);for(m=0;m<i.length;m++)p=c[i[m]],null!==p.sWidth&&(p.sWidth=Gb(p.sWidthOrig,k),r=!0);if(d||!r&&!f&&!e&&j==ba(a)&&j==n.length)for(m=0;m<j;m++)i=$(a,m),null!==i&&(c[i].sWidth=v(n.eq(m).width()));else{j=h(b).clone().css("visibility","hidden").removeAttr("id");j.find("tbody tr").remove();var t=h("<tr/>").appendTo(j.find("tbody"));
-        j.find("thead, tfoot").remove();j.append(h(a.nTHead).clone()).append(h(a.nTFoot).clone());j.find("tfoot th, tfoot td").css("width","");n=ta(a,j.find("thead")[0]);for(m=0;m<i.length;m++)p=c[i[m]],n[m].style.width=null!==p.sWidthOrig&&""!==p.sWidthOrig?v(p.sWidthOrig):"",p.sWidthOrig&&f&&h(n[m]).append(h("<div/>").css({width:p.sWidthOrig,margin:0,padding:0,border:0,height:1}));if(a.aoData.length)for(m=0;m<i.length;m++)r=i[m],p=c[r],h(Hb(a,r)).clone(!1).append(p.sContentPadding).appendTo(t);h("[name]",
-            j).removeAttr("name");p=h("<div/>").css(f||e?{position:"absolute",top:0,left:0,height:1,right:0,overflow:"hidden"}:{}).append(j).appendTo(k);f&&g?j.width(g):f?(j.css("width","auto"),j.removeAttr("width"),j.width()<k.clientWidth&&l&&j.width(k.clientWidth)):e?j.width(k.clientWidth):l&&j.width(l);for(m=e=0;m<i.length;m++)k=h(n[m]),g=k.outerWidth()-k.width(),k=o.bBounding?Math.ceil(n[m].getBoundingClientRect().width):k.outerWidth(),e+=k,c[i[m]].sWidth=v(k-g);b.style.width=v(e);p.remove()}l&&(b.style.width=
-        v(l));if((l||f)&&!a._reszEvt)b=function(){h(E).on("resize.DT-"+a.sInstance,Qa(function(){Z(a)}))},d?setTimeout(b,1E3):b(),a._reszEvt=!0}function Gb(a,b){if(!a)return 0;var c=h("<div/>").css("width",v(a)).appendTo(b||H.body),d=c[0].offsetWidth;c.remove();return d}function Hb(a,b){var c=Ib(a,b);if(0>c)return null;var d=a.aoData[c];return!d.nTr?h("<td/>").html(B(a,c,b,"display"))[0]:d.anCells[b]}function Ib(a,b){for(var c,d=-1,e=-1,f=0,g=a.aoData.length;f<g;f++)c=B(a,f,b,"display")+"",c=c.replace(bc,
-        ""),c=c.replace(/&nbsp;/g," "),c.length>d&&(d=c.length,e=f);return e}function v(a){return null===a?"0px":"number"==typeof a?0>a?"0px":a+"px":a.match(/\d$/)?a+"px":a}function W(a){var b,c,d=[],e=a.aoColumns,f,g,j,i;b=a.aaSortingFixed;c=h.isPlainObject(b);var n=[];f=function(a){a.length&&!h.isArray(a[0])?n.push(a):h.merge(n,a)};h.isArray(b)&&f(b);c&&b.pre&&f(b.pre);f(a.aaSorting);c&&b.post&&f(b.post);for(a=0;a<n.length;a++){i=n[a][0];f=e[i].aDataSort;b=0;for(c=f.length;b<c;b++)g=f[b],j=e[g].sType||
-        "string",n[a]._idx===k&&(n[a]._idx=h.inArray(n[a][1],e[g].asSorting)),d.push({src:i,col:g,dir:n[a][1],index:n[a]._idx,type:j,formatter:m.ext.type.order[j+"-pre"]})}return d}function ob(a){var b,c,d=[],e=m.ext.type.order,f=a.aoData,g=0,j,i=a.aiDisplayMaster,h;Ia(a);h=W(a);b=0;for(c=h.length;b<c;b++)j=h[b],j.formatter&&g++,Jb(a,j.col);if("ssp"!=y(a)&&0!==h.length){b=0;for(c=i.length;b<c;b++)d[i[b]]=b;g===h.length?i.sort(function(a,b){var c,e,g,j,i=h.length,k=f[a]._aSortData,m=f[b]._aSortData;for(g=
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               0;g<i;g++)if(j=h[g],c=k[j.col],e=m[j.col],c=c<e?-1:c>e?1:0,0!==c)return"asc"===j.dir?c:-c;c=d[a];e=d[b];return c<e?-1:c>e?1:0}):i.sort(function(a,b){var c,g,j,i,k=h.length,m=f[a]._aSortData,p=f[b]._aSortData;for(j=0;j<k;j++)if(i=h[j],c=m[i.col],g=p[i.col],i=e[i.type+"-"+i.dir]||e["string-"+i.dir],c=i(c,g),0!==c)return c;c=d[a];g=d[b];return c<g?-1:c>g?1:0})}a.bSorted=!0}function Kb(a){for(var b,c,d=a.aoColumns,e=W(a),a=a.oLanguage.oAria,f=0,g=d.length;f<g;f++){c=d[f];var j=c.asSorting;b=c.sTitle.replace(/<.*?>/g,
-        "");var i=c.nTh;i.removeAttribute("aria-sort");c.bSortable&&(0<e.length&&e[0].col==f?(i.setAttribute("aria-sort","asc"==e[0].dir?"ascending":"descending"),c=j[e[0].index+1]||j[0]):c=j[0],b+="asc"===c?a.sSortAscending:a.sSortDescending);i.setAttribute("aria-label",b)}}function Xa(a,b,c,d){var e=a.aaSorting,f=a.aoColumns[b].asSorting,g=function(a,b){var c=a._idx;c===k&&(c=h.inArray(a[1],f));return c+1<f.length?c+1:b?null:0};"number"===typeof e[0]&&(e=a.aaSorting=[e]);c&&a.oFeatures.bSortMulti?(c=h.inArray(b,
-        D(e,"0")),-1!==c?(b=g(e[c],!0),null===b&&1===e.length&&(b=0),null===b?e.splice(c,1):(e[c][1]=f[b],e[c]._idx=b)):(e.push([b,f[0],0]),e[e.length-1]._idx=0)):e.length&&e[0][0]==b?(b=g(e[0]),e.length=1,e[0][1]=f[b],e[0]._idx=b):(e.length=0,e.push([b,f[0]]),e[0]._idx=0);T(a);"function"==typeof d&&d(a)}function Oa(a,b,c,d){var e=a.aoColumns[c];Ya(b,{},function(b){!1!==e.bSortable&&(a.oFeatures.bProcessing?(C(a,!0),setTimeout(function(){Xa(a,c,b.shiftKey,d);"ssp"!==y(a)&&C(a,!1)},0)):Xa(a,c,b.shiftKey,d))})}
-    function ya(a){var b=a.aLastSort,c=a.oClasses.sSortColumn,d=W(a),e=a.oFeatures,f,g;if(e.bSort&&e.bSortClasses){e=0;for(f=b.length;e<f;e++)g=b[e].src,h(D(a.aoData,"anCells",g)).removeClass(c+(2>e?e+1:3));e=0;for(f=d.length;e<f;e++)g=d[e].src,h(D(a.aoData,"anCells",g)).addClass(c+(2>e?e+1:3))}a.aLastSort=d}function Jb(a,b){var c=a.aoColumns[b],d=m.ext.order[c.sSortDataType],e;d&&(e=d.call(a.oInstance,a,b,aa(a,b)));for(var f,g=m.ext.type.order[c.sType+"-pre"],j=0,i=a.aoData.length;j<i;j++)if(c=a.aoData[j],
-        c._aSortData||(c._aSortData=[]),!c._aSortData[b]||d)f=d?e[j]:B(a,j,b,"sort"),c._aSortData[b]=g?g(f):f}function za(a){if(a.oFeatures.bStateSave&&!a.bDestroying){var b={time:+new Date,start:a._iDisplayStart,length:a._iDisplayLength,order:h.extend(!0,[],a.aaSorting),search:Cb(a.oPreviousSearch),columns:h.map(a.aoColumns,function(b,d){return{visible:b.bVisible,search:Cb(a.aoPreSearchCols[d])}})};s(a,"aoStateSaveParams","stateSaveParams",[a,b]);a.oSavedState=b;a.fnStateSaveCallback.call(a.oInstance,a,
-        b)}}function Lb(a,b,c){var d,e,f=a.aoColumns,b=function(b){if(b&&b.time){var g=s(a,"aoStateLoadParams","stateLoadParams",[a,b]);if(-1===h.inArray(!1,g)&&(g=a.iStateDuration,!(0<g&&b.time<+new Date-1E3*g)&&!(b.columns&&f.length!==b.columns.length))){a.oLoadedState=h.extend(!0,{},b);b.start!==k&&(a._iDisplayStart=b.start,a.iInitDisplayStart=b.start);b.length!==k&&(a._iDisplayLength=b.length);b.order!==k&&(a.aaSorting=[],h.each(b.order,function(b,c){a.aaSorting.push(c[0]>=f.length?[0,c[1]]:c)}));b.search!==
-    k&&h.extend(a.oPreviousSearch,Db(b.search));if(b.columns){d=0;for(e=b.columns.length;d<e;d++)g=b.columns[d],g.visible!==k&&(f[d].bVisible=g.visible),g.search!==k&&h.extend(a.aoPreSearchCols[d],Db(g.search))}s(a,"aoStateLoaded","stateLoaded",[a,b])}}c()};if(a.oFeatures.bStateSave){var g=a.fnStateLoadCallback.call(a.oInstance,a,b);g!==k&&b(g)}else c()}function Aa(a){var b=m.settings,a=h.inArray(a,D(b,"nTable"));return-1!==a?b[a]:null}function K(a,b,c,d){c="DataTables warning: "+(a?"table id="+a.sTableId+
-        " - ":"")+c;d&&(c+=". For more information about this error, please see http://datatables.net/tn/"+d);if(b)E.console&&console.log&&console.log(c);else if(b=m.ext,b=b.sErrMode||b.errMode,a&&s(a,null,"error",[a,d,c]),"alert"==b)alert(c);else{if("throw"==b)throw Error(c);"function"==typeof b&&b(a,d,c)}}function F(a,b,c,d){h.isArray(c)?h.each(c,function(c,d){h.isArray(d)?F(a,b,d[0],d[1]):F(a,b,d)}):(d===k&&(d=c),b[c]!==k&&(a[d]=b[c]))}function Mb(a,b,c){var d,e;for(e in b)b.hasOwnProperty(e)&&(d=b[e],
-        h.isPlainObject(d)?(h.isPlainObject(a[e])||(a[e]={}),h.extend(!0,a[e],d)):a[e]=c&&"data"!==e&&"aaData"!==e&&h.isArray(d)?d.slice():d);return a}function Ya(a,b,c){h(a).on("click.DT",b,function(b){a.blur();c(b)}).on("keypress.DT",b,function(a){13===a.which&&(a.preventDefault(),c(a))}).on("selectstart.DT",function(){return!1})}function z(a,b,c,d){c&&a[b].push({fn:c,sName:d})}function s(a,b,c,d){var e=[];b&&(e=h.map(a[b].slice().reverse(),function(b){return b.fn.apply(a.oInstance,d)}));null!==c&&(b=h.Event(c+
-        ".dt"),h(a.nTable).trigger(b,d),e.push(b.result));return e}function Ua(a){var b=a._iDisplayStart,c=a.fnDisplayEnd(),d=a._iDisplayLength;b>=c&&(b=c-d);b-=b%d;if(-1===d||0>b)b=0;a._iDisplayStart=b}function Pa(a,b){var c=a.renderer,d=m.ext.renderer[b];return h.isPlainObject(c)&&c[b]?d[c[b]]||d._:"string"===typeof c?d[c]||d._:d._}function y(a){return a.oFeatures.bServerSide?"ssp":a.ajax||a.sAjaxSource?"ajax":"dom"}function ia(a,b){var c=[],c=Nb.numbers_length,d=Math.floor(c/2);b<=c?c=X(0,b):a<=d?(c=X(0,
-        c-2),c.push("ellipsis"),c.push(b-1)):(a>=b-1-d?c=X(b-(c-2),b):(c=X(a-d+2,a+d-1),c.push("ellipsis"),c.push(b-1)),c.splice(0,0,"ellipsis"),c.splice(0,0,0));c.DT_el="span";return c}function fb(a){h.each({num:function(b){return Ba(b,a)},"num-fmt":function(b){return Ba(b,a,Za)},"html-num":function(b){return Ba(b,a,Ca)},"html-num-fmt":function(b){return Ba(b,a,Ca,Za)}},function(b,c){x.type.order[b+a+"-pre"]=c;b.match(/^html\-/)&&(x.type.search[b+a]=x.type.search.html)})}function Ob(a){return function(){var b=
-        [Aa(this[m.ext.iApiIndex])].concat(Array.prototype.slice.call(arguments));return m.ext.internal[a].apply(this,b)}}var m=function(a){this.$=function(a,b){return this.api(!0).$(a,b)};this._=function(a,b){return this.api(!0).rows(a,b).data()};this.api=function(a){return a?new t(Aa(this[x.iApiIndex])):new t(this)};this.fnAddData=function(a,b){var c=this.api(!0),d=h.isArray(a)&&(h.isArray(a[0])||h.isPlainObject(a[0]))?c.rows.add(a):c.row.add(a);(b===k||b)&&c.draw();return d.flatten().toArray()};this.fnAdjustColumnSizing=
-        function(a){var b=this.api(!0).columns.adjust(),c=b.settings()[0],d=c.oScroll;a===k||a?b.draw(!1):(""!==d.sX||""!==d.sY)&&ma(c)};this.fnClearTable=function(a){var b=this.api(!0).clear();(a===k||a)&&b.draw()};this.fnClose=function(a){this.api(!0).row(a).child.hide()};this.fnDeleteRow=function(a,b,c){var d=this.api(!0),a=d.rows(a),e=a.settings()[0],h=e.aoData[a[0][0]];a.remove();b&&b.call(this,e,h);(c===k||c)&&d.draw();return h};this.fnDestroy=function(a){this.api(!0).destroy(a)};this.fnDraw=function(a){this.api(!0).draw(a)};
-        this.fnFilter=function(a,b,c,d,e,h){e=this.api(!0);null===b||b===k?e.search(a,c,d,h):e.column(b).search(a,c,d,h);e.draw()};this.fnGetData=function(a,b){var c=this.api(!0);if(a!==k){var d=a.nodeName?a.nodeName.toLowerCase():"";return b!==k||"td"==d||"th"==d?c.cell(a,b).data():c.row(a).data()||null}return c.data().toArray()};this.fnGetNodes=function(a){var b=this.api(!0);return a!==k?b.row(a).node():b.rows().nodes().flatten().toArray()};this.fnGetPosition=function(a){var b=this.api(!0),c=a.nodeName.toUpperCase();
-            return"TR"==c?b.row(a).index():"TD"==c||"TH"==c?(a=b.cell(a).index(),[a.row,a.columnVisible,a.column]):null};this.fnIsOpen=function(a){return this.api(!0).row(a).child.isShown()};this.fnOpen=function(a,b,c){return this.api(!0).row(a).child(b,c).show().child()[0]};this.fnPageChange=function(a,b){var c=this.api(!0).page(a);(b===k||b)&&c.draw(!1)};this.fnSetColumnVis=function(a,b,c){a=this.api(!0).column(a).visible(b);(c===k||c)&&a.columns.adjust().draw()};this.fnSettings=function(){return Aa(this[x.iApiIndex])};
-        this.fnSort=function(a){this.api(!0).order(a).draw()};this.fnSortListener=function(a,b,c){this.api(!0).order.listener(a,b,c)};this.fnUpdate=function(a,b,c,d,e){var h=this.api(!0);c===k||null===c?h.row(b).data(a):h.cell(b,c).data(a);(e===k||e)&&h.columns.adjust();(d===k||d)&&h.draw();return 0};this.fnVersionCheck=x.fnVersionCheck;var b=this,c=a===k,d=this.length;c&&(a={});this.oApi=this.internal=x.internal;for(var e in m.ext.internal)e&&(this[e]=Ob(e));this.each(function(){var e={},g=1<d?Mb(e,a,!0):
-            a,j=0,i,e=this.getAttribute("id"),n=!1,l=m.defaults,q=h(this);if("table"!=this.nodeName.toLowerCase())K(null,0,"Non-table node initialisation ("+this.nodeName+")",2);else{gb(l);hb(l.column);J(l,l,!0);J(l.column,l.column,!0);J(l,h.extend(g,q.data()));var r=m.settings,j=0;for(i=r.length;j<i;j++){var p=r[j];if(p.nTable==this||p.nTHead.parentNode==this||p.nTFoot&&p.nTFoot.parentNode==this){var t=g.bRetrieve!==k?g.bRetrieve:l.bRetrieve;if(c||t)return p.oInstance;if(g.bDestroy!==k?g.bDestroy:l.bDestroy){p.oInstance.fnDestroy();
-            break}else{K(p,0,"Cannot reinitialise DataTable",3);return}}if(p.sTableId==this.id){r.splice(j,1);break}}if(null===e||""===e)this.id=e="DataTables_Table_"+m.ext._unique++;var o=h.extend(!0,{},m.models.oSettings,{sDestroyWidth:q[0].style.width,sInstance:e,sTableId:e});o.nTable=this;o.oApi=b.internal;o.oInit=g;r.push(o);o.oInstance=1===b.length?b:q.dataTable();gb(g);g.oLanguage&&Fa(g.oLanguage);g.aLengthMenu&&!g.iDisplayLength&&(g.iDisplayLength=h.isArray(g.aLengthMenu[0])?g.aLengthMenu[0][0]:g.aLengthMenu[0]);
-            g=Mb(h.extend(!0,{},l),g);F(o.oFeatures,g,"bPaginate bLengthChange bFilter bSort bSortMulti bInfo bProcessing bAutoWidth bSortClasses bServerSide bDeferRender".split(" "));F(o,g,["asStripeClasses","ajax","fnServerData","fnFormatNumber","sServerMethod","aaSorting","aaSortingFixed","aLengthMenu","sPaginationType","sAjaxSource","sAjaxDataProp","iStateDuration","sDom","bSortCellsTop","iTabIndex","fnStateLoadCallback","fnStateSaveCallback","renderer","searchDelay","rowId",["iCookieDuration","iStateDuration"],
-                ["oSearch","oPreviousSearch"],["aoSearchCols","aoPreSearchCols"],["iDisplayLength","_iDisplayLength"],["bJQueryUI","bJUI"]]);F(o.oScroll,g,[["sScrollX","sX"],["sScrollXInner","sXInner"],["sScrollY","sY"],["bScrollCollapse","bCollapse"]]);F(o.oLanguage,g,"fnInfoCallback");z(o,"aoDrawCallback",g.fnDrawCallback,"user");z(o,"aoServerParams",g.fnServerParams,"user");z(o,"aoStateSaveParams",g.fnStateSaveParams,"user");z(o,"aoStateLoadParams",g.fnStateLoadParams,"user");z(o,"aoStateLoaded",g.fnStateLoaded,
-                "user");z(o,"aoRowCallback",g.fnRowCallback,"user");z(o,"aoRowCreatedCallback",g.fnCreatedRow,"user");z(o,"aoHeaderCallback",g.fnHeaderCallback,"user");z(o,"aoFooterCallback",g.fnFooterCallback,"user");z(o,"aoInitComplete",g.fnInitComplete,"user");z(o,"aoPreDrawCallback",g.fnPreDrawCallback,"user");o.rowIdFn=R(g.rowId);ib(o);var u=o.oClasses;g.bJQueryUI?(h.extend(u,m.ext.oJUIClasses,g.oClasses),g.sDom===l.sDom&&"lfrtip"===l.sDom&&(o.sDom='<"H"lfr>t<"F"ip>'),o.renderer)?h.isPlainObject(o.renderer)&&
-            !o.renderer.header&&(o.renderer.header="jqueryui"):o.renderer="jqueryui":h.extend(u,m.ext.classes,g.oClasses);q.addClass(u.sTable);o.iInitDisplayStart===k&&(o.iInitDisplayStart=g.iDisplayStart,o._iDisplayStart=g.iDisplayStart);null!==g.iDeferLoading&&(o.bDeferLoading=!0,e=h.isArray(g.iDeferLoading),o._iRecordsDisplay=e?g.iDeferLoading[0]:g.iDeferLoading,o._iRecordsTotal=e?g.iDeferLoading[1]:g.iDeferLoading);var v=o.oLanguage;h.extend(!0,v,g.oLanguage);v.sUrl&&(h.ajax({dataType:"json",url:v.sUrl,success:function(a){Fa(a);
-                J(l.oLanguage,a);h.extend(true,v,a);ha(o)},error:function(){ha(o)}}),n=!0);null===g.asStripeClasses&&(o.asStripeClasses=[u.sStripeOdd,u.sStripeEven]);var e=o.asStripeClasses,x=q.children("tbody").find("tr").eq(0);-1!==h.inArray(!0,h.map(e,function(a){return x.hasClass(a)}))&&(h("tbody tr",this).removeClass(e.join(" ")),o.asDestroyStripes=e.slice());e=[];r=this.getElementsByTagName("thead");0!==r.length&&(ea(o.aoHeader,r[0]),e=ta(o));if(null===g.aoColumns){r=[];j=0;for(i=e.length;j<i;j++)r.push(null)}else r=
-                g.aoColumns;j=0;for(i=r.length;j<i;j++)Ga(o,e?e[j]:null);kb(o,g.aoColumnDefs,r,function(a,b){la(o,a,b)});if(x.length){var w=function(a,b){return a.getAttribute("data-"+b)!==null?b:null};h(x[0]).children("th, td").each(function(a,b){var c=o.aoColumns[a];if(c.mData===a){var d=w(b,"sort")||w(b,"order"),e=w(b,"filter")||w(b,"search");if(d!==null||e!==null){c.mData={_:a+".display",sort:d!==null?a+".@data-"+d:k,type:d!==null?a+".@data-"+d:k,filter:e!==null?a+".@data-"+e:k};la(o,a)}}})}var U=o.oFeatures,
-                e=function(){if(g.aaSorting===k){var a=o.aaSorting;j=0;for(i=a.length;j<i;j++)a[j][1]=o.aoColumns[j].asSorting[0]}ya(o);U.bSort&&z(o,"aoDrawCallback",function(){if(o.bSorted){var a=W(o),b={};h.each(a,function(a,c){b[c.src]=c.dir});s(o,null,"order",[o,a,b]);Kb(o)}});z(o,"aoDrawCallback",function(){(o.bSorted||y(o)==="ssp"||U.bDeferRender)&&ya(o)},"sc");var a=q.children("caption").each(function(){this._captionSide=h(this).css("caption-side")}),b=q.children("thead");b.length===0&&(b=h("<thead/>").appendTo(q));
-                    o.nTHead=b[0];b=q.children("tbody");b.length===0&&(b=h("<tbody/>").appendTo(q));o.nTBody=b[0];b=q.children("tfoot");if(b.length===0&&a.length>0&&(o.oScroll.sX!==""||o.oScroll.sY!==""))b=h("<tfoot/>").appendTo(q);if(b.length===0||b.children().length===0)q.addClass(u.sNoFooter);else if(b.length>0){o.nTFoot=b[0];ea(o.aoFooter,o.nTFoot)}if(g.aaData)for(j=0;j<g.aaData.length;j++)N(o,g.aaData[j]);else(o.bDeferLoading||y(o)=="dom")&&oa(o,h(o.nTBody).children("tr"));o.aiDisplay=o.aiDisplayMaster.slice();
-                    o.bInitialised=true;n===false&&ha(o)};g.bStateSave?(U.bStateSave=!0,z(o,"aoDrawCallback",za,"state_save"),Lb(o,g,e)):e()}});b=null;return this},x,t,p,u,$a={},Pb=/[\r\n]/g,Ca=/<.*?>/g,cc=/^\d{2,4}[\.\/\-]\d{1,2}[\.\/\-]\d{1,2}([T ]{1}\d{1,2}[:\.]\d{2}([\.:]\d{2})?)?$/,dc=RegExp("(\\/|\\.|\\*|\\+|\\?|\\||\\(|\\)|\\[|\\]|\\{|\\}|\\\\|\\$|\\^|\\-)","g"),Za=/[',$?¢„?%\u2009\u202F\u20BD\u20a9\u20BArfk]/gi,M=function(a){return!a||!0===a||"-"===a?!0:!1},Qb=function(a){var b=parseInt(a,10);return!isNaN(b)&&
-    isFinite(a)?b:null},Rb=function(a,b){$a[b]||($a[b]=RegExp(Sa(b),"g"));return"string"===typeof a&&"."!==b?a.replace(/\./g,"").replace($a[b],"."):a},ab=function(a,b,c){var d="string"===typeof a;if(M(a))return!0;b&&d&&(a=Rb(a,b));c&&d&&(a=a.replace(Za,""));return!isNaN(parseFloat(a))&&isFinite(a)},Sb=function(a,b,c){return M(a)?!0:!(M(a)||"string"===typeof a)?null:ab(a.replace(Ca,""),b,c)?!0:null},D=function(a,b,c){var d=[],e=0,f=a.length;if(c!==k)for(;e<f;e++)a[e]&&a[e][b]&&d.push(a[e][b][c]);else for(;e<
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              f;e++)a[e]&&d.push(a[e][b]);return d},ja=function(a,b,c,d){var e=[],f=0,g=b.length;if(d!==k)for(;f<g;f++)a[b[f]][c]&&e.push(a[b[f]][c][d]);else for(;f<g;f++)e.push(a[b[f]][c]);return e},X=function(a,b){var c=[],d;b===k?(b=0,d=a):(d=b,b=a);for(var e=b;e<d;e++)c.push(e);return c},Tb=function(a){for(var b=[],c=0,d=a.length;c<d;c++)a[c]&&b.push(a[c]);return b},sa=function(a){var b;a:{if(!(2>a.length)){b=a.slice().sort();for(var c=b[0],d=1,e=b.length;d<e;d++){if(b[d]===c){b=!1;break a}c=b[d]}}b=!0}if(b)return a.slice();
-        b=[];var e=a.length,f,g=0,d=0;a:for(;d<e;d++){c=a[d];for(f=0;f<g;f++)if(b[f]===c)continue a;b.push(c);g++}return b};m.util={throttle:function(a,b){var c=b!==k?b:200,d,e;return function(){var b=this,g=+new Date,h=arguments;d&&g<d+c?(clearTimeout(e),e=setTimeout(function(){d=k;a.apply(b,h)},c)):(d=g,a.apply(b,h))}},escapeRegex:function(a){return a.replace(dc,"\\$1")}};var A=function(a,b,c){a[b]!==k&&(a[c]=a[b])},ca=/\[.*?\]$/,V=/\(\)$/,Sa=m.util.escapeRegex,xa=h("<div>")[0],$b=xa.textContent!==k,bc=
-        /<.*?>/g,Qa=m.util.throttle,Ub=[],w=Array.prototype,ec=function(a){var b,c,d=m.settings,e=h.map(d,function(a){return a.nTable});if(a){if(a.nTable&&a.oApi)return[a];if(a.nodeName&&"table"===a.nodeName.toLowerCase())return b=h.inArray(a,e),-1!==b?[d[b]]:null;if(a&&"function"===typeof a.settings)return a.settings().toArray();"string"===typeof a?c=h(a):a instanceof h&&(c=a)}else return[];if(c)return c.map(function(){b=h.inArray(this,e);return-1!==b?d[b]:null}).toArray()};t=function(a,b){if(!(this instanceof
-        t))return new t(a,b);var c=[],d=function(a){(a=ec(a))&&(c=c.concat(a))};if(h.isArray(a))for(var e=0,f=a.length;e<f;e++)d(a[e]);else d(a);this.context=sa(c);b&&h.merge(this,b);this.selector={rows:null,cols:null,opts:null};t.extend(this,this,Ub)};m.Api=t;h.extend(t.prototype,{any:function(){return 0!==this.count()},concat:w.concat,context:[],count:function(){return this.flatten().length},each:function(a){for(var b=0,c=this.length;b<c;b++)a.call(this,this[b],b,this);return this},eq:function(a){var b=
-        this.context;return b.length>a?new t(b[a],this[a]):null},filter:function(a){var b=[];if(w.filter)b=w.filter.call(this,a,this);else for(var c=0,d=this.length;c<d;c++)a.call(this,this[c],c,this)&&b.push(this[c]);return new t(this.context,b)},flatten:function(){var a=[];return new t(this.context,a.concat.apply(a,this.toArray()))},join:w.join,indexOf:w.indexOf||function(a,b){for(var c=b||0,d=this.length;c<d;c++)if(this[c]===a)return c;return-1},iterator:function(a,b,c,d){var e=[],f,g,h,i,n,l=this.context,
-        m,p,u=this.selector;"string"===typeof a&&(d=c,c=b,b=a,a=!1);g=0;for(h=l.length;g<h;g++){var s=new t(l[g]);if("table"===b)f=c.call(s,l[g],g),f!==k&&e.push(f);else if("columns"===b||"rows"===b)f=c.call(s,l[g],this[g],g),f!==k&&e.push(f);else if("column"===b||"column-rows"===b||"row"===b||"cell"===b){p=this[g];"column-rows"===b&&(m=Da(l[g],u.opts));i=0;for(n=p.length;i<n;i++)f=p[i],f="cell"===b?c.call(s,l[g],f.row,f.column,g,i):c.call(s,l[g],f,g,i,m),f!==k&&e.push(f)}}return e.length||d?(a=new t(l,a?
-        e.concat.apply([],e):e),b=a.selector,b.rows=u.rows,b.cols=u.cols,b.opts=u.opts,a):this},lastIndexOf:w.lastIndexOf||function(a,b){return this.indexOf.apply(this.toArray.reverse(),arguments)},length:0,map:function(a){var b=[];if(w.map)b=w.map.call(this,a,this);else for(var c=0,d=this.length;c<d;c++)b.push(a.call(this,this[c],c));return new t(this.context,b)},pluck:function(a){return this.map(function(b){return b[a]})},pop:w.pop,push:w.push,reduce:w.reduce||function(a,b){return jb(this,a,b,0,this.length,
-        1)},reduceRight:w.reduceRight||function(a,b){return jb(this,a,b,this.length-1,-1,-1)},reverse:w.reverse,selector:null,shift:w.shift,slice:function(){return new t(this.context,this)},sort:w.sort,splice:w.splice,toArray:function(){return w.slice.call(this)},to$:function(){return h(this)},toJQuery:function(){return h(this)},unique:function(){return new t(this.context,sa(this))},unshift:w.unshift});t.extend=function(a,b,c){if(c.length&&b&&(b instanceof t||b.__dt_wrapper)){var d,e,f,g=function(a,b,c){return function(){var d=
-        b.apply(a,arguments);t.extend(d,d,c.methodExt);return d}};d=0;for(e=c.length;d<e;d++)f=c[d],b[f.name]="function"===typeof f.val?g(a,f.val,f):h.isPlainObject(f.val)?{}:f.val,b[f.name].__dt_wrapper=!0,t.extend(a,b[f.name],f.propExt)}};t.register=p=function(a,b){if(h.isArray(a))for(var c=0,d=a.length;c<d;c++)t.register(a[c],b);else for(var e=a.split("."),f=Ub,g,j,c=0,d=e.length;c<d;c++){g=(j=-1!==e[c].indexOf("()"))?e[c].replace("()",""):e[c];var i;a:{i=0;for(var n=f.length;i<n;i++)if(f[i].name===g){i=
-        f[i];break a}i=null}i||(i={name:g,val:{},methodExt:[],propExt:[]},f.push(i));c===d-1?i.val=b:f=j?i.methodExt:i.propExt}};t.registerPlural=u=function(a,b,c){t.register(a,c);t.register(b,function(){var a=c.apply(this,arguments);return a===this?this:a instanceof t?a.length?h.isArray(a[0])?new t(a.context,a[0]):a[0]:k:a})};p("tables()",function(a){var b;if(a){b=t;var c=this.context;if("number"===typeof a)a=[c[a]];else var d=h.map(c,function(a){return a.nTable}),a=h(d).filter(a).map(function(){var a=h.inArray(this,
-        d);return c[a]}).toArray();b=new b(a)}else b=this;return b});p("table()",function(a){var a=this.tables(a),b=a.context;return b.length?new t(b[0]):a});u("tables().nodes()","table().node()",function(){return this.iterator("table",function(a){return a.nTable},1)});u("tables().body()","table().body()",function(){return this.iterator("table",function(a){return a.nTBody},1)});u("tables().header()","table().header()",function(){return this.iterator("table",function(a){return a.nTHead},1)});u("tables().footer()",
-        "table().footer()",function(){return this.iterator("table",function(a){return a.nTFoot},1)});u("tables().containers()","table().container()",function(){return this.iterator("table",function(a){return a.nTableWrapper},1)});p("draw()",function(a){return this.iterator("table",function(b){"page"===a?O(b):("string"===typeof a&&(a="full-hold"===a?!1:!0),T(b,!1===a))})});p("page()",function(a){return a===k?this.page.info().page:this.iterator("table",function(b){Va(b,a)})});p("page.info()",function(){if(0===
-        this.context.length)return k;var a=this.context[0],b=a._iDisplayStart,c=a.oFeatures.bPaginate?a._iDisplayLength:-1,d=a.fnRecordsDisplay(),e=-1===c;return{page:e?0:Math.floor(b/c),pages:e?1:Math.ceil(d/c),start:b,end:a.fnDisplayEnd(),length:c,recordsTotal:a.fnRecordsTotal(),recordsDisplay:d,serverSide:"ssp"===y(a)}});p("page.len()",function(a){return a===k?0!==this.context.length?this.context[0]._iDisplayLength:k:this.iterator("table",function(b){Ta(b,a)})});var Vb=function(a,b,c){if(c){var d=new t(a);
-        d.one("draw",function(){c(d.ajax.json())})}if("ssp"==y(a))T(a,b);else{C(a,!0);var e=a.jqXHR;e&&4!==e.readyState&&e.abort();ua(a,[],function(c){pa(a);for(var c=va(a,c),d=0,e=c.length;d<e;d++)N(a,c[d]);T(a,b);C(a,!1)})}};p("ajax.json()",function(){var a=this.context;if(0<a.length)return a[0].json});p("ajax.params()",function(){var a=this.context;if(0<a.length)return a[0].oAjaxData});p("ajax.reload()",function(a,b){return this.iterator("table",function(c){Vb(c,!1===b,a)})});p("ajax.url()",function(a){var b=
-        this.context;if(a===k){if(0===b.length)return k;b=b[0];return b.ajax?h.isPlainObject(b.ajax)?b.ajax.url:b.ajax:b.sAjaxSource}return this.iterator("table",function(b){h.isPlainObject(b.ajax)?b.ajax.url=a:b.ajax=a})});p("ajax.url().load()",function(a,b){return this.iterator("table",function(c){Vb(c,!1===b,a)})});var bb=function(a,b,c,d,e){var f=[],g,j,i,n,l,m;i=typeof b;if(!b||"string"===i||"function"===i||b.length===k)b=[b];i=0;for(n=b.length;i<n;i++){j=b[i]&&b[i].split&&!b[i].match(/[\[\(:]/)?b[i].split(","):
-        [b[i]];l=0;for(m=j.length;l<m;l++)(g=c("string"===typeof j[l]?h.trim(j[l]):j[l]))&&g.length&&(f=f.concat(g))}a=x.selector[a];if(a.length){i=0;for(n=a.length;i<n;i++)f=a[i](d,e,f)}return sa(f)},cb=function(a){a||(a={});a.filter&&a.search===k&&(a.search=a.filter);return h.extend({search:"none",order:"current",page:"all"},a)},db=function(a){for(var b=0,c=a.length;b<c;b++)if(0<a[b].length)return a[0]=a[b],a[0].length=1,a.length=1,a.context=[a.context[b]],a;a.length=0;return a},Da=function(a,b){var c,
-        d,e,f=[],g=a.aiDisplay;c=a.aiDisplayMaster;var j=b.search;d=b.order;e=b.page;if("ssp"==y(a))return"removed"===j?[]:X(0,c.length);if("current"==e){c=a._iDisplayStart;for(d=a.fnDisplayEnd();c<d;c++)f.push(g[c])}else if("current"==d||"applied"==d)f="none"==j?c.slice():"applied"==j?g.slice():h.map(c,function(a){return-1===h.inArray(a,g)?a:null});else if("index"==d||"original"==d){c=0;for(d=a.aoData.length;c<d;c++)"none"==j?f.push(c):(e=h.inArray(c,g),(-1===e&&"removed"==j||0<=e&&"applied"==j)&&f.push(c))}return f};
-    p("rows()",function(a,b){a===k?a="":h.isPlainObject(a)&&(b=a,a="");var b=cb(b),c=this.iterator("table",function(c){var e=b,f;return bb("row",a,function(a){var b=Qb(a);if(b!==null&&!e)return[b];f||(f=Da(c,e));if(b!==null&&h.inArray(b,f)!==-1)return[b];if(a===null||a===k||a==="")return f;if(typeof a==="function")return h.map(f,function(b){var e=c.aoData[b];return a(b,e._aData,e.nTr)?b:null});b=Tb(ja(c.aoData,f,"nTr"));if(a.nodeName){if(a._DT_RowIndex!==k)return[a._DT_RowIndex];if(a._DT_CellIndex)return[a._DT_CellIndex.row];
-        b=h(a).closest("*[data-dt-row]");return b.length?[b.data("dt-row")]:[]}if(typeof a==="string"&&a.charAt(0)==="#"){var i=c.aIds[a.replace(/^#/,"")];if(i!==k)return[i.idx]}return h(b).filter(a).map(function(){return this._DT_RowIndex}).toArray()},c,e)},1);c.selector.rows=a;c.selector.opts=b;return c});p("rows().nodes()",function(){return this.iterator("row",function(a,b){return a.aoData[b].nTr||k},1)});p("rows().data()",function(){return this.iterator(!0,"rows",function(a,b){return ja(a.aoData,b,"_aData")},
-        1)});u("rows().cache()","row().cache()",function(a){return this.iterator("row",function(b,c){var d=b.aoData[c];return"search"===a?d._aFilterData:d._aSortData},1)});u("rows().invalidate()","row().invalidate()",function(a){return this.iterator("row",function(b,c){da(b,c,a)})});u("rows().indexes()","row().index()",function(){return this.iterator("row",function(a,b){return b},1)});u("rows().ids()","row().id()",function(a){for(var b=[],c=this.context,d=0,e=c.length;d<e;d++)for(var f=0,g=this[d].length;f<
-    g;f++){var h=c[d].rowIdFn(c[d].aoData[this[d][f]]._aData);b.push((!0===a?"#":"")+h)}return new t(c,b)});u("rows().remove()","row().remove()",function(){var a=this;this.iterator("row",function(b,c,d){var e=b.aoData,f=e[c],g,h,i,n,l;e.splice(c,1);g=0;for(h=e.length;g<h;g++)if(i=e[g],l=i.anCells,null!==i.nTr&&(i.nTr._DT_RowIndex=g),null!==l){i=0;for(n=l.length;i<n;i++)l[i]._DT_CellIndex.row=g}qa(b.aiDisplayMaster,c);qa(b.aiDisplay,c);qa(a[d],c,!1);Ua(b);c=b.rowIdFn(f._aData);c!==k&&delete b.aIds[c]});
-        this.iterator("table",function(a){for(var c=0,d=a.aoData.length;c<d;c++)a.aoData[c].idx=c});return this});p("rows.add()",function(a){var b=this.iterator("table",function(b){var c,f,g,h=[];f=0;for(g=a.length;f<g;f++)c=a[f],c.nodeName&&"TR"===c.nodeName.toUpperCase()?h.push(oa(b,c)[0]):h.push(N(b,c));return h},1),c=this.rows(-1);c.pop();h.merge(c,b);return c});p("row()",function(a,b){return db(this.rows(a,b))});p("row().data()",function(a){var b=this.context;if(a===k)return b.length&&this.length?b[0].aoData[this[0]]._aData:
-        k;b[0].aoData[this[0]]._aData=a;da(b[0],this[0],"data");return this});p("row().node()",function(){var a=this.context;return a.length&&this.length?a[0].aoData[this[0]].nTr||null:null});p("row.add()",function(a){a instanceof h&&a.length&&(a=a[0]);var b=this.iterator("table",function(b){return a.nodeName&&"TR"===a.nodeName.toUpperCase()?oa(b,a)[0]:N(b,a)});return this.row(b[0])});var eb=function(a,b){var c=a.context;if(c.length&&(c=c[0].aoData[b!==k?b:a[0]])&&c._details)c._details.remove(),c._detailsShow=
-        k,c._details=k},Wb=function(a,b){var c=a.context;if(c.length&&a.length){var d=c[0].aoData[a[0]];if(d._details){(d._detailsShow=b)?d._details.insertAfter(d.nTr):d._details.detach();var e=c[0],f=new t(e),g=e.aoData;f.off("draw.dt.DT_details column-visibility.dt.DT_details destroy.dt.DT_details");0<D(g,"_details").length&&(f.on("draw.dt.DT_details",function(a,b){e===b&&f.rows({page:"current"}).eq(0).each(function(a){a=g[a];a._detailsShow&&a._details.insertAfter(a.nTr)})}),f.on("column-visibility.dt.DT_details",
-        function(a,b){if(e===b)for(var c,d=ba(b),f=0,h=g.length;f<h;f++)c=g[f],c._details&&c._details.children("td[colspan]").attr("colspan",d)}),f.on("destroy.dt.DT_details",function(a,b){if(e===b)for(var c=0,d=g.length;c<d;c++)g[c]._details&&eb(f,c)}))}}};p("row().child()",function(a,b){var c=this.context;if(a===k)return c.length&&this.length?c[0].aoData[this[0]]._details:k;if(!0===a)this.child.show();else if(!1===a)eb(this);else if(c.length&&this.length){var d=c[0],c=c[0].aoData[this[0]],e=[],f=function(a,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                b){if(h.isArray(a)||a instanceof h)for(var c=0,k=a.length;c<k;c++)f(a[c],b);else a.nodeName&&"tr"===a.nodeName.toLowerCase()?e.push(a):(c=h("<tr><td/></tr>").addClass(b),h("td",c).addClass(b).html(a)[0].colSpan=ba(d),e.push(c[0]))};f(a,b);c._details&&c._details.detach();c._details=h(e);c._detailsShow&&c._details.insertAfter(c.nTr)}return this});p(["row().child.show()","row().child().show()"],function(){Wb(this,!0);return this});p(["row().child.hide()","row().child().hide()"],function(){Wb(this,!1);
-        return this});p(["row().child.remove()","row().child().remove()"],function(){eb(this);return this});p("row().child.isShown()",function(){var a=this.context;return a.length&&this.length?a[0].aoData[this[0]]._detailsShow||!1:!1});var fc=/^([^:]+):(name|visIdx|visible)$/,Xb=function(a,b,c,d,e){for(var c=[],d=0,f=e.length;d<f;d++)c.push(B(a,e[d],b));return c};p("columns()",function(a,b){a===k?a="":h.isPlainObject(a)&&(b=a,a="");var b=cb(b),c=this.iterator("table",function(c){var e=a,f=b,g=c.aoColumns,
-        j=D(g,"sName"),i=D(g,"nTh");return bb("column",e,function(a){var b=Qb(a);if(a==="")return X(g.length);if(b!==null)return[b>=0?b:g.length+b];if(typeof a==="function"){var e=Da(c,f);return h.map(g,function(b,f){return a(f,Xb(c,f,0,0,e),i[f])?f:null})}var k=typeof a==="string"?a.match(fc):"";if(k)switch(k[2]){case "visIdx":case "visible":b=parseInt(k[1],10);if(b<0){var m=h.map(g,function(a,b){return a.bVisible?b:null});return[m[m.length+b]]}return[$(c,b)];case "name":return h.map(j,function(a,b){return a===
-    k[1]?b:null});default:return[]}if(a.nodeName&&a._DT_CellIndex)return[a._DT_CellIndex.column];b=h(i).filter(a).map(function(){return h.inArray(this,i)}).toArray();if(b.length||!a.nodeName)return b;b=h(a).closest("*[data-dt-column]");return b.length?[b.data("dt-column")]:[]},c,f)},1);c.selector.cols=a;c.selector.opts=b;return c});u("columns().header()","column().header()",function(){return this.iterator("column",function(a,b){return a.aoColumns[b].nTh},1)});u("columns().footer()","column().footer()",
-        function(){return this.iterator("column",function(a,b){return a.aoColumns[b].nTf},1)});u("columns().data()","column().data()",function(){return this.iterator("column-rows",Xb,1)});u("columns().dataSrc()","column().dataSrc()",function(){return this.iterator("column",function(a,b){return a.aoColumns[b].mData},1)});u("columns().cache()","column().cache()",function(a){return this.iterator("column-rows",function(b,c,d,e,f){return ja(b.aoData,f,"search"===a?"_aFilterData":"_aSortData",c)},1)});u("columns().nodes()",
-        "column().nodes()",function(){return this.iterator("column-rows",function(a,b,c,d,e){return ja(a.aoData,e,"anCells",b)},1)});u("columns().visible()","column().visible()",function(a,b){var c=this.iterator("column",function(b,c){if(a===k)return b.aoColumns[c].bVisible;var f=b.aoColumns,g=f[c],j=b.aoData,i,n,l;if(a!==k&&g.bVisible!==a){if(a){var m=h.inArray(!0,D(f,"bVisible"),c+1);i=0;for(n=j.length;i<n;i++)l=j[i].nTr,f=j[i].anCells,l&&l.insertBefore(f[c],f[m]||null)}else h(D(b.aoData,"anCells",c)).detach();
-        g.bVisible=a;fa(b,b.aoHeader);fa(b,b.aoFooter);za(b)}});a!==k&&(this.iterator("column",function(c,e){s(c,null,"column-visibility",[c,e,a,b])}),(b===k||b)&&this.columns.adjust());return c});u("columns().indexes()","column().index()",function(a){return this.iterator("column",function(b,c){return"visible"===a?aa(b,c):c},1)});p("columns.adjust()",function(){return this.iterator("table",function(a){Z(a)},1)});p("column.index()",function(a,b){if(0!==this.context.length){var c=this.context[0];if("fromVisible"===
-        a||"toData"===a)return $(c,b);if("fromData"===a||"toVisible"===a)return aa(c,b)}});p("column()",function(a,b){return db(this.columns(a,b))});p("cells()",function(a,b,c){h.isPlainObject(a)&&(a.row===k?(c=a,a=null):(c=b,b=null));h.isPlainObject(b)&&(c=b,b=null);if(null===b||b===k)return this.iterator("table",function(b){var d=a,e=cb(c),f=b.aoData,g=Da(b,e),j=Tb(ja(f,g,"anCells")),i=h([].concat.apply([],j)),l,n=b.aoColumns.length,m,p,u,t,s,v;return bb("cell",d,function(a){var c=typeof a==="function";
-        if(a===null||a===k||c){m=[];p=0;for(u=g.length;p<u;p++){l=g[p];for(t=0;t<n;t++){s={row:l,column:t};if(c){v=f[l];a(s,B(b,l,t),v.anCells?v.anCells[t]:null)&&m.push(s)}else m.push(s)}}return m}if(h.isPlainObject(a))return[a];c=i.filter(a).map(function(a,b){return{row:b._DT_CellIndex.row,column:b._DT_CellIndex.column}}).toArray();if(c.length||!a.nodeName)return c;v=h(a).closest("*[data-dt-row]");return v.length?[{row:v.data("dt-row"),column:v.data("dt-column")}]:[]},b,e)});var d=this.columns(b,c),e=this.rows(a,
-        c),f,g,j,i,n,l=this.iterator("table",function(a,b){f=[];g=0;for(j=e[b].length;g<j;g++){i=0;for(n=d[b].length;i<n;i++)f.push({row:e[b][g],column:d[b][i]})}return f},1);h.extend(l.selector,{cols:b,rows:a,opts:c});return l});u("cells().nodes()","cell().node()",function(){return this.iterator("cell",function(a,b,c){return(a=a.aoData[b])&&a.anCells?a.anCells[c]:k},1)});p("cells().data()",function(){return this.iterator("cell",function(a,b,c){return B(a,b,c)},1)});u("cells().cache()","cell().cache()",function(a){a=
-        "search"===a?"_aFilterData":"_aSortData";return this.iterator("cell",function(b,c,d){return b.aoData[c][a][d]},1)});u("cells().render()","cell().render()",function(a){return this.iterator("cell",function(b,c,d){return B(b,c,d,a)},1)});u("cells().indexes()","cell().index()",function(){return this.iterator("cell",function(a,b,c){return{row:b,column:c,columnVisible:aa(a,c)}},1)});u("cells().invalidate()","cell().invalidate()",function(a){return this.iterator("cell",function(b,c,d){da(b,c,a,d)})});p("cell()",
-        function(a,b,c){return db(this.cells(a,b,c))});p("cell().data()",function(a){var b=this.context,c=this[0];if(a===k)return b.length&&c.length?B(b[0],c[0].row,c[0].column):k;lb(b[0],c[0].row,c[0].column,a);da(b[0],c[0].row,"data",c[0].column);return this});p("order()",function(a,b){var c=this.context;if(a===k)return 0!==c.length?c[0].aaSorting:k;"number"===typeof a?a=[[a,b]]:a.length&&!h.isArray(a[0])&&(a=Array.prototype.slice.call(arguments));return this.iterator("table",function(b){b.aaSorting=a.slice()})});
-    p("order.listener()",function(a,b,c){return this.iterator("table",function(d){Oa(d,a,b,c)})});p("order.fixed()",function(a){if(!a){var b=this.context,b=b.length?b[0].aaSortingFixed:k;return h.isArray(b)?{pre:b}:b}return this.iterator("table",function(b){b.aaSortingFixed=h.extend(!0,{},a)})});p(["columns().order()","column().order()"],function(a){var b=this;return this.iterator("table",function(c,d){var e=[];h.each(b[d],function(b,c){e.push([c,a])});c.aaSorting=e})});p("search()",function(a,b,c,d){var e=
-        this.context;return a===k?0!==e.length?e[0].oPreviousSearch.sSearch:k:this.iterator("table",function(e){e.oFeatures.bFilter&&ga(e,h.extend({},e.oPreviousSearch,{sSearch:a+"",bRegex:null===b?!1:b,bSmart:null===c?!0:c,bCaseInsensitive:null===d?!0:d}),1)})});u("columns().search()","column().search()",function(a,b,c,d){return this.iterator("column",function(e,f){var g=e.aoPreSearchCols;if(a===k)return g[f].sSearch;e.oFeatures.bFilter&&(h.extend(g[f],{sSearch:a+"",bRegex:null===b?!1:b,bSmart:null===c?
-        !0:c,bCaseInsensitive:null===d?!0:d}),ga(e,e.oPreviousSearch,1))})});p("state()",function(){return this.context.length?this.context[0].oSavedState:null});p("state.clear()",function(){return this.iterator("table",function(a){a.fnStateSaveCallback.call(a.oInstance,a,{})})});p("state.loaded()",function(){return this.context.length?this.context[0].oLoadedState:null});p("state.save()",function(){return this.iterator("table",function(a){za(a)})});m.versionCheck=m.fnVersionCheck=function(a){for(var b=m.version.split("."),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         a=a.split("."),c,d,e=0,f=a.length;e<f;e++)if(c=parseInt(b[e],10)||0,d=parseInt(a[e],10)||0,c!==d)return c>d;return!0};m.isDataTable=m.fnIsDataTable=function(a){var b=h(a).get(0),c=!1;if(a instanceof m.Api)return!0;h.each(m.settings,function(a,e){var f=e.nScrollHead?h("table",e.nScrollHead)[0]:null,g=e.nScrollFoot?h("table",e.nScrollFoot)[0]:null;if(e.nTable===b||f===b||g===b)c=!0});return c};m.tables=m.fnTables=function(a){var b=!1;h.isPlainObject(a)&&(b=a.api,a=a.visible);var c=h.map(m.settings,
-        function(b){if(!a||a&&h(b.nTable).is(":visible"))return b.nTable});return b?new t(c):c};m.camelToHungarian=J;p("$()",function(a,b){var c=this.rows(b).nodes(),c=h(c);return h([].concat(c.filter(a).toArray(),c.find(a).toArray()))});h.each(["on","one","off"],function(a,b){p(b+"()",function(){var a=Array.prototype.slice.call(arguments);a[0]=h.map(a[0].split(/\s/),function(a){return!a.match(/\.dt\b/)?a+".dt":a}).join(" ");var d=h(this.tables().nodes());d[b].apply(d,a);return this})});p("clear()",function(){return this.iterator("table",
-        function(a){pa(a)})});p("settings()",function(){return new t(this.context,this.context)});p("init()",function(){var a=this.context;return a.length?a[0].oInit:null});p("data()",function(){return this.iterator("table",function(a){return D(a.aoData,"_aData")}).flatten()});p("destroy()",function(a){a=a||!1;return this.iterator("table",function(b){var c=b.nTableWrapper.parentNode,d=b.oClasses,e=b.nTable,f=b.nTBody,g=b.nTHead,j=b.nTFoot,i=h(e),f=h(f),k=h(b.nTableWrapper),l=h.map(b.aoData,function(a){return a.nTr}),
-        p;b.bDestroying=!0;s(b,"aoDestroyCallback","destroy",[b]);a||(new t(b)).columns().visible(!0);k.off(".DT").find(":not(tbody *)").off(".DT");h(E).off(".DT-"+b.sInstance);e!=g.parentNode&&(i.children("thead").detach(),i.append(g));j&&e!=j.parentNode&&(i.children("tfoot").detach(),i.append(j));b.aaSorting=[];b.aaSortingFixed=[];ya(b);h(l).removeClass(b.asStripeClasses.join(" "));h("th, td",g).removeClass(d.sSortable+" "+d.sSortableAsc+" "+d.sSortableDesc+" "+d.sSortableNone);b.bJUI&&(h("th span."+d.sSortIcon+
-        ", td span."+d.sSortIcon,g).detach(),h("th, td",g).each(function(){var a=h("div."+d.sSortJUIWrapper,this);h(this).append(a.contents());a.detach()}));f.children().detach();f.append(l);g=a?"remove":"detach";i[g]();k[g]();!a&&c&&(c.insertBefore(e,b.nTableReinsertBefore),i.css("width",b.sDestroyWidth).removeClass(d.sTable),(p=b.asDestroyStripes.length)&&f.children().each(function(a){h(this).addClass(b.asDestroyStripes[a%p])}));c=h.inArray(b,m.settings);-1!==c&&m.settings.splice(c,1)})});h.each(["column",
-        "row","cell"],function(a,b){p(b+"s().every()",function(a){var d=this.selector.opts,e=this;return this.iterator(b,function(f,g,h,i,m){a.call(e[b](g,"cell"===b?h:d,"cell"===b?d:k),g,h,i,m)})})});p("i18n()",function(a,b,c){var d=this.context[0],a=R(a)(d.oLanguage);a===k&&(a=b);c!==k&&h.isPlainObject(a)&&(a=a[c]!==k?a[c]:a._);return a.replace("%d",c)});m.version="1.10.15";m.settings=[];m.models={};m.models.oSearch={bCaseInsensitive:!0,sSearch:"",bRegex:!1,bSmart:!0};m.models.oRow={nTr:null,anCells:null,
-        _aData:[],_aSortData:null,_aFilterData:null,_sFilterRow:null,_sRowStripe:"",src:null,idx:-1};m.models.oColumn={idx:null,aDataSort:null,asSorting:null,bSearchable:null,bSortable:null,bVisible:null,_sManualType:null,_bAttrSrc:!1,fnCreatedCell:null,fnGetData:null,fnSetData:null,mData:null,mRender:null,nTh:null,nTf:null,sClass:null,sContentPadding:null,sDefaultContent:null,sName:null,sSortDataType:"std",sSortingClass:null,sSortingClassJUI:null,sTitle:null,sType:null,sWidth:null,sWidthOrig:null};m.defaults=
-    {aaData:null,aaSorting:[[0,"asc"]],aaSortingFixed:[],ajax:null,aLengthMenu:[10,25,50,100],aoColumns:null,aoColumnDefs:null,aoSearchCols:[],asStripeClasses:null,bAutoWidth:!0,bDeferRender:!1,bDestroy:!1,bFilter:!0,bInfo:!0,bJQueryUI:!1,bLengthChange:!0,bPaginate:!0,bProcessing:!1,bRetrieve:!1,bScrollCollapse:!1,bServerSide:!1,bSort:!0,bSortMulti:!0,bSortCellsTop:!1,bSortClasses:!0,bStateSave:!1,fnCreatedRow:null,fnDrawCallback:null,fnFooterCallback:null,fnFormatNumber:function(a){return a.toString().replace(/\B(?=(\d{3})+(?!\d))/g,
-        this.oLanguage.sThousands)},fnHeaderCallback:null,fnInfoCallback:null,fnInitComplete:null,fnPreDrawCallback:null,fnRowCallback:null,fnServerData:null,fnServerParams:null,fnStateLoadCallback:function(a){try{return JSON.parse((-1===a.iStateDuration?sessionStorage:localStorage).getItem("DataTables_"+a.sInstance+"_"+location.pathname))}catch(b){}},fnStateLoadParams:null,fnStateLoaded:null,fnStateSaveCallback:function(a,b){try{(-1===a.iStateDuration?sessionStorage:localStorage).setItem("DataTables_"+a.sInstance+
-        "_"+location.pathname,JSON.stringify(b))}catch(c){}},fnStateSaveParams:null,iStateDuration:7200,iDeferLoading:null,iDisplayLength:10,iDisplayStart:0,iTabIndex:0,oClasses:{},oLanguage:{oAria:{sSortAscending:": activate to sort column ascending",sSortDescending:": activate to sort column descending"},oPaginate:{sFirst:"First",sLast:"Last",sNext:"Next",sPrevious:"Previous"},sEmptyTable:"No data available in table",sInfo:"Showing _START_ to _END_ of _TOTAL_ entries",sInfoEmpty:"Showing 0 to 0 of 0 entries",
-        sInfoFiltered:"(filtered from _MAX_ total entries)",sInfoPostFix:"",sDecimal:"",sThousands:",",sLengthMenu:"Show _MENU_ entries",sLoadingRecords:"Loading...",sProcessing:"Processing...",sSearch:"Search:",sSearchPlaceholder:"",sUrl:"",sZeroRecords:"No matching records found"},oSearch:h.extend({},m.models.oSearch),sAjaxDataProp:"data",sAjaxSource:null,sDom:"lfrtip",searchDelay:null,sPaginationType:"simple_numbers",sScrollX:"",sScrollXInner:"",sScrollY:"",sServerMethod:"GET",renderer:null,rowId:"DT_RowId"};
-    Y(m.defaults);m.defaults.column={aDataSort:null,iDataSort:-1,asSorting:["asc","desc"],bSearchable:!0,bSortable:!0,bVisible:!0,fnCreatedCell:null,mData:null,mRender:null,sCellType:"td",sClass:"",sContentPadding:"",sDefaultContent:null,sName:"",sSortDataType:"std",sTitle:null,sType:null,sWidth:null};Y(m.defaults.column);m.models.oSettings={oFeatures:{bAutoWidth:null,bDeferRender:null,bFilter:null,bInfo:null,bLengthChange:null,bPaginate:null,bProcessing:null,bServerSide:null,bSort:null,bSortMulti:null,
-        bSortClasses:null,bStateSave:null},oScroll:{bCollapse:null,iBarWidth:0,sX:null,sXInner:null,sY:null},oLanguage:{fnInfoCallback:null},oBrowser:{bScrollOversize:!1,bScrollbarLeft:!1,bBounding:!1,barWidth:0},ajax:null,aanFeatures:[],aoData:[],aiDisplay:[],aiDisplayMaster:[],aIds:{},aoColumns:[],aoHeader:[],aoFooter:[],oPreviousSearch:{},aoPreSearchCols:[],aaSorting:null,aaSortingFixed:[],asStripeClasses:null,asDestroyStripes:[],sDestroyWidth:0,aoRowCallback:[],aoHeaderCallback:[],aoFooterCallback:[],
-        aoDrawCallback:[],aoRowCreatedCallback:[],aoPreDrawCallback:[],aoInitComplete:[],aoStateSaveParams:[],aoStateLoadParams:[],aoStateLoaded:[],sTableId:"",nTable:null,nTHead:null,nTFoot:null,nTBody:null,nTableWrapper:null,bDeferLoading:!1,bInitialised:!1,aoOpenRows:[],sDom:null,searchDelay:null,sPaginationType:"two_button",iStateDuration:0,aoStateSave:[],aoStateLoad:[],oSavedState:null,oLoadedState:null,sAjaxSource:null,sAjaxDataProp:null,bAjaxDataGet:!0,jqXHR:null,json:k,oAjaxData:k,fnServerData:null,
-        aoServerParams:[],sServerMethod:null,fnFormatNumber:null,aLengthMenu:null,iDraw:0,bDrawing:!1,iDrawError:-1,_iDisplayLength:10,_iDisplayStart:0,_iRecordsTotal:0,_iRecordsDisplay:0,bJUI:null,oClasses:{},bFiltered:!1,bSorted:!1,bSortCellsTop:null,oInit:null,aoDestroyCallback:[],fnRecordsTotal:function(){return"ssp"==y(this)?1*this._iRecordsTotal:this.aiDisplayMaster.length},fnRecordsDisplay:function(){return"ssp"==y(this)?1*this._iRecordsDisplay:this.aiDisplay.length},fnDisplayEnd:function(){var a=
-            this._iDisplayLength,b=this._iDisplayStart,c=b+a,d=this.aiDisplay.length,e=this.oFeatures,f=e.bPaginate;return e.bServerSide?!1===f||-1===a?b+d:Math.min(b+a,this._iRecordsDisplay):!f||c>d||-1===a?d:c},oInstance:null,sInstance:null,iTabIndex:0,nScrollHead:null,nScrollFoot:null,aLastSort:[],oPlugins:{},rowIdFn:null,rowId:null};m.ext=x={buttons:{},classes:{},builder:"-source-",errMode:"alert",feature:[],search:[],selector:{cell:[],column:[],row:[]},internal:{},legacy:{ajax:null},pager:{},renderer:{pageButton:{},
-        header:{}},order:{},type:{detect:[],search:{},order:{}},_unique:0,fnVersionCheck:m.fnVersionCheck,iApiIndex:0,oJUIClasses:{},sVersion:m.version};h.extend(x,{afnFiltering:x.search,aTypes:x.type.detect,ofnSearch:x.type.search,oSort:x.type.order,afnSortData:x.order,aoFeatures:x.feature,oApi:x.internal,oStdClasses:x.classes,oPagination:x.pager});h.extend(m.ext.classes,{sTable:"dataTable",sNoFooter:"no-footer",sPageButton:"paginate_button",sPageButtonActive:"current",sPageButtonDisabled:"disabled",sStripeOdd:"odd",
-        sStripeEven:"even",sRowEmpty:"dataTables_empty",sWrapper:"dataTables_wrapper",sFilter:"dataTables_filter",sInfo:"dataTables_info",sPaging:"dataTables_paginate paging_",sLength:"dataTables_length",sProcessing:"dataTables_processing",sSortAsc:"sorting_asc",sSortDesc:"sorting_desc",sSortable:"sorting",sSortableAsc:"sorting_asc_disabled",sSortableDesc:"sorting_desc_disabled",sSortableNone:"sorting_disabled",sSortColumn:"sorting_",sFilterInput:"",sLengthSelect:"",sScrollWrapper:"dataTables_scroll",sScrollHead:"dataTables_scrollHead",
-        sScrollHeadInner:"dataTables_scrollHeadInner",sScrollBody:"dataTables_scrollBody",sScrollFoot:"dataTables_scrollFoot",sScrollFootInner:"dataTables_scrollFootInner",sHeaderTH:"",sFooterTH:"",sSortJUIAsc:"",sSortJUIDesc:"",sSortJUI:"",sSortJUIAscAllowed:"",sSortJUIDescAllowed:"",sSortJUIWrapper:"",sSortIcon:"",sJUIHeader:"",sJUIFooter:""});var Ea="",Ea="",G=Ea+"ui-state-default",ka=Ea+"css_right ui-icon ui-icon-",Yb=Ea+"fg-toolbar ui-toolbar ui-widget-header ui-helper-clearfix";h.extend(m.ext.oJUIClasses,
-        m.ext.classes,{sPageButton:"fg-button ui-button "+G,sPageButtonActive:"ui-state-disabled",sPageButtonDisabled:"ui-state-disabled",sPaging:"dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_",sSortAsc:G+" sorting_asc",sSortDesc:G+" sorting_desc",sSortable:G+" sorting",sSortableAsc:G+" sorting_asc_disabled",sSortableDesc:G+" sorting_desc_disabled",sSortableNone:G+" sorting_disabled",sSortJUIAsc:ka+"triangle-1-n",sSortJUIDesc:ka+"triangle-1-s",sSortJUI:ka+"carat-2-n-s",
-            sSortJUIAscAllowed:ka+"carat-1-n",sSortJUIDescAllowed:ka+"carat-1-s",sSortJUIWrapper:"DataTables_sort_wrapper",sSortIcon:"DataTables_sort_icon",sScrollHead:"dataTables_scrollHead "+G,sScrollFoot:"dataTables_scrollFoot "+G,sHeaderTH:G,sFooterTH:G,sJUIHeader:Yb+" ui-corner-tl ui-corner-tr",sJUIFooter:Yb+" ui-corner-bl ui-corner-br"});var Nb=m.ext.pager;h.extend(Nb,{simple:function(){return["previous","next"]},full:function(){return["first","previous","next","last"]},numbers:function(a,b){return[ia(a,
-        b)]},simple_numbers:function(a,b){return["previous",ia(a,b),"next"]},full_numbers:function(a,b){return["first","previous",ia(a,b),"next","last"]},first_last_numbers:function(a,b){return["first",ia(a,b),"last"]},_numbers:ia,numbers_length:7});h.extend(!0,m.ext.renderer,{pageButton:{_:function(a,b,c,d,e,f){var g=a.oClasses,j=a.oLanguage.oPaginate,i=a.oLanguage.oAria.paginate||{},m,l,p=0,r=function(b,d){var k,t,u,s,v=function(b){Va(a,b.data.action,true)};k=0;for(t=d.length;k<t;k++){s=d[k];if(h.isArray(s)){u=
-        h("<"+(s.DT_el||"div")+"/>").appendTo(b);r(u,s)}else{m=null;l="";switch(s){case "ellipsis":b.append('<span class="ellipsis">&#x2026;</span>');break;case "first":m=j.sFirst;l=s+(e>0?"":" "+g.sPageButtonDisabled);break;case "previous":m=j.sPrevious;l=s+(e>0?"":" "+g.sPageButtonDisabled);break;case "next":m=j.sNext;l=s+(e<f-1?"":" "+g.sPageButtonDisabled);break;case "last":m=j.sLast;l=s+(e<f-1?"":" "+g.sPageButtonDisabled);break;default:m=s+1;l=e===s?g.sPageButtonActive:""}if(m!==null){u=h("<a>",{"class":g.sPageButton+
-    " "+l,"aria-controls":a.sTableId,"aria-label":i[s],"data-dt-idx":p,tabindex:a.iTabIndex,id:c===0&&typeof s==="string"?a.sTableId+"_"+s:null}).html(m).appendTo(b);Ya(u,{action:s},v);p++}}}},t;try{t=h(b).find(H.activeElement).data("dt-idx")}catch(u){}r(h(b).empty(),d);t!==k&&h(b).find("[data-dt-idx="+t+"]").focus()}}});h.extend(m.ext.type.detect,[function(a,b){var c=b.oLanguage.sDecimal;return ab(a,c)?"num"+c:null},function(a){if(a&&!(a instanceof Date)&&!cc.test(a))return null;var b=Date.parse(a);
-        return null!==b&&!isNaN(b)||M(a)?"date":null},function(a,b){var c=b.oLanguage.sDecimal;return ab(a,c,!0)?"num-fmt"+c:null},function(a,b){var c=b.oLanguage.sDecimal;return Sb(a,c)?"html-num"+c:null},function(a,b){var c=b.oLanguage.sDecimal;return Sb(a,c,!0)?"html-num-fmt"+c:null},function(a){return M(a)||"string"===typeof a&&-1!==a.indexOf("<")?"html":null}]);h.extend(m.ext.type.search,{html:function(a){return M(a)?a:"string"===typeof a?a.replace(Pb," ").replace(Ca,""):""},string:function(a){return M(a)?
-        a:"string"===typeof a?a.replace(Pb," "):a}});var Ba=function(a,b,c,d){if(0!==a&&(!a||"-"===a))return-Infinity;b&&(a=Rb(a,b));a.replace&&(c&&(a=a.replace(c,"")),d&&(a=a.replace(d,"")));return 1*a};h.extend(x.type.order,{"date-pre":function(a){return Date.parse(a)||-Infinity},"html-pre":function(a){return M(a)?"":a.replace?a.replace(/<.*?>/g,"").toLowerCase():a+""},"string-pre":function(a){return M(a)?"":"string"===typeof a?a.toLowerCase():!a.toString?"":a.toString()},"string-asc":function(a,b){return a<
-    b?-1:a>b?1:0},"string-desc":function(a,b){return a<b?1:a>b?-1:0}});fb("");h.extend(!0,m.ext.renderer,{header:{_:function(a,b,c,d){h(a.nTable).on("order.dt.DT",function(e,f,g,h){if(a===f){e=c.idx;b.removeClass(c.sSortingClass+" "+d.sSortAsc+" "+d.sSortDesc).addClass(h[e]=="asc"?d.sSortAsc:h[e]=="desc"?d.sSortDesc:c.sSortingClass)}})},jqueryui:function(a,b,c,d){h("<div/>").addClass(d.sSortJUIWrapper).append(b.contents()).append(h("<span/>").addClass(d.sSortIcon+" "+c.sSortingClassJUI)).appendTo(b);
-        h(a.nTable).on("order.dt.DT",function(e,f,g,h){if(a===f){e=c.idx;b.removeClass(d.sSortAsc+" "+d.sSortDesc).addClass(h[e]=="asc"?d.sSortAsc:h[e]=="desc"?d.sSortDesc:c.sSortingClass);b.find("span."+d.sSortIcon).removeClass(d.sSortJUIAsc+" "+d.sSortJUIDesc+" "+d.sSortJUI+" "+d.sSortJUIAscAllowed+" "+d.sSortJUIDescAllowed).addClass(h[e]=="asc"?d.sSortJUIAsc:h[e]=="desc"?d.sSortJUIDesc:c.sSortingClassJUI)}})}}});var Zb=function(a){return"string"===typeof a?a.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,
-        "&quot;"):a};m.render={number:function(a,b,c,d,e){return{display:function(f){if("number"!==typeof f&&"string"!==typeof f)return f;var g=0>f?"-":"",h=parseFloat(f);if(isNaN(h))return Zb(f);h=h.toFixed(c);f=Math.abs(h);h=parseInt(f,10);f=c?b+(f-h).toFixed(c).substring(2):"";return g+(d||"")+h.toString().replace(/\B(?=(\d{3})+(?!\d))/g,a)+f+(e||"")}}},text:function(){return{display:Zb}}};h.extend(m.ext.internal,{_fnExternApiFunc:Ob,_fnBuildAjax:ua,_fnAjaxUpdate:nb,_fnAjaxParameters:wb,_fnAjaxUpdateDraw:xb,
-        _fnAjaxDataSrc:va,_fnAddColumn:Ga,_fnColumnOptions:la,_fnAdjustColumnSizing:Z,_fnVisibleToColumnIndex:$,_fnColumnIndexToVisible:aa,_fnVisbleColumns:ba,_fnGetColumns:na,_fnColumnTypes:Ia,_fnApplyColumnDefs:kb,_fnHungarianMap:Y,_fnCamelToHungarian:J,_fnLanguageCompat:Fa,_fnBrowserDetect:ib,_fnAddData:N,_fnAddTr:oa,_fnNodeToDataIndex:function(a,b){return b._DT_RowIndex!==k?b._DT_RowIndex:null},_fnNodeToColumnIndex:function(a,b,c){return h.inArray(c,a.aoData[b].anCells)},_fnGetCellData:B,_fnSetCellData:lb,
-        _fnSplitObjNotation:La,_fnGetObjectDataFn:R,_fnSetObjectDataFn:S,_fnGetDataMaster:Ma,_fnClearTable:pa,_fnDeleteIndex:qa,_fnInvalidate:da,_fnGetRowElements:Ka,_fnCreateTr:Ja,_fnBuildHead:mb,_fnDrawHead:fa,_fnDraw:O,_fnReDraw:T,_fnAddOptionsHtml:pb,_fnDetectHeader:ea,_fnGetUniqueThs:ta,_fnFeatureHtmlFilter:rb,_fnFilterComplete:ga,_fnFilterCustom:Ab,_fnFilterColumn:zb,_fnFilter:yb,_fnFilterCreateSearch:Ra,_fnEscapeRegex:Sa,_fnFilterData:Bb,_fnFeatureHtmlInfo:ub,_fnUpdateInfo:Eb,_fnInfoMacros:Fb,_fnInitialise:ha,
-        _fnInitComplete:wa,_fnLengthChange:Ta,_fnFeatureHtmlLength:qb,_fnFeatureHtmlPaginate:vb,_fnPageChange:Va,_fnFeatureHtmlProcessing:sb,_fnProcessingDisplay:C,_fnFeatureHtmlTable:tb,_fnScrollDraw:ma,_fnApplyToChildren:I,_fnCalculateColumnWidths:Ha,_fnThrottle:Qa,_fnConvertToWidth:Gb,_fnGetWidestNode:Hb,_fnGetMaxLenString:Ib,_fnStringToCss:v,_fnSortFlatten:W,_fnSort:ob,_fnSortAria:Kb,_fnSortListener:Xa,_fnSortAttachListener:Oa,_fnSortingClasses:ya,_fnSortData:Jb,_fnSaveState:za,_fnLoadState:Lb,_fnSettingsFromNode:Aa,
-        _fnLog:K,_fnMap:F,_fnBindAction:Ya,_fnCallbackReg:z,_fnCallbackFire:s,_fnLengthOverflow:Ua,_fnRenderer:Pa,_fnDataSource:y,_fnRowAttributes:Na,_fnCalculateEnd:function(){}});h.fn.dataTable=m;m.$=h;h.fn.dataTableSettings=m.settings;h.fn.dataTableExt=m.ext;h.fn.DataTable=function(a){return h(this).dataTable(a).api()};h.each(m,function(a,b){h.fn.DataTable[a]=b});return h.fn.dataTable});
 "use strict";
 
 angular.module('app.ui').controller('GeneralElementsCtrl', function ($scope, $sce) {
@@ -14239,6 +14239,67 @@ angular.module('app.auth').directive('googleSignin', function ($rootScope, Googl
     };
 });
 
+'use strict';
+
+angular.module('app.chat').factory('ChatApi', function ($q, $rootScope, User, $http, APP_CONFIG) {
+    var dfd = $q.defer();
+    var _user;
+    var ChatSrv = {
+        initialized: dfd.promise,
+        users: [],
+        messages: [],
+        statuses: ['Online', 'Busy', 'Away', 'Log Off'],
+        status: 'Online',
+        setUser: function (user) {
+            if (ChatSrv.users.indexOf(_user) != -1)
+                ChatSrv.users.splice(ChatSrv.users.indexOf(_user), 1);
+            _user = user;
+            ChatSrv.users.push(_user);
+        },
+        sendMessage: function (text) {
+            var message = {
+                user: _user,
+                body: text,
+                date: new Date()
+            };
+            this.messages.push(message);
+        }
+    };
+
+
+    $http.get(APP_CONFIG.apiRootUrl + '/chat.json').then(function(res){
+        ChatSrv.messages = res.data.messages;
+        ChatSrv.users = res.data.users;
+        dfd.resolve();
+    });
+
+    ChatSrv.initialized.then(function () {
+
+        User.initialized.then(function () {
+            ChatSrv.setUser({
+                username: User.username,
+                picture: User.picture,
+                status: ChatSrv.status
+            });
+        });
+
+        $rootScope.$watch(function () {
+            return User.username
+        }, function (name, oldName) {
+            if (name != oldName) {
+                ChatSrv.setUser({
+                    username: User.username,
+                    picture: User.picture,
+                    status: ChatSrv.status
+                });
+            }
+        });
+    });
+
+
+    return ChatSrv;
+
+});
 (function() {
         
    'use strict';
@@ -14928,67 +14989,6 @@ angular.module('app').factory('Todo', function (Restangular, APP_CONFIG, $httpBa
 });
 'use strict';
 
-angular.module('app.chat').factory('ChatApi', function ($q, $rootScope, User, $http, APP_CONFIG) {
-    var dfd = $q.defer();
-    var _user;
-    var ChatSrv = {
-        initialized: dfd.promise,
-        users: [],
-        messages: [],
-        statuses: ['Online', 'Busy', 'Away', 'Log Off'],
-        status: 'Online',
-        setUser: function (user) {
-            if (ChatSrv.users.indexOf(_user) != -1)
-                ChatSrv.users.splice(ChatSrv.users.indexOf(_user), 1);
-            _user = user;
-            ChatSrv.users.push(_user);
-        },
-        sendMessage: function (text) {
-            var message = {
-                user: _user,
-                body: text,
-                date: new Date()
-            };
-            this.messages.push(message);
-        }
-    };
-
-
-    $http.get(APP_CONFIG.apiRootUrl + '/chat.json').then(function(res){
-        ChatSrv.messages = res.data.messages;
-        ChatSrv.users = res.data.users;
-        dfd.resolve();
-    });
-
-    ChatSrv.initialized.then(function () {
-
-        User.initialized.then(function () {
-            ChatSrv.setUser({
-                username: User.username,
-                picture: User.picture,
-                status: ChatSrv.status
-            });
-        });
-
-        $rootScope.$watch(function () {
-            return User.username
-        }, function (name, oldName) {
-            if (name != oldName) {
-                ChatSrv.setUser({
-                    username: User.username,
-                    picture: User.picture,
-                    status: ChatSrv.status
-                });
-            }
-        });
-    });
-
-
-    return ChatSrv;
-
-});
-'use strict';
-
 angular.module('app.graphs').directive('chartjsBarChart', function () {
     return {
         restrict: 'A',
@@ -15380,93 +15380,6 @@ angular.module('app.graphs').directive('chartjsRadarChart', function () {
             var ctx = element[0].getContext("2d");
             var myNewChart = new Chart(ctx).Radar(radarData, radarOptions);
         }}
-});
-'use strict'
-
-angular.module('app.graphs').factory('DygraphsDataDemo', function(){
-    function data_nolabel() {
-        return "20070101,62,39\n20070102,62,44\n20070103,62,42\n20070104,57,45\n20070105,54,44\n20070106,55,36\n20070107,62,45\n20070108,66,48\n20070109,63,39\n20070110,57,37\n20070111,50,37\n20070112,48,35\n20070113,48,30\n20070114,48,28\n20070115,53,28\n20070116,50,30\n20070117,57,37\n20070118,61,33\n20070119,55,35\n20070120,61,35\n20070121,64,43\n20070122,61,36\n20070123,57,35\n20070124,60,35\n20070125,55,39\n20070126,54,44\n20070127,57,48\n20070128,59,45\n20070129,63,45\n20070130,59,41\n20070131,55,48\n20070201,53,46\n20070202,55,44\n20070203,59,37\n20070204,66,39\n20070205,64,43\n20070206,61,46\n20070207,61,51\n20070208,60,51\n20070209,61,55\n20070210,62,55\n20070211,61,46\n20070212,59,43\n20070213,57,46\n20070214,61,39\n20070215,64,44\n20070216,71,46\n20070217,73,51\n20070218,60,46\n20070219,63,44\n20070220,57,45\n20070221,59,48\n20070222,55,44\n20070223,55,42\n20070224,57,39\n20070225,55,48\n20070226,57,44\n20070227,53,39\n20070228,53,37\n20070301,54,37\n20070302,61,39\n20070303,66,43\n20070304,70,48\n20070305,68,53\n20070306,69,46\n20070307,62,51\n20070308,61,46\n20070309,60,45\n20070310,68,46\n20070311,79,48\n20070312,80,52\n20070313,73,53\n20070314,64,48\n20070315,78,46\n20070316,78,50\n20070317,62,51\n20070318,66,46\n20070319,64,48\n20070320,60,48\n20070321,66,46\n20070322,73,43\n20070323,78,48\n20070324,68,48\n20070325,64,53\n20070326,66,48\n20070327,57,46\n20070328,66,42\n20070329,73,42\n20070330,72,46\n20070331,69,46\n20070401,64,46\n20070402,69,46\n20070403,71,46\n20070404,69,50\n20070405,71,52\n20070406,64,52\n20070407,68,51\n20070408,71,51\n20070409,66,50\n20070410,72,46\n20070411,63,50\n20070412,64,46\n20070413,70,44\n20070414,57,51\n20070415,68,46\n20070416,75,46\n20070417,62,48\n20070418,61,45\n20070419,57,42\n20070420,64,46\n20070421,61,43\n20070422,63,48\n20070423,70,44\n20070424,66,46\n20070425,66,48\n20070426,69,48\n20070427,82,50\n20070428,81,55\n20070429,70,53\n20070430,77,51\n20070501,70,48\n20070502,66,52\n20070503,63,48\n20070504,64,51\n20070505,73,46\n20070506,88,54\n20070507,91,57\n20070508,84,60\n20070509,73,55\n20070510,57,52\n20070511,64,51\n20070512,64,50\n20070513,72,46\n20070514,66,50\n20070515,63,51\n20070516,70,48\n20070517,68,50\n20070518,73,50\n20070519,70,52\n20070520,73,51\n20070521,78,54\n20070522,81,51\n20070523,86,55\n20070524,78,55\n20070525,69,54\n20070526,69,55\n20070527,69,54\n20070528,73,52\n20070529,69,53\n20070530,66,55\n20070531,64,54\n20070601,66,54\n20070602,64,54\n20070603,70,55\n20070604,73,59\n20070605,68,55\n20070606,70,53\n20070607,75,51\n20070608,70,50\n20070609,75,53\n20070610,75,55\n20070611,75,53\n20070612,79,52\n20070613,90,59\n20070614,89,60\n20070615,86,59\n20070616,72,55\n20070617,79,53\n20070618,79,57\n20070619,73,55\n20070620,71,55\n20070621,77,55\n20070622,79,54\n20070623,77,54\n20070624,77,53\n20070625,82,53\n20070626,71,54\n20070627,73,55\n20070628,73,57\n20070629,77,60\n20070630,75,54\n20070701,78,54\n20070702,82,57\n20070703,72,57\n20070704,84,59\n20070705,84,61\n20070706,75,60\n20070707,73,55\n20070708,78,55\n20070709,73,57\n20070710,73,59\n20070711,78,62\n20070712,75,59\n20070713,79,60\n20070714,73,60\n20070715,78,62\n20070716,75,59\n20070717,77,60\n20070718,75,63\n20070719,80,59\n20070720,79,59\n20070721,77,61\n20070722,75,63\n20070723,79,64\n20070724,73,61\n20070725,72,57\n20070726,75,60\n20070727,78,60\n20070728,77,57\n20070729,73,57\n20070730,80,59\n20070731,75,59\n20070801,75,59\n20070802,73,60\n20070803,79,60\n20070804,77,59\n20070805,71,57\n20070806,71,59\n20070807,73,57\n20070808,71,55\n20070809,77,60\n20070810,77,57\n20070811,73,57\n20070812,72,55\n20070813,75,55\n20070814,73,55\n20070815,75,57\n20070816,79,60\n20070817,80,55\n20070818,78,57\n20070819,77,55\n20070820,80,64\n20070821,82,62\n20070822,82,60\n20070823,82,57\n20070824,78,59\n20070825,73,61\n20070826,73,61\n20070827,78,59\n20070828,86,62\n20070829,88,68\n20070830,90,68\n20070831,80,66\n20070901,87,62\n20070902,89,61\n20070903,78,61\n20070904,78,63\n20070905,89,57\n20070906,82,64\n20070907,75,61\n20070908,73,62\n20070909,71,61\n20070910,73,59\n20070911,71,59\n20070912,72,60\n20070913,77,57\n20070914,75,60\n20070915,73,57\n20070916,72,61\n20070917,72,55\n20070918,73,55\n20070919,66,55\n20070920,71,52\n20070921,77,57\n20070922,64,57\n20070923,68,55\n20070924,78,52\n20070925,84,53\n20070926,87,57\n20070927,75,55\n20070928,66,54\n20070929,73,52\n20070930,75,48\n20071001,71,57\n20071002,81,53\n20071003,73,54\n20071004,69,55\n20071005,64,50\n20071006,73,45\n20071007,77,46\n20071008,79,53\n20071009,72,53\n20071010,69,54\n20071011,70,48\n20071012,64,54\n20071013,70,53\n20071014,66,51\n20071015,68,52\n20071016,66,52\n20071017,66,50\n20071018,73,50\n20071019,72,57\n20071020,66,54\n20071021,73,51\n20071022,81,51\n20071023,84,53\n20071024,79,55\n20071025,66,53\n20071026,68,46\n20071027,66,52\n20071028,75,52\n20071029,63,55\n20071030,63,53\n20071031,63,54\n20071101,66,53\n20071102,77,50\n20071103,80,48\n20071104,77,48\n20071105,66,48\n20071106,62,52\n20071107,61,48\n20071108,59,53\n20071109,63,48\n20071110,66,48\n20071111,63,48\n20071112,68,44\n20071113,72,51\n20071114,75,55\n20071115,69,51\n20071116,63,55\n20071117,66,51\n20071118,64,53\n20071119,66,48\n20071120,63,46\n20071121,64,43\n20071122,64,37\n20071123,70,37\n20071124,60,37\n20071125,60,46\n20071126,63,42\n20071127,63,45\n20071128,64,46\n20071129,62,41\n20071130,55,42\n20071201,57,37\n20071202,61,45\n20071203,66,50\n20071204,61,54\n20071205,60,50\n20071206,57,48\n20071207,55,45\n20071208,53,42\n20071209,57,39\n20071210,57,39\n20071211,57,41\n20071212,55,35\n20071213,59,34\n20071214,55,34\n20071215,55,39\n20071216,55,43\n20071217,57,48\n20071218,57,43\n20071219,59,41\n20071220,55,43\n20071221,53,39\n20071222,53,32\n20071223,55,37\n20071224,57,45\n20071225,57,37\n20071226,53,43\n20071227,48,37\n20071228,48,43\n20071229,57,44\n20071230,52,43\n20071231,57,42\n";
-    }
-
-    function data() {
-        return "Date,High,Low\n" + data_nolabel();
-    }
-
-    function NoisyData() {
-        return "Date,A,B\n20061001,3.01953818828,0.7212041046,2.18487394958,0.599318549691\n20061002,3.63321799308,0.778297234566,1.69491525424,0.531417655826\n20061003,2.44328097731,0.644967734352,2.51256281407,0.640539070386\n20061004,3.52733686067,0.774700921683,2.68456375839,0.66207105053\n20061005,3.28719723183,0.741636245748,2.35294117647,0.621407707226\n20061006,1.58450704225,0.523967868159,3.78657487091,0.791868460623\n20061007,5.32859680284,0.946589405904,4.0404040404,0.807910739509\n20061008,2.64084507042,0.672799548916,2.37288135593,0.626609885481\n20061009,2.26480836237,0.620990945917,3.5413153457,0.75897176848\n20061010,3.29289428076,0.74289969528,2.02702702703,0.579191340004\n20061011,2.7633851468,0.681234043829,1.1744966443,0.4413034044\n20061012,3.28719723183,0.741636245748,3.37268128162,0.741327769578\n20061013,1.77304964539,0.55569466381,1.85810810811,0.555011329732\n20061014,3.39892665474,0.7664008338,1.67224080268,0.524368852929\n20061015,2.65017667845,0.675144574777,3.35570469799,0.737661045752\n20061016,3.63951473137,0.779620631266,2.34899328859,0.620377617453\n20061017,2.25694444444,0.618859623032,1.68067226891,0.526990133716\n20061018,4.47504302926,0.857766274964,2.51677852349,0.641599927369\n20061019,2.44755244755,0.646081155692,1.68067226891,0.526990133716\n20061020,3.67775831874,0.787656442774,3.066439523,0.711598843969\n20061021,3.94265232975,0.823839169829,3.85906040268,0.788990618726\n20061022,2.59067357513,0.660187558973,3.71621621622,0.777438794254\n20061023,4.33275563258,0.847570482324,3.85906040268,0.788990618726\n20061024,3.10344827586,0.720049610821,2.84280936455,0.679611549697\n20061025,1.40350877193,0.492720767725,2.7027027027,0.666482380968\n20061026,1.95035460993,0.582291234145,2.36486486486,0.624518599275\n20061027,2.30905861456,0.632980642182,2.03045685279,0.580161203819\n20061028,4.09252669039,0.835706590809,2.87648054146,0.68754192469\n20061029,2.66903914591,0.679883997626,2.02360876897,0.578224712918\n20061030,4.74516695958,0.89127787497,4.36241610738,0.836670992529\n20061031,2.78260869565,0.685905251933,3.20945945946,0.724388507178\n20061101,1.5873015873,0.524884521441,1.51260504202,0.500373860545\n20061102,2.78745644599,0.687083077461,2.0202020202,0.57726130639\n20061103,5.11463844797,0.925157232782,2.68907563025,0.663168401088\n20061104,4.9001814882,0.919644816432,3.07692307692,0.713993047527\n20061105,5.13274336283,0.928343545136,3.55329949239,0.761492892041\n20061106,1.92644483363,0.575222935029,2.35294117647,0.621407707226\n20061107,2.46478873239,0.650573541306,1.52027027027,0.502889967904\n20061108,2.13523131673,0.609772022763,2.6981450253,0.665374048085\n20061109,3.88007054674,0.811026422222,2.72572402044,0.672079879106\n20061110,2.63620386643,0.671633132526,3.71621621622,0.777438794254\n20061111,3.69718309859,0.791736755355,3.0303030303,0.703344064467\n20061112,3.83944153578,0.802703592906,4.05405405405,0.81058250986\n20061113,2.47787610619,0.653984033555,2.20338983051,0.604340313133\n20061114,1.77304964539,0.55569466381,2.22222222222,0.60944692682\n20061115,2.30088495575,0.630766388737,0.843170320405,0.375484163785\n20061116,1.57894736842,0.522144132232,2.19594594595,0.602321544724\n20061118,2.45183887916,0.647198426991,1.69491525424,0.531417655826\n20061119,3.52733686067,0.774700921683,1.85185185185,0.55316023504\n20061120,2.97723292469,0.711254751484,2.6981450253,0.665374048085\n20061121,2.29681978799,0.629665059963,2.01680672269,0.576301104352\n20061122,3.01418439716,0.719945245328,2.5466893039,0.649125445325\n20061123,3.78378378378,0.809917534069,2.6936026936,0.664269394219\n20061124,3.18584070796,0.738851643987,2.01005025126,0.57439025002\n20061125,2.83185840708,0.697868332879,3.066439523,0.711598843969\n20061126,3.01953818828,0.7212041046,2.53378378378,0.645878720149\n20061127,2.81195079086,0.693033387099,1.51006711409,0.499540743312\n20061128,2.97723292469,0.711254751484,2.54237288136,0.648039583782\n20061129,1.41093474427,0.495309102312,3.02013422819,0.701020603129";
-    }
-
-    function data_showzerovalues() {
-        return "20070101,0,39\n20070102,62,0\n20070103,0,42\n20070104,57,0\n20070105,65,44\n20070106,55,44\n20070107,0,45\n20070108,66,0\n20070109,0,39\n";
-    }
-
-    function data_temp() {
-        return "Date,NY,SF\n20070101,46;51;56,43;45;48\n20070102,43;48;52,48;56;63\n20070103,39;46;53,50;54;62\n20070104,44;51;58,45;52;56\n20070105,51;57;62,44;49;58\n20070106,55;64;72,40;50;60\n20070107,46;51;56,45;53;63\n20070108,40;49;57,43;53;64\n20070109,37;41;45,49;56;66\n20070110,31;35;38,45;49;54\n20070111,29;35;41,41;46;54\n20070112,39;45;50,41;44;49\n20070113,46;52;57,38;44;53\n20070114,42;44;46,36;43;51\n20070115,41;46;51,36;46;55\n20070116,25;41;57,37;45;54\n20070117,21;26;31,41;47;56\n20070118,25;32;38,38;48;61\n20070119,33;38;43,\n20070120,23;29;35,\n20070121,21;26;31,55;60;68\n20070122,28;31;34,44;54;66\n20070123,30;34;38,41;51;64\n20070124,34;37;40,42;51;64\n20070125,17;27;37,45;49;56\n20070126,11;18;24,44;48;52\n20070127,22;32;41,47;52;58\n20070128,32;38;43,48;52;60\n20070129,24;28;32,47;55;64\n20070130,23;30;37,51;54;56\n20070131,27;31;34,49;52;56\n20070201,28;33;37,46;50;52\n20070202,34;37;39,47;51;57\n20070203,25;32;38,42;51;62\n20070204,18;25;31,44;55;69\n20070205,10;15;20,48;55;68\n20070206,13;20;26,48;54;62\n20070207,14;21;27,51;56;62\n20070208,17;24;30,49;54;56\n20070209,20;27;33,55;56;58\n20070210,25;30;34,55;57;60\n20070211,21;28;34,51;55;59\n20070212,30;36;41,48;51;59\n20070213,23;29;34,48;52;58\n20070214,19;25;31,44;52;60\n20070215,17;21;25,49;55;65\n20070216,16;23;30,48;59;72\n20070217,22;29;36,51;62;77\n20070218,20;28;35,48;54;61\n20070219,14;22;29,48;53;61\n20070220,29;39;49,49;53;59\n20070221,39;44;49,50;54;61\n20070222,33;40;46,43;48;54\n20070223,23;32;40,43;48;54\n20070224,22;33;43,46;51;60\n20070225,26;33;39,49;52;55\n20070226,31;34;37,44;49;54\n20070227,35;39;43,40;45;52\n20070228,37;42;46,42;47;53\n20070301,33;39;45,44;49;55\n20070302,36;49;61,45;52;60\n20070303,37;48;59,48;58;68\n20070304,35;39;42,53;60;72\n20070305,23;33;42,52;58;67\n20070306,14;19;24,49;54;66\n20070307,14;20;25,50;53;60\n20070308,20;28;35,48;52;60\n20070309,15;25;34,49;53;58\n20070310,30;43;55,50;57;69\n20070311,40;45;50,53;63;79\n20070312,36;46;56,57;65;78\n20070313,44;49;54,52;58;68\n20070314,46;56;66,50;54;62\n20070315,37;53;69,51;59;75\n20070316,28;33;38,53;62;76\n20070317,27;35;42,50;53;57\n20070318,29;35;41,50;53;61\n20070319,33;38;43,49;53;59\n20070320,35;43;50,50;54;58\n20070321,27;34;41,48;55;62\n20070322,41;54;67,50;58;71\n20070323,46;54;62,49;56;67\n20070324,40;48;55,50;52;56\n20070325,38;46;53,50;53;56\n20070326,41;48;55,48;53;60\n20070327,48;62;75,46;50;56\n20070328,47;55;63,47;52;61\n20070329,40;48;56,49;57;68\n20070330,42;55;67,48;53;64\n20070331,44;51;57,49;55;68\n20070401,42;47;51,49;52;58\n20070402,42;48;54,48;54;68\n20070403,43;52;60,48;54;66\n20070404,41;43;45,50;56;67\n20070405,36;42;47,50;54;63\n20070406,34;39;43,48;51;55\n20070407,34;39;43,51;54;59\n20070408,32;37;42,51;55;61\n20070409,35;42;49,52;55;59\n20070410,36;43;50,50;56;67\n20070411,37;44;51,51;54;57\n20070412,41;43;45,48;53;58\n20070413,44;47;50,49;54;64\n20070414,42;50;57,50;53;56\n20070415,42;49;56,48;55;65\n20070416,40;47;54,52;58;69\n20070417,43;47;50,48;52;56\n20070418,43;48;53,46;50;55\n20070419,46;55;63,46;50;55\n20070420,46;59;71,47;52;60\n20070421,48;63;78,49;52;57\n20070422,52;64;76,51;55;59\n20070423,54;70;85,48;55;65\n20070424,59;67;75,49;54;63\n20070425,49;56;63,51;54;59\n20070426,48;55;62,50;54;63\n20070427,48;52;55,53;62;78\n20070428,53;63;72,52;61;78\n20070429,55;61;66,50;53;61\n20070430,55;68;81,51;57;66\n20070501,52;62;71,50;55;61\n20070502,51;61;71,52;56;62\n20070503,53;63;72,50;53;58\n20070504,52;62;71,50;54;60\n20070505,52;63;73,50;59;70\n20070506,48;55;62,57;72;86\n20070507,48;57;65,69;76;88\n20070508,50;60;70,53;68;79\n20070509,58;70;82,50;55;61\n20070510,62;71;79,50;54;61\n20070511,61;70;78,49;52;56\n20070512,55;64;73,50;54;60\n20070513,53;61;68,47;55;66\n20070514,52;61;69,49;53;60\n20070515,59;73;87,49;52;59\n20070516,63;76;89,48;55;66\n20070517,55;62;68,49;54;61\n20070518,49;52;55,50;55;63\n20070519,52;55;57,52;57;66\n20070520,55;67;78,51;57;67\n20070521,56;65;74,49;59;69\n20070522,55;64;73,52;61;71\n20070523,58;66;74,56;68;83\n20070524,61;75;88,50;56;69\n20070525,69;82;95,50;52;60\n20070526,73;80;86,50;52;60\n20070527,68;77;85,50;52;56\n20070528,67;77;87,50;55;64\n20070529,63;72;81,51;54;59\n20070530,62;73;84,53;54;57\n20070531,67;79;90,52;54;57\n20070601,64;78;92,50;53;59\n20070602,73;82;90,50;52;56\n20070603,65;73;81,51;54;61\n20070604,60;66;71,55;59;65\n20070605,68;77;85,54;57;61\n20070606,58;65;72,52;56;62\n20070607,58;67;76,51;57;68\n20070608,66;76;85,51;54;62\n20070609,64;73;81,50;58;66\n20070610,63;69;74,53;58;64\n20070611,66;76;85,52;58;66\n20070612,68;76;84,52;60;72\n20070613,59;65;70,57;68;80\n20070614,58;63;67,57;67;84\n20070615,62;68;73,54;62;76\n20070616,64;73;82,52;55;59\n20070617,69;80;90,52;59;70\n20070618,70;78;85,52;56;64\n20070619,69;76;83,54;58;65\n20070620,70;75;80,54;56;61\n20070621,65;75;85,53;59;67\n20070622,65;71;77,53;59;67\n20070623,61;69;77,53;58;67\n20070624,63;74;84,52;58;66\n20070625,71;78;84,52;60;75\n20070626,73;84;94,51;57;65\n20070627,73;84;95,53;59;67\n20070628,73;84;94,54;61;72\n20070629,70;75;79,55;61;72\n20070630,68;76;84,53;58;66\n20070701,64;70;75,52;59;68\n20070702,60;68;76,55;62;71\n20070703,65;74;82,54;59;64\n20070704,68;71;73,55;64;75\n20070705,69;76;82,55;62;72\n20070706,70;79;87,53;57;62\n20070707,72;80;88,52;54;58\n20070708,76;85;93,53;57;65\n20070709,71;84;96,55;59;67\n20070710,75;84;93,56;61;70\n20070711,74;81;88,59;65;74\n20070712,69;77;84,58;66;75\n20070713,75;80;85,57;65;78\n20070714,70;78;86,56;60;69\n20070715,75;83;91,57;63;72\n20070716,72;78;83,56;60;67\n20070717,71;80;88,56;62;73\n20070718,71;75;79,61;66;74\n20070719,71;82;92,58;62;72\n20070720,69;75;81,58;64;73\n20070721,67;76;84,60;66;76\n20070722,70;77;84,60;65;74\n20070723,65;71;76,58;64;76\n20070724,63;73;83,56;60;71\n20070725,71;78;85,56;59;64\n20070726,73;80;86,55;58;72\n20070727,75;82;88,55;60;72\n20070728,74;81;88,55;61;70\n20070729,74;77;80,55;60;74\n20070730,72;80;88,55;63;80\n20070731,74;82;90,54;59;68\n20070801,75;84;93,55;60;69\n20070802,76;87;98,55;61;70\n20070803,73;83;93,54;60;71\n20070804,75;84;92,54;58;67\n20070805,72;78;84,55;58;62\n20070806,75;81;86,56;60;68\n20070807,78;84;90,56;61;69\n20070808,75;85;95,56;59;65\n20070809,74;80;85,57;61;72\n20070810,59;67;75,55;62;73\n20070811,60;72;83,56;60;68\n20070812,73;81;88,54;60;70\n20070813,75;82;88,55;61;74\n20070814,71;77;83,55;60;71\n20070815,72;81;89,54;61;70\n20070816,77;82;87,57;62;72\n20070817,66;77;87,53;64;77\n20070818,62;69;76,56;62;71\n20070819,62;68;73,57;64;75\n20070820,61;67;73,59;65;74\n20070821,58;60;62,58;65;80\n20070822,58;64;69,57;65;80\n20070823,63;71;79,56;62;73\n20070824,67;77;86,58;62;70\n20070825,75;83;91,58;62;71\n20070826,75;80;85,57;61;68\n20070827,71;77;83,56;61;71\n20070828,72;78;84,55;66;82\n20070829,72;79;86,61;69;83\n20070830,73;81;88,62;71;82\n20070831,72;77;81,59;64;72\n20070901,66;73;79,58;66;80\n20070902,63;72;80,58;67;86\n20070903,67;77;86,58;63;71\n20070904,73;79;85,60;64;72\n20070905,69;74;79,58;68;84\n20070906,70;77;83,60;64;69\n20070907,72;80;88,59;63;71\n20070908,74;82;90,58;61;66\n20070909,74;80;86,59;61;66\n20070910,73;76;78,60;64;71\n20070911,72;75;77,59;62;70\n20070912,66;72;77,59;62;65\n20070913,65;71;76,59;65;74\n20070914,67;72;77,60;66;74\n20070915,58;65;71,58;62;72\n20070916,55;62;69,59;63;71\n20070917,56;63;70,56;62;71\n20070918,57;65;72,56;60;67\n20070919,59;68;76,54;57;63\n20070920,64;74;83,54;59;72\n20070921,68;76;84,58;62;73\n20070922,68;72;76,58;60;65\n20070923,67;75;82,56;61;67\n20070924,65;73;81,52;62;78\n20070925,66;78;89,54;66;86\n20070926,72;81;90,58;70;92\n20070927,73;79;84,57;61;68\n20070928,64;71;77,55;59;63\n20070929,62;69;76,51;60;74\n20070930,61;67;73,51;60;71\n20071001,62;67;71,56;62;71\n20071002,60;68;75,54;62;76\n20071003,66;73;80,53;59;67\n20071004,69;77;85,53;55;59\n20071005,67;75;83,51;56;62\n20071006,68;77;85,48;57;68\n20071007,67;75;82,51;59;75\n20071008,67;78;89,52;59;78\n20071009,61;72;83,52;59;67\n20071010,62;68;73,\n20071011,59;64;69,\n20071012,51;57;62,\n20071013,49;56;63,\n20071014,52;59;65,\n20071015,53;61;69,\n20071016,58;65;71,\n20071017,60;67;73,\n20071018,64;72;79,\n20071019,66;70;74,\n20071020,64;68;72,\n20071021,59;68;76,\n20071022,62;70;77,\n20071023,67;74;81,\n20071024,54;62;70,\n20071025,52;57;61,\n20071026,53;57;60,\n20071027,59;65;70,\n20071028,46;53;59,\n20071029,43;49;54,\n20071030,49;57;64,\n20071031,51;58;64,53;60;67\n20071101,52;60;67,51;56;72\n20071102,46;51;56,49;60;82\n20071103,47;50;53,50;61;79\n20071104,49;53;56,53;62;80\n20071105,48;53;58,50;54;59\n20071106,45;52;58,50;54;61\n20071107,42;46;50,50;53;59\n20071108,38;43;48,53;56;60\n20071109,40;44;48,53;58;66\n20071110,39;43;47,52;57;62\n20071111,34;41;48,51;56;64\n20071112,40;46;52,47;56;68\n20071113,49;55;61,57;61;73\n20071114,44;53;61,53;61;72\n20071115,45;54;62,56;59;67\n20071116,39;44;48,54;56;61\n20071117,38;43;47,53;56;61\n20071118,41;44;47,53;57;63\n20071119,39;43;46,50;56;60\n20071120,40;45;50,48;54;63\n20071121,44;51;58,44;53;66\n20071122,42;54;66,46;54;68\n20071123,32;37;42,44;57;72\n20071124,28;34;40,44;54;65\n20071125,37;44;50,51;55;62\n20071126,41;52;63,47;54;65\n20071127,46;56;65,50;55;65\n20071128,37;42;47,47;56;66\n20071129,42;47;52,48;53;64\n20071130,37;40;43,45;49;57\n20071201,26;34;42,46;49;56\n20071202,21;30;38,47;54;59\n20071203,34;42;49,52;59;64\n20071204,30;33;35,31;57;69\n20071205,29;32;34,52;56;63\n20071206,23;30;37,51;52;54\n20071207,34;35;36,48;52;57\n20071208,35;40;45,42;49;56\n20071209,36;39;41,44;51;59\n20071210,37;40;43,45;50;59\n20071211,36;41;46,46;52;59\n20071212,37;46;54,42;49;57\n20071213,30;34;38,42;49;59\n20071214,32;39;45,40;48;57\n20071215,30;34;38,43;49;56\n20071216,31;36;40,46;51;57\n20071217,27;31;35,48;52;56\n20071218,31;35;38,49;52;55\n20071219,35;41;47,46;51;57\n20071220,38;42;45,45;51;56\n20071221,36;39;42,43;48;54\n20071222,36;39;42,39;46;53\n20071223,41;52;62,44;51;61\n20071224,39;46;52,49;53;60\n20071225,38;41;44,41;49;57\n20071226,34;38;41,44;48;55\n20071227,37;42;46,41;46;52\n20071228,43;47;50,41;44;45\n20071229,43;48;53,45;48;52\n20071230,37;41;44,46;49;53\n20071231,36;41;46,38;47;56\n20080101,35;42;49,42;50;58\n20080102,19;29;39,43;50;60\n20080103,15;19;23,51;53;58\n20080104,19;28;37,51;53;59\n20080105,33;38;43,46;49;51\n20080106,37;42;47,42;47;51\n20080107,42;52;61,43;48;53\n20080108,52;58;64,44;49;53\n20080109,49;58;66,46;49;52\n20080110,42;47;51,48;50;51\n20080111,41;49;57,48;51;55\n20080112,40;45;49,46;51;58\n20080113,37;42;47,44;51;60\n20080114,34;37;39,46;51;58\n20080115,34;37;40,44;49;57\n20080116,31;36;40,41;50;60\n20080117,30;36;41,44;50;61\n20080118,37;43;49,42;52;63\n20080119,34;36;37,42;50;62\n20080120,19;27;35,46;49;53\n20080121,16;22;28,43;45;46\n20080122,25;33;40,42;44;47\n20080123,32;37;41,42;44;49\n20080124,26;31;35,43;44;45\n20080125,23;29;34,45;49;52\n20080126,27;31;35,52;55;62\n20080127,31;35;39,45;51;54\n20080128,29;36;43,42;46;51\n20080129,33;39;44,41;45;49\n20080130,34;42;50,42;47;54\n20080131,30;35;40,45;48;52\n20080201,33;45;56,40;46;52\n20080202,36;40;44,42;47;53\n20080203,33;42;50,46;49;52\n20080204,34;39;43,43;49;58\n20080205,38;45;52,40;49;58\n20080206,40;55;69,47;50;55\n20080207,39;45;50,43;50;58\n20080208,36;41;46,46;53;65\n20080209,37;41;45,46;57;69\n20080210,17;31;45,49;57;70\n20080211,12;19;25,48;56;69\n20080212,19;25;31,46;54;70\n20080213,31;43;54,48;57;65\n20080214,30;36;41,49;54;64\n20080215,32;40;48,46;52;60\n20080216,25;30;35,45;51;64\n20080217,30;42;53,46;50;55\n20080218,42;53;64,47;50;58\n20080219,29;36;42,48;51;53\n20080220,25;29;33,48;51;57\n20080221,22;28;34,48;51;56\n20080222,26;30;34,46;50;56\n20080223,30;33;36,43;48;54\n20080224,27;34;40,52;54;58\n20080225,33;41;49,49;55;63\n20080226,38;43;48,48;58;70\n20080227,24;36;47,52;58;71\n20080228,20;25;29,48;56;74\n20080229,19;28;36,48;52;62\n20080301,34;40;45,50;53;59\n20080302,30;36;43,49;59;71\n20080303,35;44;52,47;57;72\n20080304,43;53;62,46;55;68\n20080305,39;49;58,46;55;71\n20080306,36;43;49,47;55;65\n20080307,35;40;45,48;56;69\n20080308,38;48;57,49;55;66\n20080309,31;37;43,47;58;76\n20080310,28;37;46,52;58;70\n20080311,36;43;49,50;54;66\n20080312,36;42;48,48;53;63\n20080313,33;39;45,30;55;61\n20080314,39;46;53,49;52;58\n20080315,42;49;55,43;50;57\n20080316,36;42;47,47;55;68\n20080317,32;41;49,49;56;66\n20080318,36;41;46,48;55;64\n20080319,42;47;52,49;52;60\n20080320,37;48;59,46;51;59\n20080321,35;41;47,47;54;67\n20080322,35;43;50,46;55;73\n20080323,32;40;48,46;54;66\n20080324,33;41;49,47;54;64\n20080325,32;39;46,49;53;59\n20080326,43;52;60,48;52;60\n20080327,44;47;50,45;50;59\n20080328,40;45;49,46;52;60\n20080329,34;41;47,48;52;59\n20080330,28;37;46,44;49;56\n20080331,39;48;57,41;50;62\n20080401,55;60;64,49;53;60\n20080402,39;47;54,48;54;62\n20080403,35;42;49,48;53;62\n20080404,42;49;55,45;50;57\n20080405,49;54;59,46;50;57\n20080406,42;46;50,48;52;59\n20080407,41;46;51,45;51;59\n20080408,41;48;55,47;50;55\n20080409,39;48;56,47;52;59\n20080410,48;62;75,46;55;66\n20080411,47;54;61,50;65;84\n20080412,47;61;74,57;71;87\n20080413,44;50;55,51;64;80\n20080414,41;49;56,48;52;58\n20080415,43;51;59,45;51;60\n20080416,46;56;65,46;51;66\n20080417,45;59;72,49;57;75\n20080418,50;67;83,48;52;60\n20080419,51;62;72,45;49;55\n20080420,48;52;56,43;48;55\n20080421,47;52;57,44;49;57\n20080422,48;59;69,48;54;64\n20080423,52;64;76,48;53;60\n20080424,58;68;77,45;53;65\n20080425,55;63;70,48;57;69\n20080426,52;58;63,51;62;78\n20080427,49;52;55,53;62;77\n20080428,48;54;59,49;56;66\n20080429,47;53;58,50;53;61\n20080430,44;51;57,47;52;60\n20080501,45;52;59,47;55;66\n20080502,50;53;55,49;53;60\n20080503,48;52;56,48;54;63\n20080504,49;61;72,49;52;59\n20080505,51;61;71,48;53;61\n20080506,52;65;77,49;56;68\n20080507,58;66;73,49;55;65\n20080508,64;69;74,48;53;62\n20080509,50;57;64,46;54;65\n20080510,50;59;67,47;54;64\n20080511,50;56;61,48;54;64\n20080512,48;53;57,50;56;66\n20080513,52;61;70,49;61;78\n20080514,53;64;74,55;69;85\n20080515,54;64;73,68;81;102\n20080516,51;56;61,65;77;99\n20080517,50;62;74,52;63;73\n20080518,56;62;67,51;54;62\n20080519,51;56;61,50;54;60\n20080520,50;54;58,52;56;63\n20080521,50;60;69,50;57;65\n20080522,50;56;61,52;58;68\n20080523,52;60;68,49;55;65\n20080524,56;63;70,51;54;62\n20080525,58;68;77,50;56;64\n20080526,60;68;76,50;55;62\n20080527,60;73;85,51;56;64\n20080528,53;61;69,52;58;67\n20080529,54;66;78,53;57;63\n20080530,62;72;82,52;56;66\n20080531,63;70;77,52;54;60\n20080601,67;76;84,49;55;63\n20080602,61;71;80,49;54;62\n20080603,65;75;84,51;55;62\n20080604,58;65;71,51;54;62\n20080605,62;67;72,51;58;70\n20080606,59;66;73,51;57;66\n20080607,60;78;96,50;59;70\n20080608,78;87;96,52;61;74\n20080609,76;88;99,54;66;83\n20080610,73;87;100,53;64;77\n20080611,72;80;88,57;65;79\n20080612,71;79;86,55;67;93\n20080613,65;74;82,50;56;65\n20080614,70;80;90,52;56;65\n20080615,65;74;83,50;54;61\n20080616,64;71;78,49;52;58\n20080617,64;71;77,48;60;78\n20080618,60;68;75,54;65;79\n20080619,60;69;77,57;72;92\n20080620,63;71;79,63;80;102\n20080621,65;75;85,56;75;85\n20080622,71;76;80,51;56;63\n20080623,70;77;83,50;52;56\n20080624,70;76;81,50;58;71\n20080625,68;77;85,51;56;64\n20080626,74;80;85,50;57;70\n20080627,76;81;85,52;57;62\n20080628,70;80;90,55;58;64\n20080629,74;82;90,53;57;65\n20080630,73;79;85,52;57;68\n20080701,71;79;86,53;58;67\n20080702,69;78;87,52;56;65\n20080703,73;83;93,54;60;71\n20080704,71;76;80,55;60;69\n20080705,69;72;75,56;62;74\n20080706,68;74;79,56;62;74\n20080707,70;78;85,56;66;80\n20080708,76;84;91,59;69;86\n20080709,75;81;87,62;69;82\n20080710,73;80;87,59;64;72\n20080711,69;79;89,58;64;73\n20080712,73;80;86,60;64;73\n20080713,72;79;85,60;64;71\n20080714,70;77;83,59;62;68\n20080715,72;81;90,59;62;70\n20080716,71;81;90,57;60;66\n20080717,74;83;92,54;58;65\n20080718,76;86;96,52;56;64\n20080719,81;89;97,53;57;63\n20080720,79;87;94,52;55;63\n20080721,75;84;93,54;57;63\n20080722,73;80;87,52;60;73\n20080723,70;76;82,54;61;76\n20080724,70;78;85,52;60;72\n20080725,71;79;87,52;61;72\n20080726,74;81;88,55;65;79\n20080727,70;76;82,55;57;62\n20080728,69;79;88,54;57;65\n20080729,75;83;90,55;59;68\n20080730,73;80;87,56;60;69\n20080731,75;83;90,55;58;69\n20080801,74;81;88,55;62;74\n20080802,69;76;82,55;64;79\n20080803,68;76;83,54;57;62\n20080804,68;77;85,53;56;65\n20080805,73;79;84,52;56;64\n20080806,72;80;88,54;57;68\n20080807,68;77;86,54;57;66\n20080808,68;75;82,54;58;66\n20080809,66;74;82,54;59;67\n20080810,69;76;82,53;64;79\n20080811,60;67;73,56;63;78\n20080812,63;72;81,55;63;79\n20080813,69;75;81,56;64;82\n20080814,68;76;84,55;61;74\n20080815,67;74;81,55;62;75\n20080816,66;74;82,57;60;66\n20080817,69;77;85,57;60;69\n20080818,73;81;88,58;62;68\n20080819,65;74;82,58;62;73\n20080820,61;69;77,58;65;74\n20080821,66;74;81,60;64;73\n20080822,69;76;83,58;62;72\n20080823,67;74;80,57;62;71\n20080824,71;76;81,57;64;73\n20080825,68;77;85,58;62;72\n20080826,62;71;80,55;61;79\n20080827,64;71;77,59;70;88\n20080828,66;75;84,62;72;86\n20080829,68;74;80,59;67;84\n20080830,68;76;84,57;61;70\n20080831,69;77;84,54;61;73\n20080901,68;76;84,57;68;83\n20080902,71;79;86,58;68;85\n20080903,70;76;81,59;69;87\n20080904,72;81;90,60;73;94\n20080905,73;80;86,63;74;92\n20080906,72;78;83,63;72;84\n20080907,70;77;83,56;62;70\n20080908,68;76;83,55;60;67\n20080909,67;73;78,58;60;65\n20080910,63;68;73,57;61;68\n20080911,62;68;73,56;60;66\n20080912,65;69;72,55;57;63\n20080913,68;74;79,55;59;67\n20080914,71;80;89,55;59;67\n20080915,67;76;84,54;58;67\n20080916,63;67;70,54;58;65\n20080917,61;68;75,56;60;67\n20080918,61;68;74,53;60;70\n20080919,55;61;66,55;62;72\n20080920,54;61;68,59;62;69\n20080921,59;70;80,57;61;70\n20080922,62;68;73,55;64;79\n20080923,57;63;69,56;67;85\n20080924,58;64;69,57;64;74\n20080925,56;62;67,57;65;76\n20080926,60;64;68,56;63;75\n20080927,64;67;69,54;62;78\n20080928,67;71;74,55;59;65\n20080929,63;68;73,57;61;67\n20080930,62;68;73,57;63;76\n20081001,61;67;73,59;64;74\n20081002,56;60;64,60;65;73\n20081003,54;60;65,59;63;71\n20081004,53;58;63,58;62;68\n20081005,54;59;63,57;62;69\n20081006,51;57;63,59;64;76\n20081007,48;56;64,56;64;79\n20081008,52;59;66,58;64;75\n20081009,60;69;77,54;61;71\n20081010,61;67;73,54;58;64\n20081011,57;64;71,55;60;67\n20081012,57;64;71,55;62;72\n20081013,60;68;75,58;64;77\n20081014,59;64;68,53;63;80\n20081015,60;66;71,55;65;83\n20081016,57;68;78,58;68;86\n20081017,52;56;60,59;69;86\n20081018,44;51;57,53;58;65\n20081019,43;51;58,52;54;57\n20081020,45;54;62,51;57;65\n20081021,46;55;63,52;62;79\n20081022,42;47;52,55;67;83\n20081023,40;47;54,61;70;85\n20081024,43;50;57,59;66;86\n20081025,54;61;67,57;67;82\n20081026,51;57;63,52;57;66\n20081027,50;57;64,51;55;65\n20081028,41;46;51,50;55;65\n20081029,40;44;48,49;54;64\n20081030,38;44;49,51;56;61\n20081031,42;53;64,58;61;66\n20081101,52;59;65,34;58;63\n20081102,39;46;52,\n20081103,44;52;59,53;56;61\n20081104,50;57;64,51;54;61\n20081105,55;59;63,46;55;66\n20081106,59;62;65,54;60;72\n20081107,58;62;65,52;60;75\n20081108,55;58;60,53;56;62\n20081109,50;53;56,52;56;63\n20081110,44;48;51,49;55;62\n20081111,40;46;51,53;58;64\n20081112,43;47;50,56;59;68\n20081113,47;53;58,52;61;74\n20081114,55;59;63,55;67;80\n20081115,58;62;65,60;70;82\n20081116,42;52;61,58;66;78\n20081117,39;43;47,57;66;77\n20081118,31;36;41,52;56;62\n20081119,28;33;37,52;54;57\n20081120,31;35;39,54;58;66\n20081121,27;33;39,47;55;67\n20081122,25;29;33,47;55;68\n20081123,26;32;37,49;56;69\n20081124,33;43;53,49;56;64\n20081125,38;43;48,52;57;61\n20081126,38;42;45,53;55;58\n20081127,37;41;44,53;55;61\n20081128,38;44;50,50;54;60\n20081129,38;42;45,50;57;68\n20081130,36;40;44,51;58;70\n20081201,43;49;55,53;55;57\n20081202,38;42;46,52;56;64\n20081203,35;39;43,50;54;59\n20081204,39;45;51,47;53;62\n20081205,34;38;42,46;54;66\n20081206,31;34;37,47;53;62\n20081207,22;30;37,44;50;56\n20081208,20;26;31,46;51;55\n20081209,31;44;56,42;50;59\n20081210,44;54;63,47;52;63\n20081211,38;41;44,48;54;63\n20081212,33;40;46,48;53;60\n20081213,28;31;33,45;49;55\n20081214,30;40;49,43;46;50\n20081215,48;58;67,41;46;51\n20081216,31;45;59,39;42;47\n20081217,33;39;44,39;45;53\n20081218,37;40;43,38;47;55\n20081219,30;35;39,45;50;55\n20081220,23;28;32,39;46;54\n20081221,26;33;40,46;48;51\n20081222,14;22;29,44;49;54\n20081223,20;26;31,43;48;53\n20081224,31;45;58,46;50;54\n20081225,35;47;58,45;48;53\n20081226,32;37;41,\n20081227,40;44;48,\n20081228,47;56;65,\n20081229,38;44;49,47;53;63\n20081230,34;39;44,46;51;58\n20081231,19;28;36,45;48;55\n20090101,16;22;27,44;48;51\n20090102,24;30;36,45;50;55\n20090103,30;35;39,40;46;54\n20090104,26;35;43,36;45;54\n20090105,39;42;44,45;46;48\n20090106,31;35;39,44;49;54\n20090107,32;36;40,44;47;52\n20090108,30;35;39,46;49;56\n20090109,27;30;33,41;51;62\n20090110,24;27;30,48;56;66\n20090111,26;29;32,44;55;70\n20090112,23;29;34,49;62;76\n20090113,29;35;41,55;64;75\n20090114,18;28;37,48;59;70\n20090115,17;20;23,48;60;74\n20090116,11;15;18,48;60;72\n20090117,8;15;22,48;57;68\n20090118,22;28;33,49;58;70\n20090119,26;30;33,46;58;71\n20090120,22;26;30,47;58;71\n20090121,19;24;28,52;57;62\n20090122,22;30;37,51;53;55\n20090123,28;37;45,53;55;56\n20090124,18;33;47,49;52;55\n20090125,15;22;28,46;50;55\n20090126,20;25;30,43;49;57\n20090127,26;29;31,43;50;58\n20090128,24;33;42,43;51;61\n20090129,27;32;37,44;56;70\n20090130,28;32;35,47;56;69\n20090131,21;25;28,44;52;69\n20090201,28;41;53,44;54;70\n20090202,33;43;52,47;57;69\n20090203,26;32;37,47;57;71\n20090204,18;25;31,47;55;67\n20090205,14;19;24,51;54;58\n20090206,17;25;32,51;53;55\n20090207,24;37;49,48;54;63\n20090208,38;49;59,45;50;56\n20090209,35;41;46,43;47;56\n20090210,33;42;50,38;47;54\n20090211,38;51;63,43;48;56\n20090212,44;51;57,44;48;55\n20090213,32;38;44,43;46;54\n20090214,29;35;41,43;48;54\n20090215,30;36;42,46;48;51\n20090216,29;35;40,47;49;56\n20090217,26;34;41,47;50;54\n20090218,32;38;43,45;52;60\n20090219,28;39;50,43;54;66\n20090220,24;29;34,49;57;68\n20090221,28;35;42,50;56;63\n20090222,32;38;43,53;55;58\n20090223,25;30;34,52;56;60\n20090224,23;30;37,50;52;53\n20090225,26;34;41,51;55;61\n20090226,35;43;50,48;54;60\n20090227,40;49;58,46;53;62\n20090228,32;43;54,50;56;66\n20090301,28;32;35,54;57;59\n20090302,18;23;28,53;56;61\n20090303,14;21;28,48;52;58\n20090304,19;27;35,44;50;58\n20090305,28;36;43,46;51;60\n20090306,38;46;54,47;52;58\n20090307,46;58;69,43;52;65\n20090308,44;53;62,50;53;60\n20090309,37;42;46,\n20090310,37;42;46,\n20090311,41;50;59,\n20090312,32;38;44,\n20090313,27;33;38,\n20090314,34;42;50,\n20090315,42;48;53,\n20090316,38;42;46,\n20090317,36;44;52,\n20090318,40;51;61,\n20090319,41;46;50,\n20090320,33;39;44,\n20090321,32;40;47,53;55;60\n20090322,36;45;53,45;50;58\n20090323,30;36;42,44;51;59\n20090324,29;38;47,43;54;66\n20090325,36;44;52,47;56;68\n20090326,40;43;45,51;58;68\n20090327,43;53;63,52;61;75\n20090328,42;48;53,51;59;71\n20090329,42;47;52,48;56;64\n20090330,42;47;51,51;57;68\n20090331,40;50;60,47;56;70\n20090401,42;46;50,50;57;68\n20090402,42;51;59,48;52;60\n20090403,44;53;61,47;53;61\n20090404,48;52;55,43;55;70\n20090405,45;56;66,46;61;80\n20090406,44;48;51,51;61;79\n20090407,40;45;50,51;55;63\n20090408,37;43;49,50;55;64\n20090409,38;50;61,50;53;58\n20090410,46;52;58,48;54;63\n20090411,43;47;50,46;53;61\n20090412,38;43;48,49;56;66\n20090413,36;47;57,49;56;65\n20090414,43;48;53,45;50;57\n20090415,43;49;54,46;46;47\n20090416,44;53;62,44;52;61\n20090417,44;57;69,46;54;70\n20090418,56;67;78,52;62;74\n20090419,47;54;61,51;70;92\n20090420,43;47;51,60;77;99\n20090421,47;52;56,64;78;93\n20090422,49;53;57,52;62;71\n20090423,45;51;57,50;54;61\n20090424,45;57;69,48;52;59\n20090425,50;69;88,45;52;60\n20090426,63;77;91,46;53;63\n20090427,53;66;79,48;51;57\n20090428,68;79;89,47;52;60\n20090429,50;59;68,46;53;61\n20090430,46;54;61,47;54;69\n20090501,54;63;72,51;56;62\n20090502,56;62;67,55;59;65\n20090503,53;56;58,53;59;66\n20090504,51;54;56,52;60;71\n20090505,51;54;56,57;61;69\n20090506,49;57;65,55;61;73\n20090507,52;63;73,51;61;72\n20090508,56;65;74,51;60;71\n20090509,57;68;78,50;57;69\n20090510,55;63;70,50;57;68\n20090511,51;59;66,50;56;65\n20090512,52;60;68,47;57;67\n20090513,51;60;68,50;59;70\n20090514,57;62;66,51;58;69\n20090515,58;66;74,51;58;67\n20090516,58;65;71,54;70;93\n20090517,53;59;64,55;70;92\n20090518,50;55;59,51;55;63\n20090519,50;60;69,51;56;64\n20090520,53;67;81,49;55;62\n20090521,64;73;81,49;54;65\n20090522,63;75;86,51;54;63\n20090523,59;68;76,50;52;56\n20090524,57;71;84,49;51;56\n20090525,64;73;81,49;54;63\n20090526,53;60;66,49;59;73\n20090527,52;56;60,52;57;64\n20090528,56;58;59,51;55;62\n20090529,55;65;74,52;57;63\n20090530,63;71;78,54;56;62\n20090531,58;70;82,53;55;60\n20090601,53;61;69,53;56;61\n20090602,63;72;80,52;57;68\n20090603,54;64;73,53;58;67\n20090604,54;62;69,55;59;67\n20090605,55;59;62,57;62;70\n20090606,58;68;78,57;61;68\n20090607,66;74;82,56;61;67\n20090608,63;70;77,55;58;62\n20090609,60;67;73,56;60;66\n20090610,59;62;65,57;61;69\n20090611,59;61;63,56;60;68\n20090612,62;71;80,56;60;67\n20090613,64;68;71,56;62;70\n20090614,61;67;72,57;62;69\n20090615,58;65;71,58;61;68\n20090616,56;62;68,57;59;66\n20090617,57;63;69,57;60;66\n20090618,62;64;66,56;63;75\n20090619,63;71;79,55;62;71\n20090620,63;68;72,53;59;69\n20090621,63;71;78,53;60;70\n20090622,67;71;75,54;62;75\n20090623,67;74;80,54;63;77\n20090624,66;71;75,54;59;69\n20090625,65;73;81,54;58;66\n20090626,65;75;85,53;60;70\n20090627,66;74;81,53;68;85\n20090628,68;75;82,60;68;78\n20090629,68;76;83,56;61;68\n20090630,67;76;84,56;61;68\n20090701,67;73;79,56;61;68\n20090702,66;72;77,56;60;66\n20090703,68;74;80,55;58;65\n20090704,68;75;81,54;60;67\n20090705,64;72;80,55;57;63\n20090706,68;77;85,54;60;69\n20090707,62;73;83,56;58;62\n20090708,61;69;77,52;62;71\n20090709,62;68;73,53;59;68\n20090710,63;69;75,54;59;66\n20090711,65;71;77,53;58;68\n20090712,66;75;83,53;60;70\n20090713,65;72;79,53;66;84\n20090714,66;74;81,58;68;86\n20090715,67;75;83,53;59;66\n20090716,73;79;85,52;57;69\n20090717,69;79;88,52;58;69\n20090718,71;78;84,54;60;74\n20090719,68;76;83,54;61;73\n20090720,68;75;82,54;57;62\n20090721,65;68;71,53;56;61\n20090722,67;75;82,52;56;60\n20090723,64;72;80,52;55;61\n20090724,65;73;80,53;56;62\n20090725,67;77;86,52;56;67\n20090726,71;79;86,53;57;72\n20090727,71;78;85,52;57;70\n20090728,73;80;87,55;58;63\n20090729,73;78;83,58;58;58\n20090730,74;81;87,56;60;65\n20090731,69;79;89,55;58;64\n20090801,69;77;85,55;58;64\n20090802,73;76;78,56;60;66\n20090803,72;79;85,56;62;70\n20090804,72;79;86,57;64;73\n20090805,74;82;89,58;62;72\n20090806,68;74;79,59;63;71\n20090807,67;74;80,58;63;71\n20090808,65;72;78,58;64;76\n20090809,71;76;81,57;66;82\n20090810,71;83;94,59;66;82\n20090811,77;85;92,58;61;66\n20090812,71;76;80,57;66;79\n20090813,70;72;74,57;63;74\n20090814,69;77;85,56;61;70\n20090815,73;81;89,55;62;76\n20090816,75;83;91,55;62;73\n20090817,77;85;93,55;58;64\n20090818,73;82;91,55;59;65\n20090819,75;83;91,57;59;65\n20090820,76;83;89,56;60;67\n20090821,75;84;92,56;62;78\n20090822,72;79;85,56;59;64\n20090823,75;81;86,55;58;65\n20090824,72;78;84,54;58;64\n20090825,71;79;86,55;60;70\n20090826,74;81;87,55;59;68\n20090827,68;74;80,53;66;87\n20090828,66;70;73,63;76;97\n20090829,67;70;73,58;73;87\n20090830,66;75;83,55;57;62\n20090831,64;68;72,54;59;69\n20090901,59;67;74,58;63;72\n20090902,61;69;77,61;70;90\n20090903,64;71;78,58;67;79\n20090904,65;74;83,54;59;66\n20090905,71;78;85,56;62;70\n20090906,64;69;74,57;62;69\n20090907,61;67;72,56;63;73\n20090908,65;70;75,55;61;71\n20090909,65;71;76,54;58;66\n20090910,61;66;71,55;65;82\n20090911,58;64;69,54;62;76\n20090912,65;67;68,58;60;64\n20090913,67;74;81,59;64;73\n20090914,65;72;79,58;63;69\n20090915,68;75;81,57;63;73\n20090916,63;67;71,58;63;72\n20090917,57;61;65,59;67;79\n20090918,58;68;77,62;70;89\n20090919,55;63;71,58;62;73\n20090920,57;66;75,57;63;76\n20090921,61;69;76,56;61;71\n20090922,66;71;75,55;62;77\n20090923,69;76;82,56;58;65\n20090924,68;75;82,55;58;65\n20090925,59;64;69,55;61;73\n20090926,55;61;66,53;66;87\n20090927,60;65;69,59;68;84\n20090928,60;67;74,56;59;63\n20090929,58;63;68,55;58;64\n20090930,51;56;60,51;58;70\n20091001,51;54;57,52;64;79\n20091002,49;58;66,55;63;77\n20091003,65;68;71,52;57;63\n20091004,59;68;76,50;55;62\n20091005,55;62;68,50;57;68\n20091006,54;61;68,50;60;74\n20091007,59;65;71,53;58;68\n20091008,55;60;64,54;57;62\n20091009,61;66;71,52;56;63\n20091010,54;61;68,51;54;59\n20091011,50;58;65,51;54;59\n20091012,46;51;55,56;60;66\n20091013,47;56;64,58;61;64\n20091014,44;49;53,63;66;76\n20091015,39;44;48,64;67;76\n20091016,39;44;49,59;67;79\n20091017,44;47;50,56;64;74\n20091018,43;45;47,56;59;63\n20091019,41;50;58,57;60;68\n20091020,47;58;68,56;59;67\n20091021,53;61;69,54;60;71\n20091022,55;66;76,57;62;72\n20091023,51;59;66,55;63;75\n20091024,53;60;67,55;61;74\n20091025,53;59;65,54;64;81\n20091026,49;55;61,57;62;71\n20091027,50;54;58,54;59;69\n20091028,51;55;58,53;58;67\n20091029,49;54;58,51;58;67\n20091030,52;56;60,52;59;74\n20091031,56;64;71,53;58;72\n20091101,50;55;60,52;63;77\n20091102,48;52;55,56;66;81\n20091103,46;54;62,56;66;80\n20091104,44;48;52,54;58;65\n20091105,44;49;53,57;61;68\n20091106,41;46;50,53;59;63\n20091107,38;46;53,49;56;65\n20091108,48;60;71,50;57;68\n20091109,48;58;67,49;56;64\n20091110,56;60;64,54;58;66\n20091111,49;54;58,54;58;65\n20091112,48;51;53,51;56;62\n20091113,49;52;55,48;53;60\n20091114,52;55;58,50;54;61\n20091115,54;59;63,44;53;65\n20091116,49;54;59,47;54;66\n20091117,46;51;55,45;54;64\n20091118,43;48;53,48;53;62\n20091119,48;55;61,44;53;63\n20091120,50;56;61,46;52;58\n20091121,47;52;57,47;51;59\n20091122,46;51;56,49;53;59\n20091123,45;53;60,44;54;66\n20091124,49;53;57,48;58;69\n20091125,49;51;53,\n20091126,49;52;54,50;55;67\n20091127,44;47;50,51;54;58\n20091128,44;48;51,\n20091129,42;51;59,49;60;71\n20091130,41;49;57,48;55;64\n20091201,38;43;48,46;52;64\n20091202,40;49;57,45;48;55\n20091203,51;59;66,46;50;58\n20091204,46;49;52,44;48;57\n20091205,37;42;47,\n";
-    }
-
-    var stockData = function() {
-        return "Month,Nominal,Real\n1913-01-15,59.740;61.330;64.880,609.591836734694;625.816326530612;662.04081632653\n1913-02-15,57.670;58.840;61.140,588.469387755102;600.408163265306;623.877551020408\n1913-03-15,57.320;59.280;59.840,584.897959183673;604.897959183673;610.612244897959\n1913-04-15,57.430;57.540;60.940,586.020408163265;587.142857142857;621.836734693877\n1913-05-15,57.420;57.420;58.570,591.958762886598;591.958762886598;603.814432989691\n1913-06-15,52.830;54.860;56.610,539.081632653061;559.795918367347;577.65306122449\n1913-07-15,55.110;57.490;57.920,556.666666666667;580.707070707071;585.050505050505\n1913-08-15,57.290;59.930;59.930,578.686868686869;605.353535353535;605.353535353535\n1913-09-15,58.800;58.880;60.830,588;588.8;608.3\n1913-10-15,56.470;57.360;59.650,564.7;573.6;596.5\n1913-11-15,55.630;55.830;57.220,550.792079207921;552.772277227723;566.534653465347\n1913-12-15,55.140;57.710;57.760,551.4;577.1;577.6\n1914-01-15,57.570;60.660;60.710,575.7;606.6;607.1\n1914-02-15,59.560;60.070;60.940,601.616161616162;606.767676767677;615.555555555556\n1914-03-15,59.430;60.360;61.120,600.30303030303;609.69696969697;617.373737373737\n1914-04-15,56.790;57.960;60.410,579.489795918367;591.428571428571;616.428571428571\n1914-05-15,57.990;59.760;59.820,585.757575757576;603.636363636364;604.242424242424\n1914-06-15,58.090;59.090;59.950,586.767676767677;596.868686868687;605.555555555556\n1914-07-15,52.320;52.320;59.920,523.2;523.2;599.2\n1914-12-15,53.170;54.580;56.760,526.435643564356;540.39603960396;561.980198019802\n1915-01-15,55.400;56.540;58.510,548.514851485149;559.80198019802;579.306930693069\n1915-02-15,54.220;55.020;57.830,542.2;550.2;578.3\n1915-03-15,55.290;60.830;61.300,558.484848484848;614.444444444444;619.191919191919\n1915-04-15,61.050;71.780;71.780,610.5;717.8;717.8\n1915-05-15,60.380;65.010;69.580,597.821782178218;643.663366336634;688.910891089109\n1915-06-15,64.860;70.060;71.900,642.178217821782;693.663366336634;711.881188118812\n1915-07-15,67.880;75.530;75.790,672.079207920792;747.821782178218;750.396039603961\n1915-08-15,76.460;81.200;81.880,757.029702970297;803.960396039604;810.693069306931\n1915-09-15,80.700;90.580;90.580,799.009900990099;896.831683168317;896.831683168317\n1915-10-15,88.230;95.340;96.460,865;934.705882352941;945.686274509804\n1915-11-15,91.080;96.710;97.560,884.271844660194;938.932038834951;947.184466019417\n1915-12-15,94.780;99.150;99.210,920.194174757282;962.621359223301;963.203883495146\n1916-01-15,90.580;90.580;98.810,870.961538461538;870.961538461538;950.096153846154\n1916-02-15,90.890;91.030;96.150,873.942307692308;875.288461538461;924.519230769231\n1916-03-15,90.520;93.250;96.080,862.095238095238;888.095238095238;915.047619047619\n1916-04-15,87.000;89.650;94.460,820.754716981132;845.754716981132;891.132075471698\n1916-05-15,87.710;91.800;92.620,819.719626168224;857.943925233645;865.607476635514\n1916-06-15,87.680;89.580;93.610,811.851851851852;829.444444444444;866.759259259259\n1916-07-15,86.420;89.250;90.530,800.185185185185;826.388888888889;838.240740740741\n1916-08-15,88.150;92.250;93.830,808.715596330275;846.330275229358;860.825688073395\n1916-09-15,91.190;103.730;103.730,821.531531531532;934.504504504505;934.504504504505\n1916-10-15,98.940;104.610;105.280,875.575221238938;925.75221238938;931.681415929203\n1916-11-15,105.630;105.970;110.150,918.521739130435;921.478260869565;957.826086956522\n1916-12-15,90.160;95.000;106.760,777.241379310345;818.965517241379;920.344827586207\n1917-01-15,95.430;95.430;99.180,815.641025641026;815.641025641026;847.692307692308\n1917-02-15,87.010;91.560;94.910,725.083333333333;763;790.916666666667\n1917-03-15,91.100;96.720;98.200,759.166666666667;806;818.333333333333\n1917-04-15,90.660;93.230;97.060,719.52380952381;739.920634920635;770.31746031746\n1917-05-15,89.080;97.380;97.410,695.9375;760.78125;761.015625\n1917-06-15,94.780;95.380;98.580,729.076923076923;733.692307692308;758.307692307692\n1917-07-15,90.480;91.750;95.310,706.875;716.796875;744.609375\n1917-08-15,83.400;83.400;93.850,641.538461538462;641.538461538462;721.923076923077\n1917-09-15,81.200;83.460;86.020,610.526315789474;627.518796992481;646.766917293233\n1917-10-15,74.500;74.500;83.580,551.851851851852;551.851851851852;619.111111111111\n1917-11-15,68.580;72.650;74.230,508;538.148148148148;549.851851851852\n1917-12-15,65.950;74.380;74.380,481.386861313869;542.919708029197;542.919708029197\n1918-01-15,73.380;79.800;79.800,524.142857142857;570;570\n1918-02-15,77.780;80.390;82.080,551.631205673759;570.141843971631;582.127659574468\n1918-03-15,76.410;76.410;79.930,545.785714285714;545.785714285714;570.928571428571\n1918-04-15,75.580;77.510;79.420,532.253521126761;545.845070422535;559.295774647887\n1918-05-15,78.080;78.080;84.040,538.48275862069;538.48275862069;579.586206896552\n1918-06-15,78.530;82.580;83.020,534.21768707483;561.768707482993;564.761904761905\n1918-07-15,80.510;81.230;82.960,533.17880794702;537.94701986755;549.403973509934\n1918-08-15,80.710;82.460;83.180,524.090909090909;535.454545454545;540.12987012987\n1918-09-15,80.290;84.680;84.680,511.40127388535;539.363057324841;539.363057324841\n1918-10-15,83.360;85.510;89.070,521;534.4375;556.6875\n1918-11-15,79.870;80.930;87.660,490;496.503067484663;537.791411042945\n1918-12-15,80.440;82.200;84.500,487.515151515152;498.181818181818;512.121212121212\n1919-01-15,79.880;80.610;83.350,484.121212121212;488.545454545455;505.151515151515\n1919-02-15,79.350;84.810;85.680,489.814814814815;523.518518518518;528.888888888889\n1919-03-15,84.240;88.850;89.050,513.658536585366;541.768292682927;542.987804878049\n1919-04-15,88.840;92.880;93.510,531.976047904192;556.167664670659;559.940119760479\n1919-05-15,93.260;105.500;105.500,551.834319526627;624.260355029586;624.260355029586\n1919-06-15,99.560;106.980;107.550,589.112426035503;633.01775147929;636.390532544379\n1919-07-15,107.160;107.160;112.230,615.862068965517;615.862068965517;645\n1919-08-15,98.460;104.750;107.990,556.271186440678;591.80790960452;610.112994350283\n1919-09-15,105.840;111.420;111.420,594.606741573034;625.955056179775;625.955056179775\n1919-10-15,108.900;118.920;118.920,601.657458563536;657.016574585635;657.016574585635\n1919-11-15,103.720;103.720;119.620,560.648648648649;560.648648648649;646.594594594595\n1919-12-15,103.550;107.230;107.970,547.883597883598;567.354497354497;571.269841269841\n1920-01-15,101.900;104.210;108.850,527.979274611399;539.948186528497;563.989637305699\n1920-02-15,89.980;91.180;103.010,461.435897435897;467.589743589744;528.25641025641\n1920-03-15,91.680;102.810;104.170,465.380710659899;521.878172588833;528.781725888325\n1920-04-15,93.160;93.540;105.650,458.916256157635;460.788177339901;520.443349753695\n1920-05-15,87.360;91.810;94.410,424.077669902913;445.679611650485;458.300970873786\n1920-06-15,90.160;90.760;93.060,431.387559808612;434.258373205742;445.263157894737\n1920-07-15,86.860;86.860;94.510,417.596153846154;417.596153846154;454.375\n1920-08-15,83.200;86.160;87.290,409.852216748768;424.433497536946;430\n1920-09-15,82.950;82.950;89.950,414.75;414.75;449.75\n1920-10-15,84.000;85.080;85.730,422.110552763819;427.537688442211;430.804020100503\n1920-11-15,73.120;76.040;85.480,369.292929292929;384.040404040404;431.717171717172\n1920-12-15,66.750;71.950;77.300,344.072164948454;370.876288659794;398.453608247423\n1921-01-15,72.670;76.130;76.760,382.473684210526;400.684210526316;404\n1921-02-15,74.340;74.980;77.140,404.021739130435;407.5;419.239130434783\n1921-03-15,72.250;75.760;77.780,394.808743169399;413.989071038251;425.027322404372\n1921-04-15,75.060;78.570;78.860,414.696132596685;434.088397790055;435.690607734807\n1921-05-15,73.440;73.440;80.030,414.915254237288;414.915254237288;452.146892655367\n1921-06-15,64.900;68.450;73.510,368.75;388.920454545455;417.670454545455\n1921-07-15,67.250;68.370;69.860,379.943502824859;386.271186440678;394.689265536723\n1921-08-15,63.900;67.110;69.950,361.016949152542;379.152542372881;395.197740112994\n1921-09-15,66.830;71.080;71.720,381.885714285714;406.171428571429;409.828571428571\n1921-10-15,69.460;73.210;73.800,396.914285714286;418.342857142857;421.714285714286\n1921-11-15,73.440;77.300;78.010,422.068965517241;444.252873563218;448.333333333333\n1921-12-15,78.120;80.800;81.500,451.560693641618;467.052023121387;471.098265895954\n1922-01-15,78.590;81.300;82.950,465.029585798817;481.065088757396;490.828402366864\n1922-02-15,81.680;85.460;85.810,483.313609467456;505.680473372781;507.751479289941\n1922-03-15,85.330;89.050;89.050,510.958083832335;533.233532934132;533.233532934132\n1922-04-15,89.300;91.930;93.210,534.730538922156;550.479041916168;558.14371257485\n1922-05-15,91.500;95.630;96.410,547.904191616767;572.634730538922;577.305389221557\n1922-06-15,90.730;92.930;96.360,543.293413173653;556.467065868264;577.005988023952\n1922-07-15,92.920;97.050;97.050,553.095238095238;577.678571428571;577.678571428571\n1922-08-15,96.210;100.780;100.780,579.578313253012;607.10843373494;607.10843373494\n1922-09-15,96.580;97.120;102.050,581.807228915663;585.060240963855;614.759036144578\n1922-10-15,96.110;96.110;102.760,575.508982035928;575.508982035928;615.329341317365\n1922-11-15,92.030;94.650;99.530,547.797619047619;563.392857142857;592.440476190476\n1922-12-15,95.030;98.170;99.220,562.307692307692;580.887573964497;587.100591715976\n1923-01-15,96.960;97.430;99.420,577.142857142857;579.940476190476;591.785714285714\n1923-02-15,97.710;103.900;103.900,581.607142857143;618.452380952381;618.452380952381\n1923-03-15,102.360;102.770;105.380,609.285714285714;611.72619047619;627.261904761905\n1923-04-15,98.380;98.380;102.700,582.130177514793;582.130177514793;607.692307692308\n1923-05-15,92.770;97.530;98.190,548.934911242604;577.100591715976;581.005917159763\n1923-06-15,88.400;88.400;97.240,520;520;572\n1923-07-15,86.910;86.910;91.720,505.290697674419;505.290697674419;533.255813953488\n1923-08-15,87.960;93.460;93.700,514.385964912281;546.549707602339;547.953216374269\n1923-09-15,87.940;87.970;93.610,511.279069767442;511.453488372093;544.244186046512\n1923-10-15,85.910;88.530;90.450,496.589595375722;511.734104046243;522.832369942196\n1923-11-15,88.410;92.340;92.880,511.040462427746;533.757225433526;536.878612716763\n1923-12-15,92.640;95.520;95.610,535.491329479769;552.138728323699;552.658959537572\n1924-01-15,94.880;100.660;100.660,548.439306358381;581.849710982659;581.849710982659\n1924-02-15,96.330;97.220;101.310,560.058139534884;565.232558139535;589.011627906977\n1924-03-15,92.540;93.010;98.860,541.169590643275;543.918128654971;578.12865497076\n1924-04-15,89.180;90.630;94.690,524.588235294118;533.117647058823;557\n1924-05-15,88.330;89.900;92.470,519.588235294118;528.823529411765;543.941176470588\n1924-06-15,89.180;96.370;96.370,524.588235294118;566.882352941176;566.882352941176\n1924-07-15,96.380;102.140;102.140,563.625730994152;597.309941520468;597.309941520468\n1924-08-15,101.510;104.140;105.570,597.117647058824;612.588235294118;621\n1924-09-15,101.070;103.160;104.950,591.052631578947;603.27485380117;613.74269005848\n1924-10-15,99.180;104.060;104.080,576.627906976744;605;605.116279069768\n1924-11-15,103.890;111.100;111.100,604.011627906977;645.93023255814;645.93023255814\n1924-12-15,110.440;120.510;120.510,638.381502890173;696.589595375723;696.589595375723\n1925-01-15,119.460;123.490;123.600,690.520231213873;713.815028901734;714.450867052023\n1925-02-15,117.960;122.240;122.860,685.813953488372;710.697674418605;714.302325581395\n1925-03-15,115.000;116.750;125.680,664.739884393064;674.85549132948;726.473988439306\n1925-04-15,117.400;120.010;121.540,682.558139534884;697.732558139535;706.627906976744\n1925-05-15,121.100;129.950;129.950,700;751.156069364162;751.156069364162\n1925-06-15,126.750;131.010;131.010,724.285714285714;748.628571428571;748.628571428571\n1925-07-15,131.330;133.810;136.500,741.977401129944;755.988700564972;771.186440677966\n1925-08-15,135.710;141.180;143.180,766.723163841808;797.627118644068;808.926553672316\n1925-09-15,137.220;143.460;147.160,775.254237288136;810.508474576271;831.412429378531\n1925-10-15,144.770;155.650;155.650,817.909604519774;879.378531073446;879.378531073446\n1925-11-15,148.180;151.080;159.390,823.222222222222;839.333333333333;885.5\n1925-12-15,152.110;156.660;156.870,849.776536312849;875.195530726257;876.368715083799\n1926-01-15,153.200;157.350;158.930,855.865921787709;879.050279329609;887.877094972067\n1926-02-15,154.680;154.680;162.310,864.134078212291;864.134078212291;906.759776536313\n1926-03-15,135.200;140.460;153.130,759.550561797753;789.101123595506;860.280898876404\n1926-04-15,136.270;143.710;144.550,761.284916201117;802.849162011173;807.541899441341\n1926-05-15,137.160;143.430;143.430,770.561797752809;805.786516853933;805.786516853933\n1926-06-15,142.300;153.040;154.030,803.954802259887;864.632768361582;870.225988700565\n1926-07-15,153.010;160.180;160.580,874.342857142857;915.314285714286;917.6\n1926-08-15,160.410;162.510;166.140,921.896551724138;933.965517241379;954.827586206897\n1926-09-15,156.260;158.190;166.100,892.914285714286;903.942857142857;949.142857142857\n1926-10-15,145.660;150.760;159.690,827.613636363636;856.590909090909;907.329545454545\n1926-11-15,150.510;156.550;157.370,850.338983050847;884.463276836158;889.09604519774\n1926-12-15,156.650;157.200;160.750,885.028248587571;888.135593220339;908.19209039548\n1927-01-15,152.730;156.410;156.560,872.742857142857;893.771428571429;894.628571428571\n1927-02-15,154.310;161.960;161.960,886.83908045977;930.80459770115;930.80459770115\n1927-03-15,158.410;160.080;161.780,915.664739884393;925.317919075144;935.14450867052\n1927-04-15,160.710;164.640;167.360,928.959537572254;951.676300578035;967.398843930636\n1927-05-15,164.550;172.960;172.960,945.689655172414;994.022988505747;994.022988505747\n1927-06-15,165.730;166.230;171.980,941.647727272727;944.488636363636;977.159090909091\n1927-07-15,168.060;181.400;181.400,971.445086705202;1048.5549132948;1048.5549132948\n1927-08-15,177.130;189.790;190.630,1029.82558139535;1103.43023255814;1108.31395348837\n1927-09-15,191.560;197.590;198.970,1107.28323699422;1142.1387283237;1150.11560693642\n1927-10-15,181.430;181.730;199.780,1042.70114942529;1044.42528735632;1148.16091954023\n1927-11-15,181.650;198.210;198.210,1050;1145.7225433526;1145.7225433526\n1927-12-15,193.580;200.700;200.930,1118.95953757225;1160.11560693642;1161.4450867052\n1928-01-15,194.500;198.590;203.350,1124.2774566474;1147.91907514451;1175.43352601156\n1928-02-15,191.330;194.780;199.350,1118.88888888889;1139.06432748538;1165.78947368421\n1928-03-15,194.530;214.450;214.450,1137.60233918129;1254.09356725146;1254.09356725146\n1928-04-15,207.940;211.630;216.930,1216.02339181287;1237.60233918129;1268.59649122807\n1928-05-15,211.730;219.810;220.880,1230.98837209302;1277.96511627907;1284.18604651163\n1928-06-15,201.960;210.370;220.270,1181.05263157895;1230.23391812865;1288.12865497076\n1928-07-15,205.100;216.000;216.620,1199.41520467836;1263.15789473684;1266.78362573099\n1928-08-15,214.080;240.410;240.410,1251.9298245614;1405.90643274854;1405.90643274854\n1928-09-15,236.860;237.380;241.720,1369.13294797688;1372.1387283237;1397.22543352601\n1928-10-15,237.750;252.160;257.130,1382.26744186047;1466.04651162791;1494.94186046512\n1928-11-15,254.380;293.380;295.620,1478.95348837209;1705.6976744186;1718.72093023256\n1928-12-15,263.950;300.000;300.000,1543.56725146199;1754.38596491228;1754.38596491228\n1929-01-15,296.980;317.510;317.510,1736.72514619883;1856.78362573099;1856.78362573099\n1929-02-15,300.410;317.410;322.060,1756.78362573099;1856.19883040936;1883.3918128655\n1929-03-15,296.510;308.850;321.180,1744.17647058824;1816.76470588235;1889.29411764706\n1929-04-15,299.130;319.290;319.290,1770;1889.2899408284;1889.2899408284\n1929-05-15,293.420;297.410;326.160,1726;1749.47058823529;1918.58823529412\n1929-06-15,303.270;331.650;331.650,1773.50877192982;1939.47368421053;1939.47368421053\n1929-07-15,335.220;347.700;347.700,1937.68786127168;2009.82658959538;2009.82658959538\n1929-08-15,337.990;380.330;380.330,1953.69942196532;2198.43930635838;2198.43930635838\n1929-09-15,343.450;343.450;381.170,1985.26011560694;1985.26011560694;2203.29479768786\n1929-10-15,230.070;273.510;352.860,1329.88439306358;1580.98265895954;2039.65317919075\n1929-11-15,198.690;238.950;257.680,1148.49710982659;1381.21387283237;1489.47976878613\n1929-12-15,230.890;248.480;262.200,1342.38372093023;1444.6511627907;1524.41860465116\n1930-01-15,244.200;267.140;267.140,1428.0701754386;1562.22222222222;1562.22222222222\n1930-02-15,262.470;271.110;272.270,1543.94117647059;1594.76470588235;1601.58823529412\n1930-03-15,270.590;286.100;286.100,1601.12426035503;1692.89940828402;1692.89940828402\n1930-04-15,276.940;279.230;294.070,1629.05882352941;1642.52941176471;1729.82352941176\n1930-05-15,259.680;275.070;275.070,1536.56804733728;1627.63313609467;1627.63313609467\n1930-06-15,211.840;226.340;274.450,1260.95238095238;1347.2619047619;1633.63095238095\n1930-07-15,218.330;233.990;240.810,1315.24096385542;1409.57831325301;1450.66265060241\n1930-08-15,217.240;240.420;240.420,1316.60606060606;1457.09090909091;1457.09090909091\n1930-09-15,204.900;204.900;245.090,1234.33734939759;1234.33734939759;1476.44578313253\n1930-10-15,183.350;183.350;214.180,1111.21212121212;1111.21212121212;1298.06060606061\n1930-11-15,171.600;180.910;190.300,1046.34146341463;1103.10975609756;1160.36585365854\n1930-12-15,157.510;164.580;186.820,978.32298136646;1022.23602484472;1160.37267080745\n1931-01-15,161.450;169.340;173.040,1015.40880503145;1065.03144654088;1088.30188679245\n1931-02-15,168.710;190.340;194.360,1074.58598726115;1212.35668789809;1237.96178343949\n1931-03-15,172.360;172.360;187.720,1104.87179487179;1104.87179487179;1203.33333333333\n1931-04-15,143.610;151.190;171.070,926.516129032258;975.41935483871;1103.67741935484\n1931-05-15,128.460;128.460;154.410,839.607843137255;839.607843137255;1009.21568627451\n1931-06-15,121.700;150.180;154.040,805.960264900662;994.569536423841;1020.13245033113\n1931-07-15,135.390;135.390;155.260,896.622516556291;896.622516556291;1028.2119205298\n1931-08-15,133.770;139.410;144.150,885.894039735099;923.245033112583;954.635761589404\n1931-09-15,96.610;96.610;140.130,644.066666666667;644.066666666667;934.2\n1931-10-15,86.480;103.970;108.880,580.402684563758;697.785234899329;730.738255033557\n1931-11-15,91.550;93.870;116.790,622.789115646259;638.571428571429;794.489795918367\n1931-12-15,73.790;77.900;91.170,505.41095890411;533.561643835617;624.452054794521\n1932-01-15,71.240;76.550;85.880,498.181818181818;535.314685314685;600.55944055944\n1932-02-15,71.800;81.440;85.980,509.219858156028;577.58865248227;609.787234042553\n1932-03-15,73.280;73.280;88.780,523.428571428571;523.428571428571;634.142857142857\n1932-04-15,55.930;55.930;72.180,402.374100719424;402.374100719424;519.280575539568\n1932-05-15,44.740;44.740;59.010,326.569343065693;326.569343065693;430.729927007299\n1932-06-15,42.840;42.840;50.620,315;315;372.205882352941\n1932-07-15,41.220;53.890;53.890,303.088235294118;396.25;396.25\n1932-08-15,53.160;73.160;75.220,393.777777777778;541.925925925926;557.185185185185\n1932-09-15,65.060;71.560;79.930,485.522388059701;534.029850746269;596.492537313433\n1932-10-15,58.470;61.900;71.210,439.624060150376;465.413533834586;535.413533834586\n1932-11-15,56.350;56.350;68.030,426.893939393939;426.893939393939;515.378787878788\n1932-12-15,55.910;60.260;61.930,426.793893129771;460;472.748091603053\n1933-01-15,59.290;60.900;64.350,459.612403100775;472.093023255814;498.837209302326\n1933-02-15,50.160;51.390;60.090,394.96062992126;404.645669291339;473.149606299213\n1933-03-15,52.540;55.400;62.950,416.984126984127;439.68253968254;499.603174603175\n1933-04-15,55.690;73.100;73.690,441.984126984127;580.15873015873;584.84126984127\n1933-05-15,76.630;88.110;90.020,608.174603174603;699.285714285714;714.444444444444\n1933-06-15,88.870;98.140;98.740,699.763779527559;772.755905511811;777.48031496063\n1933-07-15,88.710;90.770;108.670,677.175572519084;692.900763358779;829.541984732824\n1933-08-15,92.550;102.410;105.070,701.136363636364;775.833333333333;795.984848484848\n1933-09-15,93.180;94.240;105.740,705.909090909091;713.939393939394;801.060606060606\n1933-10-15,84.380;88.160;99.720,639.242424242424;667.878787878788;755.454545454545\n1933-11-15,89.620;98.140;101.280,678.939393939394;743.484848484848;767.272727272727\n1933-12-15,95.280;98.670;102.040,721.818181818182;747.5;773.030303030303\n1934-01-15,96.730;107.220;108.990,732.80303030303;812.272727272727;825.681818181818\n1934-02-15,103.120;103.460;110.740,775.338345864662;777.894736842105;832.631578947368\n1934-03-15,98.760;100.310;105.790,742.556390977444;754.210526315789;795.413533834586\n1934-04-15,100.490;100.490;106.550,755.563909774436;755.563909774436;801.127819548872\n1934-05-15,91.810;94.000;100.620,690.300751879699;706.766917293233;756.541353383459\n1934-06-15,91.790;95.750;100.420,685;714.55223880597;749.402985074627\n1934-07-15,85.510;88.050;98.820,638.134328358209;657.089552238806;737.462686567164\n1934-08-15,87.470;92.860;95.480,652.761194029851;692.985074626866;712.537313432836\n1934-09-15,86.690;92.490;93.650,637.426470588235;680.073529411765;688.602941176471\n1934-10-15,90.410;93.360;95.600,669.703703703704;691.555555555556;708.148148148148\n1934-11-15,93.460;102.940;103.080,692.296296296296;762.518518518518;763.555555555556\n1934-12-15,99.590;104.040;104.040,743.208955223881;776.417910447761;776.417910447761\n1935-01-15,100.490;101.690;105.880,738.897058823529;747.720588235294;778.529411764706\n1935-02-15,100.230;102.380;107.170,731.605839416059;747.299270072993;782.262773722628\n1935-03-15,96.710;100.780;103.270,705.912408759124;735.620437956204;753.795620437956\n1935-04-15,100.390;109.450;110.470,727.463768115942;793.115942028986;800.507246376812\n1935-05-15,108.710;110.640;116.810,787.753623188406;801.739130434783;846.449275362319\n1935-06-15,111.450;118.360;120.040,813.503649635037;863.941605839416;876.204379562044\n1935-07-15,118.690;126.230;126.560,866.350364963504;921.386861313869;923.795620437956\n1935-08-15,124.930;127.350;128.990,911.897810218978;929.562043795621;941.532846715329\n1935-09-15,127.270;131.920;134.110,928.978102189781;962.919708029197;978.905109489051\n1935-10-15,128.060;139.740;140.780,934.744525547445;1020;1027.59124087591\n1935-11-15,141.070;142.340;148.440,1022.24637681159;1031.44927536232;1075.65217391304\n1935-12-15,138.940;144.130;144.130,1006.8115942029;1044.42028985507;1044.42028985507\n1936-01-15,143.110;149.490;149.490,1037.02898550725;1083.26086956522;1083.26086956522\n1936-02-15,149.810;152.530;154.430,1085.57971014493;1105.28985507246;1119.05797101449\n1936-03-15,150.420;156.340;158.750,1097.95620437956;1141.16788321168;1158.75912408759\n1936-04-15,143.650;145.670;161.990,1048.5401459854;1063.28467153285;1182.40875912409\n1936-05-15,146.700;152.640;152.640,1070.80291970803;1114.16058394161;1114.16058394161\n1936-06-15,149.260;157.690;160.660,1081.59420289855;1142.68115942029;1164.20289855072\n1936-07-15,155.600;164.860;167.010,1119.42446043165;1186.04316546763;1201.51079136691\n1936-08-15,160.800;166.290;169.050,1148.57142857143;1187.78571428571;1207.5\n1936-09-15,165.160;167.820;169.550,1179.71428571429;1198.71428571429;1211.07142857143\n1936-10-15,168.260;177.150;177.420,1201.85714285714;1265.35714285714;1267.28571428571\n1936-11-15,176.670;183.220;184.900,1261.92857142857;1308.71428571429;1320.71428571429\n1936-12-15,175.850;179.900;182.180,1256.07142857143;1285;1301.28571428571\n1937-01-15,177.720;184.740;186.900,1260.42553191489;1310.21276595745;1325.53191489362\n1937-02-15,186.010;187.170;190.290,1319.21985815603;1327.44680851064;1349.57446808511\n1937-03-15,179.820;186.410;194.400,1266.33802816901;1312.74647887324;1369.01408450704\n1937-04-15,170.130;174.270;185.190,1189.72027972028;1218.67132867133;1295.03496503496\n1937-05-15,167.460;174.710;176.300,1162.91666666667;1213.26388888889;1224.30555555556\n1937-06-15,165.510;169.320;175.140,1149.375;1175.83333333333;1216.25\n1937-07-15,170.130;184.010;184.420,1173.31034482759;1269.03448275862;1271.86206896552\n1937-08-15,175.910;177.410;189.340,1213.1724137931;1223.51724137931;1305.79310344828\n1937-09-15,147.380;154.570;173.080,1009.45205479452;1058.69863013699;1185.47945205479\n1937-10-15,125.730;138.480;153.890,861.164383561644;948.493150684931;1054.04109589041\n1937-11-15,113.640;123.480;135.940,783.724137931035;851.586206896552;937.51724137931\n1937-12-15,118.930;120.850;129.980,825.902777777778;839.236111111111;902.638888888889\n1938-01-15,120.570;121.870;134.350,849.084507042254;858.239436619718;946.12676056338\n1938-02-15,118.490;129.640;132.410,840.354609929078;919.432624113475;939.078014184397\n1938-03-15,98.950;98.950;130.470,701.77304964539;701.77304964539;925.31914893617\n1938-04-15,103.020;111.660;118.990,725.492957746479;786.338028169014;837.957746478873\n1938-05-15,107.740;107.740;119.430,764.113475177305;764.113475177305;847.021276595745\n1938-06-15,109.710;133.880;135.870,778.085106382979;949.503546099291;963.617021276596\n1938-07-15,134.560;141.200;144.910,954.326241134752;1001.41843971631;1027.7304964539\n1938-08-15,136.510;139.270;144.470,968.156028368794;987.730496453901;1024.60992907801\n1938-09-15,129.910;141.450;143.080,921.347517730497;1003.1914893617;1014.75177304965\n1938-10-15,144.230;151.730;154.170,1030.21428571429;1083.78571428571;1101.21428571429\n1938-11-15,146.140;149.820;158.080,1043.85714285714;1070.14285714286;1129.14285714286\n1938-12-15,147.390;154.360;154.360,1052.78571428571;1102.57142857143;1102.57142857143\n1939-01-15,136.420;143.760;154.850,974.428571428571;1026.85714285714;1106.07142857143\n1939-02-15,142.430;147.300;147.300,1024.67625899281;1059.71223021583;1059.71223021583\n1939-03-15,131.840;131.840;152.280,948.489208633093;948.489208633093;1095.53956834532\n1939-04-15,123.750;128.380;132.250,896.739130434783;930.289855072464;958.333333333333\n1939-05-15,127.830;138.180;138.180,926.304347826087;1001.30434782609;1001.30434782609\n1939-06-15,130.050;130.630;140.090,942.391304347826;946.594202898551;1015.14492753623\n1939-07-15,131.930;143.260;144.510,956.014492753623;1038.11594202899;1047.17391304348\n1939-08-15,131.330;134.410;144.260,951.666666666667;973.985507246377;1045.36231884058\n1939-09-15,135.250;150.160;155.920,959.219858156028;1064.96453900709;1105.81560283688\n1939-10-15,149.890;151.880;155.480,1070.64285714286;1084.85714285714;1110.57142857143\n1939-11-15,145.690;145.690;152.640,1040.64285714286;1040.64285714286;1090.28571428571\n1939-12-15,146.340;149.990;149.990,1045.28571428571;1071.35714285714;1071.35714285714\n1940-01-15,144.650;145.330;152.800,1040.64748201439;1045.53956834532;1099.28057553957\n1940-02-15,145.000;146.540;148.940,1035.71428571429;1046.71428571429;1063.85714285714\n1940-03-15,145.590;147.540;148.370,1039.92857142857;1053.85714285714;1059.78571428571\n1940-04-15,146.800;148.430;151.290,1048.57142857143;1060.21428571429;1080.64285714286\n1940-05-15,113.940;116.220;148.170,813.857142857143;830.142857142857;1058.35714285714\n1940-06-15,111.840;122.060;123.860,793.191489361702;865.673758865248;878.439716312057\n1940-07-15,120.960;126.140;126.140,864;901;901\n1940-08-15,121.280;128.880;128.880,866.285714285714;920.571428571428;920.571428571428\n1940-09-15,127.740;132.640;135.100,912.428571428571;947.428571428571;965\n1940-10-15,130.390;134.610;135.090,931.357142857143;961.5;964.928571428571\n1940-11-15,129.780;130.030;137.750,927;928.785714285714;983.928571428571\n1940-12-15,128.410;131.130;132.350,910.709219858156;930;938.652482269504\n1941-01-15,124.050;124.130;133.590,879.787234042553;880.354609929078;947.446808510638\n1941-02-15,117.660;121.970;124.760,834.468085106383;865.035460992908;884.822695035461\n1941-03-15,120.300;122.720;123.920,847.183098591549;864.225352112676;872.676056338028\n1941-04-15,115.540;115.540;124.650,807.972027972028;807.972027972028;871.678321678322\n1941-05-15,115.300;116.230;117.820,800.694444444444;807.152777777778;818.194444444444\n1941-06-15,116.180;123.140;123.970,790.340136054422;837.687074829932;843.333333333333\n1941-07-15,122.850;128.790;130.060,835.714285714286;876.122448979592;884.761904761905\n1941-08-15,124.900;127.430;128.220,838.255033557047;855.234899328859;860.536912751678\n1941-09-15,125.810;126.820;129.320,833.17880794702;839.867549668874;856.423841059603\n1941-10-15,117.820;117.820;126.850,770.065359477124;770.065359477124;829.084967320261\n1941-11-15,114.660;114.660;119.850,744.545454545455;744.545454545455;778.246753246753\n1941-12-15,106.340;110.960;116.650,686.064516129032;715.870967741935;752.58064516129\n1942-01-15,108.940;109.410;114.220,693.885350318471;696.87898089172;727.515923566879\n1942-02-15,105.100;106.580;110.800,665.189873417722;674.556962025316;701.26582278481\n1942-03-15,99.210;99.530;106.970,620.0625;622.0625;668.5625\n1942-04-15,92.920;95.350;102.500,577.142857142857;592.23602484472;636.645962732919\n1942-05-15,95.830;100.880;101.090,587.914110429448;618.895705521472;620.184049079755\n1942-06-15,101.300;103.340;106.290,621.472392638037;633.98773006135;652.085889570552\n1942-07-15,102.690;105.720;108.910,626.158536585366;644.634146341464;664.085365853659\n1942-08-15,104.800;106.330;107.550,635.151515151515;644.424242424242;651.818181818182\n1942-09-15,106.030;109.110;109.560,642.606060606061;661.272727272727;664\n1942-10-15,109.650;113.500;115.290,656.586826347306;679.640718562874;690.359281437126\n1942-11-15,114.100;114.500;117.300,679.166666666667;681.547619047619;698.214285714286\n1942-12-15,114.610;119.400;119.560,678.165680473373;706.508875739645;707.455621301775\n1943-01-15,119.260;125.410;125.410,705.680473372781;742.07100591716;742.07100591716\n1943-02-15,125.070;129.710;130.040,740.059171597633;767.514792899408;769.467455621302\n1943-03-15,128.600;136.570;136.820,747.674418604651;794.011627906977;795.46511627907\n1943-04-15,131.180;135.480;136.930,753.908045977012;778.620689655172;786.954022988506\n1943-05-15,136.820;141.180;141.180,781.828571428571;806.742857142857;806.742857142857\n1943-06-15,138.790;143.380;143.380,793.085714285714;819.314285714286;819.314285714286\n1943-07-15,137.250;137.250;145.820,788.793103448276;788.793103448276;838.045977011494\n1943-08-15,134.000;136.620;138.450,774.566473988439;789.71098265896;800.28901734104\n1943-09-15,136.910;140.120;141.750,786.83908045977;805.287356321839;814.655172413793\n1943-10-15,136.390;138.290;140.330,783.850574712644;794.770114942529;806.494252873563\n1943-11-15,129.570;129.570;138.500,744.655172413793;744.655172413793;795.977011494253\n1943-12-15,130.680;135.890;136.240,751.034482758621;780.977011494253;782.988505747127\n1944-01-15,135.920;137.400;138.650,781.149425287356;789.655172413793;796.83908045977\n1944-02-15,134.220;136.300;137.450,771.379310344828;783.333333333333;789.942528735632\n1944-03-15,136.440;138.840;141.000,784.137931034483;797.931034482759;810.344827586207\n1944-04-15,135.000;136.210;139.110,771.428571428571;778.342857142857;794.914285714286\n1944-05-15,137.060;142.240;142.240,783.2;812.8;812.8\n1944-06-15,141.620;148.380;148.630,804.659090909091;843.068181818182;844.488636363636\n1944-07-15,145.770;146.110;150.500,823.559322033898;825.480225988701;850.282485875706\n1944-08-15,144.900;146.990;148.960,818.64406779661;830.45197740113;841.581920903955\n1944-09-15,142.960;146.310;147.160,807.683615819209;826.610169491525;831.412429378531\n1944-10-15,145.830;146.530;148.870,823.898305084746;827.853107344633;841.073446327684\n1944-11-15,145.600;147.330;148.080,822.598870056497;832.372881355932;836.610169491526\n1944-12-15,147.300;151.930;152.280,827.52808988764;853.539325842697;855.505617977528\n1945-01-15,151.350;153.670;155.850,850.280898876404;863.314606741573;875.561797752809\n1945-02-15,153.790;160.400;160.400,863.988764044944;901.123595505618;901.123595505618\n1945-03-15,152.270;154.060;161.520,855.449438202247;865.505617977528;907.415730337079\n1945-04-15,154.990;165.440;165.440,870.730337078652;929.438202247191;929.438202247191\n1945-05-15,163.090;168.300;169.080,911.117318435754;940.223463687151;944.581005586592\n1945-06-15,164.570;164.570;168.920,909.226519337016;909.226519337016;933.259668508287\n1945-07-15,160.910;162.880;167.090,889.005524861878;899.889502762431;923.149171270718\n1945-08-15,161.550;174.290;174.290,892.541436464088;962.92817679558;962.92817679558\n1945-09-15,173.900;180.110;180.220,960.773480662983;995.082872928177;995.690607734806\n1945-10-15,183.060;186.600;187.060,1011.38121546961;1030.93922651934;1033.48066298343\n1945-11-15,187.820;191.460;192.130,1037.67955801105;1057.79005524862;1061.49171270718\n1945-12-15,189.070;192.910;195.820,1038.84615384615;1059.94505494506;1075.93406593407\n1946-01-15,190.900;204.670;205.350,1048.9010989011;1124.56043956044;1128.2967032967\n1946-02-15,186.020;190.090;206.610,1027.73480662983;1050.22099447514;1141.49171270718\n1946-03-15,188.460;199.560;200.560,1029.83606557377;1090.49180327869;1095.95628415301\n1946-04-15,199.190;206.770;208.310,1082.55434782609;1123.75;1132.11956521739\n1946-05-15,200.650;212.280;212.500,1084.59459459459;1147.45945945946;1148.64864864865\n1946-06-15,200.520;205.620;211.470,1072.29946524064;1099.57219251337;1130.85561497326\n1946-07-15,195.220;201.560;207.560,985.959595959596;1017.9797979798;1048.28282828283\n1946-08-15,189.190;189.190;204.520,936.584158415842;936.584158415842;1012.47524752475\n1946-09-15,165.170;172.420;181.180,809.656862745098;845.196078431373;888.137254901961\n1946-10-15,163.120;169.150;175.940,784.230769230769;813.221153846154;845.865384615385\n1946-11-15,163.550;169.780;174.400,767.840375586855;797.089201877934;818.779342723005\n1946-12-15,167.500;177.200;177.850,779.06976744186;824.186046511628;827.209302325581\n1947-01-15,171.950;180.440;180.440,799.767441860465;839.255813953488;839.255813953488\n1947-02-15,177.220;178.900;184.060,824.279069767442;832.093023255814;856.093023255814\n1947-03-15,172.580;177.200;181.880,788.036529680365;809.132420091324;830.502283105023\n1947-04-15,166.690;170.640;177.450,761.141552511416;779.178082191781;810.27397260274\n1947-05-15,163.550;169.250;174.210,746.803652968037;772.831050228311;795.479452054795\n1947-06-15,168.000;177.300;177.440,763.636363636364;805.909090909091;806.545454545455\n1947-07-15,179.880;183.180;186.850,810.27027027027;825.135135135135;841.666666666667\n1947-08-15,177.570;178.850;183.810,789.2;794.888888888889;816.933333333333\n1947-09-15,174.860;177.490;179.810,760.260869565217;771.695652173913;781.782608695652\n1947-10-15,178.100;181.810;185.290,774.347826086957;790.478260869565;805.608695652174\n1947-11-15,179.510;179.510;183.170,777.099567099567;777.099567099567;792.943722943723\n1947-12-15,176.100;181.160;181.160,752.564102564103;774.188034188034;774.188034188034\n1948-01-15,171.180;174.760;181.040,722.278481012658;737.383966244726;763.881856540084\n1948-02-15,165.650;166.800;174.920,704.893617021277;709.787234042553;744.340425531915\n1948-03-15,165.390;177.200;177.200,706.794871794872;757.264957264957;757.264957264957\n1948-04-15,177.320;180.510;183.780,745.042016806723;758.44537815126;772.18487394958\n1948-05-15,180.940;190.740;191.060,757.071129707113;798.075313807531;799.414225941423\n1948-06-15,187.900;189.460;193.160,779.668049792531;786.141078838174;801.49377593361\n1948-07-15,181.200;181.330;191.620,742.622950819672;743.155737704918;785.327868852459\n1948-08-15,179.270;181.710;183.600,731.714285714286;741.673469387755;749.387755102041\n1948-09-15,175.990;178.300;185.360,718.326530612245;727.755102040816;756.571428571429\n1948-10-15,179.870;188.280;189.760,737.172131147541;771.639344262295;777.704918032787\n1948-11-15,171.200;171.200;189.760,707.438016528926;707.438016528926;784.132231404959\n1948-12-15,173.220;177.300;177.920,718.755186721992;735.684647302905;738.257261410788\n1949-01-15,175.030;179.120;181.430,729.291666666667;746.333333333333;755.958333333333\n1949-02-15,171.100;173.060;180.390,718.90756302521;727.142857142857;757.941176470588\n1949-03-15,173.660;177.100;178.450,729.663865546218;744.117647058823;749.789915966387\n1949-04-15,173.240;174.060;177.160,724.853556485356;728.284518828452;741.255230125523\n1949-05-15,168.360;168.360;176.630,707.394957983193;707.394957983193;742.142857142857\n1949-06-15,161.600;167.420;168.150,676.150627615063;700.502092050209;703.556485355649\n1949-07-15,168.080;175.920;176.460,709.198312236287;742.278481012658;744.556962025317\n1949-08-15,176.840;178.660;182.020,743.025210084034;750.672268907563;764.789915966387\n1949-09-15,178.040;182.510;183.290,744.937238493724;763.640167364017;766.903765690377\n1949-10-15,182.670;189.540;190.360,770.759493670886;799.746835443038;803.206751054852\n1949-11-15,187.980;191.550;193.520,789.831932773109;804.831932773109;813.109243697479\n1949-12-15,192.710;200.520;200.520,816.567796610169;849.661016949153;849.661016949153\n1950-01-15,196.810;201.790;201.980,837.489361702128;858.68085106383;859.489361702128\n1950-02-15,201.690;203.440;204.590,858.255319148936;865.702127659575;870.595744680851\n1950-03-15,202.330;206.050;209.780,857.330508474576;873.093220338983;888.898305084746\n1950-04-15,208.440;213.560;215.310,883.220338983051;904.915254237288;912.330508474576\n1950-05-15,214.870;223.420;223.420,906.62447257384;942.700421940928;942.700421940928\n1950-06-15,206.720;209.110;228.380,868.571428571429;878.613445378151;959.579831932773\n1950-07-15,197.460;209.400;210.850,819.336099585062;868.879668049792;874.896265560166\n1950-08-15,211.260;216.870;221.510,869.382716049383;892.469135802469;911.56378600823\n1950-09-15,218.100;226.360;226.780,893.852459016393;927.704918032787;929.426229508197\n1950-10-15,225.010;225.010;231.740,914.674796747967;914.674796747967;942.032520325203\n1950-11-15,222.520;227.600;235.470,900.890688259109;921.457489878542;953.31983805668\n1950-12-15,222.330;235.420;235.420,889.32;941.68;941.68\n1951-01-15,238.990;248.830;249.580,940.905511811024;979.645669291339;982.59842519685\n1951-02-15,250.760;252.050;255.710,975.719844357977;980.739299610895;994.980544747082\n1951-03-15,243.950;248.530;253.610,945.542635658915;963.294573643411;982.984496124031\n1951-04-15,246.020;259.130;259.130,953.565891472868;1004.37984496124;1004.37984496124\n1951-05-15,245.270;249.650;263.130,946.988416988417;963.899613899614;1015.94594594595\n1951-06-15,242.640;242.640;254.030,936.833976833977;936.833976833977;980.810810810811\n1951-07-15,243.980;257.860;260.700,942.007722007722;995.598455598456;1006.56370656371\n1951-08-15,259.890;270.250;270.250,1003.43629343629;1043.43629343629;1043.43629343629\n1951-09-15,270.630;271.160;276.370,1036.89655172414;1038.92720306513;1058.88888888889\n1951-10-15,260.430;262.350;275.870,994.007633587786;1001.3358778626;1052.93893129771\n1951-11-15,256.950;261.270;264.060,973.295454545455;989.659090909091;1000.22727272727\n1951-12-15,263.240;269.230;269.230,993.358490566038;1015.96226415094;1015.96226415094\n1952-01-15,268.080;270.690;275.400,1011.62264150943;1021.47169811321;1039.24528301887\n1952-02-15,258.490;260.080;271.680,982.851711026616;988.897338403042;1033.00380228137\n1952-03-15,260.080;269.460;269.460,988.897338403042;1024.56273764259;1024.56273764259\n1952-04-15,257.630;257.630;267.220,975.871212121212;975.871212121212;1012.19696969697\n1952-05-15,256.350;262.940;264.220,971.022727272727;995.984848484848;1000.83333333333\n1952-06-15,262.090;274.260;274.260,989.018867924528;1034.94339622641;1034.94339622641\n1952-07-15,272.580;279.560;279.560,1020.89887640449;1047.04119850187;1047.04119850187\n1952-08-15,273.170;275.040;280.290,1023.10861423221;1030.11235955056;1049.77528089888\n1952-09-15,268.380;270.610;277.150,1005.16853932584;1013.52059925094;1038.01498127341\n1952-10-15,263.060;269.230;271.400,985.243445692884;1008.35205992509;1016.47940074906\n1952-11-15,270.230;283.660;283.660,1012.09737827715;1062.39700374532;1062.39700374532\n1952-12-15,281.630;291.900;292.000,1054.79400749064;1093.25842696629;1093.6329588015\n1953-01-15,285.240;289.770;293.790,1072.33082706767;1089.36090225564;1104.47368421053\n1953-02-15,281.140;284.270;290.190,1060.90566037736;1072.71698113208;1095.05660377358\n1953-03-15,279.870;279.870;290.640,1052.14285714286;1052.14285714286;1092.63157894737\n1953-04-15,270.730;274.750;280.090,1017.78195488722;1032.89473684211;1052.96992481203\n1953-05-15,271.480;272.280;278.790,1016.77902621723;1019.77528089888;1044.15730337079\n1953-06-15,262.880;268.260;269.840,980.89552238806;1000.97014925373;1006.86567164179\n1953-07-15,268.060;275.380;275.380,1000.22388059701;1027.53731343284;1027.53731343284\n1953-08-15,261.220;261.220;276.740,971.078066914498;971.078066914498;1028.77323420074\n1953-09-15,255.490;264.040;265.480,949.776951672863;981.561338289963;986.914498141264\n1953-10-15,264.260;275.810;276.310,978.740740740741;1021.51851851852;1023.37037037037\n1953-11-15,273.880;281.370;281.370,1018.14126394052;1045.98513011152;1045.98513011152\n1953-12-15,278.300;280.900;283.540,1034.57249070632;1044.23791821561;1054.05204460967\n1954-01-15,279.870;292.390;292.850,1040.40892193309;1086.95167286245;1088.66171003717\n1954-02-15,289.540;294.540;294.540,1076.35687732342;1094.94423791822;1094.94423791822\n1954-03-15,296.400;303.510;303.510,1101.85873605948;1128.28996282528;1128.28996282528\n1954-04-15,304.260;319.330;319.330,1135.29850746269;1191.52985074627;1191.52985074627\n1954-05-15,317.930;327.490;327.490,1181.89591078067;1217.43494423792;1217.43494423792\n1954-06-15,319.270;333.530;336.900,1186.87732342007;1239.88847583643;1252.41635687732\n1954-07-15,334.120;347.920;347.920,1242.08178438662;1293.38289962825;1293.38289962825\n1954-08-15,335.800;335.800;350.380,1248.32713754647;1248.32713754647;1302.52788104089\n1954-09-15,338.130;360.460;363.320,1261.67910447761;1345;1355.67164179104\n1954-10-15,352.140;352.140;364.430,1313.9552238806;1313.9552238806;1359.81343283582\n1954-11-15,353.960;386.770;388.510,1320.74626865672;1443.17164179104;1449.66417910448\n1954-12-15,384.040;404.390;404.390,1438.35205992509;1514.56928838951;1514.56928838951\n1955-01-15,388.200;408.830;408.890,1453.93258426966;1531.19850187266;1531.42322097378\n1955-02-15,405.700;411.870;413.990,1519.47565543071;1542.58426966292;1550.52434456929\n1955-03-15,391.360;409.700;419.680,1465.76779026217;1534.45692883895;1571.83520599251\n1955-04-15,412.970;425.650;430.640,1546.70411985019;1594.19475655431;1612.88389513109\n1955-05-15,414.120;424.860;426.300,1551.01123595506;1591.23595505618;1596.62921348315\n1955-06-15,424.880;451.380;451.380,1591.31086142322;1690.56179775281;1690.56179775281\n1955-07-15,453.820;465.850;468.450,1693.35820895522;1738.24626865672;1747.94776119403\n1955-08-15,448.840;468.180;468.180,1674.77611940298;1746.94029850746;1746.94029850746\n1955-09-15,455.560;466.620;487.450,1693.53159851301;1734.6468401487;1812.08178438662\n1955-10-15,438.590;454.870;461.140,1630.44609665428;1690.96654275093;1714.2750929368\n1955-11-15,454.890;483.260;487.380,1691.04089219331;1796.50557620818;1811.82156133829\n1955-12-15,480.720;488.400;488.400,1793.73134328358;1822.38805970149;1822.38805970149\n1956-01-15,462.350;470.740;485.780,1725.18656716418;1756.49253731343;1812.61194029851\n1956-02-15,465.720;483.650;485.710,1737.76119402985;1804.66417910448;1812.35074626866\n1956-03-15,486.690;511.790;513.030,1816.00746268657;1909.66417910448;1914.29104477612\n1956-04-15,503.020;516.120;521.050,1869.96282527881;1918.66171003717;1936.98884758364\n1956-05-15,468.810;478.050;516.440,1736.33333333333;1770.55555555556;1912.74074074074\n1956-06-15,475.290;492.780;492.780,1747.38970588235;1811.69117647059;1811.69117647059\n1956-07-15,491.920;517.810;517.810,1795.32846715328;1889.81751824818;1889.81751824818\n1956-08-15,495.960;502.040;520.950,1816.7032967033;1838.97435897436;1908.24175824176\n1956-09-15,475.250;475.250;509.820,1734.48905109489;1734.48905109489;1860.65693430657\n1956-10-15,468.700;479.850;490.190,1704.36363636364;1744.90909090909;1782.50909090909\n1956-11-15,466.100;472.780;495.370,1694.90909090909;1719.2;1801.34545454545\n1956-12-15,480.610;499.470;499.470,1741.34057971014;1809.67391304348;1809.67391304348\n1957-01-15,474.590;479.160;499.200,1719.52898550725;1736.08695652174;1808.69565217391\n1957-02-15,454.820;464.620;477.220,1641.94945848375;1677.3285198556;1722.81588447653\n1957-03-15,468.910;474.810;475.010,1686.72661870504;1707.94964028777;1708.6690647482\n1957-04-15,474.980;494.360;494.360,1702.43727598566;1771.89964157706;1771.89964157706\n1957-05-15,494.680;504.930;506.040,1766.71428571429;1803.32142857143;1807.28571428571\n1957-06-15,497.080;503.290;513.190,1768.96797153025;1791.06761565836;1826.29893238434\n1957-07-15,503.290;508.520;520.770,1778.40989399293;1796.89045936396;1840.17667844523\n1957-08-15,470.140;484.350;506.210,1661.27208480565;1711.48409893993;1788.72791519435\n1957-09-15,456.300;456.300;486.130,1612.36749116608;1612.36749116608;1717.77385159011\n1957-10-15,419.790;441.040;465.820,1483.35689045936;1558.44522968198;1646.00706713781\n1957-11-15,427.940;449.870;449.870,1506.83098591549;1584.04929577465;1584.04929577465\n1957-12-15,425.650;435.690;449.550,1498.7676056338;1534.11971830986;1582.92253521127\n1958-01-15,438.680;450.020;451.160,1533.84615384615;1573.4965034965;1577.48251748252\n1958-02-15,436.890;439.920;458.650,1527.58741258741;1538.18181818182;1603.67132867133\n1958-03-15,443.380;446.760;455.920,1539.51388888889;1551.25;1583.05555555556\n1958-04-15,440.090;455.860;455.860,1522.80276816609;1577.37024221453;1577.37024221453\n1958-05-15,455.450;462.700;463.670,1575.95155709343;1601.03806228374;1604.39446366782\n1958-06-15,466.110;478.180;478.970,1612.83737024221;1654.60207612457;1657.33564013841\n1958-07-15,476.890;502.990;504.370,1644.44827586207;1734.44827586207;1739.20689655172\n1958-08-15,502.670;508.630;512.420,1739.34256055363;1759.96539792388;1773.07958477509\n1958-09-15,511.770;532.090;532.090,1770.83044982699;1841.14186851211;1841.14186851211\n1958-10-15,530.940;543.220;546.360,1837.16262975779;1879.65397923875;1890.51903114187\n1958-11-15,540.520;557.460;567.440,1863.86206896552;1922.27586206897;1956.68965517241\n1958-12-15,556.080;583.650;583.650,1924.15224913495;2019.55017301038;2019.55017301038\n1959-01-15,583.150;593.960;597.660,2010.86206896552;2048.13793103448;2060.89655172414\n1959-02-15,574.460;603.500;603.500,1987.7508650519;2088.23529411765;2088.23529411765\n1959-03-15,601.710;601.710;614.690,2082.04152249135;2082.04152249135;2126.95501730104\n1959-04-15,602.940;623.750;629.870,2079.10344827586;2150.86206896552;2171.96551724138\n1959-05-15,615.640;643.790;643.790,2122.89655172414;2219.96551724138;2219.96551724138\n1959-06-15,617.620;643.600;643.600,2122.40549828179;2211.68384879725;2211.68384879725\n1959-07-15,650.880;674.880;674.880,2229.04109589041;2311.23287671233;2311.23287671233\n1959-08-15,646.530;664.410;678.100,2214.14383561644;2275.37671232877;2322.2602739726\n1959-09-15,616.450;631.680;655.900,2103.92491467577;2155.90443686007;2238.56655290102\n1959-10-15,625.590;646.600;646.600,2127.85714285714;2199.31972789116;2199.31972789116\n1959-11-15,634.460;659.180;659.180,2158.02721088435;2242.10884353741;2242.10884353741\n1959-12-15,661.290;679.360;679.360,2249.28571428571;2310.74829931973;2310.74829931973\n1960-01-15,622.620;622.620;685.470,2124.98293515358;2124.98293515358;2339.48805460751\n1960-02-15,611.330;630.120;636.920,2079.3537414966;2143.26530612245;2166.39455782313\n1960-03-15,599.100;616.590;626.870,2037.75510204082;2097.24489795918;2132.21088435374\n1960-04-15,601.700;601.700;630.770,2039.66101694915;2039.66101694915;2138.20338983051\n1960-05-15,599.610;625.500;625.500,2032.57627118644;2120.33898305085;2120.33898305085\n1960-06-15,624.890;640.620;656.420,2111.11486486486;2164.25675675676;2217.63513513513\n1960-07-15,601.680;616.730;646.910,2032.7027027027;2083.5472972973;2185.50675675676\n1960-08-15,608.690;625.990;641.560,2056.38513513513;2114.83108108108;2167.43243243243\n1960-09-15,569.080;580.140;626.100,1922.56756756757;1959.93243243243;2115.2027027027\n1960-10-15,566.050;580.360;596.480,1899.4966442953;1947.51677852349;2001.61073825503\n1960-11-15,585.240;597.220;612.010,1963.89261744966;2004.09395973154;2053.72483221477\n1960-12-15,593.490;615.890;617.780,1991.57718120805;2066.74496644295;2073.08724832215\n1961-01-15,610.250;648.200;650.640,2047.81879194631;2175.1677852349;2183.35570469799\n1961-02-15,637.040;662.080;662.080,2137.71812080537;2221.74496644295;2221.74496644295\n1961-03-15,661.080;676.630;679.380,2218.38926174497;2270.57046979866;2279.79865771812\n1961-04-15,672.660;678.710;696.720,2257.24832214765;2277.55033557047;2337.98657718121\n1961-05-15,677.050;696.720;705.960,2271.97986577181;2337.98657718121;2368.9932885906\n1961-06-15,680.680;683.960;703.790,2284.1610738255;2295.1677852349;2361.71140939597\n1961-07-15,679.300;705.370;705.370,2264.33333333333;2351.23333333333;2351.23333333333\n1961-08-15,710.460;719.940;725.760,2376.12040133779;2407.82608695652;2427.29096989967\n1961-09-15,691.860;701.210;726.530,2306.2;2337.36666666667;2421.76666666667\n1961-10-15,697.240;703.920;708.490,2324.13333333333;2346.4;2361.63333333333\n1961-11-15,703.840;721.600;734.340,2346.13333333333;2405.33333333333;2447.8\n1961-12-15,720.100;731.140;734.910,2400.33333333333;2437.13333333333;2449.7\n1962-01-15,689.920;700.000;726.010,2299.73333333333;2333.33333333333;2420.03333333333\n1962-02-15,702.540;708.050;717.550,2334.01993355482;2352.32558139535;2383.88704318937\n1962-03-15,706.630;706.950;723.540,2347.60797342193;2348.67109634552;2403.78737541528\n1962-04-15,665.330;665.330;705.420,2203.07947019868;2203.07947019868;2335.82781456954\n1962-05-15,576.930;613.360;675.490,1910.3642384106;2030.99337748344;2236.72185430464\n1962-06-15,535.760;561.280;611.050,1774.03973509934;1858.54304635762;2023.34437086093\n1962-07-15,571.240;597.930;597.930,1885.28052805281;1973.36633663366;1973.36633663366\n1962-08-15,588.350;609.180;616.000,1941.74917491749;2010.49504950495;2033.00330033003\n1962-09-15,574.120;578.980;607.630,1888.55263157895;1904.53947368421;1998.78289473684\n1962-10-15,558.060;589.770;589.770,1835.72368421053;1940.03289473684;1940.03289473684\n1962-11-15,597.130;649.300;652.610,1964.24342105263;2135.85526315789;2146.74342105263\n1962-12-15,640.140;652.100;653.990,2105.72368421053;2145.06578947368;2151.28289473684\n1963-01-15,646.790;682.850;683.730,2127.59868421053;2246.21710526316;2249.11184210526\n1963-02-15,662.940;662.940;688.960,2180.72368421053;2180.72368421053;2266.31578947368\n1963-03-15,659.720;682.520;684.730,2163.01639344262;2237.77049180328;2245.01639344262\n1963-04-15,684.270;717.700;718.330,2243.50819672131;2353.11475409836;2355.18032786885\n1963-05-15,712.550;726.960;726.960,2336.22950819672;2383.47540983607;2383.47540983607\n1963-06-15,706.030;706.880;726.870,2307.28758169935;2310.06535947712;2375.39215686275\n1963-07-15,687.710;695.430;716.450,2240.09771986971;2265.24429967427;2333.71335504886\n1963-08-15,694.870;729.320;729.320,2263.42019543974;2375.63517915309;2375.63517915309\n1963-09-15,732.020;732.790;745.960,2384.42996742671;2386.93811074919;2429.83713355049\n1963-10-15,737.940;755.230;760.500,2395.90909090909;2452.04545454545;2469.15584415584\n1963-11-15,711.490;750.520;753.770,2310.03246753247;2436.75324675325;2447.30519480519\n1963-12-15,751.820;762.950;767.210,2433.07443365696;2469.09385113269;2482.88025889968\n1964-01-15,766.080;785.340;787.780,2479.22330097087;2541.55339805825;2549.4498381877\n1964-02-15,783.040;800.140;800.140,2534.11003236246;2589.4498381877;2589.4498381877\n1964-03-15,802.750;813.290;820.250,2597.89644012945;2632.00647249191;2654.53074433657\n1964-04-15,810.770;810.770;827.330,2623.85113268608;2623.85113268608;2677.44336569579\n1964-05-15,817.100;820.560;830.170,2644.33656957929;2655.53398058252;2686.63430420712\n1964-06-15,800.310;831.500;831.500,2581.64516129032;2682.25806451613;2682.25806451613\n1964-07-15,837.350;841.100;851.350,2692.44372990354;2704.50160771704;2737.45980707396\n1964-08-15,823.400;838.480;842.830,2656.12903225806;2704.77419354839;2718.8064516129\n1964-09-15,844.000;875.370;875.740,2713.82636655949;2814.69453376206;2815.88424437299\n1964-10-15,868.440;873.080;881.500,2792.4115755627;2807.33118971061;2834.40514469453\n1964-11-15,870.640;875.430;891.710,2790.51282051282;2805.86538461538;2858.04487179487\n1964-12-15,857.450;874.130;874.130,2748.23717948718;2801.69871794872;2801.69871794872\n1965-01-15,869.780;902.860;902.860,2787.75641025641;2893.78205128205;2893.78205128205\n1965-02-15,881.350;903.480;906.300,2824.83974358974;2895.76923076923;2904.80769230769\n1965-03-15,887.820;889.050;901.910,2836.4856230032;2840.41533546326;2881.50159744409\n1965-04-15,890.330;922.310;922.310,2835.44585987261;2937.29299363057;2937.29299363057\n1965-05-15,913.220;918.040;939.620,2908.34394904459;2923.69426751592;2992.42038216561\n1965-06-15,840.590;868.030;908.530,2660.09493670886;2746.93037974684;2875.09493670886\n1965-07-15,861.770;881.740;883.230,2727.12025316456;2790.3164556962;2795.03164556962\n1965-08-15,878.890;893.100;896.180,2781.29746835443;2826.26582278481;2836.01265822785\n1965-09-15,893.600;930.580;937.880,2827.84810126582;2944.87341772152;2967.9746835443\n1965-10-15,929.650;960.820;960.820,2932.64984227129;3030.97791798107;3030.97791798107\n1965-11-15,946.380;946.710;961.850,2985.42586750789;2986.46687697161;3034.22712933754\n1965-12-15,939.530;969.260;969.260,2954.49685534591;3047.98742138365;3047.98742138365\n1966-01-15,968.540;983.510;994.200,3045.72327044025;3092.79874213836;3126.41509433962\n1966-02-15,950.660;951.890;995.150,2970.8125;2974.65625;3109.84375\n1966-03-15,911.080;924.770;938.190,2838.2554517134;2880.90342679128;2922.71028037383\n1966-04-15,931.290;933.680;954.730,2883.25077399381;2890.65015479876;2955.82043343653\n1966-05-15,864.140;884.070;931.950,2675.3560371517;2737.05882352941;2885.29411764706\n1966-06-15,870.100;870.100;903.170,2685.49382716049;2685.49382716049;2787.56172839506\n1966-07-15,847.380;847.380;894.040,2607.32307692308;2607.32307692308;2750.89230769231\n1966-08-15,767.030;788.410;852.390,2345.65749235474;2411.03975535168;2606.69724770642\n1966-09-15,772.660;774.220;814.300,2362.874617737;2367.64525993884;2490.21406727829\n1966-10-15,744.320;807.070;809.570,2262.37082066869;2453.10030395137;2460.6990881459\n1966-11-15,791.590;791.590;820.870,2406.04863221885;2406.04863221885;2495.04559270517\n1966-12-15,785.690;785.690;820.540,2388.11550151976;2388.11550151976;2494.04255319149\n1967-01-15,786.410;849.890;849.890,2390.30395136778;2583.25227963526;2583.25227963526\n1967-02-15,836.640;839.370;860.970,2542.97872340426;2551.27659574468;2616.93009118541\n1967-03-15,841.760;865.980;876.670,2550.78787878788;2624.18181818182;2656.57575757576\n1967-04-15,842.430;897.050;897.050,2545.10574018127;2710.12084592145;2710.12084592145\n1967-05-15,852.560;852.560;909.630,2567.95180722892;2567.95180722892;2739.84939759036\n1967-06-15,847.770;860.260;886.150,2545.85585585586;2583.36336336336;2661.11111111111\n1967-07-15,859.690;904.240;909.560,2573.92215568862;2707.30538922156;2723.23353293413\n1967-08-15,893.720;901.290;926.720,2667.82089552239;2690.41791044776;2766.32835820896\n1967-09-15,901.180;926.660;943.080,2682.08333333333;2757.91666666667;2806.78571428571\n1967-10-15,879.740;879.740;933.310,2610.50445103858;2610.50445103858;2769.46587537092\n1967-11-15,849.570;875.810;884.880,2513.52071005917;2591.15384615385;2617.98816568047\n1967-12-15,879.160;905.110;905.110,2593.39233038348;2669.94100294985;2669.94100294985\n1968-01-15,855.470;855.470;908.920,2508.70967741935;2508.70967741935;2665.45454545455\n1968-02-15,831.770;840.500;863.560,2432.07602339181;2457.60233918129;2525.02923976608\n1968-03-15,825.130;840.670;843.220,2405.62682215743;2450.93294460641;2458.36734693878\n1968-04-15,861.250;912.220;912.220,2503.63372093023;2651.8023255814;2651.8023255814\n1968-05-15,891.600;899.000;919.900,2584.34782608696;2605.79710144928;2666.3768115942\n1968-06-15,897.800;897.800;917.950,2587.31988472622;2587.31988472622;2645.38904899135\n1968-07-15,883.000;883.000;923.720,2530.08595988539;2530.08595988539;2646.76217765043\n1968-08-15,869.650;896.010;896.130,2484.71428571429;2560.02857142857;2560.37142857143\n1968-09-15,900.360;935.790;938.280,2565.12820512821;2666.06837606838;2673.16239316239\n1968-10-15,942.320;952.390;967.490,2669.46175637394;2697.98866855524;2740.76487252125\n1968-11-15,946.230;985.080;985.080,2672.96610169492;2782.71186440678;2782.71186440678\n1968-12-15,943.750;943.750;985.210,2658.45070422535;2658.45070422535;2775.23943661972\n1969-01-15,921.250;946.050;951.890,2587.7808988764;2657.44382022472;2673.84831460674\n1969-02-15,899.800;905.210;952.700,2513.40782122905;2528.51955307263;2661.17318435754\n1969-03-15,904.030;935.480;935.480,2504.23822714681;2591.35734072022;2591.35734072022\n1969-04-15,917.510;950.180;950.180,2527.57575757576;2617.57575757576;2617.57575757576\n1969-05-15,936.920;937.560;968.850,2573.95604395604;2575.71428571429;2661.67582417582\n1969-06-15,869.760;873.190;933.170,2376.39344262295;2385.7650273224;2549.64480874317\n1969-07-15,801.960;815.470;886.120,2179.23913043478;2215.95108695652;2407.9347826087\n1969-08-15,809.130;836.720;837.250,2186.83783783784;2261.40540540541;2262.83783783784\n1969-09-15,811.840;813.090;837.780,2188.24797843666;2191.61725067385;2258.16711590296\n1969-10-15,802.200;855.990;862.260,2150.67024128686;2294.87935656836;2311.6890080429\n1969-11-15,807.290;812.300;863.050,2152.77333333333;2166.13333333333;2301.46666666667\n1969-12-15,769.930;800.360;805.040,2042.25464190981;2122.97082228117;2135.38461538462\n1970-01-15,744.060;744.060;811.310,1968.4126984127;1968.4126984127;2146.32275132275\n1970-02-15,746.440;777.590;777.590,1964.31578947368;2046.28947368421;2046.28947368421\n1970-03-15,763.600;785.570;791.050,1998.95287958115;2056.46596858639;2070.81151832461\n1970-04-15,724.330;736.070;792.500,1881.37662337662;1911.87012987013;2058.44155844156\n1970-05-15,631.160;700.440;733.630,1635.12953367876;1814.61139896373;1900.59585492228\n1970-06-15,682.910;683.530;720.430,1760.07731958763;1761.67525773196;1856.77835051546\n1970-07-15,669.360;734.120;735.560,1716.30769230769;1882.35897435897;1886.05128205128\n1970-08-15,707.350;764.580;765.810,1813.71794871795;1960.46153846154;1963.61538461538\n1970-09-15,747.470;760.680;773.140,1906.8112244898;1940.51020408163;1972.29591836735\n1970-10-15,753.560;755.610;783.680,1912.58883248731;1917.79187817259;1989.03553299492\n1970-11-15,754.240;794.090;794.090,1904.64646464646;2005.27777777778;2005.27777777778\n1970-12-15,794.290;838.920;842.000,1995.70351758794;2107.8391959799;2115.57788944724\n1971-01-15,830.570;868.500;868.500,2086.85929648241;2182.1608040201;2182.1608040201\n1971-02-15,868.980;878.830;890.060,2177.89473684211;2202.58145363409;2230.72681704261\n1971-03-15,882.390;904.370;916.830,2205.975;2260.925;2292.075\n1971-04-15,903.040;941.750;950.820,2251.97007481297;2348.50374064838;2371.12219451372\n1971-05-15,905.780;907.810;939.920,2247.59305210918;2252.63027295285;2332.30769230769\n1971-06-15,873.100;891.140;923.060,2150.49261083744;2194.92610837438;2273.54679802956\n1971-07-15,858.430;858.430;903.400,2109.16461916462;2109.16461916462;2219.65601965602\n1971-08-15,839.590;898.070;908.370,2057.81862745098;2201.15196078431;2226.39705882353\n1971-09-15,883.470;887.190;920.930,2165.36764705882;2174.48529411765;2257.18137254902\n1971-10-15,836.380;839.000;901.800,2044.93887530562;2051.34474327628;2204.88997555012\n1971-11-15,797.970;831.340;843.170,1951.02689486553;2032.61613691932;2061.54034229829\n1971-12-15,846.010;890.200;893.660,2058.41849148418;2165.93673965937;2174.35523114355\n1972-01-15,889.150;902.170;917.220,2163.38199513382;2195.06082725061;2231.67883211679\n1972-02-15,901.790;928.130;928.130,2183.51089588378;2247.28813559322;2247.28813559322\n1972-03-15,928.660;940.700;950.180,2243.14009661836;2272.22222222222;2295.12077294686\n1972-04-15,940.920;954.170;968.920,2267.27710843374;2299.20481927711;2334.74698795181\n1972-05-15,925.120;960.720;971.250,2223.84615384615;2309.42307692308;2334.73557692308\n1972-06-15,926.250;929.030;961.390,2221.22302158273;2227.8896882494;2305.49160671463\n1972-07-15,910.450;924.740;942.130,2172.91169451074;2207.01670644391;2248.52028639618\n1972-08-15,930.460;963.730;973.510,2215.38095238095;2294.59523809524;2317.88095238095\n1972-09-15,935.730;953.270;970.050,2222.63657957245;2264.29928741093;2304.1567695962\n1972-10-15,921.660;955.520;955.520,2178.86524822695;2258.91252955083;2258.91252955083\n1972-11-15,968.540;1018.21;1025.21,2284.29245283019;2401.43867924528;2417.94811320755\n1972-12-15,1000.00;1020.02;1036.27,2352.94117647059;2400.04705882353;2438.28235294118\n1973-01-15,992.930;999.020;1051.70,2330.82159624413;2345.11737089202;2468.779342723\n1973-02-15,947.920;955.070;996.760,2209.60372960373;2226.2703962704;2323.44988344988\n1973-03-15,922.710;951.010;979.980,2130.96997690531;2196.32794457275;2263.23325635104\n1973-04-15,921.430;921.430;967.410,2113.37155963303;2113.37155963303;2218.83027522936\n1973-05-15,886.510;901.410;956.580,2019.38496583144;2053.32574031891;2178.99772209567\n1973-06-15,869.130;891.710;927.000,1966.35746606335;2017.44343891403;2097.2850678733\n1973-07-15,870.110;926.400;936.710,1964.1309255079;2091.19638826185;2114.46952595937\n1973-08-15,851.900;887.570;912.780,1888.91352549889;1968.0044345898;2023.90243902439\n1973-09-15,880.570;947.100;953.270,1948.16371681416;2095.35398230089;2109.00442477876\n1973-10-15,948.830;956.580;987.060,2080.76754385965;2097.76315789474;2164.60526315789\n1973-11-15,817.730;822.250;948.830,1781.54684095861;1791.39433551198;2067.16775599129\n1973-12-15,788.310;850.860;851.140,1706.2987012987;1841.68831168831;1842.29437229437\n1974-01-15,823.110;855.550;880.690,1766.330472103;1835.94420600858;1889.89270386266\n1974-02-15,803.900;860.530;863.420,1703.17796610169;1823.15677966102;1829.27966101695\n1974-03-15,846.680;846.680;891.660,1771.29707112971;1771.29707112971;1865.39748953975\n1974-04-15,827.680;836.750;869.920,1724.33333333333;1743.22916666667;1812.33333333333\n1974-05-15,795.370;802.170;865.770,1636.56378600823;1650.55555555556;1781.41975308642\n1974-06-15,802.410;802.410;859.670,1637.57142857143;1637.57142857143;1754.42857142857\n1974-07-15,757.430;757.430;806.240,1533.25910931174;1533.25910931174;1632.06477732794\n1974-08-15,656.840;678.580;797.560,1313.68;1357.16;1595.12\n1974-09-15,607.870;607.870;677.880,1201.32411067194;1201.32411067194;1339.6837944664\n1974-10-15,584.560;665.520;673.500,1143.9530332681;1302.38747553816;1318.00391389432\n1974-11-15,608.570;618.660;674.750,1181.68932038835;1201.28155339806;1310.19417475728\n1974-12-15,577.600;616.240;616.240,1112.90944123314;1187.36030828516;1187.36030828516\n1975-01-15,632.040;703.690;705.960,1213.12859884837;1350.65259117083;1355.00959692898\n1975-02-15,707.600;739.050;749.770,1347.80952380952;1407.71428571429;1428.13333333333\n1975-03-15,743.430;768.150;786.530,1410.68311195446;1457.59013282732;1492.46679316888\n1975-04-15,742.880;821.340;821.340,1404.31001890359;1552.62759924386;1552.62759924386\n1975-05-15,815.000;832.290;858.730,1531.95488721805;1564.45488721804;1614.15413533835\n1975-06-15,819.310;878.990;878.990,1528.56343283582;1639.90671641791;1639.90671641791\n1975-07-15,824.860;831.510;881.810,1521.88191881919;1534.15129151291;1626.9557195572\n1975-08-15,791.690;835.340;835.340,1457.9926335175;1538.37937384899;1538.37937384899\n1975-09-15,793.880;793.880;840.110,1453.99267399267;1453.99267399267;1538.663003663\n1975-10-15,784.160;836.040;855.160,1428.34244080146;1522.84153005464;1557.66848816029\n1975-11-15,825.720;860.670;860.670,1493.16455696203;1556.36528028933;1556.36528028933\n1975-12-15,818.800;852.410;859.810,1475.31531531532;1535.87387387387;1549.20720720721\n1976-01-15,858.710;975.280;975.280,1544.44244604317;1754.10071942446;1754.10071942446\n1976-02-15,950.570;972.610;994.570,1703.53046594982;1743.02867383513;1782.3835125448\n1976-03-15,970.640;999.450;1009.21,1736.38640429338;1787.92486583184;1805.38461538462\n1976-04-15,968.280;996.850;1011.02,1725.98930481283;1776.91622103387;1802.17468805704\n1976-05-15,965.570;975.230;1007.48,1708.97345132743;1726.07079646018;1783.15044247788\n1976-06-15,958.090;1002.78;1007.45,1686.77816901408;1765.45774647887;1773.67957746479\n1976-07-15,979.290;984.640;1011.21,1715.04378283713;1724.41330998249;1770.94570928196\n1976-08-15,960.440;973.740;999.340,1673.24041811847;1696.41114982578;1741.01045296167\n1976-09-15,978.640;990.190;1014.79,1699.02777777778;1719.07986111111;1761.78819444444\n1976-10-15,932.350;964.930;979.890,1610.27633851468;1666.54576856649;1692.38341968912\n1976-11-15,924.040;947.220;966.090,1593.1724137931;1633.13793103448;1665.6724137931\n1976-12-15,946.640;1004.65;1004.65,1626.52920962199;1726.20274914089;1726.20274914089\n1977-01-15,954.370;954.370;999.750,1631.40170940171;1631.40170940171;1708.97435897436\n1977-02-15,931.520;936.420;958.360,1576.17597292724;1584.46700507614;1621.59052453469\n1977-03-15,919.130;919.130;968.000,1544.75630252101;1544.75630252101;1626.89075630252\n1977-04-15,914.600;926.900;947.760,1524.33333333333;1544.83333333333;1579.6\n1977-05-15,898.660;898.660;943.440,1490.31509121061;1490.31509121061;1564.57711442786\n1977-06-15,903.040;916.300;929.700,1487.71004942339;1509.55518945634;1531.63097199341\n1977-07-15,888.430;890.070;923.420,1456.44262295082;1459.13114754098;1513.80327868852\n1977-08-15,854.120;861.490;891.810,1395.62091503268;1407.66339869281;1457.20588235294\n1977-09-15,834.720;847.110;876.390,1359.47882736156;1379.65798045603;1427.34527687296\n1977-10-15,801.540;818.350;851.960,1301.2012987013;1328.49025974026;1383.05194805195\n1977-11-15,800.850;829.700;845.890,1293.7802907916;1340.38772213247;1366.54281098546\n1977-12-15,806.220;831.170;831.170,1298.26086956522;1338.43800322061;1338.43800322061\n1978-01-15,763.340;769.920;817.740,1221.344;1231.872;1308.384\n1978-02-15,742.120;742.120;782.660,1179.84101748808;1179.84101748808;1244.29252782194\n1978-03-15,742.720;757.360;773.820,1171.48264984227;1194.57413249211;1220.53627760252\n1978-04-15,751.040;837.320;837.320,1175.33646322379;1310.35993740219;1310.35993740219\n1978-05-15,822.070;840.610;858.370,1274.52713178295;1303.27131782946;1330.80620155039\n1978-06-15,812.280;818.950;866.510,1245.8282208589;1256.05828220859;1329.00306748466\n1978-07-15,805.790;862.270;862.270,1226.46879756469;1312.43531202435;1312.43531202435\n1978-08-15,860.710;876.820;900.120,1304.10606060606;1328.51515151515;1363.81818181818\n1978-09-15,857.160;865.820;907.740,1288.96240601504;1301.98496240602;1365.02255639098\n1978-10-15,792.450;792.450;901.420,1180.99850968703;1180.99850968703;1343.39791356185\n1978-11-15,785.260;799.030;827.790,1165.07418397626;1185.50445103858;1228.17507418398\n1978-12-15,787.510;805.010;821.900,1163.23485967504;1189.08419497784;1214.03249630724\n1979-01-15,811.420;839.220;859.750,1188.02342606149;1228.7262079063;1258.78477306003\n1979-02-15,807.000;808.820;840.870,1167.87264833575;1170.50651230101;1216.88856729378\n1979-03-15,815.750;862.180;871.360,1168.69627507163;1235.21489971347;1248.36676217765\n1979-04-15,854.900;854.900;878.720,1210.90651558074;1210.90651558074;1244.64589235127\n1979-05-15,822.160;822.330;857.590,1149.87412587413;1150.11188811189;1199.42657342657\n1979-06-15,821.210;841.980;849.100,1135.83679114799;1164.5643153527;1174.41217150761\n1979-07-15,825.510;846.420;852.990,1129.28864569083;1157.89329685363;1166.88098495212\n1979-08-15,846.160;887.630;887.630,1146.55826558266;1202.75067750677;1202.75067750677\n1979-09-15,866.130;878.580;893.940,1161.03217158177;1177.72117962466;1198.3109919571\n1979-10-15,806.830;815.700;897.610,1072.91223404255;1084.70744680851;1193.63031914894\n1979-11-15,796.670;822.350;831.740,1049.63109354414;1083.465085639;1095.83662714097\n1979-12-15,819.620;838.740;844.620,1068.60495436767;1093.5332464146;1101.19947848761\n1980-01-15,820.310;875.850;881.910,1054.38303341902;1125.77120822622;1133.56041131105\n1980-02-15,854.440;863.140;903.840,1082.94043092522;1093.9670468948;1145.55133079848\n1980-03-15,759.980;785.750;856.480,948.789013732834;980.961298377029;1069.26342072409\n1980-04-15,759.130;817.060;817.060,937.197530864197;1008.71604938272;1008.71604938272\n1980-05-15,805.200;850.850;860.320,984.352078239609;1040.15892420538;1051.73594132029\n1980-06-15,843.770;867.920;887.540,1020.27811366385;1049.48004836759;1073.20435308343\n1980-07-15,872.270;935.320;936.180,1054.7400241838;1130.97944377267;1132.01934703748\n1980-08-15,929.780;932.590;966.720,1116.1824729892;1119.55582232893;1160.52821128451\n1980-09-15,921.930;932.420;974.570,1097.53571428571;1110.02380952381;1160.20238095238\n1980-10-15,917.750;924.490;972.440,1082.25235849057;1090.20047169811;1146.74528301887\n1980-11-15,932.420;993.340;1000.17,1090.54970760234;1161.80116959064;1169.78947368421\n1980-12-15,908.450;963.990;974.400,1052.6651216686;1117.02201622248;1129.08458864426\n1981-01-15,938.910;947.270;1004.69,1079.20689655172;1088.81609195402;1154.81609195402\n1981-02-15,931.570;974.580;974.580,1059.80659840728;1108.73720136519;1108.73720136519\n1981-03-15,964.620;1003.87;1015.22,1089.96610169492;1134.31638418079;1147.14124293785\n1981-04-15,989.100;997.750;1024.05,1110.10101010101;1119.80920314254;1149.3265993266\n1981-05-15,963.440;991.750;995.590,1072.87305122494;1104.3986636971;1108.67483296214\n1981-06-15,976.880;976.880;1011.99,1078.23399558499;1078.23399558499;1116.98675496689\n1981-07-15,924.660;952.340;967.660,1009.45414847162;1039.67248908297;1056.39737991266\n1981-08-15,881.470;881.470;953.580,955.005417118093;955.005417118093;1033.13109425786\n1981-09-15,824.010;849.980;884.230,884.130901287554;911.995708154506;948.744635193133\n1981-10-15,830.960;852.550;878.140,889.678800856531;912.79443254818;940.192719486081\n1981-11-15,844.080;888.980;888.980,900.832443970117;948.751334044824;948.751334044824\n1981-12-15,868.250;875.000;892.690,923.670212765957;930.851063829787;949.670212765958\n1982-01-15,838.950;871.100;882.520,889.66065747614;923.753976670202;935.864262990456\n1982-02-15,811.260;824.390;852.550,857.568710359408;871.448202959831;901.215644820296\n1982-03-15,795.470;822.770;828.390,841.767195767196;870.656084656085;876.603174603175\n1982-04-15,833.240;848.360;865.580,878.018967334036;893.951527924131;912.096944151739\n1982-05-15,819.540;819.540;869.200,855.469728601253;855.469728601253;907.306889352818\n1982-06-15,788.620;811.930;816.880,813.010309278351;837.041237113402;842.144329896907\n1982-07-15,796.990;808.600;833.430,817.425641025641;829.333333333333;854.8\n1982-08-15,776.920;901.310;901.310,795.209825997953;922.528147389969;922.528147389969\n1982-09-15,895.050;896.250;934.790,914.249233912155;915.474974463738;954.841675178754\n1982-10-15,903.610;991.720;1036.98,920.173116089613;1009.89816700611;1055.98778004073\n1982-11-15,990.990;1039.28;1065.49,1011.21428571429;1060.48979591837;1087.23469387755\n1982-12-15,990.250;1046.54;1070.55,1014.60040983607;1072.27459016393;1096.875\n1983-01-15,1027.04;1075.70;1092.35,1050.14314928425;1099.89775051125;1116.92229038855\n1983-02-15,1059.79;1112.16;1121.81,1082.52298263534;1136.01634320735;1145.873340143\n1983-03-15,1114.45;1130.03;1145.90,1138.35546475996;1154.26966292135;1170.48008171604\n1983-04-15,1113.49;1226.20;1226.20,1129.30020283976;1243.61054766734;1243.61054766734\n1983-05-15,1190.02;1199.98;1232.59,1199.61693548387;1209.65725806452;1242.53024193548\n1983-06-15,1185.50;1221.96;1248.30,1191.45728643216;1228.10050251256;1254.57286432161\n1983-07-15,1189.90;1199.22;1243.69,1191.09109109109;1200.42042042042;1244.93493493493\n1983-08-15,1163.06;1216.16;1216.16,1160.73852295409;1213.73253493014;1213.73253493014\n1983-09-15,1206.81;1233.13;1260.77,1198.42105263158;1224.55809334657;1252.00595829196\n1983-10-15,1223.48;1225.20;1284.65,1211.36633663366;1213.06930693069;1271.93069306931\n1983-11-15,1214.84;1276.02;1287.19,1200.4347826087;1260.88932806324;1271.92687747036\n1983-12-15,1236.79;1258.64;1275.10,1220.91806515301;1242.48766041461;1258.73642645607\n1984-01-15,1220.58;1220.58;1286.64,1197.82139352306;1197.82139352306;1262.64965652601\n1984-02-15,1134.21;1154.63;1213.88,1107.626953125;1127.568359375;1185.4296875\n1984-03-15,1139.76;1164.89;1184.36,1110.87719298246;1135.37037037037;1154.3469785575\n1984-04-15,1130.55;1170.75;1175.25,1096.55674102813;1135.54801163919;1139.91270611057\n1984-05-15,1101.24;1104.85;1186.56,1065.02901353965;1068.52030947776;1147.54352030948\n1984-06-15,1086.90;1132.40;1133.84,1048.11957569913;1091.99614271938;1093.38476374156\n1984-07-15,1086.57;1115.28;1134.28,1043.77521613833;1071.35446685879;1089.60614793468\n1984-08-15,1134.61;1224.38;1239.73,1085.75119617225;1171.65550239234;1186.34449760766\n1984-09-15,1197.99;1206.71;1237.52,1140.94285714286;1149.24761904762;1178.59047619048\n1984-10-15,1175.13;1207.38;1225.93,1115.98290598291;1146.60968660969;1164.22602089269\n1984-11-15,1185.29;1188.94;1244.15,1125.63152896486;1129.09781576448;1181.5289648623\n1984-12-15,1163.21;1211.57;1211.57,1104.6628679962;1150.58879392213;1150.58879392213\n1985-01-15,1184.96;1286.77;1292.62,1123.18483412322;1219.68720379147;1225.23222748815\n1985-02-15,1275.84;1284.01;1297.92,1203.62264150943;1211.33018867925;1224.45283018868\n1985-03-15,1247.35;1266.78;1299.36,1172.32142857143;1190.58270676692;1221.2030075188\n1985-04-15,1252.98;1258.06;1284.78,1172.10477081384;1176.85687558466;1201.85219831618\n1985-05-15,1242.05;1315.41;1315.41,1157.54892823858;1225.91798695247;1225.91798695247\n1985-06-15,1290.10;1335.46;1335.46,1198.97769516729;1241.13382899628;1241.13382899628\n1985-07-15,1321.91;1347.45;1359.54,1226.26159554731;1249.95361781076;1261.16883116883\n1985-08-15,1312.50;1334.01;1355.62,1215.27777777778;1235.19444444444;1255.2037037037\n1985-09-15,1297.94;1328.63;1339.27,1198.46722068329;1226.80517082179;1236.6297322253\n1985-10-15,1324.37;1374.31;1375.57,1218.37166513339;1264.3146274149;1265.47378104876\n1985-11-15,1389.68;1472.13;1475.69,1274.93577981651;1350.57798165138;1353.84403669725\n1985-12-15,1457.91;1546.67;1553.10,1333.86093321135;1415.06861848124;1420.95150960659\n1986-01-15,1502.29;1570.99;1570.99,1370.70255474453;1433.38503649635;1433.38503649635\n1986-02-15,1593.12;1709.06;1713.99,1457.56633119854;1563.64135407136;1568.15187557182\n1986-03-15,1686.42;1818.61;1821.72,1550.01838235294;1671.51654411765;1674.375\n1986-04-15,1735.51;1783.98;1855.90,1598.07550644567;1642.70718232044;1708.93186003683\n1986-05-15,1758.18;1876.71;1882.35,1614.49035812672;1723.33333333333;1728.51239669421\n1986-06-15,1837.19;1892.72;1892.72,1677.79908675799;1728.51141552511;1728.51141552511\n1986-07-15,1766.87;1775.31;1909.03,1613.5799086758;1621.28767123288;1743.40639269406\n1986-08-15,1763.64;1898.34;1904.53,1607.69371011851;1730.48313582498;1736.1257976299\n1986-09-15,1755.20;1767.58;1919.71,1592.74047186933;1603.97459165154;1742.02359346642\n1986-10-15,1774.18;1877.71;1878.37,1608.50407978241;1702.36627379873;1702.96464188577\n1986-11-15,1817.21;1914.23;1916.76,1646.02355072464;1733.90398550725;1736.19565217391\n1986-12-15,1895.95;1895.95;1955.57,1715.79185520362;1715.79185520362;1769.74660633484\n1987-01-15,1927.31;2158.04;2163.39,1733.19244604317;1940.68345323741;1945.49460431655\n1987-02-15,2158.04;2223.99;2244.09,1933.72759856631;1992.82258064516;2010.83333333333\n1987-03-15,2220.47;2304.69;2372.59,1980.79393398751;2055.92328278323;2116.49420160571\n1987-04-15,2230.54;2286.36;2405.54,1979.18367346939;2028.71339840284;2134.46317657498\n1987-05-15,2215.87;2291.57;2342.19,1959.21308576481;2026.14500442087;2070.90185676393\n1987-06-15,2278.22;2418.53;2451.05,2007.2422907489;2130.86343612335;2159.5154185022\n1987-07-15,2409.76;2572.07;2572.07,2117.539543058;2260.16695957821;2260.16695957821\n1987-08-15,2546.72;2662.95;2722.42,2226.15384615385;2327.7534965035;2379.73776223776\n1987-09-15,2492.82;2596.28;2613.04,2167.66956521739;2257.6347826087;2272.20869565217\n1987-10-15,1738.74;1993.53;2640.99,1508.01387684302;1728.99392888118;2290.53772766696\n1987-11-15,1833.55;1833.55;2014.09,1588.86481802426;1588.86481802426;1745.31195840555\n1987-12-15,1766.74;1938.83;2005.64,1530.9705372617;1680.09532062392;1737.98960138648\n1988-01-15,1879.14;1958.22;2051.89,1624.14866032844;1692.49783923941;1773.45721694036\n1988-02-15,1895.72;2071.62;2071.62,1634.24137931034;1785.87931034483;1785.87931034483\n1988-03-15,1978.12;1988.06;2087.37,1697.95708154506;1706.48927038627;1791.7339055794\n1988-04-15,1980.60;2032.33;2110.08,1691.37489325363;1735.55081127242;1801.94705380017\n1988-05-15,1941.48;2031.12;2058.36,1652.32340425532;1728.61276595745;1751.79574468085\n1988-06-15,2052.45;2141.71;2152.20,1739.36440677966;1815.00847457627;1823.89830508475\n1988-07-15,2053.70;2128.73;2158.61,1733.08016877637;1796.39662447257;1821.61181434599\n1988-08-15,1989.33;2031.65;2134.07,1671.70588235294;1707.26890756303;1793.33613445378\n1988-09-15,2002.31;2112.91;2119.31,1671.37729549249;1763.69782971619;1769.04006677796\n1988-10-15,2102.06;2148.65;2183.50,1748.80199667221;1787.56239600666;1816.55574043261\n1988-11-15,2038.58;2114.51;2170.34,1694.58021612635;1757.69742310889;1804.106400665\n1988-12-15,2092.28;2168.57;2182.68,1736.33195020747;1799.64315352697;1811.35269709544\n1989-01-15,2144.64;2342.32;2342.32,1770.96614368291;1934.20313790256;1934.20313790256\n1989-02-15,2245.54;2258.39;2347.14,1846.66118421053;1857.22861842105;1930.21381578947\n1989-03-15,2243.04;2293.62;2340.71,1834.04742436631;1875.40474243663;1913.90842191333\n1989-04-15,2291.97;2418.80;2418.99,1861.87652315191;1964.90658001625;1965.06092607636\n1989-05-15,2371.33;2480.15;2502.02,1915.45234248788;2003.352180937;2021.01777059774\n1989-06-15,2440.06;2440.06;2531.87,1966.20467365028;1966.20467365028;2040.18533440774\n1989-07-15,2452.77;2660.66;2660.66,1971.68006430868;2138.79421221865;2138.79421221865\n1989-08-15,2641.12;2737.27;2743.36,2119.67897271268;2196.84590690209;2201.73354735152\n1989-09-15,2659.19;2692.82;2752.09,2127.352;2154.256;2201.672\n1989-10-15,2569.26;2645.08;2791.41,2045.58917197452;2105.95541401274;2222.4601910828\n1989-11-15,2582.17;2706.27;2706.27,2050.96902303415;2149.53931691819;2149.53931691819\n1989-12-15,2687.93;2753.20;2761.09,2131.58604282316;2183.34655035686;2189.60348929421\n1990-01-15,2543.24;2590.54;2810.15,1996.26373626374;2033.39089481947;2205.76923076923\n1990-02-15,2564.19;2627.25;2649.55,2003.2734375;2052.5390625;2069.9609375\n1990-03-15,2635.59;2707.21;2755.63,2047.85547785548;2103.50427350427;2141.12665112665\n1990-04-15,2645.05;2656.76;2765.77,2052.01706749418;2061.1016291699;2145.67106283941\n1990-05-15,2668.92;2876.66;2878.56,2065.72755417957;2226.51702786378;2227.98761609907\n1990-06-15,2842.33;2880.69;2935.89,2188.09083910701;2217.62124711316;2260.11547344111\n1990-07-15,2879.21;2905.20;2999.75,2207.98312883436;2227.91411042945;2300.4217791411\n1990-08-15,2483.42;2614.36;2899.26,1887.09726443769;1986.59574468085;2203.08510638298\n1990-09-15,2427.48;2452.48;2628.22,1829.29917106255;1848.13865862849;1980.572720422\n1990-10-15,2365.10;2442.33;2523.76,1771.61048689139;1829.4606741573;1890.45692883895\n1990-11-15,2440.84;2559.65;2565.35,1824.24514200299;1913.04185351271;1917.3019431988\n1990-12-15,2565.59;2633.66;2637.13,1917.48131539611;1968.355754858;1970.94917787743\n1991-01-15,2470.30;2736.39;2736.39,1835.2897473997;2032.97919762259;2032.97919762259\n1991-02-15,2730.69;2882.18;2934.65,2025.73442136499;2138.11572700297;2177.04005934718\n1991-03-15,2855.45;2913.86;2973.27,2115.14814814815;2158.41481481481;2202.42222222222\n1991-04-15,2873.02;2887.87;3004.46,2125.01479289941;2135.99852071006;2222.23372781065\n1991-05-15,2865.38;3027.50;3027.50,2113.11209439528;2232.66961651917;2232.66961651917\n1991-06-15,2906.75;2906.75;3035.33,2137.31617647059;2137.31617647059;2231.86029411765\n1991-07-15,2932.47;3024.82;3024.82,2153.06167400881;2220.86637298091;2220.86637298091\n1991-08-15,2898.03;3043.60;3055.23,2121.54465592972;2228.11127379209;2236.62518301611\n1991-09-15,2982.56;3016.77;3029.07,2173.87755102041;2198.81195335277;2207.77696793003\n1991-10-15,2942.75;3069.10;3077.15,2141.73944687045;2233.69723435226;2239.55604075691\n1991-11-15,2894.68;2894.68;3065.30,2100.63860667634;2100.63860667634;2224.4557329463\n1991-12-15,2863.82;3168.83;3168.83,2076.7367657723;2297.91878172589;2297.91878172589\n1992-01-15,3172.41;3223.39;3272.14,2297.18320057929;2334.09847936278;2369.39898624185\n1992-02-15,3224.73;3267.67;3283.32,2326.64502164502;2357.62626262626;2368.91774891775\n1992-03-15,3208.63;3235.47;3290.25,2303.39554917444;2322.66331658291;2361.98851399856\n1992-04-15,3181.35;3359.12;3366.50,2280.5376344086;2407.97132616487;2413.26164874552\n1992-05-15,3336.09;3396.88;3398.43,2388.03865425913;2431.5533285612;2432.66284896206\n1992-06-15,3274.12;3318.52;3413.21,2335.3209700428;2366.99001426534;2434.52924393723\n1992-07-15,3277.61;3393.78;3393.78,2332.81850533808;2415.50177935943;2415.50177935943\n1992-08-15,3228.17;3257.35;3395.40,2291.1071682044;2311.81689141235;2409.79418026969\n1992-09-15,3250.32;3271.66;3376.22,2300.29723991507;2315.39985845718;2389.39844302902\n1992-10-15,3136.58;3226.28;3254.37,2211.97461212976;2275.23272214386;2295.04231311707\n1992-11-15,3193.32;3305.16;3305.16,2248.81690140845;2327.57746478873;2327.57746478873\n1992-12-15,3255.18;3301.11;3333.26,2293.99577167019;2326.36363636364;2349.02043692741\n1993-01-15,3241.95;3310.03;3310.03,2273.4572230014;2321.19915848527;2321.19915848527\n1993-02-15,3302.19;3370.81;3442.14,2307.61006289308;2355.56254367575;2405.40880503145\n1993-03-15,3355.41;3435.11;3478.34,2336.6364902507;2392.13788300836;2422.24233983287\n1993-04-15,3370.81;3427.55;3478.61,2340.84027777778;2380.24305555556;2415.70138888889\n1993-05-15,3437.19;3527.43;3554.83,2383.62690707351;2446.20665742025;2465.2080443828\n1993-06-15,3466.81;3516.08;3553.45,2400.8379501385;2434.95844875346;2460.8379501385\n1993-07-15,3449.93;3539.47;3567.70,2389.14819944598;2451.15650969529;2470.70637119114\n1993-08-15,3548.97;3651.25;3652.09,2450.94613259668;2521.58149171271;2522.16160220994\n1993-09-15,3537.24;3555.12;3645.10,2437.79462439697;2450.11716057891;2512.12956581668\n1993-10-15,3577.76;3680.59;3687.86,2455.56623198353;2526.14275909403;2531.13246396706\n1993-11-15,3624.98;3683.95;3710.77,2486.26886145405;2526.7146776406;2545.109739369\n1993-12-15,3697.08;3754.09;3794.33,2535.72016460905;2574.82167352538;2602.42112482853\n1994-01-15,3756.60;3978.36;3978.36,2569.49384404925;2721.17647058824;2721.17647058824\n1994-02-15,3832.02;3832.02;3975.54,2612.1472392638;2612.1472392638;2709.97955010225\n1994-03-15,3626.75;3635.96;3895.65,2463.82472826087;2470.08152173913;2646.50135869565\n1994-04-15,3593.35;3681.69;3705.78,2437.82225237449;2497.75440976934;2514.09769335142\n1994-05-15,3629.04;3758.37;3766.35,2460.36610169491;2548.04745762712;2553.45762711864\n1994-06-15,3624.96;3624.96;3814.83,2449.2972972973;2449.2972972973;2577.58783783784\n1994-07-15,3646.65;3764.50;3764.50,2457.31132075472;2536.72506738544;2536.72506738544\n1994-08-15,3747.02;3913.42;3917.30,2514.77852348993;2626.45637583893;2629.06040268456\n1994-09-15,3831.75;3843.19;3953.88,2564.75903614458;2572.41633199465;2646.50602409639\n1994-10-15,3775.56;3908.12;3936.04,2525.45819397993;2614.127090301;2632.80267558528\n1994-11-15,3674.63;3739.23;3863.37,2454.66265865063;2497.81563126253;2580.74148296593\n1994-12-15,3685.73;3834.44;3861.69,2462.07748830995;2561.41616566466;2579.61923847695\n1995-01-15,3832.08;3843.86;3932.34,2549.62075848303;2557.45841650033;2616.32734530938\n1995-02-15,3847.56;4011.05;4011.74,2549.74155069583;2658.08482438701;2658.54208084824\n1995-03-15,3962.63;4157.69;4172.56,2617.3249669749;2746.16248348745;2755.98414795244\n1995-04-15,4168.41;4321.27;4321.27,2744.18038183015;2844.81237656353;2844.81237656353\n1995-05-15,4316.08;4465.14;4465.14,2835.7950065703;2933.73193166886;2933.73193166886\n1995-06-15,4423.99;4556.10;4589.64,2900.97704918033;2987.60655737705;3009.6\n1995-07-15,4585.15;4708.47;4736.29,3006.65573770492;3087.52131147541;3105.76393442623\n1995-08-15,4580.62;4610.56;4701.42,2995.8273381295;3015.40876389797;3074.83322432963\n1995-09-15,4647.54;4789.08;4801.80,3033.64229765013;3126.03133159269;3134.33420365535\n1995-10-15,4703.82;4755.48;4802.45,3060.39037085231;3094.00130123617;3124.56083279115\n1995-11-15,4766.68;5074.49;5105.56,3103.30729166667;3303.70442708333;3323.93229166667\n1995-12-15,5059.32;5117.12;5216.47,3295.97394136808;3333.62866449511;3398.35179153094\n1996-01-15,5032.94;5395.30;5395.30,3259.67616580311;3494.36528497409;3494.36528497409\n1996-02-15,5373.99;5485.62;5630.49,3469.32859909619;3541.39444803099;3634.91930277598\n1996-03-15,5470.45;5587.14;5683.60,3513.45536287733;3588.40077071291;3650.35324341683\n1996-04-15,5485.98;5569.08;5689.74,3509.90403071017;3563.07101727447;3640.26871401152\n1996-05-15,5420.95;5643.18;5778.00,3461.65389527459;3603.56321839081;3689.65517241379\n1996-06-15,5624.71;5654.63;5719.27,3589.4767070836;3608.5705169113;3649.82131461391\n1996-07-15,5346.55;5528.91;5729.98,3405.44585987261;3521.59872611465;3649.66878980892\n1996-08-15,5594.75;5616.21;5733.47,3556.73871582962;3570.38143674507;3644.92689129053\n1996-09-15,5606.96;5882.17;5894.74,3553.20659062104;3727.61089987326;3735.57667934094\n1996-10-15,5904.90;6029.38;6094.23,3730.1958307012;3808.83133291219;3849.79785217941\n1996-11-15,6021.93;6521.70;6547.79,3796.92938209332;4112.04287515763;4128.49306431274\n1996-12-15,6268.35;6448.27;6560.91,3952.30138713745;4065.74401008827;4136.76544766709\n1997-01-15,6442.49;6813.09;6883.90,4049.33375235701;4282.26901319925;4326.77561282212\n1997-02-15,6746.90;6877.74;7067.46,4227.38095238095;4309.36090225564;4428.23308270677\n1997-03-15,6583.48;6583.48;7085.16,4114.675;4114.675;4428.225\n1997-04-15,6391.69;7008.99;7008.99,3989.81897627965;4375.14981273408;4375.14981273408\n1997-05-15,6976.48;7331.04;7383.41,4357.57651467833;4579.03810118676;4611.74890693317\n1997-06-15,7269.66;7672.79;7796.51,4535.0343106675;4786.5190268247;4863.69931378665\n1997-07-15,7722.33;8222.61;8254.89,4811.42056074766;5123.1214953271;5143.23364485981\n1997-08-15,7622.42;7622.42;8259.31,4740.31094527363;4740.31094527363;5136.3868159204\n1997-09-15,7660.98;7945.26;7996.83,4752.46898263027;4928.82133995037;4960.81265508685\n1997-10-15,7161.15;7442.08;8178.31,4431.4047029703;4605.24752475248;5060.8353960396\n1997-11-15,7401.32;7823.13;7881.07,4582.86068111455;4844.04334365325;4879.91950464396\n1997-12-15,7660.13;7908.25;8149.13,4748.99566026038;4902.82083075015;5052.15747055177\n1998-01-15,7580.42;7906.50;7978.99,4690.85396039604;4892.63613861386;4937.49381188119\n1998-02-15,8107.78;8545.72;8545.72,5007.89376158122;5278.39407041383;5278.39407041383\n1998-03-15,8444.33;8799.81;8906.43,5206.12207151665;5425.28360049322;5491.01726263872\n1998-04-15,8868.32;9063.37;9184.94,5457.42769230769;5577.45846153846;5652.27076923077\n1998-05-15,8899.95;8899.95;9211.84,5466.79975429975;5466.79975429975;5658.37837837838\n1998-06-15,8627.93;8952.02;9069.60,5293.20858895706;5492.03680981595;5564.1717791411\n1998-07-15,8883.29;8883.29;9337.97,5443.19240196078;5443.19240196078;5721.79534313726\n1998-08-15,7539.07;7539.07;8786.74,4613.87392900857;4613.87392900857;5377.44186046512\n1998-09-15,7615.54;7842.62;8154.41,4654.97555012225;4793.77750611247;4984.35819070905\n1998-10-15,7632.53;8592.10;8592.10,4653.98170731707;5239.08536585366;5239.08536585366\n1998-11-15,8706.15;9116.55;9374.27,5308.62804878049;5558.87195121951;5716.01829268293\n1998-12-15,8695.60;9181.43;9320.98,5305.43014032947;5601.84868822453;5686.99206833435\n1999-01-15,9120.67;9358.83;9643.32,5551.22945830797;5696.18381010347;5869.33657942788\n1999-02-15,9133.03;9306.58;9552.68,5551.99392097264;5657.49544072948;5807.10030395137\n1999-03-15,9275.88;9786.16;10006.8,5621.74545454545;5931.00606060606;6064.72727272727\n1999-04-15,9832.51;10789.0;10878.4,5916.07099879663;6491.57641395909;6545.3670276775\n1999-05-15,10466.9;10559.7;11107.2,6297.77376654633;6353.61010830325;6683.03249097473\n1999-06-15,10490.5;10970.8;10970.8,6311.97352587244;6600.96269554753;6600.96269554753\n1999-07-15,10655.2;10655.2;11209.8,6391.84163167367;6391.84163167367;6724.5350929814\n1999-08-15,10646.0;10829.3;11326.0,6371.03530819868;6480.73010173549;6777.97725912627\n1999-09-15,10213.5;10337.0;11079.4,6083.08516974389;6156.64085765336;6598.8088147707\n1999-10-15,10019.7;10729.9;10729.9,5957.01545778835;6379.25089179548;6379.25089179548\n1999-11-15,10581.8;10877.8;11089.5,6287.46286393345;6463.33927510398;6589.12655971479\n1999-12-15,10998.4;11497.1;11497.1,6534.99702911468;6831.31313131313;6831.31313131313\n2000-01-15,10738.9;10940.5;11723.0,6361.90758293839;6481.33886255924;6944.90521327014\n2000-02-15,9862.12;10128.3;11041.1,5808.0800942285;5964.84098939929;6502.41460541814\n2000-03-15,9796.03;10921.9;11119.9,5721.98014018692;6379.61448598131;6495.26869158879\n2000-04-15,10305.8;10733.9;11287.1,6016.22883829539;6266.14127262113;6589.08347927612\n2000-05-15,10299.2;10522.3;10934.6,6005.36443148688;6135.45189504373;6375.86005830904\n2000-06-15,10376.1;10447.9;10815.3,6018.61948955917;6060.26682134571;6273.37587006961\n2000-07-15,10481.5;10522.0;10843.9,6065.68287037037;6089.12037037037;6275.40509259259\n2000-08-15,10607.0;11215.1;11252.8,6138.31018518518;6490.21990740741;6512.03703703704\n2000-09-15,10628.4;10650.9;11310.6,6118.82556131261;6131.77892918826;6511.57167530225\n2000-10-15,9975.02;10971.1;10971.1,5732.77011494253;6305.22988505747;6305.22988505747\n2000-11-15,10399.3;10414.5;10977.2,5973.1763354394;5981.90695002872;6305.11200459506\n2000-12-15,10318.9;10788.0;10898.7,5930.40229885057;6200;6263.62068965517\n2001-01-15,10525.4;10887.4;10945.8,6011.0793832096;6217.81838949172;6251.17075956596\n2001-02-15,10441.9;10495.3;10983.6,5939.64732650739;5970.02275312855;6247.78156996587\n2001-03-15,9389.48;9878.78;10858.3,5328.876276958;5606.57207718502;6162.48581157775\n2001-04-15,9485.71;10735.0;10810.1,5362.18767665348;6068.40022611645;6110.85358959864\n2001-05-15,10796.7;10911.9;11337.9,6075.80191333709;6140.63027574564;6380.36015756894\n2001-06-15,10434.8;10502.4;11175.8,5862.24719101124;5900.22471910112;6278.5393258427\n2001-07-15,10175.6;10522.8;10610.0,5732.7323943662;5928.33802816901;5977.46478873239\n2001-08-15,9919.58;9949.75;10551.2,5588.49577464789;5605.49295774648;5944.33802816902\n2001-09-15,8235.81;8847.56;10033.3,4619.07459338194;4962.17610768368;5627.20134604599\n2001-10-15,8836.83;9075.14;9545.17,4972.89251547552;5107.0005627462;5371.50815981992\n2001-11-15,9263.90;9851.56;9982.75,5222.04058624577;5553.30326944758;5627.25479143179\n2001-12-15,9763.96;10021.6;10137.0,5525.727221279;5671.53367289191;5736.84210526316\n2002-01-15,9618.24;9920.00;10259.7,5430.96555618295;5601.35516657256;5793.16770186335\n2002-02-15,9625.44;10106.1;10145.7,5413.63329583802;5683.97075365579;5706.2429696288\n2002-03-15,10281.7;10403.9;10635.3,5750.39149888143;5818.73601789709;5948.15436241611\n2002-04-15,9819.87;9946.22;10381.7,5461.55172413793;5531.82424916574;5774.02669632926\n2002-05-15,9808.04;9925.25;10353.1,5454.97219132369;5520.16129032258;5758.12013348165\n2002-06-15,9120.11;9243.26;9796.80,5069.54419121734;5137.99888827126;5445.69205113952\n2002-07-15,7702.34;8736.59;9379.50,4276.70183231538;4850.96612992782;5207.94003331483\n2002-08-15,8043.63;8663.50;9053.64,4451.37244050913;4794.41062534588;5010.31543995573\n2002-09-15,7591.93;7591.93;8602.61,4194.4364640884;4194.4364640884;4752.82320441989\n2002-10-15,7286.27;8397.03;8538.24,4018.90237175951;4631.56646442361;4709.45394373966\n2002-11-15,8358.95;8896.09;8931.68,4610.56260341975;4906.83397683398;4926.46442360728\n2002-12-15,8303.78;8341.63;8862.57,4590.25981205086;4611.18297401879;4899.15422885572\n2003-01-15,7945.13;8053.81;8842.62,4372.66373142543;4432.47660979637;4866.60429279031\n2003-02-15,7749.87;7891.08;8109.82,4232.58874931731;4309.71054068815;4429.17531403605\n2003-03-15,7524.06;7992.13;8521.97,4084.72312703583;4338.83279044517;4626.4766558089\n2003-04-15,8069.86;8480.09;8515.66,4390.56583242655;4613.75952121872;4633.11207834603\n2003-05-15,8454.25;8850.26;8850.26,4607.22070844687;4823.02997275204;4823.02997275204\n2003-06-15,8897.81;8985.44;9323.02,4843.66358192706;4891.36635819271;5075.13336962439\n2003-07-15,9036.04;9233.80;9284.57,4913.56171832518;5021.09842305601;5048.70581837955\n2003-08-15,9036.32;9415.82;9428.90,4895.0812567714;5100.66088840737;5107.74647887324\n2003-09-15,9275.06;9275.06;9659.13,5008.13174946004;5008.13174946004;5215.51295896328\n2003-10-15,9469.20;9801.12;9812.98,5118.48648648649;5297.9027027027;5304.31351351351\n2003-11-15,9619.42;9782.46;9858.46,5213.77777777778;5302.14634146341;5343.33875338753\n2003-12-15,9853.64;10453.9;10453.9,5346.52197504069;5672.21920781335;5672.21920781335\n2004-01-15,10409.9;10488.1;10702.5,5620.89632829374;5663.12095032397;5778.88768898488\n2004-02-15,10470.7;10583.9;10737.7,5623.3619763695;5684.15682062299;5766.75617615467\n2004-03-15,10048.2;10357.7;10678.1,5361.89967982924;5527.05442902882;5698.02561366062\n2004-04-15,10225.6;10225.6;10570.8,5439.14893617021;5439.14893617021;5622.76595744681\n2004-05-15,9906.91;10188.5;10317.2,5238.97937599154;5387.89000528821;5455.94923320994\n2004-06-15,10195.9;10435.5;10479.6,5374.7496046389;5501.05429625725;5524.30152872957\n2004-07-15,9961.92;10139.7;10334.2,5259.72544878564;5353.59028511088;5456.28299894403\n2004-08-15,9814.59;10173.9;10195.0,5179.20316622691;5368.81266490765;5379.94722955145\n2004-09-15,9988.54;10080.3;10341.2,5259.89468141127;5308.21484992101;5445.60294892048\n2004-10-15,9749.99;10027.5;10239.9,5107.38082765846;5252.75013095862;5364.01257202724\n2004-11-15,10035.7;10428.0;10572.6,5254.29319371728;5459.68586387435;5535.39267015707\n2004-12-15,10440.6;10783.0;10854.5,5486.38991066737;5666.31634261692;5703.88859695218\n2005-01-15,10368.6;10489.9;10729.4,5437.1263765076;5500.73413738857;5626.32406921867\n2005-02-15,10551.9;10766.2;10841.6,5501.51199165798;5613.24296141814;5652.55474452555\n2005-03-15,10405.7;10503.8;10940.6,5383.1867563373;5433.93688566994;5659.90688049664\n2005-04-15,10012.4;10192.5;10546.3,5145.11819116136;5237.66700924974;5419.47584789311\n2005-05-15,10140.1;10467.5;10542.6,5216.10082304527;5384.51646090535;5423.14814814815\n2005-06-15,10275.0;10275.0;10623.1,5282.7763496144;5282.7763496144;5461.74807197943\n2005-07-15,10270.7;10640.9;10705.6,5256.24360286592;5445.7011258956;5478.81269191402\n2005-08-15,10397.3;10481.6;10697.6,5293.94093686354;5336.86354378819;5446.84317718941\n2005-09-15,10378.0;10568.7;10682.9,5220.32193158954;5316.24748490946;5373.6921529175\n2005-10-15,10215.2;10440.1;10535.5,5128.1124497992;5241.0140562249;5288.90562248996\n2005-11-15,10406.8;10805.9;10931.6,5266.5991902834;5468.57287449393;5532.18623481781\n2005-12-15,10717.5;10717.5;10912.6,5445.88414634146;5445.88414634146;5545.02032520325\n2006-01-15,10667.4;10864.9;11043.4,5379.42511346445;5479.02168431669;5569.03681290973\n2006-02-15,10749.8;10993.4;11137.2,5410.06542526422;5532.66230498239;5605.03271263211\n2006-03-15,10958.6;11109.3;11317.4,5484.78478478478;5560.21021021021;5664.36436436436\n2006-04-15,11073.8;11367.1;11382.5,5495.68238213399;5641.24069478908;5648.88337468983\n2006-05-15,11094.4;11168.3;11642.7,5478.71604938272;5515.20987654321;5749.48148148148\n2006-06-15,10706.1;11150.2;11260.3,5276.54016757023;5495.41646131099;5549.67964514539\n2006-07-15,10739.4;11185.7;11228.0,5277.34643734644;5496.65847665848;5517.44471744472\n2006-08-15,11076.2;11381.2;11382.9,5432.17263364394;5581.75576262874;5582.58950465915\n2006-09-15,11331.4;11679.1;11718.5,5584.7215377033;5756.08674223756;5775.50517496304\n2006-10-15,11670.4;12080.7;12163.7,5783.15163528246;5986.47175421209;6027.60158572844\n2006-11-15,11986.0;12221.9;12342.6,5948.38709677419;6065.45905707196;6125.35980148883\n2006-12-15,12194.1;12463.2;12510.6,6042.66600594648;6176.01585728444;6199.50445986125\n2007-01-15,12398.0;12621.7;12621.8,6125.00988064185;6235.52485969489;6235.57426290412\n2007-02-15,12216.2;12268.6;12786.6,6003.07618219254;6028.82569447516;6283.37239986437\n2007-03-15,12050.4;12354.4;12481.0,5868.16782889867;6016.20631890607;6077.85655849468\n2007-04-15,12382.3;13062.9;13120.9,5990.87504717301;6320.16682310364;6348.22871408804\n2007-05-15,13136.1;13627.6;13633.1,6316.9815675959;6553.33759719931;6555.9824764726\n2007-06-15,13266.7;13408.6;13676.3,6367.44547688527;6435.55137459684;6564.03586238673\n2007-07-15,13212.0;13212.0;14000.4,6342.8052943125;6342.8052943125;6721.29967018565\n2007-08-15,12845.8;13357.7;13657.9,6178.3307762232;6424.53479032499;6568.91932838585\n2007-09-15,13113.4;13895.6;13912.9,6289.70214398772;6664.87601323804;6673.17377332246\n2007-10-15,13522.0;13930.0;14164.5,6471.83826626335;6667.11337443045;6779.34870008041\n2007-11-15,12743.4;13371.7;13660.9,6063.17532365578;6362.11383738468;6499.71214738054\n2007-12-15,13167.2;13264.8;13727.0,6269.02054885829;6315.48877335314;6535.54628730313\n2008-01-15,11971.2;12650.4;13056.7,5671.40420693576;5993.17794201251;6185.66420314573\n2008-02-15,12182.1;12266.4;12743.2,5754.60690717218;5794.42872461536;6019.66054616827\n2008-03-15,11740.2;12262.9;12548.6,5498.20164100259;5742.99389307257;5876.79367577086\n2008-04-15,12302.1;12820.1;12891.9,5726.62145114815;5967.75019434604;6001.17305875069\n2008-05-15,12479.6;12638.3;13058.2,5760.73710255179;5833.99497765796;6027.82599062004\n2008-06-15,11346.5;11350.0;12604.5,5185.430614903;5187.03013961566;5760.34549733793\n2008-07-15,10962.5;11378.0;11632.4,4983.77007146624;5172.66461784656;5288.31990689385\n2008-08-15,11284.2;11543.6;11782.4,5150.58013748026;5268.98113069753;5377.97942360534\n2008-09-15,10365.5;10850.7;11532.9,4737.79955481002;4959.57181316647;5271.387630666\n2008-10-15,8175.77;9325.01;10831.1,3775.06429702687;4305.71216171914;5001.13125828243\n2008-11-15,7552.29;8829.04;9625.28,3555.27362598564;4156.30928563022;4531.14275626692\n2008-12-15,8149.09;8776.39;8934.18,3876.31048195293;4174.70080103507;4249.75740624465\n2009-01-15,7949.09;8000.86;9034.69,3764.78973965512;3789.30866758548;4278.94365430064\n2009-02-15,7062.93;7062.93;8280.59,3328.54052678458;3328.54052678458;3902.38603535461\n2009-03-15,6547.05;7608.92;7924.56,3077.93746385908;3577.15000305582;3725.54052719913\n2009-04-15,7761.60;8168.12;8185.73,3639.84243106359;3830.48208591259;3838.74038641906\n2009-05-15,8212.41;8500.33;8574.65,3840.15879844381;3974.79144845129;4009.54380517732\n2009-06-15,8299.86;8447.00;8799.26,3847.99692155054;3916.21424895569;4079.52970193748\n2009-07-15,8146.52;9171.61;9171.61,3782.90326025883;4258.91219451036;4258.91219451036\n2009-08-15,9135.34;9496.28;9580.63,4232.5768877934;4399.8072592826;4438.88821965029\n2009-09-15,9280.67;9712.28;9829.87,4297.2232125907;4497.07133894216;4551.51896800004\n2009-10-15,9487.67;9712.73;10092.2,4388.84340147194;4492.9525342659;4668.48924723722\n";
-    }
-
-
-    return {
-        data_nolabel: data_nolabel,
-        data: data,
-        NoisyData:NoisyData,
-        data_showzerovalues: data_showzerovalues,
-        data_temp: data_temp,
-        stockData: stockData
-    }
-})
-'use strict';
-
-angular.module('app.graphs').directive('dygraphsNoRollPeriod', function (DygraphsDataDemo) {
-    return {
-        restrict: 'A',
-        compile: function () {
-            return {
-                post: function (scope, element) {
-                    new Dygraph(element[0], DygraphsDataDemo.data_temp, {
-                        customBars: true,
-                        title: 'Daily Temperatures in New York vs. San Francisco',
-                        ylabel: 'Temperature (F)',
-                        legend: 'always',
-                        labelsDivStyles: {
-                            'textAlign': 'right'
-                        },
-                        showRangeSelector: true
-                    });
-                }
-            }
-        }
-    }
-});
-'use strict';
-
-angular.module('app.graphs').directive('dygraphsNoRollTimestamp', function (DygraphsDataDemo) {
-    return {
-        restrict: 'A',
-        compile: function () {
-            return {
-                post: function (scope, element) {
-                    new Dygraph(element[0], DygraphsDataDemo.data_temp, {
-                        rollPeriod : 14,
-                        showRoller : true,
-                        customBars : true,
-                        ylabel : 'Temperature (F)',
-                        legend : 'always',
-                        labelsDivStyles : {
-                            'textAlign' : 'right'
-                        },
-                        showRangeSelector : true,
-                        rangeSelectorHeight : 30,
-                        rangeSelectorPlotStrokeColor : 'yellow',
-                        rangeSelectorPlotFillColor : 'lightyellow'
-                    });
-                }
-            }
-        }
-    }
 });
 "use strict";
 
@@ -15907,6 +15820,93 @@ angular.module('app.graphs').directive('flotSiteStatsChart', function(FlotConfig
                 }
             });
 
+        }
+    }
+});
+'use strict'
+
+angular.module('app.graphs').factory('DygraphsDataDemo', function(){
+    function data_nolabel() {
+        return "20070101,62,39\n20070102,62,44\n20070103,62,42\n20070104,57,45\n20070105,54,44\n20070106,55,36\n20070107,62,45\n20070108,66,48\n20070109,63,39\n20070110,57,37\n20070111,50,37\n20070112,48,35\n20070113,48,30\n20070114,48,28\n20070115,53,28\n20070116,50,30\n20070117,57,37\n20070118,61,33\n20070119,55,35\n20070120,61,35\n20070121,64,43\n20070122,61,36\n20070123,57,35\n20070124,60,35\n20070125,55,39\n20070126,54,44\n20070127,57,48\n20070128,59,45\n20070129,63,45\n20070130,59,41\n20070131,55,48\n20070201,53,46\n20070202,55,44\n20070203,59,37\n20070204,66,39\n20070205,64,43\n20070206,61,46\n20070207,61,51\n20070208,60,51\n20070209,61,55\n20070210,62,55\n20070211,61,46\n20070212,59,43\n20070213,57,46\n20070214,61,39\n20070215,64,44\n20070216,71,46\n20070217,73,51\n20070218,60,46\n20070219,63,44\n20070220,57,45\n20070221,59,48\n20070222,55,44\n20070223,55,42\n20070224,57,39\n20070225,55,48\n20070226,57,44\n20070227,53,39\n20070228,53,37\n20070301,54,37\n20070302,61,39\n20070303,66,43\n20070304,70,48\n20070305,68,53\n20070306,69,46\n20070307,62,51\n20070308,61,46\n20070309,60,45\n20070310,68,46\n20070311,79,48\n20070312,80,52\n20070313,73,53\n20070314,64,48\n20070315,78,46\n20070316,78,50\n20070317,62,51\n20070318,66,46\n20070319,64,48\n20070320,60,48\n20070321,66,46\n20070322,73,43\n20070323,78,48\n20070324,68,48\n20070325,64,53\n20070326,66,48\n20070327,57,46\n20070328,66,42\n20070329,73,42\n20070330,72,46\n20070331,69,46\n20070401,64,46\n20070402,69,46\n20070403,71,46\n20070404,69,50\n20070405,71,52\n20070406,64,52\n20070407,68,51\n20070408,71,51\n20070409,66,50\n20070410,72,46\n20070411,63,50\n20070412,64,46\n20070413,70,44\n20070414,57,51\n20070415,68,46\n20070416,75,46\n20070417,62,48\n20070418,61,45\n20070419,57,42\n20070420,64,46\n20070421,61,43\n20070422,63,48\n20070423,70,44\n20070424,66,46\n20070425,66,48\n20070426,69,48\n20070427,82,50\n20070428,81,55\n20070429,70,53\n20070430,77,51\n20070501,70,48\n20070502,66,52\n20070503,63,48\n20070504,64,51\n20070505,73,46\n20070506,88,54\n20070507,91,57\n20070508,84,60\n20070509,73,55\n20070510,57,52\n20070511,64,51\n20070512,64,50\n20070513,72,46\n20070514,66,50\n20070515,63,51\n20070516,70,48\n20070517,68,50\n20070518,73,50\n20070519,70,52\n20070520,73,51\n20070521,78,54\n20070522,81,51\n20070523,86,55\n20070524,78,55\n20070525,69,54\n20070526,69,55\n20070527,69,54\n20070528,73,52\n20070529,69,53\n20070530,66,55\n20070531,64,54\n20070601,66,54\n20070602,64,54\n20070603,70,55\n20070604,73,59\n20070605,68,55\n20070606,70,53\n20070607,75,51\n20070608,70,50\n20070609,75,53\n20070610,75,55\n20070611,75,53\n20070612,79,52\n20070613,90,59\n20070614,89,60\n20070615,86,59\n20070616,72,55\n20070617,79,53\n20070618,79,57\n20070619,73,55\n20070620,71,55\n20070621,77,55\n20070622,79,54\n20070623,77,54\n20070624,77,53\n20070625,82,53\n20070626,71,54\n20070627,73,55\n20070628,73,57\n20070629,77,60\n20070630,75,54\n20070701,78,54\n20070702,82,57\n20070703,72,57\n20070704,84,59\n20070705,84,61\n20070706,75,60\n20070707,73,55\n20070708,78,55\n20070709,73,57\n20070710,73,59\n20070711,78,62\n20070712,75,59\n20070713,79,60\n20070714,73,60\n20070715,78,62\n20070716,75,59\n20070717,77,60\n20070718,75,63\n20070719,80,59\n20070720,79,59\n20070721,77,61\n20070722,75,63\n20070723,79,64\n20070724,73,61\n20070725,72,57\n20070726,75,60\n20070727,78,60\n20070728,77,57\n20070729,73,57\n20070730,80,59\n20070731,75,59\n20070801,75,59\n20070802,73,60\n20070803,79,60\n20070804,77,59\n20070805,71,57\n20070806,71,59\n20070807,73,57\n20070808,71,55\n20070809,77,60\n20070810,77,57\n20070811,73,57\n20070812,72,55\n20070813,75,55\n20070814,73,55\n20070815,75,57\n20070816,79,60\n20070817,80,55\n20070818,78,57\n20070819,77,55\n20070820,80,64\n20070821,82,62\n20070822,82,60\n20070823,82,57\n20070824,78,59\n20070825,73,61\n20070826,73,61\n20070827,78,59\n20070828,86,62\n20070829,88,68\n20070830,90,68\n20070831,80,66\n20070901,87,62\n20070902,89,61\n20070903,78,61\n20070904,78,63\n20070905,89,57\n20070906,82,64\n20070907,75,61\n20070908,73,62\n20070909,71,61\n20070910,73,59\n20070911,71,59\n20070912,72,60\n20070913,77,57\n20070914,75,60\n20070915,73,57\n20070916,72,61\n20070917,72,55\n20070918,73,55\n20070919,66,55\n20070920,71,52\n20070921,77,57\n20070922,64,57\n20070923,68,55\n20070924,78,52\n20070925,84,53\n20070926,87,57\n20070927,75,55\n20070928,66,54\n20070929,73,52\n20070930,75,48\n20071001,71,57\n20071002,81,53\n20071003,73,54\n20071004,69,55\n20071005,64,50\n20071006,73,45\n20071007,77,46\n20071008,79,53\n20071009,72,53\n20071010,69,54\n20071011,70,48\n20071012,64,54\n20071013,70,53\n20071014,66,51\n20071015,68,52\n20071016,66,52\n20071017,66,50\n20071018,73,50\n20071019,72,57\n20071020,66,54\n20071021,73,51\n20071022,81,51\n20071023,84,53\n20071024,79,55\n20071025,66,53\n20071026,68,46\n20071027,66,52\n20071028,75,52\n20071029,63,55\n20071030,63,53\n20071031,63,54\n20071101,66,53\n20071102,77,50\n20071103,80,48\n20071104,77,48\n20071105,66,48\n20071106,62,52\n20071107,61,48\n20071108,59,53\n20071109,63,48\n20071110,66,48\n20071111,63,48\n20071112,68,44\n20071113,72,51\n20071114,75,55\n20071115,69,51\n20071116,63,55\n20071117,66,51\n20071118,64,53\n20071119,66,48\n20071120,63,46\n20071121,64,43\n20071122,64,37\n20071123,70,37\n20071124,60,37\n20071125,60,46\n20071126,63,42\n20071127,63,45\n20071128,64,46\n20071129,62,41\n20071130,55,42\n20071201,57,37\n20071202,61,45\n20071203,66,50\n20071204,61,54\n20071205,60,50\n20071206,57,48\n20071207,55,45\n20071208,53,42\n20071209,57,39\n20071210,57,39\n20071211,57,41\n20071212,55,35\n20071213,59,34\n20071214,55,34\n20071215,55,39\n20071216,55,43\n20071217,57,48\n20071218,57,43\n20071219,59,41\n20071220,55,43\n20071221,53,39\n20071222,53,32\n20071223,55,37\n20071224,57,45\n20071225,57,37\n20071226,53,43\n20071227,48,37\n20071228,48,43\n20071229,57,44\n20071230,52,43\n20071231,57,42\n";
+    }
+
+    function data() {
+        return "Date,High,Low\n" + data_nolabel();
+    }
+
+    function NoisyData() {
+        return "Date,A,B\n20061001,3.01953818828,0.7212041046,2.18487394958,0.599318549691\n20061002,3.63321799308,0.778297234566,1.69491525424,0.531417655826\n20061003,2.44328097731,0.644967734352,2.51256281407,0.640539070386\n20061004,3.52733686067,0.774700921683,2.68456375839,0.66207105053\n20061005,3.28719723183,0.741636245748,2.35294117647,0.621407707226\n20061006,1.58450704225,0.523967868159,3.78657487091,0.791868460623\n20061007,5.32859680284,0.946589405904,4.0404040404,0.807910739509\n20061008,2.64084507042,0.672799548916,2.37288135593,0.626609885481\n20061009,2.26480836237,0.620990945917,3.5413153457,0.75897176848\n20061010,3.29289428076,0.74289969528,2.02702702703,0.579191340004\n20061011,2.7633851468,0.681234043829,1.1744966443,0.4413034044\n20061012,3.28719723183,0.741636245748,3.37268128162,0.741327769578\n20061013,1.77304964539,0.55569466381,1.85810810811,0.555011329732\n20061014,3.39892665474,0.7664008338,1.67224080268,0.524368852929\n20061015,2.65017667845,0.675144574777,3.35570469799,0.737661045752\n20061016,3.63951473137,0.779620631266,2.34899328859,0.620377617453\n20061017,2.25694444444,0.618859623032,1.68067226891,0.526990133716\n20061018,4.47504302926,0.857766274964,2.51677852349,0.641599927369\n20061019,2.44755244755,0.646081155692,1.68067226891,0.526990133716\n20061020,3.67775831874,0.787656442774,3.066439523,0.711598843969\n20061021,3.94265232975,0.823839169829,3.85906040268,0.788990618726\n20061022,2.59067357513,0.660187558973,3.71621621622,0.777438794254\n20061023,4.33275563258,0.847570482324,3.85906040268,0.788990618726\n20061024,3.10344827586,0.720049610821,2.84280936455,0.679611549697\n20061025,1.40350877193,0.492720767725,2.7027027027,0.666482380968\n20061026,1.95035460993,0.582291234145,2.36486486486,0.624518599275\n20061027,2.30905861456,0.632980642182,2.03045685279,0.580161203819\n20061028,4.09252669039,0.835706590809,2.87648054146,0.68754192469\n20061029,2.66903914591,0.679883997626,2.02360876897,0.578224712918\n20061030,4.74516695958,0.89127787497,4.36241610738,0.836670992529\n20061031,2.78260869565,0.685905251933,3.20945945946,0.724388507178\n20061101,1.5873015873,0.524884521441,1.51260504202,0.500373860545\n20061102,2.78745644599,0.687083077461,2.0202020202,0.57726130639\n20061103,5.11463844797,0.925157232782,2.68907563025,0.663168401088\n20061104,4.9001814882,0.919644816432,3.07692307692,0.713993047527\n20061105,5.13274336283,0.928343545136,3.55329949239,0.761492892041\n20061106,1.92644483363,0.575222935029,2.35294117647,0.621407707226\n20061107,2.46478873239,0.650573541306,1.52027027027,0.502889967904\n20061108,2.13523131673,0.609772022763,2.6981450253,0.665374048085\n20061109,3.88007054674,0.811026422222,2.72572402044,0.672079879106\n20061110,2.63620386643,0.671633132526,3.71621621622,0.777438794254\n20061111,3.69718309859,0.791736755355,3.0303030303,0.703344064467\n20061112,3.83944153578,0.802703592906,4.05405405405,0.81058250986\n20061113,2.47787610619,0.653984033555,2.20338983051,0.604340313133\n20061114,1.77304964539,0.55569466381,2.22222222222,0.60944692682\n20061115,2.30088495575,0.630766388737,0.843170320405,0.375484163785\n20061116,1.57894736842,0.522144132232,2.19594594595,0.602321544724\n20061118,2.45183887916,0.647198426991,1.69491525424,0.531417655826\n20061119,3.52733686067,0.774700921683,1.85185185185,0.55316023504\n20061120,2.97723292469,0.711254751484,2.6981450253,0.665374048085\n20061121,2.29681978799,0.629665059963,2.01680672269,0.576301104352\n20061122,3.01418439716,0.719945245328,2.5466893039,0.649125445325\n20061123,3.78378378378,0.809917534069,2.6936026936,0.664269394219\n20061124,3.18584070796,0.738851643987,2.01005025126,0.57439025002\n20061125,2.83185840708,0.697868332879,3.066439523,0.711598843969\n20061126,3.01953818828,0.7212041046,2.53378378378,0.645878720149\n20061127,2.81195079086,0.693033387099,1.51006711409,0.499540743312\n20061128,2.97723292469,0.711254751484,2.54237288136,0.648039583782\n20061129,1.41093474427,0.495309102312,3.02013422819,0.701020603129";
+    }
+
+    function data_showzerovalues() {
+        return "20070101,0,39\n20070102,62,0\n20070103,0,42\n20070104,57,0\n20070105,65,44\n20070106,55,44\n20070107,0,45\n20070108,66,0\n20070109,0,39\n";
+    }
+
+    function data_temp() {
+        return "Date,NY,SF\n20070101,46;51;56,43;45;48\n20070102,43;48;52,48;56;63\n20070103,39;46;53,50;54;62\n20070104,44;51;58,45;52;56\n20070105,51;57;62,44;49;58\n20070106,55;64;72,40;50;60\n20070107,46;51;56,45;53;63\n20070108,40;49;57,43;53;64\n20070109,37;41;45,49;56;66\n20070110,31;35;38,45;49;54\n20070111,29;35;41,41;46;54\n20070112,39;45;50,41;44;49\n20070113,46;52;57,38;44;53\n20070114,42;44;46,36;43;51\n20070115,41;46;51,36;46;55\n20070116,25;41;57,37;45;54\n20070117,21;26;31,41;47;56\n20070118,25;32;38,38;48;61\n20070119,33;38;43,\n20070120,23;29;35,\n20070121,21;26;31,55;60;68\n20070122,28;31;34,44;54;66\n20070123,30;34;38,41;51;64\n20070124,34;37;40,42;51;64\n20070125,17;27;37,45;49;56\n20070126,11;18;24,44;48;52\n20070127,22;32;41,47;52;58\n20070128,32;38;43,48;52;60\n20070129,24;28;32,47;55;64\n20070130,23;30;37,51;54;56\n20070131,27;31;34,49;52;56\n20070201,28;33;37,46;50;52\n20070202,34;37;39,47;51;57\n20070203,25;32;38,42;51;62\n20070204,18;25;31,44;55;69\n20070205,10;15;20,48;55;68\n20070206,13;20;26,48;54;62\n20070207,14;21;27,51;56;62\n20070208,17;24;30,49;54;56\n20070209,20;27;33,55;56;58\n20070210,25;30;34,55;57;60\n20070211,21;28;34,51;55;59\n20070212,30;36;41,48;51;59\n20070213,23;29;34,48;52;58\n20070214,19;25;31,44;52;60\n20070215,17;21;25,49;55;65\n20070216,16;23;30,48;59;72\n20070217,22;29;36,51;62;77\n20070218,20;28;35,48;54;61\n20070219,14;22;29,48;53;61\n20070220,29;39;49,49;53;59\n20070221,39;44;49,50;54;61\n20070222,33;40;46,43;48;54\n20070223,23;32;40,43;48;54\n20070224,22;33;43,46;51;60\n20070225,26;33;39,49;52;55\n20070226,31;34;37,44;49;54\n20070227,35;39;43,40;45;52\n20070228,37;42;46,42;47;53\n20070301,33;39;45,44;49;55\n20070302,36;49;61,45;52;60\n20070303,37;48;59,48;58;68\n20070304,35;39;42,53;60;72\n20070305,23;33;42,52;58;67\n20070306,14;19;24,49;54;66\n20070307,14;20;25,50;53;60\n20070308,20;28;35,48;52;60\n20070309,15;25;34,49;53;58\n20070310,30;43;55,50;57;69\n20070311,40;45;50,53;63;79\n20070312,36;46;56,57;65;78\n20070313,44;49;54,52;58;68\n20070314,46;56;66,50;54;62\n20070315,37;53;69,51;59;75\n20070316,28;33;38,53;62;76\n20070317,27;35;42,50;53;57\n20070318,29;35;41,50;53;61\n20070319,33;38;43,49;53;59\n20070320,35;43;50,50;54;58\n20070321,27;34;41,48;55;62\n20070322,41;54;67,50;58;71\n20070323,46;54;62,49;56;67\n20070324,40;48;55,50;52;56\n20070325,38;46;53,50;53;56\n20070326,41;48;55,48;53;60\n20070327,48;62;75,46;50;56\n20070328,47;55;63,47;52;61\n20070329,40;48;56,49;57;68\n20070330,42;55;67,48;53;64\n20070331,44;51;57,49;55;68\n20070401,42;47;51,49;52;58\n20070402,42;48;54,48;54;68\n20070403,43;52;60,48;54;66\n20070404,41;43;45,50;56;67\n20070405,36;42;47,50;54;63\n20070406,34;39;43,48;51;55\n20070407,34;39;43,51;54;59\n20070408,32;37;42,51;55;61\n20070409,35;42;49,52;55;59\n20070410,36;43;50,50;56;67\n20070411,37;44;51,51;54;57\n20070412,41;43;45,48;53;58\n20070413,44;47;50,49;54;64\n20070414,42;50;57,50;53;56\n20070415,42;49;56,48;55;65\n20070416,40;47;54,52;58;69\n20070417,43;47;50,48;52;56\n20070418,43;48;53,46;50;55\n20070419,46;55;63,46;50;55\n20070420,46;59;71,47;52;60\n20070421,48;63;78,49;52;57\n20070422,52;64;76,51;55;59\n20070423,54;70;85,48;55;65\n20070424,59;67;75,49;54;63\n20070425,49;56;63,51;54;59\n20070426,48;55;62,50;54;63\n20070427,48;52;55,53;62;78\n20070428,53;63;72,52;61;78\n20070429,55;61;66,50;53;61\n20070430,55;68;81,51;57;66\n20070501,52;62;71,50;55;61\n20070502,51;61;71,52;56;62\n20070503,53;63;72,50;53;58\n20070504,52;62;71,50;54;60\n20070505,52;63;73,50;59;70\n20070506,48;55;62,57;72;86\n20070507,48;57;65,69;76;88\n20070508,50;60;70,53;68;79\n20070509,58;70;82,50;55;61\n20070510,62;71;79,50;54;61\n20070511,61;70;78,49;52;56\n20070512,55;64;73,50;54;60\n20070513,53;61;68,47;55;66\n20070514,52;61;69,49;53;60\n20070515,59;73;87,49;52;59\n20070516,63;76;89,48;55;66\n20070517,55;62;68,49;54;61\n20070518,49;52;55,50;55;63\n20070519,52;55;57,52;57;66\n20070520,55;67;78,51;57;67\n20070521,56;65;74,49;59;69\n20070522,55;64;73,52;61;71\n20070523,58;66;74,56;68;83\n20070524,61;75;88,50;56;69\n20070525,69;82;95,50;52;60\n20070526,73;80;86,50;52;60\n20070527,68;77;85,50;52;56\n20070528,67;77;87,50;55;64\n20070529,63;72;81,51;54;59\n20070530,62;73;84,53;54;57\n20070531,67;79;90,52;54;57\n20070601,64;78;92,50;53;59\n20070602,73;82;90,50;52;56\n20070603,65;73;81,51;54;61\n20070604,60;66;71,55;59;65\n20070605,68;77;85,54;57;61\n20070606,58;65;72,52;56;62\n20070607,58;67;76,51;57;68\n20070608,66;76;85,51;54;62\n20070609,64;73;81,50;58;66\n20070610,63;69;74,53;58;64\n20070611,66;76;85,52;58;66\n20070612,68;76;84,52;60;72\n20070613,59;65;70,57;68;80\n20070614,58;63;67,57;67;84\n20070615,62;68;73,54;62;76\n20070616,64;73;82,52;55;59\n20070617,69;80;90,52;59;70\n20070618,70;78;85,52;56;64\n20070619,69;76;83,54;58;65\n20070620,70;75;80,54;56;61\n20070621,65;75;85,53;59;67\n20070622,65;71;77,53;59;67\n20070623,61;69;77,53;58;67\n20070624,63;74;84,52;58;66\n20070625,71;78;84,52;60;75\n20070626,73;84;94,51;57;65\n20070627,73;84;95,53;59;67\n20070628,73;84;94,54;61;72\n20070629,70;75;79,55;61;72\n20070630,68;76;84,53;58;66\n20070701,64;70;75,52;59;68\n20070702,60;68;76,55;62;71\n20070703,65;74;82,54;59;64\n20070704,68;71;73,55;64;75\n20070705,69;76;82,55;62;72\n20070706,70;79;87,53;57;62\n20070707,72;80;88,52;54;58\n20070708,76;85;93,53;57;65\n20070709,71;84;96,55;59;67\n20070710,75;84;93,56;61;70\n20070711,74;81;88,59;65;74\n20070712,69;77;84,58;66;75\n20070713,75;80;85,57;65;78\n20070714,70;78;86,56;60;69\n20070715,75;83;91,57;63;72\n20070716,72;78;83,56;60;67\n20070717,71;80;88,56;62;73\n20070718,71;75;79,61;66;74\n20070719,71;82;92,58;62;72\n20070720,69;75;81,58;64;73\n20070721,67;76;84,60;66;76\n20070722,70;77;84,60;65;74\n20070723,65;71;76,58;64;76\n20070724,63;73;83,56;60;71\n20070725,71;78;85,56;59;64\n20070726,73;80;86,55;58;72\n20070727,75;82;88,55;60;72\n20070728,74;81;88,55;61;70\n20070729,74;77;80,55;60;74\n20070730,72;80;88,55;63;80\n20070731,74;82;90,54;59;68\n20070801,75;84;93,55;60;69\n20070802,76;87;98,55;61;70\n20070803,73;83;93,54;60;71\n20070804,75;84;92,54;58;67\n20070805,72;78;84,55;58;62\n20070806,75;81;86,56;60;68\n20070807,78;84;90,56;61;69\n20070808,75;85;95,56;59;65\n20070809,74;80;85,57;61;72\n20070810,59;67;75,55;62;73\n20070811,60;72;83,56;60;68\n20070812,73;81;88,54;60;70\n20070813,75;82;88,55;61;74\n20070814,71;77;83,55;60;71\n20070815,72;81;89,54;61;70\n20070816,77;82;87,57;62;72\n20070817,66;77;87,53;64;77\n20070818,62;69;76,56;62;71\n20070819,62;68;73,57;64;75\n20070820,61;67;73,59;65;74\n20070821,58;60;62,58;65;80\n20070822,58;64;69,57;65;80\n20070823,63;71;79,56;62;73\n20070824,67;77;86,58;62;70\n20070825,75;83;91,58;62;71\n20070826,75;80;85,57;61;68\n20070827,71;77;83,56;61;71\n20070828,72;78;84,55;66;82\n20070829,72;79;86,61;69;83\n20070830,73;81;88,62;71;82\n20070831,72;77;81,59;64;72\n20070901,66;73;79,58;66;80\n20070902,63;72;80,58;67;86\n20070903,67;77;86,58;63;71\n20070904,73;79;85,60;64;72\n20070905,69;74;79,58;68;84\n20070906,70;77;83,60;64;69\n20070907,72;80;88,59;63;71\n20070908,74;82;90,58;61;66\n20070909,74;80;86,59;61;66\n20070910,73;76;78,60;64;71\n20070911,72;75;77,59;62;70\n20070912,66;72;77,59;62;65\n20070913,65;71;76,59;65;74\n20070914,67;72;77,60;66;74\n20070915,58;65;71,58;62;72\n20070916,55;62;69,59;63;71\n20070917,56;63;70,56;62;71\n20070918,57;65;72,56;60;67\n20070919,59;68;76,54;57;63\n20070920,64;74;83,54;59;72\n20070921,68;76;84,58;62;73\n20070922,68;72;76,58;60;65\n20070923,67;75;82,56;61;67\n20070924,65;73;81,52;62;78\n20070925,66;78;89,54;66;86\n20070926,72;81;90,58;70;92\n20070927,73;79;84,57;61;68\n20070928,64;71;77,55;59;63\n20070929,62;69;76,51;60;74\n20070930,61;67;73,51;60;71\n20071001,62;67;71,56;62;71\n20071002,60;68;75,54;62;76\n20071003,66;73;80,53;59;67\n20071004,69;77;85,53;55;59\n20071005,67;75;83,51;56;62\n20071006,68;77;85,48;57;68\n20071007,67;75;82,51;59;75\n20071008,67;78;89,52;59;78\n20071009,61;72;83,52;59;67\n20071010,62;68;73,\n20071011,59;64;69,\n20071012,51;57;62,\n20071013,49;56;63,\n20071014,52;59;65,\n20071015,53;61;69,\n20071016,58;65;71,\n20071017,60;67;73,\n20071018,64;72;79,\n20071019,66;70;74,\n20071020,64;68;72,\n20071021,59;68;76,\n20071022,62;70;77,\n20071023,67;74;81,\n20071024,54;62;70,\n20071025,52;57;61,\n20071026,53;57;60,\n20071027,59;65;70,\n20071028,46;53;59,\n20071029,43;49;54,\n20071030,49;57;64,\n20071031,51;58;64,53;60;67\n20071101,52;60;67,51;56;72\n20071102,46;51;56,49;60;82\n20071103,47;50;53,50;61;79\n20071104,49;53;56,53;62;80\n20071105,48;53;58,50;54;59\n20071106,45;52;58,50;54;61\n20071107,42;46;50,50;53;59\n20071108,38;43;48,53;56;60\n20071109,40;44;48,53;58;66\n20071110,39;43;47,52;57;62\n20071111,34;41;48,51;56;64\n20071112,40;46;52,47;56;68\n20071113,49;55;61,57;61;73\n20071114,44;53;61,53;61;72\n20071115,45;54;62,56;59;67\n20071116,39;44;48,54;56;61\n20071117,38;43;47,53;56;61\n20071118,41;44;47,53;57;63\n20071119,39;43;46,50;56;60\n20071120,40;45;50,48;54;63\n20071121,44;51;58,44;53;66\n20071122,42;54;66,46;54;68\n20071123,32;37;42,44;57;72\n20071124,28;34;40,44;54;65\n20071125,37;44;50,51;55;62\n20071126,41;52;63,47;54;65\n20071127,46;56;65,50;55;65\n20071128,37;42;47,47;56;66\n20071129,42;47;52,48;53;64\n20071130,37;40;43,45;49;57\n20071201,26;34;42,46;49;56\n20071202,21;30;38,47;54;59\n20071203,34;42;49,52;59;64\n20071204,30;33;35,31;57;69\n20071205,29;32;34,52;56;63\n20071206,23;30;37,51;52;54\n20071207,34;35;36,48;52;57\n20071208,35;40;45,42;49;56\n20071209,36;39;41,44;51;59\n20071210,37;40;43,45;50;59\n20071211,36;41;46,46;52;59\n20071212,37;46;54,42;49;57\n20071213,30;34;38,42;49;59\n20071214,32;39;45,40;48;57\n20071215,30;34;38,43;49;56\n20071216,31;36;40,46;51;57\n20071217,27;31;35,48;52;56\n20071218,31;35;38,49;52;55\n20071219,35;41;47,46;51;57\n20071220,38;42;45,45;51;56\n20071221,36;39;42,43;48;54\n20071222,36;39;42,39;46;53\n20071223,41;52;62,44;51;61\n20071224,39;46;52,49;53;60\n20071225,38;41;44,41;49;57\n20071226,34;38;41,44;48;55\n20071227,37;42;46,41;46;52\n20071228,43;47;50,41;44;45\n20071229,43;48;53,45;48;52\n20071230,37;41;44,46;49;53\n20071231,36;41;46,38;47;56\n20080101,35;42;49,42;50;58\n20080102,19;29;39,43;50;60\n20080103,15;19;23,51;53;58\n20080104,19;28;37,51;53;59\n20080105,33;38;43,46;49;51\n20080106,37;42;47,42;47;51\n20080107,42;52;61,43;48;53\n20080108,52;58;64,44;49;53\n20080109,49;58;66,46;49;52\n20080110,42;47;51,48;50;51\n20080111,41;49;57,48;51;55\n20080112,40;45;49,46;51;58\n20080113,37;42;47,44;51;60\n20080114,34;37;39,46;51;58\n20080115,34;37;40,44;49;57\n20080116,31;36;40,41;50;60\n20080117,30;36;41,44;50;61\n20080118,37;43;49,42;52;63\n20080119,34;36;37,42;50;62\n20080120,19;27;35,46;49;53\n20080121,16;22;28,43;45;46\n20080122,25;33;40,42;44;47\n20080123,32;37;41,42;44;49\n20080124,26;31;35,43;44;45\n20080125,23;29;34,45;49;52\n20080126,27;31;35,52;55;62\n20080127,31;35;39,45;51;54\n20080128,29;36;43,42;46;51\n20080129,33;39;44,41;45;49\n20080130,34;42;50,42;47;54\n20080131,30;35;40,45;48;52\n20080201,33;45;56,40;46;52\n20080202,36;40;44,42;47;53\n20080203,33;42;50,46;49;52\n20080204,34;39;43,43;49;58\n20080205,38;45;52,40;49;58\n20080206,40;55;69,47;50;55\n20080207,39;45;50,43;50;58\n20080208,36;41;46,46;53;65\n20080209,37;41;45,46;57;69\n20080210,17;31;45,49;57;70\n20080211,12;19;25,48;56;69\n20080212,19;25;31,46;54;70\n20080213,31;43;54,48;57;65\n20080214,30;36;41,49;54;64\n20080215,32;40;48,46;52;60\n20080216,25;30;35,45;51;64\n20080217,30;42;53,46;50;55\n20080218,42;53;64,47;50;58\n20080219,29;36;42,48;51;53\n20080220,25;29;33,48;51;57\n20080221,22;28;34,48;51;56\n20080222,26;30;34,46;50;56\n20080223,30;33;36,43;48;54\n20080224,27;34;40,52;54;58\n20080225,33;41;49,49;55;63\n20080226,38;43;48,48;58;70\n20080227,24;36;47,52;58;71\n20080228,20;25;29,48;56;74\n20080229,19;28;36,48;52;62\n20080301,34;40;45,50;53;59\n20080302,30;36;43,49;59;71\n20080303,35;44;52,47;57;72\n20080304,43;53;62,46;55;68\n20080305,39;49;58,46;55;71\n20080306,36;43;49,47;55;65\n20080307,35;40;45,48;56;69\n20080308,38;48;57,49;55;66\n20080309,31;37;43,47;58;76\n20080310,28;37;46,52;58;70\n20080311,36;43;49,50;54;66\n20080312,36;42;48,48;53;63\n20080313,33;39;45,30;55;61\n20080314,39;46;53,49;52;58\n20080315,42;49;55,43;50;57\n20080316,36;42;47,47;55;68\n20080317,32;41;49,49;56;66\n20080318,36;41;46,48;55;64\n20080319,42;47;52,49;52;60\n20080320,37;48;59,46;51;59\n20080321,35;41;47,47;54;67\n20080322,35;43;50,46;55;73\n20080323,32;40;48,46;54;66\n20080324,33;41;49,47;54;64\n20080325,32;39;46,49;53;59\n20080326,43;52;60,48;52;60\n20080327,44;47;50,45;50;59\n20080328,40;45;49,46;52;60\n20080329,34;41;47,48;52;59\n20080330,28;37;46,44;49;56\n20080331,39;48;57,41;50;62\n20080401,55;60;64,49;53;60\n20080402,39;47;54,48;54;62\n20080403,35;42;49,48;53;62\n20080404,42;49;55,45;50;57\n20080405,49;54;59,46;50;57\n20080406,42;46;50,48;52;59\n20080407,41;46;51,45;51;59\n20080408,41;48;55,47;50;55\n20080409,39;48;56,47;52;59\n20080410,48;62;75,46;55;66\n20080411,47;54;61,50;65;84\n20080412,47;61;74,57;71;87\n20080413,44;50;55,51;64;80\n20080414,41;49;56,48;52;58\n20080415,43;51;59,45;51;60\n20080416,46;56;65,46;51;66\n20080417,45;59;72,49;57;75\n20080418,50;67;83,48;52;60\n20080419,51;62;72,45;49;55\n20080420,48;52;56,43;48;55\n20080421,47;52;57,44;49;57\n20080422,48;59;69,48;54;64\n20080423,52;64;76,48;53;60\n20080424,58;68;77,45;53;65\n20080425,55;63;70,48;57;69\n20080426,52;58;63,51;62;78\n20080427,49;52;55,53;62;77\n20080428,48;54;59,49;56;66\n20080429,47;53;58,50;53;61\n20080430,44;51;57,47;52;60\n20080501,45;52;59,47;55;66\n20080502,50;53;55,49;53;60\n20080503,48;52;56,48;54;63\n20080504,49;61;72,49;52;59\n20080505,51;61;71,48;53;61\n20080506,52;65;77,49;56;68\n20080507,58;66;73,49;55;65\n20080508,64;69;74,48;53;62\n20080509,50;57;64,46;54;65\n20080510,50;59;67,47;54;64\n20080511,50;56;61,48;54;64\n20080512,48;53;57,50;56;66\n20080513,52;61;70,49;61;78\n20080514,53;64;74,55;69;85\n20080515,54;64;73,68;81;102\n20080516,51;56;61,65;77;99\n20080517,50;62;74,52;63;73\n20080518,56;62;67,51;54;62\n20080519,51;56;61,50;54;60\n20080520,50;54;58,52;56;63\n20080521,50;60;69,50;57;65\n20080522,50;56;61,52;58;68\n20080523,52;60;68,49;55;65\n20080524,56;63;70,51;54;62\n20080525,58;68;77,50;56;64\n20080526,60;68;76,50;55;62\n20080527,60;73;85,51;56;64\n20080528,53;61;69,52;58;67\n20080529,54;66;78,53;57;63\n20080530,62;72;82,52;56;66\n20080531,63;70;77,52;54;60\n20080601,67;76;84,49;55;63\n20080602,61;71;80,49;54;62\n20080603,65;75;84,51;55;62\n20080604,58;65;71,51;54;62\n20080605,62;67;72,51;58;70\n20080606,59;66;73,51;57;66\n20080607,60;78;96,50;59;70\n20080608,78;87;96,52;61;74\n20080609,76;88;99,54;66;83\n20080610,73;87;100,53;64;77\n20080611,72;80;88,57;65;79\n20080612,71;79;86,55;67;93\n20080613,65;74;82,50;56;65\n20080614,70;80;90,52;56;65\n20080615,65;74;83,50;54;61\n20080616,64;71;78,49;52;58\n20080617,64;71;77,48;60;78\n20080618,60;68;75,54;65;79\n20080619,60;69;77,57;72;92\n20080620,63;71;79,63;80;102\n20080621,65;75;85,56;75;85\n20080622,71;76;80,51;56;63\n20080623,70;77;83,50;52;56\n20080624,70;76;81,50;58;71\n20080625,68;77;85,51;56;64\n20080626,74;80;85,50;57;70\n20080627,76;81;85,52;57;62\n20080628,70;80;90,55;58;64\n20080629,74;82;90,53;57;65\n20080630,73;79;85,52;57;68\n20080701,71;79;86,53;58;67\n20080702,69;78;87,52;56;65\n20080703,73;83;93,54;60;71\n20080704,71;76;80,55;60;69\n20080705,69;72;75,56;62;74\n20080706,68;74;79,56;62;74\n20080707,70;78;85,56;66;80\n20080708,76;84;91,59;69;86\n20080709,75;81;87,62;69;82\n20080710,73;80;87,59;64;72\n20080711,69;79;89,58;64;73\n20080712,73;80;86,60;64;73\n20080713,72;79;85,60;64;71\n20080714,70;77;83,59;62;68\n20080715,72;81;90,59;62;70\n20080716,71;81;90,57;60;66\n20080717,74;83;92,54;58;65\n20080718,76;86;96,52;56;64\n20080719,81;89;97,53;57;63\n20080720,79;87;94,52;55;63\n20080721,75;84;93,54;57;63\n20080722,73;80;87,52;60;73\n20080723,70;76;82,54;61;76\n20080724,70;78;85,52;60;72\n20080725,71;79;87,52;61;72\n20080726,74;81;88,55;65;79\n20080727,70;76;82,55;57;62\n20080728,69;79;88,54;57;65\n20080729,75;83;90,55;59;68\n20080730,73;80;87,56;60;69\n20080731,75;83;90,55;58;69\n20080801,74;81;88,55;62;74\n20080802,69;76;82,55;64;79\n20080803,68;76;83,54;57;62\n20080804,68;77;85,53;56;65\n20080805,73;79;84,52;56;64\n20080806,72;80;88,54;57;68\n20080807,68;77;86,54;57;66\n20080808,68;75;82,54;58;66\n20080809,66;74;82,54;59;67\n20080810,69;76;82,53;64;79\n20080811,60;67;73,56;63;78\n20080812,63;72;81,55;63;79\n20080813,69;75;81,56;64;82\n20080814,68;76;84,55;61;74\n20080815,67;74;81,55;62;75\n20080816,66;74;82,57;60;66\n20080817,69;77;85,57;60;69\n20080818,73;81;88,58;62;68\n20080819,65;74;82,58;62;73\n20080820,61;69;77,58;65;74\n20080821,66;74;81,60;64;73\n20080822,69;76;83,58;62;72\n20080823,67;74;80,57;62;71\n20080824,71;76;81,57;64;73\n20080825,68;77;85,58;62;72\n20080826,62;71;80,55;61;79\n20080827,64;71;77,59;70;88\n20080828,66;75;84,62;72;86\n20080829,68;74;80,59;67;84\n20080830,68;76;84,57;61;70\n20080831,69;77;84,54;61;73\n20080901,68;76;84,57;68;83\n20080902,71;79;86,58;68;85\n20080903,70;76;81,59;69;87\n20080904,72;81;90,60;73;94\n20080905,73;80;86,63;74;92\n20080906,72;78;83,63;72;84\n20080907,70;77;83,56;62;70\n20080908,68;76;83,55;60;67\n20080909,67;73;78,58;60;65\n20080910,63;68;73,57;61;68\n20080911,62;68;73,56;60;66\n20080912,65;69;72,55;57;63\n20080913,68;74;79,55;59;67\n20080914,71;80;89,55;59;67\n20080915,67;76;84,54;58;67\n20080916,63;67;70,54;58;65\n20080917,61;68;75,56;60;67\n20080918,61;68;74,53;60;70\n20080919,55;61;66,55;62;72\n20080920,54;61;68,59;62;69\n20080921,59;70;80,57;61;70\n20080922,62;68;73,55;64;79\n20080923,57;63;69,56;67;85\n20080924,58;64;69,57;64;74\n20080925,56;62;67,57;65;76\n20080926,60;64;68,56;63;75\n20080927,64;67;69,54;62;78\n20080928,67;71;74,55;59;65\n20080929,63;68;73,57;61;67\n20080930,62;68;73,57;63;76\n20081001,61;67;73,59;64;74\n20081002,56;60;64,60;65;73\n20081003,54;60;65,59;63;71\n20081004,53;58;63,58;62;68\n20081005,54;59;63,57;62;69\n20081006,51;57;63,59;64;76\n20081007,48;56;64,56;64;79\n20081008,52;59;66,58;64;75\n20081009,60;69;77,54;61;71\n20081010,61;67;73,54;58;64\n20081011,57;64;71,55;60;67\n20081012,57;64;71,55;62;72\n20081013,60;68;75,58;64;77\n20081014,59;64;68,53;63;80\n20081015,60;66;71,55;65;83\n20081016,57;68;78,58;68;86\n20081017,52;56;60,59;69;86\n20081018,44;51;57,53;58;65\n20081019,43;51;58,52;54;57\n20081020,45;54;62,51;57;65\n20081021,46;55;63,52;62;79\n20081022,42;47;52,55;67;83\n20081023,40;47;54,61;70;85\n20081024,43;50;57,59;66;86\n20081025,54;61;67,57;67;82\n20081026,51;57;63,52;57;66\n20081027,50;57;64,51;55;65\n20081028,41;46;51,50;55;65\n20081029,40;44;48,49;54;64\n20081030,38;44;49,51;56;61\n20081031,42;53;64,58;61;66\n20081101,52;59;65,34;58;63\n20081102,39;46;52,\n20081103,44;52;59,53;56;61\n20081104,50;57;64,51;54;61\n20081105,55;59;63,46;55;66\n20081106,59;62;65,54;60;72\n20081107,58;62;65,52;60;75\n20081108,55;58;60,53;56;62\n20081109,50;53;56,52;56;63\n20081110,44;48;51,49;55;62\n20081111,40;46;51,53;58;64\n20081112,43;47;50,56;59;68\n20081113,47;53;58,52;61;74\n20081114,55;59;63,55;67;80\n20081115,58;62;65,60;70;82\n20081116,42;52;61,58;66;78\n20081117,39;43;47,57;66;77\n20081118,31;36;41,52;56;62\n20081119,28;33;37,52;54;57\n20081120,31;35;39,54;58;66\n20081121,27;33;39,47;55;67\n20081122,25;29;33,47;55;68\n20081123,26;32;37,49;56;69\n20081124,33;43;53,49;56;64\n20081125,38;43;48,52;57;61\n20081126,38;42;45,53;55;58\n20081127,37;41;44,53;55;61\n20081128,38;44;50,50;54;60\n20081129,38;42;45,50;57;68\n20081130,36;40;44,51;58;70\n20081201,43;49;55,53;55;57\n20081202,38;42;46,52;56;64\n20081203,35;39;43,50;54;59\n20081204,39;45;51,47;53;62\n20081205,34;38;42,46;54;66\n20081206,31;34;37,47;53;62\n20081207,22;30;37,44;50;56\n20081208,20;26;31,46;51;55\n20081209,31;44;56,42;50;59\n20081210,44;54;63,47;52;63\n20081211,38;41;44,48;54;63\n20081212,33;40;46,48;53;60\n20081213,28;31;33,45;49;55\n20081214,30;40;49,43;46;50\n20081215,48;58;67,41;46;51\n20081216,31;45;59,39;42;47\n20081217,33;39;44,39;45;53\n20081218,37;40;43,38;47;55\n20081219,30;35;39,45;50;55\n20081220,23;28;32,39;46;54\n20081221,26;33;40,46;48;51\n20081222,14;22;29,44;49;54\n20081223,20;26;31,43;48;53\n20081224,31;45;58,46;50;54\n20081225,35;47;58,45;48;53\n20081226,32;37;41,\n20081227,40;44;48,\n20081228,47;56;65,\n20081229,38;44;49,47;53;63\n20081230,34;39;44,46;51;58\n20081231,19;28;36,45;48;55\n20090101,16;22;27,44;48;51\n20090102,24;30;36,45;50;55\n20090103,30;35;39,40;46;54\n20090104,26;35;43,36;45;54\n20090105,39;42;44,45;46;48\n20090106,31;35;39,44;49;54\n20090107,32;36;40,44;47;52\n20090108,30;35;39,46;49;56\n20090109,27;30;33,41;51;62\n20090110,24;27;30,48;56;66\n20090111,26;29;32,44;55;70\n20090112,23;29;34,49;62;76\n20090113,29;35;41,55;64;75\n20090114,18;28;37,48;59;70\n20090115,17;20;23,48;60;74\n20090116,11;15;18,48;60;72\n20090117,8;15;22,48;57;68\n20090118,22;28;33,49;58;70\n20090119,26;30;33,46;58;71\n20090120,22;26;30,47;58;71\n20090121,19;24;28,52;57;62\n20090122,22;30;37,51;53;55\n20090123,28;37;45,53;55;56\n20090124,18;33;47,49;52;55\n20090125,15;22;28,46;50;55\n20090126,20;25;30,43;49;57\n20090127,26;29;31,43;50;58\n20090128,24;33;42,43;51;61\n20090129,27;32;37,44;56;70\n20090130,28;32;35,47;56;69\n20090131,21;25;28,44;52;69\n20090201,28;41;53,44;54;70\n20090202,33;43;52,47;57;69\n20090203,26;32;37,47;57;71\n20090204,18;25;31,47;55;67\n20090205,14;19;24,51;54;58\n20090206,17;25;32,51;53;55\n20090207,24;37;49,48;54;63\n20090208,38;49;59,45;50;56\n20090209,35;41;46,43;47;56\n20090210,33;42;50,38;47;54\n20090211,38;51;63,43;48;56\n20090212,44;51;57,44;48;55\n20090213,32;38;44,43;46;54\n20090214,29;35;41,43;48;54\n20090215,30;36;42,46;48;51\n20090216,29;35;40,47;49;56\n20090217,26;34;41,47;50;54\n20090218,32;38;43,45;52;60\n20090219,28;39;50,43;54;66\n20090220,24;29;34,49;57;68\n20090221,28;35;42,50;56;63\n20090222,32;38;43,53;55;58\n20090223,25;30;34,52;56;60\n20090224,23;30;37,50;52;53\n20090225,26;34;41,51;55;61\n20090226,35;43;50,48;54;60\n20090227,40;49;58,46;53;62\n20090228,32;43;54,50;56;66\n20090301,28;32;35,54;57;59\n20090302,18;23;28,53;56;61\n20090303,14;21;28,48;52;58\n20090304,19;27;35,44;50;58\n20090305,28;36;43,46;51;60\n20090306,38;46;54,47;52;58\n20090307,46;58;69,43;52;65\n20090308,44;53;62,50;53;60\n20090309,37;42;46,\n20090310,37;42;46,\n20090311,41;50;59,\n20090312,32;38;44,\n20090313,27;33;38,\n20090314,34;42;50,\n20090315,42;48;53,\n20090316,38;42;46,\n20090317,36;44;52,\n20090318,40;51;61,\n20090319,41;46;50,\n20090320,33;39;44,\n20090321,32;40;47,53;55;60\n20090322,36;45;53,45;50;58\n20090323,30;36;42,44;51;59\n20090324,29;38;47,43;54;66\n20090325,36;44;52,47;56;68\n20090326,40;43;45,51;58;68\n20090327,43;53;63,52;61;75\n20090328,42;48;53,51;59;71\n20090329,42;47;52,48;56;64\n20090330,42;47;51,51;57;68\n20090331,40;50;60,47;56;70\n20090401,42;46;50,50;57;68\n20090402,42;51;59,48;52;60\n20090403,44;53;61,47;53;61\n20090404,48;52;55,43;55;70\n20090405,45;56;66,46;61;80\n20090406,44;48;51,51;61;79\n20090407,40;45;50,51;55;63\n20090408,37;43;49,50;55;64\n20090409,38;50;61,50;53;58\n20090410,46;52;58,48;54;63\n20090411,43;47;50,46;53;61\n20090412,38;43;48,49;56;66\n20090413,36;47;57,49;56;65\n20090414,43;48;53,45;50;57\n20090415,43;49;54,46;46;47\n20090416,44;53;62,44;52;61\n20090417,44;57;69,46;54;70\n20090418,56;67;78,52;62;74\n20090419,47;54;61,51;70;92\n20090420,43;47;51,60;77;99\n20090421,47;52;56,64;78;93\n20090422,49;53;57,52;62;71\n20090423,45;51;57,50;54;61\n20090424,45;57;69,48;52;59\n20090425,50;69;88,45;52;60\n20090426,63;77;91,46;53;63\n20090427,53;66;79,48;51;57\n20090428,68;79;89,47;52;60\n20090429,50;59;68,46;53;61\n20090430,46;54;61,47;54;69\n20090501,54;63;72,51;56;62\n20090502,56;62;67,55;59;65\n20090503,53;56;58,53;59;66\n20090504,51;54;56,52;60;71\n20090505,51;54;56,57;61;69\n20090506,49;57;65,55;61;73\n20090507,52;63;73,51;61;72\n20090508,56;65;74,51;60;71\n20090509,57;68;78,50;57;69\n20090510,55;63;70,50;57;68\n20090511,51;59;66,50;56;65\n20090512,52;60;68,47;57;67\n20090513,51;60;68,50;59;70\n20090514,57;62;66,51;58;69\n20090515,58;66;74,51;58;67\n20090516,58;65;71,54;70;93\n20090517,53;59;64,55;70;92\n20090518,50;55;59,51;55;63\n20090519,50;60;69,51;56;64\n20090520,53;67;81,49;55;62\n20090521,64;73;81,49;54;65\n20090522,63;75;86,51;54;63\n20090523,59;68;76,50;52;56\n20090524,57;71;84,49;51;56\n20090525,64;73;81,49;54;63\n20090526,53;60;66,49;59;73\n20090527,52;56;60,52;57;64\n20090528,56;58;59,51;55;62\n20090529,55;65;74,52;57;63\n20090530,63;71;78,54;56;62\n20090531,58;70;82,53;55;60\n20090601,53;61;69,53;56;61\n20090602,63;72;80,52;57;68\n20090603,54;64;73,53;58;67\n20090604,54;62;69,55;59;67\n20090605,55;59;62,57;62;70\n20090606,58;68;78,57;61;68\n20090607,66;74;82,56;61;67\n20090608,63;70;77,55;58;62\n20090609,60;67;73,56;60;66\n20090610,59;62;65,57;61;69\n20090611,59;61;63,56;60;68\n20090612,62;71;80,56;60;67\n20090613,64;68;71,56;62;70\n20090614,61;67;72,57;62;69\n20090615,58;65;71,58;61;68\n20090616,56;62;68,57;59;66\n20090617,57;63;69,57;60;66\n20090618,62;64;66,56;63;75\n20090619,63;71;79,55;62;71\n20090620,63;68;72,53;59;69\n20090621,63;71;78,53;60;70\n20090622,67;71;75,54;62;75\n20090623,67;74;80,54;63;77\n20090624,66;71;75,54;59;69\n20090625,65;73;81,54;58;66\n20090626,65;75;85,53;60;70\n20090627,66;74;81,53;68;85\n20090628,68;75;82,60;68;78\n20090629,68;76;83,56;61;68\n20090630,67;76;84,56;61;68\n20090701,67;73;79,56;61;68\n20090702,66;72;77,56;60;66\n20090703,68;74;80,55;58;65\n20090704,68;75;81,54;60;67\n20090705,64;72;80,55;57;63\n20090706,68;77;85,54;60;69\n20090707,62;73;83,56;58;62\n20090708,61;69;77,52;62;71\n20090709,62;68;73,53;59;68\n20090710,63;69;75,54;59;66\n20090711,65;71;77,53;58;68\n20090712,66;75;83,53;60;70\n20090713,65;72;79,53;66;84\n20090714,66;74;81,58;68;86\n20090715,67;75;83,53;59;66\n20090716,73;79;85,52;57;69\n20090717,69;79;88,52;58;69\n20090718,71;78;84,54;60;74\n20090719,68;76;83,54;61;73\n20090720,68;75;82,54;57;62\n20090721,65;68;71,53;56;61\n20090722,67;75;82,52;56;60\n20090723,64;72;80,52;55;61\n20090724,65;73;80,53;56;62\n20090725,67;77;86,52;56;67\n20090726,71;79;86,53;57;72\n20090727,71;78;85,52;57;70\n20090728,73;80;87,55;58;63\n20090729,73;78;83,58;58;58\n20090730,74;81;87,56;60;65\n20090731,69;79;89,55;58;64\n20090801,69;77;85,55;58;64\n20090802,73;76;78,56;60;66\n20090803,72;79;85,56;62;70\n20090804,72;79;86,57;64;73\n20090805,74;82;89,58;62;72\n20090806,68;74;79,59;63;71\n20090807,67;74;80,58;63;71\n20090808,65;72;78,58;64;76\n20090809,71;76;81,57;66;82\n20090810,71;83;94,59;66;82\n20090811,77;85;92,58;61;66\n20090812,71;76;80,57;66;79\n20090813,70;72;74,57;63;74\n20090814,69;77;85,56;61;70\n20090815,73;81;89,55;62;76\n20090816,75;83;91,55;62;73\n20090817,77;85;93,55;58;64\n20090818,73;82;91,55;59;65\n20090819,75;83;91,57;59;65\n20090820,76;83;89,56;60;67\n20090821,75;84;92,56;62;78\n20090822,72;79;85,56;59;64\n20090823,75;81;86,55;58;65\n20090824,72;78;84,54;58;64\n20090825,71;79;86,55;60;70\n20090826,74;81;87,55;59;68\n20090827,68;74;80,53;66;87\n20090828,66;70;73,63;76;97\n20090829,67;70;73,58;73;87\n20090830,66;75;83,55;57;62\n20090831,64;68;72,54;59;69\n20090901,59;67;74,58;63;72\n20090902,61;69;77,61;70;90\n20090903,64;71;78,58;67;79\n20090904,65;74;83,54;59;66\n20090905,71;78;85,56;62;70\n20090906,64;69;74,57;62;69\n20090907,61;67;72,56;63;73\n20090908,65;70;75,55;61;71\n20090909,65;71;76,54;58;66\n20090910,61;66;71,55;65;82\n20090911,58;64;69,54;62;76\n20090912,65;67;68,58;60;64\n20090913,67;74;81,59;64;73\n20090914,65;72;79,58;63;69\n20090915,68;75;81,57;63;73\n20090916,63;67;71,58;63;72\n20090917,57;61;65,59;67;79\n20090918,58;68;77,62;70;89\n20090919,55;63;71,58;62;73\n20090920,57;66;75,57;63;76\n20090921,61;69;76,56;61;71\n20090922,66;71;75,55;62;77\n20090923,69;76;82,56;58;65\n20090924,68;75;82,55;58;65\n20090925,59;64;69,55;61;73\n20090926,55;61;66,53;66;87\n20090927,60;65;69,59;68;84\n20090928,60;67;74,56;59;63\n20090929,58;63;68,55;58;64\n20090930,51;56;60,51;58;70\n20091001,51;54;57,52;64;79\n20091002,49;58;66,55;63;77\n20091003,65;68;71,52;57;63\n20091004,59;68;76,50;55;62\n20091005,55;62;68,50;57;68\n20091006,54;61;68,50;60;74\n20091007,59;65;71,53;58;68\n20091008,55;60;64,54;57;62\n20091009,61;66;71,52;56;63\n20091010,54;61;68,51;54;59\n20091011,50;58;65,51;54;59\n20091012,46;51;55,56;60;66\n20091013,47;56;64,58;61;64\n20091014,44;49;53,63;66;76\n20091015,39;44;48,64;67;76\n20091016,39;44;49,59;67;79\n20091017,44;47;50,56;64;74\n20091018,43;45;47,56;59;63\n20091019,41;50;58,57;60;68\n20091020,47;58;68,56;59;67\n20091021,53;61;69,54;60;71\n20091022,55;66;76,57;62;72\n20091023,51;59;66,55;63;75\n20091024,53;60;67,55;61;74\n20091025,53;59;65,54;64;81\n20091026,49;55;61,57;62;71\n20091027,50;54;58,54;59;69\n20091028,51;55;58,53;58;67\n20091029,49;54;58,51;58;67\n20091030,52;56;60,52;59;74\n20091031,56;64;71,53;58;72\n20091101,50;55;60,52;63;77\n20091102,48;52;55,56;66;81\n20091103,46;54;62,56;66;80\n20091104,44;48;52,54;58;65\n20091105,44;49;53,57;61;68\n20091106,41;46;50,53;59;63\n20091107,38;46;53,49;56;65\n20091108,48;60;71,50;57;68\n20091109,48;58;67,49;56;64\n20091110,56;60;64,54;58;66\n20091111,49;54;58,54;58;65\n20091112,48;51;53,51;56;62\n20091113,49;52;55,48;53;60\n20091114,52;55;58,50;54;61\n20091115,54;59;63,44;53;65\n20091116,49;54;59,47;54;66\n20091117,46;51;55,45;54;64\n20091118,43;48;53,48;53;62\n20091119,48;55;61,44;53;63\n20091120,50;56;61,46;52;58\n20091121,47;52;57,47;51;59\n20091122,46;51;56,49;53;59\n20091123,45;53;60,44;54;66\n20091124,49;53;57,48;58;69\n20091125,49;51;53,\n20091126,49;52;54,50;55;67\n20091127,44;47;50,51;54;58\n20091128,44;48;51,\n20091129,42;51;59,49;60;71\n20091130,41;49;57,48;55;64\n20091201,38;43;48,46;52;64\n20091202,40;49;57,45;48;55\n20091203,51;59;66,46;50;58\n20091204,46;49;52,44;48;57\n20091205,37;42;47,\n";
+    }
+
+    var stockData = function() {
+        return "Month,Nominal,Real\n1913-01-15,59.740;61.330;64.880,609.591836734694;625.816326530612;662.04081632653\n1913-02-15,57.670;58.840;61.140,588.469387755102;600.408163265306;623.877551020408\n1913-03-15,57.320;59.280;59.840,584.897959183673;604.897959183673;610.612244897959\n1913-04-15,57.430;57.540;60.940,586.020408163265;587.142857142857;621.836734693877\n1913-05-15,57.420;57.420;58.570,591.958762886598;591.958762886598;603.814432989691\n1913-06-15,52.830;54.860;56.610,539.081632653061;559.795918367347;577.65306122449\n1913-07-15,55.110;57.490;57.920,556.666666666667;580.707070707071;585.050505050505\n1913-08-15,57.290;59.930;59.930,578.686868686869;605.353535353535;605.353535353535\n1913-09-15,58.800;58.880;60.830,588;588.8;608.3\n1913-10-15,56.470;57.360;59.650,564.7;573.6;596.5\n1913-11-15,55.630;55.830;57.220,550.792079207921;552.772277227723;566.534653465347\n1913-12-15,55.140;57.710;57.760,551.4;577.1;577.6\n1914-01-15,57.570;60.660;60.710,575.7;606.6;607.1\n1914-02-15,59.560;60.070;60.940,601.616161616162;606.767676767677;615.555555555556\n1914-03-15,59.430;60.360;61.120,600.30303030303;609.69696969697;617.373737373737\n1914-04-15,56.790;57.960;60.410,579.489795918367;591.428571428571;616.428571428571\n1914-05-15,57.990;59.760;59.820,585.757575757576;603.636363636364;604.242424242424\n1914-06-15,58.090;59.090;59.950,586.767676767677;596.868686868687;605.555555555556\n1914-07-15,52.320;52.320;59.920,523.2;523.2;599.2\n1914-12-15,53.170;54.580;56.760,526.435643564356;540.39603960396;561.980198019802\n1915-01-15,55.400;56.540;58.510,548.514851485149;559.80198019802;579.306930693069\n1915-02-15,54.220;55.020;57.830,542.2;550.2;578.3\n1915-03-15,55.290;60.830;61.300,558.484848484848;614.444444444444;619.191919191919\n1915-04-15,61.050;71.780;71.780,610.5;717.8;717.8\n1915-05-15,60.380;65.010;69.580,597.821782178218;643.663366336634;688.910891089109\n1915-06-15,64.860;70.060;71.900,642.178217821782;693.663366336634;711.881188118812\n1915-07-15,67.880;75.530;75.790,672.079207920792;747.821782178218;750.396039603961\n1915-08-15,76.460;81.200;81.880,757.029702970297;803.960396039604;810.693069306931\n1915-09-15,80.700;90.580;90.580,799.009900990099;896.831683168317;896.831683168317\n1915-10-15,88.230;95.340;96.460,865;934.705882352941;945.686274509804\n1915-11-15,91.080;96.710;97.560,884.271844660194;938.932038834951;947.184466019417\n1915-12-15,94.780;99.150;99.210,920.194174757282;962.621359223301;963.203883495146\n1916-01-15,90.580;90.580;98.810,870.961538461538;870.961538461538;950.096153846154\n1916-02-15,90.890;91.030;96.150,873.942307692308;875.288461538461;924.519230769231\n1916-03-15,90.520;93.250;96.080,862.095238095238;888.095238095238;915.047619047619\n1916-04-15,87.000;89.650;94.460,820.754716981132;845.754716981132;891.132075471698\n1916-05-15,87.710;91.800;92.620,819.719626168224;857.943925233645;865.607476635514\n1916-06-15,87.680;89.580;93.610,811.851851851852;829.444444444444;866.759259259259\n1916-07-15,86.420;89.250;90.530,800.185185185185;826.388888888889;838.240740740741\n1916-08-15,88.150;92.250;93.830,808.715596330275;846.330275229358;860.825688073395\n1916-09-15,91.190;103.730;103.730,821.531531531532;934.504504504505;934.504504504505\n1916-10-15,98.940;104.610;105.280,875.575221238938;925.75221238938;931.681415929203\n1916-11-15,105.630;105.970;110.150,918.521739130435;921.478260869565;957.826086956522\n1916-12-15,90.160;95.000;106.760,777.241379310345;818.965517241379;920.344827586207\n1917-01-15,95.430;95.430;99.180,815.641025641026;815.641025641026;847.692307692308\n1917-02-15,87.010;91.560;94.910,725.083333333333;763;790.916666666667\n1917-03-15,91.100;96.720;98.200,759.166666666667;806;818.333333333333\n1917-04-15,90.660;93.230;97.060,719.52380952381;739.920634920635;770.31746031746\n1917-05-15,89.080;97.380;97.410,695.9375;760.78125;761.015625\n1917-06-15,94.780;95.380;98.580,729.076923076923;733.692307692308;758.307692307692\n1917-07-15,90.480;91.750;95.310,706.875;716.796875;744.609375\n1917-08-15,83.400;83.400;93.850,641.538461538462;641.538461538462;721.923076923077\n1917-09-15,81.200;83.460;86.020,610.526315789474;627.518796992481;646.766917293233\n1917-10-15,74.500;74.500;83.580,551.851851851852;551.851851851852;619.111111111111\n1917-11-15,68.580;72.650;74.230,508;538.148148148148;549.851851851852\n1917-12-15,65.950;74.380;74.380,481.386861313869;542.919708029197;542.919708029197\n1918-01-15,73.380;79.800;79.800,524.142857142857;570;570\n1918-02-15,77.780;80.390;82.080,551.631205673759;570.141843971631;582.127659574468\n1918-03-15,76.410;76.410;79.930,545.785714285714;545.785714285714;570.928571428571\n1918-04-15,75.580;77.510;79.420,532.253521126761;545.845070422535;559.295774647887\n1918-05-15,78.080;78.080;84.040,538.48275862069;538.48275862069;579.586206896552\n1918-06-15,78.530;82.580;83.020,534.21768707483;561.768707482993;564.761904761905\n1918-07-15,80.510;81.230;82.960,533.17880794702;537.94701986755;549.403973509934\n1918-08-15,80.710;82.460;83.180,524.090909090909;535.454545454545;540.12987012987\n1918-09-15,80.290;84.680;84.680,511.40127388535;539.363057324841;539.363057324841\n1918-10-15,83.360;85.510;89.070,521;534.4375;556.6875\n1918-11-15,79.870;80.930;87.660,490;496.503067484663;537.791411042945\n1918-12-15,80.440;82.200;84.500,487.515151515152;498.181818181818;512.121212121212\n1919-01-15,79.880;80.610;83.350,484.121212121212;488.545454545455;505.151515151515\n1919-02-15,79.350;84.810;85.680,489.814814814815;523.518518518518;528.888888888889\n1919-03-15,84.240;88.850;89.050,513.658536585366;541.768292682927;542.987804878049\n1919-04-15,88.840;92.880;93.510,531.976047904192;556.167664670659;559.940119760479\n1919-05-15,93.260;105.500;105.500,551.834319526627;624.260355029586;624.260355029586\n1919-06-15,99.560;106.980;107.550,589.112426035503;633.01775147929;636.390532544379\n1919-07-15,107.160;107.160;112.230,615.862068965517;615.862068965517;645\n1919-08-15,98.460;104.750;107.990,556.271186440678;591.80790960452;610.112994350283\n1919-09-15,105.840;111.420;111.420,594.606741573034;625.955056179775;625.955056179775\n1919-10-15,108.900;118.920;118.920,601.657458563536;657.016574585635;657.016574585635\n1919-11-15,103.720;103.720;119.620,560.648648648649;560.648648648649;646.594594594595\n1919-12-15,103.550;107.230;107.970,547.883597883598;567.354497354497;571.269841269841\n1920-01-15,101.900;104.210;108.850,527.979274611399;539.948186528497;563.989637305699\n1920-02-15,89.980;91.180;103.010,461.435897435897;467.589743589744;528.25641025641\n1920-03-15,91.680;102.810;104.170,465.380710659899;521.878172588833;528.781725888325\n1920-04-15,93.160;93.540;105.650,458.916256157635;460.788177339901;520.443349753695\n1920-05-15,87.360;91.810;94.410,424.077669902913;445.679611650485;458.300970873786\n1920-06-15,90.160;90.760;93.060,431.387559808612;434.258373205742;445.263157894737\n1920-07-15,86.860;86.860;94.510,417.596153846154;417.596153846154;454.375\n1920-08-15,83.200;86.160;87.290,409.852216748768;424.433497536946;430\n1920-09-15,82.950;82.950;89.950,414.75;414.75;449.75\n1920-10-15,84.000;85.080;85.730,422.110552763819;427.537688442211;430.804020100503\n1920-11-15,73.120;76.040;85.480,369.292929292929;384.040404040404;431.717171717172\n1920-12-15,66.750;71.950;77.300,344.072164948454;370.876288659794;398.453608247423\n1921-01-15,72.670;76.130;76.760,382.473684210526;400.684210526316;404\n1921-02-15,74.340;74.980;77.140,404.021739130435;407.5;419.239130434783\n1921-03-15,72.250;75.760;77.780,394.808743169399;413.989071038251;425.027322404372\n1921-04-15,75.060;78.570;78.860,414.696132596685;434.088397790055;435.690607734807\n1921-05-15,73.440;73.440;80.030,414.915254237288;414.915254237288;452.146892655367\n1921-06-15,64.900;68.450;73.510,368.75;388.920454545455;417.670454545455\n1921-07-15,67.250;68.370;69.860,379.943502824859;386.271186440678;394.689265536723\n1921-08-15,63.900;67.110;69.950,361.016949152542;379.152542372881;395.197740112994\n1921-09-15,66.830;71.080;71.720,381.885714285714;406.171428571429;409.828571428571\n1921-10-15,69.460;73.210;73.800,396.914285714286;418.342857142857;421.714285714286\n1921-11-15,73.440;77.300;78.010,422.068965517241;444.252873563218;448.333333333333\n1921-12-15,78.120;80.800;81.500,451.560693641618;467.052023121387;471.098265895954\n1922-01-15,78.590;81.300;82.950,465.029585798817;481.065088757396;490.828402366864\n1922-02-15,81.680;85.460;85.810,483.313609467456;505.680473372781;507.751479289941\n1922-03-15,85.330;89.050;89.050,510.958083832335;533.233532934132;533.233532934132\n1922-04-15,89.300;91.930;93.210,534.730538922156;550.479041916168;558.14371257485\n1922-05-15,91.500;95.630;96.410,547.904191616767;572.634730538922;577.305389221557\n1922-06-15,90.730;92.930;96.360,543.293413173653;556.467065868264;577.005988023952\n1922-07-15,92.920;97.050;97.050,553.095238095238;577.678571428571;577.678571428571\n1922-08-15,96.210;100.780;100.780,579.578313253012;607.10843373494;607.10843373494\n1922-09-15,96.580;97.120;102.050,581.807228915663;585.060240963855;614.759036144578\n1922-10-15,96.110;96.110;102.760,575.508982035928;575.508982035928;615.329341317365\n1922-11-15,92.030;94.650;99.530,547.797619047619;563.392857142857;592.440476190476\n1922-12-15,95.030;98.170;99.220,562.307692307692;580.887573964497;587.100591715976\n1923-01-15,96.960;97.430;99.420,577.142857142857;579.940476190476;591.785714285714\n1923-02-15,97.710;103.900;103.900,581.607142857143;618.452380952381;618.452380952381\n1923-03-15,102.360;102.770;105.380,609.285714285714;611.72619047619;627.261904761905\n1923-04-15,98.380;98.380;102.700,582.130177514793;582.130177514793;607.692307692308\n1923-05-15,92.770;97.530;98.190,548.934911242604;577.100591715976;581.005917159763\n1923-06-15,88.400;88.400;97.240,520;520;572\n1923-07-15,86.910;86.910;91.720,505.290697674419;505.290697674419;533.255813953488\n1923-08-15,87.960;93.460;93.700,514.385964912281;546.549707602339;547.953216374269\n1923-09-15,87.940;87.970;93.610,511.279069767442;511.453488372093;544.244186046512\n1923-10-15,85.910;88.530;90.450,496.589595375722;511.734104046243;522.832369942196\n1923-11-15,88.410;92.340;92.880,511.040462427746;533.757225433526;536.878612716763\n1923-12-15,92.640;95.520;95.610,535.491329479769;552.138728323699;552.658959537572\n1924-01-15,94.880;100.660;100.660,548.439306358381;581.849710982659;581.849710982659\n1924-02-15,96.330;97.220;101.310,560.058139534884;565.232558139535;589.011627906977\n1924-03-15,92.540;93.010;98.860,541.169590643275;543.918128654971;578.12865497076\n1924-04-15,89.180;90.630;94.690,524.588235294118;533.117647058823;557\n1924-05-15,88.330;89.900;92.470,519.588235294118;528.823529411765;543.941176470588\n1924-06-15,89.180;96.370;96.370,524.588235294118;566.882352941176;566.882352941176\n1924-07-15,96.380;102.140;102.140,563.625730994152;597.309941520468;597.309941520468\n1924-08-15,101.510;104.140;105.570,597.117647058824;612.588235294118;621\n1924-09-15,101.070;103.160;104.950,591.052631578947;603.27485380117;613.74269005848\n1924-10-15,99.180;104.060;104.080,576.627906976744;605;605.116279069768\n1924-11-15,103.890;111.100;111.100,604.011627906977;645.93023255814;645.93023255814\n1924-12-15,110.440;120.510;120.510,638.381502890173;696.589595375723;696.589595375723\n1925-01-15,119.460;123.490;123.600,690.520231213873;713.815028901734;714.450867052023\n1925-02-15,117.960;122.240;122.860,685.813953488372;710.697674418605;714.302325581395\n1925-03-15,115.000;116.750;125.680,664.739884393064;674.85549132948;726.473988439306\n1925-04-15,117.400;120.010;121.540,682.558139534884;697.732558139535;706.627906976744\n1925-05-15,121.100;129.950;129.950,700;751.156069364162;751.156069364162\n1925-06-15,126.750;131.010;131.010,724.285714285714;748.628571428571;748.628571428571\n1925-07-15,131.330;133.810;136.500,741.977401129944;755.988700564972;771.186440677966\n1925-08-15,135.710;141.180;143.180,766.723163841808;797.627118644068;808.926553672316\n1925-09-15,137.220;143.460;147.160,775.254237288136;810.508474576271;831.412429378531\n1925-10-15,144.770;155.650;155.650,817.909604519774;879.378531073446;879.378531073446\n1925-11-15,148.180;151.080;159.390,823.222222222222;839.333333333333;885.5\n1925-12-15,152.110;156.660;156.870,849.776536312849;875.195530726257;876.368715083799\n1926-01-15,153.200;157.350;158.930,855.865921787709;879.050279329609;887.877094972067\n1926-02-15,154.680;154.680;162.310,864.134078212291;864.134078212291;906.759776536313\n1926-03-15,135.200;140.460;153.130,759.550561797753;789.101123595506;860.280898876404\n1926-04-15,136.270;143.710;144.550,761.284916201117;802.849162011173;807.541899441341\n1926-05-15,137.160;143.430;143.430,770.561797752809;805.786516853933;805.786516853933\n1926-06-15,142.300;153.040;154.030,803.954802259887;864.632768361582;870.225988700565\n1926-07-15,153.010;160.180;160.580,874.342857142857;915.314285714286;917.6\n1926-08-15,160.410;162.510;166.140,921.896551724138;933.965517241379;954.827586206897\n1926-09-15,156.260;158.190;166.100,892.914285714286;903.942857142857;949.142857142857\n1926-10-15,145.660;150.760;159.690,827.613636363636;856.590909090909;907.329545454545\n1926-11-15,150.510;156.550;157.370,850.338983050847;884.463276836158;889.09604519774\n1926-12-15,156.650;157.200;160.750,885.028248587571;888.135593220339;908.19209039548\n1927-01-15,152.730;156.410;156.560,872.742857142857;893.771428571429;894.628571428571\n1927-02-15,154.310;161.960;161.960,886.83908045977;930.80459770115;930.80459770115\n1927-03-15,158.410;160.080;161.780,915.664739884393;925.317919075144;935.14450867052\n1927-04-15,160.710;164.640;167.360,928.959537572254;951.676300578035;967.398843930636\n1927-05-15,164.550;172.960;172.960,945.689655172414;994.022988505747;994.022988505747\n1927-06-15,165.730;166.230;171.980,941.647727272727;944.488636363636;977.159090909091\n1927-07-15,168.060;181.400;181.400,971.445086705202;1048.5549132948;1048.5549132948\n1927-08-15,177.130;189.790;190.630,1029.82558139535;1103.43023255814;1108.31395348837\n1927-09-15,191.560;197.590;198.970,1107.28323699422;1142.1387283237;1150.11560693642\n1927-10-15,181.430;181.730;199.780,1042.70114942529;1044.42528735632;1148.16091954023\n1927-11-15,181.650;198.210;198.210,1050;1145.7225433526;1145.7225433526\n1927-12-15,193.580;200.700;200.930,1118.95953757225;1160.11560693642;1161.4450867052\n1928-01-15,194.500;198.590;203.350,1124.2774566474;1147.91907514451;1175.43352601156\n1928-02-15,191.330;194.780;199.350,1118.88888888889;1139.06432748538;1165.78947368421\n1928-03-15,194.530;214.450;214.450,1137.60233918129;1254.09356725146;1254.09356725146\n1928-04-15,207.940;211.630;216.930,1216.02339181287;1237.60233918129;1268.59649122807\n1928-05-15,211.730;219.810;220.880,1230.98837209302;1277.96511627907;1284.18604651163\n1928-06-15,201.960;210.370;220.270,1181.05263157895;1230.23391812865;1288.12865497076\n1928-07-15,205.100;216.000;216.620,1199.41520467836;1263.15789473684;1266.78362573099\n1928-08-15,214.080;240.410;240.410,1251.9298245614;1405.90643274854;1405.90643274854\n1928-09-15,236.860;237.380;241.720,1369.13294797688;1372.1387283237;1397.22543352601\n1928-10-15,237.750;252.160;257.130,1382.26744186047;1466.04651162791;1494.94186046512\n1928-11-15,254.380;293.380;295.620,1478.95348837209;1705.6976744186;1718.72093023256\n1928-12-15,263.950;300.000;300.000,1543.56725146199;1754.38596491228;1754.38596491228\n1929-01-15,296.980;317.510;317.510,1736.72514619883;1856.78362573099;1856.78362573099\n1929-02-15,300.410;317.410;322.060,1756.78362573099;1856.19883040936;1883.3918128655\n1929-03-15,296.510;308.850;321.180,1744.17647058824;1816.76470588235;1889.29411764706\n1929-04-15,299.130;319.290;319.290,1770;1889.2899408284;1889.2899408284\n1929-05-15,293.420;297.410;326.160,1726;1749.47058823529;1918.58823529412\n1929-06-15,303.270;331.650;331.650,1773.50877192982;1939.47368421053;1939.47368421053\n1929-07-15,335.220;347.700;347.700,1937.68786127168;2009.82658959538;2009.82658959538\n1929-08-15,337.990;380.330;380.330,1953.69942196532;2198.43930635838;2198.43930635838\n1929-09-15,343.450;343.450;381.170,1985.26011560694;1985.26011560694;2203.29479768786\n1929-10-15,230.070;273.510;352.860,1329.88439306358;1580.98265895954;2039.65317919075\n1929-11-15,198.690;238.950;257.680,1148.49710982659;1381.21387283237;1489.47976878613\n1929-12-15,230.890;248.480;262.200,1342.38372093023;1444.6511627907;1524.41860465116\n1930-01-15,244.200;267.140;267.140,1428.0701754386;1562.22222222222;1562.22222222222\n1930-02-15,262.470;271.110;272.270,1543.94117647059;1594.76470588235;1601.58823529412\n1930-03-15,270.590;286.100;286.100,1601.12426035503;1692.89940828402;1692.89940828402\n1930-04-15,276.940;279.230;294.070,1629.05882352941;1642.52941176471;1729.82352941176\n1930-05-15,259.680;275.070;275.070,1536.56804733728;1627.63313609467;1627.63313609467\n1930-06-15,211.840;226.340;274.450,1260.95238095238;1347.2619047619;1633.63095238095\n1930-07-15,218.330;233.990;240.810,1315.24096385542;1409.57831325301;1450.66265060241\n1930-08-15,217.240;240.420;240.420,1316.60606060606;1457.09090909091;1457.09090909091\n1930-09-15,204.900;204.900;245.090,1234.33734939759;1234.33734939759;1476.44578313253\n1930-10-15,183.350;183.350;214.180,1111.21212121212;1111.21212121212;1298.06060606061\n1930-11-15,171.600;180.910;190.300,1046.34146341463;1103.10975609756;1160.36585365854\n1930-12-15,157.510;164.580;186.820,978.32298136646;1022.23602484472;1160.37267080745\n1931-01-15,161.450;169.340;173.040,1015.40880503145;1065.03144654088;1088.30188679245\n1931-02-15,168.710;190.340;194.360,1074.58598726115;1212.35668789809;1237.96178343949\n1931-03-15,172.360;172.360;187.720,1104.87179487179;1104.87179487179;1203.33333333333\n1931-04-15,143.610;151.190;171.070,926.516129032258;975.41935483871;1103.67741935484\n1931-05-15,128.460;128.460;154.410,839.607843137255;839.607843137255;1009.21568627451\n1931-06-15,121.700;150.180;154.040,805.960264900662;994.569536423841;1020.13245033113\n1931-07-15,135.390;135.390;155.260,896.622516556291;896.622516556291;1028.2119205298\n1931-08-15,133.770;139.410;144.150,885.894039735099;923.245033112583;954.635761589404\n1931-09-15,96.610;96.610;140.130,644.066666666667;644.066666666667;934.2\n1931-10-15,86.480;103.970;108.880,580.402684563758;697.785234899329;730.738255033557\n1931-11-15,91.550;93.870;116.790,622.789115646259;638.571428571429;794.489795918367\n1931-12-15,73.790;77.900;91.170,505.41095890411;533.561643835617;624.452054794521\n1932-01-15,71.240;76.550;85.880,498.181818181818;535.314685314685;600.55944055944\n1932-02-15,71.800;81.440;85.980,509.219858156028;577.58865248227;609.787234042553\n1932-03-15,73.280;73.280;88.780,523.428571428571;523.428571428571;634.142857142857\n1932-04-15,55.930;55.930;72.180,402.374100719424;402.374100719424;519.280575539568\n1932-05-15,44.740;44.740;59.010,326.569343065693;326.569343065693;430.729927007299\n1932-06-15,42.840;42.840;50.620,315;315;372.205882352941\n1932-07-15,41.220;53.890;53.890,303.088235294118;396.25;396.25\n1932-08-15,53.160;73.160;75.220,393.777777777778;541.925925925926;557.185185185185\n1932-09-15,65.060;71.560;79.930,485.522388059701;534.029850746269;596.492537313433\n1932-10-15,58.470;61.900;71.210,439.624060150376;465.413533834586;535.413533834586\n1932-11-15,56.350;56.350;68.030,426.893939393939;426.893939393939;515.378787878788\n1932-12-15,55.910;60.260;61.930,426.793893129771;460;472.748091603053\n1933-01-15,59.290;60.900;64.350,459.612403100775;472.093023255814;498.837209302326\n1933-02-15,50.160;51.390;60.090,394.96062992126;404.645669291339;473.149606299213\n1933-03-15,52.540;55.400;62.950,416.984126984127;439.68253968254;499.603174603175\n1933-04-15,55.690;73.100;73.690,441.984126984127;580.15873015873;584.84126984127\n1933-05-15,76.630;88.110;90.020,608.174603174603;699.285714285714;714.444444444444\n1933-06-15,88.870;98.140;98.740,699.763779527559;772.755905511811;777.48031496063\n1933-07-15,88.710;90.770;108.670,677.175572519084;692.900763358779;829.541984732824\n1933-08-15,92.550;102.410;105.070,701.136363636364;775.833333333333;795.984848484848\n1933-09-15,93.180;94.240;105.740,705.909090909091;713.939393939394;801.060606060606\n1933-10-15,84.380;88.160;99.720,639.242424242424;667.878787878788;755.454545454545\n1933-11-15,89.620;98.140;101.280,678.939393939394;743.484848484848;767.272727272727\n1933-12-15,95.280;98.670;102.040,721.818181818182;747.5;773.030303030303\n1934-01-15,96.730;107.220;108.990,732.80303030303;812.272727272727;825.681818181818\n1934-02-15,103.120;103.460;110.740,775.338345864662;777.894736842105;832.631578947368\n1934-03-15,98.760;100.310;105.790,742.556390977444;754.210526315789;795.413533834586\n1934-04-15,100.490;100.490;106.550,755.563909774436;755.563909774436;801.127819548872\n1934-05-15,91.810;94.000;100.620,690.300751879699;706.766917293233;756.541353383459\n1934-06-15,91.790;95.750;100.420,685;714.55223880597;749.402985074627\n1934-07-15,85.510;88.050;98.820,638.134328358209;657.089552238806;737.462686567164\n1934-08-15,87.470;92.860;95.480,652.761194029851;692.985074626866;712.537313432836\n1934-09-15,86.690;92.490;93.650,637.426470588235;680.073529411765;688.602941176471\n1934-10-15,90.410;93.360;95.600,669.703703703704;691.555555555556;708.148148148148\n1934-11-15,93.460;102.940;103.080,692.296296296296;762.518518518518;763.555555555556\n1934-12-15,99.590;104.040;104.040,743.208955223881;776.417910447761;776.417910447761\n1935-01-15,100.490;101.690;105.880,738.897058823529;747.720588235294;778.529411764706\n1935-02-15,100.230;102.380;107.170,731.605839416059;747.299270072993;782.262773722628\n1935-03-15,96.710;100.780;103.270,705.912408759124;735.620437956204;753.795620437956\n1935-04-15,100.390;109.450;110.470,727.463768115942;793.115942028986;800.507246376812\n1935-05-15,108.710;110.640;116.810,787.753623188406;801.739130434783;846.449275362319\n1935-06-15,111.450;118.360;120.040,813.503649635037;863.941605839416;876.204379562044\n1935-07-15,118.690;126.230;126.560,866.350364963504;921.386861313869;923.795620437956\n1935-08-15,124.930;127.350;128.990,911.897810218978;929.562043795621;941.532846715329\n1935-09-15,127.270;131.920;134.110,928.978102189781;962.919708029197;978.905109489051\n1935-10-15,128.060;139.740;140.780,934.744525547445;1020;1027.59124087591\n1935-11-15,141.070;142.340;148.440,1022.24637681159;1031.44927536232;1075.65217391304\n1935-12-15,138.940;144.130;144.130,1006.8115942029;1044.42028985507;1044.42028985507\n1936-01-15,143.110;149.490;149.490,1037.02898550725;1083.26086956522;1083.26086956522\n1936-02-15,149.810;152.530;154.430,1085.57971014493;1105.28985507246;1119.05797101449\n1936-03-15,150.420;156.340;158.750,1097.95620437956;1141.16788321168;1158.75912408759\n1936-04-15,143.650;145.670;161.990,1048.5401459854;1063.28467153285;1182.40875912409\n1936-05-15,146.700;152.640;152.640,1070.80291970803;1114.16058394161;1114.16058394161\n1936-06-15,149.260;157.690;160.660,1081.59420289855;1142.68115942029;1164.20289855072\n1936-07-15,155.600;164.860;167.010,1119.42446043165;1186.04316546763;1201.51079136691\n1936-08-15,160.800;166.290;169.050,1148.57142857143;1187.78571428571;1207.5\n1936-09-15,165.160;167.820;169.550,1179.71428571429;1198.71428571429;1211.07142857143\n1936-10-15,168.260;177.150;177.420,1201.85714285714;1265.35714285714;1267.28571428571\n1936-11-15,176.670;183.220;184.900,1261.92857142857;1308.71428571429;1320.71428571429\n1936-12-15,175.850;179.900;182.180,1256.07142857143;1285;1301.28571428571\n1937-01-15,177.720;184.740;186.900,1260.42553191489;1310.21276595745;1325.53191489362\n1937-02-15,186.010;187.170;190.290,1319.21985815603;1327.44680851064;1349.57446808511\n1937-03-15,179.820;186.410;194.400,1266.33802816901;1312.74647887324;1369.01408450704\n1937-04-15,170.130;174.270;185.190,1189.72027972028;1218.67132867133;1295.03496503496\n1937-05-15,167.460;174.710;176.300,1162.91666666667;1213.26388888889;1224.30555555556\n1937-06-15,165.510;169.320;175.140,1149.375;1175.83333333333;1216.25\n1937-07-15,170.130;184.010;184.420,1173.31034482759;1269.03448275862;1271.86206896552\n1937-08-15,175.910;177.410;189.340,1213.1724137931;1223.51724137931;1305.79310344828\n1937-09-15,147.380;154.570;173.080,1009.45205479452;1058.69863013699;1185.47945205479\n1937-10-15,125.730;138.480;153.890,861.164383561644;948.493150684931;1054.04109589041\n1937-11-15,113.640;123.480;135.940,783.724137931035;851.586206896552;937.51724137931\n1937-12-15,118.930;120.850;129.980,825.902777777778;839.236111111111;902.638888888889\n1938-01-15,120.570;121.870;134.350,849.084507042254;858.239436619718;946.12676056338\n1938-02-15,118.490;129.640;132.410,840.354609929078;919.432624113475;939.078014184397\n1938-03-15,98.950;98.950;130.470,701.77304964539;701.77304964539;925.31914893617\n1938-04-15,103.020;111.660;118.990,725.492957746479;786.338028169014;837.957746478873\n1938-05-15,107.740;107.740;119.430,764.113475177305;764.113475177305;847.021276595745\n1938-06-15,109.710;133.880;135.870,778.085106382979;949.503546099291;963.617021276596\n1938-07-15,134.560;141.200;144.910,954.326241134752;1001.41843971631;1027.7304964539\n1938-08-15,136.510;139.270;144.470,968.156028368794;987.730496453901;1024.60992907801\n1938-09-15,129.910;141.450;143.080,921.347517730497;1003.1914893617;1014.75177304965\n1938-10-15,144.230;151.730;154.170,1030.21428571429;1083.78571428571;1101.21428571429\n1938-11-15,146.140;149.820;158.080,1043.85714285714;1070.14285714286;1129.14285714286\n1938-12-15,147.390;154.360;154.360,1052.78571428571;1102.57142857143;1102.57142857143\n1939-01-15,136.420;143.760;154.850,974.428571428571;1026.85714285714;1106.07142857143\n1939-02-15,142.430;147.300;147.300,1024.67625899281;1059.71223021583;1059.71223021583\n1939-03-15,131.840;131.840;152.280,948.489208633093;948.489208633093;1095.53956834532\n1939-04-15,123.750;128.380;132.250,896.739130434783;930.289855072464;958.333333333333\n1939-05-15,127.830;138.180;138.180,926.304347826087;1001.30434782609;1001.30434782609\n1939-06-15,130.050;130.630;140.090,942.391304347826;946.594202898551;1015.14492753623\n1939-07-15,131.930;143.260;144.510,956.014492753623;1038.11594202899;1047.17391304348\n1939-08-15,131.330;134.410;144.260,951.666666666667;973.985507246377;1045.36231884058\n1939-09-15,135.250;150.160;155.920,959.219858156028;1064.96453900709;1105.81560283688\n1939-10-15,149.890;151.880;155.480,1070.64285714286;1084.85714285714;1110.57142857143\n1939-11-15,145.690;145.690;152.640,1040.64285714286;1040.64285714286;1090.28571428571\n1939-12-15,146.340;149.990;149.990,1045.28571428571;1071.35714285714;1071.35714285714\n1940-01-15,144.650;145.330;152.800,1040.64748201439;1045.53956834532;1099.28057553957\n1940-02-15,145.000;146.540;148.940,1035.71428571429;1046.71428571429;1063.85714285714\n1940-03-15,145.590;147.540;148.370,1039.92857142857;1053.85714285714;1059.78571428571\n1940-04-15,146.800;148.430;151.290,1048.57142857143;1060.21428571429;1080.64285714286\n1940-05-15,113.940;116.220;148.170,813.857142857143;830.142857142857;1058.35714285714\n1940-06-15,111.840;122.060;123.860,793.191489361702;865.673758865248;878.439716312057\n1940-07-15,120.960;126.140;126.140,864;901;901\n1940-08-15,121.280;128.880;128.880,866.285714285714;920.571428571428;920.571428571428\n1940-09-15,127.740;132.640;135.100,912.428571428571;947.428571428571;965\n1940-10-15,130.390;134.610;135.090,931.357142857143;961.5;964.928571428571\n1940-11-15,129.780;130.030;137.750,927;928.785714285714;983.928571428571\n1940-12-15,128.410;131.130;132.350,910.709219858156;930;938.652482269504\n1941-01-15,124.050;124.130;133.590,879.787234042553;880.354609929078;947.446808510638\n1941-02-15,117.660;121.970;124.760,834.468085106383;865.035460992908;884.822695035461\n1941-03-15,120.300;122.720;123.920,847.183098591549;864.225352112676;872.676056338028\n1941-04-15,115.540;115.540;124.650,807.972027972028;807.972027972028;871.678321678322\n1941-05-15,115.300;116.230;117.820,800.694444444444;807.152777777778;818.194444444444\n1941-06-15,116.180;123.140;123.970,790.340136054422;837.687074829932;843.333333333333\n1941-07-15,122.850;128.790;130.060,835.714285714286;876.122448979592;884.761904761905\n1941-08-15,124.900;127.430;128.220,838.255033557047;855.234899328859;860.536912751678\n1941-09-15,125.810;126.820;129.320,833.17880794702;839.867549668874;856.423841059603\n1941-10-15,117.820;117.820;126.850,770.065359477124;770.065359477124;829.084967320261\n1941-11-15,114.660;114.660;119.850,744.545454545455;744.545454545455;778.246753246753\n1941-12-15,106.340;110.960;116.650,686.064516129032;715.870967741935;752.58064516129\n1942-01-15,108.940;109.410;114.220,693.885350318471;696.87898089172;727.515923566879\n1942-02-15,105.100;106.580;110.800,665.189873417722;674.556962025316;701.26582278481\n1942-03-15,99.210;99.530;106.970,620.0625;622.0625;668.5625\n1942-04-15,92.920;95.350;102.500,577.142857142857;592.23602484472;636.645962732919\n1942-05-15,95.830;100.880;101.090,587.914110429448;618.895705521472;620.184049079755\n1942-06-15,101.300;103.340;106.290,621.472392638037;633.98773006135;652.085889570552\n1942-07-15,102.690;105.720;108.910,626.158536585366;644.634146341464;664.085365853659\n1942-08-15,104.800;106.330;107.550,635.151515151515;644.424242424242;651.818181818182\n1942-09-15,106.030;109.110;109.560,642.606060606061;661.272727272727;664\n1942-10-15,109.650;113.500;115.290,656.586826347306;679.640718562874;690.359281437126\n1942-11-15,114.100;114.500;117.300,679.166666666667;681.547619047619;698.214285714286\n1942-12-15,114.610;119.400;119.560,678.165680473373;706.508875739645;707.455621301775\n1943-01-15,119.260;125.410;125.410,705.680473372781;742.07100591716;742.07100591716\n1943-02-15,125.070;129.710;130.040,740.059171597633;767.514792899408;769.467455621302\n1943-03-15,128.600;136.570;136.820,747.674418604651;794.011627906977;795.46511627907\n1943-04-15,131.180;135.480;136.930,753.908045977012;778.620689655172;786.954022988506\n1943-05-15,136.820;141.180;141.180,781.828571428571;806.742857142857;806.742857142857\n1943-06-15,138.790;143.380;143.380,793.085714285714;819.314285714286;819.314285714286\n1943-07-15,137.250;137.250;145.820,788.793103448276;788.793103448276;838.045977011494\n1943-08-15,134.000;136.620;138.450,774.566473988439;789.71098265896;800.28901734104\n1943-09-15,136.910;140.120;141.750,786.83908045977;805.287356321839;814.655172413793\n1943-10-15,136.390;138.290;140.330,783.850574712644;794.770114942529;806.494252873563\n1943-11-15,129.570;129.570;138.500,744.655172413793;744.655172413793;795.977011494253\n1943-12-15,130.680;135.890;136.240,751.034482758621;780.977011494253;782.988505747127\n1944-01-15,135.920;137.400;138.650,781.149425287356;789.655172413793;796.83908045977\n1944-02-15,134.220;136.300;137.450,771.379310344828;783.333333333333;789.942528735632\n1944-03-15,136.440;138.840;141.000,784.137931034483;797.931034482759;810.344827586207\n1944-04-15,135.000;136.210;139.110,771.428571428571;778.342857142857;794.914285714286\n1944-05-15,137.060;142.240;142.240,783.2;812.8;812.8\n1944-06-15,141.620;148.380;148.630,804.659090909091;843.068181818182;844.488636363636\n1944-07-15,145.770;146.110;150.500,823.559322033898;825.480225988701;850.282485875706\n1944-08-15,144.900;146.990;148.960,818.64406779661;830.45197740113;841.581920903955\n1944-09-15,142.960;146.310;147.160,807.683615819209;826.610169491525;831.412429378531\n1944-10-15,145.830;146.530;148.870,823.898305084746;827.853107344633;841.073446327684\n1944-11-15,145.600;147.330;148.080,822.598870056497;832.372881355932;836.610169491526\n1944-12-15,147.300;151.930;152.280,827.52808988764;853.539325842697;855.505617977528\n1945-01-15,151.350;153.670;155.850,850.280898876404;863.314606741573;875.561797752809\n1945-02-15,153.790;160.400;160.400,863.988764044944;901.123595505618;901.123595505618\n1945-03-15,152.270;154.060;161.520,855.449438202247;865.505617977528;907.415730337079\n1945-04-15,154.990;165.440;165.440,870.730337078652;929.438202247191;929.438202247191\n1945-05-15,163.090;168.300;169.080,911.117318435754;940.223463687151;944.581005586592\n1945-06-15,164.570;164.570;168.920,909.226519337016;909.226519337016;933.259668508287\n1945-07-15,160.910;162.880;167.090,889.005524861878;899.889502762431;923.149171270718\n1945-08-15,161.550;174.290;174.290,892.541436464088;962.92817679558;962.92817679558\n1945-09-15,173.900;180.110;180.220,960.773480662983;995.082872928177;995.690607734806\n1945-10-15,183.060;186.600;187.060,1011.38121546961;1030.93922651934;1033.48066298343\n1945-11-15,187.820;191.460;192.130,1037.67955801105;1057.79005524862;1061.49171270718\n1945-12-15,189.070;192.910;195.820,1038.84615384615;1059.94505494506;1075.93406593407\n1946-01-15,190.900;204.670;205.350,1048.9010989011;1124.56043956044;1128.2967032967\n1946-02-15,186.020;190.090;206.610,1027.73480662983;1050.22099447514;1141.49171270718\n1946-03-15,188.460;199.560;200.560,1029.83606557377;1090.49180327869;1095.95628415301\n1946-04-15,199.190;206.770;208.310,1082.55434782609;1123.75;1132.11956521739\n1946-05-15,200.650;212.280;212.500,1084.59459459459;1147.45945945946;1148.64864864865\n1946-06-15,200.520;205.620;211.470,1072.29946524064;1099.57219251337;1130.85561497326\n1946-07-15,195.220;201.560;207.560,985.959595959596;1017.9797979798;1048.28282828283\n1946-08-15,189.190;189.190;204.520,936.584158415842;936.584158415842;1012.47524752475\n1946-09-15,165.170;172.420;181.180,809.656862745098;845.196078431373;888.137254901961\n1946-10-15,163.120;169.150;175.940,784.230769230769;813.221153846154;845.865384615385\n1946-11-15,163.550;169.780;174.400,767.840375586855;797.089201877934;818.779342723005\n1946-12-15,167.500;177.200;177.850,779.06976744186;824.186046511628;827.209302325581\n1947-01-15,171.950;180.440;180.440,799.767441860465;839.255813953488;839.255813953488\n1947-02-15,177.220;178.900;184.060,824.279069767442;832.093023255814;856.093023255814\n1947-03-15,172.580;177.200;181.880,788.036529680365;809.132420091324;830.502283105023\n1947-04-15,166.690;170.640;177.450,761.141552511416;779.178082191781;810.27397260274\n1947-05-15,163.550;169.250;174.210,746.803652968037;772.831050228311;795.479452054795\n1947-06-15,168.000;177.300;177.440,763.636363636364;805.909090909091;806.545454545455\n1947-07-15,179.880;183.180;186.850,810.27027027027;825.135135135135;841.666666666667\n1947-08-15,177.570;178.850;183.810,789.2;794.888888888889;816.933333333333\n1947-09-15,174.860;177.490;179.810,760.260869565217;771.695652173913;781.782608695652\n1947-10-15,178.100;181.810;185.290,774.347826086957;790.478260869565;805.608695652174\n1947-11-15,179.510;179.510;183.170,777.099567099567;777.099567099567;792.943722943723\n1947-12-15,176.100;181.160;181.160,752.564102564103;774.188034188034;774.188034188034\n1948-01-15,171.180;174.760;181.040,722.278481012658;737.383966244726;763.881856540084\n1948-02-15,165.650;166.800;174.920,704.893617021277;709.787234042553;744.340425531915\n1948-03-15,165.390;177.200;177.200,706.794871794872;757.264957264957;757.264957264957\n1948-04-15,177.320;180.510;183.780,745.042016806723;758.44537815126;772.18487394958\n1948-05-15,180.940;190.740;191.060,757.071129707113;798.075313807531;799.414225941423\n1948-06-15,187.900;189.460;193.160,779.668049792531;786.141078838174;801.49377593361\n1948-07-15,181.200;181.330;191.620,742.622950819672;743.155737704918;785.327868852459\n1948-08-15,179.270;181.710;183.600,731.714285714286;741.673469387755;749.387755102041\n1948-09-15,175.990;178.300;185.360,718.326530612245;727.755102040816;756.571428571429\n1948-10-15,179.870;188.280;189.760,737.172131147541;771.639344262295;777.704918032787\n1948-11-15,171.200;171.200;189.760,707.438016528926;707.438016528926;784.132231404959\n1948-12-15,173.220;177.300;177.920,718.755186721992;735.684647302905;738.257261410788\n1949-01-15,175.030;179.120;181.430,729.291666666667;746.333333333333;755.958333333333\n1949-02-15,171.100;173.060;180.390,718.90756302521;727.142857142857;757.941176470588\n1949-03-15,173.660;177.100;178.450,729.663865546218;744.117647058823;749.789915966387\n1949-04-15,173.240;174.060;177.160,724.853556485356;728.284518828452;741.255230125523\n1949-05-15,168.360;168.360;176.630,707.394957983193;707.394957983193;742.142857142857\n1949-06-15,161.600;167.420;168.150,676.150627615063;700.502092050209;703.556485355649\n1949-07-15,168.080;175.920;176.460,709.198312236287;742.278481012658;744.556962025317\n1949-08-15,176.840;178.660;182.020,743.025210084034;750.672268907563;764.789915966387\n1949-09-15,178.040;182.510;183.290,744.937238493724;763.640167364017;766.903765690377\n1949-10-15,182.670;189.540;190.360,770.759493670886;799.746835443038;803.206751054852\n1949-11-15,187.980;191.550;193.520,789.831932773109;804.831932773109;813.109243697479\n1949-12-15,192.710;200.520;200.520,816.567796610169;849.661016949153;849.661016949153\n1950-01-15,196.810;201.790;201.980,837.489361702128;858.68085106383;859.489361702128\n1950-02-15,201.690;203.440;204.590,858.255319148936;865.702127659575;870.595744680851\n1950-03-15,202.330;206.050;209.780,857.330508474576;873.093220338983;888.898305084746\n1950-04-15,208.440;213.560;215.310,883.220338983051;904.915254237288;912.330508474576\n1950-05-15,214.870;223.420;223.420,906.62447257384;942.700421940928;942.700421940928\n1950-06-15,206.720;209.110;228.380,868.571428571429;878.613445378151;959.579831932773\n1950-07-15,197.460;209.400;210.850,819.336099585062;868.879668049792;874.896265560166\n1950-08-15,211.260;216.870;221.510,869.382716049383;892.469135802469;911.56378600823\n1950-09-15,218.100;226.360;226.780,893.852459016393;927.704918032787;929.426229508197\n1950-10-15,225.010;225.010;231.740,914.674796747967;914.674796747967;942.032520325203\n1950-11-15,222.520;227.600;235.470,900.890688259109;921.457489878542;953.31983805668\n1950-12-15,222.330;235.420;235.420,889.32;941.68;941.68\n1951-01-15,238.990;248.830;249.580,940.905511811024;979.645669291339;982.59842519685\n1951-02-15,250.760;252.050;255.710,975.719844357977;980.739299610895;994.980544747082\n1951-03-15,243.950;248.530;253.610,945.542635658915;963.294573643411;982.984496124031\n1951-04-15,246.020;259.130;259.130,953.565891472868;1004.37984496124;1004.37984496124\n1951-05-15,245.270;249.650;263.130,946.988416988417;963.899613899614;1015.94594594595\n1951-06-15,242.640;242.640;254.030,936.833976833977;936.833976833977;980.810810810811\n1951-07-15,243.980;257.860;260.700,942.007722007722;995.598455598456;1006.56370656371\n1951-08-15,259.890;270.250;270.250,1003.43629343629;1043.43629343629;1043.43629343629\n1951-09-15,270.630;271.160;276.370,1036.89655172414;1038.92720306513;1058.88888888889\n1951-10-15,260.430;262.350;275.870,994.007633587786;1001.3358778626;1052.93893129771\n1951-11-15,256.950;261.270;264.060,973.295454545455;989.659090909091;1000.22727272727\n1951-12-15,263.240;269.230;269.230,993.358490566038;1015.96226415094;1015.96226415094\n1952-01-15,268.080;270.690;275.400,1011.62264150943;1021.47169811321;1039.24528301887\n1952-02-15,258.490;260.080;271.680,982.851711026616;988.897338403042;1033.00380228137\n1952-03-15,260.080;269.460;269.460,988.897338403042;1024.56273764259;1024.56273764259\n1952-04-15,257.630;257.630;267.220,975.871212121212;975.871212121212;1012.19696969697\n1952-05-15,256.350;262.940;264.220,971.022727272727;995.984848484848;1000.83333333333\n1952-06-15,262.090;274.260;274.260,989.018867924528;1034.94339622641;1034.94339622641\n1952-07-15,272.580;279.560;279.560,1020.89887640449;1047.04119850187;1047.04119850187\n1952-08-15,273.170;275.040;280.290,1023.10861423221;1030.11235955056;1049.77528089888\n1952-09-15,268.380;270.610;277.150,1005.16853932584;1013.52059925094;1038.01498127341\n1952-10-15,263.060;269.230;271.400,985.243445692884;1008.35205992509;1016.47940074906\n1952-11-15,270.230;283.660;283.660,1012.09737827715;1062.39700374532;1062.39700374532\n1952-12-15,281.630;291.900;292.000,1054.79400749064;1093.25842696629;1093.6329588015\n1953-01-15,285.240;289.770;293.790,1072.33082706767;1089.36090225564;1104.47368421053\n1953-02-15,281.140;284.270;290.190,1060.90566037736;1072.71698113208;1095.05660377358\n1953-03-15,279.870;279.870;290.640,1052.14285714286;1052.14285714286;1092.63157894737\n1953-04-15,270.730;274.750;280.090,1017.78195488722;1032.89473684211;1052.96992481203\n1953-05-15,271.480;272.280;278.790,1016.77902621723;1019.77528089888;1044.15730337079\n1953-06-15,262.880;268.260;269.840,980.89552238806;1000.97014925373;1006.86567164179\n1953-07-15,268.060;275.380;275.380,1000.22388059701;1027.53731343284;1027.53731343284\n1953-08-15,261.220;261.220;276.740,971.078066914498;971.078066914498;1028.77323420074\n1953-09-15,255.490;264.040;265.480,949.776951672863;981.561338289963;986.914498141264\n1953-10-15,264.260;275.810;276.310,978.740740740741;1021.51851851852;1023.37037037037\n1953-11-15,273.880;281.370;281.370,1018.14126394052;1045.98513011152;1045.98513011152\n1953-12-15,278.300;280.900;283.540,1034.57249070632;1044.23791821561;1054.05204460967\n1954-01-15,279.870;292.390;292.850,1040.40892193309;1086.95167286245;1088.66171003717\n1954-02-15,289.540;294.540;294.540,1076.35687732342;1094.94423791822;1094.94423791822\n1954-03-15,296.400;303.510;303.510,1101.85873605948;1128.28996282528;1128.28996282528\n1954-04-15,304.260;319.330;319.330,1135.29850746269;1191.52985074627;1191.52985074627\n1954-05-15,317.930;327.490;327.490,1181.89591078067;1217.43494423792;1217.43494423792\n1954-06-15,319.270;333.530;336.900,1186.87732342007;1239.88847583643;1252.41635687732\n1954-07-15,334.120;347.920;347.920,1242.08178438662;1293.38289962825;1293.38289962825\n1954-08-15,335.800;335.800;350.380,1248.32713754647;1248.32713754647;1302.52788104089\n1954-09-15,338.130;360.460;363.320,1261.67910447761;1345;1355.67164179104\n1954-10-15,352.140;352.140;364.430,1313.9552238806;1313.9552238806;1359.81343283582\n1954-11-15,353.960;386.770;388.510,1320.74626865672;1443.17164179104;1449.66417910448\n1954-12-15,384.040;404.390;404.390,1438.35205992509;1514.56928838951;1514.56928838951\n1955-01-15,388.200;408.830;408.890,1453.93258426966;1531.19850187266;1531.42322097378\n1955-02-15,405.700;411.870;413.990,1519.47565543071;1542.58426966292;1550.52434456929\n1955-03-15,391.360;409.700;419.680,1465.76779026217;1534.45692883895;1571.83520599251\n1955-04-15,412.970;425.650;430.640,1546.70411985019;1594.19475655431;1612.88389513109\n1955-05-15,414.120;424.860;426.300,1551.01123595506;1591.23595505618;1596.62921348315\n1955-06-15,424.880;451.380;451.380,1591.31086142322;1690.56179775281;1690.56179775281\n1955-07-15,453.820;465.850;468.450,1693.35820895522;1738.24626865672;1747.94776119403\n1955-08-15,448.840;468.180;468.180,1674.77611940298;1746.94029850746;1746.94029850746\n1955-09-15,455.560;466.620;487.450,1693.53159851301;1734.6468401487;1812.08178438662\n1955-10-15,438.590;454.870;461.140,1630.44609665428;1690.96654275093;1714.2750929368\n1955-11-15,454.890;483.260;487.380,1691.04089219331;1796.50557620818;1811.82156133829\n1955-12-15,480.720;488.400;488.400,1793.73134328358;1822.38805970149;1822.38805970149\n1956-01-15,462.350;470.740;485.780,1725.18656716418;1756.49253731343;1812.61194029851\n1956-02-15,465.720;483.650;485.710,1737.76119402985;1804.66417910448;1812.35074626866\n1956-03-15,486.690;511.790;513.030,1816.00746268657;1909.66417910448;1914.29104477612\n1956-04-15,503.020;516.120;521.050,1869.96282527881;1918.66171003717;1936.98884758364\n1956-05-15,468.810;478.050;516.440,1736.33333333333;1770.55555555556;1912.74074074074\n1956-06-15,475.290;492.780;492.780,1747.38970588235;1811.69117647059;1811.69117647059\n1956-07-15,491.920;517.810;517.810,1795.32846715328;1889.81751824818;1889.81751824818\n1956-08-15,495.960;502.040;520.950,1816.7032967033;1838.97435897436;1908.24175824176\n1956-09-15,475.250;475.250;509.820,1734.48905109489;1734.48905109489;1860.65693430657\n1956-10-15,468.700;479.850;490.190,1704.36363636364;1744.90909090909;1782.50909090909\n1956-11-15,466.100;472.780;495.370,1694.90909090909;1719.2;1801.34545454545\n1956-12-15,480.610;499.470;499.470,1741.34057971014;1809.67391304348;1809.67391304348\n1957-01-15,474.590;479.160;499.200,1719.52898550725;1736.08695652174;1808.69565217391\n1957-02-15,454.820;464.620;477.220,1641.94945848375;1677.3285198556;1722.81588447653\n1957-03-15,468.910;474.810;475.010,1686.72661870504;1707.94964028777;1708.6690647482\n1957-04-15,474.980;494.360;494.360,1702.43727598566;1771.89964157706;1771.89964157706\n1957-05-15,494.680;504.930;506.040,1766.71428571429;1803.32142857143;1807.28571428571\n1957-06-15,497.080;503.290;513.190,1768.96797153025;1791.06761565836;1826.29893238434\n1957-07-15,503.290;508.520;520.770,1778.40989399293;1796.89045936396;1840.17667844523\n1957-08-15,470.140;484.350;506.210,1661.27208480565;1711.48409893993;1788.72791519435\n1957-09-15,456.300;456.300;486.130,1612.36749116608;1612.36749116608;1717.77385159011\n1957-10-15,419.790;441.040;465.820,1483.35689045936;1558.44522968198;1646.00706713781\n1957-11-15,427.940;449.870;449.870,1506.83098591549;1584.04929577465;1584.04929577465\n1957-12-15,425.650;435.690;449.550,1498.7676056338;1534.11971830986;1582.92253521127\n1958-01-15,438.680;450.020;451.160,1533.84615384615;1573.4965034965;1577.48251748252\n1958-02-15,436.890;439.920;458.650,1527.58741258741;1538.18181818182;1603.67132867133\n1958-03-15,443.380;446.760;455.920,1539.51388888889;1551.25;1583.05555555556\n1958-04-15,440.090;455.860;455.860,1522.80276816609;1577.37024221453;1577.37024221453\n1958-05-15,455.450;462.700;463.670,1575.95155709343;1601.03806228374;1604.39446366782\n1958-06-15,466.110;478.180;478.970,1612.83737024221;1654.60207612457;1657.33564013841\n1958-07-15,476.890;502.990;504.370,1644.44827586207;1734.44827586207;1739.20689655172\n1958-08-15,502.670;508.630;512.420,1739.34256055363;1759.96539792388;1773.07958477509\n1958-09-15,511.770;532.090;532.090,1770.83044982699;1841.14186851211;1841.14186851211\n1958-10-15,530.940;543.220;546.360,1837.16262975779;1879.65397923875;1890.51903114187\n1958-11-15,540.520;557.460;567.440,1863.86206896552;1922.27586206897;1956.68965517241\n1958-12-15,556.080;583.650;583.650,1924.15224913495;2019.55017301038;2019.55017301038\n1959-01-15,583.150;593.960;597.660,2010.86206896552;2048.13793103448;2060.89655172414\n1959-02-15,574.460;603.500;603.500,1987.7508650519;2088.23529411765;2088.23529411765\n1959-03-15,601.710;601.710;614.690,2082.04152249135;2082.04152249135;2126.95501730104\n1959-04-15,602.940;623.750;629.870,2079.10344827586;2150.86206896552;2171.96551724138\n1959-05-15,615.640;643.790;643.790,2122.89655172414;2219.96551724138;2219.96551724138\n1959-06-15,617.620;643.600;643.600,2122.40549828179;2211.68384879725;2211.68384879725\n1959-07-15,650.880;674.880;674.880,2229.04109589041;2311.23287671233;2311.23287671233\n1959-08-15,646.530;664.410;678.100,2214.14383561644;2275.37671232877;2322.2602739726\n1959-09-15,616.450;631.680;655.900,2103.92491467577;2155.90443686007;2238.56655290102\n1959-10-15,625.590;646.600;646.600,2127.85714285714;2199.31972789116;2199.31972789116\n1959-11-15,634.460;659.180;659.180,2158.02721088435;2242.10884353741;2242.10884353741\n1959-12-15,661.290;679.360;679.360,2249.28571428571;2310.74829931973;2310.74829931973\n1960-01-15,622.620;622.620;685.470,2124.98293515358;2124.98293515358;2339.48805460751\n1960-02-15,611.330;630.120;636.920,2079.3537414966;2143.26530612245;2166.39455782313\n1960-03-15,599.100;616.590;626.870,2037.75510204082;2097.24489795918;2132.21088435374\n1960-04-15,601.700;601.700;630.770,2039.66101694915;2039.66101694915;2138.20338983051\n1960-05-15,599.610;625.500;625.500,2032.57627118644;2120.33898305085;2120.33898305085\n1960-06-15,624.890;640.620;656.420,2111.11486486486;2164.25675675676;2217.63513513513\n1960-07-15,601.680;616.730;646.910,2032.7027027027;2083.5472972973;2185.50675675676\n1960-08-15,608.690;625.990;641.560,2056.38513513513;2114.83108108108;2167.43243243243\n1960-09-15,569.080;580.140;626.100,1922.56756756757;1959.93243243243;2115.2027027027\n1960-10-15,566.050;580.360;596.480,1899.4966442953;1947.51677852349;2001.61073825503\n1960-11-15,585.240;597.220;612.010,1963.89261744966;2004.09395973154;2053.72483221477\n1960-12-15,593.490;615.890;617.780,1991.57718120805;2066.74496644295;2073.08724832215\n1961-01-15,610.250;648.200;650.640,2047.81879194631;2175.1677852349;2183.35570469799\n1961-02-15,637.040;662.080;662.080,2137.71812080537;2221.74496644295;2221.74496644295\n1961-03-15,661.080;676.630;679.380,2218.38926174497;2270.57046979866;2279.79865771812\n1961-04-15,672.660;678.710;696.720,2257.24832214765;2277.55033557047;2337.98657718121\n1961-05-15,677.050;696.720;705.960,2271.97986577181;2337.98657718121;2368.9932885906\n1961-06-15,680.680;683.960;703.790,2284.1610738255;2295.1677852349;2361.71140939597\n1961-07-15,679.300;705.370;705.370,2264.33333333333;2351.23333333333;2351.23333333333\n1961-08-15,710.460;719.940;725.760,2376.12040133779;2407.82608695652;2427.29096989967\n1961-09-15,691.860;701.210;726.530,2306.2;2337.36666666667;2421.76666666667\n1961-10-15,697.240;703.920;708.490,2324.13333333333;2346.4;2361.63333333333\n1961-11-15,703.840;721.600;734.340,2346.13333333333;2405.33333333333;2447.8\n1961-12-15,720.100;731.140;734.910,2400.33333333333;2437.13333333333;2449.7\n1962-01-15,689.920;700.000;726.010,2299.73333333333;2333.33333333333;2420.03333333333\n1962-02-15,702.540;708.050;717.550,2334.01993355482;2352.32558139535;2383.88704318937\n1962-03-15,706.630;706.950;723.540,2347.60797342193;2348.67109634552;2403.78737541528\n1962-04-15,665.330;665.330;705.420,2203.07947019868;2203.07947019868;2335.82781456954\n1962-05-15,576.930;613.360;675.490,1910.3642384106;2030.99337748344;2236.72185430464\n1962-06-15,535.760;561.280;611.050,1774.03973509934;1858.54304635762;2023.34437086093\n1962-07-15,571.240;597.930;597.930,1885.28052805281;1973.36633663366;1973.36633663366\n1962-08-15,588.350;609.180;616.000,1941.74917491749;2010.49504950495;2033.00330033003\n1962-09-15,574.120;578.980;607.630,1888.55263157895;1904.53947368421;1998.78289473684\n1962-10-15,558.060;589.770;589.770,1835.72368421053;1940.03289473684;1940.03289473684\n1962-11-15,597.130;649.300;652.610,1964.24342105263;2135.85526315789;2146.74342105263\n1962-12-15,640.140;652.100;653.990,2105.72368421053;2145.06578947368;2151.28289473684\n1963-01-15,646.790;682.850;683.730,2127.59868421053;2246.21710526316;2249.11184210526\n1963-02-15,662.940;662.940;688.960,2180.72368421053;2180.72368421053;2266.31578947368\n1963-03-15,659.720;682.520;684.730,2163.01639344262;2237.77049180328;2245.01639344262\n1963-04-15,684.270;717.700;718.330,2243.50819672131;2353.11475409836;2355.18032786885\n1963-05-15,712.550;726.960;726.960,2336.22950819672;2383.47540983607;2383.47540983607\n1963-06-15,706.030;706.880;726.870,2307.28758169935;2310.06535947712;2375.39215686275\n1963-07-15,687.710;695.430;716.450,2240.09771986971;2265.24429967427;2333.71335504886\n1963-08-15,694.870;729.320;729.320,2263.42019543974;2375.63517915309;2375.63517915309\n1963-09-15,732.020;732.790;745.960,2384.42996742671;2386.93811074919;2429.83713355049\n1963-10-15,737.940;755.230;760.500,2395.90909090909;2452.04545454545;2469.15584415584\n1963-11-15,711.490;750.520;753.770,2310.03246753247;2436.75324675325;2447.30519480519\n1963-12-15,751.820;762.950;767.210,2433.07443365696;2469.09385113269;2482.88025889968\n1964-01-15,766.080;785.340;787.780,2479.22330097087;2541.55339805825;2549.4498381877\n1964-02-15,783.040;800.140;800.140,2534.11003236246;2589.4498381877;2589.4498381877\n1964-03-15,802.750;813.290;820.250,2597.89644012945;2632.00647249191;2654.53074433657\n1964-04-15,810.770;810.770;827.330,2623.85113268608;2623.85113268608;2677.44336569579\n1964-05-15,817.100;820.560;830.170,2644.33656957929;2655.53398058252;2686.63430420712\n1964-06-15,800.310;831.500;831.500,2581.64516129032;2682.25806451613;2682.25806451613\n1964-07-15,837.350;841.100;851.350,2692.44372990354;2704.50160771704;2737.45980707396\n1964-08-15,823.400;838.480;842.830,2656.12903225806;2704.77419354839;2718.8064516129\n1964-09-15,844.000;875.370;875.740,2713.82636655949;2814.69453376206;2815.88424437299\n1964-10-15,868.440;873.080;881.500,2792.4115755627;2807.33118971061;2834.40514469453\n1964-11-15,870.640;875.430;891.710,2790.51282051282;2805.86538461538;2858.04487179487\n1964-12-15,857.450;874.130;874.130,2748.23717948718;2801.69871794872;2801.69871794872\n1965-01-15,869.780;902.860;902.860,2787.75641025641;2893.78205128205;2893.78205128205\n1965-02-15,881.350;903.480;906.300,2824.83974358974;2895.76923076923;2904.80769230769\n1965-03-15,887.820;889.050;901.910,2836.4856230032;2840.41533546326;2881.50159744409\n1965-04-15,890.330;922.310;922.310,2835.44585987261;2937.29299363057;2937.29299363057\n1965-05-15,913.220;918.040;939.620,2908.34394904459;2923.69426751592;2992.42038216561\n1965-06-15,840.590;868.030;908.530,2660.09493670886;2746.93037974684;2875.09493670886\n1965-07-15,861.770;881.740;883.230,2727.12025316456;2790.3164556962;2795.03164556962\n1965-08-15,878.890;893.100;896.180,2781.29746835443;2826.26582278481;2836.01265822785\n1965-09-15,893.600;930.580;937.880,2827.84810126582;2944.87341772152;2967.9746835443\n1965-10-15,929.650;960.820;960.820,2932.64984227129;3030.97791798107;3030.97791798107\n1965-11-15,946.380;946.710;961.850,2985.42586750789;2986.46687697161;3034.22712933754\n1965-12-15,939.530;969.260;969.260,2954.49685534591;3047.98742138365;3047.98742138365\n1966-01-15,968.540;983.510;994.200,3045.72327044025;3092.79874213836;3126.41509433962\n1966-02-15,950.660;951.890;995.150,2970.8125;2974.65625;3109.84375\n1966-03-15,911.080;924.770;938.190,2838.2554517134;2880.90342679128;2922.71028037383\n1966-04-15,931.290;933.680;954.730,2883.25077399381;2890.65015479876;2955.82043343653\n1966-05-15,864.140;884.070;931.950,2675.3560371517;2737.05882352941;2885.29411764706\n1966-06-15,870.100;870.100;903.170,2685.49382716049;2685.49382716049;2787.56172839506\n1966-07-15,847.380;847.380;894.040,2607.32307692308;2607.32307692308;2750.89230769231\n1966-08-15,767.030;788.410;852.390,2345.65749235474;2411.03975535168;2606.69724770642\n1966-09-15,772.660;774.220;814.300,2362.874617737;2367.64525993884;2490.21406727829\n1966-10-15,744.320;807.070;809.570,2262.37082066869;2453.10030395137;2460.6990881459\n1966-11-15,791.590;791.590;820.870,2406.04863221885;2406.04863221885;2495.04559270517\n1966-12-15,785.690;785.690;820.540,2388.11550151976;2388.11550151976;2494.04255319149\n1967-01-15,786.410;849.890;849.890,2390.30395136778;2583.25227963526;2583.25227963526\n1967-02-15,836.640;839.370;860.970,2542.97872340426;2551.27659574468;2616.93009118541\n1967-03-15,841.760;865.980;876.670,2550.78787878788;2624.18181818182;2656.57575757576\n1967-04-15,842.430;897.050;897.050,2545.10574018127;2710.12084592145;2710.12084592145\n1967-05-15,852.560;852.560;909.630,2567.95180722892;2567.95180722892;2739.84939759036\n1967-06-15,847.770;860.260;886.150,2545.85585585586;2583.36336336336;2661.11111111111\n1967-07-15,859.690;904.240;909.560,2573.92215568862;2707.30538922156;2723.23353293413\n1967-08-15,893.720;901.290;926.720,2667.82089552239;2690.41791044776;2766.32835820896\n1967-09-15,901.180;926.660;943.080,2682.08333333333;2757.91666666667;2806.78571428571\n1967-10-15,879.740;879.740;933.310,2610.50445103858;2610.50445103858;2769.46587537092\n1967-11-15,849.570;875.810;884.880,2513.52071005917;2591.15384615385;2617.98816568047\n1967-12-15,879.160;905.110;905.110,2593.39233038348;2669.94100294985;2669.94100294985\n1968-01-15,855.470;855.470;908.920,2508.70967741935;2508.70967741935;2665.45454545455\n1968-02-15,831.770;840.500;863.560,2432.07602339181;2457.60233918129;2525.02923976608\n1968-03-15,825.130;840.670;843.220,2405.62682215743;2450.93294460641;2458.36734693878\n1968-04-15,861.250;912.220;912.220,2503.63372093023;2651.8023255814;2651.8023255814\n1968-05-15,891.600;899.000;919.900,2584.34782608696;2605.79710144928;2666.3768115942\n1968-06-15,897.800;897.800;917.950,2587.31988472622;2587.31988472622;2645.38904899135\n1968-07-15,883.000;883.000;923.720,2530.08595988539;2530.08595988539;2646.76217765043\n1968-08-15,869.650;896.010;896.130,2484.71428571429;2560.02857142857;2560.37142857143\n1968-09-15,900.360;935.790;938.280,2565.12820512821;2666.06837606838;2673.16239316239\n1968-10-15,942.320;952.390;967.490,2669.46175637394;2697.98866855524;2740.76487252125\n1968-11-15,946.230;985.080;985.080,2672.96610169492;2782.71186440678;2782.71186440678\n1968-12-15,943.750;943.750;985.210,2658.45070422535;2658.45070422535;2775.23943661972\n1969-01-15,921.250;946.050;951.890,2587.7808988764;2657.44382022472;2673.84831460674\n1969-02-15,899.800;905.210;952.700,2513.40782122905;2528.51955307263;2661.17318435754\n1969-03-15,904.030;935.480;935.480,2504.23822714681;2591.35734072022;2591.35734072022\n1969-04-15,917.510;950.180;950.180,2527.57575757576;2617.57575757576;2617.57575757576\n1969-05-15,936.920;937.560;968.850,2573.95604395604;2575.71428571429;2661.67582417582\n1969-06-15,869.760;873.190;933.170,2376.39344262295;2385.7650273224;2549.64480874317\n1969-07-15,801.960;815.470;886.120,2179.23913043478;2215.95108695652;2407.9347826087\n1969-08-15,809.130;836.720;837.250,2186.83783783784;2261.40540540541;2262.83783783784\n1969-09-15,811.840;813.090;837.780,2188.24797843666;2191.61725067385;2258.16711590296\n1969-10-15,802.200;855.990;862.260,2150.67024128686;2294.87935656836;2311.6890080429\n1969-11-15,807.290;812.300;863.050,2152.77333333333;2166.13333333333;2301.46666666667\n1969-12-15,769.930;800.360;805.040,2042.25464190981;2122.97082228117;2135.38461538462\n1970-01-15,744.060;744.060;811.310,1968.4126984127;1968.4126984127;2146.32275132275\n1970-02-15,746.440;777.590;777.590,1964.31578947368;2046.28947368421;2046.28947368421\n1970-03-15,763.600;785.570;791.050,1998.95287958115;2056.46596858639;2070.81151832461\n1970-04-15,724.330;736.070;792.500,1881.37662337662;1911.87012987013;2058.44155844156\n1970-05-15,631.160;700.440;733.630,1635.12953367876;1814.61139896373;1900.59585492228\n1970-06-15,682.910;683.530;720.430,1760.07731958763;1761.67525773196;1856.77835051546\n1970-07-15,669.360;734.120;735.560,1716.30769230769;1882.35897435897;1886.05128205128\n1970-08-15,707.350;764.580;765.810,1813.71794871795;1960.46153846154;1963.61538461538\n1970-09-15,747.470;760.680;773.140,1906.8112244898;1940.51020408163;1972.29591836735\n1970-10-15,753.560;755.610;783.680,1912.58883248731;1917.79187817259;1989.03553299492\n1970-11-15,754.240;794.090;794.090,1904.64646464646;2005.27777777778;2005.27777777778\n1970-12-15,794.290;838.920;842.000,1995.70351758794;2107.8391959799;2115.57788944724\n1971-01-15,830.570;868.500;868.500,2086.85929648241;2182.1608040201;2182.1608040201\n1971-02-15,868.980;878.830;890.060,2177.89473684211;2202.58145363409;2230.72681704261\n1971-03-15,882.390;904.370;916.830,2205.975;2260.925;2292.075\n1971-04-15,903.040;941.750;950.820,2251.97007481297;2348.50374064838;2371.12219451372\n1971-05-15,905.780;907.810;939.920,2247.59305210918;2252.63027295285;2332.30769230769\n1971-06-15,873.100;891.140;923.060,2150.49261083744;2194.92610837438;2273.54679802956\n1971-07-15,858.430;858.430;903.400,2109.16461916462;2109.16461916462;2219.65601965602\n1971-08-15,839.590;898.070;908.370,2057.81862745098;2201.15196078431;2226.39705882353\n1971-09-15,883.470;887.190;920.930,2165.36764705882;2174.48529411765;2257.18137254902\n1971-10-15,836.380;839.000;901.800,2044.93887530562;2051.34474327628;2204.88997555012\n1971-11-15,797.970;831.340;843.170,1951.02689486553;2032.61613691932;2061.54034229829\n1971-12-15,846.010;890.200;893.660,2058.41849148418;2165.93673965937;2174.35523114355\n1972-01-15,889.150;902.170;917.220,2163.38199513382;2195.06082725061;2231.67883211679\n1972-02-15,901.790;928.130;928.130,2183.51089588378;2247.28813559322;2247.28813559322\n1972-03-15,928.660;940.700;950.180,2243.14009661836;2272.22222222222;2295.12077294686\n1972-04-15,940.920;954.170;968.920,2267.27710843374;2299.20481927711;2334.74698795181\n1972-05-15,925.120;960.720;971.250,2223.84615384615;2309.42307692308;2334.73557692308\n1972-06-15,926.250;929.030;961.390,2221.22302158273;2227.8896882494;2305.49160671463\n1972-07-15,910.450;924.740;942.130,2172.91169451074;2207.01670644391;2248.52028639618\n1972-08-15,930.460;963.730;973.510,2215.38095238095;2294.59523809524;2317.88095238095\n1972-09-15,935.730;953.270;970.050,2222.63657957245;2264.29928741093;2304.1567695962\n1972-10-15,921.660;955.520;955.520,2178.86524822695;2258.91252955083;2258.91252955083\n1972-11-15,968.540;1018.21;1025.21,2284.29245283019;2401.43867924528;2417.94811320755\n1972-12-15,1000.00;1020.02;1036.27,2352.94117647059;2400.04705882353;2438.28235294118\n1973-01-15,992.930;999.020;1051.70,2330.82159624413;2345.11737089202;2468.779342723\n1973-02-15,947.920;955.070;996.760,2209.60372960373;2226.2703962704;2323.44988344988\n1973-03-15,922.710;951.010;979.980,2130.96997690531;2196.32794457275;2263.23325635104\n1973-04-15,921.430;921.430;967.410,2113.37155963303;2113.37155963303;2218.83027522936\n1973-05-15,886.510;901.410;956.580,2019.38496583144;2053.32574031891;2178.99772209567\n1973-06-15,869.130;891.710;927.000,1966.35746606335;2017.44343891403;2097.2850678733\n1973-07-15,870.110;926.400;936.710,1964.1309255079;2091.19638826185;2114.46952595937\n1973-08-15,851.900;887.570;912.780,1888.91352549889;1968.0044345898;2023.90243902439\n1973-09-15,880.570;947.100;953.270,1948.16371681416;2095.35398230089;2109.00442477876\n1973-10-15,948.830;956.580;987.060,2080.76754385965;2097.76315789474;2164.60526315789\n1973-11-15,817.730;822.250;948.830,1781.54684095861;1791.39433551198;2067.16775599129\n1973-12-15,788.310;850.860;851.140,1706.2987012987;1841.68831168831;1842.29437229437\n1974-01-15,823.110;855.550;880.690,1766.330472103;1835.94420600858;1889.89270386266\n1974-02-15,803.900;860.530;863.420,1703.17796610169;1823.15677966102;1829.27966101695\n1974-03-15,846.680;846.680;891.660,1771.29707112971;1771.29707112971;1865.39748953975\n1974-04-15,827.680;836.750;869.920,1724.33333333333;1743.22916666667;1812.33333333333\n1974-05-15,795.370;802.170;865.770,1636.56378600823;1650.55555555556;1781.41975308642\n1974-06-15,802.410;802.410;859.670,1637.57142857143;1637.57142857143;1754.42857142857\n1974-07-15,757.430;757.430;806.240,1533.25910931174;1533.25910931174;1632.06477732794\n1974-08-15,656.840;678.580;797.560,1313.68;1357.16;1595.12\n1974-09-15,607.870;607.870;677.880,1201.32411067194;1201.32411067194;1339.6837944664\n1974-10-15,584.560;665.520;673.500,1143.9530332681;1302.38747553816;1318.00391389432\n1974-11-15,608.570;618.660;674.750,1181.68932038835;1201.28155339806;1310.19417475728\n1974-12-15,577.600;616.240;616.240,1112.90944123314;1187.36030828516;1187.36030828516\n1975-01-15,632.040;703.690;705.960,1213.12859884837;1350.65259117083;1355.00959692898\n1975-02-15,707.600;739.050;749.770,1347.80952380952;1407.71428571429;1428.13333333333\n1975-03-15,743.430;768.150;786.530,1410.68311195446;1457.59013282732;1492.46679316888\n1975-04-15,742.880;821.340;821.340,1404.31001890359;1552.62759924386;1552.62759924386\n1975-05-15,815.000;832.290;858.730,1531.95488721805;1564.45488721804;1614.15413533835\n1975-06-15,819.310;878.990;878.990,1528.56343283582;1639.90671641791;1639.90671641791\n1975-07-15,824.860;831.510;881.810,1521.88191881919;1534.15129151291;1626.9557195572\n1975-08-15,791.690;835.340;835.340,1457.9926335175;1538.37937384899;1538.37937384899\n1975-09-15,793.880;793.880;840.110,1453.99267399267;1453.99267399267;1538.663003663\n1975-10-15,784.160;836.040;855.160,1428.34244080146;1522.84153005464;1557.66848816029\n1975-11-15,825.720;860.670;860.670,1493.16455696203;1556.36528028933;1556.36528028933\n1975-12-15,818.800;852.410;859.810,1475.31531531532;1535.87387387387;1549.20720720721\n1976-01-15,858.710;975.280;975.280,1544.44244604317;1754.10071942446;1754.10071942446\n1976-02-15,950.570;972.610;994.570,1703.53046594982;1743.02867383513;1782.3835125448\n1976-03-15,970.640;999.450;1009.21,1736.38640429338;1787.92486583184;1805.38461538462\n1976-04-15,968.280;996.850;1011.02,1725.98930481283;1776.91622103387;1802.17468805704\n1976-05-15,965.570;975.230;1007.48,1708.97345132743;1726.07079646018;1783.15044247788\n1976-06-15,958.090;1002.78;1007.45,1686.77816901408;1765.45774647887;1773.67957746479\n1976-07-15,979.290;984.640;1011.21,1715.04378283713;1724.41330998249;1770.94570928196\n1976-08-15,960.440;973.740;999.340,1673.24041811847;1696.41114982578;1741.01045296167\n1976-09-15,978.640;990.190;1014.79,1699.02777777778;1719.07986111111;1761.78819444444\n1976-10-15,932.350;964.930;979.890,1610.27633851468;1666.54576856649;1692.38341968912\n1976-11-15,924.040;947.220;966.090,1593.1724137931;1633.13793103448;1665.6724137931\n1976-12-15,946.640;1004.65;1004.65,1626.52920962199;1726.20274914089;1726.20274914089\n1977-01-15,954.370;954.370;999.750,1631.40170940171;1631.40170940171;1708.97435897436\n1977-02-15,931.520;936.420;958.360,1576.17597292724;1584.46700507614;1621.59052453469\n1977-03-15,919.130;919.130;968.000,1544.75630252101;1544.75630252101;1626.89075630252\n1977-04-15,914.600;926.900;947.760,1524.33333333333;1544.83333333333;1579.6\n1977-05-15,898.660;898.660;943.440,1490.31509121061;1490.31509121061;1564.57711442786\n1977-06-15,903.040;916.300;929.700,1487.71004942339;1509.55518945634;1531.63097199341\n1977-07-15,888.430;890.070;923.420,1456.44262295082;1459.13114754098;1513.80327868852\n1977-08-15,854.120;861.490;891.810,1395.62091503268;1407.66339869281;1457.20588235294\n1977-09-15,834.720;847.110;876.390,1359.47882736156;1379.65798045603;1427.34527687296\n1977-10-15,801.540;818.350;851.960,1301.2012987013;1328.49025974026;1383.05194805195\n1977-11-15,800.850;829.700;845.890,1293.7802907916;1340.38772213247;1366.54281098546\n1977-12-15,806.220;831.170;831.170,1298.26086956522;1338.43800322061;1338.43800322061\n1978-01-15,763.340;769.920;817.740,1221.344;1231.872;1308.384\n1978-02-15,742.120;742.120;782.660,1179.84101748808;1179.84101748808;1244.29252782194\n1978-03-15,742.720;757.360;773.820,1171.48264984227;1194.57413249211;1220.53627760252\n1978-04-15,751.040;837.320;837.320,1175.33646322379;1310.35993740219;1310.35993740219\n1978-05-15,822.070;840.610;858.370,1274.52713178295;1303.27131782946;1330.80620155039\n1978-06-15,812.280;818.950;866.510,1245.8282208589;1256.05828220859;1329.00306748466\n1978-07-15,805.790;862.270;862.270,1226.46879756469;1312.43531202435;1312.43531202435\n1978-08-15,860.710;876.820;900.120,1304.10606060606;1328.51515151515;1363.81818181818\n1978-09-15,857.160;865.820;907.740,1288.96240601504;1301.98496240602;1365.02255639098\n1978-10-15,792.450;792.450;901.420,1180.99850968703;1180.99850968703;1343.39791356185\n1978-11-15,785.260;799.030;827.790,1165.07418397626;1185.50445103858;1228.17507418398\n1978-12-15,787.510;805.010;821.900,1163.23485967504;1189.08419497784;1214.03249630724\n1979-01-15,811.420;839.220;859.750,1188.02342606149;1228.7262079063;1258.78477306003\n1979-02-15,807.000;808.820;840.870,1167.87264833575;1170.50651230101;1216.88856729378\n1979-03-15,815.750;862.180;871.360,1168.69627507163;1235.21489971347;1248.36676217765\n1979-04-15,854.900;854.900;878.720,1210.90651558074;1210.90651558074;1244.64589235127\n1979-05-15,822.160;822.330;857.590,1149.87412587413;1150.11188811189;1199.42657342657\n1979-06-15,821.210;841.980;849.100,1135.83679114799;1164.5643153527;1174.41217150761\n1979-07-15,825.510;846.420;852.990,1129.28864569083;1157.89329685363;1166.88098495212\n1979-08-15,846.160;887.630;887.630,1146.55826558266;1202.75067750677;1202.75067750677\n1979-09-15,866.130;878.580;893.940,1161.03217158177;1177.72117962466;1198.3109919571\n1979-10-15,806.830;815.700;897.610,1072.91223404255;1084.70744680851;1193.63031914894\n1979-11-15,796.670;822.350;831.740,1049.63109354414;1083.465085639;1095.83662714097\n1979-12-15,819.620;838.740;844.620,1068.60495436767;1093.5332464146;1101.19947848761\n1980-01-15,820.310;875.850;881.910,1054.38303341902;1125.77120822622;1133.56041131105\n1980-02-15,854.440;863.140;903.840,1082.94043092522;1093.9670468948;1145.55133079848\n1980-03-15,759.980;785.750;856.480,948.789013732834;980.961298377029;1069.26342072409\n1980-04-15,759.130;817.060;817.060,937.197530864197;1008.71604938272;1008.71604938272\n1980-05-15,805.200;850.850;860.320,984.352078239609;1040.15892420538;1051.73594132029\n1980-06-15,843.770;867.920;887.540,1020.27811366385;1049.48004836759;1073.20435308343\n1980-07-15,872.270;935.320;936.180,1054.7400241838;1130.97944377267;1132.01934703748\n1980-08-15,929.780;932.590;966.720,1116.1824729892;1119.55582232893;1160.52821128451\n1980-09-15,921.930;932.420;974.570,1097.53571428571;1110.02380952381;1160.20238095238\n1980-10-15,917.750;924.490;972.440,1082.25235849057;1090.20047169811;1146.74528301887\n1980-11-15,932.420;993.340;1000.17,1090.54970760234;1161.80116959064;1169.78947368421\n1980-12-15,908.450;963.990;974.400,1052.6651216686;1117.02201622248;1129.08458864426\n1981-01-15,938.910;947.270;1004.69,1079.20689655172;1088.81609195402;1154.81609195402\n1981-02-15,931.570;974.580;974.580,1059.80659840728;1108.73720136519;1108.73720136519\n1981-03-15,964.620;1003.87;1015.22,1089.96610169492;1134.31638418079;1147.14124293785\n1981-04-15,989.100;997.750;1024.05,1110.10101010101;1119.80920314254;1149.3265993266\n1981-05-15,963.440;991.750;995.590,1072.87305122494;1104.3986636971;1108.67483296214\n1981-06-15,976.880;976.880;1011.99,1078.23399558499;1078.23399558499;1116.98675496689\n1981-07-15,924.660;952.340;967.660,1009.45414847162;1039.67248908297;1056.39737991266\n1981-08-15,881.470;881.470;953.580,955.005417118093;955.005417118093;1033.13109425786\n1981-09-15,824.010;849.980;884.230,884.130901287554;911.995708154506;948.744635193133\n1981-10-15,830.960;852.550;878.140,889.678800856531;912.79443254818;940.192719486081\n1981-11-15,844.080;888.980;888.980,900.832443970117;948.751334044824;948.751334044824\n1981-12-15,868.250;875.000;892.690,923.670212765957;930.851063829787;949.670212765958\n1982-01-15,838.950;871.100;882.520,889.66065747614;923.753976670202;935.864262990456\n1982-02-15,811.260;824.390;852.550,857.568710359408;871.448202959831;901.215644820296\n1982-03-15,795.470;822.770;828.390,841.767195767196;870.656084656085;876.603174603175\n1982-04-15,833.240;848.360;865.580,878.018967334036;893.951527924131;912.096944151739\n1982-05-15,819.540;819.540;869.200,855.469728601253;855.469728601253;907.306889352818\n1982-06-15,788.620;811.930;816.880,813.010309278351;837.041237113402;842.144329896907\n1982-07-15,796.990;808.600;833.430,817.425641025641;829.333333333333;854.8\n1982-08-15,776.920;901.310;901.310,795.209825997953;922.528147389969;922.528147389969\n1982-09-15,895.050;896.250;934.790,914.249233912155;915.474974463738;954.841675178754\n1982-10-15,903.610;991.720;1036.98,920.173116089613;1009.89816700611;1055.98778004073\n1982-11-15,990.990;1039.28;1065.49,1011.21428571429;1060.48979591837;1087.23469387755\n1982-12-15,990.250;1046.54;1070.55,1014.60040983607;1072.27459016393;1096.875\n1983-01-15,1027.04;1075.70;1092.35,1050.14314928425;1099.89775051125;1116.92229038855\n1983-02-15,1059.79;1112.16;1121.81,1082.52298263534;1136.01634320735;1145.873340143\n1983-03-15,1114.45;1130.03;1145.90,1138.35546475996;1154.26966292135;1170.48008171604\n1983-04-15,1113.49;1226.20;1226.20,1129.30020283976;1243.61054766734;1243.61054766734\n1983-05-15,1190.02;1199.98;1232.59,1199.61693548387;1209.65725806452;1242.53024193548\n1983-06-15,1185.50;1221.96;1248.30,1191.45728643216;1228.10050251256;1254.57286432161\n1983-07-15,1189.90;1199.22;1243.69,1191.09109109109;1200.42042042042;1244.93493493493\n1983-08-15,1163.06;1216.16;1216.16,1160.73852295409;1213.73253493014;1213.73253493014\n1983-09-15,1206.81;1233.13;1260.77,1198.42105263158;1224.55809334657;1252.00595829196\n1983-10-15,1223.48;1225.20;1284.65,1211.36633663366;1213.06930693069;1271.93069306931\n1983-11-15,1214.84;1276.02;1287.19,1200.4347826087;1260.88932806324;1271.92687747036\n1983-12-15,1236.79;1258.64;1275.10,1220.91806515301;1242.48766041461;1258.73642645607\n1984-01-15,1220.58;1220.58;1286.64,1197.82139352306;1197.82139352306;1262.64965652601\n1984-02-15,1134.21;1154.63;1213.88,1107.626953125;1127.568359375;1185.4296875\n1984-03-15,1139.76;1164.89;1184.36,1110.87719298246;1135.37037037037;1154.3469785575\n1984-04-15,1130.55;1170.75;1175.25,1096.55674102813;1135.54801163919;1139.91270611057\n1984-05-15,1101.24;1104.85;1186.56,1065.02901353965;1068.52030947776;1147.54352030948\n1984-06-15,1086.90;1132.40;1133.84,1048.11957569913;1091.99614271938;1093.38476374156\n1984-07-15,1086.57;1115.28;1134.28,1043.77521613833;1071.35446685879;1089.60614793468\n1984-08-15,1134.61;1224.38;1239.73,1085.75119617225;1171.65550239234;1186.34449760766\n1984-09-15,1197.99;1206.71;1237.52,1140.94285714286;1149.24761904762;1178.59047619048\n1984-10-15,1175.13;1207.38;1225.93,1115.98290598291;1146.60968660969;1164.22602089269\n1984-11-15,1185.29;1188.94;1244.15,1125.63152896486;1129.09781576448;1181.5289648623\n1984-12-15,1163.21;1211.57;1211.57,1104.6628679962;1150.58879392213;1150.58879392213\n1985-01-15,1184.96;1286.77;1292.62,1123.18483412322;1219.68720379147;1225.23222748815\n1985-02-15,1275.84;1284.01;1297.92,1203.62264150943;1211.33018867925;1224.45283018868\n1985-03-15,1247.35;1266.78;1299.36,1172.32142857143;1190.58270676692;1221.2030075188\n1985-04-15,1252.98;1258.06;1284.78,1172.10477081384;1176.85687558466;1201.85219831618\n1985-05-15,1242.05;1315.41;1315.41,1157.54892823858;1225.91798695247;1225.91798695247\n1985-06-15,1290.10;1335.46;1335.46,1198.97769516729;1241.13382899628;1241.13382899628\n1985-07-15,1321.91;1347.45;1359.54,1226.26159554731;1249.95361781076;1261.16883116883\n1985-08-15,1312.50;1334.01;1355.62,1215.27777777778;1235.19444444444;1255.2037037037\n1985-09-15,1297.94;1328.63;1339.27,1198.46722068329;1226.80517082179;1236.6297322253\n1985-10-15,1324.37;1374.31;1375.57,1218.37166513339;1264.3146274149;1265.47378104876\n1985-11-15,1389.68;1472.13;1475.69,1274.93577981651;1350.57798165138;1353.84403669725\n1985-12-15,1457.91;1546.67;1553.10,1333.86093321135;1415.06861848124;1420.95150960659\n1986-01-15,1502.29;1570.99;1570.99,1370.70255474453;1433.38503649635;1433.38503649635\n1986-02-15,1593.12;1709.06;1713.99,1457.56633119854;1563.64135407136;1568.15187557182\n1986-03-15,1686.42;1818.61;1821.72,1550.01838235294;1671.51654411765;1674.375\n1986-04-15,1735.51;1783.98;1855.90,1598.07550644567;1642.70718232044;1708.93186003683\n1986-05-15,1758.18;1876.71;1882.35,1614.49035812672;1723.33333333333;1728.51239669421\n1986-06-15,1837.19;1892.72;1892.72,1677.79908675799;1728.51141552511;1728.51141552511\n1986-07-15,1766.87;1775.31;1909.03,1613.5799086758;1621.28767123288;1743.40639269406\n1986-08-15,1763.64;1898.34;1904.53,1607.69371011851;1730.48313582498;1736.1257976299\n1986-09-15,1755.20;1767.58;1919.71,1592.74047186933;1603.97459165154;1742.02359346642\n1986-10-15,1774.18;1877.71;1878.37,1608.50407978241;1702.36627379873;1702.96464188577\n1986-11-15,1817.21;1914.23;1916.76,1646.02355072464;1733.90398550725;1736.19565217391\n1986-12-15,1895.95;1895.95;1955.57,1715.79185520362;1715.79185520362;1769.74660633484\n1987-01-15,1927.31;2158.04;2163.39,1733.19244604317;1940.68345323741;1945.49460431655\n1987-02-15,2158.04;2223.99;2244.09,1933.72759856631;1992.82258064516;2010.83333333333\n1987-03-15,2220.47;2304.69;2372.59,1980.79393398751;2055.92328278323;2116.49420160571\n1987-04-15,2230.54;2286.36;2405.54,1979.18367346939;2028.71339840284;2134.46317657498\n1987-05-15,2215.87;2291.57;2342.19,1959.21308576481;2026.14500442087;2070.90185676393\n1987-06-15,2278.22;2418.53;2451.05,2007.2422907489;2130.86343612335;2159.5154185022\n1987-07-15,2409.76;2572.07;2572.07,2117.539543058;2260.16695957821;2260.16695957821\n1987-08-15,2546.72;2662.95;2722.42,2226.15384615385;2327.7534965035;2379.73776223776\n1987-09-15,2492.82;2596.28;2613.04,2167.66956521739;2257.6347826087;2272.20869565217\n1987-10-15,1738.74;1993.53;2640.99,1508.01387684302;1728.99392888118;2290.53772766696\n1987-11-15,1833.55;1833.55;2014.09,1588.86481802426;1588.86481802426;1745.31195840555\n1987-12-15,1766.74;1938.83;2005.64,1530.9705372617;1680.09532062392;1737.98960138648\n1988-01-15,1879.14;1958.22;2051.89,1624.14866032844;1692.49783923941;1773.45721694036\n1988-02-15,1895.72;2071.62;2071.62,1634.24137931034;1785.87931034483;1785.87931034483\n1988-03-15,1978.12;1988.06;2087.37,1697.95708154506;1706.48927038627;1791.7339055794\n1988-04-15,1980.60;2032.33;2110.08,1691.37489325363;1735.55081127242;1801.94705380017\n1988-05-15,1941.48;2031.12;2058.36,1652.32340425532;1728.61276595745;1751.79574468085\n1988-06-15,2052.45;2141.71;2152.20,1739.36440677966;1815.00847457627;1823.89830508475\n1988-07-15,2053.70;2128.73;2158.61,1733.08016877637;1796.39662447257;1821.61181434599\n1988-08-15,1989.33;2031.65;2134.07,1671.70588235294;1707.26890756303;1793.33613445378\n1988-09-15,2002.31;2112.91;2119.31,1671.37729549249;1763.69782971619;1769.04006677796\n1988-10-15,2102.06;2148.65;2183.50,1748.80199667221;1787.56239600666;1816.55574043261\n1988-11-15,2038.58;2114.51;2170.34,1694.58021612635;1757.69742310889;1804.106400665\n1988-12-15,2092.28;2168.57;2182.68,1736.33195020747;1799.64315352697;1811.35269709544\n1989-01-15,2144.64;2342.32;2342.32,1770.96614368291;1934.20313790256;1934.20313790256\n1989-02-15,2245.54;2258.39;2347.14,1846.66118421053;1857.22861842105;1930.21381578947\n1989-03-15,2243.04;2293.62;2340.71,1834.04742436631;1875.40474243663;1913.90842191333\n1989-04-15,2291.97;2418.80;2418.99,1861.87652315191;1964.90658001625;1965.06092607636\n1989-05-15,2371.33;2480.15;2502.02,1915.45234248788;2003.352180937;2021.01777059774\n1989-06-15,2440.06;2440.06;2531.87,1966.20467365028;1966.20467365028;2040.18533440774\n1989-07-15,2452.77;2660.66;2660.66,1971.68006430868;2138.79421221865;2138.79421221865\n1989-08-15,2641.12;2737.27;2743.36,2119.67897271268;2196.84590690209;2201.73354735152\n1989-09-15,2659.19;2692.82;2752.09,2127.352;2154.256;2201.672\n1989-10-15,2569.26;2645.08;2791.41,2045.58917197452;2105.95541401274;2222.4601910828\n1989-11-15,2582.17;2706.27;2706.27,2050.96902303415;2149.53931691819;2149.53931691819\n1989-12-15,2687.93;2753.20;2761.09,2131.58604282316;2183.34655035686;2189.60348929421\n1990-01-15,2543.24;2590.54;2810.15,1996.26373626374;2033.39089481947;2205.76923076923\n1990-02-15,2564.19;2627.25;2649.55,2003.2734375;2052.5390625;2069.9609375\n1990-03-15,2635.59;2707.21;2755.63,2047.85547785548;2103.50427350427;2141.12665112665\n1990-04-15,2645.05;2656.76;2765.77,2052.01706749418;2061.1016291699;2145.67106283941\n1990-05-15,2668.92;2876.66;2878.56,2065.72755417957;2226.51702786378;2227.98761609907\n1990-06-15,2842.33;2880.69;2935.89,2188.09083910701;2217.62124711316;2260.11547344111\n1990-07-15,2879.21;2905.20;2999.75,2207.98312883436;2227.91411042945;2300.4217791411\n1990-08-15,2483.42;2614.36;2899.26,1887.09726443769;1986.59574468085;2203.08510638298\n1990-09-15,2427.48;2452.48;2628.22,1829.29917106255;1848.13865862849;1980.572720422\n1990-10-15,2365.10;2442.33;2523.76,1771.61048689139;1829.4606741573;1890.45692883895\n1990-11-15,2440.84;2559.65;2565.35,1824.24514200299;1913.04185351271;1917.3019431988\n1990-12-15,2565.59;2633.66;2637.13,1917.48131539611;1968.355754858;1970.94917787743\n1991-01-15,2470.30;2736.39;2736.39,1835.2897473997;2032.97919762259;2032.97919762259\n1991-02-15,2730.69;2882.18;2934.65,2025.73442136499;2138.11572700297;2177.04005934718\n1991-03-15,2855.45;2913.86;2973.27,2115.14814814815;2158.41481481481;2202.42222222222\n1991-04-15,2873.02;2887.87;3004.46,2125.01479289941;2135.99852071006;2222.23372781065\n1991-05-15,2865.38;3027.50;3027.50,2113.11209439528;2232.66961651917;2232.66961651917\n1991-06-15,2906.75;2906.75;3035.33,2137.31617647059;2137.31617647059;2231.86029411765\n1991-07-15,2932.47;3024.82;3024.82,2153.06167400881;2220.86637298091;2220.86637298091\n1991-08-15,2898.03;3043.60;3055.23,2121.54465592972;2228.11127379209;2236.62518301611\n1991-09-15,2982.56;3016.77;3029.07,2173.87755102041;2198.81195335277;2207.77696793003\n1991-10-15,2942.75;3069.10;3077.15,2141.73944687045;2233.69723435226;2239.55604075691\n1991-11-15,2894.68;2894.68;3065.30,2100.63860667634;2100.63860667634;2224.4557329463\n1991-12-15,2863.82;3168.83;3168.83,2076.7367657723;2297.91878172589;2297.91878172589\n1992-01-15,3172.41;3223.39;3272.14,2297.18320057929;2334.09847936278;2369.39898624185\n1992-02-15,3224.73;3267.67;3283.32,2326.64502164502;2357.62626262626;2368.91774891775\n1992-03-15,3208.63;3235.47;3290.25,2303.39554917444;2322.66331658291;2361.98851399856\n1992-04-15,3181.35;3359.12;3366.50,2280.5376344086;2407.97132616487;2413.26164874552\n1992-05-15,3336.09;3396.88;3398.43,2388.03865425913;2431.5533285612;2432.66284896206\n1992-06-15,3274.12;3318.52;3413.21,2335.3209700428;2366.99001426534;2434.52924393723\n1992-07-15,3277.61;3393.78;3393.78,2332.81850533808;2415.50177935943;2415.50177935943\n1992-08-15,3228.17;3257.35;3395.40,2291.1071682044;2311.81689141235;2409.79418026969\n1992-09-15,3250.32;3271.66;3376.22,2300.29723991507;2315.39985845718;2389.39844302902\n1992-10-15,3136.58;3226.28;3254.37,2211.97461212976;2275.23272214386;2295.04231311707\n1992-11-15,3193.32;3305.16;3305.16,2248.81690140845;2327.57746478873;2327.57746478873\n1992-12-15,3255.18;3301.11;3333.26,2293.99577167019;2326.36363636364;2349.02043692741\n1993-01-15,3241.95;3310.03;3310.03,2273.4572230014;2321.19915848527;2321.19915848527\n1993-02-15,3302.19;3370.81;3442.14,2307.61006289308;2355.56254367575;2405.40880503145\n1993-03-15,3355.41;3435.11;3478.34,2336.6364902507;2392.13788300836;2422.24233983287\n1993-04-15,3370.81;3427.55;3478.61,2340.84027777778;2380.24305555556;2415.70138888889\n1993-05-15,3437.19;3527.43;3554.83,2383.62690707351;2446.20665742025;2465.2080443828\n1993-06-15,3466.81;3516.08;3553.45,2400.8379501385;2434.95844875346;2460.8379501385\n1993-07-15,3449.93;3539.47;3567.70,2389.14819944598;2451.15650969529;2470.70637119114\n1993-08-15,3548.97;3651.25;3652.09,2450.94613259668;2521.58149171271;2522.16160220994\n1993-09-15,3537.24;3555.12;3645.10,2437.79462439697;2450.11716057891;2512.12956581668\n1993-10-15,3577.76;3680.59;3687.86,2455.56623198353;2526.14275909403;2531.13246396706\n1993-11-15,3624.98;3683.95;3710.77,2486.26886145405;2526.7146776406;2545.109739369\n1993-12-15,3697.08;3754.09;3794.33,2535.72016460905;2574.82167352538;2602.42112482853\n1994-01-15,3756.60;3978.36;3978.36,2569.49384404925;2721.17647058824;2721.17647058824\n1994-02-15,3832.02;3832.02;3975.54,2612.1472392638;2612.1472392638;2709.97955010225\n1994-03-15,3626.75;3635.96;3895.65,2463.82472826087;2470.08152173913;2646.50135869565\n1994-04-15,3593.35;3681.69;3705.78,2437.82225237449;2497.75440976934;2514.09769335142\n1994-05-15,3629.04;3758.37;3766.35,2460.36610169491;2548.04745762712;2553.45762711864\n1994-06-15,3624.96;3624.96;3814.83,2449.2972972973;2449.2972972973;2577.58783783784\n1994-07-15,3646.65;3764.50;3764.50,2457.31132075472;2536.72506738544;2536.72506738544\n1994-08-15,3747.02;3913.42;3917.30,2514.77852348993;2626.45637583893;2629.06040268456\n1994-09-15,3831.75;3843.19;3953.88,2564.75903614458;2572.41633199465;2646.50602409639\n1994-10-15,3775.56;3908.12;3936.04,2525.45819397993;2614.127090301;2632.80267558528\n1994-11-15,3674.63;3739.23;3863.37,2454.66265865063;2497.81563126253;2580.74148296593\n1994-12-15,3685.73;3834.44;3861.69,2462.07748830995;2561.41616566466;2579.61923847695\n1995-01-15,3832.08;3843.86;3932.34,2549.62075848303;2557.45841650033;2616.32734530938\n1995-02-15,3847.56;4011.05;4011.74,2549.74155069583;2658.08482438701;2658.54208084824\n1995-03-15,3962.63;4157.69;4172.56,2617.3249669749;2746.16248348745;2755.98414795244\n1995-04-15,4168.41;4321.27;4321.27,2744.18038183015;2844.81237656353;2844.81237656353\n1995-05-15,4316.08;4465.14;4465.14,2835.7950065703;2933.73193166886;2933.73193166886\n1995-06-15,4423.99;4556.10;4589.64,2900.97704918033;2987.60655737705;3009.6\n1995-07-15,4585.15;4708.47;4736.29,3006.65573770492;3087.52131147541;3105.76393442623\n1995-08-15,4580.62;4610.56;4701.42,2995.8273381295;3015.40876389797;3074.83322432963\n1995-09-15,4647.54;4789.08;4801.80,3033.64229765013;3126.03133159269;3134.33420365535\n1995-10-15,4703.82;4755.48;4802.45,3060.39037085231;3094.00130123617;3124.56083279115\n1995-11-15,4766.68;5074.49;5105.56,3103.30729166667;3303.70442708333;3323.93229166667\n1995-12-15,5059.32;5117.12;5216.47,3295.97394136808;3333.62866449511;3398.35179153094\n1996-01-15,5032.94;5395.30;5395.30,3259.67616580311;3494.36528497409;3494.36528497409\n1996-02-15,5373.99;5485.62;5630.49,3469.32859909619;3541.39444803099;3634.91930277598\n1996-03-15,5470.45;5587.14;5683.60,3513.45536287733;3588.40077071291;3650.35324341683\n1996-04-15,5485.98;5569.08;5689.74,3509.90403071017;3563.07101727447;3640.26871401152\n1996-05-15,5420.95;5643.18;5778.00,3461.65389527459;3603.56321839081;3689.65517241379\n1996-06-15,5624.71;5654.63;5719.27,3589.4767070836;3608.5705169113;3649.82131461391\n1996-07-15,5346.55;5528.91;5729.98,3405.44585987261;3521.59872611465;3649.66878980892\n1996-08-15,5594.75;5616.21;5733.47,3556.73871582962;3570.38143674507;3644.92689129053\n1996-09-15,5606.96;5882.17;5894.74,3553.20659062104;3727.61089987326;3735.57667934094\n1996-10-15,5904.90;6029.38;6094.23,3730.1958307012;3808.83133291219;3849.79785217941\n1996-11-15,6021.93;6521.70;6547.79,3796.92938209332;4112.04287515763;4128.49306431274\n1996-12-15,6268.35;6448.27;6560.91,3952.30138713745;4065.74401008827;4136.76544766709\n1997-01-15,6442.49;6813.09;6883.90,4049.33375235701;4282.26901319925;4326.77561282212\n1997-02-15,6746.90;6877.74;7067.46,4227.38095238095;4309.36090225564;4428.23308270677\n1997-03-15,6583.48;6583.48;7085.16,4114.675;4114.675;4428.225\n1997-04-15,6391.69;7008.99;7008.99,3989.81897627965;4375.14981273408;4375.14981273408\n1997-05-15,6976.48;7331.04;7383.41,4357.57651467833;4579.03810118676;4611.74890693317\n1997-06-15,7269.66;7672.79;7796.51,4535.0343106675;4786.5190268247;4863.69931378665\n1997-07-15,7722.33;8222.61;8254.89,4811.42056074766;5123.1214953271;5143.23364485981\n1997-08-15,7622.42;7622.42;8259.31,4740.31094527363;4740.31094527363;5136.3868159204\n1997-09-15,7660.98;7945.26;7996.83,4752.46898263027;4928.82133995037;4960.81265508685\n1997-10-15,7161.15;7442.08;8178.31,4431.4047029703;4605.24752475248;5060.8353960396\n1997-11-15,7401.32;7823.13;7881.07,4582.86068111455;4844.04334365325;4879.91950464396\n1997-12-15,7660.13;7908.25;8149.13,4748.99566026038;4902.82083075015;5052.15747055177\n1998-01-15,7580.42;7906.50;7978.99,4690.85396039604;4892.63613861386;4937.49381188119\n1998-02-15,8107.78;8545.72;8545.72,5007.89376158122;5278.39407041383;5278.39407041383\n1998-03-15,8444.33;8799.81;8906.43,5206.12207151665;5425.28360049322;5491.01726263872\n1998-04-15,8868.32;9063.37;9184.94,5457.42769230769;5577.45846153846;5652.27076923077\n1998-05-15,8899.95;8899.95;9211.84,5466.79975429975;5466.79975429975;5658.37837837838\n1998-06-15,8627.93;8952.02;9069.60,5293.20858895706;5492.03680981595;5564.1717791411\n1998-07-15,8883.29;8883.29;9337.97,5443.19240196078;5443.19240196078;5721.79534313726\n1998-08-15,7539.07;7539.07;8786.74,4613.87392900857;4613.87392900857;5377.44186046512\n1998-09-15,7615.54;7842.62;8154.41,4654.97555012225;4793.77750611247;4984.35819070905\n1998-10-15,7632.53;8592.10;8592.10,4653.98170731707;5239.08536585366;5239.08536585366\n1998-11-15,8706.15;9116.55;9374.27,5308.62804878049;5558.87195121951;5716.01829268293\n1998-12-15,8695.60;9181.43;9320.98,5305.43014032947;5601.84868822453;5686.99206833435\n1999-01-15,9120.67;9358.83;9643.32,5551.22945830797;5696.18381010347;5869.33657942788\n1999-02-15,9133.03;9306.58;9552.68,5551.99392097264;5657.49544072948;5807.10030395137\n1999-03-15,9275.88;9786.16;10006.8,5621.74545454545;5931.00606060606;6064.72727272727\n1999-04-15,9832.51;10789.0;10878.4,5916.07099879663;6491.57641395909;6545.3670276775\n1999-05-15,10466.9;10559.7;11107.2,6297.77376654633;6353.61010830325;6683.03249097473\n1999-06-15,10490.5;10970.8;10970.8,6311.97352587244;6600.96269554753;6600.96269554753\n1999-07-15,10655.2;10655.2;11209.8,6391.84163167367;6391.84163167367;6724.5350929814\n1999-08-15,10646.0;10829.3;11326.0,6371.03530819868;6480.73010173549;6777.97725912627\n1999-09-15,10213.5;10337.0;11079.4,6083.08516974389;6156.64085765336;6598.8088147707\n1999-10-15,10019.7;10729.9;10729.9,5957.01545778835;6379.25089179548;6379.25089179548\n1999-11-15,10581.8;10877.8;11089.5,6287.46286393345;6463.33927510398;6589.12655971479\n1999-12-15,10998.4;11497.1;11497.1,6534.99702911468;6831.31313131313;6831.31313131313\n2000-01-15,10738.9;10940.5;11723.0,6361.90758293839;6481.33886255924;6944.90521327014\n2000-02-15,9862.12;10128.3;11041.1,5808.0800942285;5964.84098939929;6502.41460541814\n2000-03-15,9796.03;10921.9;11119.9,5721.98014018692;6379.61448598131;6495.26869158879\n2000-04-15,10305.8;10733.9;11287.1,6016.22883829539;6266.14127262113;6589.08347927612\n2000-05-15,10299.2;10522.3;10934.6,6005.36443148688;6135.45189504373;6375.86005830904\n2000-06-15,10376.1;10447.9;10815.3,6018.61948955917;6060.26682134571;6273.37587006961\n2000-07-15,10481.5;10522.0;10843.9,6065.68287037037;6089.12037037037;6275.40509259259\n2000-08-15,10607.0;11215.1;11252.8,6138.31018518518;6490.21990740741;6512.03703703704\n2000-09-15,10628.4;10650.9;11310.6,6118.82556131261;6131.77892918826;6511.57167530225\n2000-10-15,9975.02;10971.1;10971.1,5732.77011494253;6305.22988505747;6305.22988505747\n2000-11-15,10399.3;10414.5;10977.2,5973.1763354394;5981.90695002872;6305.11200459506\n2000-12-15,10318.9;10788.0;10898.7,5930.40229885057;6200;6263.62068965517\n2001-01-15,10525.4;10887.4;10945.8,6011.0793832096;6217.81838949172;6251.17075956596\n2001-02-15,10441.9;10495.3;10983.6,5939.64732650739;5970.02275312855;6247.78156996587\n2001-03-15,9389.48;9878.78;10858.3,5328.876276958;5606.57207718502;6162.48581157775\n2001-04-15,9485.71;10735.0;10810.1,5362.18767665348;6068.40022611645;6110.85358959864\n2001-05-15,10796.7;10911.9;11337.9,6075.80191333709;6140.63027574564;6380.36015756894\n2001-06-15,10434.8;10502.4;11175.8,5862.24719101124;5900.22471910112;6278.5393258427\n2001-07-15,10175.6;10522.8;10610.0,5732.7323943662;5928.33802816901;5977.46478873239\n2001-08-15,9919.58;9949.75;10551.2,5588.49577464789;5605.49295774648;5944.33802816902\n2001-09-15,8235.81;8847.56;10033.3,4619.07459338194;4962.17610768368;5627.20134604599\n2001-10-15,8836.83;9075.14;9545.17,4972.89251547552;5107.0005627462;5371.50815981992\n2001-11-15,9263.90;9851.56;9982.75,5222.04058624577;5553.30326944758;5627.25479143179\n2001-12-15,9763.96;10021.6;10137.0,5525.727221279;5671.53367289191;5736.84210526316\n2002-01-15,9618.24;9920.00;10259.7,5430.96555618295;5601.35516657256;5793.16770186335\n2002-02-15,9625.44;10106.1;10145.7,5413.63329583802;5683.97075365579;5706.2429696288\n2002-03-15,10281.7;10403.9;10635.3,5750.39149888143;5818.73601789709;5948.15436241611\n2002-04-15,9819.87;9946.22;10381.7,5461.55172413793;5531.82424916574;5774.02669632926\n2002-05-15,9808.04;9925.25;10353.1,5454.97219132369;5520.16129032258;5758.12013348165\n2002-06-15,9120.11;9243.26;9796.80,5069.54419121734;5137.99888827126;5445.69205113952\n2002-07-15,7702.34;8736.59;9379.50,4276.70183231538;4850.96612992782;5207.94003331483\n2002-08-15,8043.63;8663.50;9053.64,4451.37244050913;4794.41062534588;5010.31543995573\n2002-09-15,7591.93;7591.93;8602.61,4194.4364640884;4194.4364640884;4752.82320441989\n2002-10-15,7286.27;8397.03;8538.24,4018.90237175951;4631.56646442361;4709.45394373966\n2002-11-15,8358.95;8896.09;8931.68,4610.56260341975;4906.83397683398;4926.46442360728\n2002-12-15,8303.78;8341.63;8862.57,4590.25981205086;4611.18297401879;4899.15422885572\n2003-01-15,7945.13;8053.81;8842.62,4372.66373142543;4432.47660979637;4866.60429279031\n2003-02-15,7749.87;7891.08;8109.82,4232.58874931731;4309.71054068815;4429.17531403605\n2003-03-15,7524.06;7992.13;8521.97,4084.72312703583;4338.83279044517;4626.4766558089\n2003-04-15,8069.86;8480.09;8515.66,4390.56583242655;4613.75952121872;4633.11207834603\n2003-05-15,8454.25;8850.26;8850.26,4607.22070844687;4823.02997275204;4823.02997275204\n2003-06-15,8897.81;8985.44;9323.02,4843.66358192706;4891.36635819271;5075.13336962439\n2003-07-15,9036.04;9233.80;9284.57,4913.56171832518;5021.09842305601;5048.70581837955\n2003-08-15,9036.32;9415.82;9428.90,4895.0812567714;5100.66088840737;5107.74647887324\n2003-09-15,9275.06;9275.06;9659.13,5008.13174946004;5008.13174946004;5215.51295896328\n2003-10-15,9469.20;9801.12;9812.98,5118.48648648649;5297.9027027027;5304.31351351351\n2003-11-15,9619.42;9782.46;9858.46,5213.77777777778;5302.14634146341;5343.33875338753\n2003-12-15,9853.64;10453.9;10453.9,5346.52197504069;5672.21920781335;5672.21920781335\n2004-01-15,10409.9;10488.1;10702.5,5620.89632829374;5663.12095032397;5778.88768898488\n2004-02-15,10470.7;10583.9;10737.7,5623.3619763695;5684.15682062299;5766.75617615467\n2004-03-15,10048.2;10357.7;10678.1,5361.89967982924;5527.05442902882;5698.02561366062\n2004-04-15,10225.6;10225.6;10570.8,5439.14893617021;5439.14893617021;5622.76595744681\n2004-05-15,9906.91;10188.5;10317.2,5238.97937599154;5387.89000528821;5455.94923320994\n2004-06-15,10195.9;10435.5;10479.6,5374.7496046389;5501.05429625725;5524.30152872957\n2004-07-15,9961.92;10139.7;10334.2,5259.72544878564;5353.59028511088;5456.28299894403\n2004-08-15,9814.59;10173.9;10195.0,5179.20316622691;5368.81266490765;5379.94722955145\n2004-09-15,9988.54;10080.3;10341.2,5259.89468141127;5308.21484992101;5445.60294892048\n2004-10-15,9749.99;10027.5;10239.9,5107.38082765846;5252.75013095862;5364.01257202724\n2004-11-15,10035.7;10428.0;10572.6,5254.29319371728;5459.68586387435;5535.39267015707\n2004-12-15,10440.6;10783.0;10854.5,5486.38991066737;5666.31634261692;5703.88859695218\n2005-01-15,10368.6;10489.9;10729.4,5437.1263765076;5500.73413738857;5626.32406921867\n2005-02-15,10551.9;10766.2;10841.6,5501.51199165798;5613.24296141814;5652.55474452555\n2005-03-15,10405.7;10503.8;10940.6,5383.1867563373;5433.93688566994;5659.90688049664\n2005-04-15,10012.4;10192.5;10546.3,5145.11819116136;5237.66700924974;5419.47584789311\n2005-05-15,10140.1;10467.5;10542.6,5216.10082304527;5384.51646090535;5423.14814814815\n2005-06-15,10275.0;10275.0;10623.1,5282.7763496144;5282.7763496144;5461.74807197943\n2005-07-15,10270.7;10640.9;10705.6,5256.24360286592;5445.7011258956;5478.81269191402\n2005-08-15,10397.3;10481.6;10697.6,5293.94093686354;5336.86354378819;5446.84317718941\n2005-09-15,10378.0;10568.7;10682.9,5220.32193158954;5316.24748490946;5373.6921529175\n2005-10-15,10215.2;10440.1;10535.5,5128.1124497992;5241.0140562249;5288.90562248996\n2005-11-15,10406.8;10805.9;10931.6,5266.5991902834;5468.57287449393;5532.18623481781\n2005-12-15,10717.5;10717.5;10912.6,5445.88414634146;5445.88414634146;5545.02032520325\n2006-01-15,10667.4;10864.9;11043.4,5379.42511346445;5479.02168431669;5569.03681290973\n2006-02-15,10749.8;10993.4;11137.2,5410.06542526422;5532.66230498239;5605.03271263211\n2006-03-15,10958.6;11109.3;11317.4,5484.78478478478;5560.21021021021;5664.36436436436\n2006-04-15,11073.8;11367.1;11382.5,5495.68238213399;5641.24069478908;5648.88337468983\n2006-05-15,11094.4;11168.3;11642.7,5478.71604938272;5515.20987654321;5749.48148148148\n2006-06-15,10706.1;11150.2;11260.3,5276.54016757023;5495.41646131099;5549.67964514539\n2006-07-15,10739.4;11185.7;11228.0,5277.34643734644;5496.65847665848;5517.44471744472\n2006-08-15,11076.2;11381.2;11382.9,5432.17263364394;5581.75576262874;5582.58950465915\n2006-09-15,11331.4;11679.1;11718.5,5584.7215377033;5756.08674223756;5775.50517496304\n2006-10-15,11670.4;12080.7;12163.7,5783.15163528246;5986.47175421209;6027.60158572844\n2006-11-15,11986.0;12221.9;12342.6,5948.38709677419;6065.45905707196;6125.35980148883\n2006-12-15,12194.1;12463.2;12510.6,6042.66600594648;6176.01585728444;6199.50445986125\n2007-01-15,12398.0;12621.7;12621.8,6125.00988064185;6235.52485969489;6235.57426290412\n2007-02-15,12216.2;12268.6;12786.6,6003.07618219254;6028.82569447516;6283.37239986437\n2007-03-15,12050.4;12354.4;12481.0,5868.16782889867;6016.20631890607;6077.85655849468\n2007-04-15,12382.3;13062.9;13120.9,5990.87504717301;6320.16682310364;6348.22871408804\n2007-05-15,13136.1;13627.6;13633.1,6316.9815675959;6553.33759719931;6555.9824764726\n2007-06-15,13266.7;13408.6;13676.3,6367.44547688527;6435.55137459684;6564.03586238673\n2007-07-15,13212.0;13212.0;14000.4,6342.8052943125;6342.8052943125;6721.29967018565\n2007-08-15,12845.8;13357.7;13657.9,6178.3307762232;6424.53479032499;6568.91932838585\n2007-09-15,13113.4;13895.6;13912.9,6289.70214398772;6664.87601323804;6673.17377332246\n2007-10-15,13522.0;13930.0;14164.5,6471.83826626335;6667.11337443045;6779.34870008041\n2007-11-15,12743.4;13371.7;13660.9,6063.17532365578;6362.11383738468;6499.71214738054\n2007-12-15,13167.2;13264.8;13727.0,6269.02054885829;6315.48877335314;6535.54628730313\n2008-01-15,11971.2;12650.4;13056.7,5671.40420693576;5993.17794201251;6185.66420314573\n2008-02-15,12182.1;12266.4;12743.2,5754.60690717218;5794.42872461536;6019.66054616827\n2008-03-15,11740.2;12262.9;12548.6,5498.20164100259;5742.99389307257;5876.79367577086\n2008-04-15,12302.1;12820.1;12891.9,5726.62145114815;5967.75019434604;6001.17305875069\n2008-05-15,12479.6;12638.3;13058.2,5760.73710255179;5833.99497765796;6027.82599062004\n2008-06-15,11346.5;11350.0;12604.5,5185.430614903;5187.03013961566;5760.34549733793\n2008-07-15,10962.5;11378.0;11632.4,4983.77007146624;5172.66461784656;5288.31990689385\n2008-08-15,11284.2;11543.6;11782.4,5150.58013748026;5268.98113069753;5377.97942360534\n2008-09-15,10365.5;10850.7;11532.9,4737.79955481002;4959.57181316647;5271.387630666\n2008-10-15,8175.77;9325.01;10831.1,3775.06429702687;4305.71216171914;5001.13125828243\n2008-11-15,7552.29;8829.04;9625.28,3555.27362598564;4156.30928563022;4531.14275626692\n2008-12-15,8149.09;8776.39;8934.18,3876.31048195293;4174.70080103507;4249.75740624465\n2009-01-15,7949.09;8000.86;9034.69,3764.78973965512;3789.30866758548;4278.94365430064\n2009-02-15,7062.93;7062.93;8280.59,3328.54052678458;3328.54052678458;3902.38603535461\n2009-03-15,6547.05;7608.92;7924.56,3077.93746385908;3577.15000305582;3725.54052719913\n2009-04-15,7761.60;8168.12;8185.73,3639.84243106359;3830.48208591259;3838.74038641906\n2009-05-15,8212.41;8500.33;8574.65,3840.15879844381;3974.79144845129;4009.54380517732\n2009-06-15,8299.86;8447.00;8799.26,3847.99692155054;3916.21424895569;4079.52970193748\n2009-07-15,8146.52;9171.61;9171.61,3782.90326025883;4258.91219451036;4258.91219451036\n2009-08-15,9135.34;9496.28;9580.63,4232.5768877934;4399.8072592826;4438.88821965029\n2009-09-15,9280.67;9712.28;9829.87,4297.2232125907;4497.07133894216;4551.51896800004\n2009-10-15,9487.67;9712.73;10092.2,4388.84340147194;4492.9525342659;4668.48924723722\n";
+    }
+
+
+    return {
+        data_nolabel: data_nolabel,
+        data: data,
+        NoisyData:NoisyData,
+        data_showzerovalues: data_showzerovalues,
+        data_temp: data_temp,
+        stockData: stockData
+    }
+})
+'use strict';
+
+angular.module('app.graphs').directive('dygraphsNoRollPeriod', function (DygraphsDataDemo) {
+    return {
+        restrict: 'A',
+        compile: function () {
+            return {
+                post: function (scope, element) {
+                    new Dygraph(element[0], DygraphsDataDemo.data_temp, {
+                        customBars: true,
+                        title: 'Daily Temperatures in New York vs. San Francisco',
+                        ylabel: 'Temperature (F)',
+                        legend: 'always',
+                        labelsDivStyles: {
+                            'textAlign': 'right'
+                        },
+                        showRangeSelector: true
+                    });
+                }
+            }
+        }
+    }
+});
+'use strict';
+
+angular.module('app.graphs').directive('dygraphsNoRollTimestamp', function (DygraphsDataDemo) {
+    return {
+        restrict: 'A',
+        compile: function () {
+            return {
+                post: function (scope, element) {
+                    new Dygraph(element[0], DygraphsDataDemo.data_temp, {
+                        rollPeriod : 14,
+                        showRoller : true,
+                        customBars : true,
+                        ylabel : 'Temperature (F)',
+                        legend : 'always',
+                        labelsDivStyles : {
+                            'textAlign' : 'right'
+                        },
+                        showRangeSelector : true,
+                        rangeSelectorHeight : 30,
+                        rangeSelectorPlotStrokeColor : 'yellow',
+                        rangeSelectorPlotFillColor : 'lightyellow'
+                    });
+                }
+            }
         }
     }
 });
@@ -19046,416 +19046,443 @@ angular.module('SmartAdmin.Forms').directive('smartSummernoteEditor', function (
         }
     }
 });
-'use strict';
+"use strict";
 
-angular.module('SmartAdmin.Forms').directive('smartCheckoutForm', function (formsCommon, lazyScript) {
-    return {
-        restrict: 'A',
-        link: function (scope, form) {
-           lazyScript.register('build/vendor.ui.js').then(function(){
 
-               scope.countries = formsCommon.countries;
+angular.module('SmartAdmin.Forms').directive('bootstrapAttributeForm', function(){
 
-               form.validate(angular.extend({
-                    // Rules for form validation
-                    rules : {
-                        fname : {
-                            required : true
-                        },
-                        lname : {
-                            required : true
-                        },
-                        email : {
-                            required : true,
-                            email : true
-                        },
-                        phone : {
-                            required : true
-                        },
-                        country : {
-                            required : true
-                        },
-                        city : {
-                            required : true
-                        },
-                        code : {
-                            required : true,
-                            digits : true
-                        },
-                        address : {
-                            required : true
-                        },
-                        name : {
-                            required : true
-                        },
-                        card : {
-                            required : true,
-                            creditcard : true
-                        },
-                        cvv : {
-                            required : true,
-                            digits : true
-                        },
-                        month : {
-                            required : true
-                        },
-                        year : {
-                            required : true,
-                            digits : true
-                        }
-                    },
-
-                    // Messages for form validation
-                    messages : {
-                        fname : {
-                            required : 'Please enter your first name'
-                        },
-                        lname : {
-                            required : 'Please enter your last name'
-                        },
-                        email : {
-                            required : 'Please enter your email address',
-                            email : 'Please enter a VALID email address'
-                        },
-                        phone : {
-                            required : 'Please enter your phone number'
-                        },
-                        country : {
-                            required : 'Please select your country'
-                        },
-                        city : {
-                            required : 'Please enter your city'
-                        },
-                        code : {
-                            required : 'Please enter code',
-                            digits : 'Digits only please'
-                        },
-                        address : {
-                            required : 'Please enter your full address'
-                        },
-                        name : {
-                            required : 'Please enter name on your card'
-                        },
-                        card : {
-                            required : 'Please enter your card number'
-                        },
-                        cvv : {
-                            required : 'Enter CVV2',
-                            digits : 'Digits only'
-                        },
-                        month : {
-                            required : 'Select month'
-                        },
-                        year : {
-                            required : 'Enter year',
-                            digits : 'Digits only please'
-                        }
-                    }
-                }, formsCommon.validateOptions));
-            });
-        }
-    }
-});
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartCommentForm', function (formsCommon, lazyScript) {
-    return {
-        restrict: 'A',
-        link: function (scope, form) {
-            lazyScript.register('build/vendor.ui.js').then(function(){
-                form.validate(angular.extend({
-                    // Rules for form validation
-                    rules : {
-                        name : {
-                            required : true
-                        },
-                        email : {
-                            required : true,
-                            email : true
-                        },
-                        url : {
-                            url : true
-                        },
-                        comment : {
-                            required : true
-                        }
-                    },
-
-                    // Messages for form validation
-                    messages : {
-                        name : {
-                            required : 'Enter your name',
-                        },
-                        email : {
-                            required : 'Enter your email address',
-                            email : 'Enter a VALID email'
-                        },
-                        url : {
-                            email : 'Enter a VALID url'
-                        },
-                        comment : {
-                            required : 'Please enter your comment'
-                        }
-                    },
-
-                    // Ajax form submition
-                    submitHandler : function() {
-                        form.ajaxSubmit({
-                            success : function() {
-                                form.addClass('submited');
-                            }
-                        });
-                    }
-
-                }, formsCommon.validateOptions));
-            });
-
-        }
-    }
-});
-
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartContactsForm', function (formsCommon, lazyScript) {
-    return {
-        restrict: 'A',
-        link: function (scope, form) {
-            lazyScript.register('build/vendor.ui.js').then(function(){
-                form.validate(angular.extend({
-                    // Rules for form validation
-                    rules : {
-                        name : {
-                            required : true
-                        },
-                        email : {
-                            required : true,
-                            email : true
-                        },
-                        message : {
-                            required : true,
-                            minlength : 10
-                        }
-                    },
-
-                    // Messages for form validation
-                    messages : {
-                        name : {
-                            required : 'Please enter your name'
-                        },
-                        email : {
-                            required : 'Please enter your email address',
-                            email : 'Please enter a VALID email address'
-                        },
-                        message : {
-                            required : 'Please enter your message'
-                        }
-                    },
-
-                    // Ajax form submition
-                    submitHandler : function() {
-                        form.ajaxSubmit({
-                            success : function() {
-                                form.addClass('submited');
-                            }
-                        });
-                    }
-                }, formsCommon.validateOptions));
-            });
-        }
-    }
-});
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartOrderForm', function (formsCommon, lazyScript) {
     return {
         restrict: 'E',
-        link: function (scope, form) {
-            lazyScript.register('build/vendor.ui.js').then(function(){
-                form.validate(angular.extend({
-                    // Rules for form validation
-                    rules : {
-                        name : {
-                            required : true
-                        },
-                        email : {
-                            required : true,
-                            email : true
-                        },
-                        phone : {
-                            required : true
-                        },
-                        interested : {
-                            required : true
-                        },
-                        budget : {
-                            required : true
-                        }
-                    },
+        replace: true,
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-attribute-form.tpl.html',
+        link: function(scope, form){
+            form.bootstrapValidator();
 
-                    // Messages for form validation
-                    messages : {
-                        name : {
-                            required : 'Please enter your name'
-                        },
-                        email : {
-                            required : 'Please enter your email address',
-                            email : 'Please enter a VALID email address'
-                        },
-                        phone : {
-                            required : 'Please enter your phone number'
-                        },
-                        interested : {
-                            required : 'Please select interested service'
-                        },
-                        budget : {
-                            required : 'Please select your budget'
-                        }
-                    },
-
-                }, formsCommon.validateOptions));
-            });
 
         }
+
     }
 });
-'use strict';
+"use strict";
 
-angular.module('SmartAdmin.Forms').directive('smartRegistrationForm', function (formsCommon, lazyScript) {
-    return {
-        restrict: 'A',
-        link: function (scope, form, attributes) {
-            lazyScript.register('build/vendor.ui.js').then(function(){
-                form.validate(angular.extend({
 
-                    // Rules for form validation
-                    rules: {
-                        username: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        password: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20
-                        },
-                        passwordConfirm: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20,
-                            equalTo: '#password'
-                        },
-                        firstname: {
-                            required: true
-                        },
-                        lastname: {
-                            required: true
-                        },
-                        gender: {
-                            required: true
-                        },
-                        terms: {
-                            required: true
-                        }
-                    },
+angular.module('SmartAdmin.Forms').directive('bootstrapButtonGroupForm', function(){
 
-                    // Messages for form validation
-                    messages: {
-                        login: {
-                            required: 'Please enter your login'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        password: {
-                            required: 'Please enter your password'
-                        },
-                        passwordConfirm: {
-                            required: 'Please enter your password one more time',
-                            equalTo: 'Please enter the same password as above'
-                        },
-                        firstname: {
-                            required: 'Please select your first name'
-                        },
-                        lastname: {
-                            required: 'Please select your last name'
-                        },
-                        gender: {
-                            required: 'Please select your gender'
-                        },
-                        terms: {
-                            required: 'You must agree with Terms and Conditions'
-                        }
-                    }
-
-                }, formsCommon.validateOptions));
-            });
-        }
-    }
-});
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartReviewForm', function (formsCommon, lazyScript) {
     return {
         restrict: 'E',
-        link: function (scope, form) {
-            lazyScript.register('build/vendor.ui.js').then(function(){
-
-                form.validate(angular.extend({
-                    // Rules for form validation
-                    rules : {
-                        name : {
-                            required : true
-                        },
-                        email : {
-                            required : true,
-                            email : true
-                        },
-                        review : {
-                            required : true,
-                            minlength : 20
-                        },
-                        quality : {
-                            required : true
-                        },
-                        reliability : {
-                            required : true
-                        },
-                        overall : {
-                            required : true
+        replace: true,
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-button-group-form.tpl.html',
+        link: function(scope, form){
+            form.bootstrapValidator({
+                excluded : ':disabled',
+                feedbackIcons : {
+                    valid : 'glyphicon glyphicon-ok',
+                    invalid : 'glyphicon glyphicon-remove',
+                    validating : 'glyphicon glyphicon-refresh'
+                },
+                fields : {
+                    gender : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The gender is required'
+                            }
                         }
                     },
-
-                    // Messages for form validation
-                    messages : {
-                        name : {
-                            required : 'Please enter your name'
-                        },
-                        email : {
-                            required : 'Please enter your email address',
-                            email : '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
-                        },
-                        review : {
-                            required : 'Please enter your review'
-                        },
-                        quality : {
-                            required : 'Please rate quality of the product'
-                        },
-                        reliability : {
-                            required : 'Please rate reliability of the product'
-                        },
-                        overall : {
-                            required : 'Please rate the product'
+                    'languages[]' : {
+                        validators : {
+                            choice : {
+                                min : 1,
+                                max : 2,
+                                message : 'Please choose 1 - 2 languages you can speak'
+                            }
                         }
                     }
+                }
+            });
 
-                }, formsCommon.validateOptions));
+
+        }
+
+    }
+});
+"use strict";
+
+
+angular.module('SmartAdmin.Forms').directive('bootstrapContactForm', function(){
+
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-contact-form.tpl.html',
+        link: function(scope, form){
+            form.bootstrapValidator({
+                container : '#messages',
+                feedbackIcons : {
+                    valid : 'glyphicon glyphicon-ok',
+                    invalid : 'glyphicon glyphicon-remove',
+                    validating : 'glyphicon glyphicon-refresh'
+                },
+                fields : {
+                    fullName : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The full name is required and cannot be empty'
+                            }
+                        }
+                    },
+                    email : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The email address is required and cannot be empty'
+                            },
+                            emailAddress : {
+                                message : 'The email address is not valid'
+                            }
+                        }
+                    },
+                    title : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The title is required and cannot be empty'
+                            },
+                            stringLength : {
+                                max : 100,
+                                message : 'The title must be less than 100 characters long'
+                            }
+                        }
+                    },
+                    content : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The content is required and cannot be empty'
+                            },
+                            stringLength : {
+                                max : 500,
+                                message : 'The content must be less than 500 characters long'
+                            }
+                        }
+                    }
+                }
+            });
+
+        }
+
+    }
+
+});
+"use strict";
+
+
+angular.module('SmartAdmin.Forms').directive('bootstrapMovieForm', function(){
+
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-movie-form.tpl.html',
+        link: function(scope, form){
+            form.bootstrapValidator({
+                feedbackIcons : {
+                    valid : 'glyphicon glyphicon-ok',
+                    invalid : 'glyphicon glyphicon-remove',
+                    validating : 'glyphicon glyphicon-refresh'
+                },
+                fields : {
+                    title : {
+                        group : '.col-md-8',
+                        validators : {
+                            notEmpty : {
+                                message : 'The title is required'
+                            },
+                            stringLength : {
+                                max : 200,
+                                message : 'The title must be less than 200 characters long'
+                            }
+                        }
+                    },
+                    genre : {
+                        group : '.col-md-4',
+                        validators : {
+                            notEmpty : {
+                                message : 'The genre is required'
+                            }
+                        }
+                    },
+                    director : {
+                        group : '.col-md-4',
+                        validators : {
+                            notEmpty : {
+                                message : 'The director name is required'
+                            },
+                            stringLength : {
+                                max : 80,
+                                message : 'The director name must be less than 80 characters long'
+                            }
+                        }
+                    },
+                    writer : {
+                        group : '.col-md-4',
+                        validators : {
+                            notEmpty : {
+                                message : 'The writer name is required'
+                            },
+                            stringLength : {
+                                max : 80,
+                                message : 'The writer name must be less than 80 characters long'
+                            }
+                        }
+                    },
+                    producer : {
+                        group : '.col-md-4',
+                        validators : {
+                            notEmpty : {
+                                message : 'The producer name is required'
+                            },
+                            stringLength : {
+                                max : 80,
+                                message : 'The producer name must be less than 80 characters long'
+                            }
+                        }
+                    },
+                    website : {
+                        group : '.col-md-6',
+                        validators : {
+                            notEmpty : {
+                                message : 'The website address is required'
+                            },
+                            uri : {
+                                message : 'The website address is not valid'
+                            }
+                        }
+                    },
+                    trailer : {
+                        group : '.col-md-6',
+                        validators : {
+                            notEmpty : {
+                                message : 'The trailer link is required'
+                            },
+                            uri : {
+                                message : 'The trailer link is not valid'
+                            }
+                        }
+                    },
+                    review : {
+                        // The group will be set as default (.form-group)
+                        validators : {
+                            stringLength : {
+                                max : 500,
+                                message : 'The review must be less than 500 characters long'
+                            }
+                        }
+                    },
+                    rating : {
+                        // The group will be set as default (.form-group)
+                        validators : {
+                            notEmpty : {
+                                message : 'The rating is required'
+                            }
+                        }
+                    }
+                }
+            });
+
+        }
+
+    }
+
+});
+"use strict";
+
+
+angular.module('SmartAdmin.Forms').directive('bootstrapProductForm', function(){
+
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-product-form.tpl.html',
+        link: function(scope, form){
+            form.bootstrapValidator({
+                feedbackIcons : {
+                    valid : 'glyphicon glyphicon-ok',
+                    invalid : 'glyphicon glyphicon-remove',
+                    validating : 'glyphicon glyphicon-refresh'
+                },
+                fields : {
+                    price : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The price is required'
+                            },
+                            numeric : {
+                                message : 'The price must be a number'
+                            }
+                        }
+                    },
+                    amount : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The amount is required'
+                            },
+                            numeric : {
+                                message : 'The amount must be a number'
+                            }
+                        }
+                    },
+                    color : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The color is required'
+                            }
+                        }
+                    },
+                    size : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The size is required'
+                            }
+                        }
+                    }
+                }
             });
         }
+
     }
+});
+"use strict";
+
+
+angular.module('SmartAdmin.Forms').directive('bootstrapProfileForm', function(){
+
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-profile-form.tpl.html',
+        link: function(scope, form){
+           form.bootstrapValidator({
+                feedbackIcons : {
+                    valid : 'glyphicon glyphicon-ok',
+                    invalid : 'glyphicon glyphicon-remove',
+                    validating : 'glyphicon glyphicon-refresh'
+                },
+                fields : {
+                    email : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The email address is required'
+                            },
+                            emailAddress : {
+                                message : 'The email address is not valid'
+                            }
+                        }
+                    },
+                    password : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The password is required'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+    }
+
+});
+"use strict";
+
+
+angular.module('SmartAdmin.Forms').directive('bootstrapTogglingForm', function(){
+
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-toggling-form.tpl.html',
+        link: function(scope, form){
+            form.bootstrapValidator({
+                feedbackIcons : {
+                    valid : 'glyphicon glyphicon-ok',
+                    invalid : 'glyphicon glyphicon-remove',
+                    validating : 'glyphicon glyphicon-refresh'
+                },
+                fields : {
+                    firstName : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The first name is required'
+                            }
+                        }
+                    },
+                    lastName : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The last name is required'
+                            }
+                        }
+                    },
+                    company : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The company name is required'
+                            }
+                        }
+                    },
+                    // These fields will be validated when being visible
+                    job : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The job title is required'
+                            }
+                        }
+                    },
+                    department : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The department name is required'
+                            }
+                        }
+                    },
+                    mobilePhone : {
+                        validators : {
+                            notEmpty : {
+                                message : 'The mobile phone number is required'
+                            },
+                            digits : {
+                                message : 'The mobile phone number is not valid'
+                            }
+                        }
+                    },
+                    // These fields will be validated when being visible
+                    homePhone : {
+                        validators : {
+                            digits : {
+                                message : 'The home phone number is not valid'
+                            }
+                        }
+                    },
+                    officePhone : {
+                        validators : {
+                            digits : {
+                                message : 'The office phone number is not valid'
+                            }
+                        }
+                    }
+                }
+            }).find('button[data-toggle]').on('click', function() {
+                var $target = $($(this).attr('data-toggle'));
+                // Show or hide the additional fields
+                // They will or will not be validated based on their visibilities
+                $target.toggle();
+                if (!$target.is(':visible')) {
+                    // Enable the submit buttons in case additional fields are not valid
+                    form.data('bootstrapValidator').disableSubmitButtons(false);
+                }
+            });
+        }
+
+    }
+
+
+
 });
 'use strict';
 
@@ -20183,6 +20210,417 @@ angular.module('SmartAdmin.Forms').directive('smartWizard', function () {
 });
 'use strict';
 
+angular.module('SmartAdmin.Forms').directive('smartCheckoutForm', function (formsCommon, lazyScript) {
+    return {
+        restrict: 'A',
+        link: function (scope, form) {
+           lazyScript.register('build/vendor.ui.js').then(function(){
+
+               scope.countries = formsCommon.countries;
+
+               form.validate(angular.extend({
+                    // Rules for form validation
+                    rules : {
+                        fname : {
+                            required : true
+                        },
+                        lname : {
+                            required : true
+                        },
+                        email : {
+                            required : true,
+                            email : true
+                        },
+                        phone : {
+                            required : true
+                        },
+                        country : {
+                            required : true
+                        },
+                        city : {
+                            required : true
+                        },
+                        code : {
+                            required : true,
+                            digits : true
+                        },
+                        address : {
+                            required : true
+                        },
+                        name : {
+                            required : true
+                        },
+                        card : {
+                            required : true,
+                            creditcard : true
+                        },
+                        cvv : {
+                            required : true,
+                            digits : true
+                        },
+                        month : {
+                            required : true
+                        },
+                        year : {
+                            required : true,
+                            digits : true
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages : {
+                        fname : {
+                            required : 'Please enter your first name'
+                        },
+                        lname : {
+                            required : 'Please enter your last name'
+                        },
+                        email : {
+                            required : 'Please enter your email address',
+                            email : 'Please enter a VALID email address'
+                        },
+                        phone : {
+                            required : 'Please enter your phone number'
+                        },
+                        country : {
+                            required : 'Please select your country'
+                        },
+                        city : {
+                            required : 'Please enter your city'
+                        },
+                        code : {
+                            required : 'Please enter code',
+                            digits : 'Digits only please'
+                        },
+                        address : {
+                            required : 'Please enter your full address'
+                        },
+                        name : {
+                            required : 'Please enter name on your card'
+                        },
+                        card : {
+                            required : 'Please enter your card number'
+                        },
+                        cvv : {
+                            required : 'Enter CVV2',
+                            digits : 'Digits only'
+                        },
+                        month : {
+                            required : 'Select month'
+                        },
+                        year : {
+                            required : 'Enter year',
+                            digits : 'Digits only please'
+                        }
+                    }
+                }, formsCommon.validateOptions));
+            });
+        }
+    }
+});
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartCommentForm', function (formsCommon, lazyScript) {
+    return {
+        restrict: 'A',
+        link: function (scope, form) {
+            lazyScript.register('build/vendor.ui.js').then(function(){
+                form.validate(angular.extend({
+                    // Rules for form validation
+                    rules : {
+                        name : {
+                            required : true
+                        },
+                        email : {
+                            required : true,
+                            email : true
+                        },
+                        url : {
+                            url : true
+                        },
+                        comment : {
+                            required : true
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages : {
+                        name : {
+                            required : 'Enter your name',
+                        },
+                        email : {
+                            required : 'Enter your email address',
+                            email : 'Enter a VALID email'
+                        },
+                        url : {
+                            email : 'Enter a VALID url'
+                        },
+                        comment : {
+                            required : 'Please enter your comment'
+                        }
+                    },
+
+                    // Ajax form submition
+                    submitHandler : function() {
+                        form.ajaxSubmit({
+                            success : function() {
+                                form.addClass('submited');
+                            }
+                        });
+                    }
+
+                }, formsCommon.validateOptions));
+            });
+
+        }
+    }
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartContactsForm', function (formsCommon, lazyScript) {
+    return {
+        restrict: 'A',
+        link: function (scope, form) {
+            lazyScript.register('build/vendor.ui.js').then(function(){
+                form.validate(angular.extend({
+                    // Rules for form validation
+                    rules : {
+                        name : {
+                            required : true
+                        },
+                        email : {
+                            required : true,
+                            email : true
+                        },
+                        message : {
+                            required : true,
+                            minlength : 10
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages : {
+                        name : {
+                            required : 'Please enter your name'
+                        },
+                        email : {
+                            required : 'Please enter your email address',
+                            email : 'Please enter a VALID email address'
+                        },
+                        message : {
+                            required : 'Please enter your message'
+                        }
+                    },
+
+                    // Ajax form submition
+                    submitHandler : function() {
+                        form.ajaxSubmit({
+                            success : function() {
+                                form.addClass('submited');
+                            }
+                        });
+                    }
+                }, formsCommon.validateOptions));
+            });
+        }
+    }
+});
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartOrderForm', function (formsCommon, lazyScript) {
+    return {
+        restrict: 'E',
+        link: function (scope, form) {
+            lazyScript.register('build/vendor.ui.js').then(function(){
+                form.validate(angular.extend({
+                    // Rules for form validation
+                    rules : {
+                        name : {
+                            required : true
+                        },
+                        email : {
+                            required : true,
+                            email : true
+                        },
+                        phone : {
+                            required : true
+                        },
+                        interested : {
+                            required : true
+                        },
+                        budget : {
+                            required : true
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages : {
+                        name : {
+                            required : 'Please enter your name'
+                        },
+                        email : {
+                            required : 'Please enter your email address',
+                            email : 'Please enter a VALID email address'
+                        },
+                        phone : {
+                            required : 'Please enter your phone number'
+                        },
+                        interested : {
+                            required : 'Please select interested service'
+                        },
+                        budget : {
+                            required : 'Please select your budget'
+                        }
+                    },
+
+                }, formsCommon.validateOptions));
+            });
+
+        }
+    }
+});
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartRegistrationForm', function (formsCommon, lazyScript) {
+    return {
+        restrict: 'A',
+        link: function (scope, form, attributes) {
+            lazyScript.register('build/vendor.ui.js').then(function(){
+                form.validate(angular.extend({
+
+                    // Rules for form validation
+                    rules: {
+                        username: {
+                            required: true
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        password: {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 20
+                        },
+                        passwordConfirm: {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 20,
+                            equalTo: '#password'
+                        },
+                        firstname: {
+                            required: true
+                        },
+                        lastname: {
+                            required: true
+                        },
+                        gender: {
+                            required: true
+                        },
+                        terms: {
+                            required: true
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages: {
+                        login: {
+                            required: 'Please enter your login'
+                        },
+                        email: {
+                            required: 'Please enter your email address',
+                            email: 'Please enter a VALID email address'
+                        },
+                        password: {
+                            required: 'Please enter your password'
+                        },
+                        passwordConfirm: {
+                            required: 'Please enter your password one more time',
+                            equalTo: 'Please enter the same password as above'
+                        },
+                        firstname: {
+                            required: 'Please select your first name'
+                        },
+                        lastname: {
+                            required: 'Please select your last name'
+                        },
+                        gender: {
+                            required: 'Please select your gender'
+                        },
+                        terms: {
+                            required: 'You must agree with Terms and Conditions'
+                        }
+                    }
+
+                }, formsCommon.validateOptions));
+            });
+        }
+    }
+});
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartReviewForm', function (formsCommon, lazyScript) {
+    return {
+        restrict: 'E',
+        link: function (scope, form) {
+            lazyScript.register('build/vendor.ui.js').then(function(){
+
+                form.validate(angular.extend({
+                    // Rules for form validation
+                    rules : {
+                        name : {
+                            required : true
+                        },
+                        email : {
+                            required : true,
+                            email : true
+                        },
+                        review : {
+                            required : true,
+                            minlength : 20
+                        },
+                        quality : {
+                            required : true
+                        },
+                        reliability : {
+                            required : true
+                        },
+                        overall : {
+                            required : true
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages : {
+                        name : {
+                            required : 'Please enter your name'
+                        },
+                        email : {
+                            required : 'Please enter your email address',
+                            email : '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
+                        },
+                        review : {
+                            required : 'Please enter your review'
+                        },
+                        quality : {
+                            required : 'Please rate quality of the product'
+                        },
+                        reliability : {
+                            required : 'Please rate reliability of the product'
+                        },
+                        overall : {
+                            required : 'Please rate the product'
+                        }
+                    }
+
+                }, formsCommon.validateOptions));
+            });
+        }
+    }
+});
+'use strict';
+
 angular.module('SmartAdmin.Layout').directive('demoStates', function ($rootScope) {
     return {
         restrict: 'EA',
@@ -20478,444 +20916,6 @@ angular.module('SmartAdmin.Layout').directive('smartMenu', function ($state, $ro
     }
 });
 })();
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapAttributeForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-attribute-form.tpl.html',
-        link: function(scope, form){
-            form.bootstrapValidator();
-
-
-        }
-
-    }
-});
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapButtonGroupForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-button-group-form.tpl.html',
-        link: function(scope, form){
-            form.bootstrapValidator({
-                excluded : ':disabled',
-                feedbackIcons : {
-                    valid : 'glyphicon glyphicon-ok',
-                    invalid : 'glyphicon glyphicon-remove',
-                    validating : 'glyphicon glyphicon-refresh'
-                },
-                fields : {
-                    gender : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The gender is required'
-                            }
-                        }
-                    },
-                    'languages[]' : {
-                        validators : {
-                            choice : {
-                                min : 1,
-                                max : 2,
-                                message : 'Please choose 1 - 2 languages you can speak'
-                            }
-                        }
-                    }
-                }
-            });
-
-
-        }
-
-    }
-});
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapContactForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-contact-form.tpl.html',
-        link: function(scope, form){
-            form.bootstrapValidator({
-                container : '#messages',
-                feedbackIcons : {
-                    valid : 'glyphicon glyphicon-ok',
-                    invalid : 'glyphicon glyphicon-remove',
-                    validating : 'glyphicon glyphicon-refresh'
-                },
-                fields : {
-                    fullName : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The full name is required and cannot be empty'
-                            }
-                        }
-                    },
-                    email : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The email address is required and cannot be empty'
-                            },
-                            emailAddress : {
-                                message : 'The email address is not valid'
-                            }
-                        }
-                    },
-                    title : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The title is required and cannot be empty'
-                            },
-                            stringLength : {
-                                max : 100,
-                                message : 'The title must be less than 100 characters long'
-                            }
-                        }
-                    },
-                    content : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The content is required and cannot be empty'
-                            },
-                            stringLength : {
-                                max : 500,
-                                message : 'The content must be less than 500 characters long'
-                            }
-                        }
-                    }
-                }
-            });
-
-        }
-
-    }
-
-});
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapMovieForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-movie-form.tpl.html',
-        link: function(scope, form){
-            form.bootstrapValidator({
-                feedbackIcons : {
-                    valid : 'glyphicon glyphicon-ok',
-                    invalid : 'glyphicon glyphicon-remove',
-                    validating : 'glyphicon glyphicon-refresh'
-                },
-                fields : {
-                    title : {
-                        group : '.col-md-8',
-                        validators : {
-                            notEmpty : {
-                                message : 'The title is required'
-                            },
-                            stringLength : {
-                                max : 200,
-                                message : 'The title must be less than 200 characters long'
-                            }
-                        }
-                    },
-                    genre : {
-                        group : '.col-md-4',
-                        validators : {
-                            notEmpty : {
-                                message : 'The genre is required'
-                            }
-                        }
-                    },
-                    director : {
-                        group : '.col-md-4',
-                        validators : {
-                            notEmpty : {
-                                message : 'The director name is required'
-                            },
-                            stringLength : {
-                                max : 80,
-                                message : 'The director name must be less than 80 characters long'
-                            }
-                        }
-                    },
-                    writer : {
-                        group : '.col-md-4',
-                        validators : {
-                            notEmpty : {
-                                message : 'The writer name is required'
-                            },
-                            stringLength : {
-                                max : 80,
-                                message : 'The writer name must be less than 80 characters long'
-                            }
-                        }
-                    },
-                    producer : {
-                        group : '.col-md-4',
-                        validators : {
-                            notEmpty : {
-                                message : 'The producer name is required'
-                            },
-                            stringLength : {
-                                max : 80,
-                                message : 'The producer name must be less than 80 characters long'
-                            }
-                        }
-                    },
-                    website : {
-                        group : '.col-md-6',
-                        validators : {
-                            notEmpty : {
-                                message : 'The website address is required'
-                            },
-                            uri : {
-                                message : 'The website address is not valid'
-                            }
-                        }
-                    },
-                    trailer : {
-                        group : '.col-md-6',
-                        validators : {
-                            notEmpty : {
-                                message : 'The trailer link is required'
-                            },
-                            uri : {
-                                message : 'The trailer link is not valid'
-                            }
-                        }
-                    },
-                    review : {
-                        // The group will be set as default (.form-group)
-                        validators : {
-                            stringLength : {
-                                max : 500,
-                                message : 'The review must be less than 500 characters long'
-                            }
-                        }
-                    },
-                    rating : {
-                        // The group will be set as default (.form-group)
-                        validators : {
-                            notEmpty : {
-                                message : 'The rating is required'
-                            }
-                        }
-                    }
-                }
-            });
-
-        }
-
-    }
-
-});
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapProductForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-product-form.tpl.html',
-        link: function(scope, form){
-            form.bootstrapValidator({
-                feedbackIcons : {
-                    valid : 'glyphicon glyphicon-ok',
-                    invalid : 'glyphicon glyphicon-remove',
-                    validating : 'glyphicon glyphicon-refresh'
-                },
-                fields : {
-                    price : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The price is required'
-                            },
-                            numeric : {
-                                message : 'The price must be a number'
-                            }
-                        }
-                    },
-                    amount : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The amount is required'
-                            },
-                            numeric : {
-                                message : 'The amount must be a number'
-                            }
-                        }
-                    },
-                    color : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The color is required'
-                            }
-                        }
-                    },
-                    size : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The size is required'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-    }
-});
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapProfileForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-profile-form.tpl.html',
-        link: function(scope, form){
-           form.bootstrapValidator({
-                feedbackIcons : {
-                    valid : 'glyphicon glyphicon-ok',
-                    invalid : 'glyphicon glyphicon-remove',
-                    validating : 'glyphicon glyphicon-refresh'
-                },
-                fields : {
-                    email : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The email address is required'
-                            },
-                            emailAddress : {
-                                message : 'The email address is not valid'
-                            }
-                        }
-                    },
-                    password : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The password is required'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-    }
-
-});
-"use strict";
-
-
-angular.module('SmartAdmin.Forms').directive('bootstrapTogglingForm', function(){
-
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/_common/forms/directives/bootstrap-validation/bootstrap-toggling-form.tpl.html',
-        link: function(scope, form){
-            form.bootstrapValidator({
-                feedbackIcons : {
-                    valid : 'glyphicon glyphicon-ok',
-                    invalid : 'glyphicon glyphicon-remove',
-                    validating : 'glyphicon glyphicon-refresh'
-                },
-                fields : {
-                    firstName : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The first name is required'
-                            }
-                        }
-                    },
-                    lastName : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The last name is required'
-                            }
-                        }
-                    },
-                    company : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The company name is required'
-                            }
-                        }
-                    },
-                    // These fields will be validated when being visible
-                    job : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The job title is required'
-                            }
-                        }
-                    },
-                    department : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The department name is required'
-                            }
-                        }
-                    },
-                    mobilePhone : {
-                        validators : {
-                            notEmpty : {
-                                message : 'The mobile phone number is required'
-                            },
-                            digits : {
-                                message : 'The mobile phone number is not valid'
-                            }
-                        }
-                    },
-                    // These fields will be validated when being visible
-                    homePhone : {
-                        validators : {
-                            digits : {
-                                message : 'The home phone number is not valid'
-                            }
-                        }
-                    },
-                    officePhone : {
-                        validators : {
-                            digits : {
-                                message : 'The office phone number is not valid'
-                            }
-                        }
-                    }
-                }
-            }).find('button[data-toggle]').on('click', function() {
-                var $target = $($(this).attr('data-toggle'));
-                // Show or hide the additional fields
-                // They will or will not be validated based on their visibilities
-                $target.toggle();
-                if (!$target.is(':visible')) {
-                    // Enable the submit buttons in case additional fields are not valid
-                    form.data('bootstrapValidator').disableSubmitButtons(false);
-                }
-            });
-        }
-
-    }
-
-
-
-});
 /**
  * Jarvis Widget Directive
  *

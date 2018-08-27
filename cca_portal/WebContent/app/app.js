@@ -110,11 +110,11 @@ angular.module('app', [
             console.log(data)
             if (data.code == 0) {
                 if(!data.result){
-                    window.location.href='https://mcmt.lenovo.com/ccf-prod/index?'+ new Date();
+                    window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
                 }else {
                     if(data.result.status == '-1'){
                         alert('没有权限！');
-                        window.location.href='https://mcmt.lenovo.com/ccf-prod/index?'+ new Date();
+                        window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
                     }else {
                         sessionStorage.setItem("userResult", JSON.stringify(data.result));
                     }
