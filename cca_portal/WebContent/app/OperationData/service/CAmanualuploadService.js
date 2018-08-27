@@ -1,7 +1,7 @@
 /**
  * Created by Qinglanhui on 2018/8/23.
  */
-angular.module('app.OperationData').service("OthercategorymaintenanceService", function($http, $q , APP_CONFIG) {
+angular.module('app.OperationData').service("CAmanualuploadService", function($http, $q , APP_CONFIG) {
     //SelectµÚÒ»¸ö¿òCycle
     this.getSelectCycle = function() {
         var d = $q.defer();
