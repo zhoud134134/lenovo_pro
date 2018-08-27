@@ -3,8 +3,8 @@
 angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, $state, $stateParams, $location, navService) {
 
     $scope.userData = JSON.parse(sessionStorage.getItem("userResult"));
-    var data = {"result":{"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"]},"code":0}
-    $scope.userData = data.result;
+    //var data = {"result":{"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"]},"code":0}
+   // $scope.userData = data.result;
     //$scope.userData = {"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"]}
     if($scope.userData){
         $scope.imgUser = true;
@@ -19,8 +19,7 @@ angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, 
         $rootScope.user =  $scope.userData.ITcode[0];
         console.log($rootScope.user)
     }else {
-        debugger;
-        window.location.href='mcmt.lenovo.com';
+        window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
     }
 
 
