@@ -107,15 +107,19 @@ angular.module('app', [
         // editableOptions.theme = 'bs3';
         //    $rootScope.user = '123';
         navService.getUser().then(function (data) {
+            debugger;
             console.log(data)
             if (data.code == 0) {
                 if(!data.result){
-                    window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
+                    debugger;
+                    window.location.href='mcmt.lenovo.com';
                 }else {
                     if(data.result.status == '-1'){
+                        debugger;
                         alert('没有权限！');
-                        window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
+                        window.location.href='mcmt.lenovo.com';
                     }else {
+                        debugger;
                         sessionStorage.setItem("userResult", JSON.stringify(data.result));
                     }
 
@@ -123,6 +127,7 @@ angular.module('app', [
             }
 
         }, function (data) {
+            debugger;
             console.log(data);
         });
 
