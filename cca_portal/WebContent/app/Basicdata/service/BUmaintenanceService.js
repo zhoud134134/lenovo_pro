@@ -18,7 +18,7 @@ angular.module('app.Basicdata').service("BUmaintenanceService", function ($http,
                 return str.join("&");
             },
             headers: {
-                'token': 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
             params: page
         }).then(function successCallback(response) {
@@ -41,7 +41,7 @@ angular.module('app.Basicdata').service("BUmaintenanceService", function ($http,
             method: 'DELETE',
             url: APP_CONFIG.baseUrl + '/api/bmts/' + id,
             headers: {
-                'token': 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
             /*transformRequest: function(obj) {
              var str = [];
@@ -78,7 +78,7 @@ angular.module('app.Basicdata').service("BUmaintenanceService", function ($http,
                 return str.join("&");
             },
             headers: {
-                'token': 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
             params: load,
             responseType: 'arraybuffer'

@@ -21,7 +21,7 @@ angular.module('app.Basicdata').service("SegmentmaintenanceService", function ($
             },
             params: page
         }).then(function successCallback(response) {
-            // 请求成功执行代码
+            // 请求成功执行代码 
             d.resolve(response.data);
         }, function errorCallback(response) {
             // 请求失败执行代码

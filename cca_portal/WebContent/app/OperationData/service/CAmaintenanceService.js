@@ -10,7 +10,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
             url : APP_CONFIG.baseUrl +'/api/mcm/',
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -37,7 +37,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
                 return str.join("&");
             },
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
             params : page
         }).then(function successCallback(response) {
@@ -56,7 +56,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/CAMaintenanceBmc/',
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -84,7 +84,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
              },*/
             params : id,
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token"),
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token"),
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
         }).then(function successCallback(response) {
@@ -106,7 +106,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/dm/ca/prc/'+id,
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -125,7 +125,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/dm/ca/ww/'+id,
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -145,7 +145,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/dm/ca/loadexcel/prc/'+id,
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
@@ -165,7 +165,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/dm/ca/loadexcel/ww/'+id,
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
@@ -192,7 +192,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
                 return str.join("&");
             },
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
             params : v,
         }).then(function successCallback(response) {

@@ -17,7 +17,7 @@ angular.module('app.Basicdata').service("OtherCategorymasterdataService", functi
                 return str.join("&");
             },
             headers: {
-                'token': 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
             params: page
         }).then(function successCallback(response) {
@@ -40,7 +40,7 @@ angular.module('app.Basicdata').service("OtherCategorymasterdataService", functi
             method: 'DELETE',
             url: APP_CONFIG.baseUrl + '/api/ocms/' + id,
             headers: {
-                'token': 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
             /*transformRequest: function(obj) {
              var str = [];
@@ -77,7 +77,7 @@ angular.module('app.Basicdata').service("OtherCategorymasterdataService", functi
                 return str.join("&");
             },
             headers: {
-                'token': 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
             params: load,
             responseType: 'arraybuffer'

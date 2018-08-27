@@ -9,7 +9,7 @@ angular.module('app.OperationData').service("CycleQTQService", function($http, $
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
             url : APP_CONFIG.baseUrl +'/api/cycle/zfiscper/'+type,
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -28,7 +28,7 @@ angular.module('app.OperationData').service("CycleQTQService", function($http, $
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
             url : APP_CONFIG.baseUrl +'/api/mcm/',
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -57,7 +57,7 @@ angular.module('app.OperationData').service("CycleQTQService", function($http, $
                 return str.join("&");
             },
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
             params : page
         }).then(function successCallback(response) {
@@ -77,7 +77,7 @@ angular.module('app.OperationData').service("CycleQTQService", function($http, $
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/',
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -106,7 +106,7 @@ angular.module('app.OperationData').service("CycleQTQService", function($http, $
             params : id,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             }
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -127,7 +127,7 @@ angular.module('app.OperationData').service("CycleQTQService", function($http, $
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/summary/prc/'+id,
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -147,7 +147,7 @@ angular.module('app.OperationData').service("CycleQTQService", function($http, $
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/summary/row/'+id,
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -175,7 +175,7 @@ angular.module('app.OperationData').service("CycleQTQService", function($http, $
                 return str.join("&");
             },
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
             params : v,
         }).then(function successCallback(response) {
@@ -196,7 +196,7 @@ angular.module('app.OperationData').service("CycleQTQService", function($http, $
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/summary/loadexcel/row/'+id,
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
@@ -217,7 +217,7 @@ angular.module('app.OperationData').service("CycleQTQService", function($http, $
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/summary/loadexcel/prc/'+id,
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
@@ -238,7 +238,7 @@ angular.module('app.OperationData').service("CycleQTQService", function($http, $
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/detail/loadexcel/row/'+id,
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
@@ -259,7 +259,7 @@ angular.module('app.OperationData').service("CycleQTQService", function($http, $
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/bmc/detail/loadexcel/prc/'+id,
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
@@ -288,7 +288,7 @@ angular.module('app.OperationData').service("CycleQTQService", function($http, $
                 return str.join("&");
             },
             headers: {
-                'token' : 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
             params : s,
         }).then(function successCallback(response) {
