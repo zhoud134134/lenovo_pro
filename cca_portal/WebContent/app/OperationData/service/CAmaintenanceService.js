@@ -9,6 +9,9 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
             method : 'GET',
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
             url : APP_CONFIG.baseUrl +'/api/mcm/',
+            headers: {
+                'token' : sessionStorage.getItem("token")
+            },
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -33,6 +36,9 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
                 }
                 return str.join("&");
             },
+            headers: {
+                'token' : sessionStorage.getItem("token")
+            },
             params : page
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -49,6 +55,9 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
         $http({
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/CAMaintenanceBmc/',
+            headers: {
+                'token' : sessionStorage.getItem("token")
+            },
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -74,7 +83,10 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
              return str.join("&");
              },*/
             params : id,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            headers: {
+                'token' : sessionStorage.getItem("token"),
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -93,6 +105,9 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
         $http({
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/dm/ca/prc/'+id,
+            headers: {
+                'token' : sessionStorage.getItem("token")
+            },
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -109,6 +124,9 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
         $http({
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/dm/ca/ww/'+id,
+            headers: {
+                'token' : sessionStorage.getItem("token")
+            },
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -126,6 +144,9 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
         $http({
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/dm/ca/loadexcel/prc/'+id,
+            headers: {
+                'token' : sessionStorage.getItem("token")
+            },
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -143,6 +164,9 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
         $http({
             method : 'GET',
             url : APP_CONFIG.baseUrl + '/api/dm/ca/loadexcel/ww/'+id,
+            headers: {
+                'token' : sessionStorage.getItem("token")
+            },
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -166,6 +190,9 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
                     str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
                 }
                 return str.join("&");
+            },
+            headers: {
+                'token' : sessionStorage.getItem("token")
             },
             params : v,
         }).then(function successCallback(response) {

@@ -1,22 +1,25 @@
-angular.module('app.Basicdata').service("SegmentmaintenanceService", function($http, $q , APP_CONFIG) {
+angular.module('app.Basicdata').service("SegmentmaintenanceService", function ($http, $q, APP_CONFIG) {
 
     /**
      * 页面初始化
      */
-    this.getPage = function(page) {
+    this.getPage = function (page) {
         console.log(page)
         var d = $q.defer();
         $http({
-            method : 'GET',
-            url : APP_CONFIG.baseUrl +'/api/smt/',
-            transformRequest: function(obj) {
-            var str = [];
-            for (var s in obj) {
-                str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
-            }
-            return str.join("&");
-        },
-        params : page
+            method: 'GET',
+            url: APP_CONFIG.baseUrl + '/api/smt/',
+            transformRequest: function (obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            headers: {
+                'token': sessionStorage.getItem("token")
+            },
+            params: page
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -30,19 +33,22 @@ angular.module('app.Basicdata').service("SegmentmaintenanceService", function($h
     /**
      * 某项删除
      */
-    this.delList = function(id) {
+    this.delList = function (id) {
         console.log(id)
         var d = $q.defer();
         $http({
-            method : 'DELETE',
-            url : APP_CONFIG.baseUrl +'/api/smts/'+id,
+            method: 'DELETE',
+            url: APP_CONFIG.baseUrl + '/api/smts/' + id,
+            headers: {
+                'token': sessionStorage.getItem("token")
+            },
             /*transformRequest: function(obj) {
-                var str = [];
-                for (var s in obj) {
-                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
-                }
-                return str.join("&");
-            },*/
+             var str = [];
+             for (var s in obj) {
+             str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+             }
+             return str.join("&");
+             },*/
             //data : id
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -57,21 +63,24 @@ angular.module('app.Basicdata').service("SegmentmaintenanceService", function($h
     /**
      * 下载Excel
      */
-    this.download = function(load) {
+    this.download = function (load) {
         console.log(load)
         var d = $q.defer();
         $http({
-            method : 'GET',
-            url : APP_CONFIG.baseUrl +'/api/loadfile/loadexcel',
-            transformRequest: function(obj) {
-             var str = [];
-             for (var s in obj) {
-             str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
-             }
-             return str.join("&");
-             },
-            params : load,
-            responseType : 'arraybuffer'
+            method: 'GET',
+            url: APP_CONFIG.baseUrl + '/api/loadfile/loadexcel',
+            transformRequest: function (obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            headers: {
+                'token': sessionStorage.getItem("token")
+            },
+            params: load,
+            responseType: 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
