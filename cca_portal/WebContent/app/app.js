@@ -106,45 +106,64 @@ angular.module('app', [
         $rootScope.$stateParams = $stateParams;
         // editableOptions.theme = 'bs3';
         //    $rootScope.user = '123';
-        navService.getUser().then(function (data) {
-            console.log(data)
-            if (data.code == 0) {
-                if(!data.result){
-                    window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
-                }else {
-                    if(data.result.status == '-1'){
-                        alert('没有权限！');
+
+        $rootScope.$on('$stateChangeStart',function($event, toState, toParams, fromState, fromParams,$timeout){
+            //event：该事件的基本信息
+            //toState:我们可以得到当前路由的信息，比如路由名称，url,视图的控制器，模板路径等等
+            //toParams:我们可以得到当前路由的参数
+            //fromState：我们可以得到上一个路由的信息，比如路由名称，url,视图的控制器，模板路径等等
+            //fromParams：我们可以得到上一个路由的参数
+            /*可以触发的事件包括：
+             stateChangeStart当状态改变开始的时候被触发
+             $stateChangeSuccess当状态改变成功后被触发
+             $stateChangeError当状态改变遇到错误时被触发，错误通常是目标无法载入，需要预载入的数据无法被载入等*/
+
+           /* if (!$rootScope.userResult) {
+                window.location.href='http://mcmt.lenovo.com';
+            }*/
+
+            navService.getUser().then(function (data) {
+                console.log(data)
+                if (data.code == 0) {
+                    if(!data.result){
                         window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
                     }else {
-                        sessionStorage.setItem("userResult", JSON.stringify(data.result));
+                        if(data.result.status == '-1'){
+                            alert('没有权限！');
+                            window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
+                        }else {
+                            sessionStorage.setItem("userResult", JSON.stringify(data.result));
+                        }
+
                     }
-
                 }
-            }
 
-        }, function (data) {
-            console.log(data);
+            }, function (data) {
+                console.log(data);
+            });
+            /*if (toState.name != 'login') {
+             alert(1)
+             $state.transitionTo("login", null, {notify:false});
+             $state.go("login");
+             event.preventDefault();
+
+             //window.location.href='http://mcmt.lenovo.com';
+             }else {
+             alert(2)
+             }*/
+
+
+
+
         });
-        /*$rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams,$timeout) {
-         //event：该事件的基本信息
-         //toState:我们可以得到当前路由的信息，比如路由名称，url,视图的控制器，模板路径等等
-         //toParams:我们可以得到当前路由的参数
-         //fromState：我们可以得到上一个路由的信息，比如路由名称，url,视图的控制器，模板路径等等
-         //fromParams：我们可以得到上一个路由的参数
-         /!*可以触发的事件包括：
-         stateChangeStart当状态改变开始的时候被触发
-         $stateChangeSuccess当状态改变成功后被触发
-         $stateChangeError当状态改变遇到错误时被触发，错误通常是目标无法载入，需要预载入的数据无法被载入等*!/
-         alert(2)
-         $rootScope.userResult = JSON.parse(sessionStorage.getItem("userResult"));
-         console.log($rootScope.userResult)
-         if (!$rootScope.userResult) {
-         alert('请登录！')
-         //window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
-         } else {
-         alert(3)
-         }
-         }*/
+
+        $rootScope.$on('$stateChangeStart',
+            function(event, toState, toParams, fromState, fromParams){
+
+            })
+
+
+
 
         //    数组去重
         function unique(arr){
@@ -242,7 +261,7 @@ angular.module('app', [
             for(var i=0;i<sameArr.length;i++){
                 for(var j=0;j<sameArr[i].length;j++){
                     dataArr[i] ={segment : sameArr[i][j].segment , arr:[]};
-                    dataArr[i].arr =  new Array(thead.length-1).fill('');
+                    dataArr[i].arr =  new Array(thead.length-1).fill('-');
                 }
             }
             console.log(dataArr)
@@ -267,7 +286,7 @@ angular.module('app', [
 
             //Zarr为最终前端所需数据形态，如果展示全部segment，则将已经有的替换到完整的指定项，最终所得为所需结果
             var Zarr = [];
-            var molArr2 = new Array(thead.length-1).fill('');
+            var molArr2 = new Array(thead.length-1).fill('-');
             for(var i=0;i<tbody.length;i++){
                 Zarr.push({segment : tbody[i],arr : molArr2})
             }

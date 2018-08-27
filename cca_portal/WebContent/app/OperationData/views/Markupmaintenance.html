@@ -95,531 +95,58 @@
                 <div ng-show="atc">
                     <!--WW-->
                     <div class="mup-tabbtn" ng-show="aww">
-                        <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                        <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" ng-repeat="data in resData">
                             <header>
                                 <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                                <h2>Exclude Visual,Accessory,Workstation</h2>
+                                <h2>{{data.name}}</h2>
                             </header>
                             <div>
                                 <div class="widget-body no-padding">
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;">
+                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;" border="1">
                                         <thead class="table-thead">
                                         <tr>
-                                            <td style="word-break:break-all" ng-repeat="t in tab1_1thead">{{t}}</td>
+                                            <!--data.tbodyBmc-->
+                                            <td style="word-break:break-all" ng-repeat="t in data.tbodyBmc.tbodyBmcThead">{{t}}</td>
+                                            <!--<td style="word-break:break-all" ng-repeat="t in tab1_1thead">{{t}}</td>-->
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr ng-repeat="t in tab1_1_tbody">
+                                        <tr ng-repeat="t in data.tbodyBmc.tbodyBmcTbody">
+                                            <!--<tr ng-repeat="t in tab1_1_tbody">-->
                                             <td>{{t.segment}}</td>
                                             <td ng-repeat="n in t.arr track by $index">{{n}}</td>
                                         </tr>
 
                                         </tbody>
                                         <tfoot>
-                                        <tr ng-repeat="t in tab1_1_tfoot">
+                                        <tr ng-repeat="t in data.tbodyBmc.tbodyBmcTfoot">
+                                            <!--<tr ng-repeat="t in tab1_1_tfoot">-->
                                             <td>{{t.segment}}</td>
                                             <td ng-repeat="n in t.arr track by $index">{{n}}</td>
                                         </tr>
                                         </tfoot>
                                     </table>
                                     <hr/>
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;margin-top: 15px;">
+                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;margin-top: 15px;" border="1">
                                         <thead class="table-thead">
                                         <tr>
-                                            <td style="word-break:break-all" ng-repeat="t in tab1_2thead">{{t}}</td>
+                                            <td style="word-break:break-all" ng-repeat="t in data.tbodyMark.tbodyMarkThead">{{t}}</td>
+                                            <!--<td style="word-break:break-all" ng-repeat="t in tab1_2thead">{{t}}</td>-->
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr ng-repeat="t in tab1_2_tbody">
+                                        <tr ng-repeat="t in data.tbodyMark.tbodyMarkTbody">
+                                            <!--<tr ng-repeat="t in tab1_2_tbody">-->
                                             <td>{{t.segment}}</td>
-                                            <td ng-repeat="n in t.arr track by $index">{{n | number}}</td>
+                                            <td ng-repeat="n in t.arr track by $index">{{n}}</td>
                                         </tr>
 
                                         </tbody>
                                         <tfoot>
-                                        <tr ng-repeat="t in tab1_2_tfoot">
+                                        <tr ng-repeat="t in data.tbodyMark.tbodyMarkTfoot">
+                                            <!--<tr ng-repeat="t in tab1_2_tfoot">-->
                                             <td>{{t.segment}}</td>
-                                            <td ng-repeat="n in t.arr track by $index">{{n | number}}</td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false">
-                            <header>
-                                <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                                <h2>Workstation only</h2>
-                            </header>
-                            <div>
-                                <div class="widget-body no-padding">
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;">
-                                        <thead class="table-thead">
-                                        <tr>
-                                            <td>XXX+BMC $M（Workstation only）</td>
-                                            <td>PRC</td>
-                                            <td>AP</td>
-                                            <td>EMEA</td>
-                                            <td>NA</td>
-                                            <td>Brazil</td>
-                                            <td>LAS</td>
-                                            <td>HQ</td>
-                                            <td>Total</td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Consumer</td>
-                                            <td>701.8</td>
-                                            <td>321.9</td>
-                                            <td>679.6</td>
-                                            <td>388.7</td>
-                                            <td>55.2</td>
-                                            <td>102.5</td>
-                                            <td></td>
-                                            <td>2249.7</td>
-                                        </tr>
-                                        <tr>
-                                            <td>SMB</td>
-                                            <td>701.8</td>
-                                            <td>195.0</td>
-                                            <td>416.7</td>
-                                            <td>348.9</td>
-                                            <td>16.2</td>
-                                            <td>51.9</td>
-                                            <td></td>
-                                            <td>1669.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Commercial</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Others</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td>2288.9</td>
-                                            <td>800.5</td>
-                                            <td>1895.7</td>
-                                            <td>1516.5</td>
-                                            <td>106.5</td>
-                                            <td>207.1</td>
-                                            <td></td>
-                                            <td>6815.16</td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                    <hr/>
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;margin-top: 15px;">
-                                        <thead class="table-thead">
-                                        <tr>
-                                            <td>XXX+Markup in Tape $M(Workstation only）</td>
-                                            <td>PRC</td>
-                                            <td>AP</td>
-                                            <td>EMEA</td>
-                                            <td>NA</td>
-                                            <td>Brazil</td>
-                                            <td>LAS</td>
-                                            <td>HQ</td>
-                                            <td>Total</td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Consumer</td>
-                                            <td>701.8</td>
-                                            <td>321.9</td>
-                                            <td>679.6</td>
-                                            <td>388.7</td>
-                                            <td>55.2</td>
-                                            <td>102.5</td>
-                                            <td></td>
-                                            <td>2249.7</td>
-                                        </tr>
-                                        <tr>
-                                            <td>SMB</td>
-                                            <td>701.8</td>
-                                            <td>195.0</td>
-                                            <td>416.7</td>
-                                            <td>348.9</td>
-                                            <td>16.2</td>
-                                            <td>51.9</td>
-                                            <td></td>
-                                            <td>1669.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Commercial</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Others</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td>2288.9</td>
-                                            <td>800.5</td>
-                                            <td>1895.7</td>
-                                            <td>1516.5</td>
-                                            <td>106.5</td>
-                                            <td>207.1</td>
-                                            <td></td>
-                                            <td>6815.16</td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false">
-                            <header>
-                                <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                                <h2>Visual only</h2>
-                            </header>
-                            <div>
-                                <div class="widget-body no-padding">
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;">
-                                        <thead class="table-thead">
-                                        <tr>
-                                            <td>XXX+BMC $M（Visual only）</td>
-                                            <td>PRC</td>
-                                            <td>AP</td>
-                                            <td>EMEA</td>
-                                            <td>NA</td>
-                                            <td>Brazil</td>
-                                            <td>LAS</td>
-                                            <td>HQ</td>
-                                            <td>Total</td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Consumer</td>
-                                            <td>701.8</td>
-                                            <td>321.9</td>
-                                            <td>679.6</td>
-                                            <td>388.7</td>
-                                            <td>55.2</td>
-                                            <td>102.5</td>
-                                            <td></td>
-                                            <td>2249.7</td>
-                                        </tr>
-                                        <tr>
-                                            <td>SMB</td>
-                                            <td>701.8</td>
-                                            <td>195.0</td>
-                                            <td>416.7</td>
-                                            <td>348.9</td>
-                                            <td>16.2</td>
-                                            <td>51.9</td>
-                                            <td></td>
-                                            <td>1669.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Commercial</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Others</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td>2288.9</td>
-                                            <td>800.5</td>
-                                            <td>1895.7</td>
-                                            <td>1516.5</td>
-                                            <td>106.5</td>
-                                            <td>207.1</td>
-                                            <td></td>
-                                            <td>6815.16</td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                    <hr/>
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;margin-top: 15px;">
-                                        <thead class="table-thead">
-                                        <tr>
-                                            <td>XXX+Markup in Tape $M(Visual only）</td>
-                                            <td>PRC</td>
-                                            <td>AP</td>
-                                            <td>EMEA</td>
-                                            <td>NA</td>
-                                            <td>Brazil</td>
-                                            <td>LAS</td>
-                                            <td>HQ</td>
-                                            <td>Total</td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Consumer</td>
-                                            <td>701.8</td>
-                                            <td>321.9</td>
-                                            <td>679.6</td>
-                                            <td>388.7</td>
-                                            <td>55.2</td>
-                                            <td>102.5</td>
-                                            <td></td>
-                                            <td>2249.7</td>
-                                        </tr>
-                                        <tr>
-                                            <td>SMB</td>
-                                            <td>701.8</td>
-                                            <td>195.0</td>
-                                            <td>416.7</td>
-                                            <td>348.9</td>
-                                            <td>16.2</td>
-                                            <td>51.9</td>
-                                            <td></td>
-                                            <td>1669.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Commercial</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Others</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td>2288.9</td>
-                                            <td>800.5</td>
-                                            <td>1895.7</td>
-                                            <td>1516.5</td>
-                                            <td>106.5</td>
-                                            <td>207.1</td>
-                                            <td></td>
-                                            <td>6815.16</td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false">
-                            <header>
-                                <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                                <h2>Accessory only</h2>
-                            </header>
-                            <div>
-                                <div class="widget-body no-padding">
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;">
-                                        <thead class="table-thead">
-                                        <tr>
-                                            <td>XXX+BMC $M（Accessory only）</td>
-                                            <td>PRC</td>
-                                            <td>AP</td>
-                                            <td>EMEA</td>
-                                            <td>NA</td>
-                                            <td>Brazil</td>
-                                            <td>LAS</td>
-                                            <td>HQ</td>
-                                            <td>Total</td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Consumer</td>
-                                            <td>701.8</td>
-                                            <td>321.9</td>
-                                            <td>679.6</td>
-                                            <td>388.7</td>
-                                            <td>55.2</td>
-                                            <td>102.5</td>
-                                            <td></td>
-                                            <td>2249.7</td>
-                                        </tr>
-                                        <tr>
-                                            <td>SMB</td>
-                                            <td>701.8</td>
-                                            <td>195.0</td>
-                                            <td>416.7</td>
-                                            <td>348.9</td>
-                                            <td>16.2</td>
-                                            <td>51.9</td>
-                                            <td></td>
-                                            <td>1669.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Commercial</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Others</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td>2288.9</td>
-                                            <td>800.5</td>
-                                            <td>1895.7</td>
-                                            <td>1516.5</td>
-                                            <td>106.5</td>
-                                            <td>207.1</td>
-                                            <td></td>
-                                            <td>6815.16</td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                    <hr/>
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" style="table-layout: fixed;margin-top: 15px;">
-                                        <thead class="table-thead">
-                                        <tr>
-                                            <td>XXX+Markup in Tape $M(Accessory only）</td>
-                                            <td>PRC</td>
-                                            <td>AP</td>
-                                            <td>EMEA</td>
-                                            <td>NA</td>
-                                            <td>Brazil</td>
-                                            <td>LAS</td>
-                                            <td>HQ</td>
-                                            <td>Total</td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Consumer</td>
-                                            <td>701.8</td>
-                                            <td>321.9</td>
-                                            <td>679.6</td>
-                                            <td>388.7</td>
-                                            <td>55.2</td>
-                                            <td>102.5</td>
-                                            <td></td>
-                                            <td>2249.7</td>
-                                        </tr>
-                                        <tr>
-                                            <td>SMB</td>
-                                            <td>701.8</td>
-                                            <td>195.0</td>
-                                            <td>416.7</td>
-                                            <td>348.9</td>
-                                            <td>16.2</td>
-                                            <td>51.9</td>
-                                            <td></td>
-                                            <td>1669.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Commercial</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Others</td>
-                                            <td>981.9</td>
-                                            <td>283.6</td>
-                                            <td>799.4</td>
-                                            <td>742.9</td>
-                                            <td>35.1</td>
-                                            <td>52.7</td>
-                                            <td></td>
-                                            <td>2895.5</td>
-                                        </tr>
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td>2288.9</td>
-                                            <td>800.5</td>
-                                            <td>1895.7</td>
-                                            <td>1516.5</td>
-                                            <td>106.5</td>
-                                            <td>207.1</td>
-                                            <td></td>
-                                            <td>6815.16</td>
+                                            <td ng-repeat="n in t.arr track by $index">{{n}}</td>
                                         </tr>
                                         </tfoot>
                                     </table>
