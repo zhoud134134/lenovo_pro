@@ -106,64 +106,25 @@ angular.module('app', [
         $rootScope.$stateParams = $stateParams;
         // editableOptions.theme = 'bs3';
         //    $rootScope.user = '123';
-
-        $rootScope.$on('$stateChangeStart',function($event, toState, toParams, fromState, fromParams,$timeout){
-            //event：该事件的基本信息
-            //toState:我们可以得到当前路由的信息，比如路由名称，url,视图的控制器，模板路径等等
-            //toParams:我们可以得到当前路由的参数
-            //fromState：我们可以得到上一个路由的信息，比如路由名称，url,视图的控制器，模板路径等等
-            //fromParams：我们可以得到上一个路由的参数
-            /*可以触发的事件包括：
-             stateChangeStart当状态改变开始的时候被触发
-             $stateChangeSuccess当状态改变成功后被触发
-             $stateChangeError当状态改变遇到错误时被触发，错误通常是目标无法载入，需要预载入的数据无法被载入等*/
-
-           /* if (!$rootScope.userResult) {
-                window.location.href='http://mcmt.lenovo.com';
-            }*/
-
-            navService.getUser().then(function (data) {
-                console.log(data)
-                if (data.code == 0) {
-                    if(!data.result){
-                        window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
+        navService.getUser().then(function (data) {
+            console.log(data)
+            if (data.code == 0) {
+                if(!data.result){
+                    window.location.href='https://mcmt.lenovo.com/ccf-prod/index?'+ new Date();
+                }else {
+                    if(data.result.status == '-1'){
+                        alert('没有权限！');
+                        window.location.href='https://mcmt.lenovo.com/ccf-prod/index?'+ new Date();
                     }else {
-                        if(data.result.status == '-1'){
-                            alert('没有权限！');
-                            window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
-                        }else {
-                            sessionStorage.setItem("userResult", JSON.stringify(data.result));
-                        }
-
+                        sessionStorage.setItem("userResult", JSON.stringify(data.result));
                     }
+
                 }
+            }
 
-            }, function (data) {
-                console.log(data);
-            });
-            /*if (toState.name != 'login') {
-             alert(1)
-             $state.transitionTo("login", null, {notify:false});
-             $state.go("login");
-             event.preventDefault();
-
-             //window.location.href='http://mcmt.lenovo.com';
-             }else {
-             alert(2)
-             }*/
-
-
-
-
+        }, function (data) {
+            console.log(data);
         });
-
-        $rootScope.$on('$stateChangeStart',
-            function(event, toState, toParams, fromState, fromParams){
-
-            })
-
-
-
 
         //    数组去重
         function unique(arr){
