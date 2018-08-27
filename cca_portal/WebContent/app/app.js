@@ -106,16 +106,22 @@ angular.module('app', [
         $rootScope.$stateParams = $stateParams;
         // editableOptions.theme = 'bs3';
         //    $rootScope.user = '123';
+        debugger;
         navService.getUser().then(function (data) {
             console.log(data)
+            debugger;
             if (data.code == 0) {
+                debugger;
                 if(!data.result){
+                    debugger;
                     window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
                 }else {
                     if(data.result.status == '-1'){
+                        debugger;
                         alert('没有权限！');
                         window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
                     }else {
+                        debugger;
                         sessionStorage.setItem("userResult", JSON.stringify(data.result));
                     }
 
