@@ -13,7 +13,7 @@ angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, 
             $scope.userData.thumbnailphoto = 'styles/img/avatars/sunny.png';
         } else {
             $scope.imgUser = false;
-            $scope.userData.thumbnailphoto[0] = 'data:image/jpg;base64,' + data.result.thumbnailphoto[0];
+            $scope.userData.thumbnailphoto[0] = 'data:image/jpg;base64,' + $scope.userData.thumbnailphoto[0];
         }
 
         $rootScope.user =  $scope.userData.ITcode[0];

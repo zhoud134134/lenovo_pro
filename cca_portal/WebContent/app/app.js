@@ -121,6 +121,21 @@ angular.module('app', [
             /* if (!$rootScope.userResult) {
              window.location.href='http://mcmt.lenovo.com';
              }*/
+
+
+            /*var data = {"result":{"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"],"status":["1"]},"code":0};
+            sessionStorage.setItem("userResult", JSON.stringify(data.result));
+
+            $.ajax({
+                type: "GET",
+                url: "https://mcmt.lenovo.com/ccf-prod/hello/test?ITcode=hanjz1",
+                success: function(data){
+                    console.log(data)
+                    sessionStorage.setItem("token",data);
+                }
+            });*/
+
+
             navService.getUser().then(function (data) {
                 //var data = {"result":{"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"],"status":["1"],"token":["eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MzU5NTQwMDEsInN1YiI6Imhhbmp6MSIsImNyZWF0ZWQiOjE1MzUzNDkyMDExNDh9.QmTq6eDrq5KKYkT83fVVARQVaJA7M7l64UWElI6aVt8cyLMpOjfkr-sZwKKqDKuq9U5eTuXrr8TkP6cj9l_Yhw"]},"code":0}
                 console.log(data)
@@ -147,7 +162,7 @@ angular.module('app', [
             }, function (data) {
                 console.log(data);
             });
-        })
+        });
 
 
 
