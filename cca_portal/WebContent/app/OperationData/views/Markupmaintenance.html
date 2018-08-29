@@ -46,6 +46,8 @@
                                         <td>Created By</td>
                                         <td>Created Date</td>
                                         <td>End Date</td>
+                                        <td>Validate by</td>
+                                        <td>Validate Date</td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -62,6 +64,8 @@
                                         <td>{{tab.sysCreatedBy}}</td>
                                         <td>{{tab.sysCreatedDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                         <td>{{tab.sysEndDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>{{tab.publishUser}}</td>
+                                        <td>{{tab.publishDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -98,7 +102,7 @@
                         <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" ng-repeat="data in resData">
                             <header>
                                 <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                                <h2>{{data.name}}</h2>
+                                <h2 style="font-weight: 700">{{data.name}}</h2>
                             </header>
                             <div>
                                 <div class="widget-body no-padding">
@@ -168,7 +172,7 @@
                         <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
                             <header>
                                 <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                                <h2>PRC Related</h2>
+                                <h2 style="font-weight: 700">PRC Related</h2>
                             </header>
                             <div>
                                 <div class="widget-body no-padding">
