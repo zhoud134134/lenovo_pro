@@ -1,13 +1,13 @@
 <!-- MAIN CONTENT -->
 <div id="content">
     <div class="row">
-        <big-breadcrumbs items="['Biz data maintenance','Other category']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-5"></big-breadcrumbs>
+        <big-breadcrumbs items="['Biz data manual upload','Account template manual upload']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-5"></big-breadcrumbs>
     </div>
     <!-- widget grid -->
     <section id="widget-grid" widget-grid>
         <article class="col-sm-12">
-            <!-- 绗竴閮ㄥ垎 -->
-            <div jarvis-widget data-widget-color="darken"
+            <!-- 第一部分 -->
+            <div jarvis-widget data-widget-color="Light Blue"
                  data-widget-editbutton="false"
                  data-widget-fullscreenbutton="false"
                  data-widget-deletebutton="false">
@@ -44,15 +44,64 @@
                     </div>
                 </div>
             </div>
-            <!-- 绗簩閮ㄥ垎 -->
-            <div jarvis-widget  data-widget-color="darken"
+
+            <!-- 第二部分 -->
+            <div jarvis-widget>
+                <div>
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive table-border-tb">
+                            <div style="height: 160px;">
+                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" id="tabExample1" style="table-layout: fixed;">
+                                    <thead class="table-thead">
+                                    <tr>
+                                        <td width="19px"></td>
+                                        <td>Cycle Name</td>
+                                        <td>Description</td>
+                                        <td>Status</td>
+                                        <td>Created By</td>
+                                        <td>Created Date</td>
+                                        <td>End Date</td>
+                                        <td>Validate by</td>
+                                        <td>Validate Date</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="tab in tablist" ng-click="trClick($event,tab.taskId,tab.status,tab.cycleName)">
+                                        <td>
+                                            <label class="radio">
+                                                <input type="radio" name="radio-inline">
+                                                <i></i>
+                                            </label>
+                                        </td>
+                                        <td>{{tab.cycleName}}</td>
+                                        <td>{{tab.taskName}}</td>
+                                        <td>{{tab.status}}</td>
+                                        <td>{{tab.sysCreatedBy}}</td>
+                                        <td>{{tab.sysCreatedDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>{{tab.sysEndDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>{{tab.publishUser}}</td>
+                                        <td>{{tab.publishDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-4 tab-fun-btn2">
+                                <button class="btn btn-back btn-sm" ng-click="SearchTab()">Search</button>
+                                <button class="btn btn-back btn-sm" ng-click="DelOneItem()">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 第三部分 -->
+            <div jarvis-widget  data-widget-color="Light Blue"
                  data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
                 <header>
                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                     <h2>Result</h2>
                 </header>
             </div>
-            <!-- 绗笁閮ㄥ垎 -->
+            <!-- 第四部分 -->
             <div class="mup-tabbtn">
                 <div ng-show="ww" class="othermain">
                     <div jarvis-widget data-widget-colorbutton="false"
@@ -8868,13 +8917,13 @@
                         </div>
                     </div>
                     <div class="col-sm-4 tab-fun-btn">
-
-                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true"  ng-click="getPRCDownLoad()">
+                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" >
                             <i class="fa fa-download"></i>
                         </button>
                     </div>
                 </div>
             </div>
+
         </article>
 
     </section>
