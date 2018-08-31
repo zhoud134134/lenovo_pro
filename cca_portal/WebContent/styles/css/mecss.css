@@ -8,7 +8,7 @@
 
 .gray {
     background: #F3F5F6;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 12px;
     color: #333;
 }
@@ -175,6 +175,20 @@ article {
     text-align: center;
     font-size: 13px;
 }
+.no-padding>.table-bordered tbody tr:last-child td, .no-padding>.table-responsive>.table-bordered tbody tr:last-child tdd{
+    background: #F3F5F6;
+    font-weight: 700;
+    font-size: 12px;
+    color: #333;
+}
+.jarviswidget>#cacontent{
+    border: 1px solid #ddd;
+    border-top: 0px !important;
+}
+#camainprcTab thead tr td:nth-child(2){
+    width: 160px;
+}
+
 
 /* report 第二模块 */
 /* 公用样式 */
