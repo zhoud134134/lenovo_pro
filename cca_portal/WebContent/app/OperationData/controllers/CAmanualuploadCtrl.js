@@ -1,6 +1,70 @@
 "use strict";
 
-angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($scope,$state,APP_CONFIG,$location,$rootScope,CAmanualuploadService,Upload) {
+angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($scope,$state,APP_CONFIG,$timeout,$location,$rootScope,CAmanualuploadService,Upload) {
+    //函数说明：合并指定表格（表格id为_w_table_id）指定列（列数为_w_table_colnum）的相同文本的相邻单元格
+//参数说明：_w_table_id 为需要进行合并单元格的表格的id。如在HTMl中指定表格 id="data" ，此参数应为 #data
+//参数说明：_w_table_colnum 为需要合并单元格的所在列。为数字，从最左边第一列为1开始算起。
+    function _w_table_rowspan(_w_table_id, _w_table_colnum) {
+        var _w_table_firsttd = "";
+        var _w_table_currenttd = "";
+        var  _w_table_SpanNum = 0;
+        var  _w_table_Obj = $(_w_table_id + " tr td:nth-child(" + _w_table_colnum + ")");
+        _w_table_Obj.each(function(i) {
+            if(i == 0) {
+                _w_table_firsttd = $(this);
+                _w_table_SpanNum = 1;
+            } else {
+                _w_table_currenttd = $(this);
+                if(_w_table_firsttd.text() == _w_table_currenttd.text()) {
+                    _w_table_SpanNum++;
+                    _w_table_currenttd.hide(); //remove();
+                    _w_table_firsttd.attr("rowSpan", _w_table_SpanNum);
+                } else {
+                    _w_table_firsttd = $(this);
+                    _w_table_SpanNum = 1;
+                }
+            }
+        });
+    }
+//函数说明：合并指定表格（表格id为_w_table_id）指定行（行数为_w_table_rownum）的相同文本的相邻单元格
+//参数说明：_w_table_id 为需要进行合并单元格的表格id。如在HTMl中指定表格 id="data" ，此参数应为 #data
+//参数说明：_w_table_rownum 为需要合并单元格的所在行。其参数形式请参考jQuery中nth-child的参数。
+//          如果为数字，则从最左边第一行为1开始算起。
+//          "even" 表示偶数行
+//          "odd" 表示奇数行
+//          "3n+1" 表示的行数为1、4、7、10.......
+//参数说明：_w_table_maxcolnum 为指定行中单元格对应的最大列数，列数大于这个数值的单元格将不进行比较合并。
+//          此参数可以为空，为空则指定行的所有单元格要进行比较合并。
+    function _w_table_colspan(_w_table_id, _w_table_rownum, _w_table_maxcolnum) {
+        if(_w_table_maxcolnum == void 0) {
+            _w_table_maxcolnum = 0;
+        }
+        var _w_table_firsttd = "";
+        var _w_table_currenttd = "";
+        var _w_table_SpanNum = 0;
+        $(_w_table_id + " tr:nth-child(" + _w_table_rownum + ")").each(function(i) {
+            var _w_table_Obj = $(this).children();
+            _w_table_Obj.each(function(i) {
+                if(i == 0) {
+                    _w_table_firsttd = $(this);
+                    _w_table_SpanNum = 1;
+                } else if((_w_table_maxcolnum > 0) && (i > _w_table_maxcolnum)) {
+                    return "";
+                } else {
+                    _w_table_currenttd = $(this);
+                    if(_w_table_firsttd.text() == _w_table_currenttd.text()) {
+                        _w_table_SpanNum++;
+                        _w_table_currenttd.hide(); //remove();
+                        _w_table_firsttd.attr("colSpan", _w_table_SpanNum);
+                    } else {
+                        _w_table_firsttd = $(this);
+                        _w_table_SpanNum = 1;
+                    }
+                }
+            });
+        });
+    }
+
     //初始化Cycle Choose
     CAmanualuploadService.getSelectCycle().then(function(data){
         if(data.code == 0){
@@ -11,6 +75,54 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
     },function(data){
         console.log(data);
     });
+
+    $scope.getPage = function(){
+        CAmanualuploadService.getPrc($scope.id).then(function(data){
+            if(data.code == 0){
+                $scope.PrcList = data.result;
+                console.log($scope.PrcList);
+
+                $rootScope.PrcSegment.unshift("BU");
+                $rootScope.PrcSegment.push("Total");
+                $rootScope.PrcBu.push("Total");
+
+                $rootScope.segmenttop = [ 'BU', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'Total'];
+                //var caprcthead = ["BU", "Think-T", "T-Model", "Commercial", "SMB", "Consumer", "Others", "YT", "Total"];
+                //var caprctbody = ["Think Pad", "Lenovo NB", "Commercial DT", "Consumer DT", "Workstation", "Chrome", "Server", "Accessory", "Visual", "Total"];
+
+
+                $scope.cadata = $rootScope.caprcTabCon($scope.PrcList,  $rootScope.PrcBu,  $rootScope.PrcSegment, 'values');
+                console.log($scope.cadata);
+                console.log($rootScope.segmenttop);
+                console.log($rootScope.PrcSegment);
+                console.log($rootScope.PrcBu);
+
+                $timeout(function(){
+                    console.log("1");
+                    _w_table_colspan("#caprcTab",1,11);
+                    _w_table_rowspan("#caprcTab",1);
+                    _w_table_rowspan("#caprcTab",11);
+                    _w_table_rowspan("#caprcTab",2);
+                    _w_table_rowspan("#caprcTab",12);
+                    //_w_table_rowspan("#caprcTab thead",11);
+                    // _w_table_rowspan("#caprcTab thead",2);
+                    //_w_table_rowspan("#caprcTab thead",12);
+                })
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        });
+        CAmanualuploadService.getWw($scope.id).then(function(data){
+            if(data.code == 0){
+                $scope.cawwList = data.result;
+                console.log($scope.cawwList);
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        });
+    }
 
     //上传
     $scope.myfiles = {};
@@ -25,7 +137,7 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
             }
         }
     }
-
+$scope.caprcww=false;
     $scope.upload = function(){
         Upload.upload({
             //服务端接收
@@ -39,14 +151,17 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
         }).success(function (data, status, headers, config){
-            console.log($scope.CycleChoose.indexOf("M0")==-1);
+            //console.log($scope.CycleChoose.indexOf("M0")==-1);
             if(!$scope.CycleChoose){
                 alert("请选择条件！");
             }else {
-                if (data.code == 0 && $scope.CycleChoose.indexOf("M0") == -1) {
+                if (data.code == 0 && $scope.CycleChoose.indexOf("M0") != -1) {
                     alert('上传成功！');
+                    $scope.caprcww=true;
+                    $scope.id=data.result;
+                    console.log($scope.id);
                     //$('#myModal').modal('hide');
-                    $scope.goPage();
+                    $scope.getPage();
                 } else {
                     alert('上传失败！');
                 }
@@ -57,67 +172,40 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
             console.log('error status: ' + status);
         });
     }
+    CAmanualuploadService.getPrcBu($scope.bu).then(function(caprcbudata){
+        console.log(caprcbudata.result);
+        $rootScope.PrcBu=caprcbudata.result;
+    }, function (data) {
+        console.log(data);
+    })
+    CAmanualuploadService.getPrcSegment($scope.segment).then(function(caprcsegmentdata){
+        console.log(caprcsegmentdata.result);
+        $rootScope.PrcSegment=caprcsegmentdata.result;
+    }, function (data) {
+        console.log(data);
+    })
 
-    //prc时的Download
-    $scope.getPRCDownLoad = function(){
-        if(!$scope.TaskID){
-            return;
-        }else{
-            CAmanualuploadService.getPrcDown($scope.TaskID).then(function(data){
-                console.log(data);
-                //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
-                //而使用“application/vnd.openxmlformats-officedocument.spreadsheetml.sheet”则会保存为xlsx
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-            },function(data){
-                console.log(data);
-            })
-        }
-    }
-
-    //ww时的Download
-    $scope.getWWDownLoad = function(){
-        if(!$scope.TaskID){
-            return;
-        }else{
-            CAmanualuploadService.getWwDown($scope.TaskID).then(function(data){
-                console.log(data);
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-            },function(data){
-                console.log(data);
-            })
-        }
-    }
 //点击Validate
-    $scope.getValidate = function(){
-        console.log($scope.CycleChoose);
-        $scope.validate = {
-            zcycle_name : $scope.CycleChoose,
-            zuuid : $scope.TaskID,
-            user : $rootScope.user
-        };
-        console.log($rootScope.user)
-        CAmanualuploadService.getValidate($scope.validate).then(function (data) {
-            if(data.code == 0){
-                alert('成功！');
-                $scope.getPage();
-            }else {
-                alert(data.msg);
-            }
-            console.log(data);
-        }, function (data) {
-            console.log(data);
-        });
-    };
+//    $scope.getValidate = function(){
+//        console.log($scope.CycleChoose);
+//        $scope.validate = {
+//            zcycle_name : $scope.CycleChoose,
+//            zuuid : $scope.TaskID,
+//            user : $rootScope.user
+//        };
+//        console.log($rootScope.user)
+//        CAmanualuploadService.getValidate($scope.validate).then(function (data) {
+//            if(data.code == 0){
+//                alert('成功！');
+//                $scope.getPage();
+//            }else {
+//                alert(data.msg);
+//            }
+//            console.log(data);
+//        }, function (data) {
+//            console.log(data);
+//        });
+//    };
     //button 切换
     $scope.sw1 = true;
     $scope.ww = false;
