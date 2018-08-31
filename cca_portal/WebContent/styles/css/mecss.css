@@ -175,7 +175,7 @@ article {
     text-align: center;
     font-size: 13px;
 }
-.no-padding>.table-bordered tbody tr:last-child td, .no-padding>.table-responsive>.table-bordered tbody tr:last-child tdd{
+.no-padding>.table-bordered tbody tr:last-child td, .no-padding>.table-responsive>.table-bordered tbody tr:last-child td{
     background: #F3F5F6;
     font-weight: 700;
     font-size: 12px;
