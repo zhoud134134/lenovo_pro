@@ -268,6 +268,7 @@ if (appConfig.voice_command) {
 
 appConfig.apiRootUrl = 'api';
 appConfig.baseUrl="https://mcmt.lenovo.com/ccf-prod";
+appConfig.indexUrl="https://mcmt.lenovo.com/ccf-prod/index";
 //appConfig.baseUrl="http://10.99.123.10:8080/ccf-prod";
 appConfig.limit = 10;
 appConfig.page =1;
@@ -314,7 +315,6 @@ angular.module('app', [
     'ngFileUpload',
 
 
-
     // Smartadmin Angular Common Module
     'SmartAdmin',
 
@@ -346,7 +346,6 @@ angular.module('app', [
     'app.Report',
 
 
-
 ])
     .config(function ($provide, $httpProvider, RestangularProvider) {
 
@@ -354,7 +353,8 @@ angular.module('app', [
         // Intercept http calls.
         $provide.factory('ErrorHttpInterceptor', function ($q) {
             var errorCounter = 0;
-            function notifyError(rejection){
+
+            function notifyError(rejection) {
                 console.log(rejection);
                 $.bigBox({
                     title: rejection.status + ' ' + rejection.statusText,
@@ -391,18 +391,18 @@ angular.module('app', [
 
         RestangularProvider.setBaseUrl(location.pathname.replace(/[^\/]+?$/, ''));
 
+
     })
     .constant('APP_CONFIG', window.appConfig)
 
     .run(function ($rootScope
-        , $state, $stateParams,navService
-    ) {
+        , $state, $stateParams, navService, APP_CONFIG) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         // editableOptions.theme = 'bs3';
         //    $rootScope.user = '123';
 
-        $rootScope.$on('$stateChangeStart',function($event, toState, toParams, fromState, fromParams,$timeout) {
+        $rootScope.$on('$stateChangeStart', function ($event, toState, toParams, fromState, fromParams, $timeout) {
             //event：该事件的基本信息
             //toState:我们可以得到当前路由的信息，比如路由名称，url,视图的控制器，模板路径等等
             //toParams:我们可以得到当前路由的参数
@@ -413,26 +413,43 @@ angular.module('app', [
              $stateChangeSuccess当状态改变成功后被触发
              $stateChangeError当状态改变遇到错误时被触发，错误通常是目标无法载入，需要预载入的数据无法被载入等*/
 
-            /* if (!$rootScope.userResult) {
-             window.location.href='http://mcmt.lenovo.com';
-             }*/
+            /*var data = {
+                "result": {
+                    "displayname": ["Jiaozi JZ1 Han"],
+                    "ITcode": ["hanjz1"],
+                    "email": ["hanjz1@lenovo.com"],
+                    "status": ["1"]
+                }, "code": 0
+            };
+            sessionStorage.setItem("userResult", JSON.stringify(data.result));
+
+            $.ajax({
+                type: "GET",
+                url: "https://mcmt.lenovo.com/ccf-prod/hello/test?ITcode=hanjz1",
+                success: function (data) {
+                    console.log(data)
+                    sessionStorage.setItem("token", data);
+                }
+            });*/
+
+
             navService.getUser().then(function (data) {
                 //var data = {"result":{"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"],"status":["1"],"token":["eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MzU5NTQwMDEsInN1YiI6Imhhbmp6MSIsImNyZWF0ZWQiOjE1MzUzNDkyMDExNDh9.QmTq6eDrq5KKYkT83fVVARQVaJA7M7l64UWElI6aVt8cyLMpOjfkr-sZwKKqDKuq9U5eTuXrr8TkP6cj9l_Yhw"]},"code":0}
                 console.log(data)
 
                 if (data.code == 0) {
-                    if(!data.result){
-                        window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
-                    }else {
-                        if(data.result.token[0]){
-                            sessionStorage.setItem("token",data.result.token[0]);
-                        }else {
+                    if (!data.result) {
+                        window.location.href = APP_CONFIG.indexUrl;
+                    } else {
+                        if (data.result.token[0]) {
+                            sessionStorage.setItem("token", data.result.token[0]);
+                        } else {
                             alert("没有token!");
                         }
-                        if(data.result.status == '-1'){
+                        if (data.result.status == '-1') {
                             alert('没有权限！');
-                            window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
-                        }else {
+                            window.location.href = APP_CONFIG.indexUrl;
+                        } else {
                             sessionStorage.setItem("userResult", JSON.stringify(data.result));
                         }
 
@@ -442,22 +459,213 @@ angular.module('app', [
             }, function (data) {
                 console.log(data);
             });
-        })
 
+        });
+
+
+        //调取bu、geo、region、segment
+        /* navService.getBU().then(function (data) {
+         if(data.code == 0){
+         sessionStorage.setItem("bu", JSON.stringify(data.result));
+         }
+         }, function (data) {
+         console.log(data);
+         });
+         navService.getGEO().then(function (data) {
+         if(data.code == 0){
+         sessionStorage.setItem("geo", JSON.stringify(data.result));
+         }
+         }, function (data) {
+         console.log(data);
+         });
+         navService.getREGION().then(function (data) {
+         if(data.code == 0){
+         sessionStorage.setItem("region", JSON.stringify(data.result));
+         }
+         }, function (data) {
+         console.log(data);
+         });
+         var prc = {
+         stype : 'PRC'
+         }
+         navService.getSEGMENTprc(prc).then(function (data) {
+         if(data.code == 0){
+         sessionStorage.setItem("segmentPRC", JSON.stringify(data.result));
+         }
+         }, function (data) {
+         console.log(data);
+         });
+         var ww = {
+         stype : 'WW'
+         }
+         navService.getSEGMENTww(ww).then(function (data) {
+         if(data.code == 0){
+         sessionStorage.setItem("segmentWW", JSON.stringify(data.result));
+         }
+         }, function (data) {
+         console.log(data);
+         });*/
+
+
+        //$rootScope.Markupthead = ['PRC','AP','EMEA','NA','Brazil','LAS','HQ','Total'];
+        // $rootScope.Markuptbody = ['CONSUMER','SMB','COMMERCIAL','Others','Total'];
+        //markup ww表格式化
+        $rootScope.SortUnique = function (json, tbody, thead, jsonData) {
+            //从某个json中取出数据，对数据去重，同时按照要求排序的封装
+            function SortUnique(obj, par, arr) {
+                var jsonArr = [];
+                for (var i = 0; i < obj.length; i++) {
+                    jsonArr.push(obj[i][par]);
+                }
+                return arrCONTarr(unique(jsonArr), arr);
+            }
+
+            //获取已经排序的segment，同时仅有数据中的这些
+            var segment = SortUnique(json, 'segment', tbody)
+
+
+            //把segment相同的放在一个数组中
+            var sameArr = [];
+            for (var j = 0; j < tbody.length; j++) {
+                var otherArr = [];
+                for (var i = 0; i < json.length; i++) {
+                    if (json[i].segment == tbody[j]) {
+                        otherArr.push(json[i]);
+                    }
+                }
+                if (otherArr.length) {
+                    sameArr.push(otherArr)
+                }
+            }
+            //console.log(sameArr)
+
+            //给已经处理好的数组的项中，根据geo，添加status序号
+            for (var j = 0; j < sameArr.length; j++) {
+                for (var n = 0; n < sameArr[j].length; n++) {
+                    for (var i = 0; i < thead.length; i++) {
+                        if (sameArr[j][n].geo == thead[i]) {
+                            sameArr[j][n].status = i;
+                        }
+                    }
+                }
+            }
+            console.log(sameArr)
+
+            //创建一个数组，数组中包含对象，对象中包含两项，一项为segment，一项为数组放数据用，其中给数组设置长度及默认项为空字符串
+            var dataArr = [];
+            //molArr = new Array(thead.length-1).fill('');
+            for (var i = 0; i < sameArr.length; i++) {
+                for (var j = 0; j < sameArr[i].length; j++) {
+                    dataArr[i] = {segment: sameArr[i][j].segment, arr: []};
+                    dataArr[i].arr = new Array(thead.length - 1).fill('-');
+                }
+            }
+            console.log(dataArr)
+            // var dataArr1 = dataArr;
+
+            //将原本设置的status值作为数组对象数组中的索引，将原本jsonData的值放入正确的索引之中
+            //dataArr的数据可以用于不要求全部显示segment，有什么显示什么segment用
+
+            for (var i = 0; i < dataArr.length; i++) {
+                for (var j = 0; j < sameArr.length; j++) {
+                    for (var n = 0; n < sameArr[j].length; n++) {
+                        if (sameArr[j][n].segment == dataArr[i].segment) {
+                            dataArr[i].arr[sameArr[j][n].status - 1] = sameArr[j][n][jsonData];
+
+                        }
+                    }
+                }
+            }
+            //console.log(dataArr)
+
+
+            //Zarr为最终前端所需数据形态，如果展示全部segment，则将已经有的替换到完整的指定项，最终所得为所需结果
+            var Zarr = [];
+            var molArr2 = new Array(thead.length - 1).fill('-');
+            for (var i = 0; i < tbody.length; i++) {
+                Zarr.push({segment: tbody[i], arr: molArr2})
+            }
+
+            for (var i = 0; i < Zarr.length; i++) {
+                for (var j = 0; j < dataArr.length; j++) {
+                    if (Zarr[i].segment == dataArr[j].segment) {
+                        Zarr[i] = dataArr[j];
+                    }
+                }
+            }
+            return Zarr;
+
+        }
+
+        $rootScope.markHZ = function (result, thead) {
+            var Markuptbody = [];
+            for (var i in result) {
+                console.log(i)
+                Markuptbody.push({name1: 'BMC $M（' + i + '）', name2: 'Markup in Tape $M（' + i + '）', flag: i})
+            }
+
+            for (var i = 0; i < Markuptbody.length; i++) {
+                Markuptbody[i].data1 = new Array(thead.length).fill('-');
+                Markuptbody[i].data2 = new Array(thead.length).fill('-');
+            }
+
+            var resultAarr = [];
+            for (var i in result) {
+                resultAarr.push({title: i, data: result[i], prc: [], total: [], prcData: [], totalData: []});
+            }
+
+            for (var i = 0; i < resultAarr.length; i++) {
+                for (var j = 0; j < resultAarr[i].data.length; j++) {
+                    if (resultAarr[i].data[j].geo == 'PRC') {
+                        resultAarr[i].prc.push(resultAarr[i].data[j])
+                    } else if (resultAarr[i].data[j].geo == 'Total') {
+                        resultAarr[i].total.push(resultAarr[i].data[j])
+                    }
+                }
+            }
+
+            for (var i = 0; i < resultAarr.length; i++) {
+                for (var n = 0; n < thead.length; n++) {
+                    for (var j = 0; j < resultAarr[i].prc.length; j++) {
+                        /*console.log(resultAarr[i].prc[j].segment)*/
+                        if (thead[n] == resultAarr[i].prc[j].segment) {
+                            resultAarr[i].prc[j].status = n;
+                        }
+                        if (thead[n] == resultAarr[i].total[j].segment) {
+                            resultAarr[i].total[j].status = n;
+                        }
+
+                    }
+                }
+            }
+
+            for (var i = 0; i < resultAarr.length; i++) {
+                for (var j = 0; j < Markuptbody.length; j++) {
+                    if (resultAarr[i].title == Markuptbody[j].flag) {
+                        for (var n = 0; n < resultAarr[i].prc.length; n++) {
+                            Markuptbody[j].data1[resultAarr[i].prc[n].status] = resultAarr[i].prc[n].bmc;
+                            Markuptbody[j].data2[resultAarr[i].prc[n].status] = resultAarr[i].prc[n].mark45;
+                        }
+                    }
+                }
+            }
+            console.log(Markuptbody)
+            return Markuptbody;
+        }
 
 
         //    数组去重
-        function unique(arr){
+        function unique(arr) {
             var res = [arr[0]];
-            for(var i=1;i<arr.length;i++){
+            for (var i = 1; i < arr.length; i++) {
                 var repeat = false;
-                for(var j=0;j<res.length;j++){
-                    if(arr[i] == res[j]){
+                for (var j = 0; j < res.length; j++) {
+                    if (arr[i] == res[j]) {
                         repeat = true;
                         break;
                     }
                 }
-                if(!repeat){
+                if (!repeat) {
                     res.push(arr[i]);
                 }
             }
@@ -469,15 +677,16 @@ angular.module('app', [
             var len = arr.length;
             for (var i = 0; i < len - 1; i++) {
                 for (var j = 0; j < len - 1 - i; j++) {
-                    if (arr[j] > arr[j+1]) {        // 相邻元素两两对比
-                        var temp = arr[j+1];        // 元素交换
-                        arr[j+1] = arr[j];
+                    if (arr[j] > arr[j + 1]) {        // 相邻元素两两对比
+                        var temp = arr[j + 1];        // 元素交换
+                        arr[j + 1] = arr[j];
                         arr[j] = temp;
                     }
                 }
             }
             return arr;
         }
+
         //按照另一个数组排序
         function arrCONTarr(a, b) {
             var c = [];
@@ -490,99 +699,6 @@ angular.module('app', [
             }
             return c;
         }
-
-
-        $rootScope.Markupthead = ['PRC','AP','EMEA','NA','Brazil','LAS','HQ','Total'];
-        $rootScope.Markuptbody = ['CONSUMER','SMB','COMMERCIAL','Others','Total'];
-        //二维表格式化
-        $rootScope.SortUnique =function(json,tbody,thead,jsonData){
-            //从某个json中取出数据，对数据去重，同时按照要求排序的封装
-            function SortUnique(obj,par,arr){
-                var jsonArr = [];
-                for(var i=0;i<obj.length;i++){
-                    jsonArr.push(obj[i][par]);
-                }
-                return arrCONTarr(unique(jsonArr),arr);
-            }
-
-            //获取已经排序的segment，同时仅有数据中的这些
-            var segment = SortUnique(json,'segment',tbody)
-
-
-            //把segment相同的放在一个数组中
-            var sameArr = [];
-            for(var j=0;j<tbody.length;j++){
-                var otherArr = [];
-                for(var i=0;i<json.length;i++){
-                    if(json[i].segment == tbody[j]){
-                        otherArr.push(json[i]);
-                    }
-                }
-                if(otherArr.length) {
-                    sameArr.push(otherArr)
-                }
-            }
-            //console.log(sameArr)
-
-            //给已经处理好的数组的项中，根据geo，添加status序号
-            for(var j=0;j<sameArr.length;j++){
-                for(var n=0;n<sameArr[j].length;n++){
-                    for(var i=0;i<thead.length;i++){
-                        if(sameArr[j][n].geo == thead[i]){
-                            sameArr[j][n].status = i;
-                        }
-                    }
-                }
-            }
-            console.log(sameArr)
-
-            //创建一个数组，数组中包含对象，对象中包含两项，一项为segment，一项为数组放数据用，其中给数组设置长度及默认项为空字符串
-            var dataArr = [];
-            //molArr = new Array(thead.length-1).fill('');
-            for(var i=0;i<sameArr.length;i++){
-                for(var j=0;j<sameArr[i].length;j++){
-                    dataArr[i] ={segment : sameArr[i][j].segment , arr:[]};
-                    dataArr[i].arr =  new Array(thead.length-1).fill('-');
-                }
-            }
-            console.log(dataArr)
-            // var dataArr1 = dataArr;
-
-            //将原本设置的status值作为数组对象数组中的索引，将原本jsonData的值放入正确的索引之中
-            //dataArr的数据可以用于不要求全部显示segment，有什么显示什么segment用
-
-            for(var i=0;i<dataArr.length;i++){
-                for(var j=0;j<sameArr.length;j++){
-                    for(var n=0;n<sameArr[j].length;n++){
-                        if(sameArr[j][n].segment == dataArr[i].segment){
-                            dataArr[i].arr[sameArr[j][n].status-1] = sameArr[j][n][jsonData];
-
-                        }
-                    }
-                }
-            }
-            //console.log(dataArr)
-
-
-
-            //Zarr为最终前端所需数据形态，如果展示全部segment，则将已经有的替换到完整的指定项，最终所得为所需结果
-            var Zarr = [];
-            var molArr2 = new Array(thead.length-1).fill('-');
-            for(var i=0;i<tbody.length;i++){
-                Zarr.push({segment : tbody[i],arr : molArr2})
-            }
-
-            for(var i=0;i<Zarr.length;i++){
-                for(var j=0;j<dataArr.length;j++){
-                    if(Zarr[i].segment == dataArr[j].segment){
-                        Zarr[i] = dataArr[j];
-                    }
-                }
-            }
-            return Zarr;
-
-        }
-
 
     });
 
@@ -2491,6 +2607,16 @@ angular.module('app.chat', ['ngSanitize'])
         return $sce.trustAsHtml(val);
     };
 }]);
+(function(){
+    "use strict";
+
+    angular.module('SmartAdmin.Forms', []);
+})();
+(function(){
+    "use strict";
+
+    angular.module('SmartAdmin.Layout', []);
+})();
 angular.module("app").run(["$templateCache", function($templateCache) {$templateCache.put("app/dashboard/live-feeds.tpl.html","<div jarvis-widget id=\"live-feeds-widget\" data-widget-togglebutton=\"false\" data-widget-editbutton=\"false\"\r\n     data-widget-fullscreenbutton=\"false\" data-widget-colorbutton=\"false\" data-widget-deletebutton=\"false\">\r\n<!-- widget options:\r\nusage: <div class=\"jarviswidget\" id=\"wid-id-0\" data-widget-editbutton=\"false\">\r\n\r\ndata-widget-colorbutton=\"false\"\r\ndata-widget-editbutton=\"false\"\r\ndata-widget-togglebutton=\"false\"\r\ndata-widget-deletebutton=\"false\"\r\ndata-widget-fullscreenbutton=\"false\"\r\ndata-widget-custombutton=\"false\"\r\ndata-widget-collapsed=\"true\"\r\ndata-widget-sortable=\"false\"\r\n\r\n-->\r\n<header>\r\n    <span class=\"widget-icon\"> <i class=\"glyphicon glyphicon-stats txt-color-darken\"></i> </span>\r\n\r\n    <h2>Live Feeds </h2>\r\n\r\n    <ul class=\"nav nav-tabs pull-right in\" id=\"myTab\">\r\n        <li class=\"active\">\r\n            <a data-toggle=\"tab\" href=\"#s1\"><i class=\"fa fa-clock-o\"></i> <span class=\"hidden-mobile hidden-tablet\">Live Stats</span></a>\r\n        </li>\r\n\r\n        <li>\r\n            <a data-toggle=\"tab\" href=\"#s2\"><i class=\"fa fa-facebook\"></i> <span class=\"hidden-mobile hidden-tablet\">Social Network</span></a>\r\n        </li>\r\n\r\n        <li>\r\n            <a data-toggle=\"tab\" href=\"#s3\"><i class=\"fa fa-dollar\"></i> <span class=\"hidden-mobile hidden-tablet\">Revenue</span></a>\r\n        </li>\r\n    </ul>\r\n\r\n</header>\r\n\r\n<!-- widget div-->\r\n<div class=\"no-padding\">\r\n\r\n    <div class=\"widget-body\">\r\n        <!-- content -->\r\n        <div id=\"myTabContent\" class=\"tab-content\">\r\n            <div class=\"tab-pane fade active in padding-10 no-padding-bottom\" id=\"s1\">\r\n                <div class=\"row no-space\">\r\n                    <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8\">\r\n														<span class=\"demo-liveupdate-1\"> <span\r\n                                                                class=\"onoffswitch-title\">Live switch</span> <span\r\n                                                                class=\"onoffswitch\">\r\n																<input type=\"checkbox\" name=\"start_interval\" ng-model=\"autoUpdate\"\r\n                                                                       class=\"onoffswitch-checkbox\" id=\"start_interval\">\r\n																<label class=\"onoffswitch-label\" for=\"start_interval\">\r\n                                                                    <span class=\"onoffswitch-inner\"\r\n                                                                          data-swchon-text=\"ON\"\r\n                                                                          data-swchoff-text=\"OFF\"></span>\r\n                                                                    <span class=\"onoffswitch-switch\"></span>\r\n                                                                </label> </span> </span>\r\n\r\n                        <div id=\"updating-chart\" class=\"chart-large txt-color-blue\" flot-basic flot-data=\"liveStats\" flot-options=\"liveStatsOptions\"></div>\r\n\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4 show-stats\">\r\n\r\n                        <div class=\"row\">\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> My Tasks <span\r\n                                    class=\"pull-right\">130/200</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blueDark\" style=\"width: 65%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> Transfered <span\r\n                                    class=\"pull-right\">440 GB</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blue\" style=\"width: 34%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> Bugs Squashed<span\r\n                                    class=\"pull-right\">77%</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blue\" style=\"width: 77%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> User Testing <span\r\n                                    class=\"pull-right\">7 Days</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-greenLight\" style=\"width: 84%;\"></div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <span class=\"show-stat-buttons\"> <span class=\"col-xs-12 col-sm-6 col-md-6 col-lg-6\"> <a\r\n                                    href-void class=\"btn btn-default btn-block hidden-xs\">Generate PDF</a> </span> <span\r\n                                    class=\"col-xs-12 col-sm-6 col-md-6 col-lg-6\"> <a href-void\r\n                                                                                     class=\"btn btn-default btn-block hidden-xs\">Report\r\n                                a bug</a> </span> </span>\r\n\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"show-stat-microcharts\" data-sparkline-container data-easy-pie-chart-container>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n\r\n                        <div class=\"easy-pie-chart txt-color-orangeDark\" data-percent=\"33\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">35</span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Server Load <i class=\"fa fa-caret-up icon-color-bad\"></i> </span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-greenLight\"><i class=\"fa fa-caret-up\"></i> 97%</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blueLight\"><i class=\"fa fa-caret-down\"></i> 44%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-greenLight hidden-sm hidden-md pull-right\"\r\n                             data-sparkline-type=\"line\" data-sparkline-height=\"33px\" data-sparkline-width=\"70px\"\r\n                             data-fill-color=\"transparent\">\r\n                            130, 187, 250, 257, 200, 210, 300, 270, 363, 247, 270, 363, 247\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-greenLight\" data-percent=\"78.9\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">78.9 </span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Disk Space <i class=\"fa fa-caret-down icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-blueDark\"><i class=\"fa fa-caret-up\"></i> 76%</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blue\"><i class=\"fa fa-caret-down\"></i> 3%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-blue hidden-sm hidden-md pull-right\" data-sparkline-type=\"line\"\r\n                             data-sparkline-height=\"33px\" data-sparkline-width=\"70px\" data-fill-color=\"transparent\">\r\n                            257, 200, 210, 300, 270, 363, 130, 187, 250, 247, 270, 363, 247\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-blue\" data-percent=\"23\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">23 </span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Transfered <i class=\"fa fa-caret-up icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-darken\">10GB</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blueDark\"><i class=\"fa fa-caret-up\"></i> 10%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-darken hidden-sm hidden-md pull-right\"\r\n                             data-sparkline-type=\"line\" data-sparkline-height=\"33px\" data-sparkline-width=\"70px\"\r\n                             data-fill-color=\"transparent\">\r\n                            200, 210, 363, 247, 300, 270, 130, 187, 250, 257, 363, 247, 270\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-darken\" data-percent=\"36\" data-pie-size=\"50\">\r\n                            <span class=\"percent degree-sign\">36 <i class=\"fa fa-caret-up\"></i></span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Temperature <i\r\n                                class=\"fa fa-caret-down icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-red\"><i class=\"fa fa-caret-up\"></i> 124</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blue\"><i class=\"fa fa-caret-down\"></i> 40 F</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-red hidden-sm hidden-md pull-right\" data-sparkline-type=\"line\"\r\n                             data-sparkline-height=\"33px\" data-sparkline-width=\"70px\" data-fill-color=\"transparent\">\r\n                            2700, 3631, 2471, 2700, 3631, 2471, 1300, 1877, 2500, 2577, 2000, 2100, 3000\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n            <!-- end s1 tab pane -->\r\n\r\n            <div class=\"tab-pane fade\" id=\"s2\">\r\n                <div class=\"widget-body-toolbar bg-color-white\">\r\n\r\n                    <form class=\"form-inline\" role=\"form\">\r\n\r\n                        <div class=\"form-group\">\r\n                            <label class=\"sr-only\" for=\"s123\">Show From</label>\r\n                            <input type=\"email\" class=\"form-control input-sm\" id=\"s123\" placeholder=\"Show From\">\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <input type=\"email\" class=\"form-control input-sm\" id=\"s124\" placeholder=\"To\">\r\n                        </div>\r\n\r\n                        <div class=\"btn-group hidden-phone pull-right\">\r\n                            <a class=\"btn dropdown-toggle btn-xs btn-default\" data-toggle=\"dropdown\"><i\r\n                                    class=\"fa fa-cog\"></i> More <span class=\"caret\"> </span> </a>\r\n                            <ul class=\"dropdown-menu pull-right\">\r\n                                <li>\r\n                                    <a href-void><i class=\"fa fa-file-text-alt\"></i> Export to PDF</a>\r\n                                </li>\r\n                                <li>\r\n                                    <a href-void><i class=\"fa fa-question-sign\"></i> Help</a>\r\n                                </li>\r\n                            </ul>\r\n                        </div>\r\n\r\n                    </form>\r\n\r\n                </div>\r\n                <div class=\"padding-10\">\r\n                    <div id=\"statsChart\" class=\"chart-large has-legend-unique\" flot-basic flot-data=\"statsData\" flot-options=\"statsDisplayOptions\"></div>\r\n                </div>\r\n\r\n            </div>\r\n            <!-- end s2 tab pane -->\r\n\r\n            <div class=\"tab-pane fade\" id=\"s3\">\r\n\r\n                <div class=\"widget-body-toolbar bg-color-white smart-form\" id=\"rev-toggles\">\r\n\r\n                    <div class=\"inline-group\">\r\n\r\n                        <label for=\"gra-0\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-0\" ng-model=\"targetsShow\">\r\n                            <i></i> Target </label>\r\n                        <label for=\"gra-1\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-1\" ng-model=\"actualsShow\">\r\n                            <i></i> Actual </label>\r\n                        <label for=\"gra-2\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-2\" ng-model=\"signupsShow\">\r\n                            <i></i> Signups </label>\r\n                    </div>\r\n\r\n                    <div class=\"btn-group hidden-phone pull-right\">\r\n                        <a class=\"btn dropdown-toggle btn-xs btn-default\" data-toggle=\"dropdown\"><i\r\n                                class=\"fa fa-cog\"></i> More <span class=\"caret\"> </span> </a>\r\n                        <ul class=\"dropdown-menu pull-right\">\r\n                            <li>\r\n                                <a href-void><i class=\"fa fa-file-text-alt\"></i> Export to PDF</a>\r\n                            </li>\r\n                            <li>\r\n                                <a href-void><i class=\"fa fa-question-sign\"></i> Help</a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <div class=\"padding-10\">\r\n                    <div id=\"flotcontainer\" class=\"chart-large has-legend-unique\" flot-basic flot-data=\"revenewData\" flot-options=\"revenewDisplayOptions\" ></div>\r\n                </div>\r\n            </div>\r\n            <!-- end s3 tab pane -->\r\n        </div>\r\n\r\n        <!-- end content -->\r\n    </div>\r\n\r\n</div>\r\n<!-- end widget div -->\r\n</div>\r\n");
 $templateCache.put("app/layout/layout.tpl.html","<!-- HEADER -->\r\n<div data-smart-include=\"app/layout/partials/header.tpl.html\" class=\"placeholder-header\"></div>\r\n<!-- END HEADER -->\r\n\r\n\r\n<!-- Left panel : Navigation area -->\r\n<!-- Note: This width of the aside area can be adjusted through LESS variables -->\r\n<div data-smart-include=\"app/layout/partials/navigation.tpl.html\" class=\"placeholder-left-panel\"></div>\r\n\r\n<!-- END NAVIGATION -->\r\n\r\n<!-- MAIN PANEL -->\r\n<div id=\"main\" role=\"main\">\r\n    <demo-states></demo-states>\r\n\r\n    <!-- RIBBON -->\r\n    <div id=\"ribbon\">\r\n\r\n				<span class=\"ribbon-button-alignment\">\r\n					<span id=\"refresh\" class=\"btn btn-ribbon\" reset-widgets\r\n                          tooltip-placement=\"bottom\"\r\n                          smart-tooltip-html=\"<i class=\'text-warning fa fa-warning\'></i> Warning! This will reset all your widget settings.\">\r\n						<i class=\"fa fa-refresh\"></i>\r\n					</span>\r\n				</span>\r\n\r\n        <!-- breadcrumb -->\r\n        <state-breadcrumbs></state-breadcrumbs>\r\n        <!-- end breadcrumb -->\r\n\r\n\r\n    </div>\r\n    <!-- END RIBBON -->\r\n\r\n\r\n    <div data-smart-router-animation-wrap=\"content content@app\" data-wrap-for=\"#content\">\r\n        <div data-ui-view=\"content\" data-autoscroll=\"false\"></div>\r\n    </div>\r\n\r\n</div>\r\n<!-- END MAIN PANEL -->\r\n\r\n<!-- PAGE FOOTER -->\r\n<div data-smart-include=\"app/layout/partials/footer.tpl.html\"></div>\r\n\r\n<div data-smart-include=\"app/layout/shortcut/shortcut.tpl.html\"></div>\r\n\r\n<!-- END PAGE FOOTER -->\r\n\r\n\r\n");
 $templateCache.put("app/auth/directives/login-info.tpl.html","<div class=\"login-info ng-cloak\">\r\n    <span> <!-- User image size is adjusted inside CSS, it should stay as it -->\r\n        <a  href=\"\">\r\n            <img ng-src=\"{{user.picture}}\" alt=\"me\" class=\"online\">\r\n                <span>{{user.username}}\r\n                </span>\r\n        </a>\r\n     </span>\r\n</div>");
@@ -2517,16 +2643,6 @@ $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-profile-form.tpl.html","<form id=\"profileForm\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <label>Email address</label>\r\n            <input type=\"text\" class=\"form-control\" name=\"email\" />\r\n        </div>\r\n    </fieldset>\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label>Password</label>\r\n            <input type=\"password\" class=\"form-control\" name=\"password\" />\r\n        </div>\r\n    </fieldset>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>\r\n");
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-toggling-form.tpl.html","<form id=\"togglingForm\" method=\"post\" class=\"form-horizontal\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Full name <sup>*</sup></label>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"firstName\" placeholder=\"First name\" />\r\n            </div>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"lastName\" placeholder=\"Last name\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Company <sup>*</sup></label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"text\" class=\"form-control\" name=\"company\"\r\n                       required data-bv-notempty-message=\"The company name is required\" />\r\n            </div>\r\n            <div class=\"col-lg-2\">\r\n                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"#jobInfo\">\r\n                    Add more info\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <!-- These fields will not be validated as long as they are not visible -->\r\n    <div id=\"jobInfo\" style=\"display: none;\">\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Job title <sup>*</sup></label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"job\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Department <sup>*</sup></label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"department\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Mobile phone <sup>*</sup></label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"text\" class=\"form-control\" name=\"mobilePhone\" />\r\n            </div>\r\n            <div class=\"col-lg-2\">\r\n                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"#phoneInfo\">\r\n                    Add more phone numbers\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n    <!-- These fields will not be validated as long as they are not visible -->\r\n    <div id=\"phoneInfo\" style=\"display: none;\">\r\n\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Home phone</label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"homePhone\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Office phone</label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"officePhone\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>");
 $templateCache.put("app/_common/layout/directives/demo/demo-states.tpl.html","<div class=\"demo\"><span id=\"demo-setting\"><i class=\"fa fa-cog txt-color-blueDark\"></i></span>\r\n\r\n    <form>\r\n        <legend class=\"no-padding margin-bottom-10\">Layout Options</legend>\r\n        <section>\r\n            <label><input type=\"checkbox\" ng-model=\"fixedHeader\"\r\n                          class=\"checkbox style-0\"><span>Fixed Header</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedNavigation\"\r\n                          class=\"checkbox style-0\"><span>Fixed Navigation</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedRibbon\"\r\n                          class=\"checkbox style-0\"><span>Fixed Ribbon</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedPageFooter\"\r\n                          class=\"checkbox style-0\"><span>Fixed Footer</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"insideContainer\"\r\n                          class=\"checkbox style-0\"><span>Inside <b>.container</b></span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"rtl\"\r\n                          class=\"checkbox style-0\"><span>RTL</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"menuOnTop\"\r\n                          class=\"checkbox style-0\"><span>Menu on <b>top</b></span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"colorblindFriendly\"\r\n                          class=\"checkbox style-0\"><span>For Colorblind <div\r\n                    class=\"font-xs text-right\">(experimental)\r\n            </div></span>\r\n            </label><span id=\"smart-bgimages\"></span></section>\r\n        <section><h6 class=\"margin-top-10 semi-bold margin-bottom-5\">Clear Localstorage</h6><a\r\n                ng-click=\"factoryReset()\" class=\"btn btn-xs btn-block btn-primary\" id=\"reset-smart-widget\"><i\r\n                class=\"fa fa-refresh\"></i> Factory Reset</a></section>\r\n\r\n        <h6 class=\"margin-top-10 semi-bold margin-bottom-5\">SmartAdmin Skins</h6>\r\n\r\n\r\n        <section id=\"smart-styles\">\r\n            <a ng-repeat=\"skin in skins\" ng-click=\"setSkin(skin)\" class=\"{{skin.class}}\" style=\"{{skin.style}}\"><i ng-if=\"skin.name == $parent.smartSkin\" class=\"fa fa-check fa-fw\"></i> {{skin.label}} <sup ng-if=\"skin.beta\">beta</sup></a>\r\n        </section>\r\n    </form>\r\n</div>");}]);
-(function(){
-    "use strict";
-
-    angular.module('SmartAdmin.Forms', []);
-})();
-(function(){
-    "use strict";
-
-    angular.module('SmartAdmin.Layout', []);
-})();
 (function(){
     "use strict";
 
@@ -3113,7 +3229,7 @@ angular.module('app.forms').value('formsCommon', {
     });
 "use strict";
 
-angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, $state, $stateParams, $location, navService) {
+angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, $state, $stateParams, $location, navService,APP_CONFIG) {
 
     $scope.userData = JSON.parse(sessionStorage.getItem("userResult"));
     //var data = {"result":{"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"]},"code":0}
@@ -3126,13 +3242,13 @@ angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, 
             $scope.userData.thumbnailphoto = 'styles/img/avatars/sunny.png';
         } else {
             $scope.imgUser = false;
-            $scope.userData.thumbnailphoto[0] = 'data:image/jpg;base64,' + data.result.thumbnailphoto[0];
+            $scope.userData.thumbnailphoto[0] = 'data:image/jpg;base64,' + $scope.userData.thumbnailphoto[0];
         }
 
         $rootScope.user =  $scope.userData.ITcode[0];
         console.log($rootScope.user)
     }else {
-        window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
+        window.location.href = APP_CONFIG.indexUrl;
     }
 
 
@@ -3148,13 +3264,121 @@ angular.module('app.layout').controller('JurisdictionCtrl', function ($scope,$ro
 })
 angular.module('app.layout').service("navService", function($http, $q , APP_CONFIG) {
 
-    //第一部分Select中第二第三个框
-    this.getUser = function(type) {
+    //获取用户登录信息
+    this.getUser = function() {
         var d = $q.defer();
         $http({
             method : 'GET',
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
             url : APP_CONFIG.baseUrl +'/adfs/user',
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+    //bu
+    this.getBU = function() {
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl +'/api/fileorder/bu',
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    //geo
+    this.getGEO = function() {
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl +'/api/fileorder/geo',
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    //region
+    this.getREGION = function() {
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl +'/api/fileorder/region',
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    //segment-prc
+    this.getSEGMENTprc = function(v) {
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl +'/api/fileorder/segment',
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+            transformRequest: function (obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            params: v,
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+    //segment-ww
+    this.getSEGMENTww = function(v) {
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl +'/api/fileorder/segment',
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+            transformRequest: function (obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            params: v,
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
@@ -6852,7 +7076,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
         CycleQTQService.getValidate($scope.validate).then(function (data) {
             if(data.code == 0){
                 console.log(data)
-                alert('成功！');
+                alert('Success!');
                 $scope.getPage();
             }else {
                 alert(data.msg);
@@ -6962,7 +7186,53 @@ angular.module('app.OperationData').controller('DealmaintenanceCtrl', function (
 })
 "use strict";
 
-angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$rootScope,$state,$stateParams,$location,$timeout,MarkupmaintenanceService) {
+angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$rootScope,$state,$stateParams,$location,$timeout,MarkupmaintenanceService,navService) {
+  //调取bu、geo、region、segment
+    navService.getBU().then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("bu", JSON.stringify(data.result));
+        }
+    }, function (data) {
+        console.log(data);
+    });
+    navService.getGEO().then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("geo", JSON.stringify(data.result));
+            $scope.geo = data.result;
+            $scope.geo.push('Total');
+        }
+    }, function (data) {
+        console.log(data);
+    });
+    var prc = {
+        stype : 'PRC'
+    }
+    navService.getSEGMENTprc(prc).then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("segmentPRC", JSON.stringify(data.result));
+            $scope.segmentPRC = data.result;
+            console.log(data.result)
+            $scope.segmentPRC .push('Total');
+        }
+    }, function (data) {
+        console.log(data);
+    });
+    var ww = {
+        stype : 'WW'
+    }
+    navService.getSEGMENTww(ww).then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("segmentWW", JSON.stringify(data.result));
+            $scope.segmentWW = data.result;
+            $scope.segmentWW .push('Total');
+        }
+    }, function (data) {
+        console.log(data);
+    });
+
+
+
+
 
     //初始化Cycle Choose
     MarkupmaintenanceService.getSelectCycle().then(function(data){
@@ -7049,9 +7319,6 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
 
     $scope.WW = true;
     $scope.PRC = true;
-
-
-
     $scope.markTab = false;
     //点击Search
     $scope.SearchTab = function(){
@@ -7059,31 +7326,22 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             alert("请选择项！");
         }else if($scope.status =='Success' || $scope.status =='Publish'){
             $scope.markTab = true;
-            //$scope.PRCWW = false;
             $scope.TaskID =  $scope.taskId;
             $scope.CyclName = $scope.cyclename;
-            //$scope.WW = false;
-            //$scope.PRC = true;
 
             //WW
-            // $("#PRCExample").dataTable().fnDestroy();
             MarkupmaintenanceService.getWw($scope.TaskID).then(function(data){
                 if(data.code == 0){
-                    $scope.result = data.result;
-                    $scope.resData = [];
-                    for(var i in $scope.result){
-                        var thead1 =['XXX+BMC $M（'+ i +'）'].concat($rootScope.Markupthead);
-                        var thead2 = ['XXX+Markup in Tape $M (' + i + '）'].concat($rootScope.Markupthead);
-
-                        var tbodyBmc = $rootScope.SortUnique($scope.result[i],$rootScope.Markuptbody,thead1,'bmc');
-                        var tbodyMark = $rootScope.SortUnique($scope.result[i],$rootScope.Markuptbody,thead2,'mark45');
-
-                        $scope.resData.push({name : i,tbodyBmc : {tbodyBmcThead:thead1,tbodyBmcTbody : tbodyBmc.slice(0,tbodyBmc.length-1),tbodyBmcTfoot:tbodyBmc.slice(tbodyBmc.length-1)},tbodyMark : {tbodyMarkThead:thead2,tbodyMarkTbody : tbodyMark.slice(0,tbodyMark.length-1),tbodyMarkTfoot:tbodyMark.slice(tbodyMark.length-1)}})
-
-                    }
-                    //console.log( $scope.resData)
-                    $timeout($scope.resData);
-
+                     $scope.result = data.result;
+                     $scope.resData = [];
+                     for(var i in $scope.result){
+                     var thead1 =['XXX+BMC $M（'+ i +'）'].concat($scope.geo);
+                     var thead2 = ['XXX+Markup in Tape $M (' + i + '）'].concat($scope.geo);
+                     var tbodyBmc = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead1,'bmc');
+                     var tbodyMark = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead2,'mark45');
+                     $scope.resData.push({name : i,tbodyBmc : {tbodyBmcThead:thead1,tbodyBmcTbody : tbodyBmc.slice(0,tbodyBmc.length-1),tbodyBmcTfoot:tbodyBmc.slice(tbodyBmc.length-1)},tbodyMark : {tbodyMarkThead:thead2,tbodyMarkTbody : tbodyMark.slice(0,tbodyMark.length-1),tbodyMarkTfoot:tbodyMark.slice(tbodyMark.length-1)}})
+                     }
+                     $timeout($scope.resData);
                 }
                 console.log(data);
             },function(data){
@@ -7093,9 +7351,9 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             //PRC
              MarkupmaintenanceService.getPrc($scope.TaskID).then(function(data) {
                  if (data.code == 0) {
-                     //$scope.PrcList = data.result;
-                     //console.log($scope.PrcList);
-                     //$scope.prcTalbe();
+                     $timeout(function(){
+                         $scope.markHZ = $rootScope.markHZ(data.result,$scope.segmentPRC)
+                     });
                  }
                     console.log(data)
                  } ,function(data){
@@ -7133,6 +7391,53 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             }
         }else {
             alert("还未执行完成！");
+        }
+    };
+
+    //点击Validate
+    $scope.getValidate = function(){
+        $scope.validate = {
+            zcycle_name : $scope.CyclName,
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
+        };
+        console.log($rootScope.user)
+        MarkupmaintenanceService.getValidate($scope.validate).then(function (data) {
+            if(data.code == 0){
+                console.log(data)
+                alert('Success!');
+                $scope.getPage();
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
+
+    $scope.getDownLoad = function(){
+        $('#ps2').css('display','block');
+        $('#ws2').css('display','block');
+        $('#ps1').css('display','none');
+        $('#ws1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            MarkupmaintenanceService.getPrcSum($scope.TaskID).then(function (data) {
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+                $('#ps1').css('display','block');
+                $('#ws1').css('display','block');
+                $('#ps2').css('display','none');
+                $('#ws2').css('display','none');
+            }, function (data) {
+                console.log(data);
+            });
         }
     };
 
@@ -7187,6 +7492,8 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             $scope.ww = true;
         }
     }
+
+
     new superTable("demoTable", {
         cssSkin: "sDefault",
         fixedCols: 3, //固定几列
@@ -7198,11 +7505,13 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
         }
     });
 
-    $("#div_container").css("width", "100%");//这个宽度是容器宽度，不同容器宽度不同
-    $(".fakeContainer").css("height", "445px");//这个高度是整个table可视区域的高度，不同情况高度不同
+
+    $("#div_container").css("width", "1280px");//这个宽度是容器宽度，不同容器宽度不同
+    $(".fakeContainer").css("height", "666px");//这个高度是整个table可视区域的高度，不同情况高度不同
     //.sData是调用superTables.js之后页面自己生成的  这块就是出现滚动条 达成锁定表头和列的效果
-    $(".sData").css("width", "985px");//这块的宽度是用$("#div_container")的宽度减去锁定的列的宽度
-    $(".sData").css("height", "354px");//这块的高度是用$("#div_container")的高度减去锁定的表头的高度
+
+    $(".sData").css("width", "1225px");//这块的宽度是用$("#div_container")的宽度减去锁定的列的宽度
+    //$(".sData").css("height", "590px");//这块的高度是用$("#div_container")的高度减去锁定的表头的高度
 
 
     //请求表格数据调用方法
@@ -10925,6 +11234,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
         $http({
             method: 'GET',
             url: APP_CONFIG.baseUrl + '/api/dm/markup/prc/' + id,
+            //url: APP_CONFIG.baseUrl + '/api/dm/markup/prc/ACT1234',
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
@@ -18609,153 +18919,6 @@ angular.module('app.tables').directive('jqGrid', function ($compile) {
         }
     }
 });
-"use strict";
-
-angular.module('SmartAdmin.Layout').directive('fullScreen', function(){
-    return {
-        restrict: 'A',
-        link: function(scope, element){
-            var $body = $('body');
-            var toggleFullSceen = function(e){
-                if (!$body.hasClass("full-screen")) {
-                    $body.addClass("full-screen");
-                    if (document.documentElement.requestFullscreen) {
-                        document.documentElement.requestFullscreen();
-                    } else if (document.documentElement.mozRequestFullScreen) {
-                        document.documentElement.mozRequestFullScreen();
-                    } else if (document.documentElement.webkitRequestFullscreen) {
-                        document.documentElement.webkitRequestFullscreen();
-                    } else if (document.documentElement.msRequestFullscreen) {
-                        document.documentElement.msRequestFullscreen();
-                    }
-                } else {
-                    $body.removeClass("full-screen");
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.webkitExitFullscreen) {
-                        document.webkitExitFullscreen();
-                    }
-                }
-            };
-
-            element.on('click', toggleFullSceen);
-
-        }
-    }
-});
-"use strict";
-
-angular.module('SmartAdmin.Layout').directive('minifyMenu', function(){
-    return {
-        restrict: 'A',
-        link: function(scope, element){
-                var $body = $('body');
-            var minifyMenu = function() {
-                if (!$body.hasClass("menu-on-top")) {
-                    $body.toggleClass("minified");
-                    $body.removeClass("hidden-menu");
-                    $('html').removeClass("hidden-menu-mobile-lock");
-                }
-            };
-
-            element.on('click', minifyMenu);
-        }
-    }
-})
-'use strict';
-
-angular.module('SmartAdmin.Layout').directive('reloadState', function ($rootScope) {
-    return {
-        restrict: 'A',
-        compile: function (tElement, tAttributes) {
-            tElement.removeAttr('reload-state data-reload-state');
-            tElement.on('click', function (e) {
-                $rootScope.$state.transitionTo($rootScope.$state.current, $rootScope.$stateParams, {
-                    reload: true,
-                    inherit: false,
-                    notify: true
-                });
-                e.preventDefault();
-            })
-        }
-    }
-});
-
-"use strict";
-
-angular.module('SmartAdmin.Layout').directive('resetWidgets', function($state){
-
-    return {
-        restrict: 'A',
-        link: function(scope, element){
-            element.on('click', function(){
-                $.SmartMessageBox({
-                    title : "<i class='fa fa-refresh' style='color:green'></i> Clear Local Storage",
-                    content : "Would you like to RESET all your saved widgets and clear LocalStorage?1",
-                    buttons : '[No][Yes]'
-                }, function(ButtonPressed) {
-                    if (ButtonPressed == "Yes" && localStorage) {
-                        localStorage.clear();
-                        location.reload()
-                    }
-                });
-
-            });
-        }
-    }
-
-});
-
-'use strict';
-
-angular.module('SmartAdmin.Layout').directive('searchMobile', function () {
-    return {
-        restrict: 'A',
-        compile: function (element, attributes) {
-            element.removeAttr('search-mobile data-search-mobile');
-
-            element.on('click', function (e) {
-                $('body').addClass('search-mobile');
-                e.preventDefault();
-            });
-
-            $('#cancel-search-js').on('click', function (e) {
-                $('body').removeClass('search-mobile');
-                e.preventDefault();
-            });
-        }
-    }
-});
-"use strict";
-
-angular.module('SmartAdmin.Layout').directive('toggleMenu', function(){
-    return {
-        restrict: 'A',
-        link: function(scope, element){
-            var $body = $('body');
-
-            var toggleMenu = function(){
-                if (!$body.hasClass("menu-on-top")){
-                    $('html').toggleClass("hidden-menu-mobile-lock");
-                    $body.toggleClass("hidden-menu");
-                    $body.removeClass("minified");
-                } else if ( $body.hasClass("menu-on-top") && $body.hasClass("mobile-view-activated") ) {
-                    $('html').toggleClass("hidden-menu-mobile-lock");
-                    $body.toggleClass("hidden-menu");
-                    $body.removeClass("minified");
-                }
-            };
-
-            element.on('click', toggleMenu);
-
-            scope.$on('requestToggleMenu', function(){
-                toggleMenu();
-            });
-        }
-    }
-});
 'use strict';
 
 angular.module('SmartAdmin.Layout').directive('bigBreadcrumbs', function () {
@@ -19988,93 +20151,149 @@ angular.module('SmartAdmin.UI').directive('smartTooltipHtml', function () {
     }
 );
 
-'use strict';
+"use strict";
 
-angular.module('SmartAdmin.Forms').directive('smartCkEditor', function () {
+angular.module('SmartAdmin.Layout').directive('fullScreen', function(){
     return {
         restrict: 'A',
-        compile: function ( tElement) {
-            tElement.removeAttr('smart-ck-editor data-smart-ck-editor');
-            //CKEDITOR.basePath = 'bower_components/ckeditor/';
+        link: function(scope, element){
+            var $body = $('body');
+            var toggleFullSceen = function(e){
+                if (!$body.hasClass("full-screen")) {
+                    $body.addClass("full-screen");
+                    if (document.documentElement.requestFullscreen) {
+                        document.documentElement.requestFullscreen();
+                    } else if (document.documentElement.mozRequestFullScreen) {
+                        document.documentElement.mozRequestFullScreen();
+                    } else if (document.documentElement.webkitRequestFullscreen) {
+                        document.documentElement.webkitRequestFullscreen();
+                    } else if (document.documentElement.msRequestFullscreen) {
+                        document.documentElement.msRequestFullscreen();
+                    }
+                } else {
+                    $body.removeClass("full-screen");
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    }
+                }
+            };
 
-            CKEDITOR.replace( tElement.attr('name'), { height: '380px', startupFocus : true} );
+            element.on('click', toggleFullSceen);
+
         }
     }
 });
+"use strict";
+
+angular.module('SmartAdmin.Layout').directive('minifyMenu', function(){
+    return {
+        restrict: 'A',
+        link: function(scope, element){
+                var $body = $('body');
+            var minifyMenu = function() {
+                if (!$body.hasClass("menu-on-top")) {
+                    $body.toggleClass("minified");
+                    $body.removeClass("hidden-menu");
+                    $('html').removeClass("hidden-menu-mobile-lock");
+                }
+            };
+
+            element.on('click', minifyMenu);
+        }
+    }
+})
 'use strict';
 
-angular.module('SmartAdmin.Forms').directive('smartDestroySummernote', function () {
+angular.module('SmartAdmin.Layout').directive('reloadState', function ($rootScope) {
     return {
         restrict: 'A',
         compile: function (tElement, tAttributes) {
-            tElement.removeAttr('smart-destroy-summernote data-smart-destroy-summernote')
-            tElement.on('click', function() {
-                angular.element(tAttributes.smartDestroySummernote).destroy();
+            tElement.removeAttr('reload-state data-reload-state');
+            tElement.on('click', function (e) {
+                $rootScope.$state.transitionTo($rootScope.$state.current, $rootScope.$stateParams, {
+                    reload: true,
+                    inherit: false,
+                    notify: true
+                });
+                e.preventDefault();
             })
         }
     }
 });
 
-'use strict';
+"use strict";
 
-angular.module('SmartAdmin.Forms').directive('smartEditSummernote', function () {
+angular.module('SmartAdmin.Layout').directive('resetWidgets', function($state){
+
     return {
         restrict: 'A',
-        compile: function (tElement, tAttributes) {
-            tElement.removeAttr('smart-edit-summernote data-smart-edit-summernote');
-            tElement.on('click', function(){
-                angular.element(tAttributes.smartEditSummernote).summernote({
-                    focus : true
-                });  
+        link: function(scope, element){
+            element.on('click', function(){
+                $.SmartMessageBox({
+                    title : "<i class='fa fa-refresh' style='color:green'></i> Clear Local Storage",
+                    content : "Would you like to RESET all your saved widgets and clear LocalStorage?1",
+                    buttons : '[No][Yes]'
+                }, function(ButtonPressed) {
+                    if (ButtonPressed == "Yes" && localStorage) {
+                        localStorage.clear();
+                        location.reload()
+                    }
+                });
+
+            });
+        }
+    }
+
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Layout').directive('searchMobile', function () {
+    return {
+        restrict: 'A',
+        compile: function (element, attributes) {
+            element.removeAttr('search-mobile data-search-mobile');
+
+            element.on('click', function (e) {
+                $('body').addClass('search-mobile');
+                e.preventDefault();
+            });
+
+            $('#cancel-search-js').on('click', function (e) {
+                $('body').removeClass('search-mobile');
+                e.preventDefault();
             });
         }
     }
 });
+"use strict";
 
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartMarkdownEditor', function () {
+angular.module('SmartAdmin.Layout').directive('toggleMenu', function(){
     return {
         restrict: 'A',
-        compile: function (element, attributes) {
-            element.removeAttr('smart-markdown-editor data-smart-markdown-editor')
+        link: function(scope, element){
+            var $body = $('body');
 
-            var options = {
-                autofocus:false,
-                savable:true,
-                fullscreen: {
-                    enable: false
+            var toggleMenu = function(){
+                if (!$body.hasClass("menu-on-top")){
+                    $('html').toggleClass("hidden-menu-mobile-lock");
+                    $body.toggleClass("hidden-menu");
+                    $body.removeClass("minified");
+                } else if ( $body.hasClass("menu-on-top") && $body.hasClass("mobile-view-activated") ) {
+                    $('html').toggleClass("hidden-menu-mobile-lock");
+                    $body.toggleClass("hidden-menu");
+                    $body.removeClass("minified");
                 }
             };
 
-            if(attributes.height){
-                options.height = parseInt(attributes.height);
-            }
+            element.on('click', toggleMenu);
 
-            element.markdown(options);
-        }
-    }
-});
-
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartSummernoteEditor', function (lazyScript) {
-    return {
-        restrict: 'A',
-        compile: function (tElement, tAttributes) {
-            tElement.removeAttr('smart-summernote-editor data-smart-summernote-editor');
-
-            var options = {
-                focus : true,
-                tabsize : 2
-            };
-
-            if(tAttributes.height){
-                options.height = tAttributes.height;
-            }
-
-            lazyScript.register('build/vendor.ui.js').then(function(){
-                tElement.summernote(options);                
+            scope.$on('requestToggleMenu', function(){
+                toggleMenu();
             });
         }
     }
@@ -20516,6 +20735,97 @@ angular.module('SmartAdmin.Forms').directive('bootstrapTogglingForm', function()
 
 
 
+});
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartCkEditor', function () {
+    return {
+        restrict: 'A',
+        compile: function ( tElement) {
+            tElement.removeAttr('smart-ck-editor data-smart-ck-editor');
+            //CKEDITOR.basePath = 'bower_components/ckeditor/';
+
+            CKEDITOR.replace( tElement.attr('name'), { height: '380px', startupFocus : true} );
+        }
+    }
+});
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartDestroySummernote', function () {
+    return {
+        restrict: 'A',
+        compile: function (tElement, tAttributes) {
+            tElement.removeAttr('smart-destroy-summernote data-smart-destroy-summernote')
+            tElement.on('click', function() {
+                angular.element(tAttributes.smartDestroySummernote).destroy();
+            })
+        }
+    }
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartEditSummernote', function () {
+    return {
+        restrict: 'A',
+        compile: function (tElement, tAttributes) {
+            tElement.removeAttr('smart-edit-summernote data-smart-edit-summernote');
+            tElement.on('click', function(){
+                angular.element(tAttributes.smartEditSummernote).summernote({
+                    focus : true
+                });  
+            });
+        }
+    }
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartMarkdownEditor', function () {
+    return {
+        restrict: 'A',
+        compile: function (element, attributes) {
+            element.removeAttr('smart-markdown-editor data-smart-markdown-editor')
+
+            var options = {
+                autofocus:false,
+                savable:true,
+                fullscreen: {
+                    enable: false
+                }
+            };
+
+            if(attributes.height){
+                options.height = parseInt(attributes.height);
+            }
+
+            element.markdown(options);
+        }
+    }
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartSummernoteEditor', function (lazyScript) {
+    return {
+        restrict: 'A',
+        compile: function (tElement, tAttributes) {
+            tElement.removeAttr('smart-summernote-editor data-smart-summernote-editor');
+
+            var options = {
+                focus : true,
+                tabsize : 2
+            };
+
+            if(tAttributes.height){
+                options.height = tAttributes.height;
+            }
+
+            lazyScript.register('build/vendor.ui.js').then(function(){
+                tElement.summernote(options);                
+            });
+        }
+    }
 });
 'use strict';
 
@@ -21120,6 +21430,24 @@ angular.module('SmartAdmin.Forms').directive('smartJcrop', function ($q) {
 });
 'use strict';
 
+angular.module('SmartAdmin.Forms').directive('smartDropzone', function () {
+    return function (scope, element, attrs) {
+        var config, dropzone;
+
+        config = scope[attrs.smartDropzone];
+
+        // create a Dropzone for the element with the given options
+        dropzone = new Dropzone(element[0], config.options);
+
+        // bind the given event handlers
+        angular.forEach(config.eventHandlers, function (handler, event) {
+            dropzone.on(event, handler);
+        });
+    };
+});
+
+'use strict';
+
 angular.module('SmartAdmin.Forms').directive('smartClockpicker', function () {
     return {
         restrict: 'A',
@@ -21440,24 +21768,6 @@ angular.module('SmartAdmin.Forms').directive('smartXeditable', function($timeout
 
     }
 });
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartDropzone', function () {
-    return function (scope, element, attrs) {
-        var config, dropzone;
-
-        config = scope[attrs.smartDropzone];
-
-        // create a Dropzone for the element with the given options
-        dropzone = new Dropzone(element[0], config.options);
-
-        // bind the given event handlers
-        angular.forEach(config.eventHandlers, function (handler, event) {
-            dropzone.on(event, handler);
-        });
-    };
-});
-
 'use strict';
 
 angular.module('SmartAdmin.Forms').directive('smartValidateForm', function (formsCommon) {

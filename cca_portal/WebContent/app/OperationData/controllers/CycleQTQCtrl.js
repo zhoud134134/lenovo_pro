@@ -535,7 +535,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
         CycleQTQService.getValidate($scope.validate).then(function (data) {
             if(data.code == 0){
                 console.log(data)
-                alert('成功！');
+                alert('Success!');
                 $scope.getPage();
             }else {
                 alert(data.msg);

@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, $state, $stateParams, $location, navService) {
+angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, $state, $stateParams, $location, navService,APP_CONFIG) {
 
     $scope.userData = JSON.parse(sessionStorage.getItem("userResult"));
     //var data = {"result":{"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"]},"code":0}
@@ -13,13 +13,13 @@ angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, 
             $scope.userData.thumbnailphoto = 'styles/img/avatars/sunny.png';
         } else {
             $scope.imgUser = false;
-            $scope.userData.thumbnailphoto[0] = 'data:image/jpg;base64,' + data.result.thumbnailphoto[0];
+            $scope.userData.thumbnailphoto[0] = 'data:image/jpg;base64,' + $scope.userData.thumbnailphoto[0];
         }
 
         $rootScope.user =  $scope.userData.ITcode[0];
         console.log($rootScope.user)
     }else {
-        window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
+        window.location.href = APP_CONFIG.indexUrl;
     }
 
 

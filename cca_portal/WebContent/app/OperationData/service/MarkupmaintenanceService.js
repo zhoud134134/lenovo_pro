@@ -119,6 +119,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
         $http({
             method: 'GET',
             url: APP_CONFIG.baseUrl + '/api/dm/markup/prc/' + id,
+            //url: APP_CONFIG.baseUrl + '/api/dm/markup/prc/ACT1234',
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
