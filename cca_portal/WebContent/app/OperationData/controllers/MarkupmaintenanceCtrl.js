@@ -1,6 +1,13 @@
 "use strict";
 
 angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$rootScope,$state,$stateParams,$location,$timeout,MarkupmaintenanceService) {
+    $scope.segmentPRC = JSON.parse(sessionStorage.getItem("segmentPRC"));
+    $scope.segmentWW = JSON.parse(sessionStorage.getItem("segmentWW"));
+    $scope.geo = JSON.parse(sessionStorage.getItem("geo"));
+    $scope.geo.push('Total');
+    $scope.segmentPRC .push('Total');
+    $scope.segmentWW .push('Total');
+
 
     //初始化Cycle Choose
     MarkupmaintenanceService.getSelectCycle().then(function(data){
@@ -87,9 +94,6 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
 
     $scope.WW = true;
     $scope.PRC = true;
-
-
-
     $scope.markTab = false;
     //点击Search
     $scope.SearchTab = function(){
@@ -97,31 +101,22 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             alert("请选择项！");
         }else if($scope.status =='Success' || $scope.status =='Publish'){
             $scope.markTab = true;
-            //$scope.PRCWW = false;
             $scope.TaskID =  $scope.taskId;
             $scope.CyclName = $scope.cyclename;
-            //$scope.WW = false;
-            //$scope.PRC = true;
 
             //WW
-            // $("#PRCExample").dataTable().fnDestroy();
             MarkupmaintenanceService.getWw($scope.TaskID).then(function(data){
                 if(data.code == 0){
-                    $scope.result = data.result;
-                    $scope.resData = [];
-                    for(var i in $scope.result){
-                        var thead1 =['XXX+BMC $M（'+ i +'）'].concat($rootScope.Markupthead);
-                        var thead2 = ['XXX+Markup in Tape $M (' + i + '）'].concat($rootScope.Markupthead);
-
-                        var tbodyBmc = $rootScope.SortUnique($scope.result[i],$rootScope.Markuptbody,thead1,'bmc');
-                        var tbodyMark = $rootScope.SortUnique($scope.result[i],$rootScope.Markuptbody,thead2,'mark45');
-
-                        $scope.resData.push({name : i,tbodyBmc : {tbodyBmcThead:thead1,tbodyBmcTbody : tbodyBmc.slice(0,tbodyBmc.length-1),tbodyBmcTfoot:tbodyBmc.slice(tbodyBmc.length-1)},tbodyMark : {tbodyMarkThead:thead2,tbodyMarkTbody : tbodyMark.slice(0,tbodyMark.length-1),tbodyMarkTfoot:tbodyMark.slice(tbodyMark.length-1)}})
-
-                    }
-                    //console.log( $scope.resData)
-                    $timeout($scope.resData);
-
+                     $scope.result = data.result;
+                     $scope.resData = [];
+                     for(var i in $scope.result){
+                     var thead1 =['XXX+BMC $M（'+ i +'）'].concat($scope.geo);
+                     var thead2 = ['XXX+Markup in Tape $M (' + i + '）'].concat($scope.geo);
+                     var tbodyBmc = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead1,'bmc');
+                     var tbodyMark = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead2,'mark45');
+                     $scope.resData.push({name : i,tbodyBmc : {tbodyBmcThead:thead1,tbodyBmcTbody : tbodyBmc.slice(0,tbodyBmc.length-1),tbodyBmcTfoot:tbodyBmc.slice(tbodyBmc.length-1)},tbodyMark : {tbodyMarkThead:thead2,tbodyMarkTbody : tbodyMark.slice(0,tbodyMark.length-1),tbodyMarkTfoot:tbodyMark.slice(tbodyMark.length-1)}})
+                     }
+                     $timeout($scope.resData);
                 }
                 console.log(data);
             },function(data){
@@ -131,9 +126,9 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             //PRC
              MarkupmaintenanceService.getPrc($scope.TaskID).then(function(data) {
                  if (data.code == 0) {
-                     //$scope.PrcList = data.result;
-                     //console.log($scope.PrcList);
-                     //$scope.prcTalbe();
+                     $timeout(function(){
+                         $scope.markHZ = $rootScope.markHZ(data.result,$scope.segmentPRC)
+                     });
                  }
                     console.log(data)
                  } ,function(data){
@@ -171,6 +166,53 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             }
         }else {
             alert("还未执行完成！");
+        }
+    };
+
+    //点击Validate
+    $scope.getValidate = function(){
+        $scope.validate = {
+            zcycle_name : $scope.CyclName,
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
+        };
+        console.log($rootScope.user)
+        MarkupmaintenanceService.getValidate($scope.validate).then(function (data) {
+            if(data.code == 0){
+                console.log(data)
+                alert('Success!');
+                $scope.getPage();
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
+
+    $scope.getDownLoad = function(){
+        $('#ps2').css('display','block');
+        $('#ws2').css('display','block');
+        $('#ps1').css('display','none');
+        $('#ws1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            MarkupmaintenanceService.getPrcSum($scope.TaskID).then(function (data) {
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+                $('#ps1').css('display','block');
+                $('#ws1').css('display','block');
+                $('#ps2').css('display','none');
+                $('#ws2').css('display','none');
+            }, function (data) {
+                console.log(data);
+            });
         }
     };
 

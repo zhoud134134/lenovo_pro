@@ -95,7 +95,7 @@
             </div>
             <!--第四部分-->
             <div ng-show="markTab">
-                <!--Actual-->
+                <!--Forecast-->
                 <div ng-show="atc">
                     <!--WW-->
                     <div class="mup-tabbtn" ng-show="aww">
@@ -162,7 +162,7 @@
 
                             <button class="btn btn-back btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true" ng-click="btnSwitchA('w')" ><i class="fa fa-refresh"></i></button>
 
-                            <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none"></i></button>
+                            <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getDownLoad()"><i class="fa fa-download" id="ws1" style="display: block" ></i><i class="fa fa-spinner fa-spin" id="ws2" style="display: none"></i></button>
 
                             <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
                         </div>
@@ -178,66 +178,21 @@
                                 <div class="widget-body no-padding">
                                     <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo tab-viMid" style="table-layout: fixed;">
                                         <thead class="table-thead">
-                                        <tr>
+                                        <tr >
                                             <td>XXX+PRC</td>
-                                            <td>Think-T</td>
-                                            <td>T-Model</td>
-                                            <td>REL</td>
-                                            <td>Consumer</td>
-                                            <td>YT</td>
-                                            <td>Total</td>
+                                            <td ng-repeat="t in segmentPRC">{{t}}</td>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>BMC $M（Exclude Visual & Accessory）</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>3508.9</td>
+                                        <tbody  ng-repeat="data in markHZ">
+                                        <tr >
+                                            <td style="word-wrap:break-word;">{{data.name1}}</td>
+                                            <td ng-repeat="t in data.data1 track by $index">{{t}}</td>
                                         </tr>
                                         <tr>
-                                            <td>Markup in Tape $M（Exclude Visual & Accessory）</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>3508.9</td>
+                                            <td style="word-wrap:break-word;">{{data.name2}}</td>
+                                            <td ng-repeat="t in data.data2 track by $index">{{t}}</td>
                                         </tr>
-                                        <tr>
-                                            <td>BMC $M（Visual & Accessory only）</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>3508.9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Markup in Tape $M（Visual & Accessory only）</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>701.8</td>
-                                            <td>3508.9</td>
-                                        </tr>
-
                                         </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td>2807.2</td>
-                                            <td>2807.2</td>
-                                            <td>2807.2</td>
-                                            <td>2807.2</td>
-                                            <td>2807.2</td>
-                                            <td>14035.8</td>
-                                        </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -249,13 +204,13 @@
 
                             <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
 
-                            <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" ></i><i class="fa fa-spinner fa-spin" style="display: none"></i></button>
+                            <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getDownLoad()"><i class="fa fa-download" id="ps1" style="display: block" ></i><i class="fa fa-spinner fa-spin" id="ps2" style="display: none"></i></button>
                         </div>
                     </div>
                 </div>
-                <!--Forecast-->
-                <div ng-show="!atc">
 
+                <div ng-show="!atc">
+                    <!--Actual-->
                     <div class="mup-tabbtn report-tab" ng-show="!fww">
                         <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
                             <header>

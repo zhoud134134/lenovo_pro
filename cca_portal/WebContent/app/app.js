@@ -100,7 +100,7 @@ angular.module('app', [
     .constant('APP_CONFIG', window.appConfig)
 
     .run(function ($rootScope
-        , $state, $stateParams,navService
+        , $state, $stateParams,navService,APP_CONFIG
     ) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
@@ -142,7 +142,7 @@ angular.module('app', [
 
                 if (data.code == 0) {
                     if(!data.result){
-                        window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
+                        window.location.href = APP_CONFIG.indexUrl;
                     }else {
                         if(data.result.token[0]){
                             sessionStorage.setItem("token",data.result.token[0]);
@@ -151,7 +151,7 @@ angular.module('app', [
                         }
                         if(data.result.status == '-1'){
                             alert('没有权限！');
-                            window.location.href='https://mcmt.lenovo.com/ccf-prod/index';
+                            window.location.href = APP_CONFIG.indexUrl;
                         }else {
                             sessionStorage.setItem("userResult", JSON.stringify(data.result));
                         }
@@ -162,59 +162,62 @@ angular.module('app', [
             }, function (data) {
                 console.log(data);
             });
+
         });
 
 
 
-        //    数组去重
-        function unique(arr){
-            var res = [arr[0]];
-            for(var i=1;i<arr.length;i++){
-                var repeat = false;
-                for(var j=0;j<res.length;j++){
-                    if(arr[i] == res[j]){
-                        repeat = true;
-                        break;
-                    }
-                }
-                if(!repeat){
-                    res.push(arr[i]);
-                }
+        //调取bu、geo、region、segment
+        navService.getBU().then(function (data) {
+            if(data.code == 0){
+                sessionStorage.setItem("bu", JSON.stringify(data.result));
             }
-            return res;
-        }
-
-        //    数组排序
-        function bubbleSort(arr) {
-            var len = arr.length;
-            for (var i = 0; i < len - 1; i++) {
-                for (var j = 0; j < len - 1 - i; j++) {
-                    if (arr[j] > arr[j+1]) {        // 相邻元素两两对比
-                        var temp = arr[j+1];        // 元素交换
-                        arr[j+1] = arr[j];
-                        arr[j] = temp;
-                    }
-                }
+        }, function (data) {
+            console.log(data);
+        });
+        navService.getGEO().then(function (data) {
+            if(data.code == 0){
+                sessionStorage.setItem("geo", JSON.stringify(data.result));
             }
-            return arr;
-        }
-        //按照另一个数组排序
-        function arrCONTarr(a, b) {
-            var c = [];
-            for (var i = 0; i < b.length; i++) {
-                for (var j = 0; j < a.length; j++) {
-                    if (a[j] == b[i]) {
-                        c.push(a[j]);
-                    }
-                }
+        }, function (data) {
+            console.log(data);
+        });
+        navService.getREGION().then(function (data) {
+            if(data.code == 0){
+                sessionStorage.setItem("region", JSON.stringify(data.result));
             }
-            return c;
+        }, function (data) {
+            console.log(data);
+        });
+        var prc = {
+            stype : 'PRC'
         }
+        navService.getSEGMENTprc(prc).then(function (data) {
+            if(data.code == 0){
+                sessionStorage.setItem("segmentPRC", JSON.stringify(data.result));
+            }
+        }, function (data) {
+            console.log(data);
+        });
+        var ww = {
+            stype : 'WW'
+        }
+        navService.getSEGMENTww(ww).then(function (data) {
+            if(data.code == 0){
+                sessionStorage.setItem("segmentWW", JSON.stringify(data.result));
+            }
+        }, function (data) {
+            console.log(data);
+        });
 
 
-        $rootScope.Markupthead = ['PRC','AP','EMEA','NA','Brazil','LAS','HQ','Total'];
-        $rootScope.Markuptbody = ['CONSUMER','SMB','COMMERCIAL','Others','Total'];
-        //二维表格式化
+
+
+
+
+        //$rootScope.Markupthead = ['PRC','AP','EMEA','NA','Brazil','LAS','HQ','Total'];
+       // $rootScope.Markuptbody = ['CONSUMER','SMB','COMMERCIAL','Others','Total'];
+        //markup ww表格式化
         $rootScope.SortUnique =function(json,tbody,thead,jsonData){
             //从某个json中取出数据，对数据去重，同时按照要求排序的封装
             function SortUnique(obj,par,arr){
@@ -303,6 +306,110 @@ angular.module('app', [
 
         }
 
+        $rootScope.markHZ = function(result,thead){
+            var Markuptbody = [];
+            for(var i in result){
+                console.log(i)
+                Markuptbody.push({name1:'BMC $M（'+i+'）',name2:'Markup in Tape $M（'+i+'）',flag:i})
+            }
+
+            for(var i=0;i<Markuptbody.length;i++){
+                Markuptbody[i].data1 = new Array(thead.length).fill('-');
+                Markuptbody[i].data2 = new Array(thead.length).fill('-');
+            }
+
+            var resultAarr = [];
+            for(var i in result){
+                resultAarr.push({title:i,data:result[i],prc:[],total:[],prcData:[],totalData:[]});
+            }
+
+            for(var i=0;i< resultAarr.length;i++){
+                for(var j=0;j<resultAarr[i].data.length;j++){
+                    if(resultAarr[i].data[j].geo == 'PRC'){
+                        resultAarr[i].prc.push(resultAarr[i].data[j])
+                    }else if(resultAarr[i].data[j].geo == 'Total'){
+                        resultAarr[i].total.push(resultAarr[i].data[j])
+                    }
+                }
+            }
+
+            for(var i=0;i<resultAarr.length;i++){
+                for(var n=0;n<thead.length;n++){
+                    for(var j=0;j<resultAarr[i].prc.length;j++){
+                        /*console.log(resultAarr[i].prc[j].segment)*/
+                        if(thead[n] == resultAarr[i].prc[j].segment){
+                            resultAarr[i].prc[j].status = n;
+                        }
+                        if(thead[n] == resultAarr[i].total[j].segment){
+                            resultAarr[i].total[j].status = n;
+                        }
+
+                    }
+                }
+            }
+
+            for(var i=0;i<resultAarr.length;i++){
+                for(var j=0;j<Markuptbody.length;j++){
+                    if(resultAarr[i].title == Markuptbody[j].flag){
+                        for(var n=0;n<resultAarr[i].prc.length;n++){
+                            Markuptbody[j].data1[resultAarr[i].prc[n].status] = resultAarr[i].prc[n].bmc;
+                            Markuptbody[j].data2[resultAarr[i].prc[n].status] = resultAarr[i].prc[n].mark45;
+                        }
+                    }
+                }
+            }
+            console.log(Markuptbody)
+            return Markuptbody;
+        }
+
+
+
+
+
+        //    数组去重
+        function unique(arr){
+            var res = [arr[0]];
+            for(var i=1;i<arr.length;i++){
+                var repeat = false;
+                for(var j=0;j<res.length;j++){
+                    if(arr[i] == res[j]){
+                        repeat = true;
+                        break;
+                    }
+                }
+                if(!repeat){
+                    res.push(arr[i]);
+                }
+            }
+            return res;
+        }
+
+        //    数组排序
+        function bubbleSort(arr) {
+            var len = arr.length;
+            for (var i = 0; i < len - 1; i++) {
+                for (var j = 0; j < len - 1 - i; j++) {
+                    if (arr[j] > arr[j+1]) {        // 相邻元素两两对比
+                        var temp = arr[j+1];        // 元素交换
+                        arr[j+1] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+        //按照另一个数组排序
+        function arrCONTarr(a, b) {
+            var c = [];
+            for (var i = 0; i < b.length; i++) {
+                for (var j = 0; j < a.length; j++) {
+                    if (a[j] == b[i]) {
+                        c.push(a[j]);
+                    }
+                }
+            }
+            return c;
+        }
 
     });
 
