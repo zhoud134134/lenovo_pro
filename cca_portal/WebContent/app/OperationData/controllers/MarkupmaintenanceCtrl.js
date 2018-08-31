@@ -1,12 +1,51 @@
 "use strict";
 
-angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$rootScope,$state,$stateParams,$location,$timeout,MarkupmaintenanceService) {
-    $scope.segmentPRC = JSON.parse(sessionStorage.getItem("segmentPRC"));
-    $scope.segmentWW = JSON.parse(sessionStorage.getItem("segmentWW"));
-    $scope.geo = JSON.parse(sessionStorage.getItem("geo"));
-    $scope.geo.push('Total');
-    $scope.segmentPRC .push('Total');
-    $scope.segmentWW .push('Total');
+angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$rootScope,$state,$stateParams,$location,$timeout,MarkupmaintenanceService,navService) {
+  //调取bu、geo、region、segment
+    navService.getBU().then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("bu", JSON.stringify(data.result));
+        }
+    }, function (data) {
+        console.log(data);
+    });
+    navService.getGEO().then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("geo", JSON.stringify(data.result));
+            $scope.geo = data.result;
+            $scope.geo.push('Total');
+        }
+    }, function (data) {
+        console.log(data);
+    });
+    var prc = {
+        stype : 'PRC'
+    }
+    navService.getSEGMENTprc(prc).then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("segmentPRC", JSON.stringify(data.result));
+            $scope.segmentPRC = data.result;
+            console.log(data.result)
+            $scope.segmentPRC .push('Total');
+        }
+    }, function (data) {
+        console.log(data);
+    });
+    var ww = {
+        stype : 'WW'
+    }
+    navService.getSEGMENTww(ww).then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("segmentWW", JSON.stringify(data.result));
+            $scope.segmentWW = data.result;
+            $scope.segmentWW .push('Total');
+        }
+    }, function (data) {
+        console.log(data);
+    });
+
+
+
 
 
     //初始化Cycle Choose

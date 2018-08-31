@@ -315,7 +315,6 @@ angular.module('app', [
     'ngFileUpload',
 
 
-
     // Smartadmin Angular Common Module
     'SmartAdmin',
 
@@ -347,7 +346,6 @@ angular.module('app', [
     'app.Report',
 
 
-
 ])
     .config(function ($provide, $httpProvider, RestangularProvider) {
 
@@ -355,7 +353,8 @@ angular.module('app', [
         // Intercept http calls.
         $provide.factory('ErrorHttpInterceptor', function ($q) {
             var errorCounter = 0;
-            function notifyError(rejection){
+
+            function notifyError(rejection) {
                 console.log(rejection);
                 $.bigBox({
                     title: rejection.status + ' ' + rejection.statusText,
@@ -392,18 +391,18 @@ angular.module('app', [
 
         RestangularProvider.setBaseUrl(location.pathname.replace(/[^\/]+?$/, ''));
 
+
     })
     .constant('APP_CONFIG', window.appConfig)
 
     .run(function ($rootScope
-        , $state, $stateParams,navService,APP_CONFIG
-    ) {
+        , $state, $stateParams, navService, APP_CONFIG) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         // editableOptions.theme = 'bs3';
         //    $rootScope.user = '123';
 
-        $rootScope.$on('$stateChangeStart',function($event, toState, toParams, fromState, fromParams,$timeout) {
+        $rootScope.$on('$stateChangeStart', function ($event, toState, toParams, fromState, fromParams, $timeout) {
             //event：该事件的基本信息
             //toState:我们可以得到当前路由的信息，比如路由名称，url,视图的控制器，模板路径等等
             //toParams:我们可以得到当前路由的参数
@@ -414,41 +413,43 @@ angular.module('app', [
              $stateChangeSuccess当状态改变成功后被触发
              $stateChangeError当状态改变遇到错误时被触发，错误通常是目标无法载入，需要预载入的数据无法被载入等*/
 
-            /* if (!$rootScope.userResult) {
-             window.location.href='http://mcmt.lenovo.com';
-             }*/
-
-
-            /*var data = {"result":{"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"],"status":["1"]},"code":0};
+            var data = {
+                "result": {
+                    "displayname": ["Jiaozi JZ1 Han"],
+                    "ITcode": ["hanjz1"],
+                    "email": ["hanjz1@lenovo.com"],
+                    "status": ["1"]
+                }, "code": 0
+            };
             sessionStorage.setItem("userResult", JSON.stringify(data.result));
 
             $.ajax({
                 type: "GET",
                 url: "https://mcmt.lenovo.com/ccf-prod/hello/test?ITcode=hanjz1",
-                success: function(data){
+                success: function (data) {
                     console.log(data)
-                    sessionStorage.setItem("token",data);
+                    sessionStorage.setItem("token", data);
                 }
-            });*/
+            });
 
 
-            navService.getUser().then(function (data) {
+            /*navService.getUser().then(function (data) {
                 //var data = {"result":{"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"],"status":["1"],"token":["eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MzU5NTQwMDEsInN1YiI6Imhhbmp6MSIsImNyZWF0ZWQiOjE1MzUzNDkyMDExNDh9.QmTq6eDrq5KKYkT83fVVARQVaJA7M7l64UWElI6aVt8cyLMpOjfkr-sZwKKqDKuq9U5eTuXrr8TkP6cj9l_Yhw"]},"code":0}
                 console.log(data)
 
                 if (data.code == 0) {
-                    if(!data.result){
+                    if (!data.result) {
                         window.location.href = APP_CONFIG.indexUrl;
-                    }else {
-                        if(data.result.token[0]){
-                            sessionStorage.setItem("token",data.result.token[0]);
-                        }else {
+                    } else {
+                        if (data.result.token[0]) {
+                            sessionStorage.setItem("token", data.result.token[0]);
+                        } else {
                             alert("没有token!");
                         }
-                        if(data.result.status == '-1'){
+                        if (data.result.status == '-1') {
                             alert('没有权限！');
                             window.location.href = APP_CONFIG.indexUrl;
-                        }else {
+                        } else {
                             sessionStorage.setItem("userResult", JSON.stringify(data.result));
                         }
 
@@ -457,97 +458,92 @@ angular.module('app', [
 
             }, function (data) {
                 console.log(data);
-            });
+            });*/
 
         });
-
 
 
         //调取bu、geo、region、segment
-        navService.getBU().then(function (data) {
-            if(data.code == 0){
-                sessionStorage.setItem("bu", JSON.stringify(data.result));
-            }
-        }, function (data) {
-            console.log(data);
-        });
-        navService.getGEO().then(function (data) {
-            if(data.code == 0){
-                sessionStorage.setItem("geo", JSON.stringify(data.result));
-            }
-        }, function (data) {
-            console.log(data);
-        });
-        navService.getREGION().then(function (data) {
-            if(data.code == 0){
-                sessionStorage.setItem("region", JSON.stringify(data.result));
-            }
-        }, function (data) {
-            console.log(data);
-        });
-        var prc = {
-            stype : 'PRC'
-        }
-        navService.getSEGMENTprc(prc).then(function (data) {
-            if(data.code == 0){
-                sessionStorage.setItem("segmentPRC", JSON.stringify(data.result));
-            }
-        }, function (data) {
-            console.log(data);
-        });
-        var ww = {
-            stype : 'WW'
-        }
-        navService.getSEGMENTww(ww).then(function (data) {
-            if(data.code == 0){
-                sessionStorage.setItem("segmentWW", JSON.stringify(data.result));
-            }
-        }, function (data) {
-            console.log(data);
-        });
-
-
-
-
+        /* navService.getBU().then(function (data) {
+         if(data.code == 0){
+         sessionStorage.setItem("bu", JSON.stringify(data.result));
+         }
+         }, function (data) {
+         console.log(data);
+         });
+         navService.getGEO().then(function (data) {
+         if(data.code == 0){
+         sessionStorage.setItem("geo", JSON.stringify(data.result));
+         }
+         }, function (data) {
+         console.log(data);
+         });
+         navService.getREGION().then(function (data) {
+         if(data.code == 0){
+         sessionStorage.setItem("region", JSON.stringify(data.result));
+         }
+         }, function (data) {
+         console.log(data);
+         });
+         var prc = {
+         stype : 'PRC'
+         }
+         navService.getSEGMENTprc(prc).then(function (data) {
+         if(data.code == 0){
+         sessionStorage.setItem("segmentPRC", JSON.stringify(data.result));
+         }
+         }, function (data) {
+         console.log(data);
+         });
+         var ww = {
+         stype : 'WW'
+         }
+         navService.getSEGMENTww(ww).then(function (data) {
+         if(data.code == 0){
+         sessionStorage.setItem("segmentWW", JSON.stringify(data.result));
+         }
+         }, function (data) {
+         console.log(data);
+         });*/
 
 
         //$rootScope.Markupthead = ['PRC','AP','EMEA','NA','Brazil','LAS','HQ','Total'];
-       // $rootScope.Markuptbody = ['CONSUMER','SMB','COMMERCIAL','Others','Total'];
+        // $rootScope.Markuptbody = ['CONSUMER','SMB','COMMERCIAL','Others','Total'];
         //markup ww表格式化
-        $rootScope.SortUnique =function(json,tbody,thead,jsonData){
+        $rootScope.SortUnique = function (json, tbody, thead, jsonData) {
             //从某个json中取出数据，对数据去重，同时按照要求排序的封装
-            function SortUnique(obj,par,arr){
+            function SortUnique(obj, par, arr) {
                 var jsonArr = [];
-                for(var i=0;i<obj.length;i++){
+                for (var i = 0; i < obj.length; i++) {
                     jsonArr.push(obj[i][par]);
                 }
-                return arrCONTarr(unique(jsonArr),arr);
+                return arrCONTarr(unique(jsonArr), arr);
             }
 
             //获取已经排序的segment，同时仅有数据中的这些
-            var segment = SortUnique(json,'segment',tbody)
+            var segment = SortUnique(json, 'segment', tbody)
 
 
             //把segment相同的放在一个数组中
             var sameArr = [];
-            for(var j=0;j<tbody.length;j++){
+            for (var j = 0; j < tbody.length; j++) {
                 var otherArr = [];
-                for(var i=0;i<json.length;i++){
-                    if(json[i].segment == tbody[j]){
+                for (var i = 0; i < json.length; i++) {
+                    if (json[i].segment == tbody[j]) {
                         otherArr.push(json[i]);
                     }
                 }
-                if(otherArr.length) {
+                if (otherArr.length) {
                     sameArr.push(otherArr)
                 }
             }
             //console.log(sameArr)
 
             //给已经处理好的数组的项中，根据geo，添加status序号
-            for(var j=0;j<sameArr.length;j++){
-                for(var n=0;n<sameArr[j].length;n++){
-                    for(var i=0;i<thead.length;i++){
-                        if(sameArr[j][n].geo == thead[i]){
+            for (var j = 0; j < sameArr.length; j++) {
+                for (var n = 0; n < sameArr[j].length; n++) {
+                    for (var i = 0; i < thead.length; i++) {
+                        if (sameArr[j][n].geo == thead[i]) {
                             sameArr[j][n].status = i;
                         }
                     }
@@ -558,10 +554,10 @@ angular.module('app', [
             //创建一个数组，数组中包含对象，对象中包含两项，一项为segment，一项为数组放数据用，其中给数组设置长度及默认项为空字符串
             var dataArr = [];
             //molArr = new Array(thead.length-1).fill('');
-            for(var i=0;i<sameArr.length;i++){
-                for(var j=0;j<sameArr[i].length;j++){
-                    dataArr[i] ={segment : sameArr[i][j].segment , arr:[]};
-                    dataArr[i].arr =  new Array(thead.length-1).fill('-');
+            for (var i = 0; i < sameArr.length; i++) {
+                for (var j = 0; j < sameArr[i].length; j++) {
+                    dataArr[i] = {segment: sameArr[i][j].segment, arr: []};
+                    dataArr[i].arr = new Array(thead.length - 1).fill('-');
                 }
             }
             console.log(dataArr)
@@ -570,11 +566,11 @@ angular.module('app', [
             //将原本设置的status值作为数组对象数组中的索引，将原本jsonData的值放入正确的索引之中
             //dataArr的数据可以用于不要求全部显示segment，有什么显示什么segment用
 
-            for(var i=0;i<dataArr.length;i++){
-                for(var j=0;j<sameArr.length;j++){
-                    for(var n=0;n<sameArr[j].length;n++){
-                        if(sameArr[j][n].segment == dataArr[i].segment){
-                            dataArr[i].arr[sameArr[j][n].status-1] = sameArr[j][n][jsonData];
+            for (var i = 0; i < dataArr.length; i++) {
+                for (var j = 0; j < sameArr.length; j++) {
+                    for (var n = 0; n < sameArr[j].length; n++) {
+                        if (sameArr[j][n].segment == dataArr[i].segment) {
+                            dataArr[i].arr[sameArr[j][n].status - 1] = sameArr[j][n][jsonData];
 
                         }
                     }
@@ -583,17 +579,16 @@ angular.module('app', [
             //console.log(dataArr)
 
 
-
             //Zarr为最终前端所需数据形态，如果展示全部segment，则将已经有的替换到完整的指定项，最终所得为所需结果
             var Zarr = [];
-            var molArr2 = new Array(thead.length-1).fill('-');
-            for(var i=0;i<tbody.length;i++){
-                Zarr.push({segment : tbody[i],arr : molArr2})
+            var molArr2 = new Array(thead.length - 1).fill('-');
+            for (var i = 0; i < tbody.length; i++) {
+                Zarr.push({segment: tbody[i], arr: molArr2})
             }
 
-            for(var i=0;i<Zarr.length;i++){
-                for(var j=0;j<dataArr.length;j++){
-                    if(Zarr[i].segment == dataArr[j].segment){
+            for (var i = 0; i < Zarr.length; i++) {
+                for (var j = 0; j < dataArr.length; j++) {
+                    if (Zarr[i].segment == dataArr[j].segment) {
                         Zarr[i] = dataArr[j];
                     }
                 }
@@ -602,41 +597,41 @@ angular.module('app', [
 
         }
 
-        $rootScope.markHZ = function(result,thead){
+        $rootScope.markHZ = function (result, thead) {
             var Markuptbody = [];
-            for(var i in result){
+            for (var i in result) {
                 console.log(i)
-                Markuptbody.push({name1:'BMC $M（'+i+'）',name2:'Markup in Tape $M（'+i+'）',flag:i})
+                Markuptbody.push({name1: 'BMC $M（' + i + '）', name2: 'Markup in Tape $M（' + i + '）', flag: i})
             }
 
-            for(var i=0;i<Markuptbody.length;i++){
+            for (var i = 0; i < Markuptbody.length; i++) {
                 Markuptbody[i].data1 = new Array(thead.length).fill('-');
                 Markuptbody[i].data2 = new Array(thead.length).fill('-');
             }
 
             var resultAarr = [];
-            for(var i in result){
-                resultAarr.push({title:i,data:result[i],prc:[],total:[],prcData:[],totalData:[]});
+            for (var i in result) {
+                resultAarr.push({title: i, data: result[i], prc: [], total: [], prcData: [], totalData: []});
             }
 
-            for(var i=0;i< resultAarr.length;i++){
-                for(var j=0;j<resultAarr[i].data.length;j++){
-                    if(resultAarr[i].data[j].geo == 'PRC'){
+            for (var i = 0; i < resultAarr.length; i++) {
+                for (var j = 0; j < resultAarr[i].data.length; j++) {
+                    if (resultAarr[i].data[j].geo == 'PRC') {
                         resultAarr[i].prc.push(resultAarr[i].data[j])
-                    }else if(resultAarr[i].data[j].geo == 'Total'){
+                    } else if (resultAarr[i].data[j].geo == 'Total') {
                         resultAarr[i].total.push(resultAarr[i].data[j])
                     }
                 }
             }
 
-            for(var i=0;i<resultAarr.length;i++){
-                for(var n=0;n<thead.length;n++){
-                    for(var j=0;j<resultAarr[i].prc.length;j++){
+            for (var i = 0; i < resultAarr.length; i++) {
+                for (var n = 0; n < thead.length; n++) {
+                    for (var j = 0; j < resultAarr[i].prc.length; j++) {
                         /*console.log(resultAarr[i].prc[j].segment)*/
-                        if(thead[n] == resultAarr[i].prc[j].segment){
+                        if (thead[n] == resultAarr[i].prc[j].segment) {
                             resultAarr[i].prc[j].status = n;
                         }
-                        if(thead[n] == resultAarr[i].total[j].segment){
+                        if (thead[n] == resultAarr[i].total[j].segment) {
                             resultAarr[i].total[j].status = n;
                         }
 
@@ -644,10 +639,10 @@ angular.module('app', [
                 }
             }
 
-            for(var i=0;i<resultAarr.length;i++){
-                for(var j=0;j<Markuptbody.length;j++){
-                    if(resultAarr[i].title == Markuptbody[j].flag){
-                        for(var n=0;n<resultAarr[i].prc.length;n++){
+            for (var i = 0; i < resultAarr.length; i++) {
+                for (var j = 0; j < Markuptbody.length; j++) {
+                    if (resultAarr[i].title == Markuptbody[j].flag) {
+                        for (var n = 0; n < resultAarr[i].prc.length; n++) {
                             Markuptbody[j].data1[resultAarr[i].prc[n].status] = resultAarr[i].prc[n].bmc;
                             Markuptbody[j].data2[resultAarr[i].prc[n].status] = resultAarr[i].prc[n].mark45;
                         }
@@ -659,21 +654,18 @@ angular.module('app', [
         }
 
 
-
-
-
         //    数组去重
-        function unique(arr){
+        function unique(arr) {
             var res = [arr[0]];
-            for(var i=1;i<arr.length;i++){
+            for (var i = 1; i < arr.length; i++) {
                 var repeat = false;
-                for(var j=0;j<res.length;j++){
-                    if(arr[i] == res[j]){
+                for (var j = 0; j < res.length; j++) {
+                    if (arr[i] == res[j]) {
                         repeat = true;
                         break;
                     }
                 }
-                if(!repeat){
+                if (!repeat) {
                     res.push(arr[i]);
                 }
             }
@@ -685,15 +677,16 @@ angular.module('app', [
             var len = arr.length;
             for (var i = 0; i < len - 1; i++) {
                 for (var j = 0; j < len - 1 - i; j++) {
-                    if (arr[j] > arr[j+1]) {        // 相邻元素两两对比
-                        var temp = arr[j+1];        // 元素交换
-                        arr[j+1] = arr[j];
+                    if (arr[j] > arr[j + 1]) {        // 相邻元素两两对比
+                        var temp = arr[j + 1];        // 元素交换
+                        arr[j + 1] = arr[j];
                         arr[j] = temp;
                     }
                 }
             }
             return arr;
         }
+
         //按照另一个数组排序
         function arrCONTarr(a, b) {
             var c = [];
@@ -2619,6 +2612,11 @@ angular.module('app.chat', ['ngSanitize'])
 
     angular.module('SmartAdmin.Forms', []);
 })();
+(function(){
+    "use strict";
+
+    angular.module('SmartAdmin.Layout', []);
+})();
 angular.module("app").run(["$templateCache", function($templateCache) {$templateCache.put("app/dashboard/live-feeds.tpl.html","<div jarvis-widget id=\"live-feeds-widget\" data-widget-togglebutton=\"false\" data-widget-editbutton=\"false\"\r\n     data-widget-fullscreenbutton=\"false\" data-widget-colorbutton=\"false\" data-widget-deletebutton=\"false\">\r\n<!-- widget options:\r\nusage: <div class=\"jarviswidget\" id=\"wid-id-0\" data-widget-editbutton=\"false\">\r\n\r\ndata-widget-colorbutton=\"false\"\r\ndata-widget-editbutton=\"false\"\r\ndata-widget-togglebutton=\"false\"\r\ndata-widget-deletebutton=\"false\"\r\ndata-widget-fullscreenbutton=\"false\"\r\ndata-widget-custombutton=\"false\"\r\ndata-widget-collapsed=\"true\"\r\ndata-widget-sortable=\"false\"\r\n\r\n-->\r\n<header>\r\n    <span class=\"widget-icon\"> <i class=\"glyphicon glyphicon-stats txt-color-darken\"></i> </span>\r\n\r\n    <h2>Live Feeds </h2>\r\n\r\n    <ul class=\"nav nav-tabs pull-right in\" id=\"myTab\">\r\n        <li class=\"active\">\r\n            <a data-toggle=\"tab\" href=\"#s1\"><i class=\"fa fa-clock-o\"></i> <span class=\"hidden-mobile hidden-tablet\">Live Stats</span></a>\r\n        </li>\r\n\r\n        <li>\r\n            <a data-toggle=\"tab\" href=\"#s2\"><i class=\"fa fa-facebook\"></i> <span class=\"hidden-mobile hidden-tablet\">Social Network</span></a>\r\n        </li>\r\n\r\n        <li>\r\n            <a data-toggle=\"tab\" href=\"#s3\"><i class=\"fa fa-dollar\"></i> <span class=\"hidden-mobile hidden-tablet\">Revenue</span></a>\r\n        </li>\r\n    </ul>\r\n\r\n</header>\r\n\r\n<!-- widget div-->\r\n<div class=\"no-padding\">\r\n\r\n    <div class=\"widget-body\">\r\n        <!-- content -->\r\n        <div id=\"myTabContent\" class=\"tab-content\">\r\n            <div class=\"tab-pane fade active in padding-10 no-padding-bottom\" id=\"s1\">\r\n                <div class=\"row no-space\">\r\n                    <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8\">\r\n														<span class=\"demo-liveupdate-1\"> <span\r\n                                                                class=\"onoffswitch-title\">Live switch</span> <span\r\n                                                                class=\"onoffswitch\">\r\n																<input type=\"checkbox\" name=\"start_interval\" ng-model=\"autoUpdate\"\r\n                                                                       class=\"onoffswitch-checkbox\" id=\"start_interval\">\r\n																<label class=\"onoffswitch-label\" for=\"start_interval\">\r\n                                                                    <span class=\"onoffswitch-inner\"\r\n                                                                          data-swchon-text=\"ON\"\r\n                                                                          data-swchoff-text=\"OFF\"></span>\r\n                                                                    <span class=\"onoffswitch-switch\"></span>\r\n                                                                </label> </span> </span>\r\n\r\n                        <div id=\"updating-chart\" class=\"chart-large txt-color-blue\" flot-basic flot-data=\"liveStats\" flot-options=\"liveStatsOptions\"></div>\r\n\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4 show-stats\">\r\n\r\n                        <div class=\"row\">\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> My Tasks <span\r\n                                    class=\"pull-right\">130/200</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blueDark\" style=\"width: 65%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> Transfered <span\r\n                                    class=\"pull-right\">440 GB</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blue\" style=\"width: 34%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> Bugs Squashed<span\r\n                                    class=\"pull-right\">77%</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blue\" style=\"width: 77%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> User Testing <span\r\n                                    class=\"pull-right\">7 Days</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-greenLight\" style=\"width: 84%;\"></div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <span class=\"show-stat-buttons\"> <span class=\"col-xs-12 col-sm-6 col-md-6 col-lg-6\"> <a\r\n                                    href-void class=\"btn btn-default btn-block hidden-xs\">Generate PDF</a> </span> <span\r\n                                    class=\"col-xs-12 col-sm-6 col-md-6 col-lg-6\"> <a href-void\r\n                                                                                     class=\"btn btn-default btn-block hidden-xs\">Report\r\n                                a bug</a> </span> </span>\r\n\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"show-stat-microcharts\" data-sparkline-container data-easy-pie-chart-container>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n\r\n                        <div class=\"easy-pie-chart txt-color-orangeDark\" data-percent=\"33\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">35</span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Server Load <i class=\"fa fa-caret-up icon-color-bad\"></i> </span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-greenLight\"><i class=\"fa fa-caret-up\"></i> 97%</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blueLight\"><i class=\"fa fa-caret-down\"></i> 44%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-greenLight hidden-sm hidden-md pull-right\"\r\n                             data-sparkline-type=\"line\" data-sparkline-height=\"33px\" data-sparkline-width=\"70px\"\r\n                             data-fill-color=\"transparent\">\r\n                            130, 187, 250, 257, 200, 210, 300, 270, 363, 247, 270, 363, 247\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-greenLight\" data-percent=\"78.9\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">78.9 </span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Disk Space <i class=\"fa fa-caret-down icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-blueDark\"><i class=\"fa fa-caret-up\"></i> 76%</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blue\"><i class=\"fa fa-caret-down\"></i> 3%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-blue hidden-sm hidden-md pull-right\" data-sparkline-type=\"line\"\r\n                             data-sparkline-height=\"33px\" data-sparkline-width=\"70px\" data-fill-color=\"transparent\">\r\n                            257, 200, 210, 300, 270, 363, 130, 187, 250, 247, 270, 363, 247\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-blue\" data-percent=\"23\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">23 </span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Transfered <i class=\"fa fa-caret-up icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-darken\">10GB</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blueDark\"><i class=\"fa fa-caret-up\"></i> 10%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-darken hidden-sm hidden-md pull-right\"\r\n                             data-sparkline-type=\"line\" data-sparkline-height=\"33px\" data-sparkline-width=\"70px\"\r\n                             data-fill-color=\"transparent\">\r\n                            200, 210, 363, 247, 300, 270, 130, 187, 250, 257, 363, 247, 270\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-darken\" data-percent=\"36\" data-pie-size=\"50\">\r\n                            <span class=\"percent degree-sign\">36 <i class=\"fa fa-caret-up\"></i></span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Temperature <i\r\n                                class=\"fa fa-caret-down icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-red\"><i class=\"fa fa-caret-up\"></i> 124</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blue\"><i class=\"fa fa-caret-down\"></i> 40 F</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-red hidden-sm hidden-md pull-right\" data-sparkline-type=\"line\"\r\n                             data-sparkline-height=\"33px\" data-sparkline-width=\"70px\" data-fill-color=\"transparent\">\r\n                            2700, 3631, 2471, 2700, 3631, 2471, 1300, 1877, 2500, 2577, 2000, 2100, 3000\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n            <!-- end s1 tab pane -->\r\n\r\n            <div class=\"tab-pane fade\" id=\"s2\">\r\n                <div class=\"widget-body-toolbar bg-color-white\">\r\n\r\n                    <form class=\"form-inline\" role=\"form\">\r\n\r\n                        <div class=\"form-group\">\r\n                            <label class=\"sr-only\" for=\"s123\">Show From</label>\r\n                            <input type=\"email\" class=\"form-control input-sm\" id=\"s123\" placeholder=\"Show From\">\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <input type=\"email\" class=\"form-control input-sm\" id=\"s124\" placeholder=\"To\">\r\n                        </div>\r\n\r\n                        <div class=\"btn-group hidden-phone pull-right\">\r\n                            <a class=\"btn dropdown-toggle btn-xs btn-default\" data-toggle=\"dropdown\"><i\r\n                                    class=\"fa fa-cog\"></i> More <span class=\"caret\"> </span> </a>\r\n                            <ul class=\"dropdown-menu pull-right\">\r\n                                <li>\r\n                                    <a href-void><i class=\"fa fa-file-text-alt\"></i> Export to PDF</a>\r\n                                </li>\r\n                                <li>\r\n                                    <a href-void><i class=\"fa fa-question-sign\"></i> Help</a>\r\n                                </li>\r\n                            </ul>\r\n                        </div>\r\n\r\n                    </form>\r\n\r\n                </div>\r\n                <div class=\"padding-10\">\r\n                    <div id=\"statsChart\" class=\"chart-large has-legend-unique\" flot-basic flot-data=\"statsData\" flot-options=\"statsDisplayOptions\"></div>\r\n                </div>\r\n\r\n            </div>\r\n            <!-- end s2 tab pane -->\r\n\r\n            <div class=\"tab-pane fade\" id=\"s3\">\r\n\r\n                <div class=\"widget-body-toolbar bg-color-white smart-form\" id=\"rev-toggles\">\r\n\r\n                    <div class=\"inline-group\">\r\n\r\n                        <label for=\"gra-0\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-0\" ng-model=\"targetsShow\">\r\n                            <i></i> Target </label>\r\n                        <label for=\"gra-1\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-1\" ng-model=\"actualsShow\">\r\n                            <i></i> Actual </label>\r\n                        <label for=\"gra-2\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-2\" ng-model=\"signupsShow\">\r\n                            <i></i> Signups </label>\r\n                    </div>\r\n\r\n                    <div class=\"btn-group hidden-phone pull-right\">\r\n                        <a class=\"btn dropdown-toggle btn-xs btn-default\" data-toggle=\"dropdown\"><i\r\n                                class=\"fa fa-cog\"></i> More <span class=\"caret\"> </span> </a>\r\n                        <ul class=\"dropdown-menu pull-right\">\r\n                            <li>\r\n                                <a href-void><i class=\"fa fa-file-text-alt\"></i> Export to PDF</a>\r\n                            </li>\r\n                            <li>\r\n                                <a href-void><i class=\"fa fa-question-sign\"></i> Help</a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <div class=\"padding-10\">\r\n                    <div id=\"flotcontainer\" class=\"chart-large has-legend-unique\" flot-basic flot-data=\"revenewData\" flot-options=\"revenewDisplayOptions\" ></div>\r\n                </div>\r\n            </div>\r\n            <!-- end s3 tab pane -->\r\n        </div>\r\n\r\n        <!-- end content -->\r\n    </div>\r\n\r\n</div>\r\n<!-- end widget div -->\r\n</div>\r\n");
 $templateCache.put("app/layout/layout.tpl.html","<!-- HEADER -->\r\n<div data-smart-include=\"app/layout/partials/header.tpl.html\" class=\"placeholder-header\"></div>\r\n<!-- END HEADER -->\r\n\r\n\r\n<!-- Left panel : Navigation area -->\r\n<!-- Note: This width of the aside area can be adjusted through LESS variables -->\r\n<div data-smart-include=\"app/layout/partials/navigation.tpl.html\" class=\"placeholder-left-panel\"></div>\r\n\r\n<!-- END NAVIGATION -->\r\n\r\n<!-- MAIN PANEL -->\r\n<div id=\"main\" role=\"main\">\r\n    <demo-states></demo-states>\r\n\r\n    <!-- RIBBON -->\r\n    <div id=\"ribbon\">\r\n\r\n				<span class=\"ribbon-button-alignment\">\r\n					<span id=\"refresh\" class=\"btn btn-ribbon\" reset-widgets\r\n                          tooltip-placement=\"bottom\"\r\n                          smart-tooltip-html=\"<i class=\'text-warning fa fa-warning\'></i> Warning! This will reset all your widget settings.\">\r\n						<i class=\"fa fa-refresh\"></i>\r\n					</span>\r\n				</span>\r\n\r\n        <!-- breadcrumb -->\r\n        <state-breadcrumbs></state-breadcrumbs>\r\n        <!-- end breadcrumb -->\r\n\r\n\r\n    </div>\r\n    <!-- END RIBBON -->\r\n\r\n\r\n    <div data-smart-router-animation-wrap=\"content content@app\" data-wrap-for=\"#content\">\r\n        <div data-ui-view=\"content\" data-autoscroll=\"false\"></div>\r\n    </div>\r\n\r\n</div>\r\n<!-- END MAIN PANEL -->\r\n\r\n<!-- PAGE FOOTER -->\r\n<div data-smart-include=\"app/layout/partials/footer.tpl.html\"></div>\r\n\r\n<div data-smart-include=\"app/layout/shortcut/shortcut.tpl.html\"></div>\r\n\r\n<!-- END PAGE FOOTER -->\r\n\r\n\r\n");
 $templateCache.put("app/auth/directives/login-info.tpl.html","<div class=\"login-info ng-cloak\">\r\n    <span> <!-- User image size is adjusted inside CSS, it should stay as it -->\r\n        <a  href=\"\">\r\n            <img ng-src=\"{{user.picture}}\" alt=\"me\" class=\"online\">\r\n                <span>{{user.username}}\r\n                </span>\r\n        </a>\r\n     </span>\r\n</div>");
@@ -2645,11 +2643,6 @@ $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-profile-form.tpl.html","<form id=\"profileForm\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <label>Email address</label>\r\n            <input type=\"text\" class=\"form-control\" name=\"email\" />\r\n        </div>\r\n    </fieldset>\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label>Password</label>\r\n            <input type=\"password\" class=\"form-control\" name=\"password\" />\r\n        </div>\r\n    </fieldset>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>\r\n");
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-toggling-form.tpl.html","<form id=\"togglingForm\" method=\"post\" class=\"form-horizontal\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Full name <sup>*</sup></label>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"firstName\" placeholder=\"First name\" />\r\n            </div>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"lastName\" placeholder=\"Last name\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Company <sup>*</sup></label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"text\" class=\"form-control\" name=\"company\"\r\n                       required data-bv-notempty-message=\"The company name is required\" />\r\n            </div>\r\n            <div class=\"col-lg-2\">\r\n                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"#jobInfo\">\r\n                    Add more info\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <!-- These fields will not be validated as long as they are not visible -->\r\n    <div id=\"jobInfo\" style=\"display: none;\">\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Job title <sup>*</sup></label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"job\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Department <sup>*</sup></label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"department\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Mobile phone <sup>*</sup></label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"text\" class=\"form-control\" name=\"mobilePhone\" />\r\n            </div>\r\n            <div class=\"col-lg-2\">\r\n                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"#phoneInfo\">\r\n                    Add more phone numbers\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n    <!-- These fields will not be validated as long as they are not visible -->\r\n    <div id=\"phoneInfo\" style=\"display: none;\">\r\n\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Home phone</label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"homePhone\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Office phone</label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"officePhone\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>");
 $templateCache.put("app/_common/layout/directives/demo/demo-states.tpl.html","<div class=\"demo\"><span id=\"demo-setting\"><i class=\"fa fa-cog txt-color-blueDark\"></i></span>\r\n\r\n    <form>\r\n        <legend class=\"no-padding margin-bottom-10\">Layout Options</legend>\r\n        <section>\r\n            <label><input type=\"checkbox\" ng-model=\"fixedHeader\"\r\n                          class=\"checkbox style-0\"><span>Fixed Header</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedNavigation\"\r\n                          class=\"checkbox style-0\"><span>Fixed Navigation</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedRibbon\"\r\n                          class=\"checkbox style-0\"><span>Fixed Ribbon</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedPageFooter\"\r\n                          class=\"checkbox style-0\"><span>Fixed Footer</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"insideContainer\"\r\n                          class=\"checkbox style-0\"><span>Inside <b>.container</b></span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"rtl\"\r\n                          class=\"checkbox style-0\"><span>RTL</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"menuOnTop\"\r\n                          class=\"checkbox style-0\"><span>Menu on <b>top</b></span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"colorblindFriendly\"\r\n                          class=\"checkbox style-0\"><span>For Colorblind <div\r\n                    class=\"font-xs text-right\">(experimental)\r\n            </div></span>\r\n            </label><span id=\"smart-bgimages\"></span></section>\r\n        <section><h6 class=\"margin-top-10 semi-bold margin-bottom-5\">Clear Localstorage</h6><a\r\n                ng-click=\"factoryReset()\" class=\"btn btn-xs btn-block btn-primary\" id=\"reset-smart-widget\"><i\r\n                class=\"fa fa-refresh\"></i> Factory Reset</a></section>\r\n\r\n        <h6 class=\"margin-top-10 semi-bold margin-bottom-5\">SmartAdmin Skins</h6>\r\n\r\n\r\n        <section id=\"smart-styles\">\r\n            <a ng-repeat=\"skin in skins\" ng-click=\"setSkin(skin)\" class=\"{{skin.class}}\" style=\"{{skin.style}}\"><i ng-if=\"skin.name == $parent.smartSkin\" class=\"fa fa-check fa-fw\"></i> {{skin.label}} <sup ng-if=\"skin.beta\">beta</sup></a>\r\n        </section>\r\n    </form>\r\n</div>");}]);
-(function(){
-    "use strict";
-
-    angular.module('SmartAdmin.Layout', []);
-})();
 (function(){
     "use strict";
 
@@ -6150,6 +6143,1449 @@ angular.module('app.maps').factory('SmartMapStyle', function ($q, $http, APP_CON
 
 
 });
+"use strict";
+
+angular.module('app.OperationData').controller('AlliancefundmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+})
+"use strict";
+
+angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($scope,$state,$timeout,$stateParams,$rootScope,APP_CONFIG,CAmaintenanceService) {
+    //初始化Cycle Choose
+    CAmaintenanceService.getSelectCycle().then(function(data){
+        if(data.code == 0){
+            $scope.cycledata = data.result;
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+    //第二部分tab信息展示
+    $scope.getPage = function(){
+        CAmaintenanceService.getExecute2().then(function(data){
+            if(data.code == 0){
+                $scope.tablist = data.result;
+                $("#tabExample1").dataTable().fnDestroy();
+                $timeout(function () {
+                    $('#tabExample1').dataTable({
+                        "scrollY": 160,
+                        "scrollX": true,
+                        "dom": '<"top">rt<"bottom"><"clear">',
+                        "scrollCollapse": true,
+                        //"jQueryUI": true,
+                        // "pagingType":   "simple_numbers",
+                        stateSave: true,
+                        "paging": false,
+                        "ordering": false,
+                        "bLengthChange": true
+                    });
+                });
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        });
+    }
+    $scope.getPage();
+
+    //点击Execute执行
+    $scope.getExecute = function(){
+        $scope.taskId = '';
+        $scope.search = {
+            cycleName : $scope.CycleChoose,
+            user : $rootScope.user
+        }
+        console.log($rootScope.user);
+        if(!$scope.CycleChoose){
+            alert("请选择条件！");
+        }else {
+            CAmaintenanceService.getExecute($scope.search).then(function(data){
+                if(data.code == 0){
+                    alert(data.result);
+                    $scope.getPage();
+                }else {
+                    alert(data.msg);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+        }
+    };
+    //单击整行选中
+    $scope.trClick = function($event,id,status,cycleName){
+        $($("#tabExample input:radio")).removeAttr("checked");
+        $($event.target).parent().find("input:radio").prop("checked",true);
+        $scope.taskId = id;
+        console.log($scope.taskId)
+        $scope.status = status;
+        console.log($scope.status)
+        $scope.cyclename = cycleName;
+        console.log($scope.cyclename)
+        //$scope.SearchTaskId(a,b,c)
+    }
+
+    //点击Search
+    $scope.SearchTab = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'){
+            $scope.PRCww=true;
+
+            $scope.TaskID =  $scope.taskId;
+            $scope.CycleName = $scope.cyclename;
+
+            //WW
+            CAmaintenanceService.getWw($scope.TaskID).then(function(data){
+                if(data.code == 0){
+                    $scope.WwList = data.result;
+                    console.log($scope.WwList);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+
+            //PRC
+            CAmaintenanceService.getPrc($scope.TaskID).then(function(data) {
+                if (data.code == 0) {
+                    $scope.PrcList = data.result;
+                    console.log($scope.PrcList);
+                }
+                console.log(data)
+            } ,function(data){
+                console.log(data);
+            });
+        }else {
+            alert("暂未执行成功，无法查看！");
+        }
+    };
+    //删除
+    $scope.DelOneItem = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
+            if(confirm('确认要删除？')) {
+                console.log($scope.taskid);
+                $scope.taskid = {
+                    uuid: $scope.taskId
+                };
+                CAmaintenanceService.DelItem($scope.taskid).then(function (data) {
+                    if (data.code == 0) {
+                        alert("删除成功！");
+                        $scope.taskId = '';
+                        $scope.getPage();
+                        //$("#tabExample").dataTable().fnDestroy();
+                        //$scope.PRCWW = true;
+                    }else {
+                        alert(data.msg);
+                    }
+                    console.log(data);
+                }, function (data) {
+                    console.log(data);
+                });
+            }
+        }else {
+            alert("还未执行完成！");
+        }
+    };
+
+    //prc时的Download
+    $scope.getPRCDownLoad = function(){
+        if(!$scope.TaskID){
+            return;
+        }else{
+        CAmaintenanceService.getPrcDown($scope.TaskID).then(function(data){
+            console.log(data);
+            //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
+            //而使用“application/vnd.openxmlformats-officedocument.spreadsheetml.sheet”则会保存为xlsx
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        },function(data){
+            console.log(data);
+        })
+        }
+    }
+
+    //ww时的Download
+    $scope.getWWDownLoad = function(){
+        if(!$scope.TaskID){
+            return;
+        }else{
+            CAmaintenanceService.getWwDown($scope.TaskID).then(function(data){
+                console.log(data);
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+            },function(data){
+                console.log(data);
+            })
+        }
+    }
+
+    //点击Validate
+    $scope.getValidate = function(){
+        $scope.validate = {
+            zcycle_name : $scope.CycleName,
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
+        };
+        console.log($rootScope.user)
+        CAmaintenanceService.getValidate($scope.validate).then(function (data) {
+            if(data.code == 0){
+                alert('成功！');
+                $scope.getPage();
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
+
+    //button 切换
+    $scope.sw1 = true;
+    $scope.ww = false;
+    $scope.sw2 = false;
+    $scope.btnSwitch = function (flag) {
+        if (flag == 'w') {
+            $scope.ww = true;
+            $scope.sw1 = false;
+            //$scope.sw2 = false;
+        } else if (flag == 'p') {
+            $scope.ww = false;
+            $scope.sw1 = true;
+            //$scope.sw2 = false;
+        }
+    }
+
+
+})
+"use strict";
+
+angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($scope,$state,APP_CONFIG,$location,$rootScope,CAmanualuploadService,Upload) {
+    //初始化Cycle Choose
+    CAmanualuploadService.getSelectCycle().then(function(data){
+        if(data.code == 0){
+            $scope.cycledata = data.result;
+            console.log($scope.cycledata);
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+    //上传
+    $scope.myfiles = {};
+    $scope.openUpload = function(){
+        //$('#myModal').modal('show');
+        $scope.myfilesVal = '';
+        $scope.fileChange = function(){
+            if($scope.myfiles.name){
+                $scope.myfilesVal = $scope.myfiles.name;
+            }else {
+                $scope.myfilesVal = '';
+            }
+        }
+    }
+
+    $scope.upload = function(){
+        Upload.upload({
+            //服务端接收
+            url:APP_CONFIG.baseUrl+ '/api/dm/ca/attachments',
+            data : {
+                file : $scope.myfiles,
+                username :$rootScope.user,
+                cyclename:$scope.CycleChoose
+            },
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).success(function (data, status, headers, config){
+            console.log($scope.CycleChoose.indexOf("M0")==-1);
+            if(!$scope.CycleChoose){
+                alert("请选择条件！");
+            }else {
+                if (data.code == 0 && $scope.CycleChoose.indexOf("M0") == -1) {
+                    alert('上传成功！');
+                    //$('#myModal').modal('hide');
+                    $scope.goPage();
+                } else {
+                    alert('上传失败！');
+                }
+            }
+        }).error(function (data, status, headers, config) {
+            alert('上传失败');
+            //上传失败
+            console.log('error status: ' + status);
+        });
+    }
+
+    //prc时的Download
+    $scope.getPRCDownLoad = function(){
+        if(!$scope.TaskID){
+            return;
+        }else{
+            CAmanualuploadService.getPrcDown($scope.TaskID).then(function(data){
+                console.log(data);
+                //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
+                //而使用“application/vnd.openxmlformats-officedocument.spreadsheetml.sheet”则会保存为xlsx
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+            },function(data){
+                console.log(data);
+            })
+        }
+    }
+
+    //ww时的Download
+    $scope.getWWDownLoad = function(){
+        if(!$scope.TaskID){
+            return;
+        }else{
+            CAmanualuploadService.getWwDown($scope.TaskID).then(function(data){
+                console.log(data);
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+            },function(data){
+                console.log(data);
+            })
+        }
+    }
+//点击Validate
+    $scope.getValidate = function(){
+        console.log($scope.CycleChoose);
+        $scope.validate = {
+            zcycle_name : $scope.CycleChoose,
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
+        };
+        console.log($rootScope.user)
+        CAmanualuploadService.getValidate($scope.validate).then(function (data) {
+            if(data.code == 0){
+                alert('成功！');
+                $scope.getPage();
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
+    //button 切换
+    $scope.sw1 = true;
+    $scope.ww = false;
+    $scope.sw2 = false;
+    $scope.btnSwitch = function (flag) {
+        if (flag == 'w') {
+            $scope.ww = true;
+            $scope.sw1 = false;
+            //$scope.sw2 = false;
+        } else if (flag == 'p') {
+            $scope.ww = false;
+            $scope.sw1 = true;
+            //$scope.sw2 = false;
+        }
+    }
+
+    //$scope.btnSV = function (flag) {
+    //    if (flag == 's1') {
+    //        $scope.sw2 = true;
+    //        $scope.sw1 = false;
+    //        $scope.ww=false;
+    //    } else if (flag == 's2') {
+    //        $scope.sw1 = true;
+    //        $scope.sw2 = false;
+    //        $scope.ww=false;
+    //    }
+    //}
+
+})
+"use strict";
+
+angular.module('app.OperationData').controller('ConsumptionBasemaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+})
+"use strict";
+
+angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,$state,$stateParams,$location,CycleQTQService,$http,$log,$rootScope,$timeout) {
+
+    //初始化Select-EBR Data
+    $scope.ebr =  'EBR_DATE';
+    $scope.dataMoth = [];
+    CycleQTQService.getSelect($scope.ebr).then(function(data){
+        if(data.code == 0){
+            $scope.ebrdata = data.result;
+            for(var i=0;i< $scope.ebrdata.length;i++){
+                $scope.dataMoth.push({data:$scope.ebrdata[i]});
+            }
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+    //初始化Select-CFE Data
+    $scope.cfe = 'CFE_CYCLE';
+    CycleQTQService.getSelect($scope.cfe).then(function(data){
+        if(data.code == 0){
+            $scope.cfedata = data.result;
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+    //初始化Cycle Choose
+    CycleQTQService.getSelectCycle().then(function(data){
+        if(data.code == 0){
+            $scope.cycledata = data.result;
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+    //多选控件
+    $scope.Sel = true;
+    $(document).bind('click',function(){
+        $scope.Sel = true;
+    });
+    $scope.openSel = function($event){
+        $scope.Sel = false;
+        $event.stopPropagation();
+    };
+    $scope.arr = [];
+    $scope.One = function(m){
+        m.isChecked = !m.isChecked;
+        if(m.isChecked){
+            $scope.arr.push(m.data);
+        }else {
+            for(var i=0;i<$scope.arr.length;i++){
+                if($scope.arr[i] == m.data){
+                    $scope.arr.splice(i,1);
+                    break;
+                }
+            }
+        }
+        console.log($scope.arr);
+        $scope.EBRData = $scope.arr.join(',');
+    };
+
+    //第二部分tab信息展示
+    $scope.getPage = function(){
+        CycleQTQService.getExecute2().then(function(data){
+            console.log(data);
+            if(data.code == 0){
+                //$scope.noData = false;
+                $scope.tablist = data.result;
+                $("#tabExample").dataTable().fnDestroy();
+                $timeout(function () {
+                    $('#tabExample').dataTable({
+                        "scrollY": 160,
+                        "scrollX": true,
+                        "dom": '<"top">rt<"bottom"><"clear">',
+                        "scrollCollapse": true,
+                        "jQueryUI": true,
+                        // "pagingType":   "simple_numbers",
+                        stateSave: true,
+                        "paging": false,
+                        "ordering": false,
+                        "bLengthChange": true,
+                        //"order": [[ 3, "desc" ]]
+                    });
+                });
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        });
+    }
+    $scope.getPage();
+
+    //点击Execute执行
+    //$scope.noData = true;
+    $scope.getExecute = function(){
+        $scope.taskId = '';
+        $scope.search = {
+            cycleName : $scope.CycleChoose,
+            cfeCycle : $scope.CFEData,
+            month : $scope.EBRData,
+            user : $rootScope.user
+        }
+        console.log($rootScope.user);
+        if(!$scope.EBRData || !$scope.CFEData){
+            alert("请选择条件！");
+        }else {
+            CycleQTQService.getExecute($scope.search).then(function(data){
+                if(data.code == 0){
+                    alert(data.result);
+                    $scope.getPage();
+                }else {
+                    alert(data.msg);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+        }
+    };
+
+    $scope.WW = true;
+    $scope.PRC = true;
+    $scope.WWShift = true;
+    $scope.PRCShift = true;
+    //单击整行选中
+    $scope.trClick = function($event,id,status,cycleName){
+        $($("#tabExample input:radio")).removeAttr("checked");
+        $($event.target).parent().find("input:radio").prop("checked",true);
+        $scope.taskId = id;
+        console.log($scope.taskId)
+        $scope.status = status;
+        console.log($scope.status)
+        $scope.cyclename = cycleName;
+        console.log($scope.cyclename)
+        //$scope.SearchTaskId(a,b,c)
+    }
+    //单选获得taskId
+   /* $scope.SearchTaskId = function(id,cycleName,status){
+        $scope.taskId = id;
+        $scope.status = status;
+        $scope.cyclename = cycleName;
+    };*/
+
+    //点击Search
+    $scope.SearchTab = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'){
+            $scope.PRCWW = false;
+            $scope.TaskID =  $scope.taskId;
+            $scope.CyclName = $scope.cyclename;
+            $scope.WW = false;
+            $scope.PRC = true;
+
+            //WW
+           // $("#PRCExample").dataTable().fnDestroy();
+            CycleQTQService.getWw($scope.TaskID).then(function(data){
+                if(data.code == 0){
+                    $scope.WwList = data.result;
+                    $scope.wwTable();
+                    console.log($scope.TaskID);
+                    console.log($scope.CyclName);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+
+            //PRC
+            CycleQTQService.getPrc($scope.TaskID).then(function(data) {
+                if (data.code == 0) {
+                    $scope.PrcList = data.result;
+                    console.log($scope.PrcList);
+                    $scope.prcTalbe();
+                }
+                console.log(data)
+            } ,function(data){
+                console.log(data);
+            });
+        }else {
+            alert("暂未执行成功，无法查看！");
+        }
+    };
+
+
+    //删除
+    $scope.DelParticular = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
+            if(confirm('确认要删除？')) {
+                console.log($scope.taskid);
+                $scope.taskid = {
+                    uuid: $scope.taskId
+                };
+                CycleQTQService.DelParticular($scope.taskid).then(function (data) {
+                    if (data.code == 0) {
+                        alert("删除成功！");
+                        $scope.taskId = '';
+                        $scope.getPage();
+                        //$("#tabExample").dataTable().fnDestroy();
+                        $scope.PRCWW = true;
+                    }else {
+                        alert(data.msg);
+                    }
+                    console.log(data);
+                }, function (data) {
+                    console.log(data);
+                });
+            }
+        }else {
+            alert("还未执行完成！");
+        }
+    };
+
+
+
+
+    $scope.wwTable = function(){
+        $("#WWExample").dataTable().fnDestroy();
+        $timeout(function () {
+            $('#WWExample thead tr').eq(1).find('td').each(function() {
+                var title = $('#WWExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table = $('#WWExample').DataTable({
+                //"processing": true,
+                "scrollY": 400,
+                "scrollX": true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                //"dom": '<"top"i>rt<"bottom"flp><"clear">',
+                "scrollCollapse": true,
+                //"jQueryUI": true,
+                // "pagingType":   "simple_numbers",
+                //stateSave: true,
+                //"pagingType":   "full_numbers",
+                "paging": false,
+                "ordering": false,
+                //"lengthChange": true,
+                "autoWidth": false,
+                "data" :  $scope.WwList,
+                "columns":[
+                    { "data": "qtr" },
+                    { "data": "zfingeo" },
+                    { "data": "zregion2" },
+                    { "data": "cfeBu" },
+                    { "data": "cfeSegment" },
+                    { "data": "invQty",render: $.fn.dataTable.render.number( ',', '.')},
+                    { "data": "cfeCycle" },
+                    { "data": "lqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqBmc",  render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "lqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCqTtl",render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                ]
+            });
+            table.columns().eq(0).each(function(colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function() {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+    }
+
+    $scope.prcTalbe = function(id){
+        $("#PRCExample").dataTable().fnDestroy();
+        $timeout(function () {
+            $('#PRCExample thead tr').eq(1).find('td').each(function() {
+                var title = $('#PRCExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table =$('#PRCExample').DataTable({
+                //"processing": true,
+                "scrollY": 400,
+                "scrollX": true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                "scrollCollapse": true,
+                //"jQueryUI": true,
+                // "pagingType":   "simple_numbers",
+                //stateSave: true,
+                "paging": false,
+                "ordering": false,
+                //"lengthChange": true,
+                "autoWidth": false,
+                "data" : $scope.PrcList,
+                "columns": [
+                    { "data": "qtr" },
+                    { "data": "zfingeo" },
+                    { "data": "cfeBu" },
+                    { "data": "cfePrcSegment" },
+                    { "data": "invQty" ,render: $.fn.dataTable.render.number( ',', '.')},
+                    { "data": "cfeCycle" },
+                    { "data": "lqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "lqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }}
+                ]
+            });
+            table.columns().eq(0).each(function(colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function() {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+
+    }
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.WW = false;
+            $scope.PRC = true;
+            $scope.wwTable();
+        }else if(flag == 'p'){
+            $scope.WW = true;
+            $scope.PRC = false;
+            $scope.prcTalbe();
+        }
+    };
+
+    //点击WW中的Shift view
+    $scope.getSegmentWW = function(){
+        $scope.WW = true;
+        $scope.PRC = true;
+        $scope.WWShift = false;
+        $scope.PRCShift = true;
+        //切换复杂表
+       /* $scope.validate = {
+            cycleName : $scope.CyclName,
+        };
+        console.log($scope.validate)
+        CycleQTQService.getSegment($scope.validate,$scope.TaskID).then(function (data) {
+            if(data.code == 0){
+                alert('成功！');
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });*/
+    };
+    //点击PRC中的Shift view
+    $scope.getSegmentPRC = function(){
+        $scope.WW = true;
+        $scope.PRC = true;
+        $scope.WWShift = true;
+        $scope.PRCShift = false;
+    }
+    //点击WW的中Shift view的Shift view
+    $scope.getWWShift = function(){
+        $scope.WW = false;
+        $scope.PRC = true;
+        $scope.WWShift = true;
+        $scope.PRCShift = true;
+    }
+//点击PRC的中Shift view的Shift view
+    $scope.getPRCShift = function(){
+        $scope.WW = true;
+        $scope.PRC = false;
+        $scope.WWShift = true;
+        $scope.PRCShift = true;
+    }
+
+
+    //点击Validate
+    $scope.getValidate = function(){
+        $scope.validate = {
+            zcycle_name : $scope.CyclName,
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
+        };
+        console.log($rootScope.user)
+        CycleQTQService.getValidate($scope.validate).then(function (data) {
+            if(data.code == 0){
+                console.log(data)
+                alert('Success!');
+                $scope.getPage();
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
+
+    //WW时Download Summary
+    $scope.getWWDownLoadSum = function(){
+        $('#ws2').css('display','block');
+        $('#ws1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            CycleQTQService.getWwSum($scope.TaskID).then(function (data) {
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+                $('#ws1').css('display','block');
+                $('#ws2').css('display','none');
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+
+    //Prc时Download Summary
+    $scope.getPRCDownLoadSum = function(){
+        $('#ps2').css('display','block');
+        $('#ps1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            CycleQTQService.getPrcSum($scope.TaskID).then(function (data) {
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+                $('#ps1').css('display','block');
+                $('#ps2').css('display','none');
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+    //WW时Download Detail
+    $scope.getWWDownLoadDet = function(){
+        $('#wd2').css('display','block');
+        $('#wd1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            CycleQTQService.getWwDet($scope.TaskID).then(function (data) {
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+                $('#wd1').css('display','block');
+                $('#wd2').css('display','none');
+                console.log(data);
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+
+    //Prc时Download Detail
+    $scope.getPRCDownLoadDet = function(){
+        $('#pd2').css('display','block');
+        $('#pd1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            CycleQTQService.getPrcDet($scope.TaskID).then(function (data) {
+                $('#pd1').css('display','block');
+                $('#pd2').css('display','none');
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+});
+"use strict";
+
+angular.module('app.OperationData').controller('DealmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
+    $scope.del = function(){
+        if(confirm('确认要删除？')){
+
+        }
+    }
+})
+"use strict";
+
+angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$rootScope,$state,$stateParams,$location,$timeout,MarkupmaintenanceService,navService) {
+  //调取bu、geo、region、segment
+    navService.getBU().then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("bu", JSON.stringify(data.result));
+        }
+    }, function (data) {
+        console.log(data);
+    });
+    navService.getGEO().then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("geo", JSON.stringify(data.result));
+            $scope.geo = data.result;
+            $scope.geo.push('Total');
+        }
+    }, function (data) {
+        console.log(data);
+    });
+    var prc = {
+        stype : 'PRC'
+    }
+    navService.getSEGMENTprc(prc).then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("segmentPRC", JSON.stringify(data.result));
+            $scope.segmentPRC = data.result;
+            console.log(data.result)
+            $scope.segmentPRC .push('Total');
+        }
+    }, function (data) {
+        console.log(data);
+    });
+    var ww = {
+        stype : 'WW'
+    }
+    navService.getSEGMENTww(ww).then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("segmentWW", JSON.stringify(data.result));
+            $scope.segmentWW = data.result;
+            $scope.segmentWW .push('Total');
+        }
+    }, function (data) {
+        console.log(data);
+    });
+
+
+
+
+
+    //初始化Cycle Choose
+    MarkupmaintenanceService.getSelectCycle().then(function(data){
+        if(data.code == 0){
+            $scope.cycledata = data.result;
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+    //第二部分tab信息展示
+    $scope.getPage = function(){
+        MarkupmaintenanceService.getExecute2().then(function(data){
+            console.log(data);
+            if(data.code == 0){
+                //$scope.noData = false;
+                $scope.tablist = data.result;
+                $("#tabExample").dataTable().fnDestroy();
+                $timeout(function () {
+                    $('#tabExample').dataTable({
+                        "scrollY": 160,
+                        "scrollX": true,
+                        "dom": '<"top">rt<"bottom"><"clear">',
+                        "scrollCollapse": true,
+                        "jQueryUI": true,
+                        // "pagingType":   "simple_numbers",
+                        stateSave: true,
+                        "paging": false,
+                        "ordering": false,
+                        "bLengthChange": true,
+                        //"order": [[ 3, "desc" ]]
+                    });
+                });
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        });
+    }
+    $scope.getPage();
+
+
+    //点击Execute执行
+    //$scope.noData = true;
+    $scope.getExecute = function(){
+        $scope.taskId = '';
+        $scope.search = {
+            cycleName : $scope.CycleChoose,
+            user : $rootScope.user
+        }
+        console.log($rootScope.user);
+        if(!$scope.CycleChoose){
+            alert("请选择条件！");
+        }else {
+            MarkupmaintenanceService.getExecute($scope.search).then(function(data){
+                if(data.code == 0){
+                    alert(data.result);
+                    $scope.getPage();
+                }else {
+                    alert(data.msg);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+        }
+    };
+
+
+    //单击整行选中
+    $scope.trClick = function($event,id,status,cycleName){
+        $($("#tabExample input:radio")).removeAttr("checked");
+        $($event.target).parent().find("input:radio").prop("checked",true);
+        $scope.taskId = id;
+        console.log($scope.taskId)
+        $scope.status = status;
+        console.log($scope.status)
+        $scope.cyclename = cycleName;
+        console.log($scope.cyclename)
+    }
+
+
+
+    $scope.WW = true;
+    $scope.PRC = true;
+    $scope.markTab = false;
+    //点击Search
+    $scope.SearchTab = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'){
+            $scope.markTab = true;
+            $scope.TaskID =  $scope.taskId;
+            $scope.CyclName = $scope.cyclename;
+
+            //WW
+            MarkupmaintenanceService.getWw($scope.TaskID).then(function(data){
+                if(data.code == 0){
+                     $scope.result = data.result;
+                     $scope.resData = [];
+                     for(var i in $scope.result){
+                     var thead1 =['XXX+BMC $M（'+ i +'）'].concat($scope.geo);
+                     var thead2 = ['XXX+Markup in Tape $M (' + i + '）'].concat($scope.geo);
+                     var tbodyBmc = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead1,'bmc');
+                     var tbodyMark = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead2,'mark45');
+                     $scope.resData.push({name : i,tbodyBmc : {tbodyBmcThead:thead1,tbodyBmcTbody : tbodyBmc.slice(0,tbodyBmc.length-1),tbodyBmcTfoot:tbodyBmc.slice(tbodyBmc.length-1)},tbodyMark : {tbodyMarkThead:thead2,tbodyMarkTbody : tbodyMark.slice(0,tbodyMark.length-1),tbodyMarkTfoot:tbodyMark.slice(tbodyMark.length-1)}})
+                     }
+                     $timeout($scope.resData);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+
+            //PRC
+             MarkupmaintenanceService.getPrc($scope.TaskID).then(function(data) {
+                 if (data.code == 0) {
+                     $timeout(function(){
+                         $scope.markHZ = $rootScope.markHZ(data.result,$scope.segmentPRC)
+                     });
+                 }
+                    console.log(data)
+                 } ,function(data){
+                    console.log(data);
+             });
+        }else {
+            alert("暂未执行成功，无法查看！");
+        }
+    };
+
+    //删除
+    $scope.DelParticular = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
+            if(confirm('确认要删除？')) {
+                console.log($scope.taskid);
+                $scope.taskid = {
+                    uuid: $scope.taskId
+                };
+                MarkupmaintenanceService.DelParticular($scope.taskid).then(function (data) {
+                    if (data.code == 0) {
+                        alert("删除成功！");
+                        $scope.taskId = '';
+                        $scope.getPage();
+                        //$("#tabExample").dataTable().fnDestroy();
+                        $scope.PRCWW = true;
+                    }else {
+                        alert(data.msg);
+                    }
+                    console.log(data);
+                }, function (data) {
+                    console.log(data);
+                });
+            }
+        }else {
+            alert("还未执行完成！");
+        }
+    };
+
+    //点击Validate
+    $scope.getValidate = function(){
+        $scope.validate = {
+            zcycle_name : $scope.CyclName,
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
+        };
+        console.log($rootScope.user)
+        MarkupmaintenanceService.getValidate($scope.validate).then(function (data) {
+            if(data.code == 0){
+                console.log(data)
+                alert('Success!');
+                $scope.getPage();
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
+
+    $scope.getDownLoad = function(){
+        $('#ps2').css('display','block');
+        $('#ws2').css('display','block');
+        $('#ps1').css('display','none');
+        $('#ws1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            MarkupmaintenanceService.getPrcSum($scope.TaskID).then(function (data) {
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+                $('#ps1').css('display','block');
+                $('#ws1').css('display','block');
+                $('#ps2').css('display','none');
+                $('#ws2').css('display','none');
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+
+
+
+
+    //Actual与Forecast选择展示
+    $scope.atc = true;
+    $scope.wpSel = function(){
+        if($scope.CycleSelect == 'Forecast'){
+            $scope.atc = true;
+            $scope.aww = true;
+            $scope.fww = true;
+        }else if($scope.CycleSelect =='Actual'){
+            $scope.atc = false;
+            $scope.aww = true;
+            $scope.fww = true;
+        }
+    }
+
+    //Actual中PRC与WW的切换
+    $scope.aww = true;
+    $scope.btnSwitchA = function(flag){
+        if(flag == 'w'){
+            $scope.aww = false;
+        }else if(flag == 'p'){
+            $scope.aww = true;
+        }
+    }
+
+    //Forecast中PRC与WW的切换
+    $scope.fww = true;
+    $scope.btnSwitchF = function(flag){
+        if(flag == 'w'){
+            $scope.fww = false;
+        }else if(flag == 'p'){
+            $scope.fww = true;
+        }
+    }
+
+
+})
+"use strict";
+
+angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,OthercategorymaintenanceService,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+
+
+    new superTable("demoTable", {
+        cssSkin: "sDefault",
+        fixedCols: 3, //固定几列
+        headerRows: 3,  //头部固定行数
+        onStart: function () {
+            this.start = new Date();
+        },
+        onFinish: function () {
+        }
+    });
+
+
+    $("#div_container").css("width", "1280px");//这个宽度是容器宽度，不同容器宽度不同
+    $(".fakeContainer").css("height", "666px");//这个高度是整个table可视区域的高度，不同情况高度不同
+    //.sData是调用superTables.js之后页面自己生成的  这块就是出现滚动条 达成锁定表头和列的效果
+
+    $(".sData").css("width", "1225px");//这块的宽度是用$("#div_container")的宽度减去锁定的列的宽度
+    //$(".sData").css("height", "590px");//这块的高度是用$("#div_container")的高度减去锁定的表头的高度
+
+
+    //请求表格数据调用方法
+    OthercategorymaintenanceService.getOthercategoryData().then(function(data){
+
+        if(data.code == 0){
+            $scope.categoryData = data.result;
+            console.log($scope.categoryData);
+            for(var i=0;i< $scope.categoryData.length;i++){
+               console.log($scope.categoryData[i]);
+            }
+        }
+
+    },function(data){
+        console.log(data);
+    });
+})
+"use strict";
+
+angular.module('app.OperationData').controller('OPQTQPNtakedownCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.s1 = true;
+    $scope.s2 = false;
+    $scope.w1 = true;
+    $scope.w2 = false;
+    $scope.c1 = false;
+    $scope.c2 = false;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            //PRC与WW切换
+            $scope.ww = false;
+            //大表切换
+            $scope.w2 = true;
+            $scope.w1 = false;
+            //两个按钮功能切换
+            $scope.s1 = false;
+            $scope.s2 = true;
+            //小表隐藏
+            $scope.c1 = false;
+            $scope.c2 = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+            $scope.w1 = true;
+            $scope.w2 = false;
+            $scope.s1 = true;
+            $scope.s2 = false;
+            $scope.c1 = false;
+            $scope.c2 = false;
+        }
+    }
+
+    $scope.btnSV1 = function(flag){
+        if(flag == 'd'){
+            //$scope.ww = true;
+            $scope.w1 = true;
+            $scope.c1 = false;
+
+        }else if(flag == 's'){
+            //$scope.ww = false;
+            $scope.w1 = false;
+            $scope.c1 = true;
+        }
+    }
+    $scope.btnSV2 = function(flag){
+        if(flag == 'd'){
+            $scope.w2 = true;
+            $scope.c2 = false;
+        }else if(flag == 's'){
+            $scope.w2 = false;
+            $scope.c2 = true;
+        }
+    }
+})
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -9073,1410 +10509,6 @@ var superTable = function (tableId, options) {
             });
 
 })(jQuery);
-"use strict";
-
-angular.module('app.OperationData').controller('AlliancefundmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-})
-"use strict";
-
-angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($scope,$state,$timeout,$stateParams,$rootScope,APP_CONFIG,CAmaintenanceService) {
-    //初始化Cycle Choose
-    CAmaintenanceService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
-    //第二部分tab信息展示
-    $scope.getPage = function(){
-        CAmaintenanceService.getExecute2().then(function(data){
-            if(data.code == 0){
-                $scope.tablist = data.result;
-                $("#tabExample1").dataTable().fnDestroy();
-                $timeout(function () {
-                    $('#tabExample1').dataTable({
-                        "scrollY": 160,
-                        "scrollX": true,
-                        "dom": '<"top">rt<"bottom"><"clear">',
-                        "scrollCollapse": true,
-                        //"jQueryUI": true,
-                        // "pagingType":   "simple_numbers",
-                        stateSave: true,
-                        "paging": false,
-                        "ordering": false,
-                        "bLengthChange": true
-                    });
-                });
-            }
-            console.log(data);
-        },function(data){
-            console.log(data);
-        });
-    }
-    $scope.getPage();
-
-    //点击Execute执行
-    $scope.getExecute = function(){
-        $scope.taskId = '';
-        $scope.search = {
-            cycleName : $scope.CycleChoose,
-            user : $rootScope.user
-        }
-        console.log($rootScope.user);
-        if(!$scope.CycleChoose){
-            alert("请选择条件！");
-        }else {
-            CAmaintenanceService.getExecute($scope.search).then(function(data){
-                if(data.code == 0){
-                    alert(data.result);
-                    $scope.getPage();
-                }else {
-                    alert(data.msg);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-        }
-    };
-    //单击整行选中
-    $scope.trClick = function($event,id,status,cycleName){
-        $($("#tabExample input:radio")).removeAttr("checked");
-        $($event.target).parent().find("input:radio").prop("checked",true);
-        $scope.taskId = id;
-        console.log($scope.taskId)
-        $scope.status = status;
-        console.log($scope.status)
-        $scope.cyclename = cycleName;
-        console.log($scope.cyclename)
-        //$scope.SearchTaskId(a,b,c)
-    }
-
-    //点击Search
-    $scope.SearchTab = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'){
-            $scope.PRCww=true;
-
-            $scope.TaskID =  $scope.taskId;
-            $scope.CycleName = $scope.cyclename;
-
-            //WW
-            CAmaintenanceService.getWw($scope.TaskID).then(function(data){
-                if(data.code == 0){
-                    $scope.WwList = data.result;
-                    console.log($scope.WwList);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-
-            //PRC
-            CAmaintenanceService.getPrc($scope.TaskID).then(function(data) {
-                if (data.code == 0) {
-                    $scope.PrcList = data.result;
-                    console.log($scope.PrcList);
-                }
-                console.log(data)
-            } ,function(data){
-                console.log(data);
-            });
-        }else {
-            alert("暂未执行成功，无法查看！");
-        }
-    };
-    //删除
-    $scope.DelOneItem = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
-            if(confirm('确认要删除？')) {
-                console.log($scope.taskid);
-                $scope.taskid = {
-                    uuid: $scope.taskId
-                };
-                CAmaintenanceService.DelItem($scope.taskid).then(function (data) {
-                    if (data.code == 0) {
-                        alert("删除成功！");
-                        $scope.taskId = '';
-                        $scope.getPage();
-                        //$("#tabExample").dataTable().fnDestroy();
-                        //$scope.PRCWW = true;
-                    }else {
-                        alert(data.msg);
-                    }
-                    console.log(data);
-                }, function (data) {
-                    console.log(data);
-                });
-            }
-        }else {
-            alert("还未执行完成！");
-        }
-    };
-
-    //prc时的Download
-    $scope.getPRCDownLoad = function(){
-        if(!$scope.TaskID){
-            return;
-        }else{
-        CAmaintenanceService.getPrcDown($scope.TaskID).then(function(data){
-            console.log(data);
-            //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
-            //而使用“application/vnd.openxmlformats-officedocument.spreadsheetml.sheet”则会保存为xlsx
-            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-            var objectUrl = URL.createObjectURL(blob);
-            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-            $("body").append(aForExcel);
-            $(".forExcel").click();
-            aForExcel.remove();
-        },function(data){
-            console.log(data);
-        })
-        }
-    }
-
-    //ww时的Download
-    $scope.getWWDownLoad = function(){
-        if(!$scope.TaskID){
-            return;
-        }else{
-            CAmaintenanceService.getWwDown($scope.TaskID).then(function(data){
-                console.log(data);
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-            },function(data){
-                console.log(data);
-            })
-        }
-    }
-
-    //点击Validate
-    $scope.getValidate = function(){
-        $scope.validate = {
-            zcycle_name : $scope.CycleName,
-            zuuid : $scope.TaskID,
-            user : $rootScope.user
-        };
-        console.log($rootScope.user)
-        CAmaintenanceService.getValidate($scope.validate).then(function (data) {
-            if(data.code == 0){
-                alert('成功！');
-                $scope.getPage();
-            }else {
-                alert(data.msg);
-            }
-            console.log(data);
-        }, function (data) {
-            console.log(data);
-        });
-    };
-
-    //button 切换
-    $scope.sw1 = true;
-    $scope.ww = false;
-    $scope.sw2 = false;
-    $scope.btnSwitch = function (flag) {
-        if (flag == 'w') {
-            $scope.ww = true;
-            $scope.sw1 = false;
-            //$scope.sw2 = false;
-        } else if (flag == 'p') {
-            $scope.ww = false;
-            $scope.sw1 = true;
-            //$scope.sw2 = false;
-        }
-    }
-
-
-})
-"use strict";
-
-angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($scope,$state,APP_CONFIG,$location,$rootScope,CAmanualuploadService,Upload) {
-    //初始化Cycle Choose
-    CAmanualuploadService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-            console.log($scope.cycledata);
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
-    //上传
-    $scope.myfiles = {};
-    $scope.openUpload = function(){
-        //$('#myModal').modal('show');
-        $scope.myfilesVal = '';
-        $scope.fileChange = function(){
-            if($scope.myfiles.name){
-                $scope.myfilesVal = $scope.myfiles.name;
-            }else {
-                $scope.myfilesVal = '';
-            }
-        }
-    }
-
-    $scope.upload = function(){
-        Upload.upload({
-            //服务端接收
-            url:APP_CONFIG.baseUrl+ '/api/dm/ca/attachments',
-            data : {
-                file : $scope.myfiles,
-                username :$rootScope.user,
-                cyclename:$scope.CycleChoose
-            },
-            headers: {
-                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
-            },
-        }).success(function (data, status, headers, config){
-            console.log($scope.CycleChoose.indexOf("M0")==-1);
-            if(!$scope.CycleChoose){
-                alert("请选择条件！");
-            }else {
-                if (data.code == 0 && $scope.CycleChoose.indexOf("M0") == -1) {
-                    alert('上传成功！');
-                    //$('#myModal').modal('hide');
-                    $scope.goPage();
-                } else {
-                    alert('上传失败！');
-                }
-            }
-        }).error(function (data, status, headers, config) {
-            alert('上传失败');
-            //上传失败
-            console.log('error status: ' + status);
-        });
-    }
-
-    //prc时的Download
-    $scope.getPRCDownLoad = function(){
-        if(!$scope.TaskID){
-            return;
-        }else{
-            CAmanualuploadService.getPrcDown($scope.TaskID).then(function(data){
-                console.log(data);
-                //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
-                //而使用“application/vnd.openxmlformats-officedocument.spreadsheetml.sheet”则会保存为xlsx
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-            },function(data){
-                console.log(data);
-            })
-        }
-    }
-
-    //ww时的Download
-    $scope.getWWDownLoad = function(){
-        if(!$scope.TaskID){
-            return;
-        }else{
-            CAmanualuploadService.getWwDown($scope.TaskID).then(function(data){
-                console.log(data);
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-            },function(data){
-                console.log(data);
-            })
-        }
-    }
-//点击Validate
-    $scope.getValidate = function(){
-        console.log($scope.CycleChoose);
-        $scope.validate = {
-            zcycle_name : $scope.CycleChoose,
-            zuuid : $scope.TaskID,
-            user : $rootScope.user
-        };
-        console.log($rootScope.user)
-        CAmanualuploadService.getValidate($scope.validate).then(function (data) {
-            if(data.code == 0){
-                alert('成功！');
-                $scope.getPage();
-            }else {
-                alert(data.msg);
-            }
-            console.log(data);
-        }, function (data) {
-            console.log(data);
-        });
-    };
-    //button 切换
-    $scope.sw1 = true;
-    $scope.ww = false;
-    $scope.sw2 = false;
-    $scope.btnSwitch = function (flag) {
-        if (flag == 'w') {
-            $scope.ww = true;
-            $scope.sw1 = false;
-            //$scope.sw2 = false;
-        } else if (flag == 'p') {
-            $scope.ww = false;
-            $scope.sw1 = true;
-            //$scope.sw2 = false;
-        }
-    }
-
-    //$scope.btnSV = function (flag) {
-    //    if (flag == 's1') {
-    //        $scope.sw2 = true;
-    //        $scope.sw1 = false;
-    //        $scope.ww=false;
-    //    } else if (flag == 's2') {
-    //        $scope.sw1 = true;
-    //        $scope.sw2 = false;
-    //        $scope.ww=false;
-    //    }
-    //}
-
-})
-"use strict";
-
-angular.module('app.OperationData').controller('ConsumptionBasemaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-})
-"use strict";
-
-angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,$state,$stateParams,$location,CycleQTQService,$http,$log,$rootScope,$timeout) {
-
-    //初始化Select-EBR Data
-    $scope.ebr =  'EBR_DATE';
-    $scope.dataMoth = [];
-    CycleQTQService.getSelect($scope.ebr).then(function(data){
-        if(data.code == 0){
-            $scope.ebrdata = data.result;
-            for(var i=0;i< $scope.ebrdata.length;i++){
-                $scope.dataMoth.push({data:$scope.ebrdata[i]});
-            }
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-    //初始化Select-CFE Data
-    $scope.cfe = 'CFE_CYCLE';
-    CycleQTQService.getSelect($scope.cfe).then(function(data){
-        if(data.code == 0){
-            $scope.cfedata = data.result;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
-    //初始化Cycle Choose
-    CycleQTQService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
-    //多选控件
-    $scope.Sel = true;
-    $(document).bind('click',function(){
-        $scope.Sel = true;
-    });
-    $scope.openSel = function($event){
-        $scope.Sel = false;
-        $event.stopPropagation();
-    };
-    $scope.arr = [];
-    $scope.One = function(m){
-        m.isChecked = !m.isChecked;
-        if(m.isChecked){
-            $scope.arr.push(m.data);
-        }else {
-            for(var i=0;i<$scope.arr.length;i++){
-                if($scope.arr[i] == m.data){
-                    $scope.arr.splice(i,1);
-                    break;
-                }
-            }
-        }
-        console.log($scope.arr);
-        $scope.EBRData = $scope.arr.join(',');
-    };
-
-    //第二部分tab信息展示
-    $scope.getPage = function(){
-        CycleQTQService.getExecute2().then(function(data){
-            console.log(data);
-            if(data.code == 0){
-                //$scope.noData = false;
-                $scope.tablist = data.result;
-                $("#tabExample").dataTable().fnDestroy();
-                $timeout(function () {
-                    $('#tabExample').dataTable({
-                        "scrollY": 160,
-                        "scrollX": true,
-                        "dom": '<"top">rt<"bottom"><"clear">',
-                        "scrollCollapse": true,
-                        "jQueryUI": true,
-                        // "pagingType":   "simple_numbers",
-                        stateSave: true,
-                        "paging": false,
-                        "ordering": false,
-                        "bLengthChange": true,
-                        //"order": [[ 3, "desc" ]]
-                    });
-                });
-            }
-            console.log(data);
-        },function(data){
-            console.log(data);
-        });
-    }
-    $scope.getPage();
-
-    //点击Execute执行
-    //$scope.noData = true;
-    $scope.getExecute = function(){
-        $scope.taskId = '';
-        $scope.search = {
-            cycleName : $scope.CycleChoose,
-            cfeCycle : $scope.CFEData,
-            month : $scope.EBRData,
-            user : $rootScope.user
-        }
-        console.log($rootScope.user);
-        if(!$scope.EBRData || !$scope.CFEData){
-            alert("请选择条件！");
-        }else {
-            CycleQTQService.getExecute($scope.search).then(function(data){
-                if(data.code == 0){
-                    alert(data.result);
-                    $scope.getPage();
-                }else {
-                    alert(data.msg);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-        }
-    };
-
-    $scope.WW = true;
-    $scope.PRC = true;
-    $scope.WWShift = true;
-    $scope.PRCShift = true;
-    //单击整行选中
-    $scope.trClick = function($event,id,status,cycleName){
-        $($("#tabExample input:radio")).removeAttr("checked");
-        $($event.target).parent().find("input:radio").prop("checked",true);
-        $scope.taskId = id;
-        console.log($scope.taskId)
-        $scope.status = status;
-        console.log($scope.status)
-        $scope.cyclename = cycleName;
-        console.log($scope.cyclename)
-        //$scope.SearchTaskId(a,b,c)
-    }
-    //单选获得taskId
-   /* $scope.SearchTaskId = function(id,cycleName,status){
-        $scope.taskId = id;
-        $scope.status = status;
-        $scope.cyclename = cycleName;
-    };*/
-
-    //点击Search
-    $scope.SearchTab = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'){
-            $scope.PRCWW = false;
-            $scope.TaskID =  $scope.taskId;
-            $scope.CyclName = $scope.cyclename;
-            $scope.WW = false;
-            $scope.PRC = true;
-
-            //WW
-           // $("#PRCExample").dataTable().fnDestroy();
-            CycleQTQService.getWw($scope.TaskID).then(function(data){
-                if(data.code == 0){
-                    $scope.WwList = data.result;
-                    $scope.wwTable();
-                    console.log($scope.TaskID);
-                    console.log($scope.CyclName);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-
-            //PRC
-            CycleQTQService.getPrc($scope.TaskID).then(function(data) {
-                if (data.code == 0) {
-                    $scope.PrcList = data.result;
-                    console.log($scope.PrcList);
-                    $scope.prcTalbe();
-                }
-                console.log(data)
-            } ,function(data){
-                console.log(data);
-            });
-        }else {
-            alert("暂未执行成功，无法查看！");
-        }
-    };
-
-
-    //删除
-    $scope.DelParticular = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
-            if(confirm('确认要删除？')) {
-                console.log($scope.taskid);
-                $scope.taskid = {
-                    uuid: $scope.taskId
-                };
-                CycleQTQService.DelParticular($scope.taskid).then(function (data) {
-                    if (data.code == 0) {
-                        alert("删除成功！");
-                        $scope.taskId = '';
-                        $scope.getPage();
-                        //$("#tabExample").dataTable().fnDestroy();
-                        $scope.PRCWW = true;
-                    }else {
-                        alert(data.msg);
-                    }
-                    console.log(data);
-                }, function (data) {
-                    console.log(data);
-                });
-            }
-        }else {
-            alert("还未执行完成！");
-        }
-    };
-
-
-
-
-    $scope.wwTable = function(){
-        $("#WWExample").dataTable().fnDestroy();
-        $timeout(function () {
-            $('#WWExample thead tr').eq(1).find('td').each(function() {
-                var title = $('#WWExample thead tr td').eq($(this).index()).text();
-                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-            });
-            var table = $('#WWExample').DataTable({
-                //"processing": true,
-                "scrollY": 400,
-                "scrollX": true,
-                "dom": '<"top">rt<"bottom"><"clear">',
-                //"dom": '<"top"i>rt<"bottom"flp><"clear">',
-                "scrollCollapse": true,
-                //"jQueryUI": true,
-                // "pagingType":   "simple_numbers",
-                //stateSave: true,
-                //"pagingType":   "full_numbers",
-                "paging": false,
-                "ordering": false,
-                //"lengthChange": true,
-                "autoWidth": false,
-                "data" :  $scope.WwList,
-                "columns":[
-                    { "data": "qtr" },
-                    { "data": "zfingeo" },
-                    { "data": "zregion2" },
-                    { "data": "cfeBu" },
-                    { "data": "cfeSegment" },
-                    { "data": "invQty",render: $.fn.dataTable.render.number( ',', '.')},
-                    { "data": "cfeCycle" },
-                    { "data": "lqBmc" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqBmc" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqBmc",  render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqLq" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqCq" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "lqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqLqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqCqTtl",render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                ]
-            });
-            table.columns().eq(0).each(function(colIdx) {
-                $('input', table.column(colIdx).header()).on('keyup change', function() {
-                    table
-                        .column(colIdx)
-                        .search(this.value)
-                        .draw();
-                });
-            });
-        });
-    }
-
-    $scope.prcTalbe = function(id){
-        $("#PRCExample").dataTable().fnDestroy();
-        $timeout(function () {
-            $('#PRCExample thead tr').eq(1).find('td').each(function() {
-                var title = $('#PRCExample thead tr td').eq($(this).index()).text();
-                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-            });
-            var table =$('#PRCExample').DataTable({
-                //"processing": true,
-                "scrollY": 400,
-                "scrollX": true,
-                "dom": '<"top">rt<"bottom"><"clear">',
-                "scrollCollapse": true,
-                //"jQueryUI": true,
-                // "pagingType":   "simple_numbers",
-                //stateSave: true,
-                "paging": false,
-                "ordering": false,
-                //"lengthChange": true,
-                "autoWidth": false,
-                "data" : $scope.PrcList,
-                "columns": [
-                    { "data": "qtr" },
-                    { "data": "zfingeo" },
-                    { "data": "cfeBu" },
-                    { "data": "cfePrcSegment" },
-                    { "data": "invQty" ,render: $.fn.dataTable.render.number( ',', '.')},
-                    { "data": "cfeCycle" },
-                    { "data": "lqBmc" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqBmc" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqBmc" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqLq" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqCq" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "lqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqLqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqCqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }}
-                ]
-            });
-            table.columns().eq(0).each(function(colIdx) {
-                $('input', table.column(colIdx).header()).on('keyup change', function() {
-                    table
-                        .column(colIdx)
-                        .search(this.value)
-                        .draw();
-                });
-            });
-        });
-
-    }
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.WW = false;
-            $scope.PRC = true;
-            $scope.wwTable();
-        }else if(flag == 'p'){
-            $scope.WW = true;
-            $scope.PRC = false;
-            $scope.prcTalbe();
-        }
-    };
-
-    //点击WW中的Shift view
-    $scope.getSegmentWW = function(){
-        $scope.WW = true;
-        $scope.PRC = true;
-        $scope.WWShift = false;
-        $scope.PRCShift = true;
-        //切换复杂表
-       /* $scope.validate = {
-            cycleName : $scope.CyclName,
-        };
-        console.log($scope.validate)
-        CycleQTQService.getSegment($scope.validate,$scope.TaskID).then(function (data) {
-            if(data.code == 0){
-                alert('成功！');
-            }else {
-                alert(data.msg);
-            }
-            console.log(data);
-        }, function (data) {
-            console.log(data);
-        });*/
-    };
-    //点击PRC中的Shift view
-    $scope.getSegmentPRC = function(){
-        $scope.WW = true;
-        $scope.PRC = true;
-        $scope.WWShift = true;
-        $scope.PRCShift = false;
-    }
-    //点击WW的中Shift view的Shift view
-    $scope.getWWShift = function(){
-        $scope.WW = false;
-        $scope.PRC = true;
-        $scope.WWShift = true;
-        $scope.PRCShift = true;
-    }
-//点击PRC的中Shift view的Shift view
-    $scope.getPRCShift = function(){
-        $scope.WW = true;
-        $scope.PRC = false;
-        $scope.WWShift = true;
-        $scope.PRCShift = true;
-    }
-
-
-    //点击Validate
-    $scope.getValidate = function(){
-        $scope.validate = {
-            zcycle_name : $scope.CyclName,
-            zuuid : $scope.TaskID,
-            user : $rootScope.user
-        };
-        console.log($rootScope.user)
-        CycleQTQService.getValidate($scope.validate).then(function (data) {
-            if(data.code == 0){
-                console.log(data)
-                alert('Success!');
-                $scope.getPage();
-            }else {
-                alert(data.msg);
-            }
-            console.log(data);
-        }, function (data) {
-            console.log(data);
-        });
-    };
-
-    //WW时Download Summary
-    $scope.getWWDownLoadSum = function(){
-        $('#ws2').css('display','block');
-        $('#ws1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            CycleQTQService.getWwSum($scope.TaskID).then(function (data) {
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-                $('#ws1').css('display','block');
-                $('#ws2').css('display','none');
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-
-    //Prc时Download Summary
-    $scope.getPRCDownLoadSum = function(){
-        $('#ps2').css('display','block');
-        $('#ps1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            CycleQTQService.getPrcSum($scope.TaskID).then(function (data) {
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-                $('#ps1').css('display','block');
-                $('#ps2').css('display','none');
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-    //WW时Download Detail
-    $scope.getWWDownLoadDet = function(){
-        $('#wd2').css('display','block');
-        $('#wd1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            CycleQTQService.getWwDet($scope.TaskID).then(function (data) {
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-                $('#wd1').css('display','block');
-                $('#wd2').css('display','none');
-                console.log(data);
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-
-    //Prc时Download Detail
-    $scope.getPRCDownLoadDet = function(){
-        $('#pd2').css('display','block');
-        $('#pd1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            CycleQTQService.getPrcDet($scope.TaskID).then(function (data) {
-                $('#pd1').css('display','block');
-                $('#pd2').css('display','none');
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-});
-"use strict";
-
-angular.module('app.OperationData').controller('DealmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-    $scope.del = function(){
-        if(confirm('确认要删除？')){
-
-        }
-    }
-})
-"use strict";
-
-angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$rootScope,$state,$stateParams,$location,$timeout,MarkupmaintenanceService) {
-    $scope.segmentPRC = JSON.parse(sessionStorage.getItem("segmentPRC"));
-    $scope.segmentWW = JSON.parse(sessionStorage.getItem("segmentWW"));
-    $scope.geo = JSON.parse(sessionStorage.getItem("geo"));
-    $scope.geo.push('Total');
-    $scope.segmentPRC .push('Total');
-    $scope.segmentWW .push('Total');
-
-
-    //初始化Cycle Choose
-    MarkupmaintenanceService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
-    //第二部分tab信息展示
-    $scope.getPage = function(){
-        MarkupmaintenanceService.getExecute2().then(function(data){
-            console.log(data);
-            if(data.code == 0){
-                //$scope.noData = false;
-                $scope.tablist = data.result;
-                $("#tabExample").dataTable().fnDestroy();
-                $timeout(function () {
-                    $('#tabExample').dataTable({
-                        "scrollY": 160,
-                        "scrollX": true,
-                        "dom": '<"top">rt<"bottom"><"clear">',
-                        "scrollCollapse": true,
-                        "jQueryUI": true,
-                        // "pagingType":   "simple_numbers",
-                        stateSave: true,
-                        "paging": false,
-                        "ordering": false,
-                        "bLengthChange": true,
-                        //"order": [[ 3, "desc" ]]
-                    });
-                });
-            }
-            console.log(data);
-        },function(data){
-            console.log(data);
-        });
-    }
-    $scope.getPage();
-
-
-    //点击Execute执行
-    //$scope.noData = true;
-    $scope.getExecute = function(){
-        $scope.taskId = '';
-        $scope.search = {
-            cycleName : $scope.CycleChoose,
-            user : $rootScope.user
-        }
-        console.log($rootScope.user);
-        if(!$scope.CycleChoose){
-            alert("请选择条件！");
-        }else {
-            MarkupmaintenanceService.getExecute($scope.search).then(function(data){
-                if(data.code == 0){
-                    alert(data.result);
-                    $scope.getPage();
-                }else {
-                    alert(data.msg);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-        }
-    };
-
-
-    //单击整行选中
-    $scope.trClick = function($event,id,status,cycleName){
-        $($("#tabExample input:radio")).removeAttr("checked");
-        $($event.target).parent().find("input:radio").prop("checked",true);
-        $scope.taskId = id;
-        console.log($scope.taskId)
-        $scope.status = status;
-        console.log($scope.status)
-        $scope.cyclename = cycleName;
-        console.log($scope.cyclename)
-    }
-
-
-
-    $scope.WW = true;
-    $scope.PRC = true;
-    $scope.markTab = false;
-    //点击Search
-    $scope.SearchTab = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'){
-            $scope.markTab = true;
-            $scope.TaskID =  $scope.taskId;
-            $scope.CyclName = $scope.cyclename;
-
-            //WW
-            MarkupmaintenanceService.getWw($scope.TaskID).then(function(data){
-                if(data.code == 0){
-                     $scope.result = data.result;
-                     $scope.resData = [];
-                     for(var i in $scope.result){
-                     var thead1 =['XXX+BMC $M（'+ i +'）'].concat($scope.geo);
-                     var thead2 = ['XXX+Markup in Tape $M (' + i + '）'].concat($scope.geo);
-                     var tbodyBmc = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead1,'bmc');
-                     var tbodyMark = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead2,'mark45');
-                     $scope.resData.push({name : i,tbodyBmc : {tbodyBmcThead:thead1,tbodyBmcTbody : tbodyBmc.slice(0,tbodyBmc.length-1),tbodyBmcTfoot:tbodyBmc.slice(tbodyBmc.length-1)},tbodyMark : {tbodyMarkThead:thead2,tbodyMarkTbody : tbodyMark.slice(0,tbodyMark.length-1),tbodyMarkTfoot:tbodyMark.slice(tbodyMark.length-1)}})
-                     }
-                     $timeout($scope.resData);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-
-            //PRC
-             MarkupmaintenanceService.getPrc($scope.TaskID).then(function(data) {
-                 if (data.code == 0) {
-                     $timeout(function(){
-                         $scope.markHZ = $rootScope.markHZ(data.result,$scope.segmentPRC)
-                     });
-                 }
-                    console.log(data)
-                 } ,function(data){
-                    console.log(data);
-             });
-        }else {
-            alert("暂未执行成功，无法查看！");
-        }
-    };
-
-    //删除
-    $scope.DelParticular = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
-            if(confirm('确认要删除？')) {
-                console.log($scope.taskid);
-                $scope.taskid = {
-                    uuid: $scope.taskId
-                };
-                MarkupmaintenanceService.DelParticular($scope.taskid).then(function (data) {
-                    if (data.code == 0) {
-                        alert("删除成功！");
-                        $scope.taskId = '';
-                        $scope.getPage();
-                        //$("#tabExample").dataTable().fnDestroy();
-                        $scope.PRCWW = true;
-                    }else {
-                        alert(data.msg);
-                    }
-                    console.log(data);
-                }, function (data) {
-                    console.log(data);
-                });
-            }
-        }else {
-            alert("还未执行完成！");
-        }
-    };
-
-    //点击Validate
-    $scope.getValidate = function(){
-        $scope.validate = {
-            zcycle_name : $scope.CyclName,
-            zuuid : $scope.TaskID,
-            user : $rootScope.user
-        };
-        console.log($rootScope.user)
-        MarkupmaintenanceService.getValidate($scope.validate).then(function (data) {
-            if(data.code == 0){
-                console.log(data)
-                alert('Success!');
-                $scope.getPage();
-            }else {
-                alert(data.msg);
-            }
-            console.log(data);
-        }, function (data) {
-            console.log(data);
-        });
-    };
-
-    $scope.getDownLoad = function(){
-        $('#ps2').css('display','block');
-        $('#ws2').css('display','block');
-        $('#ps1').css('display','none');
-        $('#ws1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            MarkupmaintenanceService.getPrcSum($scope.TaskID).then(function (data) {
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-                $('#ps1').css('display','block');
-                $('#ws1').css('display','block');
-                $('#ps2').css('display','none');
-                $('#ws2').css('display','none');
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-
-
-
-
-    //Actual与Forecast选择展示
-    $scope.atc = true;
-    $scope.wpSel = function(){
-        if($scope.CycleSelect == 'Forecast'){
-            $scope.atc = true;
-            $scope.aww = true;
-            $scope.fww = true;
-        }else if($scope.CycleSelect =='Actual'){
-            $scope.atc = false;
-            $scope.aww = true;
-            $scope.fww = true;
-        }
-    }
-
-    //Actual中PRC与WW的切换
-    $scope.aww = true;
-    $scope.btnSwitchA = function(flag){
-        if(flag == 'w'){
-            $scope.aww = false;
-        }else if(flag == 'p'){
-            $scope.aww = true;
-        }
-    }
-
-    //Forecast中PRC与WW的切换
-    $scope.fww = true;
-    $scope.btnSwitchF = function(flag){
-        if(flag == 'w'){
-            $scope.fww = false;
-        }else if(flag == 'p'){
-            $scope.fww = true;
-        }
-    }
-
-
-})
-"use strict";
-
-angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,OthercategorymaintenanceService,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-
-
-    new superTable("demoTable", {
-        cssSkin: "sDefault",
-        fixedCols: 3, //固定几列
-        headerRows: 3,  //头部固定行数
-        onStart: function () {
-            this.start = new Date();
-        },
-        onFinish: function () {
-        }
-    });
-
-
-    $("#div_container").css("width", "1280px");//这个宽度是容器宽度，不同容器宽度不同
-    $(".fakeContainer").css("height", "666px");//这个高度是整个table可视区域的高度，不同情况高度不同
-    //.sData是调用superTables.js之后页面自己生成的  这块就是出现滚动条 达成锁定表头和列的效果
-
-    $(".sData").css("width", "689px");//这块的宽度是用$("#div_container")的宽度减去锁定的列的宽度
-    $(".sData").css("height", "590px");//这块的高度是用$("#div_container")的高度减去锁定的表头的高度
-
-
-    //请求表格数据调用方法
-    OthercategorymaintenanceService.getOthercategoryData().then(function(data){
-
-        if(data.code == 0){
-            $scope.categoryData = data.result;
-            console.log($scope.categoryData);
-            for(var i=0;i< $scope.categoryData.length;i++){
-               console.log($scope.categoryData[i]);
-            }
-        }
-
-    },function(data){
-        console.log(data);
-    });
-})
-"use strict";
-
-angular.module('app.OperationData').controller('OPQTQPNtakedownCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.s1 = true;
-    $scope.s2 = false;
-    $scope.w1 = true;
-    $scope.w2 = false;
-    $scope.c1 = false;
-    $scope.c2 = false;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            //PRC与WW切换
-            $scope.ww = false;
-            //大表切换
-            $scope.w2 = true;
-            $scope.w1 = false;
-            //两个按钮功能切换
-            $scope.s1 = false;
-            $scope.s2 = true;
-            //小表隐藏
-            $scope.c1 = false;
-            $scope.c2 = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-            $scope.w1 = true;
-            $scope.w2 = false;
-            $scope.s1 = true;
-            $scope.s2 = false;
-            $scope.c1 = false;
-            $scope.c2 = false;
-        }
-    }
-
-    $scope.btnSV1 = function(flag){
-        if(flag == 'd'){
-            //$scope.ww = true;
-            $scope.w1 = true;
-            $scope.c1 = false;
-
-        }else if(flag == 's'){
-            //$scope.ww = false;
-            $scope.w1 = false;
-            $scope.c1 = true;
-        }
-    }
-    $scope.btnSV2 = function(flag){
-        if(flag == 'd'){
-            $scope.w2 = true;
-            $scope.c2 = false;
-        }else if(flag == 's'){
-            $scope.w2 = false;
-            $scope.c2 = true;
-        }
-    }
-})
 /**
  * Created by Qinglanhui on 2018/8/13.
  */
@@ -16298,400 +16330,6 @@ angular.module('app').factory('Todo', function (Restangular, APP_CONFIG, $httpBa
 
     return Todo
 });
-'use strict';
-
-angular.module('app.graphs').directive('chartjsBarChart', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attributes) {
-
-            var barOptions = {
-                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-                scaleBeginAtZero : true,
-                //Boolean - Whether grid lines are shown across the chart
-                scaleShowGridLines : true,
-                //String - Colour of the grid lines
-                scaleGridLineColor : "rgba(0,0,0,.05)",
-                //Number - Width of the grid lines
-                scaleGridLineWidth : 1,
-                //Boolean - If there is a stroke on each bar
-                barShowStroke : true,
-                //Number - Pixel width of the bar stroke
-                barStrokeWidth : 1,
-                //Number - Spacing between each of the X value sets
-                barValueSpacing : 5,
-                //Number - Spacing between data sets within X values
-                barDatasetSpacing : 1,
-                //Boolean - Re-draw chart on page resize
-                responsive: true,
-                //String - A legend template
-                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-            }
-
-            var barData = {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
-                datasets: [
-                    {
-                        label: "My First dataset",
-                        fillColor: "rgba(220,220,220,0.5)",
-                        strokeColor: "rgba(220,220,220,0.8)",
-                        highlightFill: "rgba(220,220,220,0.75)",
-                        highlightStroke: "rgba(220,220,220,1)",
-                        data: [65, 59, 80, 81, 56, 55, 40]
-                    },
-                    {
-                        label: "My Second dataset",
-                        fillColor: "rgba(151,187,205,0.5)",
-                        strokeColor: "rgba(151,187,205,0.8)",
-                        highlightFill: "rgba(151,187,205,0.75)",
-                        highlightStroke: "rgba(151,187,205,1)",
-                        data: [28, 48, 40, 19, 86, 27, 90]
-                    }
-                ]
-            };
-
-            var ctx = element[0].getContext("2d");
-            new Chart(ctx).Bar(barData, barOptions);
-
-        }
-    }
-});
-'use strict';
-
-angular.module('app.graphs').directive('chartjsDoughnutChart', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attributes) {
-            var doughnutOptions = {
-                //Boolean - Whether we should show a stroke on each segment
-                segmentShowStroke : true,
-                //String - The colour of each segment stroke
-                segmentStrokeColor : "#fff",
-                //Number - The width of each segment stroke
-                segmentStrokeWidth : 2,
-                //Number - The percentage of the chart that we cut out of the middle
-                percentageInnerCutout : 50, // This is 0 for Pie charts
-                //Number - Amount of animation steps
-                animationSteps : 100,
-                //String - Animation easing effect
-                animationEasing : "easeOutBounce",
-                //Boolean - Whether we animate the rotation of the Doughnut
-                animateRotate : true,
-                //Boolean - Whether we animate scaling the Doughnut from the centre
-                animateScale : false,
-                //Boolean - Re-draw chart on page resize
-                responsive: true,
-                //String - A legend template
-                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
-            };
-
-            var doughnutData = [
-                {
-                    value: 300,
-                    color:"rgba(220,220,220,0.8)",
-                    highlight: "rgba(220,220,220,0.7)",
-                    label: "Grey"
-                },
-                {
-                    value: 50,
-                    color: "rgba(151,187,205,1)",
-                    highlight: "rgba(151,187,205,0.8)",
-                    label: "Blue"
-                },
-                {
-                    value: 100,
-                    color: "rgba(169, 3, 41, 0.7)",
-                    highlight: "rgba(169, 3, 41, 0.7)",
-                    label: "Red"
-                }
-            ];
-
-            // render chart
-            var ctx = element[0].getContext("2d");
-            new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
-        }}
-});
-'use strict';
-
-angular.module('app.graphs').directive('chartjsLineChart', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attributes) {
-
-            // LINE CHART
-            // ref: http://www.chartjs.org/docs/#line-chart-introduction
-            var lineOptions = {
-                ///Boolean - Whether grid lines are shown across the chart
-                scaleShowGridLines : true,
-                //String - Colour of the grid lines
-                scaleGridLineColor : "rgba(0,0,0,.05)",
-                //Number - Width of the grid lines
-                scaleGridLineWidth : 1,
-                //Boolean - Whether the line is curved between points
-                bezierCurve : true,
-                //Number - Tension of the bezier curve between points
-                bezierCurveTension : 0.4,
-                //Boolean - Whether to show a dot for each point
-                pointDot : true,
-                //Number - Radius of each point dot in pixels
-                pointDotRadius : 4,
-                //Number - Pixel width of point dot stroke
-                pointDotStrokeWidth : 1,
-                //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-                pointHitDetectionRadius : 20,
-                //Boolean - Whether to show a stroke for datasets
-                datasetStroke : true,
-                //Number - Pixel width of dataset stroke
-                datasetStrokeWidth : 2,
-                //Boolean - Whether to fill the dataset with a colour
-                datasetFill : true,
-                //Boolean - Re-draw chart on page resize
-                responsive: true,
-                //String - A legend template
-                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-            };
-
-            var lineData = { labels: ["January", "February", "March", "April", "May", "June", "July"],
-                datasets: [
-                    {
-                        label: "My First dataset",
-                        fillColor: "rgba(220,220,220,0.2)",
-                        strokeColor: "rgba(220,220,220,1)",
-                        pointColor: "rgba(220,220,220,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: [65, 59, 80, 81, 56, 55, 40]
-                    },
-                    {
-                        label: "My Second dataset",
-                        fillColor: "rgba(151,187,205,0.2)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        pointColor: "rgba(151,187,205,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: [28, 48, 40, 19, 86, 27, 90]
-                    }
-                ]
-            };
-
-            var ctx = element[0].getContext("2d");
-            var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
-
-
-
-        }
-    }
-});
-'use strict';
-
-angular.module('app.graphs').directive('chartjsPieChart', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attributes) {
-            var pieOptions = {
-                //Boolean - Whether we should show a stroke on each segment
-                segmentShowStroke: true,
-                //String - The colour of each segment stroke
-                segmentStrokeColor: "#fff",
-                //Number - The width of each segment stroke
-                segmentStrokeWidth: 2,
-                //Number - Amount of animation steps
-                animationSteps: 100,
-                //String - types of animation
-                animationEasing: "easeOutBounce",
-                //Boolean - Whether we animate the rotation of the Doughnut
-                animateRotate: true,
-                //Boolean - Whether we animate scaling the Doughnut from the centre
-                animateScale: false,
-                //Boolean - Re-draw chart on page resize
-                responsive: true,
-                //String - A legend template
-                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
-            };
-
-            var pieData = [
-                {
-                    value: 300,
-                    color:"rgba(220,220,220,0.9)",
-                    highlight: "rgba(220,220,220,0.8)",
-                    label: "Grey"
-                },
-                {
-                    value: 50,
-                    color: "rgba(151,187,205,1)",
-                    highlight: "rgba(151,187,205,0.8)",
-                    label: "Blue"
-                },
-                {
-                    value: 100,
-                    color: "rgba(169, 3, 41, 0.7)",
-                    highlight: "rgba(169, 3, 41, 0.7)",
-                    label: "Red"
-                }
-            ];
-
-            // render chart
-            var ctx = element[0].getContext("2d");
-            var myNewChart = new Chart(ctx).Pie(pieData, pieOptions);
-        }}
-});
-'use strict';
-
-angular.module('app.graphs').directive('chartjsPolarChart', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attributes) {
-            var polarOptions = {
-                //Boolean - Show a backdrop to the scale label
-                scaleShowLabelBackdrop : true,
-                //String - The colour of the label backdrop
-                scaleBackdropColor : "rgba(255,255,255,0.75)",
-                // Boolean - Whether the scale should begin at zero
-                scaleBeginAtZero : true,
-                //Number - The backdrop padding above & below the label in pixels
-                scaleBackdropPaddingY : 2,
-                //Number - The backdrop padding to the side of the label in pixels
-                scaleBackdropPaddingX : 2,
-                //Boolean - Show line for each value in the scale
-                scaleShowLine : true,
-                //Boolean - Stroke a line around each segment in the chart
-                segmentShowStroke : true,
-                //String - The colour of the stroke on each segement.
-                segmentStrokeColor : "#fff",
-                //Number - The width of the stroke value in pixels
-                segmentStrokeWidth : 2,
-                //Number - Amount of animation steps
-                animationSteps : 100,
-                //String - Animation easing effect.
-                animationEasing : "easeOutBounce",
-                //Boolean - Whether to animate the rotation of the chart
-                animateRotate : true,
-                //Boolean - Whether to animate scaling the chart from the centre
-                animateScale : false,
-                //Boolean - Re-draw chart on page resize
-                responsive: true,
-                //String - A legend template
-                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
-            };
-
-            var polarData = [
-                {
-                    value: 300,
-                    color:"rgba(220,220,220,0.8)",
-                    highlight: "rgba(220,220,220,0.7)",
-                    label: "Grey"
-                },
-                {
-                    value: 50,
-                    color: "rgba(151,187,205,1)",
-                    highlight: "rgba(151,187,205,0.8)",
-                    label: "Blue"
-                },
-                {
-                    value: 100,
-                    color: "rgba(169, 3, 41, 0.7)",
-                    highlight: "rgba(169, 3, 41, 0.7)",
-                    label: "Red"
-                },
-                {
-                    value: 40,
-                    color: "#949FB1",
-                    highlight: "#A8B3C5",
-                    label: "Grey"
-                },
-                {
-                    value: 120,
-                    color: "#4D5360",
-                    highlight: "#616774",
-                    label: "Dark Grey"
-                }
-            ];
-
-            // render chart
-            var ctx = element[0].getContext("2d");
-            new Chart(ctx).PolarArea(polarData, polarOptions);
-        }}
-});
-'use strict';
-
-angular.module('app.graphs').directive('chartjsRadarChart', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attributes) {
-            var radarData = {
-                labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
-                datasets: [
-                    {
-                        label: "My First dataset",
-                        fillColor: "rgba(220,220,220,0.2)",
-                        strokeColor: "rgba(220,220,220,1)",
-                        pointColor: "rgba(220,220,220,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: [65, 59, 90, 81, 56, 55, 40]
-                    },
-                    {
-                        label: "My Second dataset",
-                        fillColor: "rgba(151,187,205,0.2)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        pointColor: "rgba(151,187,205,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: [28, 48, 40, 19, 96, 27, 100]
-                    }
-                ]
-            };
-
-            var radarOptions = {
-                //Boolean - Whether to show lines for each scale point
-                scaleShowLine : true,
-                //Boolean - Whether we show the angle lines out of the radar
-                angleShowLineOut : true,
-                //Boolean - Whether to show labels on the scale
-                scaleShowLabels : false,
-                // Boolean - Whether the scale should begin at zero
-                scaleBeginAtZero : true,
-                //String - Colour of the angle line
-                angleLineColor : "rgba(0,0,0,.1)",
-                //Number - Pixel width of the angle line
-                angleLineWidth : 1,
-                //String - Point label font declaration
-                pointLabelFontFamily : "'Arial'",
-                //String - Point label font weight
-                pointLabelFontStyle : "normal",
-                //Number - Point label font size in pixels
-                pointLabelFontSize : 10,
-                //String - Point label font colour
-                pointLabelFontColor : "#666",
-                //Boolean - Whether to show a dot for each point
-                pointDot : true,
-                //Number - Radius of each point dot in pixels
-                pointDotRadius : 3,
-                //Number - Pixel width of point dot stroke
-                pointDotStrokeWidth : 1,
-                //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-                pointHitDetectionRadius : 20,
-                //Boolean - Whether to show a stroke for datasets
-                datasetStroke : true,
-                //Number - Pixel width of dataset stroke
-                datasetStrokeWidth : 2,
-                //Boolean - Whether to fill the dataset with a colour
-                datasetFill : true,
-                //Boolean - Re-draw chart on page resize
-                responsive: true,
-                //String - A legend template
-                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-            }
-
-            // render chart
-            var ctx = element[0].getContext("2d");
-            var myNewChart = new Chart(ctx).Radar(radarData, radarOptions);
-        }}
-});
 'use strict'
 
 angular.module('app.graphs').factory('DygraphsDataDemo', function(){
@@ -18468,6 +18106,521 @@ angular.module('app.graphs').directive('vectorMap', function () {
 });
 'use strict';
 
+angular.module('app.graphs').directive('chartjsBarChart', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attributes) {
+
+            var barOptions = {
+                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+                scaleBeginAtZero : true,
+                //Boolean - Whether grid lines are shown across the chart
+                scaleShowGridLines : true,
+                //String - Colour of the grid lines
+                scaleGridLineColor : "rgba(0,0,0,.05)",
+                //Number - Width of the grid lines
+                scaleGridLineWidth : 1,
+                //Boolean - If there is a stroke on each bar
+                barShowStroke : true,
+                //Number - Pixel width of the bar stroke
+                barStrokeWidth : 1,
+                //Number - Spacing between each of the X value sets
+                barValueSpacing : 5,
+                //Number - Spacing between data sets within X values
+                barDatasetSpacing : 1,
+                //Boolean - Re-draw chart on page resize
+                responsive: true,
+                //String - A legend template
+                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+            }
+
+            var barData = {
+                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                datasets: [
+                    {
+                        label: "My First dataset",
+                        fillColor: "rgba(220,220,220,0.5)",
+                        strokeColor: "rgba(220,220,220,0.8)",
+                        highlightFill: "rgba(220,220,220,0.75)",
+                        highlightStroke: "rgba(220,220,220,1)",
+                        data: [65, 59, 80, 81, 56, 55, 40]
+                    },
+                    {
+                        label: "My Second dataset",
+                        fillColor: "rgba(151,187,205,0.5)",
+                        strokeColor: "rgba(151,187,205,0.8)",
+                        highlightFill: "rgba(151,187,205,0.75)",
+                        highlightStroke: "rgba(151,187,205,1)",
+                        data: [28, 48, 40, 19, 86, 27, 90]
+                    }
+                ]
+            };
+
+            var ctx = element[0].getContext("2d");
+            new Chart(ctx).Bar(barData, barOptions);
+
+        }
+    }
+});
+'use strict';
+
+angular.module('app.graphs').directive('chartjsDoughnutChart', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attributes) {
+            var doughnutOptions = {
+                //Boolean - Whether we should show a stroke on each segment
+                segmentShowStroke : true,
+                //String - The colour of each segment stroke
+                segmentStrokeColor : "#fff",
+                //Number - The width of each segment stroke
+                segmentStrokeWidth : 2,
+                //Number - The percentage of the chart that we cut out of the middle
+                percentageInnerCutout : 50, // This is 0 for Pie charts
+                //Number - Amount of animation steps
+                animationSteps : 100,
+                //String - Animation easing effect
+                animationEasing : "easeOutBounce",
+                //Boolean - Whether we animate the rotation of the Doughnut
+                animateRotate : true,
+                //Boolean - Whether we animate scaling the Doughnut from the centre
+                animateScale : false,
+                //Boolean - Re-draw chart on page resize
+                responsive: true,
+                //String - A legend template
+                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+            };
+
+            var doughnutData = [
+                {
+                    value: 300,
+                    color:"rgba(220,220,220,0.8)",
+                    highlight: "rgba(220,220,220,0.7)",
+                    label: "Grey"
+                },
+                {
+                    value: 50,
+                    color: "rgba(151,187,205,1)",
+                    highlight: "rgba(151,187,205,0.8)",
+                    label: "Blue"
+                },
+                {
+                    value: 100,
+                    color: "rgba(169, 3, 41, 0.7)",
+                    highlight: "rgba(169, 3, 41, 0.7)",
+                    label: "Red"
+                }
+            ];
+
+            // render chart
+            var ctx = element[0].getContext("2d");
+            new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
+        }}
+});
+'use strict';
+
+angular.module('app.graphs').directive('chartjsLineChart', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attributes) {
+
+            // LINE CHART
+            // ref: http://www.chartjs.org/docs/#line-chart-introduction
+            var lineOptions = {
+                ///Boolean - Whether grid lines are shown across the chart
+                scaleShowGridLines : true,
+                //String - Colour of the grid lines
+                scaleGridLineColor : "rgba(0,0,0,.05)",
+                //Number - Width of the grid lines
+                scaleGridLineWidth : 1,
+                //Boolean - Whether the line is curved between points
+                bezierCurve : true,
+                //Number - Tension of the bezier curve between points
+                bezierCurveTension : 0.4,
+                //Boolean - Whether to show a dot for each point
+                pointDot : true,
+                //Number - Radius of each point dot in pixels
+                pointDotRadius : 4,
+                //Number - Pixel width of point dot stroke
+                pointDotStrokeWidth : 1,
+                //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                pointHitDetectionRadius : 20,
+                //Boolean - Whether to show a stroke for datasets
+                datasetStroke : true,
+                //Number - Pixel width of dataset stroke
+                datasetStrokeWidth : 2,
+                //Boolean - Whether to fill the dataset with a colour
+                datasetFill : true,
+                //Boolean - Re-draw chart on page resize
+                responsive: true,
+                //String - A legend template
+                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+            };
+
+            var lineData = { labels: ["January", "February", "March", "April", "May", "June", "July"],
+                datasets: [
+                    {
+                        label: "My First dataset",
+                        fillColor: "rgba(220,220,220,0.2)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: [65, 59, 80, 81, 56, 55, 40]
+                    },
+                    {
+                        label: "My Second dataset",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: [28, 48, 40, 19, 86, 27, 90]
+                    }
+                ]
+            };
+
+            var ctx = element[0].getContext("2d");
+            var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
+
+
+
+        }
+    }
+});
+'use strict';
+
+angular.module('app.graphs').directive('chartjsPieChart', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attributes) {
+            var pieOptions = {
+                //Boolean - Whether we should show a stroke on each segment
+                segmentShowStroke: true,
+                //String - The colour of each segment stroke
+                segmentStrokeColor: "#fff",
+                //Number - The width of each segment stroke
+                segmentStrokeWidth: 2,
+                //Number - Amount of animation steps
+                animationSteps: 100,
+                //String - types of animation
+                animationEasing: "easeOutBounce",
+                //Boolean - Whether we animate the rotation of the Doughnut
+                animateRotate: true,
+                //Boolean - Whether we animate scaling the Doughnut from the centre
+                animateScale: false,
+                //Boolean - Re-draw chart on page resize
+                responsive: true,
+                //String - A legend template
+                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+            };
+
+            var pieData = [
+                {
+                    value: 300,
+                    color:"rgba(220,220,220,0.9)",
+                    highlight: "rgba(220,220,220,0.8)",
+                    label: "Grey"
+                },
+                {
+                    value: 50,
+                    color: "rgba(151,187,205,1)",
+                    highlight: "rgba(151,187,205,0.8)",
+                    label: "Blue"
+                },
+                {
+                    value: 100,
+                    color: "rgba(169, 3, 41, 0.7)",
+                    highlight: "rgba(169, 3, 41, 0.7)",
+                    label: "Red"
+                }
+            ];
+
+            // render chart
+            var ctx = element[0].getContext("2d");
+            var myNewChart = new Chart(ctx).Pie(pieData, pieOptions);
+        }}
+});
+'use strict';
+
+angular.module('app.graphs').directive('chartjsPolarChart', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attributes) {
+            var polarOptions = {
+                //Boolean - Show a backdrop to the scale label
+                scaleShowLabelBackdrop : true,
+                //String - The colour of the label backdrop
+                scaleBackdropColor : "rgba(255,255,255,0.75)",
+                // Boolean - Whether the scale should begin at zero
+                scaleBeginAtZero : true,
+                //Number - The backdrop padding above & below the label in pixels
+                scaleBackdropPaddingY : 2,
+                //Number - The backdrop padding to the side of the label in pixels
+                scaleBackdropPaddingX : 2,
+                //Boolean - Show line for each value in the scale
+                scaleShowLine : true,
+                //Boolean - Stroke a line around each segment in the chart
+                segmentShowStroke : true,
+                //String - The colour of the stroke on each segement.
+                segmentStrokeColor : "#fff",
+                //Number - The width of the stroke value in pixels
+                segmentStrokeWidth : 2,
+                //Number - Amount of animation steps
+                animationSteps : 100,
+                //String - Animation easing effect.
+                animationEasing : "easeOutBounce",
+                //Boolean - Whether to animate the rotation of the chart
+                animateRotate : true,
+                //Boolean - Whether to animate scaling the chart from the centre
+                animateScale : false,
+                //Boolean - Re-draw chart on page resize
+                responsive: true,
+                //String - A legend template
+                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+            };
+
+            var polarData = [
+                {
+                    value: 300,
+                    color:"rgba(220,220,220,0.8)",
+                    highlight: "rgba(220,220,220,0.7)",
+                    label: "Grey"
+                },
+                {
+                    value: 50,
+                    color: "rgba(151,187,205,1)",
+                    highlight: "rgba(151,187,205,0.8)",
+                    label: "Blue"
+                },
+                {
+                    value: 100,
+                    color: "rgba(169, 3, 41, 0.7)",
+                    highlight: "rgba(169, 3, 41, 0.7)",
+                    label: "Red"
+                },
+                {
+                    value: 40,
+                    color: "#949FB1",
+                    highlight: "#A8B3C5",
+                    label: "Grey"
+                },
+                {
+                    value: 120,
+                    color: "#4D5360",
+                    highlight: "#616774",
+                    label: "Dark Grey"
+                }
+            ];
+
+            // render chart
+            var ctx = element[0].getContext("2d");
+            new Chart(ctx).PolarArea(polarData, polarOptions);
+        }}
+});
+'use strict';
+
+angular.module('app.graphs').directive('chartjsRadarChart', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attributes) {
+            var radarData = {
+                labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+                datasets: [
+                    {
+                        label: "My First dataset",
+                        fillColor: "rgba(220,220,220,0.2)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: [65, 59, 90, 81, 56, 55, 40]
+                    },
+                    {
+                        label: "My Second dataset",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: [28, 48, 40, 19, 96, 27, 100]
+                    }
+                ]
+            };
+
+            var radarOptions = {
+                //Boolean - Whether to show lines for each scale point
+                scaleShowLine : true,
+                //Boolean - Whether we show the angle lines out of the radar
+                angleShowLineOut : true,
+                //Boolean - Whether to show labels on the scale
+                scaleShowLabels : false,
+                // Boolean - Whether the scale should begin at zero
+                scaleBeginAtZero : true,
+                //String - Colour of the angle line
+                angleLineColor : "rgba(0,0,0,.1)",
+                //Number - Pixel width of the angle line
+                angleLineWidth : 1,
+                //String - Point label font declaration
+                pointLabelFontFamily : "'Arial'",
+                //String - Point label font weight
+                pointLabelFontStyle : "normal",
+                //Number - Point label font size in pixels
+                pointLabelFontSize : 10,
+                //String - Point label font colour
+                pointLabelFontColor : "#666",
+                //Boolean - Whether to show a dot for each point
+                pointDot : true,
+                //Number - Radius of each point dot in pixels
+                pointDotRadius : 3,
+                //Number - Pixel width of point dot stroke
+                pointDotStrokeWidth : 1,
+                //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                pointHitDetectionRadius : 20,
+                //Boolean - Whether to show a stroke for datasets
+                datasetStroke : true,
+                //Number - Pixel width of dataset stroke
+                datasetStrokeWidth : 2,
+                //Boolean - Whether to fill the dataset with a colour
+                datasetFill : true,
+                //Boolean - Re-draw chart on page resize
+                responsive: true,
+                //String - A legend template
+                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+            }
+
+            // render chart
+            var ctx = element[0].getContext("2d");
+            var myNewChart = new Chart(ctx).Radar(radarData, radarOptions);
+        }}
+});
+'use strict';
+
+angular.module('app.tables').directive('jqGrid', function ($compile) {
+    var jqGridCounter = 0;
+
+    return {
+        replace: true,
+        restrict: 'E',
+        scope: {
+            gridData: '='
+        },
+        template: '<div>' +
+            '<table></table>' +
+            '<div class="jqgrid-pagination"></div>' +
+            '</div>',
+        controller: function($scope, $element){
+            $scope.editRow  = function(row){
+                $element.find('table').editRow(row);
+            };
+            $scope.saveRow  = function(row){
+                $element.find('table').saveRow(row);
+            };
+            $scope.restoreRow  = function(row){
+                $element.find('table').restoreRow(row);
+            };
+        },
+        link: function (scope, element) {
+            var gridNumber = jqGridCounter++;
+            var wrapperId = 'jqgrid-' + gridNumber;
+            element.attr('id', wrapperId);
+
+            var tableId = 'jqgrid-table-' + gridNumber;
+            var table = element.find('table');
+            table.attr('id', tableId);
+
+            var pagerId = 'jqgrid-pager-' + gridNumber;
+            element.find('.jqgrid-pagination').attr('id', pagerId);
+
+
+            table.jqGrid({
+                data : scope.gridData.data,
+                datatype : "local",
+                height : 'auto',
+                colNames : scope.gridData.colNames || [],
+                colModel : scope.gridData.colModel || [],
+                rowNum : 10,
+                rowList : [10, 20, 30],
+                pager : '#' + pagerId,
+                sortname : 'id',
+                toolbarfilter : true,
+                viewrecords : true,
+                sortorder : "asc",
+                gridComplete : function() {
+                    var ids = table.jqGrid('getDataIDs');
+                    for (var i = 0; i < ids.length; i++) {
+                        var cl = ids[i];
+                        var be = "<button class='btn btn-xs btn-default' uib-tooltip='Edit Row' tooltip-append-to-body='true' ng-click='editRow("+ cl +")'><i class='fa fa-pencil'></i></button>";
+
+                        var se = "<button class='btn btn-xs btn-default' uib-tooltip='Save Row' tooltip-append-to-body='true' ng-click='saveRow("+ cl +")'><i class='fa fa-save'></i></button>";
+
+                        var ca = "<button class='btn btn-xs btn-default' uib-tooltip='Cancel' tooltip-append-to-body='true' ng-click='restoreRow("+ cl +")'><i class='fa fa-times'></i></button>";
+
+                        table.jqGrid('setRowData', ids[i], {
+                            act : be + se + ca
+                        });
+                    }
+                },
+                editurl : "dummy.html",
+                caption : "SmartAdmin jQgrid Skin",
+                multiselect : true,
+                autowidth : true
+
+            });
+            table.jqGrid('navGrid', '#' + pagerId, {
+                edit : false,
+                add : false,
+                del : true
+            });
+            table.jqGrid('inlineNav', '#' + pagerId);
+
+
+            element.find(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+            element.find(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+            element.find(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+            element.find(".ui-jqgrid-pager").removeClass("ui-state-default");
+            element.find(".ui-jqgrid").removeClass("ui-widget-content");
+
+            // add classes
+            element.find(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
+            element.find(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
+
+            element.find(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
+            element.find(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+            element.find(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+            element.find(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+            element.find(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+            element.find(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+            element.find(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
+            element.find(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
+
+            element.find(".ui-icon.ui-icon-seek-prev").wrap("<div class='btn btn-sm btn-default'></div>");
+            element.find(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
+
+            element.find(".ui-icon.ui-icon-seek-first").wrap("<div class='btn btn-sm btn-default'></div>");
+            element.find(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");
+
+            element.find(".ui-icon.ui-icon-seek-next").wrap("<div class='btn btn-sm btn-default'></div>");
+            element.find(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
+
+            element.find(".ui-icon.ui-icon-seek-end").wrap("<div class='btn btn-sm btn-default'></div>");
+            element.find(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
+
+            $(window).on('resize.jqGrid', function() {
+               table.jqGrid('setGridWidth', $("#content").width());
+            });
+
+
+            $compile(element.contents())(scope);
+        }
+    }
+});
+'use strict';
+
 angular.module('app.tables').directive('datatableBasic', function ($compile) {
     return {
         restrict: 'A',
@@ -18763,127 +18916,6 @@ angular.module('app.tables').directive('datatableTableTools', function () {
                     responsiveHelper.respond();
                 }
             });
-        }
-    }
-});
-'use strict';
-
-angular.module('app.tables').directive('jqGrid', function ($compile) {
-    var jqGridCounter = 0;
-
-    return {
-        replace: true,
-        restrict: 'E',
-        scope: {
-            gridData: '='
-        },
-        template: '<div>' +
-            '<table></table>' +
-            '<div class="jqgrid-pagination"></div>' +
-            '</div>',
-        controller: function($scope, $element){
-            $scope.editRow  = function(row){
-                $element.find('table').editRow(row);
-            };
-            $scope.saveRow  = function(row){
-                $element.find('table').saveRow(row);
-            };
-            $scope.restoreRow  = function(row){
-                $element.find('table').restoreRow(row);
-            };
-        },
-        link: function (scope, element) {
-            var gridNumber = jqGridCounter++;
-            var wrapperId = 'jqgrid-' + gridNumber;
-            element.attr('id', wrapperId);
-
-            var tableId = 'jqgrid-table-' + gridNumber;
-            var table = element.find('table');
-            table.attr('id', tableId);
-
-            var pagerId = 'jqgrid-pager-' + gridNumber;
-            element.find('.jqgrid-pagination').attr('id', pagerId);
-
-
-            table.jqGrid({
-                data : scope.gridData.data,
-                datatype : "local",
-                height : 'auto',
-                colNames : scope.gridData.colNames || [],
-                colModel : scope.gridData.colModel || [],
-                rowNum : 10,
-                rowList : [10, 20, 30],
-                pager : '#' + pagerId,
-                sortname : 'id',
-                toolbarfilter : true,
-                viewrecords : true,
-                sortorder : "asc",
-                gridComplete : function() {
-                    var ids = table.jqGrid('getDataIDs');
-                    for (var i = 0; i < ids.length; i++) {
-                        var cl = ids[i];
-                        var be = "<button class='btn btn-xs btn-default' uib-tooltip='Edit Row' tooltip-append-to-body='true' ng-click='editRow("+ cl +")'><i class='fa fa-pencil'></i></button>";
-
-                        var se = "<button class='btn btn-xs btn-default' uib-tooltip='Save Row' tooltip-append-to-body='true' ng-click='saveRow("+ cl +")'><i class='fa fa-save'></i></button>";
-
-                        var ca = "<button class='btn btn-xs btn-default' uib-tooltip='Cancel' tooltip-append-to-body='true' ng-click='restoreRow("+ cl +")'><i class='fa fa-times'></i></button>";
-
-                        table.jqGrid('setRowData', ids[i], {
-                            act : be + se + ca
-                        });
-                    }
-                },
-                editurl : "dummy.html",
-                caption : "SmartAdmin jQgrid Skin",
-                multiselect : true,
-                autowidth : true
-
-            });
-            table.jqGrid('navGrid', '#' + pagerId, {
-                edit : false,
-                add : false,
-                del : true
-            });
-            table.jqGrid('inlineNav', '#' + pagerId);
-
-
-            element.find(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
-            element.find(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
-            element.find(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
-            element.find(".ui-jqgrid-pager").removeClass("ui-state-default");
-            element.find(".ui-jqgrid").removeClass("ui-widget-content");
-
-            // add classes
-            element.find(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
-            element.find(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
-
-            element.find(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
-            element.find(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
-            element.find(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
-            element.find(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
-            element.find(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
-            element.find(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
-            element.find(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
-            element.find(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
-
-            element.find(".ui-icon.ui-icon-seek-prev").wrap("<div class='btn btn-sm btn-default'></div>");
-            element.find(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
-
-            element.find(".ui-icon.ui-icon-seek-first").wrap("<div class='btn btn-sm btn-default'></div>");
-            element.find(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");
-
-            element.find(".ui-icon.ui-icon-seek-next").wrap("<div class='btn btn-sm btn-default'></div>");
-            element.find(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
-
-            element.find(".ui-icon.ui-icon-seek-end").wrap("<div class='btn btn-sm btn-default'></div>");
-            element.find(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
-
-            $(window).on('resize.jqGrid', function() {
-               table.jqGrid('setGridWidth', $("#content").width());
-            });
-
-
-            $compile(element.contents())(scope);
         }
     }
 });
@@ -20706,97 +20738,6 @@ angular.module('SmartAdmin.Forms').directive('bootstrapTogglingForm', function()
 });
 'use strict';
 
-angular.module('SmartAdmin.Forms').directive('smartCkEditor', function () {
-    return {
-        restrict: 'A',
-        compile: function ( tElement) {
-            tElement.removeAttr('smart-ck-editor data-smart-ck-editor');
-            //CKEDITOR.basePath = 'bower_components/ckeditor/';
-
-            CKEDITOR.replace( tElement.attr('name'), { height: '380px', startupFocus : true} );
-        }
-    }
-});
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartDestroySummernote', function () {
-    return {
-        restrict: 'A',
-        compile: function (tElement, tAttributes) {
-            tElement.removeAttr('smart-destroy-summernote data-smart-destroy-summernote')
-            tElement.on('click', function() {
-                angular.element(tAttributes.smartDestroySummernote).destroy();
-            })
-        }
-    }
-});
-
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartEditSummernote', function () {
-    return {
-        restrict: 'A',
-        compile: function (tElement, tAttributes) {
-            tElement.removeAttr('smart-edit-summernote data-smart-edit-summernote');
-            tElement.on('click', function(){
-                angular.element(tAttributes.smartEditSummernote).summernote({
-                    focus : true
-                });  
-            });
-        }
-    }
-});
-
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartMarkdownEditor', function () {
-    return {
-        restrict: 'A',
-        compile: function (element, attributes) {
-            element.removeAttr('smart-markdown-editor data-smart-markdown-editor')
-
-            var options = {
-                autofocus:false,
-                savable:true,
-                fullscreen: {
-                    enable: false
-                }
-            };
-
-            if(attributes.height){
-                options.height = parseInt(attributes.height);
-            }
-
-            element.markdown(options);
-        }
-    }
-});
-
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartSummernoteEditor', function (lazyScript) {
-    return {
-        restrict: 'A',
-        compile: function (tElement, tAttributes) {
-            tElement.removeAttr('smart-summernote-editor data-smart-summernote-editor');
-
-            var options = {
-                focus : true,
-                tabsize : 2
-            };
-
-            if(tAttributes.height){
-                options.height = tAttributes.height;
-            }
-
-            lazyScript.register('build/vendor.ui.js').then(function(){
-                tElement.summernote(options);                
-            });
-        }
-    }
-});
-'use strict';
-
 angular.module('SmartAdmin.Forms').directive('smartCheckoutForm', function (formsCommon, lazyScript) {
     return {
         restrict: 'A',
@@ -21736,6 +21677,97 @@ angular.module('SmartAdmin.Forms').directive('smartDropzone', function () {
     };
 });
 
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartCkEditor', function () {
+    return {
+        restrict: 'A',
+        compile: function ( tElement) {
+            tElement.removeAttr('smart-ck-editor data-smart-ck-editor');
+            //CKEDITOR.basePath = 'bower_components/ckeditor/';
+
+            CKEDITOR.replace( tElement.attr('name'), { height: '380px', startupFocus : true} );
+        }
+    }
+});
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartDestroySummernote', function () {
+    return {
+        restrict: 'A',
+        compile: function (tElement, tAttributes) {
+            tElement.removeAttr('smart-destroy-summernote data-smart-destroy-summernote')
+            tElement.on('click', function() {
+                angular.element(tAttributes.smartDestroySummernote).destroy();
+            })
+        }
+    }
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartEditSummernote', function () {
+    return {
+        restrict: 'A',
+        compile: function (tElement, tAttributes) {
+            tElement.removeAttr('smart-edit-summernote data-smart-edit-summernote');
+            tElement.on('click', function(){
+                angular.element(tAttributes.smartEditSummernote).summernote({
+                    focus : true
+                });  
+            });
+        }
+    }
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartMarkdownEditor', function () {
+    return {
+        restrict: 'A',
+        compile: function (element, attributes) {
+            element.removeAttr('smart-markdown-editor data-smart-markdown-editor')
+
+            var options = {
+                autofocus:false,
+                savable:true,
+                fullscreen: {
+                    enable: false
+                }
+            };
+
+            if(attributes.height){
+                options.height = parseInt(attributes.height);
+            }
+
+            element.markdown(options);
+        }
+    }
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartSummernoteEditor', function (lazyScript) {
+    return {
+        restrict: 'A',
+        compile: function (tElement, tAttributes) {
+            tElement.removeAttr('smart-summernote-editor data-smart-summernote-editor');
+
+            var options = {
+                focus : true,
+                tabsize : 2
+            };
+
+            if(tAttributes.height){
+                options.height = tAttributes.height;
+            }
+
+            lazyScript.register('build/vendor.ui.js').then(function(){
+                tElement.summernote(options);                
+            });
+        }
+    }
+});
 'use strict';
 
 angular.module('SmartAdmin.Forms').directive('smartValidateForm', function (formsCommon) {
