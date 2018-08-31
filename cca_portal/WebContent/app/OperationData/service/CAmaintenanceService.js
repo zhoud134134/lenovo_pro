@@ -136,7 +136,44 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
         });
         return d.promise;
     }
-
+    //请求Prc bu的数据
+    this.getPrcBu = function(type) {
+        console.log(type);
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/fileorder/bu',
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    //请求Prc Segment的数据
+    this.getPrcSegment = function(type) {
+        console.log(type);
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/fileorder/segment',
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
     //Prc时的Download
     this.getPrcDown = function(id) {
         console.log(id)
