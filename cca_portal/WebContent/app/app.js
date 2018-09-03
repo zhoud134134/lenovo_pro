@@ -403,7 +403,88 @@ angular.module('app', [
             }
             return c;
         }
+        $rootScope.caprcTabCon=function(json, tbody, thead, jsonData) {
+            //从某个json中取出数据，对数据去重，同时按照要求排序的封装?
+            function SortUnique(obj, par, arr) {
+                var jsonArr = [];
+                for(var i = 0; i < obj.length; i++) {
+                    jsonArr.push(obj[i][par]);
+                }
+                return arrCONTarr(unique(jsonArr), arr);
+            }
 
+            //获取已经排序的bu，同时仅有数据中的这些
+            var bu = SortUnique(json, 'bu', tbody)
+
+            //把segment相同的放在一个数组中
+            var sameArr = [];
+            for(var j = 0; j < tbody.length; j++) {
+                var otherArr = [];
+                for(var i = 0; i < json.length; i++) {
+                    if(json[i].bu == tbody[j]) {
+                        otherArr.push(json[i]);
+                    }
+                }
+                if(otherArr.length) {
+                    sameArr.push(otherArr)
+                }
+            }
+            console.log(sameArr)
+
+            //给已经处理好的数组的项中，根据segment，添加status序号
+            for(var j = 0; j < sameArr.length; j++) {
+                for(var n = 0; n < sameArr[j].length; n++) {
+                    for(var i = 0; i < thead.length; i++) {
+                        if(sameArr[j][n].segment == thead[i]) {
+                            sameArr[j][n].status = i;
+                        }
+                    }
+                }
+            }
+
+            //创建一个数组，数组中包含对象，对象中包含两项，一项为segment，一项为数组放数据用，其中给数组设置长度及默认项为空字符串
+            var dataArr = [];
+            //					molArr = new Array(thead.length - 1).fill('-');
+            for(var i = 0; i < sameArr.length; i++) {
+                for(var j = 0; j < sameArr[i].length; j++) {
+                    dataArr[i] = {
+                        bu: sameArr[i][j].bu,
+                        arr: []
+                    };
+                    dataArr[i].arr = new Array(thead.length - 1).fill('-');
+                }
+            }
+
+            //将原本设置的status值作为数组对象数组中的索引，将原本jsonData的值放入正确的索引之中
+            //dataArr的数据可以用于不要求全部显示segment，有什么显示什么segment用
+            for(var i = 0; i < dataArr.length; i++) {
+                for(var j = 0; j < sameArr.length; j++) {
+                    for(var n = 0; n < sameArr[j].length; n++) {
+                        if(sameArr[j][n].bu == dataArr[i].bu) {
+                            dataArr[i].arr[sameArr[j][n].status - 1] = sameArr[j][n][jsonData]
+                        }
+                    }
+                }
+            }
+
+            //Zarr为最终前端所需数据形态，如果展示全部segment，则将已经有的替换到完整的指定项，最终所得为所需结果
+            var Zarr = [];
+            var camolArr2 = new Array(thead.length - 1).fill('-');
+            for(var i = 0; i < tbody.length; i++) {
+                Zarr.push({
+                    bu: tbody[i],
+                    arr: camolArr2
+                })
+            }
+            for(var i = 0; i < Zarr.length; i++) {
+                for(var j = 0; j < dataArr.length; j++) {
+                    if(Zarr[i].bu == dataArr[j].bu) {
+                        Zarr[i] = dataArr[j];
+                    }
+                }
+            }
+            return Zarr;
+        };
     });
 
 
