@@ -10,4 +10,5 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
             $scope.ww = true;
         }
     }
+    $('#final table').stickySort({ sortable: true });
 })
