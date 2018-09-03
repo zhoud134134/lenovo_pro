@@ -229,7 +229,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
             });
             var table = $('#WWExample').DataTable({
                 //"processing": true,
-                "scrollY": 600,
+                "scrollY": 850,
                 "scrollX": true,
                 "dom": '<"top">rt<"bottom"><"clear">',
                 //"dom": '<"top"i>rt<"bottom"flp><"clear">',
@@ -353,7 +353,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
             });
             var table =$('#PRCExample').DataTable({
                 //"processing": true,
-                "scrollY": 400,
+                "scrollY": 850,
                 "scrollX": true,
                 "dom": '<"top">rt<"bottom"><"clear">',
                 "scrollCollapse": true,
