@@ -26,6 +26,12 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                 title: 'Biz data maintenance'
             }
         })
+        .state('app.OperationData.Bizdatamanualupload', {
+            abstract: true,
+            data: {
+                title: 'Biz data manual upload'
+            }
+        })
         //三级菜单
         .state('app.OperationData.Dealmaintenance.Dealmaintenance', {
             url: '/OperationData/Dealmaintenance/Dealmaintenance',
@@ -51,7 +57,7 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                 }
             }
         })
-        .state('app.OperationData.Bizdatamaintenance.CAmanualupload', {
+       /* .state('app.OperationData.Bizdatamaintenance.CAmanualupload', {
             url: '/OperationData/Bizdatamaintenance/CAmanualupload',
             data: {
                 title: 'CA manual upload'
@@ -62,7 +68,7 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                     controller: 'CAmanualuploadCtrl',
                 }
             }
-        })
+        })*/
         .state('app.OperationData.Bizdatamaintenance.Markupmaintenance', {
             url: '/OperationData/Bizdatamaintenance/Markupmaintenance',
             data: {
@@ -99,7 +105,7 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                 }
             }
         })
-        .state('app.OperationData.Bizdatamaintenance.Othercategorymaintenance', {
+       /* .state('app.OperationData.Bizdatamaintenance.Othercategorymaintenance', {
             url: '/OperationData/Bizdatamaintenance/Othercategorymaintenance',
             data: {
                 title: 'Other category maintenance'
@@ -110,7 +116,7 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                     controller: 'OthercategorymaintenanceCtrl',
                 }
             }
-        })
+        })*/
         .state('app.OperationData.Bizdatamaintenance.Alliancefundmaintenance', {
             url: '/OperationData/Bizdatamaintenance/Alliancefundmaintenance',
             data: {
@@ -135,8 +141,58 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                 }
             }
         })
+        .state('app.OperationData.Bizdatamanualupload.AccountTemplateManualUpload', {
+            url: '/OperationData/Bizdatamaintenance/AccountTemplateManualUpload',
+            data: {
+                title: 'Account template manual upload'
+            },
+            views: {
+                "content@app": {
+                    templateUrl: 'app/OperationData/views/AccountTemplateManualUpload.html',
+                    controller: 'AccountTemplateManualUploadCtrl',
+                }
+            }
+        })
+        .state('app.OperationData.Bizdatamanualupload.MegaDealRelatedMaintenance', {
+            url: '/OperationData/Bizdatamaintenance/MegaDealRelatedMaintenance',
+            data: {
+                title: 'Mega Deal related  maintenance'
+            },
+            views: {
+                "content@app": {
+                    templateUrl: 'app/OperationData/views/MegaDealRelatedMaintenance.html',
+                    controller: 'MegaDealRelatedMaintenanceCtrl',
+                }
+            }
+        })
+        .state('app.OperationData.Bizdatamanualupload.CAmanualupload', {
+            url: '/OperationData/Bizdatamaintenance/CAmanualupload',
+            data: {
+                title: 'CA manual upload'
+            },
+            views: {
+                "content@app": {
+                    templateUrl: 'app/OperationData/views/CAmanualupload.html',
+                    controller: 'CAmanualuploadCtrl',
+                }
+            }
+        })
+        .state('app.OperationData.Bizdatamanualupload.Othercategorymaintenance', {
+            url: '/OperationData/Bizdatamaintenance/Othercategorymaintenance',
+            data: {
+                title: 'Other category main...'
+            },
+            views: {
+                "content@app": {
+                    templateUrl: 'app/OperationData/views/Othercategorymaintenance.html',
+                    controller: 'OthercategorymaintenanceCtrl',
+                }
+            }
+        })
 
-        .state('app.OperationData.login', {
+
+
+        /*.state('app.OperationData.login', {
             url : '/login',
             views: {
                 "content@app": {
@@ -144,6 +200,6 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                     controller: 'AlliancefundmaintenanceCtrl',
                 }
             }
-        })
+        })*/
 
 });
