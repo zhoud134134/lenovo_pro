@@ -141,6 +141,18 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                 }
             }
         })
+        .state('app.OperationData.Bizdatamaintenance.OutTapeAllocation', {
+            url: '/OperationData/Bizdatamaintenance/OutTapeAllocation',
+            data: {
+                title: 'Out tape Allocation'
+            },
+            views: {
+                "content@app": {
+                    templateUrl: 'app/OperationData/views/OutTapeAllocation.html',
+                    controller: 'OutTapeAllocationCtrl',
+                }
+            }
+        })
         .state('app.OperationData.Bizdatamanualupload.AccountTemplateManualUpload', {
             url: '/OperationData/Bizdatamaintenance/AccountTemplateManualUpload',
             data: {
