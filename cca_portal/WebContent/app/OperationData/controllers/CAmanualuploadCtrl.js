@@ -162,6 +162,13 @@ $scope.caprcww=false;
                     console.log($scope.id);
                     //$('#myModal').modal('hide');
                     $scope.getPage();
+                }else if(data.code == 0 && $scope.CycleChoose.indexOf("Actual") != -1){
+                    alert('上传成功！');
+                    $scope.caprcww=true;
+                    $scope.id=data.result;
+                    console.log($scope.id);
+                    //$('#myModal').modal('hide');
+                    $scope.getPage();
                 } else {
                     alert('上传失败！');
                 }
