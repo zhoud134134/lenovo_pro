@@ -2,10 +2,8 @@
     margin-top: 5px;
 }
 
-#demoTable td,#demoTable th{
+#other_content td,#other_content th{
     text-align: center;
-    height:25px;
-    min-width:100px;
     font-family:"Helvetica Neue", "Microsoft Yahei", Arial, sans-serif;
     font-size:12px;
 }
