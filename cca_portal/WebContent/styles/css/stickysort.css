@@ -17,6 +17,9 @@
 	width: auto; /* Prevent table from stretching to full size */
 
 }
+#outcontent .sticky-col{
+    width: 320px;
+}
 
 	.sticky-col{
 		position: fixed;
