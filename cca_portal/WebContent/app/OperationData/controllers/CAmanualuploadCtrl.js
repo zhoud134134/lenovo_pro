@@ -82,16 +82,15 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
                 $scope.PrcList = data.result;
                 console.log($scope.PrcList);
 
-                $rootScope.PrcSegment.unshift("BU");
-                $rootScope.PrcSegment.push("Total");
+                var arrSegment=$rootScope.PrcSegment.concat(["Total"]);
                 $rootScope.PrcBu.push("Total");
 
-                $rootScope.segmenttop = [ 'BU', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'Total'];
+                //$rootScope.segmenttop = [ 'BU', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'Total'];
                 //var caprcthead = ["BU", "Think-T", "T-Model", "Commercial", "SMB", "Consumer", "Others", "YT", "Total"];
                 //var caprctbody = ["Think Pad", "Lenovo NB", "Commercial DT", "Consumer DT", "Workstation", "Chrome", "Server", "Accessory", "Visual", "Total"];
 
 
-                $scope.cadata = $rootScope.caprcTabCon($scope.PrcList,  $rootScope.PrcBu,  $rootScope.PrcSegment, 'values');
+                $scope.cadata = $rootScope.caprcTabCon($scope.PrcList,  $rootScope.PrcBu, arrSegment, 'values');
                 console.log($scope.cadata);
                 console.log($rootScope.segmenttop);
                 console.log($rootScope.PrcSegment);
@@ -99,14 +98,11 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
 
                 $timeout(function(){
                     console.log("1");
-                    _w_table_colspan("#caprcTab",1,11);
-                    _w_table_rowspan("#caprcTab",1);
-                    _w_table_rowspan("#caprcTab",11);
-                    _w_table_rowspan("#caprcTab",2);
-                    _w_table_rowspan("#caprcTab",12);
-                    //_w_table_rowspan("#caprcTab thead",11);
-                    // _w_table_rowspan("#caprcTab thead",2);
-                    //_w_table_rowspan("#caprcTab thead",12);
+                    //_w_table_colspan("#caprcTab",1,11);
+                    //_w_table_rowspan("#caprcTab",1);
+                    //_w_table_rowspan("#caprcTab",9);
+                    //_w_table_rowspan("#caprcTab",2);
+                    //_w_table_rowspan("#caprcTab",10);
                 })
             }
             console.log(data);
@@ -122,7 +118,7 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
         },function(data){
             console.log(data);
         });
-    }
+    };
 
     //上传
     $scope.myfiles = {};
@@ -137,7 +133,7 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
             }
         }
     }
-$scope.caprcww=false;
+    $scope.caprcww=false;
     $scope.upload = function(){
         Upload.upload({
             //服务端接收
@@ -179,13 +175,16 @@ $scope.caprcww=false;
             console.log('error status: ' + status);
         });
     }
-    CAmanualuploadService.getPrcBu($scope.bu).then(function(caprcbudata){
+    var prc = {
+        stype : 'PRC'
+    };
+    CAmanualuploadService.getPrcBu(prc).then(function(caprcbudata){
         console.log(caprcbudata.result);
         $rootScope.PrcBu=caprcbudata.result;
     }, function (data) {
         console.log(data);
     })
-    CAmanualuploadService.getPrcSegment($scope.segment).then(function(caprcsegmentdata){
+    CAmanualuploadService.getPrcSegment(prc).then(function(caprcsegmentdata){
         console.log(caprcsegmentdata.result);
         $rootScope.PrcSegment=caprcsegmentdata.result;
     }, function (data) {
