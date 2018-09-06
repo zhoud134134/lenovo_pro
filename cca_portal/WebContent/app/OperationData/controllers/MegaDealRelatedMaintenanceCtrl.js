@@ -51,7 +51,7 @@ angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl',
                 console.log(data)
                 console.log(status)
                 if(status == 200){
-                    if(data.code == 0){
+                    if(data.code == 0){ 
                         MegaDealRelatedMaintenance.getData($scope.cycle).then(function(data2){
                             if(data2.code == 0){
                                 $scope.pageList = data2.result;
