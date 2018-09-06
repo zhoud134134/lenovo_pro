@@ -24,7 +24,7 @@ angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl',
         }
     }
 
-    $scope.caprcww=false;
+    $scope.TAB = false;
     $scope.upload = function(){
         if(!$scope.CycleChoose){
             alert("请选择条件！");
@@ -55,6 +55,7 @@ angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl',
                         MegaDealRelatedMaintenance.getData($scope.cycle).then(function(data2){
                             if(data2.code == 0){
                                 $scope.pageList = data2.result;
+                                $scope.TAB = true;
                                 $scope.getTable();
                             }
                             console.log(data2);
