@@ -6,7 +6,7 @@
     <!-- widget grid -->
     <section id="widget-grid" id="widget-grid">
         <article class="col-sm-12">
-            <!-- 第一部分 -->
+            <!-- 绗竴閮ㄥ垎 -->
             <div jarvis-widget data-widget-color="Light Blue"
                  data-widget-editbutton="false"
                  data-widget-fullscreenbutton="false"
@@ -22,9 +22,7 @@
                         <div class="col-sm-6 form-group-m">
                             <label>Cycle choose:</label>
                             <div class="for-sel">
-                                <select class="form-control">
-                                    <option value="">Q1M3</option>
-                                    <option value="">Q1M4</option>
+                                <select class="form-control" ng-model="CycleChoose" ng-options="x for x in cycledata">
                                 </select>
                             </div>
                         </div>
@@ -40,12 +38,13 @@
                         </div>
                     </div>
                     <div class="col-sm-3 tab-serch-btn">
-                        <button class="btn btn-back searchbtn">Upload</button>
+                        <button class="btn btn-back searchbtn" ng-click="upload()">Upload</button>
+                        <button class="btn btn-back searchbtn" ng-click="DowTemp()">Download Template</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 第二部分 -->
+            <!-- 绗簩閮ㄥ垎 -->
             <div jarvis-widget  data-widget-color="Light Blue"
                  data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
                 <header>
@@ -54,7 +53,7 @@
                 </header>
             </div>
 
-            <!--第三部分-->
+            <!--绗笁閮ㄥ垎-->
             <!--WW-->
             <div class="mup-tabbtn report-tab" ng-show="!WW" style="max-height: 575px;overflow: hidden">
                 <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
@@ -64,7 +63,7 @@
                     </header>
                     <div>
                         <div class="widget-body no-padding">
-                            <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" id="WWExample" ng-show="ww">
+                            <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" id="MegaTable">
                                 <thead class="table-thead tab-mid">
                                 <tr>
                                     <td>Cycle</td>

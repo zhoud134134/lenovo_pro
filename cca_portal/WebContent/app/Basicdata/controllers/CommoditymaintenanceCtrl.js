@@ -127,14 +127,14 @@ angular.module('app.Basicdata').controller('CommoditymaintenanceCtrl', function 
             }
         }).success(function (data, status, headers, config) {
             if(data.code == 0){
-                alert('上传成功！');
+                alert('Success！');
                 $('#myModal').modal('hide');
                 $scope.goPage();
             }else {
-                alert('上传失败！');
+                alert('Uploading Failed');
             }
         }).error(function (data, status, headers, config) {
-            alert('上传失败！');
+            alert('Uploading Failed');
             //上传失败
             console.log('error status: ' + status);
         });

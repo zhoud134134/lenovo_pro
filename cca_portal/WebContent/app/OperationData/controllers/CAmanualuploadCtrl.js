@@ -152,25 +152,25 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
                 alert("请选择条件！");
             }else {
                 if (data.code == 0 && $scope.CycleChoose.indexOf("M0") != -1) {
-                    alert('上传成功！');
+                    alert('Success');
                     $scope.caprcww=true;
                     $scope.id=data.result;
                     console.log($scope.id);
                     //$('#myModal').modal('hide');
                     $scope.getPage();
                 }else if(data.code == 0 && $scope.CycleChoose.indexOf("Actual") != -1){
-                    alert('上传成功！');
+                    alert('Success');
                     $scope.caprcww=true;
                     $scope.id=data.result;
                     console.log($scope.id);
                     //$('#myModal').modal('hide');
                     $scope.getPage();
                 } else {
-                    alert('上传失败！');
+                    alert('Uploading Failed');
                 }
             }
         }).error(function (data, status, headers, config) {
-            alert('上传失败');
+            alert('Uploading Failed');
             //上传失败
             console.log('error status: ' + status);
         });
