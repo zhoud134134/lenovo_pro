@@ -2,10 +2,11 @@
     margin-top: 5px;
 }
 
-#other_content td,#other_content th{
+#other_content td,#other_content th,#outcontent td,#outcontent th{
     text-align: center;
-    font-family:"Helvetica Neue", "Microsoft Yahei", Arial, sans-serif;
+    font-family: "Open Sans",Arial,Helvetica,Sans-Serif;
     font-size:12px;
+    color: #333;
 }
 #demoTable th{
     background: #F3F5F6;
@@ -115,4 +116,35 @@ main section {
 
 .overflow-both thead a {
     border: none;
+}
+
+/*out大表样式*/
+
+#outcontent table .Ftbody tr th:nth-child(2){
+    background: #FFFFFF;
+    font-weight: 400;
+    text-align: left;
+}
+#outcontent table .Ftbody tr:nth-child(2) th:nth-child(1){
+    background: #FFFFFF;
+    font-weight: 400;
+    text-align: left;
+}
+#outcontent table .Ftbody tr:nth-child(3) th:nth-child(1){
+    background: #FFFFFF;
+    font-weight: 400;
+    text-align: left;
+}
+#outcontent table .Ftbody tr:nth-child(4) th:nth-child(1){
+    background: #FFFFFF;
+    font-weight: 400;
+    text-align: left;
+}
+#outcontent table .Ftbody tr:nth-child(5) th:nth-child(1){
+    background: #FFFFFF;
+    font-weight: 400;
+    text-align: left;
+}
+#outcontent table .Ftbody tr:nth-child(6) td{
+    font-weight: 700;
 }
