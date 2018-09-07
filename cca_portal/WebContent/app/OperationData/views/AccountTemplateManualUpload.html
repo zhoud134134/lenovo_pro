@@ -6,7 +6,7 @@
     <!-- widget grid -->
     <section id="widget-grid" widget-grid>
         <article class="col-sm-12">
-            <!-- µÚÒ»²¿·Ö -->
+            <!-- ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ -->
             <div jarvis-widget data-widget-color="Light Blue"
                  data-widget-editbutton="false"
                  data-widget-fullscreenbutton="false"
@@ -22,9 +22,7 @@
                         <div class="col-sm-6 form-group-m">
                             <label>Cycle choose:</label>
                             <div class="for-sel">
-                                <select class="form-control">
-                                    <option value="">Q1M3</option>
-                                    <option value="">Q1M4</option>
+                                <select class="form-control" ng-model="CycleChoose" ng-options="x for x in cycledata">
                                 </select>
                             </div>
                         </div>
@@ -40,13 +38,13 @@
                         </div>
                     </div>
                     <div class="col-sm-3 tab-serch-btn">
-                        <button class="btn btn-back searchbtn">Upload</button>
-                        <button class="btn btn-back searchbtn">Download Template</button>
+                        <button class="btn btn-back searchbtn" ng-click="upload()">Upload</button>
+                        <button class="btn btn-back searchbtn" ng-click="DowTemp()">Download Template</button>
                     </div>
                 </div>
             </div>
 
-            <!-- µÚ¶þ²¿·Ö -->
+            <!-- ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ -->
             <div jarvis-widget>
                 <div>
                     <div class="widget-body no-padding">
@@ -94,7 +92,7 @@
                     </div>
                 </div>
             </div>
-            <!-- µÚÈý²¿·Ö -->
+            <!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -->
             <div jarvis-widget  data-widget-color="Light Blue"
                  data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
                 <header>
@@ -102,7 +100,7 @@
                     <h2>Result</h2>
                 </header>
             </div>
-            <!-- µÚËÄ²¿·Ö -->
+            <!-- ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ -->
             <div class="mup-tabbtn">
                 <div ng-show="ww" class="othermain">
                     <div jarvis-widget data-widget-colorbutton="false"
