@@ -267,8 +267,10 @@ if (appConfig.voice_command) {
 }
 
 appConfig.apiRootUrl = 'api';
-appConfig.baseUrl="https://mcmt.lenovo.com/ccf-prod";
-appConfig.indexUrl="https://mcmt.lenovo.com/ccf-prod/index";
+appConfig.baseUrl="https://mcmt-dev.lenovo.com/ccf-dev";
+appConfig.indexUrl="https://mcmt-dev.lenovo.com/ccf-dev/index";
+//appConfig.baseUrl="https://mcmt.lenovo.com/ccf-prod";
+//appConfig.indexUrl="https://mcmt.lenovo.com/ccf-prod/index";
 //appConfig.baseUrl="http://10.99.123.10:8080/ccf-prod";
 appConfig.limit = 10;
 appConfig.page =1;
@@ -413,27 +415,27 @@ angular.module('app', [
              $stateChangeSuccess当状态改变成功后被触发
              $stateChangeError当状态改变遇到错误时被触发，错误通常是目标无法载入，需要预载入的数据无法被载入等*/
 
-            /*var data = {
-                "result": {
-                    "displayname": ["Jiaozi JZ1 Han"],
-                    "ITcode": ["hanjz1"],
-                    "email": ["hanjz1@lenovo.com"],
-                    "status": ["1"]
-                }, "code": 0
-            };
-            sessionStorage.setItem("userResult", JSON.stringify(data.result));
+            //var data = {
+            //    "result": {
+            //        "displayname": ["Jiaozi JZ1 Han"],
+            //        "ITcode": ["hanjz1"],
+            //        "email": ["hanjz1@lenovo.com"],
+            //        "status": ["1"]
+            //    }, "code": 0
+            //};
+            //sessionStorage.setItem("userResult", JSON.stringify(data.result));
+            //
+            //$.ajax({
+            //    type: "GET",
+            //    url: "https://mcmt.lenovo.com/ccf-prod/hello/test?ITcode=hanjz1",
+            //    success: function (data) {
+            //        console.log(data)
+            //        sessionStorage.setItem("token", data);
+            //    }
+            //});
 
-            $.ajax({
-                type: "GET",
-                url: "https://mcmt.lenovo.com/ccf-prod/hello/test?ITcode=hanjz1",
-                success: function (data) {
-                    console.log(data)
-                    sessionStorage.setItem("token", data);
-                }
-            });*/
 
-
-            navService.getUser().then(function (data) {
+           navService.getUser().then(function (data) {
                 //var data = {"result":{"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"],"status":["1"],"token":["eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MzU5NTQwMDEsInN1YiI6Imhhbmp6MSIsImNyZWF0ZWQiOjE1MzUzNDkyMDExNDh9.QmTq6eDrq5KKYkT83fVVARQVaJA7M7l64UWElI6aVt8cyLMpOjfkr-sZwKKqDKuq9U5eTuXrr8TkP6cj9l_Yhw"]},"code":0}
                 console.log(data)
 
@@ -537,7 +539,6 @@ angular.module('app', [
                     sameArr.push(otherArr)
                 }
             }
-            //console.log(sameArr)
 
             //给已经处理好的数组的项中，根据geo，添加status序号
             for (var j = 0; j < sameArr.length; j++) {
@@ -560,7 +561,7 @@ angular.module('app', [
                     dataArr[i].arr = new Array(thead.length - 1).fill('-');
                 }
             }
-            console.log(dataArr)
+            console.log(dataArr);
             // var dataArr1 = dataArr;
 
             //将原本设置的status值作为数组对象数组中的索引，将原本jsonData的值放入正确的索引之中
@@ -576,8 +577,7 @@ angular.module('app', [
                     }
                 }
             }
-            //console.log(dataArr)
-
+            console.log(dataArr);
 
             //Zarr为最终前端所需数据形态，如果展示全部segment，则将已经有的替换到完整的指定项，最终所得为所需结果
             var Zarr = [];
@@ -653,7 +653,89 @@ angular.module('app', [
             return Markuptbody;
         }
 
+        $rootScope.caprcTabCon=function(json, tbody, thead, jsonData) {
+            //从某个json中取出数据，对数据去重，同时按照要求排序的封装?
+            function SortUnique(obj, par, arr) {
+                var jsonArr = [];
+                for(var i = 0; i < obj.length; i++) {
+                    jsonArr.push(obj[i][par]);
+                }
+                return arrCONTarr(unique(jsonArr), arr);
+            }
 
+            //获取已经排序的bu，同时仅有数据中的这些
+            var bu = SortUnique(json, 'bu', tbody)
+
+            //把segment相同的放在一个数组中
+            var sameArr = [];
+            for(var j = 0; j < tbody.length; j++) {
+                var otherArr = [];
+                for(var i = 0; i < json.length; i++) {
+                    if(json[i].bu == tbody[j]) {
+                        otherArr.push(json[i]);
+                    }
+                }
+                if(otherArr.length) {
+                    sameArr.push(otherArr)
+                }
+            }
+            console.log(sameArr)
+
+            //给已经处理好的数组的项中，根据segment，添加status序号
+            for(var j = 0; j < sameArr.length; j++) {
+                for(var n = 0; n < sameArr[j].length; n++) {
+                    for(var i = 0; i < thead.length; i++) {
+                        if(sameArr[j][n].segment == thead[i]) {
+                            sameArr[j][n].status = i+1;
+                        }
+                    }
+                }
+            }
+            console.log(sameArr)
+
+            //创建一个数组，数组中包含对象，对象中包含两项，一项为segment，一项为数组放数据用，其中给数组设置长度及默认项为空字符串
+            var dataArr = [];
+            //					molArr = new Array(thead.length - 1).fill('-');
+            for(var i = 0; i < sameArr.length; i++) {
+                for(var j = 0; j < sameArr[i].length; j++) {
+                    dataArr[i] = {
+                        bu: sameArr[i][j].bu,
+                        arr: []
+                    };
+                    dataArr[i].arr = new Array(thead.length).fill('-');
+                }
+            }
+            console.log(dataArr);
+            //将原本设置的status值作为数组对象数组中的索引，将原本jsonData的值放入正确的索引之中
+            //dataArr的数据可以用于不要求全部显示segment，有什么显示什么segment用
+            for(var i = 0; i < dataArr.length; i++) {
+                for(var j = 0; j < sameArr.length; j++) {
+                    for(var n = 0; n < sameArr[j].length; n++) {
+                        if(sameArr[j][n].bu == dataArr[i].bu) {
+                            dataArr[i].arr[sameArr[j][n].status-1] = sameArr[j][n][jsonData]
+                        }
+                    }
+                }
+            }
+
+            //Zarr为最终前端所需数据形态，如果展示全部segment，则将已经有的替换到完整的指定项，最终所得为所需结果
+            var Zarr = [];
+            var camolArr2 = new Array(thead.length).fill('-');
+            for(var i = 0; i < tbody.length; i++) {
+                Zarr.push({
+                    bu: tbody[i],
+                    arr: camolArr2
+                })
+            }
+            for(var i = 0; i < Zarr.length; i++) {
+                for(var j = 0; j < dataArr.length; j++) {
+                    if(Zarr[i].bu == dataArr[j].bu) {
+                        Zarr[i] = dataArr[j];
+                    }
+                }
+            }
+            return Zarr;
+        };
         //    数组去重
         function unique(arr) {
             var res = [arr[0]];
@@ -699,7 +781,6 @@ angular.module('app', [
             }
             return c;
         }
-
     });
 
 
@@ -1959,6 +2040,12 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                 title: 'Biz data maintenance'
             }
         })
+        .state('app.OperationData.Bizdatamanualupload', {
+            abstract: true,
+            data: {
+                title: 'Biz data manual upload'
+            }
+        })
         //三级菜单
         .state('app.OperationData.Dealmaintenance.Dealmaintenance', {
             url: '/OperationData/Dealmaintenance/Dealmaintenance',
@@ -1984,7 +2071,7 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                 }
             }
         })
-        .state('app.OperationData.Bizdatamaintenance.CAmanualupload', {
+       /* .state('app.OperationData.Bizdatamaintenance.CAmanualupload', {
             url: '/OperationData/Bizdatamaintenance/CAmanualupload',
             data: {
                 title: 'CA manual upload'
@@ -1995,7 +2082,7 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                     controller: 'CAmanualuploadCtrl',
                 }
             }
-        })
+        })*/
         .state('app.OperationData.Bizdatamaintenance.Markupmaintenance', {
             url: '/OperationData/Bizdatamaintenance/Markupmaintenance',
             data: {
@@ -2032,7 +2119,7 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                 }
             }
         })
-        .state('app.OperationData.Bizdatamaintenance.Othercategorymaintenance', {
+       /* .state('app.OperationData.Bizdatamaintenance.Othercategorymaintenance', {
             url: '/OperationData/Bizdatamaintenance/Othercategorymaintenance',
             data: {
                 title: 'Other category maintenance'
@@ -2043,7 +2130,7 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                     controller: 'OthercategorymaintenanceCtrl',
                 }
             }
-        })
+        })*/
         .state('app.OperationData.Bizdatamaintenance.Alliancefundmaintenance', {
             url: '/OperationData/Bizdatamaintenance/Alliancefundmaintenance',
             data: {
@@ -2068,8 +2155,70 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                 }
             }
         })
+        .state('app.OperationData.Bizdatamaintenance.OutTapeAllocation', {
+            url: '/OperationData/Bizdatamaintenance/OutTapeAllocation',
+            data: {
+                title: 'Out tape Allocation'
+            },
+            views: {
+                "content@app": {
+                    templateUrl: 'app/OperationData/views/OutTapeAllocation.html',
+                    controller: 'OutTapeAllocationCtrl',
+                }
+            }
+        })
+        .state('app.OperationData.Bizdatamanualupload.AccountTemplateManualUpload', {
+            url: '/OperationData/Bizdatamaintenance/AccountTemplateManualUpload',
+            data: {
+                title: 'Account template manual upload'
+            },
+            views: {
+                "content@app": {
+                    templateUrl: 'app/OperationData/views/AccountTemplateManualUpload.html',
+                    controller: 'AccountTemplateManualUploadCtrl',
+                }
+            }
+        })
+        .state('app.OperationData.Bizdatamanualupload.MegaDealRelatedMaintenance', {
+            url: '/OperationData/Bizdatamaintenance/MegaDealRelatedMaintenance',
+            data: {
+                title: 'Mega Deal related  maintenance'
+            },
+            views: {
+                "content@app": {
+                    templateUrl: 'app/OperationData/views/MegaDealRelatedMaintenance.html',
+                    controller: 'MegaDealRelatedMaintenanceCtrl',
+                }
+            }
+        })
+        .state('app.OperationData.Bizdatamanualupload.CAmanualupload', {
+            url: '/OperationData/Bizdatamaintenance/CAmanualupload',
+            data: {
+                title: 'CA manual upload'
+            },
+            views: {
+                "content@app": {
+                    templateUrl: 'app/OperationData/views/CAmanualupload.html',
+                    controller: 'CAmanualuploadCtrl',
+                }
+            }
+        })
+        .state('app.OperationData.Bizdatamanualupload.Othercategorymaintenance', {
+            url: '/OperationData/Bizdatamaintenance/Othercategorymaintenance',
+            data: {
+                title: 'Other category main...'
+            },
+            views: {
+                "content@app": {
+                    templateUrl: 'app/OperationData/views/Othercategorymaintenance.html',
+                    controller: 'OthercategorymaintenanceCtrl',
+                }
+            }
+        })
 
-        .state('app.OperationData.login', {
+
+
+        /*.state('app.OperationData.login', {
             url : '/login',
             views: {
                 "content@app": {
@@ -2077,7 +2226,7 @@ angular.module('app.OperationData').config(function ($stateProvider) {
                     controller: 'AlliancefundmaintenanceCtrl',
                 }
             }
-        })
+        })*/
 
 });
 "use strict";
@@ -2607,16 +2756,6 @@ angular.module('app.chat', ['ngSanitize'])
         return $sce.trustAsHtml(val);
     };
 }]);
-(function(){
-    "use strict";
-
-    angular.module('SmartAdmin.Forms', []);
-})();
-(function(){
-    "use strict";
-
-    angular.module('SmartAdmin.Layout', []);
-})();
 angular.module("app").run(["$templateCache", function($templateCache) {$templateCache.put("app/dashboard/live-feeds.tpl.html","<div jarvis-widget id=\"live-feeds-widget\" data-widget-togglebutton=\"false\" data-widget-editbutton=\"false\"\r\n     data-widget-fullscreenbutton=\"false\" data-widget-colorbutton=\"false\" data-widget-deletebutton=\"false\">\r\n<!-- widget options:\r\nusage: <div class=\"jarviswidget\" id=\"wid-id-0\" data-widget-editbutton=\"false\">\r\n\r\ndata-widget-colorbutton=\"false\"\r\ndata-widget-editbutton=\"false\"\r\ndata-widget-togglebutton=\"false\"\r\ndata-widget-deletebutton=\"false\"\r\ndata-widget-fullscreenbutton=\"false\"\r\ndata-widget-custombutton=\"false\"\r\ndata-widget-collapsed=\"true\"\r\ndata-widget-sortable=\"false\"\r\n\r\n-->\r\n<header>\r\n    <span class=\"widget-icon\"> <i class=\"glyphicon glyphicon-stats txt-color-darken\"></i> </span>\r\n\r\n    <h2>Live Feeds </h2>\r\n\r\n    <ul class=\"nav nav-tabs pull-right in\" id=\"myTab\">\r\n        <li class=\"active\">\r\n            <a data-toggle=\"tab\" href=\"#s1\"><i class=\"fa fa-clock-o\"></i> <span class=\"hidden-mobile hidden-tablet\">Live Stats</span></a>\r\n        </li>\r\n\r\n        <li>\r\n            <a data-toggle=\"tab\" href=\"#s2\"><i class=\"fa fa-facebook\"></i> <span class=\"hidden-mobile hidden-tablet\">Social Network</span></a>\r\n        </li>\r\n\r\n        <li>\r\n            <a data-toggle=\"tab\" href=\"#s3\"><i class=\"fa fa-dollar\"></i> <span class=\"hidden-mobile hidden-tablet\">Revenue</span></a>\r\n        </li>\r\n    </ul>\r\n\r\n</header>\r\n\r\n<!-- widget div-->\r\n<div class=\"no-padding\">\r\n\r\n    <div class=\"widget-body\">\r\n        <!-- content -->\r\n        <div id=\"myTabContent\" class=\"tab-content\">\r\n            <div class=\"tab-pane fade active in padding-10 no-padding-bottom\" id=\"s1\">\r\n                <div class=\"row no-space\">\r\n                    <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8\">\r\n														<span class=\"demo-liveupdate-1\"> <span\r\n                                                                class=\"onoffswitch-title\">Live switch</span> <span\r\n                                                                class=\"onoffswitch\">\r\n																<input type=\"checkbox\" name=\"start_interval\" ng-model=\"autoUpdate\"\r\n                                                                       class=\"onoffswitch-checkbox\" id=\"start_interval\">\r\n																<label class=\"onoffswitch-label\" for=\"start_interval\">\r\n                                                                    <span class=\"onoffswitch-inner\"\r\n                                                                          data-swchon-text=\"ON\"\r\n                                                                          data-swchoff-text=\"OFF\"></span>\r\n                                                                    <span class=\"onoffswitch-switch\"></span>\r\n                                                                </label> </span> </span>\r\n\r\n                        <div id=\"updating-chart\" class=\"chart-large txt-color-blue\" flot-basic flot-data=\"liveStats\" flot-options=\"liveStatsOptions\"></div>\r\n\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4 show-stats\">\r\n\r\n                        <div class=\"row\">\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> My Tasks <span\r\n                                    class=\"pull-right\">130/200</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blueDark\" style=\"width: 65%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> Transfered <span\r\n                                    class=\"pull-right\">440 GB</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blue\" style=\"width: 34%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> Bugs Squashed<span\r\n                                    class=\"pull-right\">77%</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-blue\" style=\"width: 77%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xs-6 col-sm-6 col-md-12 col-lg-12\"><span class=\"text\"> User Testing <span\r\n                                    class=\"pull-right\">7 Days</span> </span>\r\n\r\n                                <div class=\"progress\">\r\n                                    <div class=\"progress-bar bg-color-greenLight\" style=\"width: 84%;\"></div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <span class=\"show-stat-buttons\"> <span class=\"col-xs-12 col-sm-6 col-md-6 col-lg-6\"> <a\r\n                                    href-void class=\"btn btn-default btn-block hidden-xs\">Generate PDF</a> </span> <span\r\n                                    class=\"col-xs-12 col-sm-6 col-md-6 col-lg-6\"> <a href-void\r\n                                                                                     class=\"btn btn-default btn-block hidden-xs\">Report\r\n                                a bug</a> </span> </span>\r\n\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"show-stat-microcharts\" data-sparkline-container data-easy-pie-chart-container>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n\r\n                        <div class=\"easy-pie-chart txt-color-orangeDark\" data-percent=\"33\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">35</span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Server Load <i class=\"fa fa-caret-up icon-color-bad\"></i> </span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-greenLight\"><i class=\"fa fa-caret-up\"></i> 97%</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blueLight\"><i class=\"fa fa-caret-down\"></i> 44%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-greenLight hidden-sm hidden-md pull-right\"\r\n                             data-sparkline-type=\"line\" data-sparkline-height=\"33px\" data-sparkline-width=\"70px\"\r\n                             data-fill-color=\"transparent\">\r\n                            130, 187, 250, 257, 200, 210, 300, 270, 363, 247, 270, 363, 247\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-greenLight\" data-percent=\"78.9\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">78.9 </span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Disk Space <i class=\"fa fa-caret-down icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-blueDark\"><i class=\"fa fa-caret-up\"></i> 76%</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blue\"><i class=\"fa fa-caret-down\"></i> 3%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-blue hidden-sm hidden-md pull-right\" data-sparkline-type=\"line\"\r\n                             data-sparkline-height=\"33px\" data-sparkline-width=\"70px\" data-fill-color=\"transparent\">\r\n                            257, 200, 210, 300, 270, 363, 130, 187, 250, 247, 270, 363, 247\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-blue\" data-percent=\"23\" data-pie-size=\"50\">\r\n                            <span class=\"percent percent-sign\">23 </span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Transfered <i class=\"fa fa-caret-up icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-darken\">10GB</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blueDark\"><i class=\"fa fa-caret-up\"></i> 10%</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-darken hidden-sm hidden-md pull-right\"\r\n                             data-sparkline-type=\"line\" data-sparkline-height=\"33px\" data-sparkline-width=\"70px\"\r\n                             data-fill-color=\"transparent\">\r\n                            200, 210, 363, 247, 300, 270, 130, 187, 250, 257, 363, 247, 270\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xs-12 col-sm-3 col-md-3 col-lg-3\">\r\n                        <div class=\"easy-pie-chart txt-color-darken\" data-percent=\"36\" data-pie-size=\"50\">\r\n                            <span class=\"percent degree-sign\">36 <i class=\"fa fa-caret-up\"></i></span>\r\n                        </div>\r\n                        <span class=\"easy-pie-title\"> Temperature <i\r\n                                class=\"fa fa-caret-down icon-color-good\"></i></span>\r\n                        <ul class=\"smaller-stat hidden-sm pull-right\">\r\n                            <li>\r\n                                <span class=\"label bg-color-red\"><i class=\"fa fa-caret-up\"></i> 124</span>\r\n                            </li>\r\n                            <li>\r\n                                <span class=\"label bg-color-blue\"><i class=\"fa fa-caret-down\"></i> 40 F</span>\r\n                            </li>\r\n                        </ul>\r\n                        <div class=\"sparkline txt-color-red hidden-sm hidden-md pull-right\" data-sparkline-type=\"line\"\r\n                             data-sparkline-height=\"33px\" data-sparkline-width=\"70px\" data-fill-color=\"transparent\">\r\n                            2700, 3631, 2471, 2700, 3631, 2471, 1300, 1877, 2500, 2577, 2000, 2100, 3000\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n            <!-- end s1 tab pane -->\r\n\r\n            <div class=\"tab-pane fade\" id=\"s2\">\r\n                <div class=\"widget-body-toolbar bg-color-white\">\r\n\r\n                    <form class=\"form-inline\" role=\"form\">\r\n\r\n                        <div class=\"form-group\">\r\n                            <label class=\"sr-only\" for=\"s123\">Show From</label>\r\n                            <input type=\"email\" class=\"form-control input-sm\" id=\"s123\" placeholder=\"Show From\">\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <input type=\"email\" class=\"form-control input-sm\" id=\"s124\" placeholder=\"To\">\r\n                        </div>\r\n\r\n                        <div class=\"btn-group hidden-phone pull-right\">\r\n                            <a class=\"btn dropdown-toggle btn-xs btn-default\" data-toggle=\"dropdown\"><i\r\n                                    class=\"fa fa-cog\"></i> More <span class=\"caret\"> </span> </a>\r\n                            <ul class=\"dropdown-menu pull-right\">\r\n                                <li>\r\n                                    <a href-void><i class=\"fa fa-file-text-alt\"></i> Export to PDF</a>\r\n                                </li>\r\n                                <li>\r\n                                    <a href-void><i class=\"fa fa-question-sign\"></i> Help</a>\r\n                                </li>\r\n                            </ul>\r\n                        </div>\r\n\r\n                    </form>\r\n\r\n                </div>\r\n                <div class=\"padding-10\">\r\n                    <div id=\"statsChart\" class=\"chart-large has-legend-unique\" flot-basic flot-data=\"statsData\" flot-options=\"statsDisplayOptions\"></div>\r\n                </div>\r\n\r\n            </div>\r\n            <!-- end s2 tab pane -->\r\n\r\n            <div class=\"tab-pane fade\" id=\"s3\">\r\n\r\n                <div class=\"widget-body-toolbar bg-color-white smart-form\" id=\"rev-toggles\">\r\n\r\n                    <div class=\"inline-group\">\r\n\r\n                        <label for=\"gra-0\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-0\" ng-model=\"targetsShow\">\r\n                            <i></i> Target </label>\r\n                        <label for=\"gra-1\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-1\" ng-model=\"actualsShow\">\r\n                            <i></i> Actual </label>\r\n                        <label for=\"gra-2\" class=\"checkbox\">\r\n                            <input type=\"checkbox\" id=\"gra-2\" ng-model=\"signupsShow\">\r\n                            <i></i> Signups </label>\r\n                    </div>\r\n\r\n                    <div class=\"btn-group hidden-phone pull-right\">\r\n                        <a class=\"btn dropdown-toggle btn-xs btn-default\" data-toggle=\"dropdown\"><i\r\n                                class=\"fa fa-cog\"></i> More <span class=\"caret\"> </span> </a>\r\n                        <ul class=\"dropdown-menu pull-right\">\r\n                            <li>\r\n                                <a href-void><i class=\"fa fa-file-text-alt\"></i> Export to PDF</a>\r\n                            </li>\r\n                            <li>\r\n                                <a href-void><i class=\"fa fa-question-sign\"></i> Help</a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <div class=\"padding-10\">\r\n                    <div id=\"flotcontainer\" class=\"chart-large has-legend-unique\" flot-basic flot-data=\"revenewData\" flot-options=\"revenewDisplayOptions\" ></div>\r\n                </div>\r\n            </div>\r\n            <!-- end s3 tab pane -->\r\n        </div>\r\n\r\n        <!-- end content -->\r\n    </div>\r\n\r\n</div>\r\n<!-- end widget div -->\r\n</div>\r\n");
 $templateCache.put("app/layout/layout.tpl.html","<!-- HEADER -->\r\n<div data-smart-include=\"app/layout/partials/header.tpl.html\" class=\"placeholder-header\"></div>\r\n<!-- END HEADER -->\r\n\r\n\r\n<!-- Left panel : Navigation area -->\r\n<!-- Note: This width of the aside area can be adjusted through LESS variables -->\r\n<div data-smart-include=\"app/layout/partials/navigation.tpl.html\" class=\"placeholder-left-panel\"></div>\r\n\r\n<!-- END NAVIGATION -->\r\n\r\n<!-- MAIN PANEL -->\r\n<div id=\"main\" role=\"main\">\r\n    <demo-states></demo-states>\r\n\r\n    <!-- RIBBON -->\r\n    <div id=\"ribbon\">\r\n\r\n				<span class=\"ribbon-button-alignment\">\r\n					<span id=\"refresh\" class=\"btn btn-ribbon\" reset-widgets\r\n                          tooltip-placement=\"bottom\"\r\n                          smart-tooltip-html=\"<i class=\'text-warning fa fa-warning\'></i> Warning! This will reset all your widget settings.\">\r\n						<i class=\"fa fa-refresh\"></i>\r\n					</span>\r\n				</span>\r\n\r\n        <!-- breadcrumb -->\r\n        <state-breadcrumbs></state-breadcrumbs>\r\n        <!-- end breadcrumb -->\r\n\r\n\r\n    </div>\r\n    <!-- END RIBBON -->\r\n\r\n\r\n    <div data-smart-router-animation-wrap=\"content content@app\" data-wrap-for=\"#content\">\r\n        <div data-ui-view=\"content\" data-autoscroll=\"false\"></div>\r\n    </div>\r\n\r\n</div>\r\n<!-- END MAIN PANEL -->\r\n\r\n<!-- PAGE FOOTER -->\r\n<div data-smart-include=\"app/layout/partials/footer.tpl.html\"></div>\r\n\r\n<div data-smart-include=\"app/layout/shortcut/shortcut.tpl.html\"></div>\r\n\r\n<!-- END PAGE FOOTER -->\r\n\r\n\r\n");
 $templateCache.put("app/auth/directives/login-info.tpl.html","<div class=\"login-info ng-cloak\">\r\n    <span> <!-- User image size is adjusted inside CSS, it should stay as it -->\r\n        <a  href=\"\">\r\n            <img ng-src=\"{{user.picture}}\" alt=\"me\" class=\"online\">\r\n                <span>{{user.username}}\r\n                </span>\r\n        </a>\r\n     </span>\r\n</div>");
@@ -2627,7 +2766,7 @@ $templateCache.put("app/dashboard/todo/todo-widget.tpl.html","<div id=\"todo-wid
 $templateCache.put("app/layout/language/language-selector.tpl.html","<ul class=\"header-dropdown-list hidden-xs ng-cloak\" ng-controller=\"LanguagesCtrl\">\r\n    <li class=\"dropdown\" dropdown>\r\n        <a class=\"dropdown-toggle\"  data-toggle=\"dropdown\" href> <img src=\"styles/img/blank.gif\" class=\"flag flag-{{currentLanguage.key}}\" alt=\"{{currentLanguage.alt}}\"> <span> {{currentLanguage.title}} </span>\r\n            <i class=\"fa fa-angle-down\"></i> </a>\r\n        <ul class=\"dropdown-menu pull-right\">\r\n            <li ng-class=\"{active: language==currentLanguage}\" ng-repeat=\"language in languages\">\r\n                <a ng-click=\"selectLanguage(language)\" ><img src=\"styles/img/blank.gif\" class=\"flag flag-{{language.key}}\"\r\n                                                   alt=\"{{language.alt}}\"> {{language.title}}</a>\r\n            </li>\r\n        </ul>\r\n    </li>\r\n</ul>");
 $templateCache.put("app/layout/partials/footer.tpl.html","<div class=\"page-footer\">\r\n    <div class=\"row\">\r\n        <div class=\"col-xs-12 col-sm-6\">\r\n            <span class=\"txt-color-white\">SmartAdmin WebApp © 2016</span>\r\n        </div>\r\n\r\n        <div class=\"col-xs-6 col-sm-6 text-right hidden-xs\">\r\n            <div class=\"txt-color-white inline-block\">\r\n                <i class=\"txt-color-blueLight hidden-mobile\">Last account activity <i class=\"fa fa-clock-o\"></i>\r\n                    <strong>52 mins ago &nbsp;</strong> </i>\r\n\r\n                <div class=\"btn-group dropup\">\r\n                    <button class=\"btn btn-xs dropdown-toggle bg-color-blue txt-color-white\" data-toggle=\"dropdown\">\r\n                        <i class=\"fa fa-link\"></i> <span class=\"caret\"></span>\r\n                    </button>\r\n                    <ul class=\"dropdown-menu pull-right text-left\">\r\n                        <li>\r\n                            <div class=\"padding-5\">\r\n                                <p class=\"txt-color-darken font-sm no-margin\">Download Progress</p>\r\n\r\n                                <div class=\"progress progress-micro no-margin\">\r\n                                    <div class=\"progress-bar progress-bar-success\" style=\"width: 50%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"divider\"></li>\r\n                        <li>\r\n                            <div class=\"padding-5\">\r\n                                <p class=\"txt-color-darken font-sm no-margin\">Server Load</p>\r\n\r\n                                <div class=\"progress progress-micro no-margin\">\r\n                                    <div class=\"progress-bar progress-bar-success\" style=\"width: 20%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"divider\"></li>\r\n                        <li>\r\n                            <div class=\"padding-5\">\r\n                                <p class=\"txt-color-darken font-sm no-margin\">Memory Load <span class=\"text-danger\">*critical*</span>\r\n                                </p>\r\n\r\n                                <div class=\"progress progress-micro no-margin\">\r\n                                    <div class=\"progress-bar progress-bar-danger\" style=\"width: 70%;\"></div>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"divider\"></li>\r\n                        <li>\r\n                            <div class=\"padding-5\">\r\n                                <button class=\"btn btn-block btn-default\">refresh</button>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 $templateCache.put("app/layout/partials/header.tpl.html","<header id=\"header\">\r\n<div id=\"logo-group\">\r\n\r\n    <!-- PLACE YOUR LOGO HERE -->\r\n    <span id=\"logo\"> <img src=\"styles/img/logo-blue.png\" alt=\"SmartAdmin\" style=\"width: 100%;height: 49px;padding-left: 0\"> </span>\r\n    <!-- END LOGO PLACEHOLDER -->\r\n\r\n    <!-- Note: The activity badge color changes when clicked and resets the number to 0\r\n    Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->\r\n    <!--<span id=\"activity\" class=\"activity-dropdown\" activities-dropdown-toggle>\r\n        <i class=\"fa fa-user\"></i> \r\n        <b class=\"badge bg-color-red\">21</b> \r\n    </span>-->\r\n    <div smart-include=\"app/dashboard/activities/activities.html\"></div>\r\n</div>\r\n\r\n\r\n<!--<recent-projects></recent-projects>-->\r\n\r\n\r\n\r\n<!-- pulled right: nav area -->\r\n<div class=\"pull-right\">\r\n\r\n    <!-- collapse menu button -->\r\n    <div id=\"hide-menu\" class=\"btn-header pull-right\">\r\n        <span> <a toggle-menu title=\"Collapse Menu\"><i\r\n                class=\"fa fa-reorder\"></i></a> </span>\r\n    </div>\r\n    <!-- end collapse menu -->\r\n\r\n    <!-- #MOBILE -->\r\n    <!-- Top menu profile link : this shows only when top menu is active -->\r\n    <ul id=\"mobile-profile-img\" class=\"header-dropdown-list hidden-xs padding-5\">\r\n        <li class=\"\">\r\n            <a href=\"#\" class=\"dropdown-toggle no-margin userdropdown\" data-toggle=\"dropdown\">\r\n                <img src=\"styles/img/avatars/sunny.png\" alt=\"John Doe\" class=\"online\"/>\r\n            </a>\r\n            <ul class=\"dropdown-menu pull-right\">\r\n                <li>\r\n                    <a href-void class=\"padding-10 padding-top-0 padding-bottom-0\"><i\r\n                            class=\"fa fa-cog\"></i> Setting</a>\r\n                </li>\r\n                <li class=\"divider\"></li>\r\n                <li>\r\n                    <a ui-sref=\"app.appViews.profileDemo\" class=\"padding-10 padding-top-0 padding-bottom-0\"> <i class=\"fa fa-user\"></i>\r\n                        <u>P</u>rofile</a>\r\n                </li>\r\n                <li class=\"divider\"></li>\r\n                <li>\r\n                    <a href-void class=\"padding-10 padding-top-0 padding-bottom-0\"\r\n                       data-action=\"toggleShortcut\"><i class=\"fa fa-arrow-down\"></i> <u>S</u>hortcut</a>\r\n                </li>\r\n                <li class=\"divider\"></li>\r\n                <li>\r\n                    <a href-void class=\"padding-10 padding-top-0 padding-bottom-0\"\r\n                       data-action=\"launchFullscreen\"><i class=\"fa fa-arrows-alt\"></i> Full <u>S</u>creen</a>\r\n                </li>\r\n                <li class=\"divider\"></li>\r\n                <li>\r\n                    <a href=\"#/login\" class=\"padding-10 padding-top-5 padding-bottom-5\" data-action=\"userLogout\"><i\r\n                            class=\"fa fa-sign-out fa-lg\"></i> <strong><u>L</u>ogout</strong></a>\r\n                </li>\r\n            </ul>\r\n        </li>\r\n    </ul>\r\n\r\n    <!-- logout button -->\r\n    <!-- <div id=\"logout\" class=\"btn-header transparent pull-right\">\r\n         <span> <a ui-sref=\"login\" title=\"Sign Out\" data-action=\"userLogout\"\r\n                   data-logout-msg=\"You can improve your security further after logging out by closing this opened browser\"><i\r\n                 class=\"fa fa-sign-out\"></i></a> </span>\r\n     </div>-->\r\n    <!-- end logout button -->\r\n\r\n    <!-- search mobile button (this is hidden till mobile view port) -->\r\n    <div id=\"search-mobile\" class=\"btn-header transparent pull-right\" data-search-mobile>\r\n        <span> <a href=\"#\" title=\"Search\"><i class=\"fa fa-search\"></i></a> </span>\r\n    </div>\r\n    <!-- end search mobile button -->\r\n\r\n    <!-- input: search field -->\r\n    <form action=\"#/search\" class=\"header-search pull-right\">\r\n        <input id=\"search-fld\" type=\"text\" name=\"param\" placeholder=\"Search\" data-autocomplete=\'[\r\n					\"ActionScript\",\r\n					\"AppleScript\",\r\n					\"Asp\",\r\n					\"BASIC\",\r\n					\"C\",\r\n					\"C++\",\r\n					\"Clojure\",\r\n					\"COBOL\",\r\n					\"ColdFusion\",\r\n					\"Erlang\",\r\n					\"Fortran\",\r\n					\"Groovy\",\r\n					\"Haskell\",\r\n					\"Java\",\r\n					\"JavaScript\",\r\n					\"Lisp\",\r\n					\"Perl\",\r\n					\"PHP\",\r\n					\"Python\",\r\n					\"Ruby\",\r\n					\"Scala\",\r\n					\"Scheme\"]\'>\r\n        <button type=\"submit\">\r\n            <i class=\"fa fa-search\"></i>\r\n        </button>\r\n        <a href=\"$\" id=\"cancel-search-js\" title=\"Cancel Search\"><i class=\"fa fa-times\"></i></a>\r\n    </form>\r\n    <!-- end input: search field -->\r\n\r\n    <!-- fullscreen button -->\r\n    <!--<div id=\"fullscreen\" class=\"btn-header transparent pull-right\">\r\n        <span> <a full-screen title=\"Full Screen\"><i\r\n                class=\"fa fa-arrows-alt\"></i></a> </span>\r\n    </div>-->\r\n    <!-- end fullscreen button -->\r\n\r\n    <!-- #Voice Command: Start Speech -->\r\n    <!--<div id=\"speech-btn\" class=\"btn-header transparent pull-right hidden-sm hidden-xs\">\r\n        <div>\r\n            <a title=\"Voice Command\" id=\"voice-command-btn\" speech-recognition><i class=\"fa fa-microphone\"></i></a>\r\n\r\n            <div class=\"popover bottom\">\r\n                <div class=\"arrow\"></div>\r\n                <div class=\"popover-content\">\r\n                    <h4 class=\"vc-title\">Voice command activated <br>\r\n                        <small>Please speak clearly into the mic</small>\r\n                    </h4>\r\n                    <h4 class=\"vc-title-error text-center\">\r\n                        <i class=\"fa fa-microphone-slash\"></i> Voice command failed\r\n                        <br>\r\n                        <small class=\"txt-color-red\">Must <strong>\"Allow\"</strong> Microphone</small>\r\n                        <br>\r\n                        <small class=\"txt-color-red\">Must have <strong>Internet Connection</strong></small>\r\n                    </h4>\r\n                    <a href-void class=\"btn btn-success\" id=\"speech-help-btn\">See Commands</a>\r\n                    <a href-void class=\"btn bg-color-purple txt-color-white\"\r\n                       onclick=\"$(\'#speech-btn .popover\').fadeOut(50);\">Close Popup</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>-->\r\n    <!-- end voice command -->\r\n\r\n\r\n\r\n    <!-- multiple lang dropdown : find all flags in the flags page -->\r\n    <language-selector></language-selector>\r\n    <!-- end multiple lang -->\r\n\r\n</div>\r\n<!-- end pulled right: nav area -->\r\n\r\n</header>");
-$templateCache.put("app/layout/partials/navigation.tpl.html","<aside id=\"left-panel\" ng-controller=\"navCtrl\">\r\n\r\n    <!-- User info -->\r\n    <div class=\"login-info ng-cloak\">\r\n    <span> <!-- User image size is adjusted inside CSS, it should stay as it -->\r\n        <a  href=\"\">\r\n            <img ng-src=\"{{userData.thumbnailphoto}}\" alt=\"me\" class=\"online\" ng-show=\"imgUser\">\r\n\r\n            <img ng-src=\"{{userData.thumbnailphoto[0]}}\" alt=\"me\" class=\"online\" ng-show=\"!imgUser\">\r\n                <span>{{userData.displayname[0]}}\r\n                </span>\r\n        </a>\r\n     </span>\r\n    </div>\r\n    <!-- end user info -->\r\n\r\n    <nav>\r\n        <!-- NOTE: Notice the gaps after each icon usage <i></i>..\r\n        Please note that these links work a bit different than\r\n        traditional href=\"\" links. See documentation for details.\r\n        -->\r\n\r\n        <ul data-smart-menu>\r\n            <!--自己-->\r\n            <li data-menu-collapse>\r\n                <a href=\"#\" title=\"Control Point\"><i class=\"fa fa-lg fa-fw fa-desktop\"></i> <span\r\n                        class=\"menu-item-parent\">{{getWord(\'Control Point\')}}</span></a>\r\n                <ul>\r\n                    <li data-ui-sref-active=\"active\">\r\n                        <a data-ui-sref=\"app.ControlPoint.Costinterlockschedule\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Cost interlock schedule\')}}</a>\r\n                    </li>\r\n                    <li data-ui-sref-active=\"active\">\r\n                        <a data-ui-sref=\"app.ControlPoint.CycleVersioncontrol\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Cycle & Version control\')}}</a>\r\n                    </li>\r\n                    <li data-ui-sref-active=\"active\">\r\n                        <a data-ui-sref=\"app.ControlPoint.Taskqueue\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Task queue\')}}</a>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-cube\"></i> <span class=\"menu-item-parent\">{{getWord(\'Basic data\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Master data maintenance\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.Segmentmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Segment maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.BUmaintenance\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'BU maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.Commoditymaintenance\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'Commodity maintena...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.OtherCategorymasterdata\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Other category maste...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.DataMapping\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Data Mapping\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Data source detail\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.Markupdetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Markup detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.EBRQtydetail\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'EBR/宇宙版 Qty detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.CFEBMCdetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CFE BMC detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.BPCCAdetail\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'BPC CA detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.BPCBMCForecastdetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'BPC BMC Forecast detail\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-bar-chart\"></i> <span class=\"menu-item-parent\">{{getWord(\'Operational Data\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Deal maintenance\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Dealmaintenance.Dealmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Deal maintenance\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Biz data maintenance\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.CAmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CA maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.CAmanualupload\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CA manual upload\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.Markupmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Markup maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.CycleQtQ\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Cycle QtQ\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.ConsumptionBasemaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Consumption Base...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.Othercategorymaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Other category main...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.Alliancefundmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Alliance fund main...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.QTQPNtakedown\"><i class=\"fa fa-leaf\"></i> {{getWord(\'QTQ PN take down\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-pencil-square-o\"></i> <span class=\"menu-item-parent\">{{getWord(\'Validation\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Validation\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.CAAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CA Accumulation\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.MarkupAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Markup Accumulation\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.CycleQtQAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Cycle QtQ Accumula...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.ConsumptionbaseAccumulation-detail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Consumption base...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.OthercategoryAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Other category A...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.AlliancefundAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Alliance fund Accumu...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.QTQPNtakedownAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'QTQ PN take down...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.Outtapedetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Out tape detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.ResultcheckingbyMTM\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Result checking by...\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\">\r\n                    <i class=\"fa fa-lg fa-fw fa-th\"></i> <span class=\"menu-item-parent\">{{getWord(\'Report\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Report\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.InOutSummaryQtQ\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'In+Out Summary QtQ\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.OuttapeSummary\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'Out tape Summary\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.OuttapeBUSummary\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'Out tape BU Summary\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.QTQPNtakedown\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'QTQ PN take down\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n            <!--smartadmin的ui-->\r\n\r\n        </ul>\r\n\r\n        <!-- NOTE: This allows you to pull menu items from server -->\r\n        <!-- <ul data-smart-menu-items=\"/api/menu-items.json\"></ul> -->\r\n    </nav>\r\n\r\n  <span class=\"minifyme\" data-action=\"minifyMenu\" minify-menu>\r\n    <i class=\"fa fa-arrow-circle-left hit\"></i>\r\n  </span>\r\n\r\n</aside>");
+$templateCache.put("app/layout/partials/navigation.tpl.html","<aside id=\"left-panel\" ng-controller=\"navCtrl\">\r\n\r\n    <!-- User info -->\r\n    <div class=\"login-info ng-cloak\">\r\n    <span> <!-- User image size is adjusted inside CSS, it should stay as it -->\r\n        <a  href=\"\">\r\n            <img ng-src=\"{{userData.thumbnailphoto}}\" alt=\"me\" class=\"online\" ng-show=\"imgUser\">\r\n\r\n            <img ng-src=\"{{userData.thumbnailphoto[0]}}\" alt=\"me\" class=\"online\" ng-show=\"!imgUser\">\r\n                <span>{{userData.displayname[0]}}\r\n                </span>\r\n        </a>\r\n     </span>\r\n    </div>\r\n    <!-- end user info -->\r\n\r\n    <nav>\r\n        <!-- NOTE: Notice the gaps after each icon usage <i></i>..\r\n        Please note that these links work a bit different than\r\n        traditional href=\"\" links. See documentation for details.\r\n        -->\r\n\r\n        <ul data-smart-menu>\r\n            <!--自己-->\r\n            <li data-menu-collapse>\r\n                <a href=\"#\" title=\"Control Point\"><i class=\"fa fa-lg fa-fw fa-desktop\"></i> <span\r\n                        class=\"menu-item-parent\">{{getWord(\'Control Point\')}}</span></a>\r\n                <ul>\r\n                    <li data-ui-sref-active=\"active\">\r\n                        <a data-ui-sref=\"app.ControlPoint.Costinterlockschedule\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Cost interlock schedule\')}}</a>\r\n                    </li>\r\n                    <li data-ui-sref-active=\"active\">\r\n                        <a data-ui-sref=\"app.ControlPoint.CycleVersioncontrol\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Cycle & Version control\')}}</a>\r\n                    </li>\r\n                    <li data-ui-sref-active=\"active\">\r\n                        <a data-ui-sref=\"app.ControlPoint.Taskqueue\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Task queue\')}}</a>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-cube\"></i> <span class=\"menu-item-parent\">{{getWord(\'Basic data\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Master data maintenance\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.Segmentmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Segment maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.BUmaintenance\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'BU maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.Commoditymaintenance\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'Commodity maintena...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.OtherCategorymasterdata\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Other category maste...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.Masterdatamaintenance.DataMapping\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Data Mapping\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Data source detail\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.Markupdetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Markup detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.EBRQtydetail\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'EBR/宇宙版 Qty detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.CFEBMCdetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CFE BMC detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.BPCCAdetail\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'BPC CA detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Basicdata.DatasourceDetail.BPCBMCForecastdetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'BPC BMC Forecast detail\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-bar-chart\"></i> <span class=\"menu-item-parent\">{{getWord(\'Operational Data\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Deal maintenance\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Dealmaintenance.Dealmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Deal maintenance\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Biz data maintenance\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.CAmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CA maintenance\')}}</a>\r\n                            </li>\r\n                            <!--<li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.CAmanualupload\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CA manual upload\')}}</a>\r\n                            </li>-->\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.Markupmaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Markup maintenance\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.CycleQtQ\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Cycle QtQ\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.ConsumptionBasemaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Consumption Base...\')}}</a>\r\n                            </li>\r\n                            <!--<li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.Othercategorymaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Other category main...\')}}</a>\r\n                            </li>-->\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.QTQPNtakedown\"><i class=\"fa fa-leaf\"></i> {{getWord(\'QTQ PN take down\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamaintenance.OutTapeAllocation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Out tape Allocation\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Biz data manual upload\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamanualupload.CAmanualupload\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CA manual upload\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamanualupload.Othercategorymaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Other category main...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamanualupload.AccountTemplateManualUpload\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Account template manual upload\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.OperationData.Bizdatamanualupload.MegaDealRelatedMaintenance\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Mega Deal related  maintenance\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-pencil-square-o\"></i> <span class=\"menu-item-parent\">{{getWord(\'Validation\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Validation\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.CAAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'CA Accumulation\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.MarkupAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Markup Accumulation\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.CycleQtQAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Cycle QtQ Accumula...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.ConsumptionbaseAccumulation-detail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Consumption base...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.OthercategoryAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Other category A...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.AlliancefundAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Alliance fund Accumu...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.QTQPNtakedownAccumulation\"><i class=\"fa fa-leaf\"></i> {{getWord(\'QTQ PN take down...\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.Outtapedetail\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Out tape detail\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Validation.Validation.ResultcheckingbyMTM\"><i class=\"fa fa-leaf\"></i> {{getWord(\'Result checking by...\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n\r\n            <li data-menu-collapse>\r\n                <a href=\"#\">\r\n                    <i class=\"fa fa-lg fa-fw fa-th\"></i> <span class=\"menu-item-parent\">{{getWord(\'Report\')}}</span></a>\r\n                <ul>\r\n                    <li data-menu-collapse>\r\n                        <a href=\"#\"><i class=\"fa fa-lg fa-fw fa-external-link-square\"></i> {{getWord(\'Report\')}}</a>\r\n                        <ul>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.InOutSummaryQtQ\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'In+Out Summary QtQ\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.OuttapeSummary\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'Out tape Summary\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.OuttapeBUSummary\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'Out tape BU Summary\')}}</a>\r\n                            </li>\r\n                            <li data-ui-sref-active=\"active\">\r\n                                <a data-ui-sref=\"app.Report.QTQPNtakedown\">\r\n                                    <i class=\"fa fa-leaf\"></i> {{getWord(\'QTQ PN take down\')}}</a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n            <!--smartadmin的ui-->\r\n\r\n        </ul>\r\n\r\n        <!-- NOTE: This allows you to pull menu items from server -->\r\n        <!-- <ul data-smart-menu-items=\"/api/menu-items.json\"></ul> -->\r\n    </nav>\r\n\r\n  <span class=\"minifyme\" data-action=\"minifyMenu\" minify-menu>\r\n    <i class=\"fa fa-arrow-circle-left hit\"></i>\r\n  </span>\r\n\r\n</aside>");
 $templateCache.put("app/layout/partials/sub-header.tpl.html","<div class=\"col-xs-12 col-sm-5 col-md-5 col-lg-8\" data-sparkline-container>\r\n    <ul id=\"sparks\" class=\"\">\r\n        <li class=\"sparks-info\">\r\n            <h5> My Income <span class=\"txt-color-blue\">$47,171</span></h5>\r\n            <div class=\"sparkline txt-color-blue hidden-mobile hidden-md hidden-sm\">\r\n                1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471\r\n            </div>\r\n        </li>\r\n        <li class=\"sparks-info\">\r\n            <h5> Site Traffic <span class=\"txt-color-purple\"><i class=\"fa fa-arrow-circle-up\"></i>&nbsp;45%</span></h5>\r\n            <div class=\"sparkline txt-color-purple hidden-mobile hidden-md hidden-sm\">\r\n                110,150,300,130,400,240,220,310,220,300, 270, 210\r\n            </div>\r\n        </li>\r\n        <li class=\"sparks-info\">\r\n            <h5> Site Orders <span class=\"txt-color-greenDark\"><i class=\"fa fa-shopping-cart\"></i>&nbsp;2447</span></h5>\r\n            <div class=\"sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm\">\r\n                110,150,300,130,400,240,220,310,220,300, 270, 210\r\n            </div>\r\n        </li>\r\n    </ul>\r\n</div>\r\n			");
 $templateCache.put("app/layout/partials/voice-commands.tpl.html","<!-- TRIGGER BUTTON:\r\n<a href=\"/my-ajax-page.html\" data-toggle=\"modal\" data-target=\"#remoteModal\" class=\"btn btn-default\">Open Modal</a>  -->\r\n\r\n<!-- MODAL PLACE HOLDER\r\n<div class=\"modal fade\" id=\"remoteModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"remoteModalLabel\" aria-hidden=\"true\">\r\n<div class=\"modal-dialog\">\r\n<div class=\"modal-content\"></div>\r\n</div>\r\n</div>   -->\r\n<!--////////////////////////////////////-->\r\n\r\n<!--<div class=\"modal-header\">\r\n<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n&times;\r\n</button>\r\n<h4 class=\"modal-title\" id=\"myModalLabel\">Command List</h4>\r\n</div>-->\r\n<div class=\"modal-body\">\r\n\r\n	<h1><i class=\"fa fa-microphone text-muted\"></i>&nbsp;&nbsp; SmartAdmin Voice Command</h1>\r\n	<hr class=\"simple\">\r\n	<h5>Instruction</h5>\r\n\r\n	Click <span class=\"text-success\">\"Allow\"</span> to access your microphone and activate Voice Command.\r\n	You will notice a <span class=\"text-primary\"><strong>BLUE</strong> Flash</span> on the microphone icon indicating activation.\r\n	The icon will appear <span class=\"text-danger\"><strong>RED</strong></span> <span class=\"label label-danger\"><i class=\"fa fa-microphone fa-lg\"></i></span> if you <span class=\"text-danger\">\"Deny\"</span> access or don\'t have any microphone installed.\r\n	<br>\r\n	<br>\r\n	As a security precaution, your browser will disconnect the microphone every 60 to 120 seconds (sooner if not being used). In which case Voice Command will prompt you again to <span class=\"text-success\">\"Allow\"</span> or <span class=\"text-danger\">\"Deny\"</span> access to your microphone.\r\n	<br>\r\n	<br>\r\n	If you host your page over <strong>http<span class=\"text-success\">s</span></strong> (secure socket layer) protocol you can wave this security measure and have an unintrupted Voice Command.\r\n	<br>\r\n	<br>\r\n	<h5>Commands</h5>\r\n	<ul>\r\n		<li>\r\n			<strong>\'show\' </strong> then say the <strong>*page*</strong> you want to go to. For example <strong>\"show inbox\"</strong> or <strong>\"show calendar\"</strong>\r\n		</li>\r\n		<li>\r\n			<strong>\'mute\' </strong> - mutes all sound effects for the theme.\r\n		</li>\r\n		<li>\r\n			<strong>\'sound on\'</strong> - unmutes all sound effects for the theme.\r\n		</li>\r\n		<li>\r\n			<span class=\"text-danger\"><strong>\'stop\'</strong></span> - deactivates voice command.\r\n		</li>\r\n		<li>\r\n			<span class=\"text-primary\"><strong>\'help\'</strong></span> - brings up the command list\r\n		</li>\r\n		<li>\r\n			<span class=\"text-danger\"><strong>\'got it\'</strong></span> - closes help modal\r\n		</li>\r\n		<li>\r\n			<strong>\'hide navigation\'</strong> - toggle navigation collapse\r\n		</li>\r\n		<li>\r\n			<strong>\'show navigation\'</strong> - toggle navigation to open (can be used again to close)\r\n		</li>\r\n		<li>\r\n			<strong>\'scroll up\'</strong> - scrolls to the top of the page\r\n		</li>\r\n		<li>\r\n			<strong>\'scroll down\'</strong> - scrollts to the bottom of the page\r\n		</li>\r\n		<li>\r\n			<strong>\'go back\' </strong> - goes back in history (history -1 click)\r\n		</li>\r\n		<li>\r\n			<strong>\'logout\'</strong> - logs you out\r\n		</li>\r\n	</ul>\r\n	<br>\r\n	<h5>Adding your own commands</h5>\r\n	Voice Command supports up to 80 languages. Adding your own commands is extreamly easy. All commands are stored inside <strong>app.config.js</strong> file under the <code>var commands = {...}</code>. \r\n\r\n	<hr class=\"simple\">\r\n	<div class=\"text-right\">\r\n		<button type=\"button\" class=\"btn btn-success btn-lg\" data-dismiss=\"modal\">\r\n			Got it!\r\n		</button>\r\n	</div>\r\n\r\n</div>\r\n<!--<div class=\"modal-footer\">\r\n<button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Got it!</button>\r\n</div> -->");
 $templateCache.put("app/layout/shortcut/shortcut.tpl.html","<div id=\"shortcut\">\r\n	<ul>\r\n		<li>\r\n			<a href=\"#/inbox/\" class=\"jarvismetro-tile big-cubes bg-color-blue\"> <span class=\"iconbox\"> <i class=\"fa fa-envelope fa-4x\"></i> <span>Mail <span class=\"label pull-right bg-color-darken\">14</span></span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/calendar\" class=\"jarvismetro-tile big-cubes bg-color-orangeDark\"> <span class=\"iconbox\"> <i class=\"fa fa-calendar fa-4x\"></i> <span>Calendar</span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/maps\" class=\"jarvismetro-tile big-cubes bg-color-purple\"> <span class=\"iconbox\"> <i class=\"fa fa-map-marker fa-4x\"></i> <span>Maps</span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/invoice\" class=\"jarvismetro-tile big-cubes bg-color-blueDark\"> <span class=\"iconbox\"> <i class=\"fa fa-book fa-4x\"></i> <span>Invoice <span class=\"label pull-right bg-color-darken\">99</span></span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/gallery\" class=\"jarvismetro-tile big-cubes bg-color-greenLight\"> <span class=\"iconbox\"> <i class=\"fa fa-picture-o fa-4x\"></i> <span>Gallery </span> </span> </a>\r\n		</li>\r\n		<li>\r\n			<a href=\"#/profile\" class=\"jarvismetro-tile big-cubes selected bg-color-pinkDark\"> <span class=\"iconbox\"> <i class=\"fa fa-user fa-4x\"></i> <span>My Profile </span> </span> </a>\r\n		</li>\r\n	</ul>\r\n</div>");
@@ -2643,6 +2782,16 @@ $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-profile-form.tpl.html","<form id=\"profileForm\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <label>Email address</label>\r\n            <input type=\"text\" class=\"form-control\" name=\"email\" />\r\n        </div>\r\n    </fieldset>\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label>Password</label>\r\n            <input type=\"password\" class=\"form-control\" name=\"password\" />\r\n        </div>\r\n    </fieldset>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>\r\n");
 $templateCache.put("app/_common/forms/directives/bootstrap-validation/bootstrap-toggling-form.tpl.html","<form id=\"togglingForm\" method=\"post\" class=\"form-horizontal\">\r\n\r\n    <fieldset>\r\n        <legend>\r\n            Default Form Elements\r\n        </legend>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Full name <sup>*</sup></label>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"firstName\" placeholder=\"First name\" />\r\n            </div>\r\n            <div class=\"col-lg-4\">\r\n                <input type=\"text\" class=\"form-control\" name=\"lastName\" placeholder=\"Last name\" />\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Company <sup>*</sup></label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"text\" class=\"form-control\" name=\"company\"\r\n                       required data-bv-notempty-message=\"The company name is required\" />\r\n            </div>\r\n            <div class=\"col-lg-2\">\r\n                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"#jobInfo\">\r\n                    Add more info\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n\r\n    <!-- These fields will not be validated as long as they are not visible -->\r\n    <div id=\"jobInfo\" style=\"display: none;\">\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Job title <sup>*</sup></label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"job\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Department <sup>*</sup></label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"department\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n\r\n    <fieldset>\r\n        <div class=\"form-group\">\r\n            <label class=\"col-lg-3 control-label\">Mobile phone <sup>*</sup></label>\r\n            <div class=\"col-lg-5\">\r\n                <input type=\"text\" class=\"form-control\" name=\"mobilePhone\" />\r\n            </div>\r\n            <div class=\"col-lg-2\">\r\n                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"#phoneInfo\">\r\n                    Add more phone numbers\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </fieldset>\r\n    <!-- These fields will not be validated as long as they are not visible -->\r\n    <div id=\"phoneInfo\" style=\"display: none;\">\r\n\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Home phone</label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"homePhone\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n        <fieldset>\r\n            <div class=\"form-group\">\r\n                <label class=\"col-lg-3 control-label\">Office phone</label>\r\n                <div class=\"col-lg-5\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"officePhone\" />\r\n                </div>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n\r\n    <div class=\"form-actions\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <button class=\"btn btn-default\" type=\"submit\">\r\n                    <i class=\"fa fa-eye\"></i>\r\n                    Validate\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>");
 $templateCache.put("app/_common/layout/directives/demo/demo-states.tpl.html","<div class=\"demo\"><span id=\"demo-setting\"><i class=\"fa fa-cog txt-color-blueDark\"></i></span>\r\n\r\n    <form>\r\n        <legend class=\"no-padding margin-bottom-10\">Layout Options</legend>\r\n        <section>\r\n            <label><input type=\"checkbox\" ng-model=\"fixedHeader\"\r\n                          class=\"checkbox style-0\"><span>Fixed Header</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedNavigation\"\r\n                          class=\"checkbox style-0\"><span>Fixed Navigation</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedRibbon\"\r\n                          class=\"checkbox style-0\"><span>Fixed Ribbon</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"fixedPageFooter\"\r\n                          class=\"checkbox style-0\"><span>Fixed Footer</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"insideContainer\"\r\n                          class=\"checkbox style-0\"><span>Inside <b>.container</b></span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"rtl\"\r\n                          class=\"checkbox style-0\"><span>RTL</span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"menuOnTop\"\r\n                          class=\"checkbox style-0\"><span>Menu on <b>top</b></span></label>\r\n            <label><input type=\"checkbox\"\r\n                          ng-model=\"colorblindFriendly\"\r\n                          class=\"checkbox style-0\"><span>For Colorblind <div\r\n                    class=\"font-xs text-right\">(experimental)\r\n            </div></span>\r\n            </label><span id=\"smart-bgimages\"></span></section>\r\n        <section><h6 class=\"margin-top-10 semi-bold margin-bottom-5\">Clear Localstorage</h6><a\r\n                ng-click=\"factoryReset()\" class=\"btn btn-xs btn-block btn-primary\" id=\"reset-smart-widget\"><i\r\n                class=\"fa fa-refresh\"></i> Factory Reset</a></section>\r\n\r\n        <h6 class=\"margin-top-10 semi-bold margin-bottom-5\">SmartAdmin Skins</h6>\r\n\r\n\r\n        <section id=\"smart-styles\">\r\n            <a ng-repeat=\"skin in skins\" ng-click=\"setSkin(skin)\" class=\"{{skin.class}}\" style=\"{{skin.style}}\"><i ng-if=\"skin.name == $parent.smartSkin\" class=\"fa fa-check fa-fw\"></i> {{skin.label}} <sup ng-if=\"skin.beta\">beta</sup></a>\r\n        </section>\r\n    </form>\r\n</div>");}]);
+(function(){
+    "use strict";
+
+    angular.module('SmartAdmin.Forms', []);
+})();
+(function(){
+    "use strict";
+
+    angular.module('SmartAdmin.Layout', []);
+})();
 (function(){
     "use strict";
 
@@ -3649,14 +3798,14 @@ angular.module('app.Basicdata').controller('BUmaintenanceCtrl', function ($scope
             }
         }).success(function (data, status, headers, config) {
             if(data.code == 0){
-                alert('上传成功！');
+                alert('Success！');
                 $('#myModal').modal('hide');
                 $scope.goPage();
             }else {
-                alert('上传失败！');
+                alert('Uploading Failed');
             }
         }).error(function (data, status, headers, config) {
-            alert('上传失败！');
+            alert('Uploading Failed');
             //上传失败
             console.log('error status: ' + status);
         });
@@ -3804,14 +3953,14 @@ angular.module('app.Basicdata').controller('CommoditymaintenanceCtrl', function 
             }
         }).success(function (data, status, headers, config) {
             if(data.code == 0){
-                alert('上传成功！');
+                alert('Success！');
                 $('#myModal').modal('hide');
                 $scope.goPage();
             }else {
-                alert('上传失败！');
+                alert('Uploading Failed');
             }
         }).error(function (data, status, headers, config) {
-            alert('上传失败！');
+            alert('Uploading Failed');
             //上传失败
             console.log('error status: ' + status);
         });
@@ -3992,14 +4141,14 @@ angular.module('app.Basicdata').controller('OtherCategorymasterdataCtrl', functi
             }
         }).success(function (data, status, headers, config) {
             if(data.code == 0){
-                alert('上传成功！');
+                alert('Success！');
                 $('#myModal').modal('hide');
                 $scope.goPage();
             }else {
-                alert('上传失败！');
+                alert('Uploading Failed');
             }
         }).error(function (data, status, headers, config) {
-            alert('上传失败！');
+            alert('Uploading Failed');
             //上传失败
             console.log('error status: ' + status);
         });
@@ -4149,14 +4298,14 @@ angular.module('app.Basicdata').controller('SegmentmaintenanceCtrl', function ($
             }
         }).success(function (data, status, headers, config) {
             if(data.code == 0){
-                alert('上传成功！');
+                alert('Success！');
                 $('#myModal').modal('hide');
                 $scope.goPage();
             }else {
-                alert('上传失败！');
+                alert('Uploading Failed');
             }
         }).error(function (data, status, headers, config) {
-            alert('上传失败！');
+            alert('Uploading Failed');
             //上传失败
             console.log('error status: ' + status);
         });
@@ -4586,7 +4735,7 @@ angular.module('app.Basicdata').service("CommoditymaintenanceService", function(
 angular.module('app.Basicdata').service("OtherCategorymasterdataService", function ($http, $q, APP_CONFIG) {
 
     /**
-     * ҳ���ʼ��
+     * ҳ���ʼ��
      */
     this.getPage = function (page) {
         console.log(page)
@@ -4606,17 +4755,17 @@ angular.module('app.Basicdata').service("OtherCategorymasterdataService", functi
             },
             params: page
         }).then(function successCallback(response) {
-            // ����ɹ�ִ�д���
+            // ����ɹ�ִ�д���
             d.resolve(response.data);
         }, function errorCallback(response) {
-            // ����ʧ��ִ�д���
+            // ����ʧ��ִ�д���
             d.reject("error");
         });
         return d.promise;
     }
 
     /**
-     * ĳ��ɾ��
+     * ĳ��ɾ��
      */
     this.delList = function (id) {
         console.log(id)
@@ -4636,17 +4785,17 @@ angular.module('app.Basicdata').service("OtherCategorymasterdataService", functi
              },*/
             //data : id
         }).then(function successCallback(response) {
-            // ����ɹ�ִ�д���
+            // ����ɹ�ִ�д���
             d.resolve(response.data);
         }, function errorCallback(response) {
-            // ����ʧ��ִ�д���
+            // ����ʧ��ִ�д���
             d.reject("error");
         });
         return d.promise;
     }
 
     /**
-     * ����Excel
+     * ����Excel
      */
     this.download = function (load) {
         console.log(load)
@@ -4667,10 +4816,10 @@ angular.module('app.Basicdata').service("OtherCategorymasterdataService", functi
             params: load,
             responseType: 'arraybuffer'
         }).then(function successCallback(response) {
-            // ����ɹ�ִ�д���
+            // ����ɹ�ִ�д���
             d.resolve(response.data);
         }, function errorCallback(response) {
-            // ����ʧ��ִ�д���
+            // ����ʧ��ִ�д���
             d.reject("error");
         });
         return d.promise;
@@ -6143,1449 +6292,6 @@ angular.module('app.maps').factory('SmartMapStyle', function ($q, $http, APP_CON
 
 
 });
-"use strict";
-
-angular.module('app.OperationData').controller('AlliancefundmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-})
-"use strict";
-
-angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($scope,$state,$timeout,$stateParams,$rootScope,APP_CONFIG,CAmaintenanceService) {
-    //初始化Cycle Choose
-    CAmaintenanceService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
-    //第二部分tab信息展示
-    $scope.getPage = function(){
-        CAmaintenanceService.getExecute2().then(function(data){
-            if(data.code == 0){
-                $scope.tablist = data.result;
-                $("#tabExample1").dataTable().fnDestroy();
-                $timeout(function () {
-                    $('#tabExample1').dataTable({
-                        "scrollY": 160,
-                        "scrollX": true,
-                        "dom": '<"top">rt<"bottom"><"clear">',
-                        "scrollCollapse": true,
-                        //"jQueryUI": true,
-                        // "pagingType":   "simple_numbers",
-                        stateSave: true,
-                        "paging": false,
-                        "ordering": false,
-                        "bLengthChange": true
-                    });
-                });
-            }
-            console.log(data);
-        },function(data){
-            console.log(data);
-        });
-    }
-    $scope.getPage();
-
-    //点击Execute执行
-    $scope.getExecute = function(){
-        $scope.taskId = '';
-        $scope.search = {
-            cycleName : $scope.CycleChoose,
-            user : $rootScope.user
-        }
-        console.log($rootScope.user);
-        if(!$scope.CycleChoose){
-            alert("请选择条件！");
-        }else {
-            CAmaintenanceService.getExecute($scope.search).then(function(data){
-                if(data.code == 0){
-                    alert(data.result);
-                    $scope.getPage();
-                }else {
-                    alert(data.msg);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-        }
-    };
-    //单击整行选中
-    $scope.trClick = function($event,id,status,cycleName){
-        $($("#tabExample input:radio")).removeAttr("checked");
-        $($event.target).parent().find("input:radio").prop("checked",true);
-        $scope.taskId = id;
-        console.log($scope.taskId)
-        $scope.status = status;
-        console.log($scope.status)
-        $scope.cyclename = cycleName;
-        console.log($scope.cyclename)
-        //$scope.SearchTaskId(a,b,c)
-    }
-
-    //点击Search
-    $scope.SearchTab = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'){
-            $scope.PRCww=true;
-
-            $scope.TaskID =  $scope.taskId;
-            $scope.CycleName = $scope.cyclename;
-
-            //WW
-            CAmaintenanceService.getWw($scope.TaskID).then(function(data){
-                if(data.code == 0){
-                    $scope.WwList = data.result;
-                    console.log($scope.WwList);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-
-            //PRC
-            CAmaintenanceService.getPrc($scope.TaskID).then(function(data) {
-                if (data.code == 0) {
-                    $scope.PrcList = data.result;
-                    console.log($scope.PrcList);
-                }
-                console.log(data)
-            } ,function(data){
-                console.log(data);
-            });
-        }else {
-            alert("暂未执行成功，无法查看！");
-        }
-    };
-    //删除
-    $scope.DelOneItem = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
-            if(confirm('确认要删除？')) {
-                console.log($scope.taskid);
-                $scope.taskid = {
-                    uuid: $scope.taskId
-                };
-                CAmaintenanceService.DelItem($scope.taskid).then(function (data) {
-                    if (data.code == 0) {
-                        alert("删除成功！");
-                        $scope.taskId = '';
-                        $scope.getPage();
-                        //$("#tabExample").dataTable().fnDestroy();
-                        //$scope.PRCWW = true;
-                    }else {
-                        alert(data.msg);
-                    }
-                    console.log(data);
-                }, function (data) {
-                    console.log(data);
-                });
-            }
-        }else {
-            alert("还未执行完成！");
-        }
-    };
-
-    //prc时的Download
-    $scope.getPRCDownLoad = function(){
-        if(!$scope.TaskID){
-            return;
-        }else{
-        CAmaintenanceService.getPrcDown($scope.TaskID).then(function(data){
-            console.log(data);
-            //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
-            //而使用“application/vnd.openxmlformats-officedocument.spreadsheetml.sheet”则会保存为xlsx
-            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-            var objectUrl = URL.createObjectURL(blob);
-            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-            $("body").append(aForExcel);
-            $(".forExcel").click();
-            aForExcel.remove();
-        },function(data){
-            console.log(data);
-        })
-        }
-    }
-
-    //ww时的Download
-    $scope.getWWDownLoad = function(){
-        if(!$scope.TaskID){
-            return;
-        }else{
-            CAmaintenanceService.getWwDown($scope.TaskID).then(function(data){
-                console.log(data);
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-            },function(data){
-                console.log(data);
-            })
-        }
-    }
-
-    //点击Validate
-    $scope.getValidate = function(){
-        $scope.validate = {
-            zcycle_name : $scope.CycleName,
-            zuuid : $scope.TaskID,
-            user : $rootScope.user
-        };
-        console.log($rootScope.user)
-        CAmaintenanceService.getValidate($scope.validate).then(function (data) {
-            if(data.code == 0){
-                alert('成功！');
-                $scope.getPage();
-            }else {
-                alert(data.msg);
-            }
-            console.log(data);
-        }, function (data) {
-            console.log(data);
-        });
-    };
-
-    //button 切换
-    $scope.sw1 = true;
-    $scope.ww = false;
-    $scope.sw2 = false;
-    $scope.btnSwitch = function (flag) {
-        if (flag == 'w') {
-            $scope.ww = true;
-            $scope.sw1 = false;
-            //$scope.sw2 = false;
-        } else if (flag == 'p') {
-            $scope.ww = false;
-            $scope.sw1 = true;
-            //$scope.sw2 = false;
-        }
-    }
-
-
-})
-"use strict";
-
-angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($scope,$state,APP_CONFIG,$location,$rootScope,CAmanualuploadService,Upload) {
-    //初始化Cycle Choose
-    CAmanualuploadService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-            console.log($scope.cycledata);
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
-    //上传
-    $scope.myfiles = {};
-    $scope.openUpload = function(){
-        //$('#myModal').modal('show');
-        $scope.myfilesVal = '';
-        $scope.fileChange = function(){
-            if($scope.myfiles.name){
-                $scope.myfilesVal = $scope.myfiles.name;
-            }else {
-                $scope.myfilesVal = '';
-            }
-        }
-    }
-
-    $scope.upload = function(){
-        Upload.upload({
-            //服务端接收
-            url:APP_CONFIG.baseUrl+ '/api/dm/ca/attachments',
-            data : {
-                file : $scope.myfiles,
-                username :$rootScope.user,
-                cyclename:$scope.CycleChoose
-            },
-            headers: {
-                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
-            },
-        }).success(function (data, status, headers, config){
-            console.log($scope.CycleChoose.indexOf("M0")==-1);
-            if(!$scope.CycleChoose){
-                alert("请选择条件！");
-            }else {
-                if (data.code == 0 && $scope.CycleChoose.indexOf("M0") == -1) {
-                    alert('上传成功！');
-                    //$('#myModal').modal('hide');
-                    $scope.goPage();
-                } else {
-                    alert('上传失败！');
-                }
-            }
-        }).error(function (data, status, headers, config) {
-            alert('上传失败');
-            //上传失败
-            console.log('error status: ' + status);
-        });
-    }
-
-    //prc时的Download
-    $scope.getPRCDownLoad = function(){
-        if(!$scope.TaskID){
-            return;
-        }else{
-            CAmanualuploadService.getPrcDown($scope.TaskID).then(function(data){
-                console.log(data);
-                //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
-                //而使用“application/vnd.openxmlformats-officedocument.spreadsheetml.sheet”则会保存为xlsx
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-            },function(data){
-                console.log(data);
-            })
-        }
-    }
-
-    //ww时的Download
-    $scope.getWWDownLoad = function(){
-        if(!$scope.TaskID){
-            return;
-        }else{
-            CAmanualuploadService.getWwDown($scope.TaskID).then(function(data){
-                console.log(data);
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-            },function(data){
-                console.log(data);
-            })
-        }
-    }
-//点击Validate
-    $scope.getValidate = function(){
-        console.log($scope.CycleChoose);
-        $scope.validate = {
-            zcycle_name : $scope.CycleChoose,
-            zuuid : $scope.TaskID,
-            user : $rootScope.user
-        };
-        console.log($rootScope.user)
-        CAmanualuploadService.getValidate($scope.validate).then(function (data) {
-            if(data.code == 0){
-                alert('成功！');
-                $scope.getPage();
-            }else {
-                alert(data.msg);
-            }
-            console.log(data);
-        }, function (data) {
-            console.log(data);
-        });
-    };
-    //button 切换
-    $scope.sw1 = true;
-    $scope.ww = false;
-    $scope.sw2 = false;
-    $scope.btnSwitch = function (flag) {
-        if (flag == 'w') {
-            $scope.ww = true;
-            $scope.sw1 = false;
-            //$scope.sw2 = false;
-        } else if (flag == 'p') {
-            $scope.ww = false;
-            $scope.sw1 = true;
-            //$scope.sw2 = false;
-        }
-    }
-
-    //$scope.btnSV = function (flag) {
-    //    if (flag == 's1') {
-    //        $scope.sw2 = true;
-    //        $scope.sw1 = false;
-    //        $scope.ww=false;
-    //    } else if (flag == 's2') {
-    //        $scope.sw1 = true;
-    //        $scope.sw2 = false;
-    //        $scope.ww=false;
-    //    }
-    //}
-
-})
-"use strict";
-
-angular.module('app.OperationData').controller('ConsumptionBasemaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-})
-"use strict";
-
-angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,$state,$stateParams,$location,CycleQTQService,$http,$log,$rootScope,$timeout) {
-
-    //初始化Select-EBR Data
-    $scope.ebr =  'EBR_DATE';
-    $scope.dataMoth = [];
-    CycleQTQService.getSelect($scope.ebr).then(function(data){
-        if(data.code == 0){
-            $scope.ebrdata = data.result;
-            for(var i=0;i< $scope.ebrdata.length;i++){
-                $scope.dataMoth.push({data:$scope.ebrdata[i]});
-            }
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-    //初始化Select-CFE Data
-    $scope.cfe = 'CFE_CYCLE';
-    CycleQTQService.getSelect($scope.cfe).then(function(data){
-        if(data.code == 0){
-            $scope.cfedata = data.result;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
-    //初始化Cycle Choose
-    CycleQTQService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
-    //多选控件
-    $scope.Sel = true;
-    $(document).bind('click',function(){
-        $scope.Sel = true;
-    });
-    $scope.openSel = function($event){
-        $scope.Sel = false;
-        $event.stopPropagation();
-    };
-    $scope.arr = [];
-    $scope.One = function(m){
-        m.isChecked = !m.isChecked;
-        if(m.isChecked){
-            $scope.arr.push(m.data);
-        }else {
-            for(var i=0;i<$scope.arr.length;i++){
-                if($scope.arr[i] == m.data){
-                    $scope.arr.splice(i,1);
-                    break;
-                }
-            }
-        }
-        console.log($scope.arr);
-        $scope.EBRData = $scope.arr.join(',');
-    };
-
-    //第二部分tab信息展示
-    $scope.getPage = function(){
-        CycleQTQService.getExecute2().then(function(data){
-            console.log(data);
-            if(data.code == 0){
-                //$scope.noData = false;
-                $scope.tablist = data.result;
-                $("#tabExample").dataTable().fnDestroy();
-                $timeout(function () {
-                    $('#tabExample').dataTable({
-                        "scrollY": 160,
-                        "scrollX": true,
-                        "dom": '<"top">rt<"bottom"><"clear">',
-                        "scrollCollapse": true,
-                        "jQueryUI": true,
-                        // "pagingType":   "simple_numbers",
-                        stateSave: true,
-                        "paging": false,
-                        "ordering": false,
-                        "bLengthChange": true,
-                        //"order": [[ 3, "desc" ]]
-                    });
-                });
-            }
-            console.log(data);
-        },function(data){
-            console.log(data);
-        });
-    }
-    $scope.getPage();
-
-    //点击Execute执行
-    //$scope.noData = true;
-    $scope.getExecute = function(){
-        $scope.taskId = '';
-        $scope.search = {
-            cycleName : $scope.CycleChoose,
-            cfeCycle : $scope.CFEData,
-            month : $scope.EBRData,
-            user : $rootScope.user
-        }
-        console.log($rootScope.user);
-        if(!$scope.EBRData || !$scope.CFEData){
-            alert("请选择条件！");
-        }else {
-            CycleQTQService.getExecute($scope.search).then(function(data){
-                if(data.code == 0){
-                    alert(data.result);
-                    $scope.getPage();
-                }else {
-                    alert(data.msg);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-        }
-    };
-
-    $scope.WW = true;
-    $scope.PRC = true;
-    $scope.WWShift = true;
-    $scope.PRCShift = true;
-    //单击整行选中
-    $scope.trClick = function($event,id,status,cycleName){
-        $($("#tabExample input:radio")).removeAttr("checked");
-        $($event.target).parent().find("input:radio").prop("checked",true);
-        $scope.taskId = id;
-        console.log($scope.taskId)
-        $scope.status = status;
-        console.log($scope.status)
-        $scope.cyclename = cycleName;
-        console.log($scope.cyclename)
-        //$scope.SearchTaskId(a,b,c)
-    }
-    //单选获得taskId
-   /* $scope.SearchTaskId = function(id,cycleName,status){
-        $scope.taskId = id;
-        $scope.status = status;
-        $scope.cyclename = cycleName;
-    };*/
-
-    //点击Search
-    $scope.SearchTab = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'){
-            $scope.PRCWW = false;
-            $scope.TaskID =  $scope.taskId;
-            $scope.CyclName = $scope.cyclename;
-            $scope.WW = false;
-            $scope.PRC = true;
-
-            //WW
-           // $("#PRCExample").dataTable().fnDestroy();
-            CycleQTQService.getWw($scope.TaskID).then(function(data){
-                if(data.code == 0){
-                    $scope.WwList = data.result;
-                    $scope.wwTable();
-                    console.log($scope.TaskID);
-                    console.log($scope.CyclName);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-
-            //PRC
-            CycleQTQService.getPrc($scope.TaskID).then(function(data) {
-                if (data.code == 0) {
-                    $scope.PrcList = data.result;
-                    console.log($scope.PrcList);
-                    $scope.prcTalbe();
-                }
-                console.log(data)
-            } ,function(data){
-                console.log(data);
-            });
-        }else {
-            alert("暂未执行成功，无法查看！");
-        }
-    };
-
-
-    //删除
-    $scope.DelParticular = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
-            if(confirm('确认要删除？')) {
-                console.log($scope.taskid);
-                $scope.taskid = {
-                    uuid: $scope.taskId
-                };
-                CycleQTQService.DelParticular($scope.taskid).then(function (data) {
-                    if (data.code == 0) {
-                        alert("删除成功！");
-                        $scope.taskId = '';
-                        $scope.getPage();
-                        //$("#tabExample").dataTable().fnDestroy();
-                        $scope.PRCWW = true;
-                    }else {
-                        alert(data.msg);
-                    }
-                    console.log(data);
-                }, function (data) {
-                    console.log(data);
-                });
-            }
-        }else {
-            alert("还未执行完成！");
-        }
-    };
-
-
-
-
-    $scope.wwTable = function(){
-        $("#WWExample").dataTable().fnDestroy();
-        $timeout(function () {
-            $('#WWExample thead tr').eq(1).find('td').each(function() {
-                var title = $('#WWExample thead tr td').eq($(this).index()).text();
-                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-            });
-            var table = $('#WWExample').DataTable({
-                //"processing": true,
-                "scrollY": 400,
-                "scrollX": true,
-                "dom": '<"top">rt<"bottom"><"clear">',
-                //"dom": '<"top"i>rt<"bottom"flp><"clear">',
-                "scrollCollapse": true,
-                //"jQueryUI": true,
-                // "pagingType":   "simple_numbers",
-                //stateSave: true,
-                //"pagingType":   "full_numbers",
-                "paging": false,
-                "ordering": false,
-                //"lengthChange": true,
-                "autoWidth": false,
-                "data" :  $scope.WwList,
-                "columns":[
-                    { "data": "qtr" },
-                    { "data": "zfingeo" },
-                    { "data": "zregion2" },
-                    { "data": "cfeBu" },
-                    { "data": "cfeSegment" },
-                    { "data": "invQty",render: $.fn.dataTable.render.number( ',', '.')},
-                    { "data": "cfeCycle" },
-                    { "data": "lqBmc" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqBmc" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqBmc",  render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqLq" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqCq" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "lqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqLqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqCqTtl",render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                ]
-            });
-            table.columns().eq(0).each(function(colIdx) {
-                $('input', table.column(colIdx).header()).on('keyup change', function() {
-                    table
-                        .column(colIdx)
-                        .search(this.value)
-                        .draw();
-                });
-            });
-        });
-    }
-
-    $scope.prcTalbe = function(id){
-        $("#PRCExample").dataTable().fnDestroy();
-        $timeout(function () {
-            $('#PRCExample thead tr').eq(1).find('td').each(function() {
-                var title = $('#PRCExample thead tr td').eq($(this).index()).text();
-                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-            });
-            var table =$('#PRCExample').DataTable({
-                //"processing": true,
-                "scrollY": 400,
-                "scrollX": true,
-                "dom": '<"top">rt<"bottom"><"clear">',
-                "scrollCollapse": true,
-                //"jQueryUI": true,
-                // "pagingType":   "simple_numbers",
-                //stateSave: true,
-                "paging": false,
-                "ordering": false,
-                //"lengthChange": true,
-                "autoWidth": false,
-                "data" : $scope.PrcList,
-                "columns": [
-                    { "data": "qtr" },
-                    { "data": "zfingeo" },
-                    { "data": "cfeBu" },
-                    { "data": "cfePrcSegment" },
-                    { "data": "invQty" ,render: $.fn.dataTable.render.number( ',', '.')},
-                    { "data": "cfeCycle" },
-                    { "data": "lqBmc" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqBmc" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqBmc" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqLq" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqCq" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "lqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "cqLqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }},
-                    { "data": "nqCqTtl" ,render: function ( data, type, row ) {
-                        if(data == null){
-                            return data;
-                        }else {
-                            var abc = data + '';
-                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                        }
-                    }}
-                ]
-            });
-            table.columns().eq(0).each(function(colIdx) {
-                $('input', table.column(colIdx).header()).on('keyup change', function() {
-                    table
-                        .column(colIdx)
-                        .search(this.value)
-                        .draw();
-                });
-            });
-        });
-
-    }
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.WW = false;
-            $scope.PRC = true;
-            $scope.wwTable();
-        }else if(flag == 'p'){
-            $scope.WW = true;
-            $scope.PRC = false;
-            $scope.prcTalbe();
-        }
-    };
-
-    //点击WW中的Shift view
-    $scope.getSegmentWW = function(){
-        $scope.WW = true;
-        $scope.PRC = true;
-        $scope.WWShift = false;
-        $scope.PRCShift = true;
-        //切换复杂表
-       /* $scope.validate = {
-            cycleName : $scope.CyclName,
-        };
-        console.log($scope.validate)
-        CycleQTQService.getSegment($scope.validate,$scope.TaskID).then(function (data) {
-            if(data.code == 0){
-                alert('成功！');
-            }else {
-                alert(data.msg);
-            }
-            console.log(data);
-        }, function (data) {
-            console.log(data);
-        });*/
-    };
-    //点击PRC中的Shift view
-    $scope.getSegmentPRC = function(){
-        $scope.WW = true;
-        $scope.PRC = true;
-        $scope.WWShift = true;
-        $scope.PRCShift = false;
-    }
-    //点击WW的中Shift view的Shift view
-    $scope.getWWShift = function(){
-        $scope.WW = false;
-        $scope.PRC = true;
-        $scope.WWShift = true;
-        $scope.PRCShift = true;
-    }
-//点击PRC的中Shift view的Shift view
-    $scope.getPRCShift = function(){
-        $scope.WW = true;
-        $scope.PRC = false;
-        $scope.WWShift = true;
-        $scope.PRCShift = true;
-    }
-
-
-    //点击Validate
-    $scope.getValidate = function(){
-        $scope.validate = {
-            zcycle_name : $scope.CyclName,
-            zuuid : $scope.TaskID,
-            user : $rootScope.user
-        };
-        console.log($rootScope.user)
-        CycleQTQService.getValidate($scope.validate).then(function (data) {
-            if(data.code == 0){
-                console.log(data)
-                alert('Success!');
-                $scope.getPage();
-            }else {
-                alert(data.msg);
-            }
-            console.log(data);
-        }, function (data) {
-            console.log(data);
-        });
-    };
-
-    //WW时Download Summary
-    $scope.getWWDownLoadSum = function(){
-        $('#ws2').css('display','block');
-        $('#ws1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            CycleQTQService.getWwSum($scope.TaskID).then(function (data) {
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-                $('#ws1').css('display','block');
-                $('#ws2').css('display','none');
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-
-    //Prc时Download Summary
-    $scope.getPRCDownLoadSum = function(){
-        $('#ps2').css('display','block');
-        $('#ps1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            CycleQTQService.getPrcSum($scope.TaskID).then(function (data) {
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-                $('#ps1').css('display','block');
-                $('#ps2').css('display','none');
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-    //WW时Download Detail
-    $scope.getWWDownLoadDet = function(){
-        $('#wd2').css('display','block');
-        $('#wd1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            CycleQTQService.getWwDet($scope.TaskID).then(function (data) {
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-                $('#wd1').css('display','block');
-                $('#wd2').css('display','none');
-                console.log(data);
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-
-    //Prc时Download Detail
-    $scope.getPRCDownLoadDet = function(){
-        $('#pd2').css('display','block');
-        $('#pd1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            CycleQTQService.getPrcDet($scope.TaskID).then(function (data) {
-                $('#pd1').css('display','block');
-                $('#pd2').css('display','none');
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-});
-"use strict";
-
-angular.module('app.OperationData').controller('DealmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
-    $scope.del = function(){
-        if(confirm('确认要删除？')){
-
-        }
-    }
-})
-"use strict";
-
-angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$rootScope,$state,$stateParams,$location,$timeout,MarkupmaintenanceService,navService) {
-  //调取bu、geo、region、segment
-    navService.getBU().then(function (data) {
-        if(data.code == 0){
-            sessionStorage.setItem("bu", JSON.stringify(data.result));
-        }
-    }, function (data) {
-        console.log(data);
-    });
-    navService.getGEO().then(function (data) {
-        if(data.code == 0){
-            sessionStorage.setItem("geo", JSON.stringify(data.result));
-            $scope.geo = data.result;
-            $scope.geo.push('Total');
-        }
-    }, function (data) {
-        console.log(data);
-    });
-    var prc = {
-        stype : 'PRC'
-    }
-    navService.getSEGMENTprc(prc).then(function (data) {
-        if(data.code == 0){
-            sessionStorage.setItem("segmentPRC", JSON.stringify(data.result));
-            $scope.segmentPRC = data.result;
-            console.log(data.result)
-            $scope.segmentPRC .push('Total');
-        }
-    }, function (data) {
-        console.log(data);
-    });
-    var ww = {
-        stype : 'WW'
-    }
-    navService.getSEGMENTww(ww).then(function (data) {
-        if(data.code == 0){
-            sessionStorage.setItem("segmentWW", JSON.stringify(data.result));
-            $scope.segmentWW = data.result;
-            $scope.segmentWW .push('Total');
-        }
-    }, function (data) {
-        console.log(data);
-    });
-
-
-
-
-
-    //初始化Cycle Choose
-    MarkupmaintenanceService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
-    //第二部分tab信息展示
-    $scope.getPage = function(){
-        MarkupmaintenanceService.getExecute2().then(function(data){
-            console.log(data);
-            if(data.code == 0){
-                //$scope.noData = false;
-                $scope.tablist = data.result;
-                $("#tabExample").dataTable().fnDestroy();
-                $timeout(function () {
-                    $('#tabExample').dataTable({
-                        "scrollY": 160,
-                        "scrollX": true,
-                        "dom": '<"top">rt<"bottom"><"clear">',
-                        "scrollCollapse": true,
-                        "jQueryUI": true,
-                        // "pagingType":   "simple_numbers",
-                        stateSave: true,
-                        "paging": false,
-                        "ordering": false,
-                        "bLengthChange": true,
-                        //"order": [[ 3, "desc" ]]
-                    });
-                });
-            }
-            console.log(data);
-        },function(data){
-            console.log(data);
-        });
-    }
-    $scope.getPage();
-
-
-    //点击Execute执行
-    //$scope.noData = true;
-    $scope.getExecute = function(){
-        $scope.taskId = '';
-        $scope.search = {
-            cycleName : $scope.CycleChoose,
-            user : $rootScope.user
-        }
-        console.log($rootScope.user);
-        if(!$scope.CycleChoose){
-            alert("请选择条件！");
-        }else {
-            MarkupmaintenanceService.getExecute($scope.search).then(function(data){
-                if(data.code == 0){
-                    alert(data.result);
-                    $scope.getPage();
-                }else {
-                    alert(data.msg);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-        }
-    };
-
-
-    //单击整行选中
-    $scope.trClick = function($event,id,status,cycleName){
-        $($("#tabExample input:radio")).removeAttr("checked");
-        $($event.target).parent().find("input:radio").prop("checked",true);
-        $scope.taskId = id;
-        console.log($scope.taskId)
-        $scope.status = status;
-        console.log($scope.status)
-        $scope.cyclename = cycleName;
-        console.log($scope.cyclename)
-    }
-
-
-
-    $scope.WW = true;
-    $scope.PRC = true;
-    $scope.markTab = false;
-    //点击Search
-    $scope.SearchTab = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'){
-            $scope.markTab = true;
-            $scope.TaskID =  $scope.taskId;
-            $scope.CyclName = $scope.cyclename;
-
-            //WW
-            MarkupmaintenanceService.getWw($scope.TaskID).then(function(data){
-                if(data.code == 0){
-                     $scope.result = data.result;
-                     $scope.resData = [];
-                     for(var i in $scope.result){
-                     var thead1 =['XXX+BMC $M（'+ i +'）'].concat($scope.geo);
-                     var thead2 = ['XXX+Markup in Tape $M (' + i + '）'].concat($scope.geo);
-                     var tbodyBmc = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead1,'bmc');
-                     var tbodyMark = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead2,'mark45');
-                     $scope.resData.push({name : i,tbodyBmc : {tbodyBmcThead:thead1,tbodyBmcTbody : tbodyBmc.slice(0,tbodyBmc.length-1),tbodyBmcTfoot:tbodyBmc.slice(tbodyBmc.length-1)},tbodyMark : {tbodyMarkThead:thead2,tbodyMarkTbody : tbodyMark.slice(0,tbodyMark.length-1),tbodyMarkTfoot:tbodyMark.slice(tbodyMark.length-1)}})
-                     }
-                     $timeout($scope.resData);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-
-            //PRC
-             MarkupmaintenanceService.getPrc($scope.TaskID).then(function(data) {
-                 if (data.code == 0) {
-                     $timeout(function(){
-                         $scope.markHZ = $rootScope.markHZ(data.result,$scope.segmentPRC)
-                     });
-                 }
-                    console.log(data)
-                 } ,function(data){
-                    console.log(data);
-             });
-        }else {
-            alert("暂未执行成功，无法查看！");
-        }
-    };
-
-    //删除
-    $scope.DelParticular = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
-            if(confirm('确认要删除？')) {
-                console.log($scope.taskid);
-                $scope.taskid = {
-                    uuid: $scope.taskId
-                };
-                MarkupmaintenanceService.DelParticular($scope.taskid).then(function (data) {
-                    if (data.code == 0) {
-                        alert("删除成功！");
-                        $scope.taskId = '';
-                        $scope.getPage();
-                        //$("#tabExample").dataTable().fnDestroy();
-                        $scope.PRCWW = true;
-                    }else {
-                        alert(data.msg);
-                    }
-                    console.log(data);
-                }, function (data) {
-                    console.log(data);
-                });
-            }
-        }else {
-            alert("还未执行完成！");
-        }
-    };
-
-    //点击Validate
-    $scope.getValidate = function(){
-        $scope.validate = {
-            zcycle_name : $scope.CyclName,
-            zuuid : $scope.TaskID,
-            user : $rootScope.user
-        };
-        console.log($rootScope.user)
-        MarkupmaintenanceService.getValidate($scope.validate).then(function (data) {
-            if(data.code == 0){
-                console.log(data)
-                alert('Success!');
-                $scope.getPage();
-            }else {
-                alert(data.msg);
-            }
-            console.log(data);
-        }, function (data) {
-            console.log(data);
-        });
-    };
-
-    $scope.getDownLoad = function(){
-        $('#ps2').css('display','block');
-        $('#ws2').css('display','block');
-        $('#ps1').css('display','none');
-        $('#ws1').css('display','none');
-        if(!$scope.TaskID){
-            return;
-        }else {
-            MarkupmaintenanceService.getPrcSum($scope.TaskID).then(function (data) {
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-                $('#ps1').css('display','block');
-                $('#ws1').css('display','block');
-                $('#ps2').css('display','none');
-                $('#ws2').css('display','none');
-            }, function (data) {
-                console.log(data);
-            });
-        }
-    };
-
-
-
-
-    //Actual与Forecast选择展示
-    $scope.atc = true;
-    $scope.wpSel = function(){
-        if($scope.CycleSelect == 'Forecast'){
-            $scope.atc = true;
-            $scope.aww = true;
-            $scope.fww = true;
-        }else if($scope.CycleSelect =='Actual'){
-            $scope.atc = false;
-            $scope.aww = true;
-            $scope.fww = true;
-        }
-    }
-
-    //Actual中PRC与WW的切换
-    $scope.aww = true;
-    $scope.btnSwitchA = function(flag){
-        if(flag == 'w'){
-            $scope.aww = false;
-        }else if(flag == 'p'){
-            $scope.aww = true;
-        }
-    }
-
-    //Forecast中PRC与WW的切换
-    $scope.fww = true;
-    $scope.btnSwitchF = function(flag){
-        if(flag == 'w'){
-            $scope.fww = false;
-        }else if(flag == 'p'){
-            $scope.fww = true;
-        }
-    }
-
-
-})
-"use strict";
-
-angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,OthercategorymaintenanceService,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            $scope.ww = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-        }
-    }
-
-
-    new superTable("demoTable", {
-        cssSkin: "sDefault",
-        fixedCols: 3, //固定几列
-        headerRows: 3,  //头部固定行数
-        onStart: function () {
-            this.start = new Date();
-        },
-        onFinish: function () {
-        }
-    });
-
-
-    $("#div_container").css("width", "1280px");//这个宽度是容器宽度，不同容器宽度不同
-    $(".fakeContainer").css("height", "666px");//这个高度是整个table可视区域的高度，不同情况高度不同
-    //.sData是调用superTables.js之后页面自己生成的  这块就是出现滚动条 达成锁定表头和列的效果
-
-    $(".sData").css("width", "1225px");//这块的宽度是用$("#div_container")的宽度减去锁定的列的宽度
-    //$(".sData").css("height", "590px");//这块的高度是用$("#div_container")的高度减去锁定的表头的高度
-
-
-    //请求表格数据调用方法
-    OthercategorymaintenanceService.getOthercategoryData().then(function(data){
-
-        if(data.code == 0){
-            $scope.categoryData = data.result;
-            console.log($scope.categoryData);
-            for(var i=0;i< $scope.categoryData.length;i++){
-               console.log($scope.categoryData[i]);
-            }
-        }
-
-    },function(data){
-        console.log(data);
-    });
-})
-"use strict";
-
-angular.module('app.OperationData').controller('OPQTQPNtakedownCtrl', function ($scope,$state,$stateParams,$location) {
-
-    $scope.ww = true;
-    $scope.s1 = true;
-    $scope.s2 = false;
-    $scope.w1 = true;
-    $scope.w2 = false;
-    $scope.c1 = false;
-    $scope.c2 = false;
-    $scope.btnSwitch = function(flag){
-        if(flag == 'w'){
-            //PRC与WW切换
-            $scope.ww = false;
-            //大表切换
-            $scope.w2 = true;
-            $scope.w1 = false;
-            //两个按钮功能切换
-            $scope.s1 = false;
-            $scope.s2 = true;
-            //小表隐藏
-            $scope.c1 = false;
-            $scope.c2 = false;
-        }else if(flag == 'p'){
-            $scope.ww = true;
-            $scope.w1 = true;
-            $scope.w2 = false;
-            $scope.s1 = true;
-            $scope.s2 = false;
-            $scope.c1 = false;
-            $scope.c2 = false;
-        }
-    }
-
-    $scope.btnSV1 = function(flag){
-        if(flag == 'd'){
-            //$scope.ww = true;
-            $scope.w1 = true;
-            $scope.c1 = false;
-
-        }else if(flag == 's'){
-            //$scope.ww = false;
-            $scope.w1 = false;
-            $scope.c1 = true;
-        }
-    }
-    $scope.btnSV2 = function(flag){
-        if(flag == 'd'){
-            $scope.w2 = true;
-            $scope.c2 = false;
-        }else if(flag == 's'){
-            $scope.w2 = false;
-            $scope.c2 = true;
-        }
-    }
-})
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -9964,6 +8670,15 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
+/*
+ * jQuery throttle / debounce - v1.1 - 3/7/2010
+ * http://benalman.com/projects/jquery-throttle-debounce-plugin/
+ * 
+ * Copyright (c) 2010 "Cowboy" Ben Alman
+ * Dual licensed under the MIT and GPL licenses.
+ * http://benalman.com/about/license/
+ */
+(function(b,c){var $=b.jQuery||b.Cowboy||(b.Cowboy={}),a;$.throttle=a=function(e,f,j,i){var h,d=0;if(typeof f!=="boolean"){i=j;j=f;f=c}function g(){var o=this,m=+new Date()-d,n=arguments;function l(){d=+new Date();j.apply(o,n)}function k(){h=c}if(i&&!h){l()}h&&clearTimeout(h);if(i===c&&m>e){l()}else{if(f!==true){h=setTimeout(i?k:l,i===c?e-m:e)}}}if($.guid){g.guid=j.guid=j.guid||$.guid++}return g};$.debounce=function(d,e,f){return f===c?a(d,e,false):a(d,f,e!==false)}})(this);
 /*!
  DataTables 1.10.15
  ?2008-2017 SpryMedia Ltd - datatables.net/license
@@ -10056,7 +8771,7 @@ d(j,n)}}if(c){e=0;for(a=c.length;e<a;e++)d(e,c[e])}}function N(a,b,c,d){var e=a.
                 g.aoColumns;j=0;for(i=r.length;j<i;j++)Ga(o,e?e[j]:null);kb(o,g.aoColumnDefs,r,function(a,b){la(o,a,b)});if(x.length){var w=function(a,b){return a.getAttribute("data-"+b)!==null?b:null};h(x[0]).children("th, td").each(function(a,b){var c=o.aoColumns[a];if(c.mData===a){var d=w(b,"sort")||w(b,"order"),e=w(b,"filter")||w(b,"search");if(d!==null||e!==null){c.mData={_:a+".display",sort:d!==null?a+".@data-"+d:k,type:d!==null?a+".@data-"+d:k,filter:e!==null?a+".@data-"+e:k};la(o,a)}}})}var U=o.oFeatures,
                 e=function(){if(g.aaSorting===k){var a=o.aaSorting;j=0;for(i=a.length;j<i;j++)a[j][1]=o.aoColumns[j].asSorting[0]}ya(o);U.bSort&&z(o,"aoDrawCallback",function(){if(o.bSorted){var a=W(o),b={};h.each(a,function(a,c){b[c.src]=c.dir});s(o,null,"order",[o,a,b]);Kb(o)}});z(o,"aoDrawCallback",function(){(o.bSorted||y(o)==="ssp"||U.bDeferRender)&&ya(o)},"sc");var a=q.children("caption").each(function(){this._captionSide=h(this).css("caption-side")}),b=q.children("thead");b.length===0&&(b=h("<thead/>").appendTo(q));
                     o.nTHead=b[0];b=q.children("tbody");b.length===0&&(b=h("<tbody/>").appendTo(q));o.nTBody=b[0];b=q.children("tfoot");if(b.length===0&&a.length>0&&(o.oScroll.sX!==""||o.oScroll.sY!==""))b=h("<tfoot/>").appendTo(q);if(b.length===0||b.children().length===0)q.addClass(u.sNoFooter);else if(b.length>0){o.nTFoot=b[0];ea(o.aoFooter,o.nTFoot)}if(g.aaData)for(j=0;j<g.aaData.length;j++)N(o,g.aaData[j]);else(o.bDeferLoading||y(o)=="dom")&&oa(o,h(o.nTBody).children("tr"));o.aiDisplay=o.aiDisplayMaster.slice();
-                    o.bInitialised=true;n===false&&ha(o)};g.bStateSave?(U.bStateSave=!0,z(o,"aoDrawCallback",za,"state_save"),Lb(o,g,e)):e()}});b=null;return this},x,t,p,u,$a={},Pb=/[\r\n]/g,Ca=/<.*?>/g,cc=/^\d{2,4}[\.\/\-]\d{1,2}[\.\/\-]\d{1,2}([T ]{1}\d{1,2}[:\.]\d{2}([\.:]\d{2})?)?$/,dc=RegExp("(\\/|\\.|\\*|\\+|\\?|\\||\\(|\\)|\\[|\\]|\\{|\\}|\\\\|\\$|\\^|\\-)","g"),Za=/[',$?��?%\u2009\u202F\u20BD\u20a9\u20BArfk]/gi,M=function(a){return!a||!0===a||"-"===a?!0:!1},Qb=function(a){var b=parseInt(a,10);return!isNaN(b)&&
+                    o.bInitialised=true;n===false&&ha(o)};g.bStateSave?(U.bStateSave=!0,z(o,"aoDrawCallback",za,"state_save"),Lb(o,g,e)):e()}});b=null;return this},x,t,p,u,$a={},Pb=/[\r\n]/g,Ca=/<.*?>/g,cc=/^\d{2,4}[\.\/\-]\d{1,2}[\.\/\-]\d{1,2}([T ]{1}\d{1,2}[:\.]\d{2}([\.:]\d{2})?)?$/,dc=RegExp("(\\/|\\.|\\*|\\+|\\?|\\||\\(|\\)|\\[|\\]|\\{|\\}|\\\\|\\$|\\^|\\-)","g"),Za=/[',$?��?%\u2009\u202F\u20BD\u20a9\u20BArfk]/gi,M=function(a){return!a||!0===a||"-"===a?!0:!1},Qb=function(a){var b=parseInt(a,10);return!isNaN(b)&&
     isFinite(a)?b:null},Rb=function(a,b){$a[b]||($a[b]=RegExp(Sa(b),"g"));return"string"===typeof a&&"."!==b?a.replace(/\./g,"").replace($a[b],"."):a},ab=function(a,b,c){var d="string"===typeof a;if(M(a))return!0;b&&d&&(a=Rb(a,b));c&&d&&(a=a.replace(Za,""));return!isNaN(parseFloat(a))&&isFinite(a)},Sb=function(a,b,c){return M(a)?!0:!(M(a)||"string"===typeof a)?null:ab(a.replace(Ca,""),b,c)?!0:null},D=function(a,b,c){var d=[],e=0,f=a.length;if(c!==k)for(;e<f;e++)a[e]&&a[e][b]&&d.push(a[e][b][c]);else for(;e<
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               f;e++)a[e]&&d.push(a[e][b]);return d},ja=function(a,b,c,d){var e=[],f=0,g=b.length;if(d!==k)for(;f<g;f++)a[b[f]][c]&&e.push(a[b[f]][c][d]);else for(;f<g;f++)e.push(a[b[f]][c]);return e},X=function(a,b){var c=[],d;b===k?(b=0,d=a):(d=b,b=a);for(var e=b;e<d;e++)c.push(e);return c},Tb=function(a){for(var b=[],c=0,d=a.length;c<d;c++)a[c]&&b.push(a[c]);return b},sa=function(a){var b;a:{if(!(2>a.length)){b=a.slice().sort();for(var c=b[0],d=1,e=b.length;d<e;d++){if(b[d]===c){b=!1;break a}c=b[d]}}b=!0}if(b)return a.slice();
         b=[];var e=a.length,f,g=0,d=0;a:for(;d<e;d++){c=a[d];for(f=0;f<g;f++)if(b[f]===c)continue a;b.push(c);g++}return b};m.util={throttle:function(a,b){var c=b!==k?b:200,d,e;return function(){var b=this,g=+new Date,h=arguments;d&&g<d+c?(clearTimeout(e),e=setTimeout(function(){d=k;a.apply(b,h)},c)):(d=g,a.apply(b,h))}},escapeRegex:function(a){return a.replace(dc,"\\$1")}};var A=function(a,b,c){a[b]!==k&&(a[c]=a[b])},ca=/\[.*?\]$/,V=/\(\)$/,Sa=m.util.escapeRegex,xa=h("<div>")[0],$b=xa.textContent!==k,bc=
@@ -10131,384 +8846,2353 @@ d(j,n)}}if(c){e=0;for(a=c.length;e<a;e++)d(e,c[e])}}function N(a,b,c,d){var e=a.
         _fnSplitObjNotation:La,_fnGetObjectDataFn:R,_fnSetObjectDataFn:S,_fnGetDataMaster:Ma,_fnClearTable:pa,_fnDeleteIndex:qa,_fnInvalidate:da,_fnGetRowElements:Ka,_fnCreateTr:Ja,_fnBuildHead:mb,_fnDrawHead:fa,_fnDraw:O,_fnReDraw:T,_fnAddOptionsHtml:pb,_fnDetectHeader:ea,_fnGetUniqueThs:ta,_fnFeatureHtmlFilter:rb,_fnFilterComplete:ga,_fnFilterCustom:Ab,_fnFilterColumn:zb,_fnFilter:yb,_fnFilterCreateSearch:Ra,_fnEscapeRegex:Sa,_fnFilterData:Bb,_fnFeatureHtmlInfo:ub,_fnUpdateInfo:Eb,_fnInfoMacros:Fb,_fnInitialise:ha,
         _fnInitComplete:wa,_fnLengthChange:Ta,_fnFeatureHtmlLength:qb,_fnFeatureHtmlPaginate:vb,_fnPageChange:Va,_fnFeatureHtmlProcessing:sb,_fnProcessingDisplay:C,_fnFeatureHtmlTable:tb,_fnScrollDraw:ma,_fnApplyToChildren:I,_fnCalculateColumnWidths:Ha,_fnThrottle:Qa,_fnConvertToWidth:Gb,_fnGetWidestNode:Hb,_fnGetMaxLenString:Ib,_fnStringToCss:v,_fnSortFlatten:W,_fnSort:ob,_fnSortAria:Kb,_fnSortListener:Xa,_fnSortAttachListener:Oa,_fnSortingClasses:ya,_fnSortData:Jb,_fnSaveState:za,_fnLoadState:Lb,_fnSettingsFromNode:Aa,
         _fnLog:K,_fnMap:F,_fnBindAction:Ya,_fnCallbackReg:z,_fnCallbackFire:s,_fnLengthOverflow:Ua,_fnRenderer:Pa,_fnDataSource:y,_fnRowAttributes:Na,_fnCalculateEnd:function(){}});h.fn.dataTable=m;m.$=h;h.fn.dataTableSettings=m.settings;h.fn.dataTableExt=m.ext;h.fn.DataTable=function(a){return h(this).dataTable(a).api()};h.each(m,function(a,b){h.fn.DataTable[a]=b});return h.fn.dataTable});
-/////////////////////////////////////////////////////////////////////////////////////////
-// Super Tables v0.30 - MIT Style License
-// Copyright (c) 2008 Matt Murphy --- www.matts411.com
-//
-// Contributors:
-// Joe Gallo
-/////////////////////////////////////////////////////////////////////////////////////////
-////// TO CALL: 
-// new superTable([string] tableId, [object] options);
-//
-////// OPTIONS: (order does not matter )
-// cssSkin : string ( eg. "sDefault", "sSky", "sOrange", "sDark" )
-// headerRows : integer ( default is 1 )
-// fixedCols : integer ( default is 0 )
-// colWidths : integer array ( use -1 for auto sizing )
-// onStart : function ( any this.variableNameHere variables you create here can be used later ( eg. onFinish function ) )
-// onFinish : function ( all this.variableNameHere variables created in this script can be used in this function )
-//
-////// EXAMPLES:
-// var myST = new superTable("myTableId");
-//
-// var myST = new superTable("myTableId", {
-//		cssSkin : "sDefault",
-//		headerRows : 1,
-//		fixedCols : 2,
-//		colWidths : [100, 230, 220, -1, 120, -1, -1, 120],
-//		onStart : function () {
-//			this.start = new Date();
-//		},
-//		onFinish : function () {
-//			alert("Finished... " + ((new Date()) - this.start) + "ms.");
-//		}
-// });
-//
-////// ISSUES / NOTES:
-// 1. No quirksmode support (officially, but still should work)
-// 2. Element id's may be duplicated when fixedCols > 0, causing getElementById() issues
-// 3. Safari will render the header row incorrectly if the fixed header row count is 1 and there is a colspan > 1 in one 
-//		or more of the cells (fix available)
-/////////////////////////////////////////////////////////////////////////////////////////
+(function($){
+	$.fn.stickySort = function(opts) {
 
-var superTable = function (tableId, options) {
-/////* Initialize */
-	options = options || {};
-	this.cssSkin = options.cssSkin || "";
-	this.headerRows = parseInt(options.headerRows || "1");
-	this.fixedCols = parseInt(options.fixedCols || "0");
-	this.colWidths = options.colWidths || [];
-	this.initFunc = options.onStart || null;
-	this.callbackFunc = options.onFinish || null;
-	this.initFunc && this.initFunc();
-	
-/////* Create the framework dom */
-	this.sBase = document.createElement("DIV");
-	this.sFHeader = this.sBase.cloneNode(false);
-	this.sHeader = this.sBase.cloneNode(false);
-	this.sHeaderInner = this.sBase.cloneNode(false);
-	this.sFData = this.sBase.cloneNode(false);
-	this.sFDataInner = this.sBase.cloneNode(false);
-	this.sData = this.sBase.cloneNode(false);
-	this.sColGroup = document.createElement("COLGROUP");
-	
-	this.sDataTable = document.getElementById(tableId);
-	this.sDataTable.style.margin = "0px"; /* Otherwise looks bad */
-	if (this.cssSkin !== "") {
-		this.sDataTable.className += " " + this.cssSkin;
-	}
-	if (this.sDataTable.getElementsByTagName("COLGROUP").length > 0) {
-		this.sDataTable.removeChild(this.sDataTable.getElementsByTagName("COLGROUP")[0]); /* Making our own */
-	}
-	this.sParent = this.sDataTable.parentNode;
-	this.sParentHeight = this.sParent.offsetHeight;
-	this.sParentWidth = this.sParent.offsetWidth;
-	
-/////* Attach the required classNames */
-	this.sBase.className = "sBase";
-	this.sFHeader.className = "sFHeader";
-	this.sHeader.className = "sHeader";
-	this.sHeaderInner.className = "sHeaderInner";
-	this.sFData.className = "sFData";
-	this.sFDataInner.className = "sFDataInner";
-	this.sData.className = "sData";
-	
-/////* Clone parts of the data table for the new header table */
-	var alpha, beta, touched, clean, cleanRow, i, j, k, m, n, p;
-	this.sHeaderTable = this.sDataTable.cloneNode(false);
-	if (this.sDataTable.tHead) {
-		alpha = this.sDataTable.tHead;
-		this.sHeaderTable.appendChild(alpha.cloneNode(false));
-		beta = this.sHeaderTable.tHead;
-	} else {
-		alpha = this.sDataTable.tBodies[0];
-		this.sHeaderTable.appendChild(alpha.cloneNode(false));
-		beta = this.sHeaderTable.tBodies[0];
-	}
-	alpha = alpha.rows;
-	for (i=0; i<this.headerRows; i++) {
-		beta.appendChild(alpha[i].cloneNode(true));
-	}
-	this.sHeaderInner.appendChild(this.sHeaderTable);
-	
-	if (this.fixedCols > 0) {
-		this.sFHeaderTable = this.sHeaderTable.cloneNode(true);
-		this.sFHeader.appendChild(this.sFHeaderTable);
-		this.sFDataTable = this.sDataTable.cloneNode(true);
-		this.sFDataInner.appendChild(this.sFDataTable);
-	}
-	
-/////* Set up the colGroup */
-	alpha = this.sDataTable.tBodies[0].rows;
-	for (i=0, j=alpha.length; i<j; i++) {
-		clean = true;
-		for (k=0, m=alpha[i].cells.length; k<m; k++) {
-			if (alpha[i].cells[k].colSpan !== 1 || alpha[i].cells[k].rowSpan !== 1) {
-				i += alpha[i].cells[k].rowSpan - 1;
-				clean = false;
-				break;
-			}
-		}
-		if (clean === true) break; /* A row with no cells of colSpan > 1 || rowSpan > 1 has been found */
-	}
-	cleanRow = (clean === true) ? i : 0; /* Use this row index to calculate the column widths */
-	try{
-		for (i=0, j=alpha[cleanRow].cells.length; i<j; i++) {
-		if (i === this.colWidths.length || this.colWidths[i] === -1) {
-			this.colWidths[i] = alpha[cleanRow].cells[i].offsetWidth;
-		}
-	}
-	}catch (msg) {
+		// Default settings
+		var settings = $.extend(true, {
+			threshold: {
+				rows: 3,
+				viewport: 0.25,
+				px: false,
+				allowanceEval: 'min'
+			},
+			sortable: false,
+			scrollThrottle: 5,
+			resizeThrottle: 250
+		}, opts);
 
-	}
-	
-	
-	for (i=0, j=this.colWidths.length; i<j; i++) {
-		this.sColGroup.appendChild(document.createElement("COL"));
-		this.sColGroup.lastChild.setAttribute("width", this.colWidths[i]);
-	}
-	this.sDataTable.insertBefore(this.sColGroup.cloneNode(true), this.sDataTable.firstChild);
-	this.sHeaderTable.insertBefore(this.sColGroup.cloneNode(true), this.sHeaderTable.firstChild);
-	if (this.fixedCols > 0) {
-		this.sFDataTable.insertBefore(this.sColGroup.cloneNode(true), this.sFDataTable.firstChild);
-		this.sFHeaderTable.insertBefore(this.sColGroup.cloneNode(true), this.sFHeaderTable.firstChild);
-	}
-	
-/////* Style the tables individually if applicable */
-	if (this.cssSkin !== "") {
-		this.sDataTable.className += " " + this.cssSkin + "-Main";
-		this.sHeaderTable.className += " " + this.cssSkin + "-Headers";
-		if (this.fixedCols > 0) {
-			this.sFDataTable.className += " " + this.cssSkin + "-Fixed";
-			this.sFHeaderTable.className += " " + this.cssSkin + "-FixedHeaders";
-		}
-	}
-	
-/////* Throw everything into sBase */
-	if (this.fixedCols > 0) {
-		this.sBase.appendChild(this.sFHeader);
-	}
-	this.sHeader.appendChild(this.sHeaderInner);
-	this.sBase.appendChild(this.sHeader);
-	if (this.fixedCols > 0) {
-		this.sFData.appendChild(this.sFDataInner);
-		this.sBase.appendChild(this.sFData);
-	}
-	this.sBase.appendChild(this.sData);
-	this.sParent.insertBefore(this.sBase, this.sDataTable);
-	this.sData.appendChild(this.sDataTable);
-	
-/////* Align the tables */
-	var sDataStyles, sDataTableStyles;
-	try {//有数据的时候执行的代码
-    	this.sHeaderHeight = this.sDataTable.tBodies[0].rows[(this.sDataTable.tHead) ? 0 : this.headerRows].offsetTop;
-    	$(".fakeContainer").removeClass("my_width");   	
-		sDataStyles += "height: " + (this.sParentHeight-53) + "px;";//更改滚动条的位置
-	} catch (e) {//无数据或者无权限的时候执行的代码
-		$(".fakeContainer").removeClass("fakeContainer");
-		//$(".first_div").addClass("my_width");
-		$("#my_div div").removeClass();
-		$("#my_div div div:nth-child(1)").remove();
-		$("#my_div div div:nth-child(2)").remove();
-		$("#my_div div div:nth-child(3)").remove();
-		$("#my_div div div:nth-child(4)").remove();
-		$("#demoTable th").css("min-width","0");
-		$("#sj").css("display","block");						
-		$("#my_div").css("overflow-x","scroll");
-		$(".page-header").css("display","none");	
+		this.each(function() {
+			if($(this).is('table') && $(this).find('thead').length > 0 && $(this).find('th').length > 0) {
+				// Clone <thead>
+				var $w	   = $(window),
+					$t	   = $(this),
+					$thead = $t.find('thead').clone(),
+					$col   = $t.find('thead, tbody').clone();
+					console.log($thead)
+				// Add class, copy children classes, remove margins, reset width and wrap table
+				$t
+				.wrap('<div class="sticky-wrap" />')
+				.parent()
+					.addClass($t.attr('class'))
+					.end()
+				.addClass('sticky-enabled');
+
+				if($t.hasClass('overflow-y')) $t.removeClass('overflow-y').parent().addClass('overflow-y');
+
+				// Create new sticky table head (basic)
+				$t.after('<div class="sticky-thead"><table></table></div>');
+
+				// If <tbody> contains <th>, then we create sticky column and intersect (advanced)
+				if($t.find('tbody th').length > 0) {
+					$t.after('<div class="sticky-col"><table></table ></div>');
+				}
+
+				// Create shorthand for things
+				var $stickyHead  = $(this).siblings('.sticky-thead'),
+					$stickyCol   = $(this).siblings('.sticky-col'),
+					$stickyInsct = $(this).siblings('.sticky-intersect'),
+					$stickyWrap  = $(this).parent('.sticky-wrap');
+
+				$stickyHead.find('table').append($thead);
+
+				$stickyCol
+				.find('table')
+				.append($col)
+					.find('thead th')
+					.end()
+					.find('tbody td').remove();
+
+				$stickyInsct.find('table').html('<thead><tr><th>'+$t.find('thead th:first-child').html()+'</th></tr></thead>');
+
 				
-		$("#qx").css("display","block");
-		//$("#qx").addClass("my_width");
-		var id = $(".my_table").attr('id');
-		//console.log(id);					 
-		var width = $("#my_div").width();
-		$("#" + id ).css("width",width+"px ");	//加上此处解决ie浏览器查看问题	
-		sDataStyles += "height: " + (this.sParentHeight+17) + "px;";//更改滚动条的位置
-	}	
-	sDataTableStyles = "margin-top: " + (this.sHeaderHeight * -1) + "px;";
-	sDataStyles = "margin-top: " + this.sHeaderHeight + "px;";
-		
-	if (this.fixedCols > 0) {		
-		/* A collapsed table's cell's offsetLeft is calculated differently (w/ or w/out border included) across broswers - adjust: */
-		this.sFHeaderWidth = this.sDataTable.tBodies[0].rows[cleanRow].cells[this.fixedCols].offsetLeft;
-		if (window.getComputedStyle) {
-			alpha = document.defaultView;
-			beta = this.sDataTable.tBodies[0].rows[0].cells[0];
-			if (navigator.taintEnabled) { /* If not Safari */
-				this.sFHeaderWidth += Math.ceil(parseInt(alpha.getComputedStyle(beta, null).getPropertyValue("border-right-width")) / 2);
-			} else {
-				this.sFHeaderWidth += parseInt(alpha.getComputedStyle(beta, null).getPropertyValue("border-right-width"));
+				// Set widths
+				var setWidths = function () {
+						$t
+						.find('thead th').each(function (i) {
+							$stickyHead.find('th').eq(i).width($(this).width());
+						})
+						.end()
+						.find('tr').each(function (i) {
+							$stickyCol.find('tr').eq(i).height($(this).height());
+						});
+
+						// Set width of sticky table head
+						$stickyHead
+						.width($stickyWrap.width())
+						.find('table')
+							.width($t.width());
+
+						// Set width of sticky table col
+						$stickyCol.find('th').add($stickyInsct.find('th')).width($t.find('thead th').first().width());
+
+						// Set position sticky intersect
+						$stickyCol.find('table').css({
+							left: $stickyWrap.offset().left
+						});
+					},
+					repositionSticky = function () {
+						// Return value of calculated allowance
+						var allowance = calcAllowance();
+					
+						// 1. Deal with positioning of sticky header
+						// Check if wrapper parent is overflowing along the y-axis
+						if($t.height() > $stickyWrap.height()) {
+							// If it is overflowing (advanced layout)
+							// Position sticky header based on wrapper scrollTop()
+							if($stickyWrap.scrollTop() > 0) {
+								// When top of wrapping parent is out of view
+								$stickyHead.add($stickyInsct).css({
+									opacity: 1,
+									'pointer-events': 'auto',
+									position: 'fixed',
+									top: $stickyWrap.offset().top - $w.scrollTop(),
+									left: $stickyWrap.offset().left
+								});
+								$stickyHead.find('table').css({
+									left: -$stickyWrap.scrollLeft()
+								});
+							} else {
+								// When top of wrapping parent is in view
+								$stickyHead.add($stickyInsct).css({
+									opacity: 0,
+									'pointer-events': 'none'
+								});
+								$stickyInsct.css({
+									position: 'absolute',
+									top: 0,
+									left: 0
+								});
+							}
+						} else {
+							// If it is not overflowing (basic layout)
+							// Position sticky header based on viewport scrollTop
+							if($w.scrollTop() > $t.offset().top && $w.scrollTop() < $t.offset().top + $t.outerHeight() - allowance) {
+								// When top of viewport is in the table itself
+								$stickyHead.add($stickyInsct).css({
+									opacity: 1,
+									'pointer-events': 'auto',
+									position: 'fixed',
+									left: $stickyWrap.offset().left
+								});
+								$stickyHead.find('table').css({
+									left: -$stickyWrap.scrollLeft()
+								});
+							} else {
+								// When top of viewport is above or below table
+								$stickyHead.add($stickyInsct).css({
+									opacity: 0,
+									'pointer-events': 'none',
+									position: 'absolute',
+									left: 0
+								});
+							}
+						}
+
+						// 2. Now deal with positioning of sticky column
+						if($stickyWrap.scrollLeft() > 0) {
+							// When left of wrapping parent is out of view
+							$stickyCol.css({
+								position: 'fixed',
+								left: $stickyWrap.offset().left,
+								top: $stickyWrap.offset().top - $w.scrollTop(),
+								height: $stickyWrap.height()
+							})
+							.find('table')
+								.css({
+									top: -$stickyWrap.scrollTop(),
+									left: 0
+								})
+							.end()
+							.add($stickyInsct).css({
+								opacity: 1,
+								'pointer-events': 'auto'
+							});
+						} else {
+							// When left of wrapping parent is in view
+							$stickyCol
+							.css({
+								opacity: 0,
+								'pointer-events': 'none'
+							});
+						}
+					},
+					calcAllowance = function () {
+						var rowHeight = 0,
+							allowance = [];
+
+						// Calculate allowance
+						$t.find('tbody tr:lt('+settings.threshold.rows+')').each(function () {
+							rowHeight += $(this).height();
+						});
+						allowance.push(rowHeight);
+						
+						// Get height based on viewport
+						allowance.push($w.height()*settings.threshold.viewport)
+						
+						// If pixel threshold exists, add it
+						if(settings.threshold.px) {
+							allowance.push(settings.threshold.px);
+						}
+
+						// Get minimum or maximum?
+						if(settings.threshold.allowanceEval == 'min') {
+							return Math.min.apply(null, allowance);
+						} else {
+							return Math.max.apply(null, allowance);
+						}
+					};
+
+				setWidths();
+
+				$t.parent('.sticky-wrap').scroll($.throttle(settings.scrollThrottle, repositionSticky));
+
+				$w
+				.load(setWidths)
+				.resize($.debounce(settings.resizeThrottle, function () {
+					setWidths();
+					repositionSticky();
+				}))
+				.scroll($.throttle(settings.scrollThrottle, repositionSticky));
+
+				// Extended feature: Sortable table
+				// Do sorting only when original table is slated for sorting:
+				// 1. Check if HTML5 data- attribute, data-sortable, exists
+				// 2. Check if table has the class 'sortable'
+				// 3. Check if settings.sortable is enabled
+				if(settings.sortable || ($t.data('sortable') != undefined || $t.hasClass('sortable'))) {
+
+					// Store original order of rows first, so we can return to its natural/resting state
+					$t.find('tbody tr').each(function (i) {
+						$(this).attr('data-sortOrder', i);
+					});
+
+
+					// Bind click function to all <thead>'s <th> elements in the original table AND all dynamically generated sticky tables
+				
+				}
 			}
-		} else if (/*@cc_on!@*/0) { /* Internet Explorer */
-			alpha = this.sDataTable.tBodies[0].rows[0].cells[0];
-			beta = [alpha.currentStyle["borderRightWidth"], alpha.currentStyle["borderLeftWidth"]];
-			if(/px/i.test(beta[0]) && /px/i.test(beta[1])) {
-				beta = [parseInt(beta[0]), parseInt(beta[1])].sort();
-				this.sFHeaderWidth += Math.ceil(parseInt(beta[1]) / 2);
-			}
-		}
-		
-		/* Opera 9.5 issue - a sizeable data table may cause the document scrollbars to appear without this: */
-		if (window.opera) {
-			this.sFData.style.height = this.sParentHeight + "px";
-		}
-		
-		this.sFHeader.style.width = this.sFHeaderWidth + "px";
-		sDataTableStyles += "margin-left: " + (this.sFHeaderWidth * -1) + "px;";
-		sDataStyles += "margin-left: " + this.sFHeaderWidth + "px;";
-		sDataStyles += "width: " + (this.sParentWidth - this.sFHeaderWidth) + "px;";
-	} else {
-		sDataStyles += "width: " + this.sParentWidth + "px;";
-	}
-	this.sData.style.cssText = sDataStyles;
-	this.sDataTable.style.cssText = sDataTableStyles;
-	
-/////* Set up table scrolling and IE's onunload event for garbage collection */
-	(function (st) {
-		if (st.fixedCols > 0) {
-			st.sData.onscroll = function () {
-				st.sHeaderInner.style.right = st.sData.scrollLeft + "px";
-				st.sFDataInner.style.top = (st.sData.scrollTop * -1) + "px";
-			};
-		} else {
-			st.sData.onscroll = function () {
-				st.sHeaderInner.style.right = st.sData.scrollLeft + "px";
-			};
-		}
-		if (/*@cc_on!@*/0) { /* Internet Explorer */
-			window.attachEvent("onunload", function () {
-				st.sData.onscroll = null;
-				st = null;
-			});
-		}
-	})(this);
-	
-	this.callbackFunc && this.callbackFunc();
-};
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
-// Super Tables Plugin for jQuery - MIT Style License
-
-// Copyright (c) 2009 Jeffrey Lee --- blog2.darkthread.net
-
-//
-
-// A wrapper for Matt Murphy's Super Tables http://www.matts411.com/post/super_tables/
-
-//
-
-// Contributors:
-
-//
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
-////// TO CALL: 
-
-// $("...").toSuperTable(options)
-
-//
-
-////// OPTIONS: (order does not matter )
-
-// cssSkin : string ( eg. "sDefault", "sSky", "sOrange", "sDark" )
-
-// headerRows : integer ( default is 1 )
-
-// fixedCols : integer ( default is 0 )
-
-// colWidths : integer array ( use -1 for auto sizing )
-
-// onStart : function ( any this.variableNameHere variables you create here can be used later ( eg. onFinish function ) )
-
-// onFinish : function ( all this.variableNameHere variables created in this script can be used in this function )
-
-// margin, padding, width, height, overflow...: Styles for "fakeContainer"
-
-//
-
-////// Example:
-
-// $("#GridView1").toSuperTable(
-
-//              { width: "640px", height: "480px", fixedCols: 2,
-
-//                onFinish: function() { alert('Done!'); } })
-
-
-
-(function($) {
-
-    $.fn.extend(
-
-            {
-
-                toSuperTable: function(options) {
-
-                    var setting = $.extend(
-
-                    {
-
-                        width: "640px", height: "320px",
-
-                        margin: "10px", padding: "0px",
-
-                        overflow: "hidden", colWidths: undefined,
-
-                        fixedCols: 0, headerRows: 1,
-
-                        onStart: function() { },
-
-                        onFinish: function() { },
-
-                        cssSkin: "sSky"
-
-                    }, options);
-
-                    return this.each(function() {
-
-                        var q = $(this);
-
-                        var id = q.attr("id");
-
-                        q.removeAttr("style").wrap("<div id='" + id + "_box'></div>");
-
-
-
-                        var nonCssProps = ["fixedCols", "headerRows", "onStart", "onFinish", "cssSkin", "colWidths"];
-
-                        var container = $("#" + id + "_box");
-
-
-
-                        for (var p in setting) {
-
-                            if ($.inArray(p, nonCssProps) == -1) {
-
-                                container.css(p, setting[p]);
-
-                                delete setting[p];
-
-                            }
-
-                        }
-
-
-
-                        var mySt = new superTable(id, setting);
-
-
-
-                    });
-
+		});
+
+		// Return to allow chaining
+		return this;
+	};
+})(jQuery);
+"use strict";
+
+angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+    $('#final table').stickySort({ sortable: true });
+})
+"use strict";
+
+angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($scope,$state,$timeout,$stateParams,$rootScope,APP_CONFIG,CAmaintenanceService,navService) {
+    //函数说明：合并指定表格（表格id为_w_table_id）指定列（列数为_w_table_colnum）的相同文本的相邻单元格
+//参数说明：_w_table_id 为需要进行合并单元格的表格的id。如在HTMl中指定表格 id="data" ，此参数应为 #data
+//参数说明：_w_table_colnum 为需要合并单元格的所在列。为数字，从最左边第一列为1开始算起。
+    function _w_table_rowspan(_w_table_id, _w_table_colnum) {
+        var _w_table_firsttd = "";
+        var _w_table_currenttd = "";
+        var  _w_table_SpanNum = 0;
+        var  _w_table_Obj = $(_w_table_id + " tr td:nth-child(" + _w_table_colnum + ")");
+        _w_table_Obj.each(function(i) {
+            if(i == 0) {
+                _w_table_firsttd = $(this);
+                _w_table_SpanNum = 1;
+            } else {
+                _w_table_currenttd = $(this);
+                if(_w_table_firsttd.text() == _w_table_currenttd.text()) {
+                    _w_table_SpanNum++;
+                    _w_table_currenttd.hide(); //remove();
+                    _w_table_firsttd.attr("rowSpan", _w_table_SpanNum);
+                } else {
+                    _w_table_firsttd = $(this);
+                    _w_table_SpanNum = 1;
                 }
+            }
+        });
+    }
+//函数说明：合并指定表格（表格id为_w_table_id）指定行（行数为_w_table_rownum）的相同文本的相邻单元格
+//参数说明：_w_table_id 为需要进行合并单元格的表格id。如在HTMl中指定表格 id="data" ，此参数应为 #data
+//参数说明：_w_table_rownum 为需要合并单元格的所在行。其参数形式请参考jQuery中nth-child的参数。
+//          如果为数字，则从最左边第一行为1开始算起。
+//          "even" 表示偶数行
+//          "odd" 表示奇数行
+//          "3n+1" 表示的行数为1、4、7、10.......
+//参数说明：_w_table_maxcolnum 为指定行中单元格对应的最大列数，列数大于这个数值的单元格将不进行比较合并。
+//          此参数可以为空，为空则指定行的所有单元格要进行比较合并。
+    function _w_table_colspan(_w_table_id, _w_table_rownum, _w_table_maxcolnum) {
+        if(_w_table_maxcolnum == void 0) {
+            _w_table_maxcolnum = 0;
+        }
+        var _w_table_firsttd = "";
+        var _w_table_currenttd = "";
+        var _w_table_SpanNum = 0;
+        $(_w_table_id + " tr:nth-child(" + _w_table_rownum + ")").each(function(i) {
+            var _w_table_Obj = $(this).children();
+            _w_table_Obj.each(function(i) {
+                if(i == 0) {
+                    _w_table_firsttd = $(this);
+                    _w_table_SpanNum = 1;
+                } else if((_w_table_maxcolnum > 0) && (i > _w_table_maxcolnum)) {
+                    return "";
+                } else {
+                    _w_table_currenttd = $(this);
+                    if(_w_table_firsttd.text() == _w_table_currenttd.text()) {
+                        _w_table_SpanNum++;
+                        _w_table_currenttd.hide(); //remove();
+                        _w_table_firsttd.attr("colSpan", _w_table_SpanNum);
+                    } else {
+                        _w_table_firsttd = $(this);
+                        _w_table_SpanNum = 1;
+                    }
+                }
+            });
+        });
+    }
 
+    //初始化Cycle Choose
+    CAmaintenanceService.getSelectCycle().then(function(data){
+        if(data.code == 0){
+            $scope.cycledata = data.result;
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+    //第二部分tab信息展示
+    $scope.getPage = function(){
+        CAmaintenanceService.getExecute2().then(function(data){
+            if(data.code == 0){
+                $scope.tablist = data.result;
+                $("#tabExample1").dataTable().fnDestroy();
+                $timeout(function () {
+                    $('#tabExample1').dataTable({
+                        "scrollY": 160,
+                        "scrollX": true,
+                        "dom": '<"top">rt<"bottom"><"clear">',
+                        "scrollCollapse": true,
+                        //"jQueryUI": true,
+                        // "pagingType":   "simple_numbers",
+                        stateSave: true,
+                        "paging": false,
+                        "ordering": false,
+                        "bLengthChange": true
+                    });
+                });
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        });
+    }
+    $scope.getPage();
+
+    //点击Execute执行
+    $scope.getExecute = function(){
+        $scope.taskId = '';
+        $scope.search = {
+            cycleName : $scope.CycleChoose,
+            user : $rootScope.user
+        }
+        console.log($rootScope.user);
+        if(!$scope.CycleChoose){
+            alert("请选择条件！");
+        }else {
+            CAmaintenanceService.getExecute($scope.search).then(function(data){
+                if(data.code == 0){
+                    alert(data.result);
+                    $scope.getPage();
+                }else {
+                    alert(data.msg);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+        }
+    };
+    //单击整行选中
+    $scope.trClick = function($event,id,status,cycleName){
+        $($("#tabExample input:radio")).removeAttr("checked");
+        $($event.target).parent().find("input:radio").prop("checked",true);
+        $scope.taskId = id;
+        console.log($scope.taskId)
+        $scope.status = status;
+        console.log($scope.status)
+        $scope.cyclename = cycleName;
+        console.log($scope.cyclename)
+        //$scope.SearchTaskId(a,b,c)
+    }
+
+    //点击Search
+    $scope.SearchTab = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'){
+            $scope.PRCww=true;
+
+            $scope.TaskID =  $scope.taskId;
+            $scope.CycleName = $scope.cyclename;
+
+            //WW
+            CAmaintenanceService.getWw($scope.TaskID).then(function(data){
+                if(data.code == 0){
+                    $scope.WwList = data.result;
+                    console.log($scope.WwList);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
             });
 
-})(jQuery);
+            //PRC
+            CAmaintenanceService.getPrc($scope.TaskID).then(function(caprcdata) {
+                console.log(caprcdata);
+                if (caprcdata.code == 0) {
+                    $scope.PrcList = caprcdata.result;
+                    console.log($scope.PrcList);
+
+                    var arrSegment=$rootScope.PrcSegment.concat(["Total"]);
+
+                    //$rootScope.PrcSegment.unshift("BU");
+                    //$rootScope.PrcSegment.push("Total");
+                    $rootScope.PrcBu.push("Total");
+
+                    //$rootScope.segmenttop = [ 'BU', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'Total'];
+                    //var caprcthead = ["BU", "Think-T", "T-Model", "Commercial", "SMB", "Consumer", "Others", "YT", "Total"];
+                    //var caprctbody = ["Think Pad", "Lenovo NB", "Commercial DT", "Consumer DT", "Workstation", "Chrome", "Server", "Accessory", "Visual", "Total"];
+
+
+                    $scope.cadata = $rootScope.caprcTabCon($scope.PrcList,  $rootScope.PrcBu,  arrSegment, 'values');
+                    console.log($scope.cadata);
+                    console.log($rootScope.segmenttop);
+                    console.log($rootScope.PrcSegment);
+                    console.log(arrSegment);
+                    console.log($rootScope.PrcBu);
+
+                    $timeout(function(){
+                        console.log("1");
+                        //_w_table_colspan("#caprcTab",1,11);
+                        //_w_table_rowspan("#caprcTab",1);
+                        //_w_table_rowspan("#caprcTab",2);
+                        //_w_table_rowspan("#caprcTab",10);
+                        //_w_table_rowspan("#caprcTab",11);
+                    })
+                }
+            } ,function(data){
+                console.log(data);
+            });
+        }else {
+            alert("暂未执行成功，无法查看！");
+        }
+    };
+    var prc = {
+        stype : 'PRC'
+    };
+    CAmaintenanceService.getPrcBu(prc).then(function(caprcbudata){
+        console.log(caprcbudata.result);
+        $rootScope.PrcBu=caprcbudata.result;
+    }, function (data) {
+        console.log(data);
+    })
+    CAmaintenanceService.getPrcSegment(prc).then(function(caprcsegmentdata){
+        console.log(caprcsegmentdata.result);
+        $rootScope.PrcSegment=caprcsegmentdata.result;
+    }, function (data) {
+        console.log(data);
+    })
+    //删除
+    $scope.DelOneItem = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
+            if(confirm('确认要删除？')) {
+                console.log($scope.taskid);
+                $scope.taskid = {
+                    uuid: $scope.taskId
+                };
+                CAmaintenanceService.DelItem($scope.taskid).then(function (data) {
+                    if (data.code == 0) {
+                        alert("删除成功！");
+                        $scope.taskId = '';
+                        $scope.getPage();
+                        //$("#tabExample").dataTable().fnDestroy();
+                        //$scope.PRCWW = true;
+                    }else {
+                        alert(data.msg);
+                    }
+                    console.log(data);
+                }, function (data) {
+                    console.log(data);
+                });
+            }
+        }else {
+            alert("还未执行完成！");
+        }
+    };
+
+    //prc时的Download
+    $scope.getPRCDownLoad = function(){
+        if(!$scope.TaskID){
+            return;
+        }else{
+        CAmaintenanceService.getPrcDown($scope.TaskID).then(function(data){
+            console.log(data);
+            //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
+            //而使用“application/vnd.openxmlformats-officedocument.spreadsheetml.sheet”则会保存为xlsx
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        },function(data){
+            console.log(data);
+        })
+        }
+    }
+
+    //ww时的Download
+    $scope.getWWDownLoad = function(){
+        if(!$scope.TaskID){
+            return;
+        }else{
+            CAmaintenanceService.getWwDown($scope.TaskID).then(function(data){
+                console.log(data);
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+            },function(data){
+                console.log(data);
+            })
+        }
+    }
+
+    //点击Validate
+    $scope.getValidate = function(){
+        $scope.validate = {
+            zcycle_name : $scope.CycleName,
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
+        };
+        console.log($rootScope.user)
+        CAmaintenanceService.getValidate($scope.validate).then(function (data) {
+            if(data.code == 0){
+                alert('成功！');
+                $scope.getPage();
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
+
+    //button 切换
+    $scope.sw1 = true;
+    $scope.ww = false;
+    $scope.sw2 = false;
+    $scope.btnSwitch = function (flag) {
+        if (flag == 'w') {
+            $scope.ww = true;
+            $scope.sw1 = false;
+            //$scope.sw2 = false;
+        } else if (flag == 'p') {
+            $scope.ww = false;
+            $scope.sw1 = true;
+            //$scope.sw2 = false;
+        }
+    }
+
+
+})
+"use strict";
+
+angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($scope,$state,APP_CONFIG,$timeout,$location,$rootScope,CAmanualuploadService,Upload) {
+    //函数说明：合并指定表格（表格id为_w_table_id）指定列（列数为_w_table_colnum）的相同文本的相邻单元格
+//参数说明：_w_table_id 为需要进行合并单元格的表格的id。如在HTMl中指定表格 id="data" ，此参数应为 #data
+//参数说明：_w_table_colnum 为需要合并单元格的所在列。为数字，从最左边第一列为1开始算起。
+    function _w_table_rowspan(_w_table_id, _w_table_colnum) {
+        var _w_table_firsttd = "";
+        var _w_table_currenttd = "";
+        var  _w_table_SpanNum = 0;
+        var  _w_table_Obj = $(_w_table_id + " tr td:nth-child(" + _w_table_colnum + ")");
+        _w_table_Obj.each(function(i) {
+            if(i == 0) {
+                _w_table_firsttd = $(this);
+                _w_table_SpanNum = 1;
+            } else {
+                _w_table_currenttd = $(this);
+                if(_w_table_firsttd.text() == _w_table_currenttd.text()) {
+                    _w_table_SpanNum++;
+                    _w_table_currenttd.hide(); //remove();
+                    _w_table_firsttd.attr("rowSpan", _w_table_SpanNum);
+                } else {
+                    _w_table_firsttd = $(this);
+                    _w_table_SpanNum = 1;
+                }
+            }
+        });
+    }
+//函数说明：合并指定表格（表格id为_w_table_id）指定行（行数为_w_table_rownum）的相同文本的相邻单元格
+//参数说明：_w_table_id 为需要进行合并单元格的表格id。如在HTMl中指定表格 id="data" ，此参数应为 #data
+//参数说明：_w_table_rownum 为需要合并单元格的所在行。其参数形式请参考jQuery中nth-child的参数。
+//          如果为数字，则从最左边第一行为1开始算起。
+//          "even" 表示偶数行
+//          "odd" 表示奇数行
+//          "3n+1" 表示的行数为1、4、7、10.......
+//参数说明：_w_table_maxcolnum 为指定行中单元格对应的最大列数，列数大于这个数值的单元格将不进行比较合并。
+//          此参数可以为空，为空则指定行的所有单元格要进行比较合并。
+    function _w_table_colspan(_w_table_id, _w_table_rownum, _w_table_maxcolnum) {
+        if(_w_table_maxcolnum == void 0) {
+            _w_table_maxcolnum = 0;
+        }
+        var _w_table_firsttd = "";
+        var _w_table_currenttd = "";
+        var _w_table_SpanNum = 0;
+        $(_w_table_id + " tr:nth-child(" + _w_table_rownum + ")").each(function(i) {
+            var _w_table_Obj = $(this).children();
+            _w_table_Obj.each(function(i) {
+                if(i == 0) {
+                    _w_table_firsttd = $(this);
+                    _w_table_SpanNum = 1;
+                } else if((_w_table_maxcolnum > 0) && (i > _w_table_maxcolnum)) {
+                    return "";
+                } else {
+                    _w_table_currenttd = $(this);
+                    if(_w_table_firsttd.text() == _w_table_currenttd.text()) {
+                        _w_table_SpanNum++;
+                        _w_table_currenttd.hide(); //remove();
+                        _w_table_firsttd.attr("colSpan", _w_table_SpanNum);
+                    } else {
+                        _w_table_firsttd = $(this);
+                        _w_table_SpanNum = 1;
+                    }
+                }
+            });
+        });
+    }
+
+    //初始化Cycle Choose
+    CAmanualuploadService.getSelectCycle().then(function(data){
+        if(data.code == 0){
+            $scope.cycledata = data.result;
+            console.log($scope.cycledata);
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+    $scope.getPage = function(){
+        CAmanualuploadService.getPrc($scope.id).then(function(data){
+            if(data.code == 0){
+                $scope.PrcList = data.result;
+                console.log($scope.PrcList);
+
+                var arrSegment=$rootScope.PrcSegment.concat(["Total"]);
+                $rootScope.PrcBu.push("Total");
+
+                //$rootScope.segmenttop = [ 'BU', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'Total'];
+                //var caprcthead = ["BU", "Think-T", "T-Model", "Commercial", "SMB", "Consumer", "Others", "YT", "Total"];
+                //var caprctbody = ["Think Pad", "Lenovo NB", "Commercial DT", "Consumer DT", "Workstation", "Chrome", "Server", "Accessory", "Visual", "Total"];
+
+
+                $scope.cadata = $rootScope.caprcTabCon($scope.PrcList,  $rootScope.PrcBu, arrSegment, 'values');
+                console.log($scope.cadata);
+                console.log($rootScope.segmenttop);
+                console.log($rootScope.PrcSegment);
+                console.log($rootScope.PrcBu);
+
+                $timeout(function(){
+                    console.log("1");
+                    //_w_table_colspan("#caprcTab",1,11);
+                    //_w_table_rowspan("#caprcTab",1);
+                    //_w_table_rowspan("#caprcTab",9);
+                    //_w_table_rowspan("#caprcTab",2);
+                    //_w_table_rowspan("#caprcTab",10);
+                })
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        });
+        CAmanualuploadService.getWw($scope.id).then(function(data){
+            if(data.code == 0){
+                $scope.cawwList = data.result;
+                console.log($scope.cawwList);
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        });
+    };
+
+    //上传
+    $scope.myfiles = {};
+    $scope.openUpload = function(){
+        //$('#myModal').modal('show');
+        $scope.myfilesVal = '';
+        $scope.fileChange = function(){
+            if($scope.myfiles.name){
+                $scope.myfilesVal = $scope.myfiles.name;
+            }else {
+                $scope.myfilesVal = '';
+            }
+        }
+    }
+    $scope.caprcww=false;
+    $scope.upload = function(){
+        Upload.upload({
+            //服务端接收
+            url:APP_CONFIG.baseUrl+ '/api/dm/ca/attachments',
+            data : {
+                file : $scope.myfiles,
+                username :$rootScope.user,
+                cyclename:$scope.CycleChoose
+            },
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).success(function (data, status, headers, config){
+            //console.log($scope.CycleChoose.indexOf("M0")==-1);
+            if(!$scope.CycleChoose){
+                alert("请选择条件！");
+            }else {
+                if (data.code == 0 && $scope.CycleChoose.indexOf("M0") != -1) {
+                    alert('Success');
+                    $scope.caprcww=true;
+                    $scope.id=data.result;
+                    console.log($scope.id);
+                    //$('#myModal').modal('hide');
+                    $scope.getPage();
+                }else if(data.code == 0 && $scope.CycleChoose.indexOf("Actual") != -1){
+                    alert('Success');
+                    $scope.caprcww=true;
+                    $scope.id=data.result;
+                    console.log($scope.id);
+                    //$('#myModal').modal('hide');
+                    $scope.getPage();
+                } else {
+                    alert('Uploading Failed');
+                }
+            }
+        }).error(function (data, status, headers, config) {
+            alert('Uploading Failed');
+            //上传失败
+            console.log('error status: ' + status);
+        });
+    }
+    var prc = {
+        stype : 'PRC'
+    };
+    CAmanualuploadService.getPrcBu(prc).then(function(caprcbudata){
+        console.log(caprcbudata.result);
+        $rootScope.PrcBu=caprcbudata.result;
+    }, function (data) {
+        console.log(data);
+    })
+    CAmanualuploadService.getPrcSegment(prc).then(function(caprcsegmentdata){
+        console.log(caprcsegmentdata.result);
+        $rootScope.PrcSegment=caprcsegmentdata.result;
+    }, function (data) {
+        console.log(data);
+    })
+
+//点击Validate
+//    $scope.getValidate = function(){
+//        console.log($scope.CycleChoose);
+//        $scope.validate = {
+//            zcycle_name : $scope.CycleChoose,
+//            zuuid : $scope.TaskID,
+//            user : $rootScope.user
+//        };
+//        console.log($rootScope.user)
+//        CAmanualuploadService.getValidate($scope.validate).then(function (data) {
+//            if(data.code == 0){
+//                alert('成功！');
+//                $scope.getPage();
+//            }else {
+//                alert(data.msg);
+//            }
+//            console.log(data);
+//        }, function (data) {
+//            console.log(data);
+//        });
+//    };
+    //button 切换
+    $scope.sw1 = true;
+    $scope.ww = false;
+    $scope.sw2 = false;
+    $scope.btnSwitch = function (flag) {
+        if (flag == 'w') {
+            $scope.ww = true;
+            $scope.sw1 = false;
+            //$scope.sw2 = false;
+        } else if (flag == 'p') {
+            $scope.ww = false;
+            $scope.sw1 = true;
+            //$scope.sw2 = false;
+        }
+    }
+
+    //$scope.btnSV = function (flag) {
+    //    if (flag == 's1') {
+    //        $scope.sw2 = true;
+    //        $scope.sw1 = false;
+    //        $scope.ww=false;
+    //    } else if (flag == 's2') {
+    //        $scope.sw1 = true;
+    //        $scope.sw2 = false;
+    //        $scope.ww=false;
+    //    }
+    //}
+
+    //下载模板
+    $scope.DowTemp = function(){
+        $scope.temp = {
+            type: 'ca manual upload'
+        }
+        CAmanualuploadService.download($scope.temp).then(function(data){
+            console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        },function(data){
+            console.log(data);
+        });
+    }
+
+})
+"use strict";
+
+angular.module('app.OperationData').controller('ConsumptionBasemaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+})
+"use strict";
+
+angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,$state,$stateParams,$location,CycleQTQService,$http,$log,$rootScope,$timeout) {
+
+    //初始化Select-EBR Data
+    $scope.ebr =  'EBR_DATE';
+    $scope.dataMoth = [];
+    CycleQTQService.getSelect($scope.ebr).then(function(data){
+        if(data.code == 0){
+            $scope.ebrdata = data.result;
+            for(var i=0;i< $scope.ebrdata.length;i++){
+                $scope.dataMoth.push({data:$scope.ebrdata[i]});
+            }
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+    //初始化Select-CFE Data
+    $scope.cfe = 'CFE_CYCLE';
+    CycleQTQService.getSelect($scope.cfe).then(function(data){
+        if(data.code == 0){
+            $scope.cfedata = data.result;
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+    //初始化Cycle Choose
+    CycleQTQService.getSelectCycle().then(function(data){
+        if(data.code == 0){
+            $scope.cycledata = data.result;
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+    //多选控件
+    $scope.Sel = true;
+    $(document).bind('click',function(){
+        $scope.Sel = true;
+    });
+    $scope.openSel = function($event){
+        $scope.Sel = false;
+        $event.stopPropagation();
+    };
+    $scope.arr = [];
+    $scope.One = function(m){
+        m.isChecked = !m.isChecked;
+        if(m.isChecked){
+            $scope.arr.push(m.data);
+        }else {
+            for(var i=0;i<$scope.arr.length;i++){
+                if($scope.arr[i] == m.data){
+                    $scope.arr.splice(i,1);
+                    break;
+                }
+            }
+        }
+        console.log($scope.arr);
+        $scope.EBRData = $scope.arr.join(',');
+    };
+
+    //第二部分tab信息展示
+    $scope.getPage = function(){
+        CycleQTQService.getExecute2().then(function(data){
+            console.log(data);
+            if(data.code == 0){
+                //$scope.noData = false;
+                $scope.tablist = data.result;
+                $("#tabExample").dataTable().fnDestroy();
+                $timeout(function () {
+                    $('#tabExample').dataTable({
+                        "scrollY": 160,
+                        "scrollX": true,
+                        "dom": '<"top">rt<"bottom"><"clear">',
+                        "scrollCollapse": true,
+                        "jQueryUI": true,
+                        // "pagingType":   "simple_numbers",
+                        stateSave: true,
+                        "paging": false,
+                        "ordering": false,
+                        "bLengthChange": true,
+                        //"order": [[ 3, "desc" ]]
+                    });
+                });
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        });
+    }
+    $scope.getPage();
+
+    //点击Execute执行
+    //$scope.noData = true;
+    $scope.getExecute = function(){
+        $scope.taskId = '';
+        $scope.search = {
+            cycleName : $scope.CycleChoose,
+            cfeCycle : $scope.CFEData,
+            month : $scope.EBRData,
+            user : $rootScope.user
+        }
+        console.log($rootScope.user);
+        if(!$scope.EBRData || !$scope.CFEData){
+            alert("请选择条件！");
+        }else {
+            CycleQTQService.getExecute($scope.search).then(function(data){
+                if(data.code == 0){
+                    alert(data.result);
+                    $scope.getPage();
+                }else {
+                    alert(data.msg);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+        }
+    };
+
+    $scope.WW = true;
+    $scope.PRC = true;
+    $scope.WWShift = true;
+    $scope.PRCShift = true;
+    //单击整行选中
+    $scope.trClick = function($event,id,status,cycleName){
+        $($("#tabExample input:radio")).removeAttr("checked");
+        $($event.target).parent().find("input:radio").prop("checked",true);
+        $scope.taskId = id;
+        console.log($scope.taskId)
+        $scope.status = status;
+        console.log($scope.status)
+        $scope.cyclename = cycleName;
+        console.log($scope.cyclename)
+        //$scope.SearchTaskId(a,b,c)
+    }
+    //单选获得taskId
+   /* $scope.SearchTaskId = function(id,cycleName,status){
+        $scope.taskId = id;
+        $scope.status = status;
+        $scope.cyclename = cycleName;
+    };*/
+
+    //点击Search
+    $scope.SearchTab = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'){
+            $scope.PRCWW = false;
+            $scope.TaskID =  $scope.taskId;
+            $scope.CyclName = $scope.cyclename;
+            $scope.WW = false;
+            $scope.PRC = true;
+
+            //WW
+           // $("#PRCExample").dataTable().fnDestroy();
+            CycleQTQService.getWw($scope.TaskID).then(function(data){
+                if(data.code == 0){
+                    $scope.WwList = data.result;
+                    $scope.wwTable();
+                    console.log($scope.TaskID);
+                    console.log($scope.CyclName);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+
+            //PRC
+            CycleQTQService.getPrc($scope.TaskID).then(function(data) {
+                if (data.code == 0) {
+                    $scope.PrcList = data.result;
+                    console.log($scope.PrcList);
+                    $scope.prcTalbe();
+                }
+                console.log(data)
+            } ,function(data){
+                console.log(data);
+            });
+        }else {
+            alert("暂未执行成功，无法查看！");
+        }
+    };
+
+
+    //删除
+    $scope.DelParticular = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
+            if(confirm('确认要删除？')) {
+                console.log($scope.taskid);
+                $scope.taskid = {
+                    uuid: $scope.taskId
+                };
+                CycleQTQService.DelParticular($scope.taskid).then(function (data) {
+                    if (data.code == 0) {
+                        alert("删除成功！");
+                        $scope.taskId = '';
+                        $scope.getPage();
+                        //$("#tabExample").dataTable().fnDestroy();
+                        $scope.PRCWW = true;
+                    }else {
+                        alert(data.msg);
+                    }
+                    console.log(data);
+                }, function (data) {
+                    console.log(data);
+                });
+            }
+        }else {
+            alert("还未执行完成！");
+        }
+    };
+
+
+
+
+    $scope.wwTable = function(){
+        $("#WWExample").dataTable().fnDestroy();
+        $timeout(function () {
+            $('#WWExample thead tr').eq(1).find('td').each(function() {
+                var title = $('#WWExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table = $('#WWExample').DataTable({
+                //"processing": true,
+                "scrollY": 850,
+                "scrollX": true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                //"dom": '<"top"i>rt<"bottom"flp><"clear">',
+                "scrollCollapse": true,
+                //"jQueryUI": true,
+                // "pagingType":   "simple_numbers",
+                //stateSave: true,
+                //"pagingType":   "full_numbers",
+                "paging": false,
+                "ordering": false,
+                //"lengthChange": true,
+                "autoWidth": false,
+                "data" :  $scope.WwList,
+                "columns":[
+                    { "data": "qtr" },
+                    { "data": "zfingeo" },
+                    { "data": "zregion2" },
+                    { "data": "cfeBu" },
+                    { "data": "cfeSegment" },
+                    { "data": "invQty",render: $.fn.dataTable.render.number( ',', '.')},
+                    { "data": "cfeCycle" },
+                    { "data": "lqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqBmc",  render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "lqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCqTtl",render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                ]
+            });
+            table.columns().eq(0).each(function(colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function() {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+    }
+
+    $scope.prcTalbe = function(id){
+        $("#PRCExample").dataTable().fnDestroy();
+        $timeout(function () {
+            $('#PRCExample thead tr').eq(1).find('td').each(function() {
+                var title = $('#PRCExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table =$('#PRCExample').DataTable({
+                //"processing": true,
+                "scrollY": 850,
+                "scrollX": true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                "scrollCollapse": true,
+                //"jQueryUI": true,
+                // "pagingType":   "simple_numbers",
+                //stateSave: true,
+                "paging": false,
+                "ordering": false,
+                //"lengthChange": true,
+                "autoWidth": false,
+                "data" : $scope.PrcList,
+                "columns": [
+                    { "data": "qtr" },
+                    { "data": "zfingeo" },
+                    { "data": "cfeBu" },
+                    { "data": "cfePrcSegment" },
+                    { "data": "invQty" ,render: $.fn.dataTable.render.number( ',', '.')},
+                    { "data": "cfeCycle" },
+                    { "data": "lqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqBmc" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCq" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "lqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "cqLqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }},
+                    { "data": "nqCqTtl" ,render: function ( data, type, row ) {
+                        if(data == null){
+                            return data;
+                        }else {
+                            var abc = data + '';
+                            return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                        }
+                    }}
+                ]
+            });
+            table.columns().eq(0).each(function(colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function() {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+
+    }
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.WW = false;
+            $scope.PRC = true;
+            $scope.wwTable();
+        }else if(flag == 'p'){
+            $scope.WW = true;
+            $scope.PRC = false;
+            $scope.prcTalbe();
+        }
+    };
+
+    //点击WW中的Shift view
+    $scope.getSegmentWW = function(){
+        $scope.WW = true;
+        $scope.PRC = true;
+        $scope.WWShift = false;
+        $scope.PRCShift = true;
+        //切换复杂表
+       /* $scope.validate = {
+            cycleName : $scope.CyclName,
+        };
+        console.log($scope.validate)
+        CycleQTQService.getSegment($scope.validate,$scope.TaskID).then(function (data) {
+            if(data.code == 0){
+                alert('成功！');
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });*/
+    };
+    //点击PRC中的Shift view
+    $scope.getSegmentPRC = function(){
+        $scope.WW = true;
+        $scope.PRC = true;
+        $scope.WWShift = true;
+        $scope.PRCShift = false;
+    }
+    //点击WW的中Shift view的Shift view
+    $scope.getWWShift = function(){
+        $scope.WW = false;
+        $scope.PRC = true;
+        $scope.WWShift = true;
+        $scope.PRCShift = true;
+    }
+//点击PRC的中Shift view的Shift view
+    $scope.getPRCShift = function(){
+        $scope.WW = true;
+        $scope.PRC = false;
+        $scope.WWShift = true;
+        $scope.PRCShift = true;
+    }
+
+
+    //点击Validate
+    $scope.getValidate = function(){
+        $scope.validate = {
+            zcycle_name : $scope.CyclName,
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
+        };
+        console.log($rootScope.user)
+        CycleQTQService.getValidate($scope.validate).then(function (data) {
+            if(data.code == 0){
+                console.log(data)
+                alert('Success!');
+                $scope.getPage();
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
+
+    //WW时Download Summary
+    $scope.getWWDownLoadSum = function(){
+        $('#ws2').css('display','block');
+        $('#ws1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            CycleQTQService.getWwSum($scope.TaskID).then(function (data) {
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+                $('#ws1').css('display','block');
+                $('#ws2').css('display','none');
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+
+    //Prc时Download Summary
+    $scope.getPRCDownLoadSum = function(){
+        $('#ps2').css('display','block');
+        $('#ps1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            CycleQTQService.getPrcSum($scope.TaskID).then(function (data) {
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+                $('#ps1').css('display','block');
+                $('#ps2').css('display','none');
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+    //WW时Download Detail
+    $scope.getWWDownLoadDet = function(){
+        $('#wd2').css('display','block');
+        $('#wd1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            CycleQTQService.getWwDet($scope.TaskID).then(function (data) {
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+                $('#wd1').css('display','block');
+                $('#wd2').css('display','none');
+                console.log(data);
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+
+    //Prc时Download Detail
+    $scope.getPRCDownLoadDet = function(){
+        $('#pd2').css('display','block');
+        $('#pd1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            CycleQTQService.getPrcDet($scope.TaskID).then(function (data) {
+                $('#pd1').css('display','block');
+                $('#pd2').css('display','none');
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+});
+"use strict";
+
+angular.module('app.OperationData').controller('DealmaintenanceCtrl', function ($scope,$state,$stateParams,$location) {
+    $scope.del = function(){
+        if(confirm('确认要删除？')){
+
+        }
+    }
+})
+"use strict";
+
+angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$rootScope,$state,$stateParams,$location,$timeout,MarkupmaintenanceService,navService) {
+  //调取bu、geo、region、segment
+    navService.getBU().then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("bu", JSON.stringify(data.result));
+        }
+    }, function (data) {
+        console.log(data);
+    });
+    navService.getGEO().then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("geo", JSON.stringify(data.result));
+            $scope.geo = data.result;
+            $scope.geo.push('Total');
+        }
+    }, function (data) {
+        console.log(data);
+    });
+    var prc = {
+        stype : 'PRC'
+    }
+    navService.getSEGMENTprc(prc).then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("segmentPRC", JSON.stringify(data.result));
+            $scope.segmentPRC = data.result;
+            console.log(data.result)
+            $scope.segmentPRC .push('Total');
+        }
+    }, function (data) {
+        console.log(data);
+    });
+    var ww = {
+        stype : 'WW'
+    }
+    navService.getSEGMENTww(ww).then(function (data) {
+        if(data.code == 0){
+            sessionStorage.setItem("segmentWW", JSON.stringify(data.result));
+            $scope.segmentWW = data.result;
+            $scope.segmentWW .push('Total');
+        }
+    }, function (data) {
+        console.log(data);
+    });
+
+
+
+
+
+    //初始化Cycle Choose
+    MarkupmaintenanceService.getSelectCycle().then(function(data){
+        if(data.code == 0){
+            $scope.cycledata = data.result;
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+    //第二部分tab信息展示
+    $scope.getPage = function(){
+        MarkupmaintenanceService.getExecute2().then(function(data){
+            console.log(data);
+            if(data.code == 0){
+                //$scope.noData = false;
+                $scope.tablist = data.result;
+                $("#tabExample").dataTable().fnDestroy();
+                $timeout(function () {
+                    $('#tabExample').dataTable({
+                        "scrollY": 160,
+                        "scrollX": true,
+                        "dom": '<"top">rt<"bottom"><"clear">',
+                        "scrollCollapse": true,
+                        "jQueryUI": true,
+                        // "pagingType":   "simple_numbers",
+                        stateSave: true,
+                        "paging": false,
+                        "ordering": false,
+                        "bLengthChange": true,
+                        //"order": [[ 3, "desc" ]]
+                    });
+                });
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        });
+    }
+    $scope.getPage();
+
+
+    //点击Execute执行
+    //$scope.noData = true;
+    $scope.getExecute = function(){
+        $scope.taskId = '';
+        $scope.search = {
+            cycleName : $scope.CycleChoose,
+            user : $rootScope.user
+        }
+        console.log($rootScope.user);
+        if(!$scope.CycleChoose){
+            alert("请选择条件！");
+        }else {
+            MarkupmaintenanceService.getExecute($scope.search).then(function(data){
+                if(data.code == 0){
+                    alert(data.result);
+                    $scope.getPage();
+                }else {
+                    alert(data.msg);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+        }
+    };
+
+
+    //单击整行选中
+    $scope.trClick = function($event,id,status,cycleName){
+        $($("#tabExample input:radio")).removeAttr("checked");
+        $($event.target).parent().find("input:radio").prop("checked",true);
+        $scope.taskId = id;
+        console.log($scope.taskId)
+        $scope.status = status;
+        console.log($scope.status)
+        $scope.cyclename = cycleName;
+        console.log($scope.cyclename)
+    }
+
+
+
+    $scope.WW = true;
+    $scope.PRC = true;
+    $scope.markTab = false;
+    //点击Search
+    $scope.SearchTab = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'){
+            $scope.markTab = true;
+            $scope.TaskID =  $scope.taskId;
+            $scope.CyclName = $scope.cyclename;
+
+            //WW
+            MarkupmaintenanceService.getWw($scope.TaskID).then(function(data){
+                if(data.code == 0){
+                     $scope.result = data.result;
+                     $scope.resData = [];
+                     for(var i in $scope.result){
+                     var thead1 =['XXX+BMC $M（'+ i +'）'].concat($scope.geo);
+                     var thead2 = ['XXX+Markup in Tape $M (' + i + '）'].concat($scope.geo);
+                     var tbodyBmc = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead1,'bmc');
+                     var tbodyMark = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead2,'mark45');
+                     $scope.resData.push({name : i,tbodyBmc : {tbodyBmcThead:thead1,tbodyBmcTbody : tbodyBmc.slice(0,tbodyBmc.length-1),tbodyBmcTfoot:tbodyBmc.slice(tbodyBmc.length-1)},tbodyMark : {tbodyMarkThead:thead2,tbodyMarkTbody : tbodyMark.slice(0,tbodyMark.length-1),tbodyMarkTfoot:tbodyMark.slice(tbodyMark.length-1)}})
+                     }
+                     $timeout($scope.resData);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+
+            //PRC
+             MarkupmaintenanceService.getPrc($scope.TaskID).then(function(data) {
+                 if (data.code == 0) {
+                     $timeout(function(){
+                         $scope.markHZ = $rootScope.markHZ(data.result,$scope.segmentPRC)
+                     });
+                 }
+                    console.log(data)
+                 } ,function(data){
+                    console.log(data);
+             });
+        }else {
+            alert("暂未执行成功，无法查看！");
+        }
+    };
+
+    //删除
+    $scope.DelParticular = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
+            if(confirm('确认要删除？')) {
+                console.log($scope.taskid);
+                $scope.taskid = {
+                    uuid: $scope.taskId
+                };
+                MarkupmaintenanceService.DelParticular($scope.taskid).then(function (data) {
+                    if (data.code == 0) {
+                        alert("删除成功！");
+                        $scope.taskId = '';
+                        $scope.getPage();
+                        //$("#tabExample").dataTable().fnDestroy();
+                        $scope.PRCWW = true;
+                    }else {
+                        alert(data.msg);
+                    }
+                    console.log(data);
+                }, function (data) {
+                    console.log(data);
+                });
+            }
+        }else {
+            alert("还未执行完成！");
+        }
+    };
+
+    //点击Validate
+    $scope.getValidate = function(){
+        $scope.validate = {
+            zcycle_name : $scope.CyclName,
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
+        };
+        console.log($rootScope.user)
+        MarkupmaintenanceService.getValidate($scope.validate).then(function (data) {
+            if(data.code == 0){
+                console.log(data)
+                alert('Success!');
+                $scope.getPage();
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
+
+    $scope.getDownLoad = function(){
+        $('#ps2').css('display','block');
+        $('#ws2').css('display','block');
+        $('#ps1').css('display','none');
+        $('#ws1').css('display','none');
+        if(!$scope.TaskID){
+            return;
+        }else {
+            MarkupmaintenanceService.getPrcSum($scope.TaskID).then(function (data) {
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+                $('#ps1').css('display','block');
+                $('#ws1').css('display','block');
+                $('#ps2').css('display','none');
+                $('#ws2').css('display','none');
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
+
+
+
+
+    //Actual与Forecast选择展示
+    $scope.atc = true;
+    $scope.wpSel = function(){
+        if($scope.CycleSelect == 'Forecast'){
+            $scope.atc = true;
+            $scope.aww = true;
+            $scope.fww = true;
+        }else if($scope.CycleSelect =='Actual'){
+            $scope.atc = false;
+            $scope.aww = true;
+            $scope.fww = true;
+        }
+    }
+
+    //Actual中PRC与WW的切换
+    $scope.aww = true;
+    $scope.btnSwitchA = function(flag){
+        if(flag == 'w'){
+            $scope.aww = false;
+        }else if(flag == 'p'){
+            $scope.aww = true;
+        }
+    }
+
+    //Forecast中PRC与WW的切换
+    $scope.fww = true;
+    $scope.btnSwitchF = function(flag){
+        if(flag == 'w'){
+            $scope.fww = false;
+        }else if(flag == 'p'){
+            $scope.fww = true;
+        }
+    }
+
+
+})
+"use strict";
+
+angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl', function ($scope,$state,$stateParams,$location,$timeout,CycleQTQService,Upload,MegaDealRelatedMaintenance,APP_CONFIG,$rootScope) {
+
+    //初始化Cycle Choose
+    CycleQTQService.getSelectCycle().then(function(data){
+        if(data.code == 0){
+            $scope.cycledata = data.result;
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+
+    //上传
+    $scope.myfiles = {};
+    $scope.myfilesVal = '';
+    $scope.fileChange = function(){
+        if($scope.myfiles.name){
+            $scope.myfilesVal = $scope.myfiles.name;
+        }else {
+            $scope.myfilesVal = '';
+        }
+    }
+
+    $scope.TAB = false;
+    $scope.upload = function(){
+        if(!$scope.CycleChoose){
+            alert("请选择条件！");
+        }else {
+            var cycleArr = $scope.CycleChoose.split(' ');
+            $scope.cycle = cycleArr[2];
+            $scope.year = cycleArr[0];
+            $scope.quarter = cycleArr[1].substring(0,2) ;
+            console.log($scope.quarter)
+            Upload.upload({
+                //服务端接收
+                url:APP_CONFIG.baseUrl+ '/api/mega/attachments',
+                data : {
+                    file : $scope.myfiles,
+                    username :$rootScope.user,
+                    cycle:$scope.CycleChoose,
+                    year:$scope.year,
+                    quarter:$scope.quarter
+                },
+                headers: {
+                    'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+                },
+            }).success(function (data, status, headers, config){
+                console.log(data)
+                console.log(status)
+                if(status == 200){
+                    if(data.code == 0){ 
+                        MegaDealRelatedMaintenance.getData($scope.cycle).then(function(data2){
+                            if(data2.code == 0){
+                                $scope.pageList = data2.result;
+                                $scope.TAB = true;
+                                alert('Success');
+                                $scope.getTable();
+                            }
+                            console.log(data2);
+                        },function(data2){
+                            console.log(data2);
+                        });
+                    }else {
+                        alert(data.msg);
+                    }
+                }
+
+            }).error(function (data, status, headers, config) {
+                alert('Uploading Failed');
+                //上传失败
+                console.log('error status: ' + status);
+            });
+
+        }
+    }
+
+
+    $scope.getTable = function(){
+        $("#MegaTable").dataTable().fnDestroy();
+        $timeout(function () {
+            $('#MegaTable thead tr').eq(1).find('td').each(function() {
+                var title = $('#MegaTable thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table = $('#MegaTable').DataTable({
+                //"processing": true,
+                "scrollY": 850,
+                "scrollX": true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                "scrollCollapse": true,
+                "paging": false,
+                "autoWidth": false,
+                "data" :  $scope.pageList,
+                "columns":[
+                    { "data": "cycle" },
+                    { "data": "category" },
+                    { "data": "segment" },
+                    { "data": "bu" },
+                    { "data": "geo" },
+                    { "data": "region" },
+                    { "data": "value" },
+                    { "data": "remark" }
+                ]
+            });
+            table.columns().eq(0).each(function(colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function() {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+    }
+
+
+
+
+    //下载模板
+    $scope.DowTemp = function(){
+        $scope.temp = {
+            type: 'megadeal'
+        }
+        MegaDealRelatedMaintenance.download($scope.temp).then(function(data){
+            console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        },function(data){
+            console.log(data);
+        });
+    }
+
+})
+"use strict";
+
+angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,OthercategorymaintenanceService,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            $scope.ww = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+        }
+    }
+    $('#final table').stickySort({ sortable: true });
+    // new superTable("demoTable", {
+    //     cssSkin: "sDefault",
+    //     fixedCols: 3, //固定几列
+    //     headerRows: 3,  //头部固定行数
+    //     onStart: function () {
+    //         this.start = new Date();
+    //     },
+    //     onFinish: function () {
+    //     }
+    // });
+    //
+    //
+    // $("#div_container").css("width", "100%");//这个宽度是容器宽度，不同容器宽度不同
+    // $(".fakeContainer").css("height", "745px");//这个高度是整个table可视区域的高度，不同情况高度不同
+    // //.sData是调用superTables.js之后页面自己生成的  这块就是出现滚动条 达成锁定表头和列的效果
+    //
+    // $(".sData").css("width", "1225px");//这块的宽度是用$("#div_container")的宽度减去锁定的列的宽度
+    // $(".sData").css("height", "665px");//这块的高度是用$("#div_container")的高度减去锁定的表头的高度
+
+
+    //请求表格数据调用方法
+    OthercategorymaintenanceService.getOthercategoryData().then(function(data){
+
+        if(data.code == 0){
+            $scope.categoryData = data.result;
+            console.log($scope.categoryData);
+            for(var i=0;i< $scope.categoryData.length;i++){
+               console.log($scope.categoryData[i]);
+            }
+        }
+
+    },function(data){
+        console.log(data);
+    });
+})
+"use strict";
+
+angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function ($scope,$rootScope,Upload,$timeout,APP_CONFIG,$state,$stateParams,$location,OutTapeAllocationService) {
+    //初始化Cycle Choose
+    OutTapeAllocationService.getSelectCycle().then(function(data){
+        if(data.code == 0){
+            $scope.cycledata = data.result;
+            console.log($scope.cycledata);
+        }
+        console.log(data);
+    },function(data){
+        console.log(data);
+    });
+
+    //EBR  上传文件
+    $scope.myfiles = {};
+    $scope.openUpload = function(){
+        $scope.myfilesVal = '';
+        $scope.fileChange = function(){
+            if($scope.myfiles.name){
+                $scope.myfilesVal = $scope.myfiles.name;
+            }else {
+                $scope.myfilesVal = '';
+            }
+        }
+    };
+    //GIBP 上传文件
+    $scope.myfiles1 = {};
+    $scope.openUpload1 = function(){
+        $scope.myfilesVal1 = '';
+        $scope.fileChange1 = function(){
+            if($scope.myfiles1.name){
+                $scope.myfilesVal1 = $scope.myfiles1.name;
+            }else {
+                $scope.myfilesVal1 = '';
+            }
+        }
+    };
+    //上传
+    $scope.upload = function(){
+        Upload.upload({
+            //服务端接收
+            url:APP_CONFIG.baseUrl+ '/api/dm/ca/attachments',
+            data : {
+                file : $scope.myfiles,
+                username :$rootScope.user,
+                cyclename:$scope.CycleChoose
+            },
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).success(function (data, status, headers, config){
+            if(!$scope.CycleChoose){
+                alert("请选择条件！");
+            }else {
+                if (data.code == 0 && $scope.CycleChoose.indexOf("M0") != -1) {
+                    alert('上传成功！');
+                    console.log(data);
+                    $scope.id=data.result;
+                    $scope.getPage();
+                }else if(data.code == 0 && $scope.CycleChoose.indexOf("Actual") != -1){
+                    alert('上传成功！');
+                    $scope.id=data.result;
+                    console.log(data);
+                    console.log($scope.id);
+                    $scope.getPage();
+                } else {
+                    alert('上传失败！');
+                }
+            }
+        }).error(function (data, status, headers, config) {
+            alert('上传失败');
+            //上传失败
+            console.log('error status: ' + status);
+        });
+    }
+
+    //第二部分tab信息展示
+    $scope.getPage = function(){
+        OutTapeAllocationService.getExecute2().then(function(data){
+            if(data.code == 0){
+                $scope.tablist = data.result;
+                console.log($scope.tablist);
+                $("#tabExample1").dataTable().fnDestroy();
+                $timeout(function () {
+                    $('#tabExample1').dataTable({
+                        "scrollY": 160,
+                        "scrollX": true,
+                        "dom": '<"top">rt<"bottom"><"clear">',
+                        "scrollCollapse": true,
+                        //"jQueryUI": true,
+                        // "pagingType":   "simple_numbers",
+                        stateSave: true,
+                        "paging": false,
+                        "ordering": false,
+                        "bLengthChange": true
+                    });
+                });
+            }
+            console.log(data);
+        },function(data){
+            console.log(data);
+        });
+    }
+    $scope.getPage();
+
+    //单击整行选中
+    $scope.trClick = function($event,id,status,cycleName){
+        $($("#tabExample input:radio")).removeAttr("checked");
+        $($event.target).parent().find("input:radio").prop("checked",true);
+        $scope.taskId = id;
+        console.log($scope.taskId);
+        $scope.status = status;
+        console.log($scope.status);
+        $scope.cyclename = cycleName;
+        console.log($scope.cyclename);
+    };
+    //LTA Out  SW三个 隐藏
+    $scope.althree=false;
+    //点击Search
+    $scope.SearchTab = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'){
+            $scope.TaskID =  $scope.taskId;
+            $scope.CycleName = $scope.cyclename;
+            //LTA Out  SW三个 显示
+            $scope.althree=true;
+            //LTA显示
+            $scope.althreeLta=true;
+            //LatalTable 1
+            OutTapeAllocationService.getWw($scope.TaskID).then(function(data){
+                if(data.code == 0){
+                    $scope.WwList = data.result;
+                    $scope.LatalTable();
+                    console.log($scope.TaskID);
+                    console.log($scope.CyclName);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
+
+            //LatresTable 2
+            OutTapeAllocationService.getPrc($scope.TaskID).then(function(data) {
+                if (data.code == 0) {
+                    $scope.PrcList = data.result;
+                    console.log($scope.PrcList);
+                    $scope.LatresTable();
+                }
+                console.log(data)
+            } ,function(data){
+                console.log(data);
+            });
+        }else {
+            alert("暂未执行成功，无法查看！");
+        }
+    };
+    //删除
+    $scope.DelOneItem = function(){
+        if(!$scope.taskId){
+            alert("请选择项！");
+        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
+            if(confirm('确认要删除？')) {
+                console.log($scope.taskid);
+                $scope.taskid = {
+                    uuid: $scope.taskId
+                };
+                OutTapeAllocationService.DelItem($scope.taskid).then(function (data) {
+                    if (data.code == 0) {
+                        alert("删除成功！");
+                        $scope.taskId = '';
+                        $scope.getPage();
+                    }else {
+                        alert(data.msg);
+                    }
+                    console.log(data);
+                }, function (data) {
+                    console.log(data);
+                });
+            }
+        }else {
+            alert("还未执行完成！");
+        }
+    };
+    //LatalTable 搜索数据
+    $scope.LatalTable = function(){
+        $("#LatalExample").dataTable().fnDestroy();
+        $timeout(function () {
+            $('#LatalExample thead tr').eq(1).find('td').each(function() {
+                var title = $('#LatalExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table = $('#LatalExample').DataTable({
+                "scrollY": 600,
+                "scrollX": true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                "scrollCollapse": true,
+                "paging": false,
+                "ordering": false,
+                "autoWidth": false,
+                "data" :  $scope.WwList,
+                "columns":[
+                    { "data": "Geo" },
+                    { "data": "Country" },
+                    { "data": "BU" },
+                    { "data": "Deal Des#/SKU" },
+                    { "data": "PN" },
+                    { "data": "Amount"}
+                    //{ "data": "lqBmc" ,render: function ( data, type, row ) {
+                    //    if(data == null){
+                    //        return data;
+                    //    }else {
+                    //        var abc = data + '';
+                    //        return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                    //    }
+                    //}}
+                ]
+            });
+            table.columns().eq(0).each(function(colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function() {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+    }
+    //LatresTable  搜索 数据
+    $scope.LatresTable = function(){
+        $("#LatresExample").dataTable().fnDestroy();
+        $timeout(function () {
+            $('#LatresExample thead tr').eq(1).find('td').each(function() {
+                var title = $('#LatresExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table = $('#LatresExample').DataTable({
+                "scrollY": 600,
+                "scrollX": true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                "scrollCollapse": true,
+                "paging": false,
+                "ordering": false,
+                "autoWidth": false,
+                "data" :  $scope.PrcList,
+                "columns":[
+                    { "data": "Geo" },
+                    { "data": "Country" },
+                    { "data": "BU" },
+                    { "data": "Deal Des#/SKU" },
+                    { "data": "PN" },
+                    { "data": "Amount"}
+                    //{ "data": "lqBmc" ,render: function ( data, type, row ) {
+                    //    if(data == null){
+                    //        return data;
+                    //    }else {
+                    //        var abc = data + '';
+                    //        return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                    //    }
+                    //}}
+                ]
+            });
+            table.columns().eq(0).each(function(colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function() {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+    }
+
+    //Download
+    $scope.getDownLoad = function(){
+        if(!$scope.TaskID){
+            return;
+        }else{
+            OutTapeAllocationService.getWwDown($scope.TaskID).then(function(data){
+                console.log(data);
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+            },function(data){
+                console.log(data);
+            })
+        }
+    }
+
+    //点击Validate
+    $scope.getValidate = function(){
+        $scope.validate = {
+            zcycle_name : $scope.CycleName,
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
+        };
+        OutTapeAllocationService.getValidate($scope.validate).then(function (data) {
+            if(data.code == 0){
+                alert('Success！');
+                $scope.getPage();
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
+
+})
+"use strict";
+
+angular.module('app.OperationData').controller('OPQTQPNtakedownCtrl', function ($scope,$state,$stateParams,$location) {
+
+    $scope.ww = true;
+    $scope.s1 = true;
+    $scope.s2 = false;
+    $scope.w1 = true;
+    $scope.w2 = false;
+    $scope.c1 = false;
+    $scope.c2 = false;
+    $scope.btnSwitch = function(flag){
+        if(flag == 'w'){
+            //PRC与WW切换
+            $scope.ww = false;
+            //大表切换
+            $scope.w2 = true;
+            $scope.w1 = false;
+            //两个按钮功能切换
+            $scope.s1 = false;
+            $scope.s2 = true;
+            //小表隐藏
+            $scope.c1 = false;
+            $scope.c2 = false;
+        }else if(flag == 'p'){
+            $scope.ww = true;
+            $scope.w1 = true;
+            $scope.w2 = false;
+            $scope.s1 = true;
+            $scope.s2 = false;
+            $scope.c1 = false;
+            $scope.c2 = false;
+        }
+    }
+
+    $scope.btnSV1 = function(flag){
+        if(flag == 'd'){
+            //$scope.ww = true;
+            $scope.w1 = true;
+            $scope.c1 = false;
+
+        }else if(flag == 's'){
+            //$scope.ww = false;
+            $scope.w1 = false;
+            $scope.c1 = true;
+        }
+    }
+    $scope.btnSV2 = function(flag){
+        if(flag == 'd'){
+            $scope.w2 = true;
+            $scope.c2 = false;
+        }else if(flag == 's'){
+            $scope.w2 = false;
+            $scope.c2 = true;
+        }
+    }
+})
 /**
  * Created by Qinglanhui on 2018/8/13.
  */
@@ -10647,7 +11331,44 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
         });
         return d.promise;
     }
-
+    //请求Prc bu的数据
+    this.getPrcBu = function(type) {
+        console.log(type);
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/fileorder/bu',
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    //请求Prc Segment的数据
+    this.getPrcSegment = function(type) {
+        console.log(type);
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/fileorder/segment',
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
     //Prc时的Download
     this.getPrcDown = function(id) {
         console.log(id)
@@ -10720,7 +11441,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
  * Created by Qinglanhui on 2018/8/23.
  */
 angular.module('app.OperationData').service("CAmanualuploadService", function($http, $q , APP_CONFIG) {
-    //Select��һ����Cycle
+    //Select��һ����Cycle
     this.getSelectCycle = function() {
         var d = $q.defer();
         $http({
@@ -10731,62 +11452,128 @@ angular.module('app.OperationData').service("CAmanualuploadService", function($h
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
         }).then(function successCallback(response) {
-            // ����ɹ�ִ�д���
+            // ����ɹ�ִ�д���
             d.resolve(response.data);
         }, function errorCallback(response) {
-            // ����ʧ��ִ�д���
+            // ����ʧ��ִ�д���
             d.reject("error");
         });
         return d.promise;
     }
-    //Prcʱ��Download
-    this.getPrcDown = function(id) {
+    //����Prc������
+    this.getPrc = function(id) {
+        console.log(id);
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/dm/ca/prc/'+id,
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    //����Ww������
+    this.getWw = function(id) {
         console.log(id)
         var d = $q.defer();
         $http({
             method : 'GET',
-            url : APP_CONFIG.baseUrl + '/api/dm/ca/loadexcel/prc/'+id,
+            url : APP_CONFIG.baseUrl + '/api/dm/ca/ww/'+id,
             headers: {
-                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
-            responseType : 'arraybuffer'
         }).then(function successCallback(response) {
-            // ����ɹ�ִ�д���
+            // ����ɹ�ִ�д���
             d.resolve(response.data);
         }, function errorCallback(response) {
-            // ����ʧ��ִ�д���
+            // ����ʧ��ִ�д���
             d.reject("error");
         });
         return d.promise;
     }
-    //Wwʱ��Download
-    this.getWwDown = function(id) {
-        console.log(id)
+    //����Prc bu������
+    this.getPrcBu = function(type) {
+        console.log(type);
         var d = $q.defer();
         $http({
             method : 'GET',
-            url : APP_CONFIG.baseUrl + '/api/dm/ca/loadexcel/ww/'+id,
+            url : APP_CONFIG.baseUrl + '/api/fileorder/bu',
             headers: {
-                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
-            responseType : 'arraybuffer'
         }).then(function successCallback(response) {
-            // ����ɹ�ִ�д���
+            // ����ɹ�ִ�д���
             d.resolve(response.data);
         }, function errorCallback(response) {
-            // ����ʧ��ִ�д���
+            // ����ʧ��ִ�д���
             d.reject("error");
         });
         return d.promise;
     }
-    //Validate��ť����
-    this.getValidate = function(v) {
-        console.log(v)
+    //����Prc Segment������
+    this.getPrcSegment = function(type) {
+        console.log(type);
         var d = $q.defer();
         $http({
-            method : 'PUT',
-            url : APP_CONFIG.baseUrl + '/api/publish/',
-            transformRequest: function(obj) {
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/fileorder/segment',
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    ////Validate��ť����
+    //this.getValidate = function(v) {
+    //    console.log(v)
+    //    var d = $q.defer();
+    //    $http({
+    //        method : 'PUT',
+    //        url : APP_CONFIG.baseUrl + '/api/publish/',
+    //        transformRequest: function(obj) {
+    //            var str = [];
+    //            for (var s in obj) {
+    //                str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+    //            }
+    //            return str.join("&");
+    //        },
+    //        headers: {
+    //            'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+    //        },
+    //        params : v,
+    //    }).then(function successCallback(response) {
+    //        // ����ɹ�ִ�д���
+    //        d.resolve(response.data);
+    //    }, function errorCallback(response) {
+    //        // ����ʧ��ִ�д���
+    //        d.reject("error");
+    //    });
+    //    return d.promise;
+    //}
+
+    /**
+     * ����ģ��
+     */
+    this.download = function (load) {
+        console.log(load)
+        var d = $q.defer();
+        $http({
+            method: 'GET',
+            url: APP_CONFIG.baseUrl + '/api/loadfile/loadexcel',
+            transformRequest: function (obj) {
                 var str = [];
                 for (var s in obj) {
                     str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
@@ -10796,16 +11583,18 @@ angular.module('app.OperationData').service("CAmanualuploadService", function($h
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
-            params : v,
+            params: load,
+            responseType: 'arraybuffer'
         }).then(function successCallback(response) {
-            // ����ɹ�ִ�д���
+            // ����ɹ�ִ�д���
             d.resolve(response.data);
         }, function errorCallback(response) {
-            // ����ʧ��ִ�д���
+            // ����ʧ��ִ�д���
             d.reject("error");
         });
         return d.promise;
     }
+
 })
 
 angular.module('app.OperationData').service("CycleQTQService", function($http, $q , APP_CONFIG) {
@@ -11391,6 +12180,69 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
     }
 
 });
+angular.module('app.OperationData').service("MegaDealRelatedMaintenance", function($http, $q , APP_CONFIG) {
+
+    //获取数据
+    this.getData = function(cycle) {
+        console.log(cycle)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
+            url : APP_CONFIG.baseUrl +'/api/mega/'+cycle,
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+            transformRequest: function(obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            //params : cycle
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+    /**
+     * 下载模板
+     */
+    this.download = function (load) {
+        console.log(load)
+        var d = $q.defer();
+        $http({
+            method: 'GET',
+            url: APP_CONFIG.baseUrl + '/api/loadfile/loadexcel',
+            transformRequest: function (obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+            params: load,
+            responseType: 'arraybuffer'
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+});
 angular.module('app.OperationData').service("OthercategorymaintenanceService", function($http, $q , APP_CONFIG) {
 
     //第一部分Select中第二第三个框
@@ -11686,6 +12538,166 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
     }
 
 });
+/**
+ * Created by Qinglanhui on 2018/9/5.
+ */
+angular.module('app.OperationData').service("OutTapeAllocationService", function($http, $q , APP_CONFIG) {
+    //Select��һ����Cycle
+    this.getSelectCycle = function() {
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
+            url : APP_CONFIG.baseUrl +'/api/mcm/',
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+    //��ȡ�ڶ����ֱ������
+    this.getExecute2 = function() {
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/CAMaintenanceBmc/',
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+    //ɾ���ڶ�����ĳһ��
+    this.DelItem = function(id) {
+        console.log(id)
+        var d = $q.defer();
+        $http({
+            method : 'DELETE',
+            url : APP_CONFIG.baseUrl + '/api/caMaintenanceUUid/',
+            /*transformRequest: function(obj) {
+             var str = [];
+             for (var s in obj) {
+             str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+             }
+             return str.join("&");
+             },*/
+            params : id,
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token"),
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+    //����Ww������ 1
+    this.getWw = function(id) {
+        console.log(id)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/bmc/summary/row/'+id,
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    //����Prc������ 2
+    this.getPrc = function(id) {
+        console.log(id)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/bmc/summary/prc/'+id,
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+    //Download
+    this.getWwDown = function(id) {
+        console.log(id)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/dm/ca/loadexcel/ww/'+id,
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+            responseType : 'arraybuffer'
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    //Validate��ť����
+    this.getValidate = function(v) {
+        console.log(v)
+        var d = $q.defer();
+        $http({
+            method : 'PUT',
+            url : APP_CONFIG.baseUrl + '/api/publish/',
+            transformRequest: function(obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+            params : v,
+        }).then(function successCallback(response) {
+            // ����ɹ�ִ�д���
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // ����ʧ��ִ�д���
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
+})
 "use strict";
 
 angular.module('app.Report').controller('InOutSummaryQtQCtrl', function ($scope,$state,$stateParams,$location) {
@@ -11744,29 +12756,8 @@ angular.module('app.Report').controller('OuttapeBUSummaryCtrl', function ($scope
 "use strict";
 
 angular.module('app.Report').controller('OuttapeSummaryCtrl', function ($scope,$state,$stateParams,$timeout) {
-    //datatable ��ͷ�̶�
-    $scope.reporttab=function(){
-        $("#tabExample1").dataTable().fnDestroy();
-        $timeout(function () {
-            $('#tabExample1').dataTable({
-                "scrollY":260,
-                "scrollX": true,
-                "dom": '<"top">rt<"bottom"><"clear">',
-                "scrollCollapse": true,
-                "jQueryUI": true,
-                // "pagingType":   "simple_numbers",
-                stateSave: true,
-                "paging": false,
-                "ordering": false,
-                "bLengthChange": true,
-                //"order": [[ 3, "desc" ]],
-                "fixedColumns" :{
-                    leftColumns: 2,
-                }
-            });
-        })
-    }
-    $scope.reporttab();
+    $('#final table').stickySort({ sortable: true });
+
 })
 "use strict";
 
@@ -14243,7 +15234,7 @@ d(j,n)}}if(c){e=0;for(a=c.length;e<a;e++)d(e,c[e])}}function N(a,b,c,d){var e=a.
                 g.aoColumns;j=0;for(i=r.length;j<i;j++)Ga(o,e?e[j]:null);kb(o,g.aoColumnDefs,r,function(a,b){la(o,a,b)});if(x.length){var w=function(a,b){return a.getAttribute("data-"+b)!==null?b:null};h(x[0]).children("th, td").each(function(a,b){var c=o.aoColumns[a];if(c.mData===a){var d=w(b,"sort")||w(b,"order"),e=w(b,"filter")||w(b,"search");if(d!==null||e!==null){c.mData={_:a+".display",sort:d!==null?a+".@data-"+d:k,type:d!==null?a+".@data-"+d:k,filter:e!==null?a+".@data-"+e:k};la(o,a)}}})}var U=o.oFeatures,
                 e=function(){if(g.aaSorting===k){var a=o.aaSorting;j=0;for(i=a.length;j<i;j++)a[j][1]=o.aoColumns[j].asSorting[0]}ya(o);U.bSort&&z(o,"aoDrawCallback",function(){if(o.bSorted){var a=W(o),b={};h.each(a,function(a,c){b[c.src]=c.dir});s(o,null,"order",[o,a,b]);Kb(o)}});z(o,"aoDrawCallback",function(){(o.bSorted||y(o)==="ssp"||U.bDeferRender)&&ya(o)},"sc");var a=q.children("caption").each(function(){this._captionSide=h(this).css("caption-side")}),b=q.children("thead");b.length===0&&(b=h("<thead/>").appendTo(q));
                     o.nTHead=b[0];b=q.children("tbody");b.length===0&&(b=h("<tbody/>").appendTo(q));o.nTBody=b[0];b=q.children("tfoot");if(b.length===0&&a.length>0&&(o.oScroll.sX!==""||o.oScroll.sY!==""))b=h("<tfoot/>").appendTo(q);if(b.length===0||b.children().length===0)q.addClass(u.sNoFooter);else if(b.length>0){o.nTFoot=b[0];ea(o.aoFooter,o.nTFoot)}if(g.aaData)for(j=0;j<g.aaData.length;j++)N(o,g.aaData[j]);else(o.bDeferLoading||y(o)=="dom")&&oa(o,h(o.nTBody).children("tr"));o.aiDisplay=o.aiDisplayMaster.slice();
-                    o.bInitialised=true;n===false&&ha(o)};g.bStateSave?(U.bStateSave=!0,z(o,"aoDrawCallback",za,"state_save"),Lb(o,g,e)):e()}});b=null;return this},x,t,p,u,$a={},Pb=/[\r\n]/g,Ca=/<.*?>/g,cc=/^\d{2,4}[\.\/\-]\d{1,2}[\.\/\-]\d{1,2}([T ]{1}\d{1,2}[:\.]\d{2}([\.:]\d{2})?)?$/,dc=RegExp("(\\/|\\.|\\*|\\+|\\?|\\||\\(|\\)|\\[|\\]|\\{|\\}|\\\\|\\$|\\^|\\-)","g"),Za=/[',$?��?%\u2009\u202F\u20BD\u20a9\u20BArfk]/gi,M=function(a){return!a||!0===a||"-"===a?!0:!1},Qb=function(a){var b=parseInt(a,10);return!isNaN(b)&&
+                    o.bInitialised=true;n===false&&ha(o)};g.bStateSave?(U.bStateSave=!0,z(o,"aoDrawCallback",za,"state_save"),Lb(o,g,e)):e()}});b=null;return this},x,t,p,u,$a={},Pb=/[\r\n]/g,Ca=/<.*?>/g,cc=/^\d{2,4}[\.\/\-]\d{1,2}[\.\/\-]\d{1,2}([T ]{1}\d{1,2}[:\.]\d{2}([\.:]\d{2})?)?$/,dc=RegExp("(\\/|\\.|\\*|\\+|\\?|\\||\\(|\\)|\\[|\\]|\\{|\\}|\\\\|\\$|\\^|\\-)","g"),Za=/[',$?��?%\u2009\u202F\u20BD\u20a9\u20BArfk]/gi,M=function(a){return!a||!0===a||"-"===a?!0:!1},Qb=function(a){var b=parseInt(a,10);return!isNaN(b)&&
     isFinite(a)?b:null},Rb=function(a,b){$a[b]||($a[b]=RegExp(Sa(b),"g"));return"string"===typeof a&&"."!==b?a.replace(/\./g,"").replace($a[b],"."):a},ab=function(a,b,c){var d="string"===typeof a;if(M(a))return!0;b&&d&&(a=Rb(a,b));c&&d&&(a=a.replace(Za,""));return!isNaN(parseFloat(a))&&isFinite(a)},Sb=function(a,b,c){return M(a)?!0:!(M(a)||"string"===typeof a)?null:ab(a.replace(Ca,""),b,c)?!0:null},D=function(a,b,c){var d=[],e=0,f=a.length;if(c!==k)for(;e<f;e++)a[e]&&a[e][b]&&d.push(a[e][b][c]);else for(;e<
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               f;e++)a[e]&&d.push(a[e][b]);return d},ja=function(a,b,c,d){var e=[],f=0,g=b.length;if(d!==k)for(;f<g;f++)a[b[f]][c]&&e.push(a[b[f]][c][d]);else for(;f<g;f++)e.push(a[b[f]][c]);return e},X=function(a,b){var c=[],d;b===k?(b=0,d=a):(d=b,b=a);for(var e=b;e<d;e++)c.push(e);return c},Tb=function(a){for(var b=[],c=0,d=a.length;c<d;c++)a[c]&&b.push(a[c]);return b},sa=function(a){var b;a:{if(!(2>a.length)){b=a.slice().sort();for(var c=b[0],d=1,e=b.length;d<e;d++){if(b[d]===c){b=!1;break a}c=b[d]}}b=!0}if(b)return a.slice();
         b=[];var e=a.length,f,g=0,d=0;a:for(;d<e;d++){c=a[d];for(f=0;f<g;f++)if(b[f]===c)continue a;b.push(c);g++}return b};m.util={throttle:function(a,b){var c=b!==k?b:200,d,e;return function(){var b=this,g=+new Date,h=arguments;d&&g<d+c?(clearTimeout(e),e=setTimeout(function(){d=k;a.apply(b,h)},c)):(d=g,a.apply(b,h))}},escapeRegex:function(a){return a.replace(dc,"\\$1")}};var A=function(a,b,c){a[b]!==k&&(a[c]=a[b])},ca=/\[.*?\]$/,V=/\(\)$/,Sa=m.util.escapeRegex,xa=h("<div>")[0],$b=xa.textContent!==k,bc=
@@ -17255,18 +18246,6 @@ angular.module('app.graphs').directive('flotSiteStatsChart', function(FlotConfig
 });
 'use strict';
 
-angular.module('app.graphs').directive('highchartTable', function (lazyScript) {
-    return {
-        restrict: 'A',
-        link: function (scope, element) {
-            lazyScript.register('build/vendor.graphs.js').then(function(){
-                element.highchartTable();
-            })
-        }
-    }
-});
-'use strict';
-
 angular.module('app.graphs').directive('easyPieChartContainer', function () {
     return {
         restrict: 'A',
@@ -17756,6 +18735,18 @@ angular.module('app.graphs').directive('sparklineContainer', function () {
 
             drawSparklines();
 
+        }
+    }
+});
+'use strict';
+
+angular.module('app.graphs').directive('highchartTable', function (lazyScript) {
+    return {
+        restrict: 'A',
+        link: function (scope, element) {
+            lazyScript.register('build/vendor.graphs.js').then(function(){
+                element.highchartTable();
+            })
         }
     }
 });
@@ -18916,6 +19907,153 @@ angular.module('app.tables').directive('jqGrid', function ($compile) {
 
 
             $compile(element.contents())(scope);
+        }
+    }
+});
+"use strict";
+
+angular.module('SmartAdmin.Layout').directive('fullScreen', function(){
+    return {
+        restrict: 'A',
+        link: function(scope, element){
+            var $body = $('body');
+            var toggleFullSceen = function(e){
+                if (!$body.hasClass("full-screen")) {
+                    $body.addClass("full-screen");
+                    if (document.documentElement.requestFullscreen) {
+                        document.documentElement.requestFullscreen();
+                    } else if (document.documentElement.mozRequestFullScreen) {
+                        document.documentElement.mozRequestFullScreen();
+                    } else if (document.documentElement.webkitRequestFullscreen) {
+                        document.documentElement.webkitRequestFullscreen();
+                    } else if (document.documentElement.msRequestFullscreen) {
+                        document.documentElement.msRequestFullscreen();
+                    }
+                } else {
+                    $body.removeClass("full-screen");
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    }
+                }
+            };
+
+            element.on('click', toggleFullSceen);
+
+        }
+    }
+});
+"use strict";
+
+angular.module('SmartAdmin.Layout').directive('minifyMenu', function(){
+    return {
+        restrict: 'A',
+        link: function(scope, element){
+                var $body = $('body');
+            var minifyMenu = function() {
+                if (!$body.hasClass("menu-on-top")) {
+                    $body.toggleClass("minified");
+                    $body.removeClass("hidden-menu");
+                    $('html').removeClass("hidden-menu-mobile-lock");
+                }
+            };
+
+            element.on('click', minifyMenu);
+        }
+    }
+})
+'use strict';
+
+angular.module('SmartAdmin.Layout').directive('reloadState', function ($rootScope) {
+    return {
+        restrict: 'A',
+        compile: function (tElement, tAttributes) {
+            tElement.removeAttr('reload-state data-reload-state');
+            tElement.on('click', function (e) {
+                $rootScope.$state.transitionTo($rootScope.$state.current, $rootScope.$stateParams, {
+                    reload: true,
+                    inherit: false,
+                    notify: true
+                });
+                e.preventDefault();
+            })
+        }
+    }
+});
+
+"use strict";
+
+angular.module('SmartAdmin.Layout').directive('resetWidgets', function($state){
+
+    return {
+        restrict: 'A',
+        link: function(scope, element){
+            element.on('click', function(){
+                $.SmartMessageBox({
+                    title : "<i class='fa fa-refresh' style='color:green'></i> Clear Local Storage",
+                    content : "Would you like to RESET all your saved widgets and clear LocalStorage?1",
+                    buttons : '[No][Yes]'
+                }, function(ButtonPressed) {
+                    if (ButtonPressed == "Yes" && localStorage) {
+                        localStorage.clear();
+                        location.reload()
+                    }
+                });
+
+            });
+        }
+    }
+
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Layout').directive('searchMobile', function () {
+    return {
+        restrict: 'A',
+        compile: function (element, attributes) {
+            element.removeAttr('search-mobile data-search-mobile');
+
+            element.on('click', function (e) {
+                $('body').addClass('search-mobile');
+                e.preventDefault();
+            });
+
+            $('#cancel-search-js').on('click', function (e) {
+                $('body').removeClass('search-mobile');
+                e.preventDefault();
+            });
+        }
+    }
+});
+"use strict";
+
+angular.module('SmartAdmin.Layout').directive('toggleMenu', function(){
+    return {
+        restrict: 'A',
+        link: function(scope, element){
+            var $body = $('body');
+
+            var toggleMenu = function(){
+                if (!$body.hasClass("menu-on-top")){
+                    $('html').toggleClass("hidden-menu-mobile-lock");
+                    $body.toggleClass("hidden-menu");
+                    $body.removeClass("minified");
+                } else if ( $body.hasClass("menu-on-top") && $body.hasClass("mobile-view-activated") ) {
+                    $('html').toggleClass("hidden-menu-mobile-lock");
+                    $body.toggleClass("hidden-menu");
+                    $body.removeClass("minified");
+                }
+            };
+
+            element.on('click', toggleMenu);
+
+            scope.$on('requestToggleMenu', function(){
+                toggleMenu();
+            });
         }
     }
 });
@@ -20153,153 +21291,6 @@ angular.module('SmartAdmin.UI').directive('smartTooltipHtml', function () {
 
 "use strict";
 
-angular.module('SmartAdmin.Layout').directive('fullScreen', function(){
-    return {
-        restrict: 'A',
-        link: function(scope, element){
-            var $body = $('body');
-            var toggleFullSceen = function(e){
-                if (!$body.hasClass("full-screen")) {
-                    $body.addClass("full-screen");
-                    if (document.documentElement.requestFullscreen) {
-                        document.documentElement.requestFullscreen();
-                    } else if (document.documentElement.mozRequestFullScreen) {
-                        document.documentElement.mozRequestFullScreen();
-                    } else if (document.documentElement.webkitRequestFullscreen) {
-                        document.documentElement.webkitRequestFullscreen();
-                    } else if (document.documentElement.msRequestFullscreen) {
-                        document.documentElement.msRequestFullscreen();
-                    }
-                } else {
-                    $body.removeClass("full-screen");
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.webkitExitFullscreen) {
-                        document.webkitExitFullscreen();
-                    }
-                }
-            };
-
-            element.on('click', toggleFullSceen);
-
-        }
-    }
-});
-"use strict";
-
-angular.module('SmartAdmin.Layout').directive('minifyMenu', function(){
-    return {
-        restrict: 'A',
-        link: function(scope, element){
-                var $body = $('body');
-            var minifyMenu = function() {
-                if (!$body.hasClass("menu-on-top")) {
-                    $body.toggleClass("minified");
-                    $body.removeClass("hidden-menu");
-                    $('html').removeClass("hidden-menu-mobile-lock");
-                }
-            };
-
-            element.on('click', minifyMenu);
-        }
-    }
-})
-'use strict';
-
-angular.module('SmartAdmin.Layout').directive('reloadState', function ($rootScope) {
-    return {
-        restrict: 'A',
-        compile: function (tElement, tAttributes) {
-            tElement.removeAttr('reload-state data-reload-state');
-            tElement.on('click', function (e) {
-                $rootScope.$state.transitionTo($rootScope.$state.current, $rootScope.$stateParams, {
-                    reload: true,
-                    inherit: false,
-                    notify: true
-                });
-                e.preventDefault();
-            })
-        }
-    }
-});
-
-"use strict";
-
-angular.module('SmartAdmin.Layout').directive('resetWidgets', function($state){
-
-    return {
-        restrict: 'A',
-        link: function(scope, element){
-            element.on('click', function(){
-                $.SmartMessageBox({
-                    title : "<i class='fa fa-refresh' style='color:green'></i> Clear Local Storage",
-                    content : "Would you like to RESET all your saved widgets and clear LocalStorage?1",
-                    buttons : '[No][Yes]'
-                }, function(ButtonPressed) {
-                    if (ButtonPressed == "Yes" && localStorage) {
-                        localStorage.clear();
-                        location.reload()
-                    }
-                });
-
-            });
-        }
-    }
-
-});
-
-'use strict';
-
-angular.module('SmartAdmin.Layout').directive('searchMobile', function () {
-    return {
-        restrict: 'A',
-        compile: function (element, attributes) {
-            element.removeAttr('search-mobile data-search-mobile');
-
-            element.on('click', function (e) {
-                $('body').addClass('search-mobile');
-                e.preventDefault();
-            });
-
-            $('#cancel-search-js').on('click', function (e) {
-                $('body').removeClass('search-mobile');
-                e.preventDefault();
-            });
-        }
-    }
-});
-"use strict";
-
-angular.module('SmartAdmin.Layout').directive('toggleMenu', function(){
-    return {
-        restrict: 'A',
-        link: function(scope, element){
-            var $body = $('body');
-
-            var toggleMenu = function(){
-                if (!$body.hasClass("menu-on-top")){
-                    $('html').toggleClass("hidden-menu-mobile-lock");
-                    $body.toggleClass("hidden-menu");
-                    $body.removeClass("minified");
-                } else if ( $body.hasClass("menu-on-top") && $body.hasClass("mobile-view-activated") ) {
-                    $('html').toggleClass("hidden-menu-mobile-lock");
-                    $body.toggleClass("hidden-menu");
-                    $body.removeClass("minified");
-                }
-            };
-
-            element.on('click', toggleMenu);
-
-            scope.$on('requestToggleMenu', function(){
-                toggleMenu();
-            });
-        }
-    }
-});
-"use strict";
-
 
 angular.module('SmartAdmin.Forms').directive('bootstrapAttributeForm', function(){
 
@@ -20829,6 +21820,196 @@ angular.module('SmartAdmin.Forms').directive('smartSummernoteEditor', function (
 });
 'use strict';
 
+angular.module('SmartAdmin.Forms').directive('smartJcrop', function ($q) {
+    return {
+        restrict: 'A',
+        scope: {
+            coords: '=',
+            options: '=',
+            selection: '='
+        },
+        link: function (scope, element, attributes) {
+            var jcropApi, imageWidth, imageHeight, imageLoaded = $q.defer();
+
+            var listeners = {
+                onSelectHandlers: [],
+                onChangeHandlers: [],
+                onSelect: function (c) {
+                    angular.forEach(listeners.onSelectHandlers, function (handler) {
+                        handler.call(jcropApi, c)
+                    })
+                },
+                onChange: function (c) {
+                    angular.forEach(listeners.onChangeHandlers, function (handler) {
+                        handler.call(jcropApi, c)
+                    })
+                }
+            };
+
+            if (attributes.coords) {
+                var coordsUpdate = function (c) {
+                    scope.$apply(function () {
+                        scope.coords = c;
+                    });
+                };
+                listeners.onSelectHandlers.push(coordsUpdate);
+                listeners.onChangeHandlers.push(coordsUpdate);
+            }
+
+            var $previewPane = $(attributes.smartJcropPreview),
+                $previewContainer = $previewPane.find('.preview-container'),
+                $previewImg = $previewPane.find('img');
+
+            if ($previewPane.length && $previewImg.length) {
+                var previewUpdate = function (coords) {
+                    if (parseInt(coords.w) > 0) {
+                        var rx = $previewContainer.width() / coords.w;
+                        var ry = $previewContainer.height() / coords.h;
+
+                        $previewImg.css({
+                            width: Math.round(rx * imageWidth) + 'px',
+                            height: Math.round(ry * imageHeight) + 'px',
+                            marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+                            marginTop: '-' + Math.round(ry * coords.y) + 'px'
+                        });
+                    }
+                };
+                listeners.onSelectHandlers.push(previewUpdate);
+                listeners.onChangeHandlers.push(previewUpdate);
+            }
+
+
+            var options = {
+                onSelect: listeners.onSelect,
+                onChange: listeners.onChange
+            };
+
+            if ($previewContainer.length) {
+                options.aspectRatio = $previewContainer.width() / $previewContainer.height()
+            }
+
+            if (attributes.selection) {
+                scope.$watch('selection', function (newVal, oldVal) {
+                    if (newVal != oldVal) {
+                        var rectangle = newVal == 'release' ? [imageWidth / 2, imageHeight / 2, imageWidth / 2, imageHeight / 2] : newVal;
+
+                        var callback = newVal == 'release' ? function () {
+                            jcropApi.release();
+                        } : angular.noop;
+
+                        imageLoaded.promise.then(function () {
+                            if (scope.options && scope.options.animate) {
+                                jcropApi.animateTo(rectangle, callback);
+                            } else {
+                                jcropApi.setSelect(rectangle);
+                            }
+                        });
+                    }
+                });
+            }
+
+            if (attributes.options) {
+
+                var optionNames = [
+                    'bgOpacity', 'bgColor', 'bgFade', 'shade', 'outerImage',
+                    'allowSelect', 'allowMove', 'allowResize',
+                    'aspectRatio'
+                ];
+
+                angular.forEach(optionNames, function (name) {
+                    if (scope.options[name])
+                        options[name] = scope.options[name]
+
+                    scope.$watch('options.' + name, function (newVal, oldVal) {
+                        if (newVal != oldVal) {
+                            imageLoaded.promise.then(function () {
+                                var update = {};
+                                update[name] = newVal;
+                                jcropApi.setOptions(update);
+                            });
+                        }
+                    });
+
+                });
+
+
+                scope.$watch('options.disabled', function (newVal, oldVal) {
+                    if (newVal != oldVal) {
+                        if (newVal) {
+                            jcropApi.disable();
+                        } else {
+                            jcropApi.enable();
+                        }
+                    }
+                });
+
+                scope.$watch('options.destroyed', function (newVal, oldVal) {
+                    if (newVal != oldVal) {
+                        if (newVal) {
+                            jcropApi.destroy();
+                        } else {
+                            _init();
+                        }
+                    }
+                });
+
+                scope.$watch('options.src', function (newVal, oldVal) {
+                    imageLoaded = $q.defer();
+                    if (newVal != oldVal) {
+                        jcropApi.setImage(scope.options.src, function () {
+                            imageLoaded.resolve();
+                        });
+                    }
+                });
+
+                var updateSize = function(){
+                    jcropApi.setOptions({
+                        minSize: [scope.options.minSizeWidth, scope.options.minSizeHeight],
+                        maxSize: [scope.options.maxSizeWidth, scope.options.maxSizeHeight]
+                    });
+                };
+
+                scope.$watch('options.minSizeWidth', function (newVal, oldVal) {
+                    if (newVal != oldVal) updateSize();
+                });
+                scope.$watch('options.minSizeHeight', function (newVal, oldVal) {
+                    if (newVal != oldVal) updateSize();
+                });
+                scope.$watch('options.maxSizeWidth', function (newVal, oldVal) {
+                    if (newVal != oldVal) updateSize();
+                });
+                scope.$watch('options.maxSizeHeight', function (newVal, oldVal) {
+                    if (newVal != oldVal) updateSize();
+                });
+            }
+
+            var _init = function () {
+                element.Jcrop(options, function () {
+                    jcropApi = this;
+                    // Use the API to get the real image size
+                    var bounds = this.getBounds();
+                    imageWidth = bounds[0];
+                    imageHeight = bounds[1];
+
+                    if (attributes.selection && angular.isArray(scope.selection)) {
+                        if (scope.options && scope.options.animate) {
+                            jcropApi.animateTo(scope.selection);
+                        } else {
+                            jcropApi.setSelect(scope.selection);
+                        }
+                    }
+                    imageLoaded.resolve();
+                });
+            };
+
+            _init()
+
+
+        }
+    }
+});
+'use strict';
+
 angular.module('SmartAdmin.Forms').directive('smartCheckoutForm', function (formsCommon, lazyScript) {
     return {
         restrict: 'A',
@@ -21240,214 +22421,6 @@ angular.module('SmartAdmin.Forms').directive('smartReviewForm', function (formsC
 });
 'use strict';
 
-angular.module('SmartAdmin.Forms').directive('smartJcrop', function ($q) {
-    return {
-        restrict: 'A',
-        scope: {
-            coords: '=',
-            options: '=',
-            selection: '='
-        },
-        link: function (scope, element, attributes) {
-            var jcropApi, imageWidth, imageHeight, imageLoaded = $q.defer();
-
-            var listeners = {
-                onSelectHandlers: [],
-                onChangeHandlers: [],
-                onSelect: function (c) {
-                    angular.forEach(listeners.onSelectHandlers, function (handler) {
-                        handler.call(jcropApi, c)
-                    })
-                },
-                onChange: function (c) {
-                    angular.forEach(listeners.onChangeHandlers, function (handler) {
-                        handler.call(jcropApi, c)
-                    })
-                }
-            };
-
-            if (attributes.coords) {
-                var coordsUpdate = function (c) {
-                    scope.$apply(function () {
-                        scope.coords = c;
-                    });
-                };
-                listeners.onSelectHandlers.push(coordsUpdate);
-                listeners.onChangeHandlers.push(coordsUpdate);
-            }
-
-            var $previewPane = $(attributes.smartJcropPreview),
-                $previewContainer = $previewPane.find('.preview-container'),
-                $previewImg = $previewPane.find('img');
-
-            if ($previewPane.length && $previewImg.length) {
-                var previewUpdate = function (coords) {
-                    if (parseInt(coords.w) > 0) {
-                        var rx = $previewContainer.width() / coords.w;
-                        var ry = $previewContainer.height() / coords.h;
-
-                        $previewImg.css({
-                            width: Math.round(rx * imageWidth) + 'px',
-                            height: Math.round(ry * imageHeight) + 'px',
-                            marginLeft: '-' + Math.round(rx * coords.x) + 'px',
-                            marginTop: '-' + Math.round(ry * coords.y) + 'px'
-                        });
-                    }
-                };
-                listeners.onSelectHandlers.push(previewUpdate);
-                listeners.onChangeHandlers.push(previewUpdate);
-            }
-
-
-            var options = {
-                onSelect: listeners.onSelect,
-                onChange: listeners.onChange
-            };
-
-            if ($previewContainer.length) {
-                options.aspectRatio = $previewContainer.width() / $previewContainer.height()
-            }
-
-            if (attributes.selection) {
-                scope.$watch('selection', function (newVal, oldVal) {
-                    if (newVal != oldVal) {
-                        var rectangle = newVal == 'release' ? [imageWidth / 2, imageHeight / 2, imageWidth / 2, imageHeight / 2] : newVal;
-
-                        var callback = newVal == 'release' ? function () {
-                            jcropApi.release();
-                        } : angular.noop;
-
-                        imageLoaded.promise.then(function () {
-                            if (scope.options && scope.options.animate) {
-                                jcropApi.animateTo(rectangle, callback);
-                            } else {
-                                jcropApi.setSelect(rectangle);
-                            }
-                        });
-                    }
-                });
-            }
-
-            if (attributes.options) {
-
-                var optionNames = [
-                    'bgOpacity', 'bgColor', 'bgFade', 'shade', 'outerImage',
-                    'allowSelect', 'allowMove', 'allowResize',
-                    'aspectRatio'
-                ];
-
-                angular.forEach(optionNames, function (name) {
-                    if (scope.options[name])
-                        options[name] = scope.options[name]
-
-                    scope.$watch('options.' + name, function (newVal, oldVal) {
-                        if (newVal != oldVal) {
-                            imageLoaded.promise.then(function () {
-                                var update = {};
-                                update[name] = newVal;
-                                jcropApi.setOptions(update);
-                            });
-                        }
-                    });
-
-                });
-
-
-                scope.$watch('options.disabled', function (newVal, oldVal) {
-                    if (newVal != oldVal) {
-                        if (newVal) {
-                            jcropApi.disable();
-                        } else {
-                            jcropApi.enable();
-                        }
-                    }
-                });
-
-                scope.$watch('options.destroyed', function (newVal, oldVal) {
-                    if (newVal != oldVal) {
-                        if (newVal) {
-                            jcropApi.destroy();
-                        } else {
-                            _init();
-                        }
-                    }
-                });
-
-                scope.$watch('options.src', function (newVal, oldVal) {
-                    imageLoaded = $q.defer();
-                    if (newVal != oldVal) {
-                        jcropApi.setImage(scope.options.src, function () {
-                            imageLoaded.resolve();
-                        });
-                    }
-                });
-
-                var updateSize = function(){
-                    jcropApi.setOptions({
-                        minSize: [scope.options.minSizeWidth, scope.options.minSizeHeight],
-                        maxSize: [scope.options.maxSizeWidth, scope.options.maxSizeHeight]
-                    });
-                };
-
-                scope.$watch('options.minSizeWidth', function (newVal, oldVal) {
-                    if (newVal != oldVal) updateSize();
-                });
-                scope.$watch('options.minSizeHeight', function (newVal, oldVal) {
-                    if (newVal != oldVal) updateSize();
-                });
-                scope.$watch('options.maxSizeWidth', function (newVal, oldVal) {
-                    if (newVal != oldVal) updateSize();
-                });
-                scope.$watch('options.maxSizeHeight', function (newVal, oldVal) {
-                    if (newVal != oldVal) updateSize();
-                });
-            }
-
-            var _init = function () {
-                element.Jcrop(options, function () {
-                    jcropApi = this;
-                    // Use the API to get the real image size
-                    var bounds = this.getBounds();
-                    imageWidth = bounds[0];
-                    imageHeight = bounds[1];
-
-                    if (attributes.selection && angular.isArray(scope.selection)) {
-                        if (scope.options && scope.options.animate) {
-                            jcropApi.animateTo(scope.selection);
-                        } else {
-                            jcropApi.setSelect(scope.selection);
-                        }
-                    }
-                    imageLoaded.resolve();
-                });
-            };
-
-            _init()
-
-
-        }
-    }
-});
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartDropzone', function () {
-    return function (scope, element, attrs) {
-        var config, dropzone;
-
-        config = scope[attrs.smartDropzone];
-
-        // create a Dropzone for the element with the given options
-        dropzone = new Dropzone(element[0], config.options);
-
-        // bind the given event handlers
-        angular.forEach(config.eventHandlers, function (handler, event) {
-            dropzone.on(event, handler);
-        });
-    };
-});
-
-'use strict';
-
 angular.module('SmartAdmin.Forms').directive('smartClockpicker', function () {
     return {
         restrict: 'A',
@@ -21834,6 +22807,24 @@ angular.module('SmartAdmin.Forms').directive('smartValidateForm', function (form
 
         }
     }
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartDropzone', function () {
+    return function (scope, element, attrs) {
+        var config, dropzone;
+
+        config = scope[attrs.smartDropzone];
+
+        // create a Dropzone for the element with the given options
+        dropzone = new Dropzone(element[0], config.options);
+
+        // bind the given event handlers
+        angular.forEach(config.eventHandlers, function (handler, event) {
+            dropzone.on(event, handler);
+        });
+    };
 });
 
 'use strict';
