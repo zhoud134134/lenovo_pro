@@ -18,9 +18,12 @@
 
 }
 #outcontent .sticky-col{
-    width: 282px;
+    width: 321px;
 }
 
+#ouButcontent .sticky-col{
+	width: 139px;
+}
 	.sticky-col{
 		position: fixed;
     left: 0px;
@@ -52,7 +55,9 @@
 	min-width: 138px;
 	height: 30px;
 }
-
+#outcontent .sticky-wrap th{
+	min-width: 160px;
+}
 .sticky-wrap thead th {
 	-webkit-user-select: none;
 	-moz-user-select: none;
