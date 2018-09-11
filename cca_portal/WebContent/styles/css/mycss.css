@@ -344,6 +344,7 @@
 .file-route {
     height: 31px;
     line-height: 31px;
+    width: 160px;
 }
 .model-file-btn {
     position: relative;
@@ -445,6 +446,7 @@
 .dataTables_scrollHead .table-bordered, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
     border: 1px solid #ddd;
     border-right: 0;
+    min-width: 196px;
 }
 .dataTables_scrollBody  .table-bordered>tbody>tr>td {
     border-bottom: 0;

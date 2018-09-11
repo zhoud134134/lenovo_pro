@@ -109,4 +109,52 @@ angular.module('app.OperationData').service("OutTapeAllocationService", function
         return d.promise;
     }
 
+    //Download
+    this.getWwDown = function(id) {
+        console.log(id)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/dm/ca/loadexcel/ww/'+id,
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+            responseType : 'arraybuffer'
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    //Validate按钮功能
+    this.getValidate = function(v) {
+        console.log(v)
+        var d = $q.defer();
+        $http({
+            method : 'PUT',
+            url : APP_CONFIG.baseUrl + '/api/publish/',
+            transformRequest: function(obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
+            },
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+            params : v,
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
 })

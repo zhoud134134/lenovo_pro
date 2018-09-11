@@ -128,6 +128,8 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
             $scope.althree=true;
             //LTA显示
             $scope.althreeLta=true;
+            $scope.althreeOut=true;
+            $scope.althreeSw=true;
             //LatalTable 1
             OutTapeAllocationService.getWw($scope.TaskID).then(function(data){
                 if(data.code == 0){
@@ -183,7 +185,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
             alert("还未执行完成！");
         }
     };
-
+    //LatalTable 搜索数据
     $scope.LatalTable = function(){
         $("#LatalExample").dataTable().fnDestroy();
         $timeout(function () {
@@ -201,12 +203,21 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "autoWidth": false,
                 "data" :  $scope.WwList,
                 "columns":[
-                    { "data": "Geo" },
-                    { "data": "Country" },
-                    { "data": "BU" },
-                    { "data": "Deal Des#/SKU" },
-                    { "data": "PN" },
-                    { "data": "Amount"}
+                    { "data": "H1" },
+                    { "data": "Account" },
+                    { "data": "A0" },
+                    { "data": "Profit Center" },
+                    { "data": "Amount" },
+                    { "data": "Deal Des./SKU/Text"},
+                    {"data":"GPN"},
+                    {"data":"Plant"},
+                    {"data":"CD"},
+                    {"data":"BU"},
+                    {"data":"Geo"},
+                    {"data":"Sub_Geo"},
+                    {"data":"Country"},
+                    {"data":"BPC Segment"},
+                    {"data":"Segment"}
                     //{ "data": "lqBmc" ,render: function ( data, type, row ) {
                     //    if(data == null){
                     //        return data;
@@ -227,6 +238,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
             });
         });
     }
+    //LatresTable  搜索 数据
     $scope.LatresTable = function(){
         $("#LatresExample").dataTable().fnDestroy();
         $timeout(function () {
@@ -244,12 +256,13 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "autoWidth": false,
                 "data" :  $scope.PrcList,
                 "columns":[
-                    { "data": "Geo" },
-                    { "data": "Country" },
                     { "data": "BU" },
-                    { "data": "Deal Des#/SKU" },
-                    { "data": "PN" },
-                    { "data": "Amount"}
+                    { "data": "Segment" },
+                    { "data": "Intel Alliance Funding" },
+                    { "data": "SKU" },
+                    { "data": "Geo" },
+                    { "data": "Sub_Geo"},
+                    {"data":"Amount"}
                     //{ "data": "lqBmc" ,render: function ( data, type, row ) {
                     //    if(data == null){
                     //        return data;
@@ -270,4 +283,58 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
             });
         });
     }
+
+    //Download
+    $scope.getDownLoad = function(){
+        if(!$scope.TaskID){
+            return;
+        }else{
+            OutTapeAllocationService.getWwDown($scope.TaskID).then(function(data){
+                console.log(data);
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+            },function(data){
+                console.log(data);
+            })
+        }
+    }
+
+    //点击Validate
+    $scope.getValidate = function(){
+        $scope.validate = {
+            zcycle_name : $scope.CycleName,
+            zuuid : $scope.TaskID,
+            user : $rootScope.user
+        };
+        OutTapeAllocationService.getValidate($scope.validate).then(function (data) {
+            if(data.code == 0){
+                alert('Success！');
+                $scope.getPage();
+            }else {
+                alert(data.msg);
+            }
+            console.log(data);
+        }, function (data) {
+            console.log(data);
+        });
+    };
+    $scope.type=0;
+   $scope.a=function(type){
+       switch (type) {
+           case 0:
+               console.log(0);
+               break;
+           case 1:
+              console.log(1);
+               break;
+           case 2:
+              console.log(2);
+               break;
+
+       }
+   }
 })
