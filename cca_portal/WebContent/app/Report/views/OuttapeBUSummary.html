@@ -1,28 +1,397 @@
 <!-- MAIN CONTENT -->
 <div id="content">
 
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <span>Out tape BU Summary</span>
+            </h1>
+        </div>
+        <!-- <big-breadcrumbs items="['Cost interlock schedule']" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs> -->
+        <!-- <div smart-include="app/layout/partials/sub-header.tpl.html"></div> -->
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- row -->
         <div class="row">
-            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-                <h1 class="page-title txt-color-blueDark">
-                    <span>Out tape BU Summary</span>
-                </h1>
-            </div>
-            <!-- <big-breadcrumbs items="['Cost interlock schedule']" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs> -->
-            <!-- <div smart-include="app/layout/partials/sub-header.tpl.html"></div> -->
+            <article class="col-sm-12">
+                <!--第一部分 search -->
+                <div jarvis-widget id="no-padding-table-widget" data-widget-color="Light Blue"
+                     data-widget-editbutton="false" data-widget-fullscreenbutton="false"
+                     data-widget-deletebutton="false">
+                    <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-table"></i>
+                    </span>
+                        <h2>Search</h2>
+                    </header>
+                    <div class="tab-serch">
+                        <div class="col-sm-8">
+                            <div class="col-sm-5 form-group-m">
+                                <label>Cycle Choose:</label>
+                                <div class="for-sel">
+                                    <select class="form-control">
+                                        <option value="">All</option>
+                                        <option value="">Q2M0</option>
+                                        <option value="">Q2M1</option>
+                                        <option value="">Q2M2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 tab-serch-btn">
+                            <button class="btn btn-back searchbtn" ng-click="SearchTab()">Search</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第二部分    内容 -->
+                <div class="mup-tabbtn">
+                    <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false"
+                         data-widget-deletebutton="false"
+                         data-widget-sortable="false">
+                        <header>
+                                <span class="widget-icon">
+                                    <i class="fa fa-columns"></i>
+                                </span>
+                            <h2>Result</h2>
+                        </header>
+                        <div class="summary-tab">
+                            <div class="widget-body no-padding ">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#LAR" aria-controls="home"
+                                                                              role="tab" data-toggle="tab">Think Pad</a>
+                                    </li>
+                                    <li role="presentation"><a href="#Out" aria-controls="LRD" role="tab"
+                                                               data-toggle="tab">Lenovo NB</a></li>
+                                    <li role="presentation"><a href="#Out" aria-controls="LRD" role="tab"
+                                                               data-toggle="tab">Commercial DT</a></li>
+                                    <li role="presentation"><a href="#Out" aria-controls="LRD" role="tab"
+                                                               data-toggle="tab">Consumer DT</a></li>
+                                    <li role="presentation"><a href="#Out" aria-controls="LRD" role="tab"
+                                                               data-toggle="tab">Workstation</a></li>
+                                    <li role="presentation"><a href="#Out" aria-controls="LRD" role="tab"
+                                                               data-toggle="tab">Chrome</a></li>
+                                    <li role="presentation"><a href="#Out" aria-controls="LRD" role="tab"
+                                                               data-toggle="tab">Server</a></li>
+                                    <li role="presentation"><a href="#Out" aria-controls="LRD" role="tab"
+                                                               data-toggle="tab">Accessories</a></li>
+                                    <li role="presentation"><a href="#Out" aria-controls="LRD" role="tab"
+                                                               data-toggle="tab">Visual</a></li>
+                                </ul>
+
+                                <main id="ouButcontent">
+                                    <section class="demo4" id="bufinal">
+
+                                        <table  class="overflow-both" >
+                                            <thead>
+                                            <tr>
+                                                <th class="center" >BU</th>
+                                                <th class="center" colspan="15">FYQ2 Cost Guidance - M1
+                                                    + Benefit/- Hit</th>
+                                            </tr>
+                                            <tr>
+                                                <th rowspan="2">Think Pad</th>
+                                                <th class="center" >PRC</th>
+                                                <th class="center" colspan="8">AP</th>
+                                                <th>EMEA</th>
+                                                <th>NA</th>
+                                                <th>LAS</th>
+                                                <th>Brazil</th>
+                                                <th rowspan="2">Top</th>
+                                                <th rowspan="2">Ttl</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="center" >China</th>
+                                                <th class="center" >HTK</th>
+                                                <th class="center" >ID</th>
+                                                <th class="center" >SEA</th>
+
+                                                <th class="center" >India</th>
+                                                <th class="center" >Japan</th>
+
+                                                <th class="center" >ANZ</th>
+                                                <th class="center" >HQ</th>
+                                                <th class="center" >Total</th>
+                                                <th>Total</th>
+                                                <th>NA</th>
+                                                <th>LAS</th>
+                                                <th>Brazil</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="Ftbody">
+                                            <tr>
+                                                <th >In Tape</th>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>QtQ take-down</th>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                            </tr>
+
+                                            <tr style="height: 20px">
+                                                <!-- <td colspan="2"></td> -->
+                                                <td colspan="12"></td>
+                                            </tr>
+                                            </tbody>
+
+                                            </tbody>
+
+                                            <tbody class="Ftbody">
+                                            <tr>
+                                                <th >Out tape delivery</th>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+
+                                            </tr>
+                                            <tr>
+                                                <th>CPU</th>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>SW</th>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>HDD</th>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Other</th>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>CPU</th>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>MVA special support</th>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Cost parity</th>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Lenovo Total  ($M)</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                            </tr>
+                                            <tr style="height: 20px">
+                                                <!-- <td colspan="2"></td> -->
+                                                <td colspan="12"></td>
+                                            </tr>
+                                            </tbody>
+                                            <tbody class="Ftbody">
+                                            <tr>
+                                                <th >$/CA</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                                <th>#111</th>
+                                            </tr>
+                                            <tr style="height: 20px">
+                                                <!-- <td colspan="2"></td> -->
+                                                <td colspan="12"></td>
+                                            </tr>
+                                            <tr>
+                                                <th >CA</th>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>2</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                </main>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
         </div>
-        <!-- widget grid -->
-        <section id="widget-grid" widget-grid>
-    
-            <!-- row -->
-            <div class="row">
-                <article class="col-sm-12">
-                    
-                </article>
-             </div>
-        
-                <!-- end row -->
-        </section>
-            <!-- end widget grid -->
-        
-        </div>
-        <!-- END MAIN CONTENT -->
+
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->

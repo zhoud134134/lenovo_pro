@@ -2,7 +2,7 @@ angular.module('app.layout').service("navService", function($http, $q , APP_CONF
 
     //获取用户登录信息
     this.getUser = function() {
-        var d = $q.defer();
+       /* var d = $q.defer();
         $http({
             method : 'GET',
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
@@ -14,9 +14,42 @@ angular.module('app.layout').service("navService", function($http, $q , APP_CONF
             // 请求失败执行代码
             d.reject("error");
         });
-        return d.promise;
-    }
+        return d.promise;*/
+    	
+    	$.ajax({
+            url: APP_CONFIG.baseUrl +'/adfs/user',
+            type: "get",
+            contentType: "application/json;charset=utf-8;",
+            dataType: "JSON",
+            async:false,
+            success: function(data){
+            	 if (data.code == 0) {
+                     if (!data.result) {
+                         window.location.href = APP_CONFIG.indexUrl;
+                     } else {
+                         if (data.result.token[0]) {
+                             sessionStorage.setItem("token", data.result.token[0]);
+                         } else {
+                             alert("没有token!");
+                         }
+                         if (data.result.status == '-1') {
+                             alert('没有权限！');
+                             window.location.href = APP_CONFIG.indexUrl;
+                         } else {
+                             sessionStorage.setItem("userResult", JSON.stringify(data.result));
+                         }
 
+                     }
+                 }
+            },
+            error: function(xhr, err) {
+               // openNewAlert( {title: "提示", message: "获取数据失败，请联系管理员！"} );
+                console.log(err);
+            }
+        });
+    	
+    	
+    }
     //bu
     this.getBU = function() {
         var d = $q.defer();
@@ -125,6 +158,29 @@ angular.module('app.layout').service("navService", function($http, $q , APP_CONF
         return d.promise;
     }
 
-
+    //请求全部排序的数据type=all
+    this.getSortData = function(type,stype) {
+      //  console.log(type);
+       var paramsdata = {
+            'type' : type,
+            'stype' : stype
+        };
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/fileorder/'+type,
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+             params: paramsdata,
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
 
 });

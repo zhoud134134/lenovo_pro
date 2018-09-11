@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($scope,$state,$timeout,$stateParams,$rootScope,APP_CONFIG,CAmaintenanceService,navService) {
+angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($scope,$state,$timeout,$stateParams,$rootScope,APP_CONFIG,CAmaintenanceService) {
     //函数说明：合并指定表格（表格id为_w_table_id）指定列（列数为_w_table_colnum）的相同文本的相邻单元格
 //参数说明：_w_table_id 为需要进行合并单元格的表格的id。如在HTMl中指定表格 id="data" ，此参数应为 #data
 //参数说明：_w_table_colnum 为需要合并单元格的所在列。为数字，从最左边第一列为1开始算起。
@@ -70,9 +70,9 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         if(data.code == 0){
             $scope.cycledata = data.result;
         }
-        console.log(data);
+       // console.log(data);
     },function(data){
-        console.log(data);
+       // console.log(data);
     });
 
     //第二部分tab信息展示
@@ -96,9 +96,9 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                     });
                 });
             }
-            console.log(data);
+           // console.log(data);
         },function(data){
-            console.log(data);
+          //  console.log(data);
         });
     }
     $scope.getPage();
@@ -110,7 +110,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             cycleName : $scope.CycleChoose,
             user : $rootScope.user
         }
-        console.log($rootScope.user);
+        //console.log($rootScope.user);
         if(!$scope.CycleChoose){
             alert("请选择条件！");
         }else {
@@ -121,9 +121,9 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                 }else {
                     alert(data.msg);
                 }
-                console.log(data);
+               // console.log(data);
             },function(data){
-                console.log(data);
+              //  console.log(data);
             });
         }
     };
@@ -132,11 +132,11 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         $($("#tabExample input:radio")).removeAttr("checked");
         $($event.target).parent().find("input:radio").prop("checked",true);
         $scope.taskId = id;
-        console.log($scope.taskId)
+      //  console.log($scope.taskId)
         $scope.status = status;
-        console.log($scope.status)
+       // console.log($scope.status)
         $scope.cyclename = cycleName;
-        console.log($scope.cyclename)
+      //  console.log($scope.cyclename)
         //$scope.SearchTaskId(a,b,c)
     }
 
@@ -146,76 +146,58 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             alert("请选择项！");
         }else if($scope.status =='Success' || $scope.status =='Publish'){
             $scope.PRCww=true;
-
             $scope.TaskID =  $scope.taskId;
             $scope.CycleName = $scope.cyclename;
 
             //WW
             CAmaintenanceService.getWw($scope.TaskID).then(function(data){
                 if(data.code == 0){
+                    
                     $scope.WwList = data.result;
-                    console.log($scope.WwList);
+                    $scope.segment = $rootScope.sortByDataBase($rootScope.getFiled($scope.WwList,"segment"),$rootScope.wwSortData.segments);
+                     $scope.segment.push('Total');
+                    $scope.bu =  $rootScope.sortByDataBase($rootScope.getFiled($scope.WwList,"bu"), $rootScope.wwSortData.bus);
+                    $scope.geo = $rootScope.sortByDataBase($rootScope.getFiled($scope.WwList,"geo"), $rootScope.wwSortData.geos);
+                    $scope.dataMap = CAmaintenanceService.getDataMap($scope.WwList,$scope.segment,$scope.geo,$scope.bu,$rootScope.wwSortData.regions);
                 }
-                console.log(data);
+                //console.log(data);
             },function(data){
-                console.log(data);
+               // console.log(data);
             });
 
             //PRC
             CAmaintenanceService.getPrc($scope.TaskID).then(function(caprcdata) {
-                console.log(caprcdata);
                 if (caprcdata.code == 0) {
+                	
                     $scope.PrcList = caprcdata.result;
-                    console.log($scope.PrcList);
-
-                    var arrSegment=$rootScope.PrcSegment.concat(["Total"]);
-
-                    //$rootScope.PrcSegment.unshift("BU");
-                    //$rootScope.PrcSegment.push("Total");
-                    $rootScope.PrcBu.push("Total");
-
-                    //$rootScope.segmenttop = [ 'BU', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'Total'];
-                    //var caprcthead = ["BU", "Think-T", "T-Model", "Commercial", "SMB", "Consumer", "Others", "YT", "Total"];
-                    //var caprctbody = ["Think Pad", "Lenovo NB", "Commercial DT", "Consumer DT", "Workstation", "Chrome", "Server", "Accessory", "Visual", "Total"];
-
-
-                    $scope.cadata = $rootScope.caprcTabCon($scope.PrcList,  $rootScope.PrcBu,  arrSegment, 'values');
-                    console.log($scope.cadata);
-                    console.log($rootScope.segmenttop);
-                    console.log($rootScope.PrcSegment);
-                    console.log(arrSegment);
-                    console.log($rootScope.PrcBu);
-
-                    $timeout(function(){
-                        console.log("1");
-                        //_w_table_colspan("#caprcTab",1,11);
-                        //_w_table_rowspan("#caprcTab",1);
-                        //_w_table_rowspan("#caprcTab",2);
-                        //_w_table_rowspan("#caprcTab",10);
-                        //_w_table_rowspan("#caprcTab",11);
-                    })
+                    $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled($scope.PrcList,"segment"),$rootScope.prcSortData.segments);
+                    $scope.Prcbu =  $rootScope.sortByDataBase($rootScope.getFiled($scope.PrcList,"bu"), $rootScope.prcSortData.bus);
+                    $scope.Prcbu.push('Total');
+                    $scope.getPrcDataMap = CAmaintenanceService.getPrcDataMap($scope.PrcList,$scope.Prcsegment,$scope.Prcbu);
                 }
             } ,function(data){
-                console.log(data);
+               // console.log(data);
             });
+            
+            
+            
+            
+            
         }else {
             alert("暂未执行成功，无法查看！");
         }
     };
-    var prc = {
-        stype : 'PRC'
-    };
-    CAmaintenanceService.getPrcBu(prc).then(function(caprcbudata){
-        console.log(caprcbudata.result);
+    CAmaintenanceService.getPrcBu($scope.bu).then(function(caprcbudata){
+        //console.log(caprcbudata.result);
         $rootScope.PrcBu=caprcbudata.result;
     }, function (data) {
-        console.log(data);
+       // console.log(data);
     })
-    CAmaintenanceService.getPrcSegment(prc).then(function(caprcsegmentdata){
-        console.log(caprcsegmentdata.result);
+    CAmaintenanceService.getPrcSegment($scope.segment).then(function(caprcsegmentdata){
+       // console.log(caprcsegmentdata.result);
         $rootScope.PrcSegment=caprcsegmentdata.result;
     }, function (data) {
-        console.log(data);
+       // console.log(data);
     })
     //删除
     $scope.DelOneItem = function(){
@@ -223,7 +205,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             alert("请选择项！");
         }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
             if(confirm('确认要删除？')) {
-                console.log($scope.taskid);
+                //console.log($scope.taskid);
                 $scope.taskid = {
                     uuid: $scope.taskId
                 };
@@ -237,9 +219,9 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                     }else {
                         alert(data.msg);
                     }
-                    console.log(data);
+                    //console.log(data);
                 }, function (data) {
-                    console.log(data);
+                    //console.log(data);
                 });
             }
         }else {
@@ -253,7 +235,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             return;
         }else{
         CAmaintenanceService.getPrcDown($scope.TaskID).then(function(data){
-            console.log(data);
+           // console.log(data);
             //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
             //而使用“application/vnd.openxmlformats-officedocument.spreadsheetml.sheet”则会保存为xlsx
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
@@ -263,7 +245,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             $(".forExcel").click();
             aForExcel.remove();
         },function(data){
-            console.log(data);
+            //console.log(data);
         })
         }
     }
@@ -274,7 +256,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             return;
         }else{
             CAmaintenanceService.getWwDown($scope.TaskID).then(function(data){
-                console.log(data);
+                //console.log(data);
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                 var objectUrl = URL.createObjectURL(blob);
                 var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
@@ -282,7 +264,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                 $(".forExcel").click();
                 aForExcel.remove();
             },function(data){
-                console.log(data);
+                //console.log(data);
             })
         }
     }
@@ -294,7 +276,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             zuuid : $scope.TaskID,
             user : $rootScope.user
         };
-        console.log($rootScope.user)
+      //  console.log($rootScope.user)
         CAmaintenanceService.getValidate($scope.validate).then(function (data) {
             if(data.code == 0){
                 alert('成功！');
@@ -302,9 +284,9 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             }else {
                 alert(data.msg);
             }
-            console.log(data);
+          //  console.log(data);
         }, function (data) {
-            console.log(data);
+          //  console.log(data);
         });
     };
 
@@ -323,6 +305,5 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             //$scope.sw2 = false;
         }
     }
-
 
 })

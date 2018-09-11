@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,OthercategorymaintenanceService,$state,$stateParams,$location) {
+angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,OthercategorymaintenanceService,$state,$stateParams,$rootScope,$location) {
 
     $scope.ww = true;
     $scope.btnSwitch = function(flag){
@@ -10,39 +10,25 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             $scope.ww = true;
         }
     }
-    $('#final table').stickySort({ sortable: true });
-    // new superTable("demoTable", {
-    //     cssSkin: "sDefault",
-    //     fixedCols: 3, //固定几列
-    //     headerRows: 3,  //头部固定行数
-    //     onStart: function () {
-    //         this.start = new Date();
-    //     },
-    //     onFinish: function () {
-    //     }
-    // });
-    //
-    //
-    // $("#div_container").css("width", "100%");//这个宽度是容器宽度，不同容器宽度不同
-    // $(".fakeContainer").css("height", "745px");//这个高度是整个table可视区域的高度，不同情况高度不同
-    // //.sData是调用superTables.js之后页面自己生成的  这块就是出现滚动条 达成锁定表头和列的效果
-    //
-    // $(".sData").css("width", "1225px");//这块的宽度是用$("#div_container")的宽度减去锁定的列的宽度
-    // $(".sData").css("height", "665px");//这块的高度是用$("#div_container")的高度减去锁定的表头的高度
-
 
     //请求表格数据调用方法
     OthercategorymaintenanceService.getOthercategoryData().then(function(data){
-
         if(data.code == 0){
             $scope.categoryData = data.result;
-            console.log($scope.categoryData);
-            for(var i=0;i< $scope.categoryData.length;i++){
-               console.log($scope.categoryData[i]);
-            }
+            var geo = $rootScope.getFiled($scope.categoryData,"geo");
+            var categorylvl1 = $rootScope.getFiled($scope.categoryData,"categorylvl1");
+            var categorylvl2 = $rootScope.getFiled($scope.categoryData,"categorylvl2");
+            var categorylvl3 = $rootScope.getFiled($scope.categoryData,"categorylvl3");
+            $scope.dataMap = OthercategorymaintenanceService.getDataMap($scope.categoryData,geo,categorylvl1,categorylvl2,categorylvl3);
         }
 
     },function(data){
-        console.log(data);
+        //console.log(data);
     });
+    
+    $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
+        //下面是在table render完成后执行的js
+    	$('#final table').stickySort({ sortable: true });
+    });
+    
 })

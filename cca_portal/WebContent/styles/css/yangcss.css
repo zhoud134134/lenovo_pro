@@ -2,7 +2,7 @@
     margin-top: 5px;
 }
 
-#other_content td,#other_content th,#outcontent td,#outcontent th{
+#other_content td,#other_content th,#outcontent td,#outcontent th,#ouButcontent td,#ouButcontent th{
     text-align: center;
     font-family: "Open Sans",Arial,Helvetica,Sans-Serif;
     font-size:12px;
@@ -74,9 +74,14 @@
     padding: 0;
 }
 #final .sticky-wrap {
+     overflow-x: auto;
+     overflow-y: auto;
+     max-height: 90vh;
+ }
+#bufinal .sticky-wrap {
     overflow-x: auto;
-    overflow-y: auto;
-    max-height: 90vh;
+    /*overflow-y: auto;*/
+    max-height: 68vh;
 }
 #final .toggle {
     background-color: #004B80;

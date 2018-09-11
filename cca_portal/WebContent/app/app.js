@@ -137,32 +137,19 @@ angular.module('app', [
             //});
 
 
-           navService.getUser().then(function (data) {
-                //var data = {"result":{"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"],"status":["1"],"token":["eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MzU5NTQwMDEsInN1YiI6Imhhbmp6MSIsImNyZWF0ZWQiOjE1MzUzNDkyMDExNDh9.QmTq6eDrq5KKYkT83fVVARQVaJA7M7l64UWElI6aVt8cyLMpOjfkr-sZwKKqDKuq9U5eTuXrr8TkP6cj9l_Yhw"]},"code":0}
-                console.log(data)
-
-                if (data.code == 0) {
-                    if (!data.result) {
-                        window.location.href = APP_CONFIG.indexUrl;
-                    } else {
-                        if (data.result.token[0]) {
-                            sessionStorage.setItem("token", data.result.token[0]);
-                        } else {
-                            alert("没有token!");
-                        }
-                        if (data.result.status == '-1') {
-                            alert('没有权限！');
-                            window.location.href = APP_CONFIG.indexUrl;
-                        } else {
-                            sessionStorage.setItem("userResult", JSON.stringify(data.result));
-                        }
-
-                    }
-                }
-
-            }, function (data) {
-                console.log(data);
-            });
+           navService.getUser();
+           
+           
+        navService.getSortData("all","prc").then(function(caprcsegmentdata){
+        	   $rootScope.prcSortData=caprcsegmentdata.result;
+		    }, function (data) {
+		       // console.log(data);
+		    });
+		   navService.getSortData("all","ww").then(function(cawwsegmentdata){
+        	   $rootScope.wwSortData=cawwsegmentdata.result;
+		    }, function (data) {
+		       // console.log(data);
+		    });
 
         });
 
@@ -483,6 +470,67 @@ angular.module('app', [
             }
             return c;
         }
+        
+        $rootScope.getFiled = function(arryList,type){
+        	var arry = [];
+        	for (var r=0;r<arryList.length;r++){
+    			if($rootScope.isNotInArray(arry,$.trim(arryList[r][type]))){
+    				arry.push($.trim(arryList[r][type]));
+    			}        	
+    		}
+        	return arry;
+        }
+        
+        $rootScope.isNotInArray = function(arryList,obj){
+        	for(var t = 0; t < arryList.length; t++){
+    	        if(obj == arryList[t]){
+    	            return false;
+    	        }
+    	    }
+    	    return true;
+        }
+        
+        $rootScope.dedupe = function (array){
+   		 return Array.from(new Set(array));
+   		}
+       
+        $rootScope.sortByDataBase = function (data,okdata){
+   					var list = [];
+   					var sortdata = [];
+   					var obj = {};
+   					for(var i=0;i<okdata.length;i++){
+   						obj["_"+okdata[i]] = [];
+   					}
+   					for(var i=0;i<data.length;i++){
+   						list = obj["_"+data[i]];
+   						if(!list){
+   							list = [];
+   						}
+   						list.push(data[i]);
+   					}
+   					for(var i=0;i<okdata.length;i++){
+   						list = obj["_"+okdata[i]];
+   						for(var j=0;j<list.length;j++){
+   							//console.log(" "+list[j]);
+   							sortdata.push(list[j]);
+
+   						}
+   					}
+   				
+   					return 	$rootScope.dedupe(sortdata);
+   				}
+        
+    }).directive('onFinishRenderFilters', function ($timeout) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attr) {
+                if (scope.$last === true) {
+                    $timeout(function() {
+                        scope.$emit('ngRepeatFinished');
+                    });
+                }
+            }
+        };
     });
 
 
