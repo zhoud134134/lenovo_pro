@@ -8,18 +8,18 @@
         <article class="col-sm-12">
             <!-- 第一部分 -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#LTA" aria-controls="home" role="tab" data-toggle="tab">LTA & Alliance</a></li>
-                <li role="presentation"><a href="#Out" aria-controls="profile" role="tab" data-toggle="tab">Out tape related</a></li>
-                <li role="presentation"><a href="#SW" aria-controls="messages" role="tab" data-toggle="tab">SW</a></li>
+                <li role="presentation" class="active"><a href="#LTA" aria-controls="home" role="tab" data-toggle="tab"  ng-click="a(0)" >LTA & Alliance</a></li>
+                <li role="presentation"><a href="#Out" aria-controls="profile" role="tab" data-toggle="tab" ng-click="a(1)" >Out tape related</a></li>
+                <li role="presentation"><a href="#SW" aria-controls="messages" role="tab" data-toggle="tab"  ng-click="a(2)">SW</a></li>
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="LTA">
                     <div jarvis-widget data-widget-color="Light Blue" data-widget-editbutton="false" data-widget-fullscreenbutton="false"
                          data-widget-deletebutton="false">
                         <header>
-                    <span class="widget-icon">
-                        <i class="fa fa-table"></i>
-                    </span>
+                            <span class="widget-icon">
+                                <i class="fa fa-table"></i>
+                            </span>
                             <h2>Data Choose</h2>
                         </header>
                         <div class="tab-serch">
@@ -27,38 +27,38 @@
                                 <div class="col-sm-5">
                                     <label style="text-align: right;width: 125px;float:left;">Cycle choose:</label>
                                     <div style="padding-left: 135px;" >
-                                        <select class="form-control col-sm-6" ng-model="CycleChoose" ng-options="x for x in cycledata" style="width: 50%;">
+                                        <select class="form-control col-sm-6" ng-model="CycleChoose" ng-options="x for x in cycledata" style="width: 44%;">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-7"></div>
                             </div>
                             <div class="col-sm-12" style="margin-top:10px ">
-                                <div class="col-sm-5">
-                                    <label style="text-align: right;width: 125px;float:left;">EBR data Excel File:</label>
-                                    <div style="padding-left: 135px;" >
+                                <div class="col-sm-4" style="padding-left: 18px;">
+                                    <label style="float:left;padding-right: 10px;">EBR data Excel File:</label>
+                                    <div>
                                         <input type="text" class="file-route col-sm-6" ng-model="myfilesVal"/>
-                                        <div class="model-file-btn col-sm-6">
+                                        <div class="model-file-btn col-sm-3">
                                             <button type="button" class="btn btn-back">Browse</button>
                                             <input type="file" name="file" ngf-select="true" ng-model="myfiles" ngf-accept="'.xlsx,.xls'" ng-change="fileChange()" ng-click="openUpload()"/>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-5">
-                                    <label style="text-align: right;width: 125px;float:left;">GIBP data Excel File:</label>
-                                    <div style="padding-left: 135px;" >
-                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesVal"/>
-                                        <div class="model-file-btn col-sm-6">
+                                <div class="col-sm-5"> <!--padding-left: 68px;-->
+                                    <label style="padding-right:10px;float:left;">GIBP data Excel File:</label>
+                                    <div>
+                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesVal1"/>
+                                        <div class="model-file-btn col-sm-3">
                                             <button type="button" class="btn btn-back">Browse</button>
-                                            <input type="file" name="file" ngf-select="true" ng-model="myfiles" ngf-accept="'.xlsx,.xls'" ng-change="fileChange()" ng-click="openUpload()"/>
+                                            <input type="file" name="file" ngf-select="true" ng-model="myfiles1" ngf-accept="'.xlsx,.xls'" ng-change="fileChange1()" ng-click="openUpload1()"/>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2 tab-serch-btn">
+                                <div class="col-sm-3 tab-serch-btn">
                                     <button class="btn btn-back searchbtn" ng-click="upload()">Upload</button>
+                                    <button class="btn btn-back searchbtn">Download Template</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -66,9 +66,9 @@
                     <div jarvis-widget data-widget-color="Light Blue" data-widget-editbutton="false" data-widget-fullscreenbutton="false"
                          data-widget-deletebutton="false">
                         <header>
-                    <span class="widget-icon">
-                        <i class="fa fa-table"></i>
-                    </span>
+                            <span class="widget-icon">
+                                <i class="fa fa-table"></i>
+                            </span>
                             <h2>Data Choose</h2>
                         </header>
                         <div class="tab-serch">
@@ -76,38 +76,38 @@
                                 <div class="col-sm-5">
                                     <label style="text-align: right;width: 125px;float:left;">Cycle choose:</label>
                                     <div style="padding-left: 135px;" >
-                                        <select class="form-control col-sm-6" ng-model="CycleChoose" ng-options="x for x in cycledata" style="width: 50%;">
+                                        <select class="form-control col-sm-6" ng-model="CycleChoose" ng-options="x for x in cycledata" style="width: 44%;">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-7"></div>
                             </div>
                             <div class="col-sm-12" style="margin-top:10px ">
-                                <div class="col-sm-5">
-                                    <label style="text-align: right;width: 125px;float:left;">EBR data Excel File:</label>
-                                    <div style="padding-left: 135px;" >
+                                <div class="col-sm-4" style="padding-left: 18px;">
+                                    <label style="float:left;padding-right: 10px;">EBR data Excel File:</label>
+                                    <div>
                                         <input type="text" class="file-route col-sm-6" ng-model="myfilesVal"/>
-                                        <div class="model-file-btn col-sm-6">
+                                        <div class="model-file-btn col-sm-3">
                                             <button type="button" class="btn btn-back">Browse</button>
                                             <input type="file" name="file" ngf-select="true" ng-model="myfiles" ngf-accept="'.xlsx,.xls'" ng-change="fileChange()" ng-click="openUpload()"/>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-5">
-                                    <label style="text-align: right;width: 125px;float:left;">GIBP data Excel File:</label>
-                                    <div style="padding-left: 135px;" >
-                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesVal"/>
-                                        <div class="model-file-btn col-sm-6">
+                               <div class="col-sm-5"> <!--padding-left: 68px;-->
+                                    <label style="padding-right:10px;float:left;">GIBP data Excel File:</label>
+                                    <div>
+                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesVal1"/>
+                                        <div class="model-file-btn col-sm-3">
                                             <button type="button" class="btn btn-back">Browse</button>
-                                            <input type="file" name="file" ngf-select="true" ng-model="myfiles" ngf-accept="'.xlsx,.xls'" ng-change="fileChange()" ng-click="openUpload()"/>
+                                            <input type="file" name="file" ngf-select="true" ng-model="myfiles1" ngf-accept="'.xlsx,.xls'" ng-change="fileChange1()" ng-click="openUpload1()"/>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2 tab-serch-btn">
+                                <div class="col-sm-3 tab-serch-btn">
                                     <button class="btn btn-back searchbtn" ng-click="upload()">Upload</button>
+                                    <button class="btn btn-back searchbtn">Download Template</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -115,9 +115,9 @@
                     <div jarvis-widget data-widget-color="Light Blue" data-widget-editbutton="false" data-widget-fullscreenbutton="false"
                          data-widget-deletebutton="false">
                         <header>
-                    <span class="widget-icon">
-                        <i class="fa fa-table"></i>
-                    </span>
+                            <span class="widget-icon">
+                                <i class="fa fa-table"></i>
+                            </span>
                             <h2>Data Choose</h2>
                         </header>
                         <div class="tab-serch">
@@ -125,311 +125,358 @@
                                 <div class="col-sm-5">
                                     <label style="text-align: right;width: 125px;float:left;">Cycle choose:</label>
                                     <div style="padding-left: 135px;" >
-                                        <select class="form-control col-sm-6" ng-model="CycleChoose" ng-options="x for x in cycledata" style="width: 50%;">
+                                        <select class="form-control col-sm-6" ng-model="CycleChoose" ng-options="x for x in cycledata" style="width: 44%;">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-7"></div>
                             </div>
                             <div class="col-sm-12" style="margin-top:10px ">
-                                <div class="col-sm-5">
-                                    <label style="text-align: right;width: 125px;float:left;">EBR data Excel File:</label>
-                                    <div style="padding-left: 135px;" >
+                                <div class="col-sm-4" style="padding-left: 18px;">
+                                    <label style="float:left;padding-right: 10px;">EBR data Excel File:</label>
+                                    <div>
                                         <input type="text" class="file-route col-sm-6" ng-model="myfilesVal"/>
-                                        <div class="model-file-btn col-sm-6">
+                                        <div class="model-file-btn col-sm-3">
                                             <button type="button" class="btn btn-back">Browse</button>
                                             <input type="file" name="file" ngf-select="true" ng-model="myfiles" ngf-accept="'.xlsx,.xls'" ng-change="fileChange()" ng-click="openUpload()"/>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-5">
-                                    <label style="text-align: right;width: 125px;float:left;">GIBP data Excel File:</label>
-                                    <div style="padding-left: 135px;" >
-                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesVal"/>
-                                        <div class="model-file-btn col-sm-6">
+                                <div class="col-sm-5"> <!--padding-left: 68px;-->
+                                    <label style="padding-right:10px;float:left;">GIBP data Excel File:</label>
+                                    <div>
+                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesVal1"/>
+                                        <div class="model-file-btn col-sm-3">
                                             <button type="button" class="btn btn-back">Browse</button>
-                                            <input type="file" name="file" ngf-select="true" ng-model="myfiles" ngf-accept="'.xlsx,.xls'" ng-change="fileChange()" ng-click="openUpload()"/>
+                                            <input type="file" name="file" ngf-select="true" ng-model="myfiles1" ngf-accept="'.xlsx,.xls'" ng-change="fileChange1()" ng-click="openUpload1()"/>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2 tab-serch-btn">
+                                <div class="col-sm-3 tab-serch-btn">
                                     <button class="btn btn-back searchbtn" ng-click="upload()">Upload</button>
+                                    <button class="btn btn-back searchbtn">Download Template</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- 第二部分 -->
-            <div jarvis-widget>
-                <div>
-                    <div class="widget-body no-padding">
-                        <div class="table-responsive table-border-tb">
-                            <div style="height: 160px;">
-                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" id="tabExample1" style="table-layout: fixed;">
-                                    <thead class="table-thead">
-                                    <tr>
-                                        <td width="19px"></td>
-                                        <td>Cycle Name</td>
-                                        <td>Description</td>
-                                        <td>Status</td>
-                                        <td>Created By</td>
-                                        <td>Created Date</td>
-                                        <td>End Date</td>
-                                        <td>Validate by</td>
-                                        <td>Validate Date</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="tab in tablist" ng-click="trClick($event,tab.taskId,tab.status,tab.cycleName)">
-                                        <td>
-                                            <label class="radio">
-                                                <input type="radio" name="radio-inline">
-                                                <i></i>
-                                            </label>
-                                        </td>
-                                        <td>{{tab.cycleName}}</td>
-                                        <td>{{tab.taskName}}</td>
-                                        <td>{{tab.status}}</td>
-                                        <td>{{tab.sysCreatedBy}}</td>
-                                        <td>{{tab.sysCreatedDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                                        <td>{{tab.sysEndDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                                        <td>{{tab.publishUser}}</td>
-                                        <td>{{tab.publishDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-sm-4 tab-fun-btn2">
-                                <button class="btn btn-back btn-sm" ng-click="SearchTab()">Search</button>
-                                <button class="btn btn-back btn-sm" ng-click="DelOneItem()">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!--<div jarvis-widget>-->
+                <!--<div>-->
+                    <!--<div class="widget-body no-padding">-->
+                        <!--<div class="table-responsive table-border-tb">-->
+                            <!--<div style="height: 160px;">-->
+                                <!--<table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" id="tabExample1" style="table-layout: fixed;">-->
+                                    <!--<thead class="table-thead">-->
+                                    <!--<tr>-->
+                                        <!--<td width="19px"></td>-->
+                                        <!--<td>Cycle Name</td>-->
+                                        <!--<td>Description</td>-->
+                                        <!--<td>Status</td>-->
+                                        <!--<td>Created By</td>-->
+                                        <!--<td>Created Date</td>-->
+                                        <!--<td>End Date</td>-->
+                                        <!--<td>Validate by</td>-->
+                                        <!--<td>Validate Date</td>-->
+                                    <!--</tr>-->
+                                    <!--</thead>-->
+                                    <!--<tbody>-->
+                                    <!--<tr ng-repeat="tab in tablist" ng-click="trClick($event,tab.taskId,tab.status,tab.cycleName)">-->
+                                        <!--<td>-->
+                                            <!--<label class="radio">-->
+                                                <!--<input type="radio" name="radio-inline">-->
+                                                <!--<i></i>-->
+                                            <!--</label>-->
+                                        <!--</td>-->
+                                        <!--<td>{{tab.cycleName}}</td>-->
+                                        <!--<td>{{tab.taskName}}</td>-->
+                                        <!--<td>{{tab.status}}</td>-->
+                                        <!--<td>{{tab.sysCreatedBy}}</td>-->
+                                        <!--<td>{{tab.sysCreatedDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>-->
+                                        <!--<td>{{tab.sysEndDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>-->
+                                        <!--<td>{{tab.publishUser}}</td>-->
+                                        <!--<td>{{tab.publishDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>-->
+                                    <!--</tr>-->
+                                    <!--</tbody>-->
+                                <!--</table>-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-4 tab-fun-btn2">-->
+                                <!--<button class="btn btn-back btn-sm" ng-click="SearchTab()">Search</button>-->
+                                <!--<button class="btn btn-back btn-sm" ng-click="DelOneItem()">Delete</button>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
 
             <!-- 第三部分 -->
-            <div jarvis-widget  data-widget-color="Light Blue"
-                 data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
-                <header>
-                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                    <h2>Result</h2>
-                </header>
-            </div>
-
-            <!-- 第四部分LTA & Alliance -->
-            <div class="mup-tabbtn report-tab" style="max-height: 1045px;overflow: hidden;">
-                <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
-                    <header>
-                        <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                        <h2>LTA & Alliance</h2>
-                    </header>
-                    <div>
-                        <div class="widget-body no-padding">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#LAR" aria-controls="home" role="tab" data-toggle="tab">Allocation Result</a></li>
-                                <li role="presentation"><a href="#Out" aria-controls="LRD" role="tab" data-toggle="tab">Residual Data</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="LAR">
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
-                                        <thead class="table-thead tab-mid">
-                                        <tr>
-                                            <td>Geo</td>
-                                            <td>Country</td>
-                                            <td>BU</td>
-                                            <td>Deal Des#/SKU</td>
-                                            <td>PN</td>
-                                            <td>Amount</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="LRD">
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
-                                        <thead class="table-thead tab-mid">
-                                        <tr>
-                                            <td>Geo</td>
-                                            <td>Country</td>
-                                            <td>BU</td>
-                                            <td>Deal Des#/SKU</td>
-                                            <td>PN</td>
-                                            <td>Amount</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        </thead>
-                                    </table>
+            <div ng-show="althree">
+                <!-- 第四部分LTA & Alliance -->
+                <div class="mup-tabbtn report-tab" ng-show="althreeLta" style="max-height: 1045px;overflow: hidden;">
+                    <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
+                            <h2>LTA & Alliance Result</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#Ltaal" aria-controls="home" role="tab" data-toggle="tab">Allocation Result</a></li>
+                                    <li role="presentation"><a href="#Ltares" aria-controls="LRD" role="tab" data-toggle="tab">Residual Data</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="Ltaal">
+                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" id="LatalExample">
+                                            <thead class="table-thead tab-mid">
+                                            <tr>
+                                                <td>H1</td>
+                                                <td>Account</td>
+                                                <td>A0</td>
+                                                <td>Profit Center</td>
+                                                <td>Amount</td>
+                                                <td>Deal Des./SKU/Text</td>
+                                                <td>GPN</td>
+                                                <td>Plant</td>
+                                                <td>CD</td>
+                                                <td>BU</td>
+                                                <td>Geo</td>
+                                                <td>Sub_Geo</td>
+                                                <td>Country</td>
+                                                <td>BPC Segment</td>
+                                                <td>Segment</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="Ltares">
+                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" id="LatresExample">
+                                            <thead class="table-thead tab-mid">
+                                            <tr>
+                                                <td>BU</td>
+                                                <td>Segment</td>
+                                                <td>Intel Alliance Funding</td>
+                                                <td>SKU</td>
+                                                <td>Geo</td>
+                                                <td>Sub_Geo</td>
+                                                <td>Amount</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
+                    </div>
+
+                    <div class="col-sm-4 tab-fun-btn">
+                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getDownLoad()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
+                        <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
                     </div>
                 </div>
 
-                <div class="col-sm-4 tab-fun-btn">
-                    <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
-
-                    <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
-                </div>
-            </div>
-
-            <!-- 第四部分Out tape related -->
-            <div class="mup-tabbtn report-tab" style="max-height: 1045px;overflow: hidden;">
-                <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
-                    <header>
-                        <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                        <h2>Out tape related</h2>
-                    </header>
-                    <div>
-                        <div class="widget-body no-padding">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#LAR" aria-controls="home" role="tab" data-toggle="tab">Allocation Result</a></li>
-                                <li role="presentation"><a href="#Out" aria-controls="LRD" role="tab" data-toggle="tab">Residual Data</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="LAR">
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
-                                        <thead class="table-thead tab-mid">
-                                        <tr>
-                                            <td>Geo</td>
-                                            <td>Country</td>
-                                            <td>BU</td>
-                                            <td>Deal Des#/SKU</td>
-                                            <td>PN</td>
-                                            <td>Amount</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        </thead>
-                                    </table>
+                 <!-- 第四部分Out tape related -->
+                 <div class="mup-tabbtn report-tab" ng-show="althreeOut" style="max-height: 1045px;overflow: hidden;">
+                    <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
+                            <h2>Out tape related Result</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#Outal" aria-controls="home" role="tab" data-toggle="tab">Allocation Result</a></li>
+                                    <li role="presentation"><a href="#Outres" aria-controls="LRD" role="tab" data-toggle="tab">Residual Data</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="Outal">
+                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
+                                            <thead class="table-thead tab-mid">
+                                            <tr>
+                                                <td>H1</td>
+                                                <td>Account</td>
+                                                <td>A0</td>
+                                                <td>Profit Center</td>
+                                                <td>Amount</td>
+                                                <td>Deal Des./SKU/Text</td>
+                                                <td>GPN</td>
+                                                <td>Plant</td>
+                                                <td>CD</td>
+                                                <td>BU</td>
+                                                <td>Geo</td>
+                                                <td>Sub_Geo</td>
+                                                <td>Country</td>
+                                                <td>BPC Segment</td>
+                                                <td>Segment</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="Outres">
+                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
+                                            <thead class="table-thead tab-mid">
+                                            <tr>
+                                                <td>Geo</td>
+                                                <td>Sub-Geo</td>
+                                                <td>BU</td>
+                                                <td>Product Number</td>
+                                                <td>SKU</td>
+                                                <td>Amount</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="LRD">
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
-                                        <thead class="table-thead tab-mid">
-                                        <tr>
-                                            <td>Geo</td>
-                                            <td>Country</td>
-                                            <td>BU</td>
-                                            <td>Deal Des#/SKU</td>
-                                            <td>PN</td>
-                                            <td>Amount</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        </thead>
-                                    </table>
-                                </div>
+
                             </div>
-
                         </div>
+                    </div>
+
+                    <div class="col-sm-4 tab-fun-btn">
+                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
+                        <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
                     </div>
                 </div>
 
-                <div class="col-sm-4 tab-fun-btn">
-                    <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
-
-                    <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
-                </div>
-            </div>
-
-            <!-- 第四部分SW -->
-            <div class="mup-tabbtn report-tab" style="max-height: 1045px;overflow: hidden;">
-                <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
-                    <header>
-                        <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
-                        <h2>SW</h2>
-                    </header>
-                    <div>
-                        <div class="widget-body no-padding">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#LAR" aria-controls="home" role="tab" data-toggle="tab">Allocation Result</a></li>
-                                <li role="presentation"><a href="#Out" aria-controls="LRD" role="tab" data-toggle="tab">Residual Data</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="LAR">
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
-                                        <thead class="table-thead tab-mid">
-                                        <tr>
-                                            <td>Geo</td>
-                                            <td>Country</td>
-                                            <td>BU</td>
-                                            <td>Deal Des#/SKU</td>
-                                            <td>PN</td>
-                                            <td>Amount</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="LRD">
-                                    <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
-                                        <thead class="table-thead tab-mid">
-                                        <tr>
-                                            <td>Geo</td>
-                                            <td>Country</td>
-                                            <td>BU</td>
-                                            <td>Deal Des#/SKU</td>
-                                            <td>PN</td>
-                                            <td>Amount</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        </thead>
-                                    </table>
+                 <!-- 第四部分SW -->
+                 <div class="mup-tabbtn report-tab" ng-show="althreeSw" style="max-height: 1045px;overflow: hidden;">
+                    <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
+                            <h2>SW Result</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#Swal" aria-controls="home" role="tab" data-toggle="tab">Allocation Result</a></li>
+                                    <li role="presentation"><a href="#Swres" aria-controls="LRD" role="tab" data-toggle="tab">Residual Data</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="Swal">
+                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
+                                            <thead class="table-thead tab-mid">
+                                            <tr>
+                                                <td>H1</td>
+                                                <td>Account</td>
+                                                <td>A0</td>
+                                                <td>Profit Center</td>
+                                                <td>Amount</td>
+                                                <td>Deal Des./SKU/Text</td>
+                                                <td>GPN</td>
+                                                <td>Plant</td>
+                                                <td>CD</td>
+                                                <td>BU</td>
+                                                <td>Geo</td>
+                                                <td>Sub_Geo</td>
+                                                <td>Country</td>
+                                                <td>BPC Segment</td>
+                                                <td>Segment</td>
+                                                <td>Material</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="Swres">
+                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
+                                            <thead class="table-thead tab-mid">
+                                            <tr>
+                                                <td>Geo</td>
+                                                <td>Country</td>
+                                                <td>BU</td>
+                                                <td>Deal Des#/SKU</td>
+                                                <td>PN</td>
+                                                <td>Amount</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
 
-                <div class="col-sm-4 tab-fun-btn">
-                    <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
-
-                    <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
+                    <div class="col-sm-4 tab-fun-btn">
+                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
+                        <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
+                    </div>
                 </div>
             </div>
 

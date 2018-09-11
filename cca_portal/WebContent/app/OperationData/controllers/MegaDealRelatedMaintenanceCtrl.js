@@ -56,6 +56,7 @@ angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl',
                             if(data2.code == 0){
                                 $scope.pageList = data2.result;
                                 $scope.TAB = true;
+                                alert('Success');
                                 $scope.getTable();
                             }
                             console.log(data2);
@@ -118,7 +119,7 @@ angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl',
 
 
 
-//下载模板
+    //下载模板
     $scope.DowTemp = function(){
         $scope.temp = {
             type: 'megadeal'

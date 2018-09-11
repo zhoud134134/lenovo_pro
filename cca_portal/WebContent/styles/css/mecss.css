@@ -1,3 +1,22 @@
+.header-dropdown-list{
+ display: none;
+}
+/*尾部*/
+.page-footer{
+    display: none;
+}
+/*头部*/
+#header{
+    height: 56px;
+}
+.btn-header>:first-child>a{
+    line-height: 32px;
+}
+/*右边的设置*/
+#demo-setting{
+    display: none;
+}
+
 /* nav 去除 下边框 */
 
 .nav-tabs.bordered+.tab-content {
