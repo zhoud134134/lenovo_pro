@@ -23,6 +23,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             }
         }
     }
+    $scope.ww=false;
     $scope.upload = function(){
         Upload.upload({
             //服务端接收
@@ -42,13 +43,13 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             }else {
                 if (data.code == 0 && $scope.CycleChoose.indexOf("M0") != -1) {
                     alert('Success');
-                    $scope.caprcww=true;
+                    $scope.ww=true;
                     $scope.id=data.result;
                     console.log($scope.id);
                     $scope.getPage();
                 }else if(data.code == 0 && $scope.CycleChoose.indexOf("Actual") != -1){
                     alert('Success');
-                    $scope.caprcww=true;
+                    $scope.ww=true;
                     $scope.id=data.result;
                     console.log($scope.id);
                     $scope.getPage();
