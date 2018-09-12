@@ -140,7 +140,7 @@ angular.module('app', [
            navService.getUser();
            
            
-        navService.getSortData("all","prc").then(function(caprcsegmentdata){
+            navService.getSortData("all","prc").then(function(caprcsegmentdata){
         	   $rootScope.prcSortData=caprcsegmentdata.result;
 		    }, function (data) {
 		       // console.log(data);
@@ -150,7 +150,16 @@ angular.module('app', [
 		    }, function (data) {
 		       // console.log(data);
 		    });
-
+            //初始化Cycle Choose
+            navService.getSelectCycle().then(function(data){
+                if(data.code == 0){
+                    $rootScope.cycledata = data.result;
+                    console.log($rootScope.cycledata);
+                }
+                console.log(data);
+            },function(data){
+                console.log(data);
+            });
         });
 
 
