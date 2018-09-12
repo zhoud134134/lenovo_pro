@@ -137,28 +137,18 @@ angular.module('app', [
             //});
 
 
-           navService.getUser();
-           
-           
+            navService.getUser();
+
+
             navService.getSortData("all","prc").then(function(caprcsegmentdata){
-        	   $rootScope.prcSortData=caprcsegmentdata.result;
-		    }, function (data) {
-		       // console.log(data);
-		    });
-		   navService.getSortData("all","ww").then(function(cawwsegmentdata){
-        	   $rootScope.wwSortData=cawwsegmentdata.result;
-		    }, function (data) {
-		       // console.log(data);
-		    });
-            //初始化Cycle Choose
-            navService.getSelectCycle().then(function(data){
-                if(data.code == 0){
-                    $rootScope.cycledata = data.result;
-                    console.log($rootScope.cycledata);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
+                $rootScope.prcSortData=caprcsegmentdata.result;
+            }, function (data) {
+                // console.log(data);
+            });
+            navService.getSortData("all","ww").then(function(cawwsegmentdata){
+                $rootScope.wwSortData=cawwsegmentdata.result;
+            }, function (data) {
+                // console.log(data);
             });
         });
 
@@ -479,56 +469,60 @@ angular.module('app', [
             }
             return c;
         }
-        
-        $rootScope.getFiled = function(arryList,type){
-        	var arry = [];
-        	for (var r=0;r<arryList.length;r++){
-    			if($rootScope.isNotInArray(arry,$.trim(arryList[r][type]))){
-    				arry.push($.trim(arryList[r][type]));
-    			}        	
-    		}
-        	return arry;
-        }
-        
-        $rootScope.isNotInArray = function(arryList,obj){
-        	for(var t = 0; t < arryList.length; t++){
-    	        if(obj == arryList[t]){
-    	            return false;
-    	        }
-    	    }
-    	    return true;
-        }
-        
-        $rootScope.dedupe = function (array){
-   		 return Array.from(new Set(array));
-   		}
-       
-        $rootScope.sortByDataBase = function (data,okdata){
-   					var list = [];
-   					var sortdata = [];
-   					var obj = {};
-   					for(var i=0;i<okdata.length;i++){
-   						obj["_"+okdata[i]] = [];
-   					}
-   					for(var i=0;i<data.length;i++){
-   						list = obj["_"+data[i]];
-   						if(!list){
-   							list = [];
-   						}
-   						list.push(data[i]);
-   					}
-   					for(var i=0;i<okdata.length;i++){
-   						list = obj["_"+okdata[i]];
-   						for(var j=0;j<list.length;j++){
-   							//console.log(" "+list[j]);
-   							sortdata.push(list[j]);
 
-   						}
-   					}
-   				
-   					return 	$rootScope.dedupe(sortdata);
-   				}
-        
+        $rootScope.getFiled = function(arryList,type){
+            var arry = [];
+            for (var r=0;r<arryList.length;r++){
+                if($rootScope.isNotInArray(arry,$.trim(arryList[r][type]))){
+                    arry.push($.trim(arryList[r][type]));
+                }
+            }
+            return arry;
+        }
+
+        $rootScope.isNotInArray = function(arryList,obj){
+            for(var t = 0; t < arryList.length; t++){
+                if(obj == arryList[t]){
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        $rootScope.dedupe = function (array){
+            return Array.from(new Set(array));
+        }
+
+        $rootScope.sortByDataBase = function (data,okdata){
+            var list = [];
+            var sortdata = [];
+            var obj = {};
+            for(var i=0;i<okdata.length;i++){
+                obj["_"+okdata[i]] = [];
+            }
+            for(var i=0;i<data.length;i++){
+                list = obj["_"+data[i]];
+                if(!list){
+                    list = [];
+                }
+                list.push(data[i]);
+            }
+            for(var i=0;i<okdata.length;i++){
+                list = obj["_"+okdata[i]];
+                for(var j=0;j<list.length;j++){
+                    //console.log(" "+list[j]);
+                    sortdata.push(list[j]);
+
+                }
+            }
+
+            return 	$rootScope.dedupe(sortdata);
+        }
+
+        $rootScope.getCycle = function(type){
+            return navService.getSelectCycle(type);
+        }
+
     }).directive('onFinishRenderFilters', function ($timeout) {
         return {
             restrict: 'A',
