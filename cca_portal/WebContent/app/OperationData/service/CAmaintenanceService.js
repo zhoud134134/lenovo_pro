@@ -2,25 +2,6 @@
  * Created by Qinglanhui on 2018/8/13.
  */
 angular.module('app.OperationData').service("CAmaintenanceService", function($http, $q ,$rootScope, APP_CONFIG) {
-    //Select第一个框Cycle
-    this.getSelectCycle = function() {
-        var d = $q.defer();
-        $http({
-            method : 'GET',
-            //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
-            url : APP_CONFIG.baseUrl +'/api/mcm/',
-            headers: {
-                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
-            },
-        }).then(function successCallback(response) {
-            // 请求成功执行代码
-            d.resolve(response.data);
-        }, function errorCallback(response) {
-            // 请求失败执行代码
-            d.reject("error");
-        });
-        return d.promise;
-    }
     //点击Execute执行
     this.getExecute = function(page) {
         //console.log(page)

@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($scope,$state,APP_CONFIG,$timeout,$location,$rootScope,CAmanualuploadService,Upload) {
+angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($scope,$state,APP_CONFIG,$timeout,$location,$rootScope,navService,CAmanualuploadService,Upload) {
     //函数说明：合并指定表格（表格id为_w_table_id）指定列（列数为_w_table_colnum）的相同文本的相邻单元格
 //参数说明：_w_table_id 为需要进行合并单元格的表格的id。如在HTMl中指定表格 id="data" ，此参数应为 #data
 //参数说明：_w_table_colnum 为需要合并单元格的所在列。为数字，从最左边第一列为1开始算起。
@@ -64,17 +64,6 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
             });
         });
     }
-
-    //初始化Cycle Choose
-    CAmanualuploadService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-            console.log($scope.cycledata);
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
 
     $scope.getPage = function(){
         CAmanualuploadService.getPrc($scope.id).then(function(data){
@@ -156,14 +145,12 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
                     $scope.caprcww=true;
                     $scope.id=data.result;
                     console.log($scope.id);
-                    //$('#myModal').modal('hide');
                     $scope.getPage();
                 }else if(data.code == 0 && $scope.CycleChoose.indexOf("Actual") != -1){
                     alert('Success');
                     $scope.caprcww=true;
                     $scope.id=data.result;
                     console.log($scope.id);
-                    //$('#myModal').modal('hide');
                     $scope.getPage();
                 } else {
                     alert('Uploading Failed');
@@ -239,5 +226,23 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
     //        $scope.ww=false;
     //    }
     //}
+
+    //下载模板
+    $scope.DowTemp = function(){
+        $scope.temp = {
+            type: 'ca manual upload'
+        }
+        CAmanualuploadService.download($scope.temp).then(function(data){
+            console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        },function(data){
+            console.log(data);
+        });
+    }
 
 })

@@ -7,7 +7,7 @@
     <section id="widget-grid" widget-grid>
         <article class="col-sm-12">
             <!-- 第一部分 -->
-            <div jarvis-widget data-widget-color="darken"
+            <div jarvis-widget data-widget-color="Light Blue"
                  data-widget-editbutton="false"
                  data-widget-fullscreenbutton="false"
                  data-widget-deletebutton="false">
@@ -22,9 +22,7 @@
                         <div class="col-sm-6 form-group-m">
                             <label>Cycle choose:</label>
                             <div class="for-sel">
-                                <select class="form-control">
-                                    <option value="">Q1M3</option>
-                                    <option value="">Q1M4</option>
+                                <select class="form-control" ng-model="CycleChoose" ng-options="x for x in cycledata">
                                 </select>
                             </div>
                         </div>
@@ -34,18 +32,18 @@
                                 <input type="text" class="file-route col-sm-8" ng-model="myfilesVal"/>
                                 <div class="model-file-btn col-sm-4">
                                     <button type="button" class="btn btn-back">Browse</button>
-                                    <input type="file" name="file" ngf-select="true" ng-model="myfiles" ngf-accept="'.xlsx,.xls'" ng-change="fileChange()"/>
+                                    <input type="file" name="file" ngf-select="true" ng-model="myfiles" ngf-accept="'.xlsx,.xls'" ng-change="fileChange()" ng-click="openUpload()"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-3 tab-serch-btn">
-                        <button class="btn btn-back searchbtn">Upload</button>
+                        <button class="btn btn-back searchbtn" ng-click="upload()">Upload</button>
                     </div>
                 </div>
             </div>
             <!-- 第二部分 -->
-            <div jarvis-widget  data-widget-color="darken"
+            <div jarvis-widget  data-widget-color="Light Blue"
                  data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
                 <header>
                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>

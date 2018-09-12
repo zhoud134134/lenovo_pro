@@ -183,4 +183,24 @@ angular.module('app.layout').service("navService", function($http, $q , APP_CONF
         return d.promise;
     }
 
+    //Select第一个框Cycle Choose
+    this.getSelectCycle = function() {
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
+            url : APP_CONFIG.baseUrl +'/api/mcm/',
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+
 });

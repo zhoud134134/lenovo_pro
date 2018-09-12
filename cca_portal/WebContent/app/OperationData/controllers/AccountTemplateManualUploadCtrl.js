@@ -1,20 +1,8 @@
 "use strict";
 
-angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl', function ($scope,MegaDealRelatedMaintenance,CAmaintenanceService,$timeout,$rootScope,Upload,APP_CONFIG,$state,$stateParams,$location) {
+angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl', function ($scope,MegaDealRelatedMaintenance,AccountTemplateManualUploadService,CAmaintenanceService,$timeout,$rootScope,Upload,APP_CONFIG,$state,$stateParams,$location) {
 
     $('#final table').stickySort({ sortable: true });
-
-
-    //初始化Cycle Choose
-    CAmaintenanceService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
     //上传
     $scope.myfiles = {};
     $scope.myfilesVal = '';
@@ -26,7 +14,7 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
         }
     }
 
-    $scope.caprcww=false;
+    $scope.ww=false;
     $scope.upload = function(){
         Upload.upload({
             //服务端接收
@@ -46,14 +34,14 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
             }else {
                 if (data.code == 0 && $scope.CycleChoose.indexOf("M0") != -1) {
                     alert('Success');
-                    $scope.caprcww=true;
+                    $scope.ww=true;
                     $scope.id=data.result;
                     console.log($scope.id);
                     //$('#myModal').modal('hide');
                     $scope.getPage();
                 }else if(data.code == 0 && $scope.CycleChoose.indexOf("Actual") != -1){
                     alert('Success');
-                    $scope.caprcww=true;
+                    $scope.ww=true;
                     $scope.id=data.result;
                     console.log($scope.id);
                     //$('#myModal').modal('hide');
@@ -192,4 +180,5 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
             console.log(data);
         });
     }
+
 })

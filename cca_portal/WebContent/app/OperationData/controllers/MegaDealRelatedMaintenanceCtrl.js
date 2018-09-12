@@ -1,18 +1,6 @@
 "use strict";
 
-angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl', function ($scope,$state,$stateParams,$location,$timeout,CycleQTQService,Upload,MegaDealRelatedMaintenance,APP_CONFIG,$rootScope) {
-
-    //初始化Cycle Choose
-    CycleQTQService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
-
+angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl', function ($scope,$state,$stateParams,$location,$timeout,Upload,MegaDealRelatedMaintenance,APP_CONFIG,$rootScope) {
     //上传
     $scope.myfiles = {};
     $scope.myfilesVal = '';

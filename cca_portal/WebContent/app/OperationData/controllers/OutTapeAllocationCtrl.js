@@ -1,17 +1,6 @@
 "use strict";
 
 angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function ($scope,$rootScope,Upload,$timeout,APP_CONFIG,$state,$stateParams,$location,OutTapeAllocationService) {
-    //初始化Cycle Choose
-    OutTapeAllocationService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-            console.log($scope.cycledata);
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
     //EBR  上传文件
     $scope.myfiles = {};
     $scope.openUpload = function(){

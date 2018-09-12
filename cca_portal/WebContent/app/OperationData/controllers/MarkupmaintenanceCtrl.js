@@ -44,20 +44,6 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
         console.log(data);
     });
 
-
-
-
-
-    //初始化Cycle Choose
-    MarkupmaintenanceService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
     //第二部分tab信息展示
     $scope.getPage = function(){
         MarkupmaintenanceService.getExecute2().then(function(data){

@@ -26,17 +26,6 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
     },function(data){
         console.log(data);
     });
-
-    //初始化Cycle Choose
-    CycleQTQService.getSelectCycle().then(function(data){
-        if(data.code == 0){
-            $scope.cycledata = data.result;
-        }
-        console.log(data);
-    },function(data){
-        console.log(data);
-    });
-
     //多选控件
     $scope.Sel = true;
     $(document).bind('click',function(){
