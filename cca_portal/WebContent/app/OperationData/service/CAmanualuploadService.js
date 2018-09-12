@@ -78,7 +78,7 @@ angular.module('app.OperationData').service("CAmanualuploadService", function($h
         });
         return d.promise;
     }
-    ////Validate按钮功能
+    //Validate按钮功能
     //this.getValidate = function(v) {
     //    console.log(v)
     //    var d = $q.defer();

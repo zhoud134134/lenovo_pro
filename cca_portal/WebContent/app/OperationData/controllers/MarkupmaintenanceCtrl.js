@@ -43,7 +43,9 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
     }, function (data) {
         console.log(data);
     });
-
+    $rootScope.getCycle('Forecast').then(function(data){
+        $scope.cycledata = data.result;
+    });
     //第二部分tab信息展示
     $scope.getPage = function(){
         MarkupmaintenanceService.getExecute2().then(function(data){

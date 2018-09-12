@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($scope,$state,APP_CONFIG,$timeout,$location,$rootScope,navService,CAmanualuploadService,Upload) {
+angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($scope,$state,APP_CONFIG,$timeout,$location,$rootScope,navService,CAmanualuploadService,CAmaintenanceService,Upload) {
     //函数说明：合并指定表格（表格id为_w_table_id）指定列（列数为_w_table_colnum）的相同文本的相邻单元格
 //参数说明：_w_table_id 为需要进行合并单元格的表格的id。如在HTMl中指定表格 id="data" ，此参数应为 #data
 //参数说明：_w_table_colnum 为需要合并单元格的所在列。为数字，从最左边第一列为1开始算起。
@@ -64,49 +64,69 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
             });
         });
     }
-
+    $rootScope.getCycle('Actual').then(function(data){
+        $scope.cycledata = data.result;
+    });
     $scope.getPage = function(){
-        CAmanualuploadService.getPrc($scope.id).then(function(data){
-            if(data.code == 0){
-                $scope.PrcList = data.result;
-                console.log($scope.PrcList);
-
-                var arrSegment=$rootScope.PrcSegment.concat(["Total"]);
-                $rootScope.PrcBu.push("Total");
-
-                //$rootScope.segmenttop = [ 'BU', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'Total'];
-                //var caprcthead = ["BU", "Think-T", "T-Model", "Commercial", "SMB", "Consumer", "Others", "YT", "Total"];
-                //var caprctbody = ["Think Pad", "Lenovo NB", "Commercial DT", "Consumer DT", "Workstation", "Chrome", "Server", "Accessory", "Visual", "Total"];
-
-
-                $scope.cadata = $rootScope.caprcTabCon($scope.PrcList,  $rootScope.PrcBu, arrSegment, 'values');
-                console.log($scope.cadata);
-                console.log($rootScope.segmenttop);
-                console.log($rootScope.PrcSegment);
-                console.log($rootScope.PrcBu);
-
-                $timeout(function(){
-                    console.log("1");
-                    //_w_table_colspan("#caprcTab",1,11);
-                    //_w_table_rowspan("#caprcTab",1);
-                    //_w_table_rowspan("#caprcTab",9);
-                    //_w_table_rowspan("#caprcTab",2);
-                    //_w_table_rowspan("#caprcTab",10);
-                })
-            }
-            console.log(data);
-        },function(data){
-            console.log(data);
-        });
+        //WW
         CAmanualuploadService.getWw($scope.id).then(function(data){
             if(data.code == 0){
-                $scope.cawwList = data.result;
-                console.log($scope.cawwList);
+
+                $scope.WwList = data.result;
+                $scope.segment = $rootScope.sortByDataBase($rootScope.getFiled($scope.WwList,"segment"),$rootScope.wwSortData.segments);
+                $scope.segment.push('Total');
+                $scope.bu =  $rootScope.sortByDataBase($rootScope.getFiled($scope.WwList,"bu"), $rootScope.wwSortData.bus);
+                $scope.geo = $rootScope.sortByDataBase($rootScope.getFiled($scope.WwList,"geo"), $rootScope.wwSortData.geos);
+                $scope.dataMap = CAmaintenanceService.getDataMap($scope.WwList,$scope.segment,$scope.geo,$scope.bu,$rootScope.wwSortData.regions);
             }
-            console.log(data);
+            //console.log(data);
         },function(data){
-            console.log(data);
+            // console.log(data);
         });
+
+        //PRC
+        CAmanualuploadService.getPrc($scope.id).then(function(caprcdata) {
+            if (caprcdata.code == 0) {
+                $scope.PrcList = caprcdata.result;
+                $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled($scope.PrcList,"segment"),$rootScope.prcSortData.segments);
+                $scope.Prcbu =  $rootScope.sortByDataBase($rootScope.getFiled($scope.PrcList,"bu"), $rootScope.prcSortData.bus);
+                $scope.Prcbu.push('Total');
+                $scope.getPrcDataMap = CAmaintenanceService.getPrcDataMap($scope.PrcList,$scope.Prcsegment,$scope.Prcbu);
+            }
+        } ,function(data){
+            // console.log(data);
+        });
+        //CAmanualuploadService.getPrc($scope.id).then(function(data){
+        //    if(data.code == 0){
+        //        $scope.PrcList = data.result;
+        //        console.log($scope.PrcList);
+        //
+        //        var arrSegment=$rootScope.PrcSegment.concat(["Total"]);
+        //        $rootScope.PrcBu.push("Total");
+        //
+        //        //$rootScope.segmenttop = [ 'BU', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'PRC Segment', 'Total'];
+        //        //var caprcthead = ["BU", "Think-T", "T-Model", "Commercial", "SMB", "Consumer", "Others", "YT", "Total"];
+        //        //var caprctbody = ["Think Pad", "Lenovo NB", "Commercial DT", "Consumer DT", "Workstation", "Chrome", "Server", "Accessory", "Visual", "Total"];
+        //
+        //        $scope.cadata = $rootScope.caprcTabCon($scope.PrcList,  $rootScope.PrcBu, arrSegment, 'values');
+        //        console.log($scope.cadata);
+        //        console.log($rootScope.segmenttop);
+        //        console.log($rootScope.PrcSegment);
+        //        console.log($rootScope.PrcBu);
+        //    }
+        //    console.log(data);
+        //},function(data){
+        //    console.log(data);
+        //});
+        //CAmanualuploadService.getWw($scope.id).then(function(data){
+        //    if(data.code == 0){
+        //        $scope.cawwList = data.result;
+        //        console.log($scope.cawwList);
+        //    }
+        //    console.log(data);
+        //},function(data){
+        //    console.log(data);
+        //});
     };
 
     //上传

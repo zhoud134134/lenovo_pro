@@ -1,7 +1,9 @@
 "use strict";
 
 angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,OthercategorymaintenanceService,$state,$stateParams,$rootScope,$location,Upload,APP_CONFIG) {
-
+    $rootScope.getCycle('Forecast').then(function(data){
+        $scope.cycledata = data.result;
+    });
     $scope.ww = true;
     $scope.btnSwitch = function(flag){
         if(flag == 'w'){
@@ -23,6 +25,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             }
         }
     }
+    $scope.ww=false;
     $scope.upload = function(){
         Upload.upload({
             //服务端接收
@@ -39,19 +42,27 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             //console.log($scope.CycleChoose.indexOf("M0")==-1);
             if(!$scope.CycleChoose){
                 alert("请选择条件！");
-            }else {
-                if (data.code == 0 && $scope.CycleChoose.indexOf("M0") != -1) {
+            }else {//&& $scope.CycleChoose.indexOf("M0") != -1
+                if (data.code == 0 ) {
                     alert('Success');
-                    $scope.caprcww=true;
+                    $scope.ww=true;
                     $scope.id=data.result;
+                    console.log(data.result);
                     console.log($scope.id);
-                    $scope.getPage();
-                }else if(data.code == 0 && $scope.CycleChoose.indexOf("Actual") != -1){
-                    alert('Success');
-                    $scope.caprcww=true;
-                    $scope.id=data.result;
-                    console.log($scope.id);
-                    $scope.getPage();
+                    //$scope.getPage();
+                    //请求表格数据调用方法
+                    OthercategorymaintenanceService.getOthercategoryData($scope.id).then(function(data){
+                        if(data.code == 0){
+                            $scope.categoryData = data.result;
+                            var geo = $rootScope.getFiled($scope.categoryData,"geo");
+                            var categorylvl1 = $rootScope.getFiled($scope.categoryData,"categorylvl1");
+                            var categorylvl2 = $rootScope.getFiled($scope.categoryData,"categorylvl2");
+                            var categorylvl3 = $rootScope.getFiled($scope.categoryData,"categorylvl3");
+                            $scope.dataMap = OthercategorymaintenanceService.getDataMap($scope.categoryData,geo,categorylvl1,categorylvl2,categorylvl3);
+                        }
+                    },function(data){
+                        console.log(data);
+                    });
                 } else {
                     alert('Uploading Failed');
                 }
@@ -62,20 +73,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             console.log('error status: ' + status);
         });
     }
-    //请求表格数据调用方法
-    OthercategorymaintenanceService.getOthercategoryData().then(function(data){
-        if(data.code == 0){
-            $scope.categoryData = data.result;
-            var geo = $rootScope.getFiled($scope.categoryData,"geo");
-            var categorylvl1 = $rootScope.getFiled($scope.categoryData,"categorylvl1");
-            var categorylvl2 = $rootScope.getFiled($scope.categoryData,"categorylvl2");
-            var categorylvl3 = $rootScope.getFiled($scope.categoryData,"categorylvl3");
-            $scope.dataMap = OthercategorymaintenanceService.getDataMap($scope.categoryData,geo,categorylvl1,categorylvl2,categorylvl3);
-        }
 
-    },function(data){
-        //console.log(data);
-    });
     
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js

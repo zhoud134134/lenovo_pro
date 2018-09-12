@@ -1,6 +1,9 @@
 "use strict";
 
 angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl', function ($scope,$state,$stateParams,$location,$timeout,Upload,MegaDealRelatedMaintenance,APP_CONFIG,$rootScope) {
+    $rootScope.getCycle().then(function(data){
+        $scope.cycledata = data.result;
+    });
     //上传
     $scope.myfiles = {};
     $scope.myfilesVal = '';
