@@ -26,6 +26,9 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
     },function(data){
         console.log(data);
     });
+    $rootScope.getCycle().then(function(data){
+        $scope.cycledata = data.result;
+    });
     //多选控件
     $scope.Sel = true;
     $(document).bind('click',function(){

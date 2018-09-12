@@ -318,11 +318,14 @@ article {
     color: #333;
 }
 /*#outtContent .overflow-both1 thead tr:nth-child(1) th{*/
-    /*min-width: 382px;*/
+    /*min-width: 410px;*/
 /*}*/
 /*.overflow-both1 .sticky-col{*/
     /*width:382px !important;*/
     /*/!*min-width: 381px;*!/*/
+/*}*/
+/*#outtContent .sticky-thead table thead tr:nth-child(1) th{*/
+    /*min-width:410px;*/
 /*}*/
 .overflow-both1 thead {
     background: #F3F5F6;

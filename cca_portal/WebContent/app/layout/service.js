@@ -184,12 +184,17 @@ angular.module('app.layout').service("navService", function($http, $q , APP_CONF
     }
 
     //Select第一个框Cycle Choose
-    this.getSelectCycle = function() {
+    this.getSelectCycle = function(type) {
+        var url=APP_CONFIG.baseUrl +'/api/mcm';
         var d = $q.defer();
+        if(type){
+            url+="?type="+type;
+        }
         $http({
             method : 'GET',
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
-            url : APP_CONFIG.baseUrl +'/api/mcm/',
+            //url : APP_CONFIG.baseUrl +'/api/mcm/',
+            url:url,
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },

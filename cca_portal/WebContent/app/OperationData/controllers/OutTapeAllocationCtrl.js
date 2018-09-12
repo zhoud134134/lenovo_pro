@@ -25,6 +25,9 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
             }
         }
     };
+    $rootScope.getCycle().then(function(data){
+        $scope.cycledata = data.result;
+    });
     //上传
     $scope.upload = function(){
         Upload.upload({

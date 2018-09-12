@@ -70,12 +70,11 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
 
     
     //请求Othercategory表格 接口
-
-    this.getOthercategoryData = function() {
+    this.getOthercategoryData = function(id) {
         var d = $q.defer();
         $http({
             method : 'GET',
-             url : APP_CONFIG.baseUrl +'/api/FYCGData/',
+             url : APP_CONFIG.baseUrl +'/api/FYCGData/'+id,
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },

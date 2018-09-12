@@ -64,7 +64,9 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
             });
         });
     }
-
+    $rootScope.getCycle('Actual').then(function(data){
+        $scope.cycledata = data.result;
+    });
     $scope.getPage = function(){
         //WW
         CAmanualuploadService.getWw($scope.id).then(function(data){

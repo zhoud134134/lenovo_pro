@@ -64,7 +64,9 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             });
         });
     }
-
+    $rootScope.getCycle('Forecast').then(function(data){
+        $scope.cycledata = data.result;
+    });
     //第二部分tab信息展示
     $scope.getPage = function(){
         CAmaintenanceService.getExecute2().then(function(data){
