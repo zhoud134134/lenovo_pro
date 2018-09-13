@@ -317,6 +317,9 @@ article {
     font-size: 12px;
     color: #333;
 }
+#outtContent .sticky-col{
+    width: 277px;
+}
 /*#outtContent .overflow-both1 thead tr:nth-child(1) th{*/
     /*min-width: 410px;*/
 /*}*/
