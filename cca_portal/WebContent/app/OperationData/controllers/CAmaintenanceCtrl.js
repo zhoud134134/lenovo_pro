@@ -106,9 +106,13 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         if(!$scope.CycleChoose){
             alert("请选择条件！");
         }else {
+            $('#execute2').css('display','block');
+            $('#execute1').css('display','none');
             CAmaintenanceService.getExecute($scope.search).then(function(data){
                 if(data.code == 0){
                     alert(data.result);
+                    $('#execute1').css('display','block');
+                    $('#execute2').css('display','none');
                     $scope.getPage();
                 }else {
                     alert(data.msg);
