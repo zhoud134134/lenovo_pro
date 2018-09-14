@@ -29,7 +29,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
     $scope.upload = function(){
         Upload.upload({
             //服务端接收
-            url:APP_CONFIG.baseUrl+ '/api/dm/ca/attachments',
+            url:APP_CONFIG.baseUrl+ '/api/FYCGData/',
             data : {
                 file : $scope.myfiles,
                 username :$rootScope.user,
@@ -39,10 +39,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
         }).success(function (data, status, headers, config){
-            //console.log($scope.CycleChoose.indexOf("M0")==-1);
-            if(!$scope.CycleChoose){
-                alert("请选择条件！");
-            }else {//&& $scope.CycleChoose.indexOf("M0") != -1
+          
                 if (data.code == 0 ) {
                     alert('Success');
                     $scope.ww=true;
@@ -66,7 +63,6 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
                 } else {
                     alert('Uploading Failed');
                 }
-            }
         }).error(function (data, status, headers, config) {
             alert('Uploading Failed');
             //上传失败
