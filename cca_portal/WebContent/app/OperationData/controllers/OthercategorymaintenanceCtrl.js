@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,OthercategorymaintenanceService,$state,$stateParams,$rootScope,$location,Upload,APP_CONFIG) {
+angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,$timeout,OthercategorymaintenanceService,$state,$stateParams,$rootScope,$location,Upload,APP_CONFIG) {
     $rootScope.getCycle().then(function(data){
         $scope.cycledata = data.result;
     });
@@ -27,7 +27,12 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
     }
     $scope.ww=false;
     $scope.upload = function(){
-        Upload.upload({
+        if(!$scope.CycleChoose){
+            alert("请选择条件！");
+        }else{
+            $('#upload1').css('display','none');
+            $('#upload2').css('display','block');
+            Upload.upload({
             //服务端接收
             url:APP_CONFIG.baseUrl+ '/api/FYCGData/',
             data : {
@@ -37,38 +42,25 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             },
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
-            },
+            }
         }).success(function (data, status, headers, config){
-            //console.log($scope.CycleChoose.indexOf("M0")==-1);
-
-            if(!$scope.CycleChoose){
-                alert("请选择条件！");
-            }else {//&& $scope.CycleChoose.indexOf("M0") != -1
                 if (data.code == 0 ) {
-                    $timeout(function () {
-                        $('#upload1').css('display','none');
-                        $('#upload2').css('display','block');
-                    });
-                    console.log("1");
-                    alert('Success');
-
-                    $scope.id=data.result;
-                    console.log(data.result);
+                    $scope.id=data.task_id;
+                    console.log(data);
                     console.log($scope.id);
                     //请求表格数据调用方法
                     OthercategorymaintenanceService.getOthercategoryData($scope.id).then(function(data){
                         if(data.code == 0){
-                            console.log(2);
-                            $('#upload1').css('display','block');
-                            $('#upload2').css('display','none');
                             $scope.ww=true;
-
                             $scope.categoryData = data.result;
                             var geo = $rootScope.getFiled($scope.categoryData,"geo");
                             var categorylvl1 = $rootScope.getFiled($scope.categoryData,"categorylvl1");
                             var categorylvl2 = $rootScope.getFiled($scope.categoryData,"categorylvl2");
                             var categorylvl3 = $rootScope.getFiled($scope.categoryData,"categorylvl3");
                             $scope.dataMap = OthercategorymaintenanceService.getDataMap($scope.categoryData,geo,categorylvl1,categorylvl2,categorylvl3);
+
+                            $('#upload1').css('display','block');
+                            $('#upload2').css('display','none');
                         }
                     },function(data){
                         console.log(data);
@@ -81,12 +73,15 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             //上传失败
             console.log('error status: ' + status);
         });
-    }
+    }}
 
     
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js
     	$('#final table').stickySort({ sortable: true });
+
+        //$('#upload1').css('display','block');
+        //$('#upload2').css('display','none');
     });
 
     //下载模板
@@ -106,4 +101,5 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             console.log(data);
         });
     }
+
 })
