@@ -7,7 +7,7 @@ angular.module('app.OperationData').service("MegaDealRelatedMaintenance", functi
         $http({
             method : 'GET',
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
-            url : APP_CONFIG.baseUrl +'/api/mega/'+cycle,
+            url : APP_CONFIG.baseUrl +'/api/mega',
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
@@ -18,7 +18,9 @@ angular.module('app.OperationData').service("MegaDealRelatedMaintenance", functi
                 }
                 return str.join("&");
             },
-            //params : cycle
+            params : {
+            'cycle' :cycle
+            }
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);

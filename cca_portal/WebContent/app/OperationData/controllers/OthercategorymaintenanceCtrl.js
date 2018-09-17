@@ -33,7 +33,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             data : {
                 file : $scope.myfiles,
                 username :$rootScope.user,
-                cyclename:$scope.CycleChoose
+                cycle:$scope.CycleChoose
             },
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
