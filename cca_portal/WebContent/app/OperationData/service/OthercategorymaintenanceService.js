@@ -38,8 +38,8 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
         });
         return d.promise;
     }
-    //
-    //
+
+
     ////Validate按钮功能
     //this.getValidate = function(v) {
     //    console.log(v)

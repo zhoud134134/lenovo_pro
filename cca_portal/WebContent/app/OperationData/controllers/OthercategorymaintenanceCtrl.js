@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,OthercategorymaintenanceService,$state,$stateParams,$rootScope,$location,Upload,APP_CONFIG) {
+angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,$timeout,OthercategorymaintenanceService,$state,$stateParams,$rootScope,$location,Upload,APP_CONFIG) {
     $rootScope.getCycle('Forecast').then(function(data){
         $scope.cycledata = data.result;
     });
@@ -40,19 +40,29 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             },
         }).success(function (data, status, headers, config){
             //console.log($scope.CycleChoose.indexOf("M0")==-1);
+
             if(!$scope.CycleChoose){
                 alert("请选择条件！");
             }else {//&& $scope.CycleChoose.indexOf("M0") != -1
                 if (data.code == 0 ) {
+                    $timeout(function () {
+                        $('#upload1').css('display','none');
+                        $('#upload2').css('display','block');
+                    });
+                    console.log("1");
                     alert('Success');
-                    $scope.ww=true;
+
                     $scope.id=data.result;
                     console.log(data.result);
                     console.log($scope.id);
-                    //$scope.getPage();
                     //请求表格数据调用方法
                     OthercategorymaintenanceService.getOthercategoryData($scope.id).then(function(data){
                         if(data.code == 0){
+                            console.log(2);
+                            $('#upload1').css('display','block');
+                            $('#upload2').css('display','none');
+                            $scope.ww=true;
+
                             $scope.categoryData = data.result;
                             var geo = $rootScope.getFiled($scope.categoryData,"geo");
                             var categorylvl1 = $rootScope.getFiled($scope.categoryData,"categorylvl1");
@@ -79,5 +89,22 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
         //下面是在table render完成后执行的js
     	$('#final table').stickySort({ sortable: true });
     });
-    
+
+    //下载模板
+    $scope.DowTemp = function(){
+        $scope.temp = {
+            type: 'other category maintenance'
+        }
+        OthercategorymaintenanceService.download($scope.temp).then(function(data){
+            console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        },function(data){
+            console.log(data);
+        });
+    }
 })
