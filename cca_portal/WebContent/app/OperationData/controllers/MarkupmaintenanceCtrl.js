@@ -43,7 +43,7 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
     }, function (data) {
         console.log(data);
     });
-    $rootScope.getCycle('Forecast').then(function(data){
+    $rootScope.getCycle('FCST').then(function(data){
         $scope.cycledata = data.result;
     });
     //第二部分tab信息展示

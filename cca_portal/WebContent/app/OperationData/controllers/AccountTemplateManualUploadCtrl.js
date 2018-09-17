@@ -1,7 +1,9 @@
 "use strict";
 
 angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl', function ($scope,MegaDealRelatedMaintenance,AccountTemplateManualUploadService,CAmaintenanceService,$timeout,$rootScope,Upload,APP_CONFIG,$state,$stateParams,$location) {
-
+	 $rootScope.getCycle('Actual').then(function(data){
+	        $scope.cycledata = data.result;
+	    });
     $('#final table').stickySort({ sortable: true });
     //上传
     $scope.myfiles = {};

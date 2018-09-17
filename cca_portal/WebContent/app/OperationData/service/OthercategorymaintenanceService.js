@@ -74,7 +74,7 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
         var d = $q.defer();
         $http({
             method : 'GET',
-             url : APP_CONFIG.baseUrl +'/api/FYCGData/'+id,
+             url : APP_CONFIG.baseUrl +'/api/FYCGData/?uuid='+id,
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },

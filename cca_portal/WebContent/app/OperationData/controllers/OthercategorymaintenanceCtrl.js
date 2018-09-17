@@ -1,7 +1,7 @@
 "use strict";
 
-angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,$timeout,OthercategorymaintenanceService,$state,$stateParams,$rootScope,$location,Upload,APP_CONFIG) {
-    $rootScope.getCycle('Forecast').then(function(data){
+angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,OthercategorymaintenanceService,$state,$stateParams,$rootScope,$location,Upload,APP_CONFIG) {
+    $rootScope.getCycle().then(function(data){
         $scope.cycledata = data.result;
     });
     $scope.ww = true;
@@ -29,11 +29,11 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
     $scope.upload = function(){
         Upload.upload({
             //服务端接收
-            url:APP_CONFIG.baseUrl+ '/api/dm/ca/attachments',
+            url:APP_CONFIG.baseUrl+ '/api/FYCGData/',
             data : {
                 file : $scope.myfiles,
                 username :$rootScope.user,
-                cyclename:$scope.CycleChoose
+                cycle:$scope.CycleChoose
             },
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
@@ -76,7 +76,6 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
                 } else {
                     alert('Uploading Failed');
                 }
-            }
         }).error(function (data, status, headers, config) {
             alert('Uploading Failed');
             //上传失败
