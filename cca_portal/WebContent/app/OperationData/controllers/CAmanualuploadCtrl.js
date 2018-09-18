@@ -245,7 +245,7 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
     //下载模板
     $scope.DowTemp = function(){
         $scope.temp = {
-            type: 'ca manual upload'
+            type: 'cam'
         }
         CAmanualuploadService.download($scope.temp).then(function(data){
             console.log(data);
