@@ -18,15 +18,15 @@
                     <h2>Cycle choose</h2>
                 </header>
                 <div class="tab-serch">
-                    <div class="col-sm-9">
-                        <div class="col-sm-6 form-group-m">
+                    <div class="col-sm-8">
+                        <div class="col-sm-5 form-group-m">
                             <label>Cycle choose:</label>
                             <div class="for-sel">
                                 <select class="form-control" ng-model="CycleChoose" ng-options="x for x in cycledata">
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-6 form-group-m">
+                        <div class="col-sm-7 form-group-m">
                             <label>Upload Excel File:</label>
                             <div class="model-file">
                                 <input type="text" class="file-route col-sm-8" ng-model="myfilesVal"/>
@@ -37,8 +37,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3 tab-serch-btn">
-                        <button class="btn btn-back searchbtn" ng-click="upload()">Upload</button>
+                    <div class="col-sm-4 pull-right">
+                        <button class="btn btn-back pull-right" id="upload2" style="display: none;"><i class="fa fa-spinner fa-spin"></i></button>
+                        <button class="btn btn-back pull-right" id="upload1" style="margin-right:10px;" ng-click="upload()">Upload</button>
+                        <button class="btn btn-back pull-right" style="margin-right: 10px;" ng-click="DowTemp()">Download Template</button>
                     </div>
                 </div>
             </div>
@@ -102,12 +104,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 tab-fun-btn">
-
-                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true"  ng-click="getPRCDownLoad()">
-                            <i class="fa fa-download"></i>
-                        </button>
-                    </div>
+                    <!--<div class="col-sm-4 tab-fun-btn">-->
+                        <!--<button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true"  ng-click="getPRCDownLoad()">-->
+                            <!--<i class="fa fa-download"></i>-->
+                        <!--</button>-->
+                    <!--</div>-->
                 </div>
             </div>
         </article>

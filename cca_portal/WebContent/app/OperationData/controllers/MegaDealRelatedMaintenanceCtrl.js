@@ -24,7 +24,12 @@ angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl',
             $scope.cycle = cycleArr[2];
             $scope.year = cycleArr[0];
             $scope.quarter = cycleArr[1].substring(0,2) ;
-            console.log($scope.quarter)
+            console.log($scope.quarter);
+
+            $scope.cycle1 = $scope.CycleChoose;
+            console.log($scope.cycle1);
+            //var ai=$scope.cycleArr1.replace(/\s/g, "");
+            //console.log(ai);
             Upload.upload({
                 //服务端接收
                 url:APP_CONFIG.baseUrl+ '/api/mega/attachments',
@@ -42,10 +47,11 @@ angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl',
                 console.log(data)
                 console.log(status)
                 if(status == 200){
-                    if(data.code == 0){ 
-                        MegaDealRelatedMaintenance.getData($scope.CycleChoose).then(function(data2){
+                    if(data.code == 0){
+                        MegaDealRelatedMaintenance.getData($scope.cycle1).then(function(data2){
                             if(data2.code == 0){
                                 $scope.pageList = data2.result;
+                                console.log($scope.pageList);
                                 $scope.TAB = true;
                                 alert('Success');
                                 $scope.getTable();

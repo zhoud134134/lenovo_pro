@@ -2,12 +2,12 @@ angular.module('app.OperationData').service("MegaDealRelatedMaintenance", functi
 
     //获取数据
     this.getData = function(cycle) {
-        console.log(cycle)
+        console.log(cycle);
         var d = $q.defer();
         $http({
             method : 'GET',
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
-            url : APP_CONFIG.baseUrl +'/api/mega',
+            url : APP_CONFIG.baseUrl +'/api/mega?cycle='+cycle,
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
