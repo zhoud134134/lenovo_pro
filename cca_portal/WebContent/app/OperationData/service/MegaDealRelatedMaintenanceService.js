@@ -7,7 +7,7 @@ angular.module('app.OperationData').service("MegaDealRelatedMaintenance", functi
         $http({
             method : 'GET',
             //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
-            url : APP_CONFIG.baseUrl +'/api/mega?cycle='+cycle,
+            url : APP_CONFIG.baseUrl +'/api/mega',
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
