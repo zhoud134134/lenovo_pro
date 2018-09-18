@@ -45,7 +45,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             }
         }).success(function (data, status, headers, config){
                 if (data.code == 0 ) {
-                    $scope.id=data.task_id;
+                    $scope.id=data.result;
                     console.log(data);
                     console.log($scope.id);
                     //请求表格数据调用方法
@@ -87,7 +87,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
     //下载模板
     $scope.DowTemp = function(){
         $scope.temp = {
-            type: 'other category maintenance'
+            type: 'category'
         }
         OthercategorymaintenanceService.download($scope.temp).then(function(data){
             console.log(data);
