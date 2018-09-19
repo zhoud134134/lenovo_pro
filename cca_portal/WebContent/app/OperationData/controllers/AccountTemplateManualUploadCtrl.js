@@ -41,7 +41,7 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
                     $scope.id=data.result;
                     console.log(data);
                     //请求表格数据调用方法
-                    AccountTemplateManualUploadService.getOthercategoryData($scope.CycleChoose).then(function(data){
+                    AccountTemplateManualUploadService.getSumactData($scope.id).then(function(data){
                         if(data.code == 0){
                             $scope.account=true;
                             console.log(data);
