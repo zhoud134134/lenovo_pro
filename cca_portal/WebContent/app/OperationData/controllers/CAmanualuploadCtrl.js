@@ -67,68 +67,21 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
     $rootScope.getCycle('Actual').then(function(data){
         $scope.cycledata = data.result;
     });
-    //上传
-    $scope.myfiles = {};
-    $scope.openUpload = function(){
-        //$('#myModal').modal('show');
-        $scope.myfilesVal = '';
-        $scope.fileChange = function(){
-            if($scope.myfiles.name){
-                $scope.myfilesVal = $scope.myfiles.name;
-            }else {
-                $scope.myfilesVal = '';
-            }
-        }
-    }
-    $scope.caprcww=false;
-    $scope.upload = function(){
-        Upload.upload({
-            //服务端接收
-            url:APP_CONFIG.baseUrl+ '/api/dm/ca/attachments',
-            data : {
-                file : $scope.myfiles,
-                username :$rootScope.user,
-                cyclename:$scope.CycleChoose
-            },
-            headers: {
-                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
-            },
-        }).success(function (data, status, headers, config){
-            //console.log($scope.CycleChoose.indexOf("M0")==-1);
-            if(!$scope.CycleChoose){
-                alert("请选择条件！");
-            }else {
-                if (data.code == 0 ) {
-                    alert('Success');
-                    $scope.caprcww=true;
-                    $scope.id=data.result;
-                    console.log($scope.id);
-                    $scope.getPage();
-                } else {
-                    alert('Uploading Failed');
-                }
-            }
-        }).error(function (data, status, headers, config) {
-            alert('Uploading Failed');
-            //上传失败
-            console.log('error status: ' + status);
-        });
-    }
     $scope.getPage = function(){
         //WW
         CAmanualuploadService.getWw($scope.id).then(function(data){
             if(data.code == 0){
 
                 $scope.WwList = data.result;
-                $scope.segment = $rootScope.sortByDataBase($rootScope.getFiled($scope.WwList,"segment"),$rootScope.wwSortData.segments);
-                $scope.segment.push('Total');
-                $scope.bu =  $rootScope.sortByDataBase($rootScope.getFiled($scope.WwList,"bu"), $rootScope.wwSortData.bus);
-                $scope.geo = $rootScope.sortByDataBase($rootScope.getFiled($scope.WwList,"geo"), $rootScope.wwSortData.geos);
+                $scope.segment = $rootScope.getFiled($scope.WwList,"segment");
+            //    $scope.segment.push('Total');
+                $scope.bu =  $rootScope.getFiled($scope.WwList,"bu");
+                $scope.geo = $rootScope.getFiled($scope.WwList,"geo");
                 $scope.dataMap = CAmaintenanceService.getDataMap($scope.WwList,$scope.segment,$scope.geo,$scope.bu,$rootScope.wwSortData.regions);
             }
             //console.log(data);
         },function(data){
-             console.log(data);
+            // console.log(data);
         });
 
         //PRC
@@ -141,7 +94,7 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
                 $scope.getPrcDataMap = CAmaintenanceService.getPrcDataMap($scope.PrcList,$scope.Prcsegment,$scope.Prcbu);
             }
         } ,function(data){
-             console.log(data);
+            // console.log(data);
         });
         //CAmanualuploadService.getPrc($scope.id).then(function(data){
         //    if(data.code == 0){
@@ -176,7 +129,59 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
         //});
     };
 
-
+    //上传
+    $scope.myfiles = {};
+    $scope.openUpload = function(){
+        //$('#myModal').modal('show');
+        $scope.myfilesVal = '';
+        $scope.fileChange = function(){
+            if($scope.myfiles.name){
+                $scope.myfilesVal = $scope.myfiles.name;
+            }else {
+                $scope.myfilesVal = '';
+            }
+        }
+    }
+    $scope.caprcww=false;
+    $scope.upload = function(){
+        Upload.upload({
+            //服务端接收
+            url:APP_CONFIG.baseUrl+ '/api/dm/ca/attachments',
+            data : {
+                file : $scope.myfiles,
+                username :$rootScope.user,
+                cyclename:$scope.CycleChoose
+            },
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).success(function (data, status, headers, config){
+            //console.log($scope.CycleChoose.indexOf("M0")==-1);
+            if(!$scope.CycleChoose){
+                alert("请选择条件！");
+            }else {
+                if (data.code == 0 && $scope.CycleChoose.indexOf("M0") != -1) {
+                    alert('Success');
+                    $scope.caprcww=true;
+                    $scope.id=data.result;
+                    console.log($scope.id);
+                    $scope.getPage();
+                }else if(data.code == 0 && $scope.CycleChoose.indexOf("Actual") != -1){
+                    alert('Success');
+                    $scope.caprcww=true;
+                    $scope.id=data.result;
+                    console.log($scope.id);
+                    $scope.getPage();
+                } else {
+                    alert('Uploading Failed');
+                }
+            }
+        }).error(function (data, status, headers, config) {
+            alert('Uploading Failed');
+            //上传失败
+            console.log('error status: ' + status);
+        });
+    }
     var prc = {
         stype : 'PRC'
     };
@@ -259,5 +264,10 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
             console.log(data);
         });
     }
+    
+    $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
+        //下面是在table render完成后执行的js
+    	$('#final table').stickySort({ sortable: true });
+    });
 
 })

@@ -106,12 +106,13 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         if(!$scope.CycleChoose){
             alert("请选择条件！");
         }else {
+            $('#execute2').css('display','block');
+            $('#execute1').css('display','none');
             CAmaintenanceService.getExecute($scope.search).then(function(data){
                 if(data.code == 0){
-                    $('#execute2').css('display','block');
-                    $('#execute1').css('display','none');
                     alert(data.result);
-                    //$('#execute1').css('display','block');
+                    $('#execute1').css('display','block');
+                    $('#execute2').css('display','none');
                     $scope.getPage();
                 }else {
                     alert(data.msg);
@@ -149,10 +150,10 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                 if(data.code == 0){
                     
                     $scope.WwList = data.result;
-                    $scope.segment = $rootScope.sortByDataBase($rootScope.getFiled($scope.WwList,"segment"),$rootScope.wwSortData.segments);
-                     $scope.segment.push('Total');
-                    $scope.bu =  $rootScope.sortByDataBase($rootScope.getFiled($scope.WwList,"bu"), $rootScope.wwSortData.bus);
-                    $scope.geo = $rootScope.sortByDataBase($rootScope.getFiled($scope.WwList,"geo"), $rootScope.wwSortData.geos);
+                    $scope.segment = $rootScope.getFiled($scope.WwList,"segment");
+                   //  $scope.segment.push('Total');
+                    $scope.bu =  $rootScope.getFiled($scope.WwList,"bu");
+                    $scope.geo = $rootScope.getFiled($scope.WwList,"geo");
                     $scope.dataMap = CAmaintenanceService.getDataMap($scope.WwList,$scope.segment,$scope.geo,$scope.bu,$rootScope.wwSortData.regions);
                 }
                 //console.log(data);
@@ -300,5 +301,10 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             //$scope.sw2 = false;
         }
     }
+    
+    $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
+        //下面是在table render完成后执行的js
+    	$('#final table').stickySort({ sortable: true });
+    });
 
 })

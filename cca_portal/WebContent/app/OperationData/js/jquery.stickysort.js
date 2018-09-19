@@ -21,7 +21,7 @@
 					$t	   = $(this),
 					$thead = $t.find('thead').clone(),
 					$col   = $t.find('thead, tbody').clone();
-					console.log($thead)
+				//	console.log($thead)
 				// Add class, copy children classes, remove margins, reset width and wrap table
 				$t
 				.wrap('<div class="sticky-wrap" />')
