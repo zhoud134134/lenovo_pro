@@ -6,7 +6,7 @@
     <!-- widget grid -->
     <section id="widget-grid" widget-grid>
         <article class="col-sm-12">
-            <!-- ��һ���� -->
+            <!-- 第一部分-->
             <div jarvis-widget data-widget-color="Light Blue"
                  data-widget-editbutton="false"
                  data-widget-fullscreenbutton="false"
@@ -38,61 +38,62 @@
                         </div>
                     </div>
                     <div class="col-sm-3 tab-serch-btn">
-                        <button class="btn btn-back searchbtn" ng-click="upload()">Upload</button>
-                        <button class="btn btn-back searchbtn" ng-click="DowTemp()">Download Template</button>
+                        <button class="btn btn-back pull-right" id="upload2" style="display: none;"><i class="fa fa-spinner fa-spin"></i></button>
+                        <button class="btn btn-back pull-right" id="upload1" style="margin-right:10px;" ng-click="upload()">Upload</button>
+                        <button class="btn btn-back pull-right" style="margin-right: 10px;" ng-click="DowTemp()">Download Template</button>
                     </div>
                 </div>
             </div>
 
-            <!-- �ڶ����� -->
-            <div jarvis-widget>
-                <div>
-                    <div class="widget-body no-padding">
-                        <div class="table-responsive table-border-tb">
-                            <div style="height: 160px;">
-                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" id="tabExample1" style="table-layout: fixed;">
-                                    <thead class="table-thead">
-                                    <tr>
-                                        <td width="19px"></td>
-                                        <td>Cycle Name</td>
-                                        <td>Description</td>
-                                        <td>Status</td>
-                                        <td>Created By</td>
-                                        <td>Created Date</td>
-                                        <td>End Date</td>
-                                        <td>Validate by</td>
-                                        <td>Validate Date</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="tab in tablist" ng-click="trClick($event,tab.taskId,tab.status,tab.cycleName)">
-                                        <td>
-                                            <label class="radio">
-                                                <input type="radio" name="radio-inline">
-                                                <i></i>
-                                            </label>
-                                        </td>
-                                        <td>{{tab.cycleName}}</td>
-                                        <td>{{tab.taskName}}</td>
-                                        <td>{{tab.status}}</td>
-                                        <td>{{tab.sysCreatedBy}}</td>
-                                        <td>{{tab.sysCreatedDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                                        <td>{{tab.sysEndDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                                        <td>{{tab.publishUser}}</td>
-                                        <td>{{tab.publishDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-sm-4 tab-fun-btn2">
-                                <button class="btn btn-back btn-sm" ng-click="SearchTab()">Search</button>
-                                <button class="btn btn-back btn-sm" ng-click="DelOneItem()">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- �������� -->
+            <!-- 第二部分 -->
+            <!-- <div jarvis-widget>
+                 <div>
+                     <div class="widget-body no-padding">
+                         <div class="table-responsive table-border-tb">
+                             <div style="height: 160px;">
+                                 <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" id="tabExample1" style="table-layout: fixed;">
+                                     <thead class="table-thead">
+                                     <tr>
+                                         <td width="19px"></td>
+                                         <td>Cycle Name</td>
+                                         <td>Description</td>
+                                         <td>Status</td>
+                                         <td>Created By</td>
+                                         <td>Created Date</td>
+                                         <td>End Date</td>
+                                         <td>Validate by</td>
+                                         <td>Validate Date</td>
+                                     </tr>
+                                     </thead>
+                                     <tbody>
+                                     <tr ng-repeat="tab in tablist" ng-click="trClick($event,tab.taskId,tab.status,tab.cycleName)">
+                                         <td>
+                                             <label class="radio">
+                                                 <input type="radio" name="radio-inline">
+                                                 <i></i>
+                                             </label>
+                                         </td>
+                                         <td>{{tab.cycleName}}</td>
+                                         <td>{{tab.taskName}}</td>
+                                         <td>{{tab.status}}</td>
+                                         <td>{{tab.sysCreatedBy}}</td>
+                                         <td>{{tab.sysCreatedDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                         <td>{{tab.sysEndDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                         <td>{{tab.publishUser}}</td>
+                                         <td>{{tab.publishDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                     </tr>
+                                     </tbody>
+                                 </table>
+                             </div>
+                             <div class="col-sm-4 tab-fun-btn2">
+                                 <button class="btn btn-back btn-sm" ng-click="SearchTab()">Search</button>
+                                 <button class="btn btn-back btn-sm" ng-click="DelOneItem()">Delete</button>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>-->
+            <!--第三部分 -->
             <div jarvis-widget  data-widget-color="Light Blue"
                  data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
                 <header>
@@ -100,9 +101,9 @@
                     <h2>Result</h2>
                 </header>
             </div>
-            <!-- ���Ĳ��� -->
-            <div class="mup-tabbtn">
-                <div ng-show="ww" class="othermain">
+            <!-- 第四部分 -->
+            <div class="mup-tabbtn" ng-show="account">
+                <div class="othermain">
                     <div jarvis-widget data-widget-colorbutton="false"
                          data-widget-editbutton="false"
                          data-widget-deletebutton="false"
@@ -116,7 +117,7 @@
                         <div class="operadata-segment-con">
                             <div class="widget-body no-padding">
                                 <main id="other_content">
-                                    <section class="demo1" id="final">
+                                    <section class="demo8" id="final">
                                         <table class="overflow-both" >
                                             <thead>
                                             <tr>
@@ -10610,7 +10611,35 @@
                                             </tr>
                                             </tbody>
                                         </table>
+                                        <!--<table class="overflow-both" >
+                                           <thead>
+                                           <tr>
+                                               <th class="center" rowspan="2" colspan="3">Mx Cost Guidance Forecast</th>
+                                               <th class="center" rowspan="3">BU</th>
+                                               <th class="center" colspan="{{geovalue}}" ng-repeat="(geokey,geovalue) in dataMap.geo">{{geokey}}</th>
+                                           </tr>
+                                           <tr>
+                                               <th class="center" colspan="{{regionvalue.length}}" ng-repeat="(regionkey,regionvalue) in dataMap.region">{{regionvalue.region}}</th>
+                                           </tr>
+                                           <tr>
+                                               <th class="center" id="td">Main Category</th>
 
+                                               <th>First layer</th>
+                                               <th>Second layer</th>
+                                               <th class="center" ng-repeat="s in dataMap.segment track by $index">{{s}}</th>
+                                           </tr>
+                                           </thead>
+
+                                           <tbody>
+                                           <tr ng-repeat="category in dataMap.categoryData track by $index" on-finish-render-filters>
+                                               <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl1}}</th>
+                                               <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl2}}</th>
+                                               <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl3}}</th>
+                                               <th>{{category.bu}}</th>
+                                               <td ng-repeat="c in category.ca track by $index">{{c}}</td>
+                                           </tr>
+                                           </tbody>
+                                      </table>-->
                                     </section>
                                 </main>
                             </div>
