@@ -273,15 +273,11 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
 						for (var al=0;al<arryList.length;al++) {
 							if (segment[s] == $.trim(arryList[al].segment)) {
 								if (bu[b] == $.trim(arryList[al].bu)) {
-									if(region[k][re] == $.trim(arryList[al].region)){
-										if("Total" == region[k][re]){
-											if(geo[k] != $.trim(arryList[al].geo)){
-												continue;
-											}
+									if(geo[k] == $.trim(arryList[al].geo)){
+										if(region[k][re] == $.trim(arryList[al].region)){
+											ca.push($.trim(arryList[al].values.toString()));
 										}
-										ca.push($.trim(arryList[al].values.toString()));
 									}
-									
 									
 									if(k == region.length -1 && re == region[region.length -1].length - 1){
 										if($.trim(arryList[al].geo) == "Global Total" && $.trim(arryList[al].region) == "Global Total"){
