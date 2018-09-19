@@ -258,6 +258,25 @@ article {
     border-collapse: separate !important;
     border-spacing: 0 20px;
 }
+
+#cacontent .sticky-col {
+				width: 237px;
+			}
+			.caleft{
+				text-align: left;
+				background: #fff !important;
+				font-weight: 400;
+			}
+			#cacontent .sticky-thead{
+				display: none;
+			}
+			#cacontent .sticky-wrap .Ftbody tr td{
+				min-width: 50px;
+			}
+			#cacontent .sticky-wrap th{
+				min-width: 118px;
+			}
+
 /* 公用 end */
 /*report 第二部分的内容*/
 .summary {

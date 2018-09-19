@@ -153,65 +153,34 @@
                                 <div class="tab-content">
                                  
                                     <div id="operadata-segment-{{$index+1}}" class="tab-pane" ng-class="{true:'active',false:''}[{{$index == 0}}]" ng-repeat="(key,value) in dataMap">
-                                        <table class="col-sm-12 table1 operadata-tab2">
-                                            <tr>
-                                                <td class="operadata-tab1-width">
-                                                    <div class="operadata-tab2-box">
-                                                        <table class="operadata-tab2-left">
-                                                            <tr>
-                                                                <!-- <td rowspan="11">CA(K)</td> -->
-                                                                <td class="gray">
-                                                                    <div class="operadata-tab2-box-jin1">
-                                                                        <table>
-                                                                            <tr>
-                                                                                <td rowspan="11">CA(K)</td>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="operadata-tab2-box-jin2">
-                                                                        <table>
-                                                                            <thead>
-                                                                            <tr style="height: 66px;" class="gray">
-                                                                                <td rowspan="2" style="border-top: 0px solid #fff;">BU</td>
-                                                                            </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                            <tr class="operadata-left" ng-repeat="b in bu">
-                                                                                <td>{{b}}</td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </td>
-                                                 <td class="operadata-tab2-bord">
-                                                    <div class="operadata-tab2-box1">
-                                                        <table class="operadata-tab2-right">
-                                                            <thead class="gray">
-                                                            <tr>
-                                                                <td colspan="{{geovalue}}" ng-repeat="(geokey,geovalue) in value.geo">{{geokey}}</td>
-                                                                  <td rowspan="2">Global Total</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="white-space: nowrap;" ng-repeat="r in value.region track by $index">{{r}}</td>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr class="operadata-left" ng-repeat="(bukey,buvalue) in value.bu">
-                                                                <td ng-repeat="c in buvalue track by $index">{{c}}</td>
-                                                            </tr>
-                                                    
-                                                        </table>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                          <main id="cacontent">
+			<section class="demo1" id="final">
+				<table class="overflow-both">
+					<thead>
+						<tr class="gray">
+							<th rowspan="8" style="border-bottom: 1px solid transparent;"></th>
+							<th rowspan="2">BU</th>
+							<th colspan="{{geovalue}}" ng-repeat="(geokey,geovalue) in value.geo">{{geokey}}</th>
+							<th rowspan="2">Global Total</th>
+						</tr>
+						<tr class="gray">
+							
+							<th ng-repeat="r in value.region track by $index">{{r}}</th>
+						</tr>
+					</thead>
+					<tbody class="Ftbody">
+						<tr>
+							<th rowspan="{{bu.length + 2}}" style="padding-bottom: 60px;">CA(K)</th>
+						</tr>
+						<tr ng-repeat="(bukey,buvalue) in value.bu" on-finish-render-filters>
+							<th class="caleft" >{{bukey}}</th>
+							<td ng-repeat="c in buvalue track by $index">{{c}}</td>
+						</tr>	
+					</tbody>
+				</table>
+			</section>
+		 </main> 
+ </div>
                                 </div>
                             </div>
                         </div>
