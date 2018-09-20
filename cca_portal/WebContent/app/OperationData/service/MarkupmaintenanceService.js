@@ -146,7 +146,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
         var d = $q.defer();
         $http({
             method: 'GET',
-            url: APP_CONFIG.baseUrl + '/api/bmc/summary/loadexcel/row/' + id,
+            url: APP_CONFIG.baseUrl + '/api/dm/markup/excel/' + id,
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
@@ -167,7 +167,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
         var d = $q.defer();
         $http({
             method: 'GET',
-            url: APP_CONFIG.baseUrl + '/api/bmc/summary/loadexcel/prc/' + id,
+            url: APP_CONFIG.baseUrl + '/api/dm/markup/excel/' + id,
             headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
             },
