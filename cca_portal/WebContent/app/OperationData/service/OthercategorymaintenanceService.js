@@ -175,6 +175,7 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
 		    			for(var h = 0; h < geoList.length; h++){
 		    				for(var i = 0; i < geoList[h].length; i++){
 		    					var regionMapKey =  geoList[h][i] + '_' + geo[h];
+		    					var catemp = [];
 		    					for(var j = 0; j < regionMap[regionMapKey].length; j++){
 		    						for (var arl=0;arl<arryList.length;arl++){
 				    					if(categorylvl1[a] == arryList[arl].categorylvl1){
@@ -185,6 +186,8 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
 						        							if(geoList[h][i] == arryList[arl].region){
 						        								if(regionMap[regionMapKey][j] == arryList[arl].segment){
 						        									ca.push(arryList[arl].value);
+						        									catemp.push(arryList[arl].value);
+						        									
 						        								}
 						        							}
 						        						
@@ -201,6 +204,10 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
 						        			}
 						        		}
 				    				}
+		    						if(j+1 != catemp.length){
+		    							ca.push('-');
+		    							catemp.push('-');
+		    						}
 		    					}
 		    				}
     					}
