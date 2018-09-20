@@ -1,10 +1,10 @@
 "use strict";
 
 angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl', function ($scope, OthercategorymaintenanceService, AccountTemplateManualUploadService, CAmaintenanceService, $timeout, $rootScope, Upload, APP_CONFIG, $state, $stateParams, $location) {
-    $rootScope.getCycle().then(function (data) {
+    $rootScope.getCycle('Actual').then(function (data) {
         $scope.cycledata = data.result;
     });
-    $('#final table').stickySort({sortable: true});
+    //$('#final table').stickySort({sortable: true});
 
     //上传
     $scope.myfiles = {};
@@ -68,6 +68,12 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
             });
         }
     }
+ $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
+        //下面是在table render完成后执行的js
+    	$('#final table').stickySort({ sortable: true });
+
+        
+    });
 
 
     //下载模板
