@@ -54,4 +54,28 @@ angular.module('app.OperationData').service("AccountTemplateManualUploadService"
         return d.promise;
     }
     
+    //SumAct时的Download
+    this.getSumActDownLoad = function(id) {
+       // console.log(id)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/SUMACTExcel/',
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+            params : {
+            'uuid' :id
+            },
+            responseType : 'arraybuffer'
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
+    
 })

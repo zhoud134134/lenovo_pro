@@ -185,8 +185,8 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
 						        						if(geo[h] == arryList[arl].geo){
 						        							if(geoList[h][i] == arryList[arl].region){
 						        								if(regionMap[regionMapKey][j] == arryList[arl].segment){
-						        									ca.push(arryList[arl].value);
-						        									catemp.push(arryList[arl].value);
+						        									ca.push(arryList[arl].formattedValue);
+						        									catemp.push(arryList[arl].formattedValue);
 						        									
 						        								}
 						        							}

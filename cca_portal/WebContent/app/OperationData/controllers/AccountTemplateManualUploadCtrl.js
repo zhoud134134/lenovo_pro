@@ -39,6 +39,7 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
                 console.log(data);
                 if (data.code == 0) {
                     $scope.id=data.result;
+                    $scope.TaskID=data.result;
                     console.log(data);
                     //请求表格数据调用方法
                     AccountTemplateManualUploadService.getSumactData($scope.id).then(function(data){
@@ -75,11 +76,29 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
         
     });
 
+ //ww时的Download
+ $scope.getSumActDownLoad = function(){
+     if(!$scope.TaskID){
+         return;
+     }else{
+    	 AccountTemplateManualUploadService.getSumActDownLoad($scope.TaskID).then(function(data){
+             //console.log(data);
+             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+             var objectUrl = URL.createObjectURL(blob);
+             var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+             $("body").append(aForExcel);
+             $(".forExcel").click();
+             aForExcel.remove();
+         },function(data){
+             //console.log(data);
+         })
+     }
+ }
 
     //下载模板
     $scope.DowTemp = function(){
         $scope.temp = {
-            type: 'account'
+            type: 'actual'
         }
         OthercategorymaintenanceService.download($scope.temp).then(function(data){
             console.log(data);
