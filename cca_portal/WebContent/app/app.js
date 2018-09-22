@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 
-angular.module('app', [
+var ccf = angular.module('app', [
     'ngSanitize',
     'ngAnimate',
     'restangular',
@@ -105,8 +105,9 @@ angular.module('app', [
         $rootScope.$stateParams = $stateParams;
         // editableOptions.theme = 'bs3';
         //    $rootScope.user = '123';
+        
 
-        $rootScope.$on('$stateChangeStart', function ($event, toState, toParams, fromState, fromParams, $timeout) {
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, $timeout) {
             //event：该事件的基本信息
             //toState:我们可以得到当前路由的信息，比如路由名称，url,视图的控制器，模板路径等等
             //toParams:我们可以得到当前路由的参数
@@ -116,89 +117,14 @@ angular.module('app', [
              stateChangeStart当状态改变开始的时候被触发
              $stateChangeSuccess当状态改变成功后被触发
              $stateChangeError当状态改变遇到错误时被触发，错误通常是目标无法载入，需要预载入的数据无法被载入等*/
-
-            //var data = {
-            //    "result": {
-            //        "displayname": ["Jiaozi JZ1 Han"],
-            //        "ITcode": ["hanjz1"],
-            //        "email": ["hanjz1@lenovo.com"],
-            //        "status": ["1"]
-            //    }, "code": 0
-            //};
-            //sessionStorage.setItem("userResult", JSON.stringify(data.result));
-            //
-            //$.ajax({
-            //    type: "GET",
-            //    url: "https://mcmt.lenovo.com/ccf-prod/hello/test?ITcode=hanjz1",
-            //    success: function (data) {
-            //        console.log(data)
-            //        sessionStorage.setItem("token", data);
-            //    }
-            //});
-
-
-            navService.getUser();
-
-
-            navService.getSortData("all","prc").then(function(caprcsegmentdata){
-                $rootScope.prcSortData=caprcsegmentdata.result;
-            }, function (data) {
-                // console.log(data);
-            });
-            navService.getSortData("all","ww").then(function(cawwsegmentdata){
-                $rootScope.wwSortData=cawwsegmentdata.result;
-            }, function (data) {
-                // console.log(data);
-            });
+        	if(toState.url == '/real-login') return;
+        	if(!sessionStorage.getItem("token") && !$rootScope.userData){
+        		event.preventDefault();// 取消默认跳转行为
+        		$rootScope.$state.go('realLogin');//跳转到登录界面 }
+        	}
+    
         });
 
-
-        //调取bu、geo、region、segment
-        /* navService.getBU().then(function (data) {
-         if(data.code == 0){
-         sessionStorage.setItem("bu", JSON.stringify(data.result));
-         }
-         }, function (data) {
-         console.log(data);
-         });
-         navService.getGEO().then(function (data) {
-         if(data.code == 0){
-         sessionStorage.setItem("geo", JSON.stringify(data.result));
-         }
-         }, function (data) {
-         console.log(data);
-         });
-         navService.getREGION().then(function (data) {
-         if(data.code == 0){
-         sessionStorage.setItem("region", JSON.stringify(data.result));
-         }
-         }, function (data) {
-         console.log(data);
-         });
-         var prc = {
-         stype : 'PRC'
-         }
-         navService.getSEGMENTprc(prc).then(function (data) {
-         if(data.code == 0){
-         sessionStorage.setItem("segmentPRC", JSON.stringify(data.result));
-         }
-         }, function (data) {
-         console.log(data);
-         });
-         var ww = {
-         stype : 'WW'
-         }
-         navService.getSEGMENTww(ww).then(function (data) {
-         if(data.code == 0){
-         sessionStorage.setItem("segmentWW", JSON.stringify(data.result));
-         }
-         }, function (data) {
-         console.log(data);
-         });*/
-
-
-        //$rootScope.Markupthead = ['PRC','AP','EMEA','NA','Brazil','LAS','HQ','Total'];
-        // $rootScope.Markuptbody = ['CONSUMER','SMB','COMMERCIAL','Others','Total'];
         //markup ww表格式化
         $rootScope.SortUnique = function (json, tbody, thead, jsonData) {
             //从某个json中取出数据，对数据去重，同时按照要求排序的封装
@@ -535,5 +461,61 @@ angular.module('app', [
             }
         };
     });
+
+
+ccf.factory('authHttpResponseInterceptor', ["$rootScope", "APP_CONFIG","$location", function ($rootScope,APP_CONFIG,$location) {
+    //拦截器配置
+    return {
+        request: function (config) {
+        	//var url = $location.url();
+        	console.log("in");
+            if(!$rootScope.userData){
+            //	$location.url('/login').search({ redirect: encodeURIComponent(url) });
+            	$.ajax({
+                    url: APP_CONFIG.baseUrl +'/adfs/user',
+                    type: "get",
+                    contentType: "application/json;charset=utf-8;",
+                    dataType: "JSON",
+                    async:false,
+                    success: function(data){
+                    	 if (data.code == 0) {
+                             if (!data.result) {
+                                 window.location.href = APP_CONFIG.indexUrl;
+                             } else {
+                                 if (data.result.token[0]) {
+                                     sessionStorage.setItem("token", data.result.token[0]);
+                                     console.log(sessionStorage.getItem("token"));
+                                 } else {
+                                     alert("没有token!");
+                                     window.location.href = APP_CONFIG.indexUrl;
+                                 }
+                                 if (data.result.status == '-1') {
+                                     alert('没有权限！');
+                                     window.location.href = APP_CONFIG.indexUrl;
+                                 } else {
+                                     $rootScope.userData = data.result;
+                                     console.log($rootScope.userData);
+                                     $rootScope.$state.go('app.indexPage');
+                                 }
+
+                             }
+                         }else{
+                        	 window.location.href = APP_CONFIG.indexUrl;
+                         }
+                    },
+                    error: function(xhr, err) {
+                        console.log(err);
+                    }
+                });  
+        }
+            return config || $q.when(config);
+        }
+    };
+}]);
+
+ccf.config(['$httpProvider', function ($httpProvider) {
+    //Http Intercpetor to check auth failures for xhr requests
+    $httpProvider.interceptors.push('authHttpResponseInterceptor');
+}])
 
 

@@ -16,20 +16,7 @@ angular.module('app.layout', ['ui.router'])
             }
 
         }
-    )
-    .state('login', {
-        url : '/login',
-        views: {
-            root: {
-                templateUrl: 'login.html'
-            }
-        },
-        data: {
-            title: 'Login',
-            htmlId: 'extr-page'
-        },
-    })
-        .state('app.indexPage', {
+    ).state('app.indexPage', {
             url : '/indexPage',
             views: {
                 "content@app": {
@@ -57,7 +44,7 @@ angular.module('app.layout', ['ui.router'])
         })
 
     //$urlRouterProvider.otherwise('/Jurisdiction');
-    $urlRouterProvider.otherwise('/indexPage');
+    $urlRouterProvider.otherwise('/login');
         //$urlRouterProvider.otherwise('/dashboard');
 
 })

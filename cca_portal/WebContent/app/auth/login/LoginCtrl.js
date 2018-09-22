@@ -1,8 +1,12 @@
 "use strict";
 
-angular.module('app.auth').controller('LoginCtrl', function ($scope, $state, GooglePlus, User, ezfb) {
+angular.module('app.auth').controller('LoginCtrl', function ($scope, $state) {
+	
+	if(sessionStorage.getItem("token")){
+		$state.go('app.indexPage'); return; 
+	}
 
-    $scope.$on('event:google-plus-signin-success', function (event, authResult) {
+/*    $scope.$on('event:google-plus-signin-success', function (event, authResult) {
         if (authResult.status.method == 'PROMPT') {
             GooglePlus.getUser().then(function (user) {
                 User.username = user.name;
@@ -18,5 +22,5 @@ angular.module('app.auth').controller('LoginCtrl', function ($scope, $state, Goo
             User.picture = 'https://graph.facebook.com/' + res.id + '/picture';
             $state.go('app.dashboard');
         });
-    });
+    });*/
 })
