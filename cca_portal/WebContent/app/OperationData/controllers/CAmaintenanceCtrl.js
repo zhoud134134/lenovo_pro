@@ -149,12 +149,12 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             CAmaintenanceService.getWw($scope.TaskID).then(function(data){
                 if(data.code == 0){
                     
-                    $scope.WwList = data.result;
-                    $scope.segment = $rootScope.getFiled($scope.WwList,"segment");
+                  var WwList = data.result;
+                    $scope.segment = $rootScope.getFiled(WwList,"segment");
                    //  $scope.segment.push('Total');
-                    $scope.bu =  $rootScope.getFiled($scope.WwList,"bu");
-                    $scope.geo = $rootScope.getFiled($scope.WwList,"geo");
-                    $scope.dataMap = CAmaintenanceService.getDataMap($scope.WwList,$scope.segment,$scope.geo,$scope.bu,$rootScope.wwSortData.regions);
+                    $scope.bu =  $rootScope.getFiled(WwList,"bu");
+                    $scope.geo = $rootScope.getFiled(WwList,"geo");
+                    $scope.dataMap = CAmaintenanceService.getDataMap(WwList,$scope.segment,$scope.geo,$scope.bu,$rootScope.wwSortData.regions);
                 }
                 //console.log(data);
             },function(data){
@@ -165,11 +165,11 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             CAmaintenanceService.getPrc($scope.TaskID).then(function(caprcdata) {
                 if (caprcdata.code == 0) {
                 	
-                    $scope.PrcList = caprcdata.result;
-                    $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled($scope.PrcList,"segment"),$rootScope.prcSortData.segments);
-                    $scope.Prcbu =  $rootScope.sortByDataBase($rootScope.getFiled($scope.PrcList,"bu"), $rootScope.prcSortData.bus);
+                    var PrcList = caprcdata.result;
+                    $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled(PrcList,"segment"),$rootScope.prcSortData.segments);
+                    $scope.Prcbu =  $rootScope.sortByDataBase($rootScope.getFiled(PrcList,"bu"), $rootScope.prcSortData.bus);
                     $scope.Prcbu.push('Total');
-                    $scope.getPrcDataMap = CAmaintenanceService.getPrcDataMap($scope.PrcList,$scope.Prcsegment,$scope.Prcbu);
+                    $scope.getPrcDataMap = CAmaintenanceService.getPrcDataMap(PrcList,$scope.Prcsegment,$scope.Prcbu);
                 }
             } ,function(data){
                // console.log(data);
