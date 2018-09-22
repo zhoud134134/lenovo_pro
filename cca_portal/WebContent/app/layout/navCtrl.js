@@ -2,10 +2,7 @@
 
 angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, $state, $stateParams, $location, navService,APP_CONFIG) {
 
-    //$scope.userData = JSON.parse(sessionStorage.getItem("userResult"));
-    //var data = {"result":{"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"]},"code":0}
-   // $scope.userData = data.result;
-    //$scope.userData = {"displayname":["Jiaozi JZ1 Han"],"ITcode":["hanjz1"],"email":["hanjz1@lenovo.com"]}
+	$rootScope.userData = JSON.parse(sessionStorage.getItem("userResult"));
     if($rootScope.userData){
         $scope.imgUser = true;
         if (!$rootScope.userData.thumbnailphoto) {
@@ -29,8 +26,7 @@ angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, 
             // console.log(data);
         });
     }else {
-    	console.log("ddd");
-       // window.location.href = APP_CONFIG.indexUrl;
+    	console.log("获取用户信息失败！");
     }
 
 

@@ -230,13 +230,16 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         if(!$scope.TaskID){
             return;
         }else{
-        CAmaintenanceService.getPrcDown($scope.TaskID).then(function(data){
+        CAmaintenanceService.getPrcDown($scope.TaskID).then(function(response){
+        	var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                var data = response.data;
            // console.log(data);
             //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
             //而使用“application/vnd.openxmlformats-officedocument.spreadsheetml.sheet”则会保存为xlsx
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
             var objectUrl = URL.createObjectURL(blob);
             var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            aForExcel.attr("download",fileName);
             $("body").append(aForExcel);
             $(".forExcel").click();
             aForExcel.remove();
@@ -251,11 +254,14 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         if(!$scope.TaskID){
             return;
         }else{
-            CAmaintenanceService.getWwDown($scope.TaskID).then(function(data){
+            CAmaintenanceService.getWwDown($scope.TaskID).then(function(response){
+            		var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                var data = response.data;
                 //console.log(data);
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                 var objectUrl = URL.createObjectURL(blob);
                 var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                 aForExcel.attr("download",fileName);
                 $("body").append(aForExcel);
                 $(".forExcel").click();
                 aForExcel.remove();

@@ -90,7 +90,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
             headers: {
                 'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
-        }).then(function successCallback(response) {
+        }).then(function successCallback(response) {debugger;
             // 请求成功执行代码
             d.resolve(response.data);
         }, function errorCallback(response) {
@@ -111,7 +111,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
                 'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
                // 'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MzYxOTkyMzMsInN1YiI6Imhhbmp6MSIsImNyZWF0ZWQiOjE1MzU1OTQ0MzMxMjZ9.GlA3OLL-lieX6XrZxPNeLPliybWx0z2j3zCCaY0Hiacl1bZ_8pUZ8CCF9ik2P127JDlIIIf6lqm5cRrYfqy0gQ'
             },
-        }).then(function successCallback(response) {
+        }).then(function successCallback(response) {debugger;
             // 请求成功执行代码
             d.resolve(response.data);
         }, function errorCallback(response) {
@@ -171,7 +171,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
-            d.resolve(response.data);
+            d.resolve(response);
         }, function errorCallback(response) {
             // 请求失败执行代码
             d.reject("error");
@@ -191,7 +191,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function($ht
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
-            d.resolve(response.data);
+            d.resolve(response);
         }, function errorCallback(response) {
             // 请求失败执行代码
             d.reject("error");

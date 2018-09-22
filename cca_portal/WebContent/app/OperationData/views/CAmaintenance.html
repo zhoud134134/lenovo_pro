@@ -168,11 +168,11 @@
 							<th ng-repeat="r in value.region track by $index">{{r}}</th>
 						</tr>
 					</thead>
-					<tbody class="Ftbody">
+					<tbody class="Ftbody" on-finish-render-filters>
 						<tr>
 							<th rowspan="{{bu.length + 2}}" style="padding-bottom: 60px;">CA(K)</th>
 						</tr>
-						<tr ng-repeat="(bukey,buvalue) in value.bu" on-finish-render-filters>
+						<tr ng-repeat="(bukey,buvalue) in value.bu" >
 							<th class="caleft" >{{bukey}}</th>
 							<td ng-repeat="c in buvalue track by $index">{{c}}</td>
 						</tr>	

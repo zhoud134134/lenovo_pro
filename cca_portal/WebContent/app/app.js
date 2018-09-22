@@ -468,9 +468,8 @@ ccf.factory('authHttpResponseInterceptor', ["$rootScope", "APP_CONFIG","$locatio
     return {
         request: function (config) {
         	//var url = $location.url();
-        	console.log("in");
-            if(!$rootScope.userData){
-            //	$location.url('/login').search({ redirect: encodeURIComponent(url) });
+        	 if(!sessionStorage.getItem("token")){
+        		 //	$location.url('/login').search({ redirect: encodeURIComponent(url) });
             	$.ajax({
                     url: APP_CONFIG.baseUrl +'/adfs/user',
                     type: "get",
@@ -493,8 +492,7 @@ ccf.factory('authHttpResponseInterceptor', ["$rootScope", "APP_CONFIG","$locatio
                                      alert('没有权限！');
                                      window.location.href = APP_CONFIG.indexUrl;
                                  } else {
-                                     $rootScope.userData = data.result;
-                                     console.log($rootScope.userData);
+                                     sessionStorage.setItem("userResult", JSON.stringify(data.result));
                                      $rootScope.$state.go('app.indexPage');
                                  }
 

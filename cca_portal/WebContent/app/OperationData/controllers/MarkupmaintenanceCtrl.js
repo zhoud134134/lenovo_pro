@@ -137,8 +137,8 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
                      $scope.result = data.result;
                      $scope.resData = [];
                      for(var i in $scope.result){
-                     var thead1 =['XXX+BMC $M（'+ i +'）'].concat($scope.geo);
-                     var thead2 = ['XXX+Markup in Tape $M (' + i + '）'].concat($scope.geo);
+                     var thead1 =[$scope.CyclName+' BMC $M（'+ i +'）'].concat($scope.geo);
+                     var thead2 = [$scope.CyclName+' Markup in Tape $M (' + i + '）'].concat($scope.geo);
                      var tbodyBmc = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead1,'bmc');
                      var tbodyMark = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead2,'mark45');
                      $scope.resData.push({name : i,tbodyBmc : {tbodyBmcThead:thead1,tbodyBmcTbody : tbodyBmc.slice(0,tbodyBmc.length-1),tbodyBmcTfoot:tbodyBmc.slice(tbodyBmc.length-1)},tbodyMark : {tbodyMarkThead:thead2,tbodyMarkTbody : tbodyMark.slice(0,tbodyMark.length-1),tbodyMarkTfoot:tbodyMark.slice(tbodyMark.length-1)}})
@@ -154,7 +154,8 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
              MarkupmaintenanceService.getPrc($scope.TaskID).then(function(data) {
                  if (data.code == 0) {
                      $timeout(function(){
-                         $scope.markHZ = $rootScope.markHZ(data.result,$scope.segmentPRC)
+                         $scope.markHZ = $rootScope.markHZ(data.result,$scope.segmentPRC);
+                         $scope.cycleForTitle=$scope.CyclName;
                      });
                  }
                     console.log(data)
@@ -226,10 +227,13 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
         if(!$scope.TaskID){
             return;
         }else {
-            MarkupmaintenanceService.getPrcSum($scope.TaskID).then(function (data) {
+            MarkupmaintenanceService.getPrcSum($scope.TaskID).then(function (response) {
+            	var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                var data = response.data;
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                 var objectUrl = URL.createObjectURL(blob);
                 var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                 aForExcel.attr("download",fileName);
                 $("body").append(aForExcel);
                 $(".forExcel").click();
                 aForExcel.remove();

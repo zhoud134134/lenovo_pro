@@ -82,10 +82,13 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
          return;
      }else{
     	 AccountTemplateManualUploadService.getSumActDownLoad($scope.TaskID).then(function(data){
+    	 		var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                var data = response.data;
              //console.log(data);
              var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
              var objectUrl = URL.createObjectURL(blob);
              var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+             aForExcel.attr("download",fileName);
              $("body").append(aForExcel);
              $(".forExcel").click();
              aForExcel.remove();
@@ -101,10 +104,13 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
             type: 'actual'
         }
         OthercategorymaintenanceService.download($scope.temp).then(function(data){
+        		var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                var data = response.data;
             console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
             var objectUrl = URL.createObjectURL(blob);
             var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+             aForExcel.attr("download",fileName);
             $("body").append(aForExcel);
             $(".forExcel").click();
             aForExcel.remove();
