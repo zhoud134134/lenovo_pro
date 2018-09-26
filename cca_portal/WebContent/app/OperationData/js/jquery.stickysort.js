@@ -148,7 +148,7 @@
 								position: 'fixed',
 								left: $stickyWrap.offset().left,
 								top: $stickyWrap.offset().top - $w.scrollTop(),
-								height: $stickyWrap.height()
+								height: $stickyWrap.height()-9
 							})
 							.find('table')
 								.css({
