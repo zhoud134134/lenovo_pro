@@ -4,9 +4,7 @@
     <div class="login-info ng-cloak">
     <span> <!-- User image size is adjusted inside CSS, it should stay as it -->
         <a  href="">
-            <img ng-src="{{userData.thumbnailphoto}}" alt="me" class="online" ng-show="imgUser">
-
-            <img ng-src="{{userData.thumbnailphoto[0]}}" alt="me" class="online" ng-show="!imgUser">
+            <img ng-src="{{userData.thumbnailphoto}}" alt="me" class="online">
                 <span>{{userData.displayname[0]}}
                 </span>
         </a>

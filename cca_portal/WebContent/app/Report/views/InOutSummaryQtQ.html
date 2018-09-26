@@ -14,34 +14,37 @@
                     <h2>Search</h2>
                 </header>
                 <div class="tab-serch">
-                    <div class="col-sm-8">
-                        <div class="col-sm-5 form-group-m">
+                    <div class="col-sm-10">
+                        <div class="col-sm-3 form-group-m">
                             <label>Segment:</label>
                             <div class="for-sel">
-                                <select class="form-control">
-                                    <option value="">Consumer</option>
-                                    <option value="">Commerical</option>
-                                    <option value="">SMB</option>
-                                    <option value="">All</option>
+                                <select class="form-control" ng-model="SegsycleChoose" ng-options="x for x in seGcycledata">
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-5 form-group-m">
+                        <div class="col-sm-3 form-group-m">
                             <label>Geo:</label>
                             <div class="for-sel">
-                                <select class="form-control">
-                                    <option value="">EMEA</option>
-                                    <option value="">AP</option>
-                                    <option value="">NA</option>
-                                    <option value="">PRC</option>
-                                    <option value="">LAS</option>
-                                    <option value="">Brazil</option>
-                                    <option value="">All</option>
+                                <select class="form-control" ng-model="GeosycleChoose" ng-options="x for x in Geocycledata">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 form-group-m">
+                            <label>Cycle:</label>
+                            <div class="for-sel">
+                                <select class="form-control" ng-model="CycleChoose" ng-options="x for x in cycledata">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 form-group-m">
+                            <label>Cycle1:</label>
+                            <div class="for-sel">
+                                <select class="form-control" ng-model="cycleChoose" ng-options="x for x in cycledata">
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 tab-serch-btn">
+                    <div class="col-sm-2 tab-serch-btn">
                         <button class="btn btn-back searchbtn">Download</button>
                         <button class="btn btn-back searchbtn">Search</button>
                     </div>
@@ -94,21 +97,26 @@
                             </tr>
                         </table>
                         <table class="col-sm-2 report-tab-left">
-                            <tr style="background: #F3F5F6;" class="table-thead">
-                                <td colspan="3">
-                                    <!--PRC Q4 Actual-->
-                                    <select  class="report-tab-select">
-                                        <!--<option value="0" selected  disabled>Cycle Choose</option>-->
-                                        <option value="1">Q2M0</option>
-                                        <option value="2" selected>Q2M1</option>
-                                        <option value="3">Q2M2</option>
-                                    </select>
-                                </td>
-                            </tr>
+                            <!--<tr style="background: #F3F5F6;" class="table-thead">-->
+                            <!--<td colspan="3">-->
+                            <!--&lt;!&ndash;PRC Q4 Actual&ndash;&gt;-->
+                            <!--<select  class="report-tab-select">-->
+                            <!--&lt;!&ndash;<option value="0" selected  disabled>Cycle Choose</option>&ndash;&gt;-->
+                            <!--<option value="1">Q2M0</option>-->
+                            <!--<option value="2" selected>Q2M1</option>-->
+                            <!--<option value="3">Q2M2</option>-->
+                            <!--</select>-->
+                            <!--</td>-->
+                            <!--</tr>-->
                             <tr style="background: #F3F5F6;" class="table-thead">
                                 <td class="report-w50">CA</td>
                                 <td class="report-w50">$/CA</td>
                                 <td class="report-w50">$M</td>
+                            </tr>
+                            <tr class="table-thead">
+                                <td>13.80</td>
+                                <td class="report-negative">($2.9)</td>
+                                <td class="report-negative">($40.0)</td>
                             </tr>
                             <tr class="table-thead">
                                 <td>13.80</td>
@@ -167,21 +175,26 @@
                             </tr>
                         </table>
                         <table class="col-sm-2 report-tab-left">
-                            <tr style="background: #F3F5F6;" class="table-thead">
-                                <td colspan="3">
-                                    <!--PRC Q4 Actual-->
-                                    <select  class="report-tab-select">
-                                        <!--<option value="0" selected  disabled>Cycle Choose</option>-->
-                                        <option value="1">Q1M0</option>
-                                        <option value="2">Q1M1</option>
-                                        <option value="3" selected>Q1M2</option>
-                                    </select>
-                                </td>
-                            </tr>
+                            <!--<tr style="background: #F3F5F6;" class="table-thead">-->
+                            <!--<td colspan="3">-->
+                            <!--&lt;!&ndash;PRC Q4 Actual&ndash;&gt;-->
+                            <!--<select  class="report-tab-select">-->
+                            <!--&lt;!&ndash;<option value="0" selected  disabled>Cycle Choose</option>&ndash;&gt;-->
+                            <!--<option value="1">Q1M0</option>-->
+                            <!--<option value="2">Q1M1</option>-->
+                            <!--<option value="3" selected>Q1M2</option>-->
+                            <!--</select>-->
+                            <!--</td>-->
+                            <!--</tr>-->
                             <tr style="background: #F3F5F6;" class="table-thead">
                                 <td class="report-w50">CA</td>
                                 <td class="report-w50">$/CA</td>
                                 <td class="report-w50">$M</td>
+                            </tr>
+                            <tr class="table-thead">
+                                <td>12.20</td>
+                                <td>$32.8</td>
+                                <td>$399.3</td>
                             </tr>
                             <tr class="table-thead">
                                 <td>12.20</td>

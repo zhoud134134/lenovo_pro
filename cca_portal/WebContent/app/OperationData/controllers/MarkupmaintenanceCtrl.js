@@ -88,7 +88,7 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
         }
         console.log($rootScope.user);
         if(!$scope.CycleChoose){
-            alert("请选择条件！");
+            alert("Please select conditions！");
         }else {
             MarkupmaintenanceService.getExecute($scope.search).then(function(data){
                 if(data.code == 0){
@@ -125,7 +125,7 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
     //点击Search
     $scope.SearchTab = function(){
         if(!$scope.taskId){
-            alert("请选择项！");
+            alert("Please select items！");
         }else if($scope.status =='Success' || $scope.status =='Publish'){
             $scope.markTab = true;
             $scope.TaskID =  $scope.taskId;
@@ -163,23 +163,23 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
                     console.log(data);
              });
         }else {
-            alert("暂未执行成功，无法查看！");
+            alert("It has not been executed successfully and cannot be viewed！");
         }
     };
 
     //删除
     $scope.DelParticular = function(){
         if(!$scope.taskId){
-            alert("请选择项！");
+            alert("Please select items！");
         }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
-            if(confirm('确认要删除？')) {
+            if(confirm('Confirm to delete？')) {
                 console.log($scope.taskid);
                 $scope.taskid = {
                     uuid: $scope.taskId
                 };
                 MarkupmaintenanceService.DelParticular($scope.taskid).then(function (data) {
                     if (data.code == 0) {
-                        alert("删除成功！");
+                        alert("Delete the success！");
                         $scope.taskId = '';
                         $scope.getPage();
                         //$("#tabExample").dataTable().fnDestroy();
@@ -193,7 +193,7 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
                 });
             }
         }else {
-            alert("还未执行完成！");
+            alert("Execution is not complete！");
         }
     };
 
@@ -237,6 +237,7 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
                 $("body").append(aForExcel);
                 $(".forExcel").click();
                 aForExcel.remove();
+
                 $('#ps1').css('display','block');
                 $('#ws1').css('display','block');
                 $('#ps2').css('display','none');
