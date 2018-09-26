@@ -36,8 +36,9 @@
                         </div>
                     </div>
                     <div class="col-sm-4 tab-serch-btn">
-                        <button class="btn btn-back searchbtn" ng-click="upload()">Upload</button>
-                        <button class="btn btn-back searchbtn" ng-click="DowTemp()">Download Template</button>
+                        <button class="btn btn-back pull-right" id="upload2" style="display: none;"><i class="fa fa-spinner fa-spin"></i></button>
+                        <button class="btn btn-back pull-right" id="upload1" style="margin-right:10px;" ng-click="upload()">Upload</button>
+                        <button class="btn btn-back pull-right" style="margin-right: 10px;" ng-click="DowTemp()">Download Template</button>
                     </div>
                 </div>
             </div>
@@ -47,7 +48,7 @@
                 <!--PRC-->
                 <div ng-show="ww">
                     <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false"
-                         data-widget-sortable="false">
+                         data-widget-sortable="false" style="z-index: 1;">
                         <header>
                                 <span class="widget-icon">
                                     <i class="fa fa-columns"></i>
@@ -88,7 +89,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 tab-fun-btn">
+                    <div class="col-sm-4 tab-fun-btn" style="z-index: 10;">
                         <button class="btn btn-back btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true" ng-click="btnSwitch('w')" ng-show="!ww">
                             <i class="fa fa-refresh"></i>
                         </button>
@@ -102,7 +103,7 @@
                 </div>
 
                 <div ng-show="sw1" id="operadata-segment-tab" style="margin-top: 10px;">
-                    <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                    <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" style="z-index: 1;">
                         <header>
                                 <span class="widget-icon">
                                     <i class="fa fa-columns"></i>
@@ -154,7 +155,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 tab-fun-btn">
+                    <div class="col-sm-4 tab-fun-btn"  style="z-index: 10;">
                         <button class="btn btn-back btn-xs" uib-tooltip="Shift View" tooltip-append-to-body="true" ng-click="btnSV('s1')" ng-show="!sw1">
                             <i class="fa fa-exchange"></i>
                         </button>

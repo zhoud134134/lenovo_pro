@@ -20,10 +20,10 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
     $scope.account = false;
     $scope.upload = function () {
         if (!$scope.CycleChoose) {
-            alert("请选择条件！");
+            alert("Please select conditions！");
         } else {
-            $('#upload1').css('display','none');
-            $('#upload2').css('display','block');
+            $('#upload1').css('display', 'none');
+            $('#upload2').css('display', 'block');
             Upload.upload({
                 //服务端接收
                 url: APP_CONFIG.baseUrl + '/api/SUMACT/',
@@ -38,25 +38,25 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
             }).success(function (data, status, headers, config) {
                 console.log(data);
                 if (data.code == 0) {
-                    $scope.id=data.result;
-                    $scope.TaskID=data.result;
+                    $scope.id = data.result;
+                    $scope.TaskID = data.result;
                     console.log(data);
                     //请求表格数据调用方法
-                    AccountTemplateManualUploadService.getSumactData($scope.id).then(function(data){
-                        if(data.code == 0){
-                            $scope.account=true;
+                    AccountTemplateManualUploadService.getSumactData($scope.id).then(function (data) {
+                        if (data.code == 0) {
+                            $scope.account = true;
                             console.log(data);
                             $scope.categoryData = data.result;
-                            var geo = $rootScope.getFiled($scope.categoryData,"geo");
-                            var categorylvl1 = $rootScope.getFiled($scope.categoryData,"categorylvl1");
-                            var categorylvl2 = $rootScope.getFiled($scope.categoryData,"categorylvl2");
-                            var categorylvl3 = $rootScope.getFiled($scope.categoryData,"categorylvl3");
-                            $scope.dataMap = OthercategorymaintenanceService.getDataMap($scope.categoryData,geo,categorylvl1,categorylvl2,categorylvl3);
+                            var geo = $rootScope.getFiled($scope.categoryData, "geo");
+                            var categorylvl1 = $rootScope.getFiled($scope.categoryData, "categorylvl1");
+                            var categorylvl2 = $rootScope.getFiled($scope.categoryData, "categorylvl2");
+                            var categorylvl3 = $rootScope.getFiled($scope.categoryData, "categorylvl3");
+                            $scope.dataMap = OthercategorymaintenanceService.getDataMap($scope.categoryData, geo, categorylvl1, categorylvl2, categorylvl3);
 
-                            $('#upload1').css('display','block');
-                            $('#upload2').css('display','none');
+                            $('#upload1').css('display', 'block');
+                            $('#upload2').css('display', 'none');
                         }
-                    },function(data){
+                    }, function (data) {
                         console.log(data);
                     });
                 } else {
@@ -69,50 +69,52 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
             });
         }
     }
- $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
+    $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js
-    	$('#final table').stickySort({ sortable: true });
+        $('#final table').stickySort({sortable: true});
 
-        
+
     });
 
- //ww时的Download
- $scope.getSumActDownLoad = function(){
-     if(!$scope.TaskID){
-         return;
-     }else{
-    	 AccountTemplateManualUploadService.getSumActDownLoad($scope.TaskID).then(function(data){
-    	 		var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+    //ww时的Download
+    $scope.getSumActDownLoad = function () {
+        if (!$scope.TaskID) {
+            return;
+        } else {
+            AccountTemplateManualUploadService.getSumActDownLoad($scope.TaskID).then(function (response) {
+                var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
                 var data = response.data;
-             //console.log(data);
-             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-             var objectUrl = URL.createObjectURL(blob);
-             var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-             aForExcel.attr("download",fileName);
-             $("body").append(aForExcel);
-             $(".forExcel").click();
-             aForExcel.remove();
-         },function(data){
-             //console.log(data);
-         })
-     }
- }
+                //console.log(data);
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+                aForExcel.attr("download", fileName);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+            }, function (data) {
+                //console.log(data);
+            })
+        }
+    }
 
     //下载模板
-    $scope.DowTemp = function(){
+    $scope.DowTemp = function () {
         $scope.temp = {
             type: 'actual'
         }
-        OthercategorymaintenanceService.download($scope.temp).then(function(data){
-        
-            console.log(data);
+        AccountTemplateManualUploadService.download($scope.temp).then(function (response) {
+            console.log(response);
+            var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            var data = response.data;
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
             var objectUrl = URL.createObjectURL(blob);
             var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            aForExcel.attr("download",fileName);
             $("body").append(aForExcel);
             $(".forExcel").click();
             aForExcel.remove();
-        },function(data){
+        }, function (data) {
             console.log(data);
         });
     }

@@ -105,7 +105,7 @@ var ccf = angular.module('app', [
         $rootScope.$stateParams = $stateParams;
         // editableOptions.theme = 'bs3';
         //    $rootScope.user = '123';
-        
+
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, $timeout) {
             //event：该事件的基本信息
@@ -117,12 +117,34 @@ var ccf = angular.module('app', [
              stateChangeStart当状态改变开始的时候被触发
              $stateChangeSuccess当状态改变成功后被触发
              $stateChangeError当状态改变遇到错误时被触发，错误通常是目标无法载入，需要预载入的数据无法被载入等*/
-        	if(toState.url == '/real-login') return;
-        	if(!sessionStorage.getItem("token") && !$rootScope.userData){
-        		event.preventDefault();// 取消默认跳转行为
-        		$rootScope.$state.go('realLogin');//跳转到登录界面 }
-        	}
-    
+            //if(toState.url == '/real-login') return;
+            //if(!sessionStorage.getItem("token") && !$rootScope.userData){
+            //    event.preventDefault();// 取消默认跳转行为
+            //    $rootScope.$state.go('realLogin');//跳转到登录界面 }
+            //}
+            var data = {
+                "result": {
+                    "displayname": ["Jiaozi JZ1 Han"],
+                    "ITcode": ["hanjz1"],
+                    "email": ["hanjz1@lenovo.com"],
+                    "status": ["1"]
+                }, "code": 0
+            };
+            sessionStorage.setItem("userResult", JSON.stringify(data.result));
+
+            $.ajax({
+                type: "GET",
+                url: "https://mcmt.lenovo.com/ccf-prod/hello/test?ITcode=hanjz1",
+                async:false,
+                success: function (data) {
+                    console.log(data)
+                    sessionStorage.setItem("token", data);
+                },
+                error:function(){
+                    console.log("error");
+                }
+            });
+           // $rootScope.$state.go('app.indexPage');
         });
 
         //markup ww表格式化
@@ -449,6 +471,14 @@ var ccf = angular.module('app', [
             return navService.getSelectCycle(type);
         }
 
+        $rootScope.getOutsumCycle = function(type){
+            return navService.getOutsumSelectCycle(type);
+        }
+
+        $rootScope.getSeg = function(type){
+            return navService.getSegment(type);
+        }
+
     }).directive('onFinishRenderFilters', function ($timeout) {
         return {
             restrict: 'A',
@@ -465,55 +495,54 @@ var ccf = angular.module('app', [
 
 ccf.factory('authHttpResponseInterceptor', ["$rootScope", "APP_CONFIG","$location", function ($rootScope,APP_CONFIG,$location) {
     //拦截器配置
-    return {
-        request: function (config) {
-        	//var url = $location.url();
-        	 if(!sessionStorage.getItem("token")){
-        		 //	$location.url('/login').search({ redirect: encodeURIComponent(url) });
-            	$.ajax({
-                    url: APP_CONFIG.baseUrl +'/adfs/user',
-                    type: "get",
-                    contentType: "application/json;charset=utf-8;",
-                    dataType: "JSON",
-                    async:false,
-                    success: function(data){
-                    	 if (data.code == 0) {
-                             if (!data.result) {
-                                 window.location.href = APP_CONFIG.indexUrl;
-                             } else {
-                                 if (data.result.token[0]) {
-                                     sessionStorage.setItem("token", data.result.token[0]);
-                                     console.log(sessionStorage.getItem("token"));
-                                 } else {
-                                     alert("没有token!");
-                                     window.location.href = APP_CONFIG.indexUrl;
-                                 }
-                                 if (data.result.status == '-1') {
-                                     alert('没有权限！');
-                                     window.location.href = APP_CONFIG.indexUrl;
-                                 } else {
-                                     sessionStorage.setItem("userResult", JSON.stringify(data.result));
-                                     $rootScope.$state.go('app.indexPage');
-                                 }
-
-                             }
-                         }else{
-                        	 window.location.href = APP_CONFIG.indexUrl;
-                         }
-                    },
-                    error: function(xhr, err) {
-                        console.log(err);
-                    }
-                });  
-        }
-            return config || $q.when(config);
-        }
-    };
+    //return {
+    //    request: function (config) {
+    //        //var url = $location.url();
+    //        if(!sessionStorage.getItem("token")){
+    //            //	$location.url('/login').search({ redirect: encodeURIComponent(url) });
+    //            $.ajax({
+    //                url: APP_CONFIG.baseUrl +'/adfs/user',
+    //                type: "get",
+    //                contentType: "application/json;charset=utf-8;",
+    //                dataType: "JSON",
+    //                async:false,
+    //                success: function(data){
+    //                    if (data.code == 0) {
+    //                        if (!data.result) {
+    //                            window.location.href = APP_CONFIG.indexUrl;
+    //                        } else {
+    //                            if (data.result.token[0]) {
+    //                                sessionStorage.setItem("token", data.result.token[0]);
+    //                            } else {
+    //                                alert("没有token!");
+    //                                window.location.href = APP_CONFIG.indexUrl;
+    //                            }
+    //                            if (data.result.status == '-1') {
+    //                                alert('没有权限！');
+    //                                window.location.href = APP_CONFIG.indexUrl;
+    //                            } else {
+    //                                sessionStorage.setItem("userResult", JSON.stringify(data.result));
+    //                                $rootScope.$state.go('app.indexPage');
+    //                            }
+    //
+    //                        }
+    //                    }else{
+    //                        window.location.href = APP_CONFIG.indexUrl;
+    //                    }
+    //                },
+    //                error: function(xhr, err) {
+    //                    console.log(err);
+    //                }
+    //            });
+    //        }
+    //        return config || $q.when(config);
+    //    }
+    //};
 }]);
 
 ccf.config(['$httpProvider', function ($httpProvider) {
     //Http Intercpetor to check auth failures for xhr requests
-    $httpProvider.interceptors.push('authHttpResponseInterceptor');
+ //   $httpProvider.interceptors.push('authHttpResponseInterceptor');
 }])
 
 

@@ -1,21 +1,21 @@
 "use strict";
 
-angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($scope,$state,APP_CONFIG,$timeout,$location,$rootScope,navService,CAmanualuploadService,CAmaintenanceService,Upload) {
+angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($scope, $state, APP_CONFIG, $timeout, $location, $rootScope, navService, CAmanualuploadService, CAmaintenanceService, Upload) {
     //函数说明：合并指定表格（表格id为_w_table_id）指定列（列数为_w_table_colnum）的相同文本的相邻单元格
 //参数说明：_w_table_id 为需要进行合并单元格的表格的id。如在HTMl中指定表格 id="data" ，此参数应为 #data
 //参数说明：_w_table_colnum 为需要合并单元格的所在列。为数字，从最左边第一列为1开始算起。
     function _w_table_rowspan(_w_table_id, _w_table_colnum) {
         var _w_table_firsttd = "";
         var _w_table_currenttd = "";
-        var  _w_table_SpanNum = 0;
-        var  _w_table_Obj = $(_w_table_id + " tr td:nth-child(" + _w_table_colnum + ")");
-        _w_table_Obj.each(function(i) {
-            if(i == 0) {
+        var _w_table_SpanNum = 0;
+        var _w_table_Obj = $(_w_table_id + " tr td:nth-child(" + _w_table_colnum + ")");
+        _w_table_Obj.each(function (i) {
+            if (i == 0) {
                 _w_table_firsttd = $(this);
                 _w_table_SpanNum = 1;
             } else {
                 _w_table_currenttd = $(this);
-                if(_w_table_firsttd.text() == _w_table_currenttd.text()) {
+                if (_w_table_firsttd.text() == _w_table_currenttd.text()) {
                     _w_table_SpanNum++;
                     _w_table_currenttd.hide(); //remove();
                     _w_table_firsttd.attr("rowSpan", _w_table_SpanNum);
@@ -26,6 +26,7 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
             }
         });
     }
+
 //函数说明：合并指定表格（表格id为_w_table_id）指定行（行数为_w_table_rownum）的相同文本的相邻单元格
 //参数说明：_w_table_id 为需要进行合并单元格的表格id。如在HTMl中指定表格 id="data" ，此参数应为 #data
 //参数说明：_w_table_rownum 为需要合并单元格的所在行。其参数形式请参考jQuery中nth-child的参数。
@@ -36,23 +37,23 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
 //参数说明：_w_table_maxcolnum 为指定行中单元格对应的最大列数，列数大于这个数值的单元格将不进行比较合并。
 //          此参数可以为空，为空则指定行的所有单元格要进行比较合并。
     function _w_table_colspan(_w_table_id, _w_table_rownum, _w_table_maxcolnum) {
-        if(_w_table_maxcolnum == void 0) {
+        if (_w_table_maxcolnum == void 0) {
             _w_table_maxcolnum = 0;
         }
         var _w_table_firsttd = "";
         var _w_table_currenttd = "";
         var _w_table_SpanNum = 0;
-        $(_w_table_id + " tr:nth-child(" + _w_table_rownum + ")").each(function(i) {
+        $(_w_table_id + " tr:nth-child(" + _w_table_rownum + ")").each(function (i) {
             var _w_table_Obj = $(this).children();
-            _w_table_Obj.each(function(i) {
-                if(i == 0) {
+            _w_table_Obj.each(function (i) {
+                if (i == 0) {
                     _w_table_firsttd = $(this);
                     _w_table_SpanNum = 1;
-                } else if((_w_table_maxcolnum > 0) && (i > _w_table_maxcolnum)) {
+                } else if ((_w_table_maxcolnum > 0) && (i > _w_table_maxcolnum)) {
                     return "";
                 } else {
                     _w_table_currenttd = $(this);
-                    if(_w_table_firsttd.text() == _w_table_currenttd.text()) {
+                    if (_w_table_firsttd.text() == _w_table_currenttd.text()) {
                         _w_table_SpanNum++;
                         _w_table_currenttd.hide(); //remove();
                         _w_table_firsttd.attr("colSpan", _w_table_SpanNum);
@@ -64,36 +65,37 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
             });
         });
     }
-    $rootScope.getCycle('Actual').then(function(data){
+
+    $rootScope.getCycle('Actual').then(function (data) {
         $scope.cycledata = data.result;
     });
-    $scope.getPage = function(){
+    $scope.getPage = function () {
         //WW
-        CAmanualuploadService.getWw($scope.id).then(function(data){
-            if(data.code == 0){
+        CAmanualuploadService.getWw($scope.id).then(function (data) {
+            if (data.code == 0) {
 
                 $scope.WwList = data.result;
-                $scope.segment = $rootScope.getFiled($scope.WwList,"segment");
-            //    $scope.segment.push('Total');
-                $scope.bu =  $rootScope.getFiled($scope.WwList,"bu");
-                $scope.geo = $rootScope.getFiled($scope.WwList,"geo");
-                $scope.dataMap = CAmaintenanceService.getDataMap($scope.WwList,$scope.segment,$scope.geo,$scope.bu,$rootScope.wwSortData.regions);
+                $scope.segment = $rootScope.getFiled($scope.WwList, "segment");
+                //    $scope.segment.push('Total');
+                $scope.bu = $rootScope.getFiled($scope.WwList, "bu");
+                $scope.geo = $rootScope.getFiled($scope.WwList, "geo");
+                $scope.dataMap = CAmaintenanceService.getDataMap($scope.WwList, $scope.segment, $scope.geo, $scope.bu, $rootScope.wwSortData.regions);
             }
             //console.log(data);
-        },function(data){
+        }, function (data) {
             // console.log(data);
         });
 
         //PRC
-        CAmanualuploadService.getPrc($scope.id).then(function(caprcdata) {
+        CAmanualuploadService.getPrc($scope.id).then(function (caprcdata) {
             if (caprcdata.code == 0) {
                 $scope.PrcList = caprcdata.result;
-                $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled($scope.PrcList,"segment"),$rootScope.prcSortData.segments);
-                $scope.Prcbu =  $rootScope.sortByDataBase($rootScope.getFiled($scope.PrcList,"bu"), $rootScope.prcSortData.bus);
+                $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled($scope.PrcList, "segment"), $rootScope.prcSortData.segments);
+                $scope.Prcbu = $rootScope.sortByDataBase($rootScope.getFiled($scope.PrcList, "bu"), $rootScope.prcSortData.bus);
                 $scope.Prcbu.push('Total');
-                $scope.getPrcDataMap = CAmaintenanceService.getPrcDataMap($scope.PrcList,$scope.Prcsegment,$scope.Prcbu);
+                $scope.getPrcDataMap = CAmaintenanceService.getPrcDataMap($scope.PrcList, $scope.Prcsegment, $scope.Prcbu);
             }
-        } ,function(data){
+        }, function (data) {
             // console.log(data);
         });
         //CAmanualuploadService.getPrc($scope.id).then(function(data){
@@ -131,69 +133,73 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
 
     //上传
     $scope.myfiles = {};
-    $scope.openUpload = function(){
+    $scope.openUpload = function () {
         //$('#myModal').modal('show');
         $scope.myfilesVal = '';
-        $scope.fileChange = function(){
-            if($scope.myfiles.name){
+        $scope.fileChange = function () {
+            if ($scope.myfiles.name) {
                 $scope.myfilesVal = $scope.myfiles.name;
-            }else {
+            } else {
                 $scope.myfilesVal = '';
             }
         }
     }
-    $scope.caprcww=false;
-    $scope.upload = function(){
-        Upload.upload({
-            //服务端接收
-            url:APP_CONFIG.baseUrl+ '/api/dm/ca/attachments',
-            data : {
-                file : $scope.myfiles,
-                username :$rootScope.user,
-                cyclename:$scope.CycleChoose
-            },
-            headers: {
-                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
-            },
-        }).success(function (data, status, headers, config){
-            //console.log($scope.CycleChoose.indexOf("M0")==-1);
-            if(!$scope.CycleChoose){
-                alert("请选择条件！");
-            }else {
-                if (data.code == 0 && $scope.CycleChoose.indexOf("M0") != -1) {
-                    alert('Success');
-                    $scope.caprcww=true;
-                    $scope.id=data.result;
+    $scope.caprcww = false;
+
+    $scope.upload = function () {
+        if (!$scope.CycleChoose) {
+            alert("Please select conditions！");
+        } else {
+            $('#upload1').css('display', 'none');
+            $('#upload2').css('display', 'block');
+            Upload.upload({
+                //服务端接收
+                url: APP_CONFIG.baseUrl + '/api/dm/ca/attachments',
+                data: {
+                    file: $scope.myfiles,
+                    username: $rootScope.user,
+                    cyclename: $scope.CycleChoose
+                },
+                headers: {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+                },
+            }).success(function (data, status, headers, config) {
+                //console.log($scope.CycleChoose.indexOf("M0")==-1);
+                if (data.code == 0) {
+                    //alert('Success');
+                    $scope.caprcww = true;
+                    $scope.id = data.result;
                     console.log($scope.id);
                     $scope.getPage();
-                }else if(data.code == 0 && $scope.CycleChoose.indexOf("Actual") != -1){
-                    alert('Success');
-                    $scope.caprcww=true;
-                    $scope.id=data.result;
-                    console.log($scope.id);
-                    $scope.getPage();
+
+                    $('#upload1').css('display','block');
+                    $('#upload2').css('display','none');
                 } else {
                     alert('Uploading Failed');
+
+                    $('#upload1').css('display','block');
+                    $('#upload2').css('display','none');
                 }
-            }
-        }).error(function (data, status, headers, config) {
-            alert('Uploading Failed');
-            //上传失败
-            console.log('error status: ' + status);
-        });
+            }).error(function (data, status, headers, config) {
+                alert('Uploading Failed');
+                //上传失败
+                console.log('error status: ' + status);
+            });
+        }
     }
+
     var prc = {
-        stype : 'PRC'
+        stype: 'PRC'
     };
-    CAmanualuploadService.getPrcBu(prc).then(function(caprcbudata){
+    CAmanualuploadService.getPrcBu(prc).then(function (caprcbudata) {
         console.log(caprcbudata.result);
-        $rootScope.PrcBu=caprcbudata.result;
+        $rootScope.PrcBu = caprcbudata.result;
     }, function (data) {
         console.log(data);
     })
-    CAmanualuploadService.getPrcSegment(prc).then(function(caprcsegmentdata){
+    CAmanualuploadService.getPrcSegment(prc).then(function (caprcsegmentdata) {
         console.log(caprcsegmentdata.result);
-        $rootScope.PrcSegment=caprcsegmentdata.result;
+        $rootScope.PrcSegment = caprcsegmentdata.result;
     }, function (data) {
         console.log(data);
     })
@@ -248,26 +254,30 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
     //}
 
     //下载模板
-    $scope.DowTemp = function(){
+    $scope.DowTemp = function () {
         $scope.temp = {
-            type: 'cam'
+            type: 'CAmanuaupload'
         }
-        CAmanualuploadService.download($scope.temp).then(function(data){
-            console.log(data);
+        CAmanualuploadService.download($scope.temp).then(function (response) {
+            console.log(response);
+            var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            var data = response.data;
+            //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
             var objectUrl = URL.createObjectURL(blob);
-            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+            aForExcel.attr("download", fileName);
             $("body").append(aForExcel);
             $(".forExcel").click();
             aForExcel.remove();
-        },function(data){
+        }, function (data) {
             console.log(data);
         });
     }
-    
+
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js
-    	$('#final table').stickySort({ sortable: true });
+        $('#final table').stickySort({sortable: true});
     });
 
 })

@@ -104,11 +104,12 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         }
         //console.log($rootScope.user);
         if(!$scope.CycleChoose){
-            alert("请选择条件！");
+            alert("Please select conditions！");
         }else {
             $('#execute2').css('display','block');
             $('#execute1').css('display','none');
             CAmaintenanceService.getExecute($scope.search).then(function(data){
+                console.log(data);
                 if(data.code == 0){
                     alert(data.result);
                     $('#execute1').css('display','block');
@@ -119,7 +120,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                 }
                // console.log(data);
             },function(data){
-              //  console.log(data);
+                console.log(data);
             });
         }
     };
@@ -148,13 +149,16 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             //WW
             CAmaintenanceService.getWw($scope.TaskID).then(function(data){
                 if(data.code == 0){
-                    
-                  var WwList = data.result;
+
+                   var WwList = data.result;
+                    $scope.iconData = {"Consumer":"fa-university","SMB":"fa-bookmark","Commercial":"fa-life-bouy","Others":"fa-code-fork","Total":"fa-reorder"};
                     $scope.segment = $rootScope.getFiled(WwList,"segment");
                    //  $scope.segment.push('Total');
                     $scope.bu =  $rootScope.getFiled(WwList,"bu");
                     $scope.geo = $rootScope.getFiled(WwList,"geo");
                     $scope.dataMap = CAmaintenanceService.getDataMap(WwList,$scope.segment,$scope.geo,$scope.bu,$rootScope.wwSortData.regions);
+                    //var t=$("#cacontent table tbody tr:eq(1) th:eq(5)").value;
+                    //console.log(t);
                 }
                 //console.log(data);
             },function(data){
@@ -164,7 +168,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             //PRC
             CAmaintenanceService.getPrc($scope.TaskID).then(function(caprcdata) {
                 if (caprcdata.code == 0) {
-                	
+
                     var PrcList = caprcdata.result;
                     $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled(PrcList,"segment"),$rootScope.prcSortData.segments);
                     $scope.Prcbu =  $rootScope.sortByDataBase($rootScope.getFiled(PrcList,"bu"), $rootScope.prcSortData.bus);
@@ -174,11 +178,11 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             } ,function(data){
                // console.log(data);
             });
-            
-            
-            
-            
-            
+
+
+
+
+
         }else {
             alert("暂未执行成功，无法查看！");
         }
@@ -255,7 +259,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             return;
         }else{
             CAmaintenanceService.getWwDown($scope.TaskID).then(function(response){
-            		var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
                 var data = response.data;
                 //console.log(data);
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
@@ -307,7 +311,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             //$scope.sw2 = false;
         }
     }
-    
+
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js
     	$('#final table').stickySort({ sortable: true });

@@ -62,14 +62,14 @@
 
 
 }
- .mup-tabbtn {
+.mup-tabbtn {
     background: #fff;
     padding: 15px 10px 10px 10px;
     border: 1px solid #ddd;
     overflow: hidden;
 }
 
- /* 三维表格新样式*/
+/* 三维表格新样式*/
 
 
 #other_content{
@@ -77,10 +77,10 @@
     padding: 0;
 }
 #final .sticky-wrap {
-     overflow-x: auto;
-     overflow-y: auto;
-     max-height: 90vh;
- }
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 90vh;
+}
 #bufinal .sticky-wrap {
     overflow-x: auto;
     /*overflow-y: auto;*/
@@ -128,6 +128,17 @@ main section {
 
 /*out大表样式*/
 
+/*#tapefinal .tapetbody tr:nth-child(5) th{*/
+/*background: #FFFFFF;*/
+/*border-right: 0;*/
+/*}*/
+/*#tapefinal .tapetbody tr:nth-child(13) th{*/
+/*background: #FFFFFF;*/
+/*border-right: 0;*/
+/*}*/
+#outtContent .tapetbody th{
+    background: #F3F5F6;
+}
 #outcontent table .Ftbody tr th:nth-child(2){
     background: #FFFFFF;
     font-weight: 400;
@@ -155,4 +166,35 @@ main section {
 }
 #outcontent table .Ftbody tr:nth-child(6) td{
     font-weight: 700;
+}
+
+
+/*Markup 样式*/
+
+thead.mark-hearder tr td{
+    color: #333;
+}
+tbody.tb-class tr:nth-child(4) td{
+    color: #333 !important;
+    font-weight: 100 !important;
+}
+tfoot.tf-class tr td{
+    color: #333 !important;
+}
+
+.relate-class .table-striped>tbody>tr:nth-of-type(odd){
+    background: #FFFFFF !important;
+}
+
+.relate-class tbody tr:nth-child(2) td{
+    background: #f9f9f9 !important;
+}
+.relate-class tbody tr td:last-child{
+    background: #f9f9f9 !important;
+    font-weight: 700;
+    color: #333;
+}
+
+.relate-class .table>tbody+tbody{
+    border-top: 0!important;
 }

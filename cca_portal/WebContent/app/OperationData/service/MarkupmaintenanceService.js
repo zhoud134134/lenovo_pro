@@ -195,7 +195,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
             responseType: 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
-            d.resolve(response.data);
+            d.resolve(response);
         }, function errorCallback(response) {
             // 请求失败执行代码
             d.reject("error");
@@ -216,7 +216,7 @@ angular.module('app.OperationData').service("MarkupmaintenanceService", function
             responseType: 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
-            d.resolve(response.data);
+            d.resolve(response);
         }, function errorCallback(response) {
             // 请求失败执行代码
             d.reject("error");

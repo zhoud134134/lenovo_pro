@@ -44,7 +44,7 @@ angular.module('app.layout', ['ui.router'])
         })
 
     //$urlRouterProvider.otherwise('/Jurisdiction');
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/indexPage');
         //$urlRouterProvider.otherwise('/dashboard');
 
 })

@@ -18,8 +18,10 @@ angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl',
     $scope.TAB = false;
     $scope.upload = function(){
         if(!$scope.CycleChoose){
-            alert("请选择条件！");
+            alert("Please select conditions！");
         }else {
+            $('#upload1').css('display', 'none');
+            $('#upload2').css('display', 'block');
             var cycleArr = $scope.CycleChoose.split(' ');
             $scope.cycle = cycleArr[2];
             $scope.year = cycleArr[0];
@@ -53,8 +55,11 @@ angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl',
                                 $scope.pageList = data2.result;
                                 console.log($scope.pageList);
                                 $scope.TAB = true;
-                                alert('Success');
+                                //alert('Success');
                                 $scope.getTable();
+
+                                $('#upload1').css('display','block');
+                                $('#upload2').css('display','none');
                             }
                             console.log(data2);
                         },function(data2){
@@ -121,11 +126,14 @@ angular.module('app.OperationData').controller('MegaDealRelatedMaintenanceCtrl',
         $scope.temp = {
             type: 'megadeal'
         }
-        MegaDealRelatedMaintenance.download($scope.temp).then(function(data){
-            console.log(data);
+        MegaDealRelatedMaintenance.download($scope.temp).then(function(response){
+            var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            var data = response.data;
+            //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
             var objectUrl = URL.createObjectURL(blob);
             var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            aForExcel.attr("download",fileName);
             $("body").append(aForExcel);
             $(".forExcel").click();
             aForExcel.remove();

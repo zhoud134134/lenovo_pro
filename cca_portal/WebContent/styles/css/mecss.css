@@ -194,6 +194,12 @@ article {
     text-align: center;
     font-size: 13px;
 }
+.no-padding>.table-camain tbody tr td:last-child {
+    background: #F3F5F6;
+    font-weight: 700;
+    font-size: 12px;
+    color: #333 !important;
+}
 .no-padding>.table-bordered tbody tr:last-child td, .no-padding>.table-responsive>.table-bordered tbody tr:last-child td{
     background: #F3F5F6;
     font-weight: 700;
@@ -354,6 +360,16 @@ article {
 }
 .overflow-both1 tbody tr td{
     border: 1px solid #ddd;text-align: center;
+}
+
+.outtapebu .sticky-col{
+    width: 140px;
+}
+.outtapebu .sticky-thead{
+    display: none;.
+}
+.outtapebu #bufinal .sticky-wrap{
+    max-height: 100%;
 }
 
 
