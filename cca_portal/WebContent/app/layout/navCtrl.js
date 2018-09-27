@@ -12,12 +12,19 @@ angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, 
 
         $rootScope.user =  $rootScope.userData.ITcode[0];
 
-        navService.getSortData("all","prc").then(function(caprcsegmentdata){
+             
+        navService.getSortData("all","").then(function(caprcsegmentdata){
+            $rootScope.allSortData=caprcsegmentdata.result;
+        }, function (data) {
+            // console.log(data);
+        });
+        
+        navService.getSortData("segment","prc").then(function(caprcsegmentdata){
             $rootScope.prcSortData=caprcsegmentdata.result;
         }, function (data) {
             // console.log(data);
         });
-        navService.getSortData("all","ww").then(function(cawwsegmentdata){
+        navService.getSortData("segment","ww").then(function(cawwsegmentdata){
             $rootScope.wwSortData=cawwsegmentdata.result;
         }, function (data) {
             // console.log(data);
