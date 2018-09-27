@@ -1,21 +1,21 @@
 "use strict";
 
-angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($scope,$state,$timeout,$stateParams,$rootScope,APP_CONFIG,CAmaintenanceService) {
+angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($scope, $state, $timeout, $stateParams, $rootScope, APP_CONFIG, CAmaintenanceService) {
     //函数说明：合并指定表格（表格id为_w_table_id）指定列（列数为_w_table_colnum）的相同文本的相邻单元格
 //参数说明：_w_table_id 为需要进行合并单元格的表格的id。如在HTMl中指定表格 id="data" ，此参数应为 #data
 //参数说明：_w_table_colnum 为需要合并单元格的所在列。为数字，从最左边第一列为1开始算起。
     function _w_table_rowspan(_w_table_id, _w_table_colnum) {
         var _w_table_firsttd = "";
         var _w_table_currenttd = "";
-        var  _w_table_SpanNum = 0;
-        var  _w_table_Obj = $(_w_table_id + " tr td:nth-child(" + _w_table_colnum + ")");
-        _w_table_Obj.each(function(i) {
-            if(i == 0) {
+        var _w_table_SpanNum = 0;
+        var _w_table_Obj = $(_w_table_id + " tr td:nth-child(" + _w_table_colnum + ")");
+        _w_table_Obj.each(function (i) {
+            if (i == 0) {
                 _w_table_firsttd = $(this);
                 _w_table_SpanNum = 1;
             } else {
                 _w_table_currenttd = $(this);
-                if(_w_table_firsttd.text() == _w_table_currenttd.text()) {
+                if (_w_table_firsttd.text() == _w_table_currenttd.text()) {
                     _w_table_SpanNum++;
                     _w_table_currenttd.hide(); //remove();
                     _w_table_firsttd.attr("rowSpan", _w_table_SpanNum);
@@ -26,6 +26,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             }
         });
     }
+
 //函数说明：合并指定表格（表格id为_w_table_id）指定行（行数为_w_table_rownum）的相同文本的相邻单元格
 //参数说明：_w_table_id 为需要进行合并单元格的表格id。如在HTMl中指定表格 id="data" ，此参数应为 #data
 //参数说明：_w_table_rownum 为需要合并单元格的所在行。其参数形式请参考jQuery中nth-child的参数。
@@ -36,23 +37,23 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
 //参数说明：_w_table_maxcolnum 为指定行中单元格对应的最大列数，列数大于这个数值的单元格将不进行比较合并。
 //          此参数可以为空，为空则指定行的所有单元格要进行比较合并。
     function _w_table_colspan(_w_table_id, _w_table_rownum, _w_table_maxcolnum) {
-        if(_w_table_maxcolnum == void 0) {
+        if (_w_table_maxcolnum == void 0) {
             _w_table_maxcolnum = 0;
         }
         var _w_table_firsttd = "";
         var _w_table_currenttd = "";
         var _w_table_SpanNum = 0;
-        $(_w_table_id + " tr:nth-child(" + _w_table_rownum + ")").each(function(i) {
+        $(_w_table_id + " tr:nth-child(" + _w_table_rownum + ")").each(function (i) {
             var _w_table_Obj = $(this).children();
-            _w_table_Obj.each(function(i) {
-                if(i == 0) {
+            _w_table_Obj.each(function (i) {
+                if (i == 0) {
                     _w_table_firsttd = $(this);
                     _w_table_SpanNum = 1;
-                } else if((_w_table_maxcolnum > 0) && (i > _w_table_maxcolnum)) {
+                } else if ((_w_table_maxcolnum > 0) && (i > _w_table_maxcolnum)) {
                     return "";
                 } else {
                     _w_table_currenttd = $(this);
-                    if(_w_table_firsttd.text() == _w_table_currenttd.text()) {
+                    if (_w_table_firsttd.text() == _w_table_currenttd.text()) {
                         _w_table_SpanNum++;
                         _w_table_currenttd.hide(); //remove();
                         _w_table_firsttd.attr("colSpan", _w_table_SpanNum);
@@ -64,13 +65,14 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
             });
         });
     }
-    $rootScope.getCycle('FCST').then(function(data){
+
+    $rootScope.getCycle('FCST').then(function (data) {
         $scope.cycledata = data.result;
     });
     //第二部分tab信息展示
-    $scope.getPage = function(){
-        CAmaintenanceService.getExecute2().then(function(data){
-            if(data.code == 0){
+    $scope.getPage = function () {
+        CAmaintenanceService.getExecute2().then(function (data) {
+            if (data.code == 0) {
                 $scope.tablist = data.result;
                 $("#tabExample1").dataTable().fnDestroy();
                 $timeout(function () {
@@ -88,135 +90,134 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                     });
                 });
             }
-           // console.log(data);
-        },function(data){
-          //  console.log(data);
+            // console.log(data);
+        }, function (data) {
+            //  console.log(data);
         });
     }
     $scope.getPage();
 
     //点击Execute执行
-    $scope.getExecute = function(){
+    $scope.getExecute = function () {
         $scope.taskId = '';
         $scope.search = {
-            cycleName : $scope.CycleChoose,
-            user : $rootScope.user
+            cycleName: $scope.CycleChoose,
+            user: $rootScope.user
         }
         //console.log($rootScope.user);
-        if(!$scope.CycleChoose){
+        if (!$scope.CycleChoose) {
             alert("Please select conditions！");
-        }else {
-            $('#execute2').css('display','block');
-            $('#execute1').css('display','none');
-            CAmaintenanceService.getExecute($scope.search).then(function(data){
+        } else {
+            $('#execute2').css('display', 'block');
+            $('#execute1').css('display', 'none');
+            CAmaintenanceService.getExecute($scope.search).then(function (data) {
                 console.log(data);
-                if(data.code == 0){
+                if (data.code == 0) {
                     alert(data.result);
-                    $('#execute1').css('display','block');
-                    $('#execute2').css('display','none');
+                    $('#execute1').css('display', 'block');
+                    $('#execute2').css('display', 'none');
                     $scope.getPage();
-                }else {
+                } else {
                     alert(data.msg);
                 }
-               // console.log(data);
-            },function(data){
+                // console.log(data);
+            }, function (data) {
                 console.log(data);
             });
         }
     };
     //单击整行选中
-    $scope.trClick = function($event,id,status,cycleName){
+    $scope.trClick = function ($event, id, status, cycleName) {
         $($("#tabExample input:radio")).removeAttr("checked");
-        $($event.target).parent().find("input:radio").prop("checked",true);
+        $($event.target).parent().find("input:radio").prop("checked", true);
         $scope.taskId = id;
-      //  console.log($scope.taskId)
+        //  console.log($scope.taskId)
         $scope.status = status;
-       // console.log($scope.status)
+        // console.log($scope.status)
         $scope.cyclename = cycleName;
-      //  console.log($scope.cyclename)
+        //  console.log($scope.cyclename)
         //$scope.SearchTaskId(a,b,c)
     }
 
     //点击Search
-    $scope.SearchTab = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'){
-            $scope.PRCww=true;
-            $scope.TaskID =  $scope.taskId;
+    $scope.SearchTab = function () {
+        if (!$scope.taskId) {
+            alert("Please select items！");
+        } else if ($scope.status == 'Success' || $scope.status == 'Publish') {
+            $scope.PRCww = true;
+            $scope.TaskID = $scope.taskId;
             $scope.CycleName = $scope.cyclename;
-
             //WW
-            CAmaintenanceService.getWw($scope.TaskID).then(function(data){
-                if(data.code == 0){
-
-                   var WwList = data.result;
-                    $scope.iconData = {"Consumer":"fa-university","SMB":"fa-bookmark","Commercial":"fa-life-bouy","Others":"fa-code-fork","Total":"fa-reorder"};
-                    $scope.segment = $rootScope.getFiled(WwList,"segment");
-                   //  $scope.segment.push('Total');
-                    $scope.bu =  $rootScope.getFiled(WwList,"bu");
-                    $scope.geo = $rootScope.getFiled(WwList,"geo");
-                    $scope.dataMap = CAmaintenanceService.getDataMap(WwList,$scope.segment,$scope.geo,$scope.bu,$rootScope.wwSortData.regions);
-                    //var t=$("#cacontent table tbody tr:eq(1) th:eq(5)").value;
-                    //console.log(t);
+            CAmaintenanceService.getWw($scope.TaskID).then(function (data) {
+                if (data.code == 0) {
+                    var WwList = data.result;
+                    $scope.iconData = {
+                        "Consumer": "fa-university",
+                        "SMB": "fa-bookmark",
+                        "Commercial": "fa-life-bouy",
+                        "Others": "fa-code-fork",
+                        "Total": "fa-reorder"
+                    };
+                    $scope.segment = $rootScope.getFiled(WwList, "segment");
+                    $scope.bu = $rootScope.getFiled(WwList, "bu");
+                    $scope.geo = $rootScope.getFiled(WwList, "geo");
+                    $scope.dataMap = CAmaintenanceService.getDataMap(WwList, $scope.segment, $scope.geo, $scope.bu, $rootScope.wwSortData.regions);
                 }
                 //console.log(data);
-            },function(data){
-               // console.log(data);
+            }, function (data) {
+                 console.log(data);
             });
 
             //PRC
-            CAmaintenanceService.getPrc($scope.TaskID).then(function(caprcdata) {
+            CAmaintenanceService.getPrc($scope.TaskID).then(function (caprcdata) {
                 if (caprcdata.code == 0) {
 
                     var PrcList = caprcdata.result;
-                    $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled(PrcList,"segment"),$rootScope.prcSortData.segments);
-                    $scope.Prcbu =  $rootScope.sortByDataBase($rootScope.getFiled(PrcList,"bu"), $rootScope.prcSortData.bus);
+                    $scope.Prcsegment = $rootScope.getFiled(PrcList, "segment");
+                   // $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled(PrcList, "segment"), $rootScope.prcSortData.segments);
+                    $scope.Prcbu = $rootScope.sortByDataBase($rootScope.getFiled(PrcList, "bu"), $rootScope.prcSortData.bus);
                     $scope.Prcbu.push('Total');
-                    $scope.getPrcDataMap = CAmaintenanceService.getPrcDataMap(PrcList,$scope.Prcsegment,$scope.Prcbu);
+                    $scope.getPrcDataMap = CAmaintenanceService.getPrcDataMap(PrcList, $scope.Prcsegment, $scope.Prcbu);
                 }
-            } ,function(data){
-               // console.log(data);
+            }, function (data) {
+                // console.log(data);
             });
 
 
-
-
-
-        }else {
-            alert("暂未执行成功，无法查看！");
+        } else {
+            alert("Execution in process, unable to check！");
         }
     };
-    CAmaintenanceService.getPrcBu($scope.bu).then(function(caprcbudata){
+    CAmaintenanceService.getPrcBu($scope.bu).then(function (caprcbudata) {
         //console.log(caprcbudata.result);
-        $rootScope.PrcBu=caprcbudata.result;
+        $rootScope.PrcBu = caprcbudata.result;
     }, function (data) {
-       // console.log(data);
+        // console.log(data);
     })
-    CAmaintenanceService.getPrcSegment($scope.segment).then(function(caprcsegmentdata){
-       // console.log(caprcsegmentdata.result);
-        $rootScope.PrcSegment=caprcsegmentdata.result;
+    CAmaintenanceService.getPrcSegment($scope.segment).then(function (caprcsegmentdata) {
+        // console.log(caprcsegmentdata.result);
+        $rootScope.PrcSegment = caprcsegmentdata.result;
     }, function (data) {
-       // console.log(data);
+        // console.log(data);
     })
     //删除
-    $scope.DelOneItem = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
-            if(confirm('确认要删除？')) {
+    $scope.DelOneItem = function () {
+        if (!$scope.taskId) {
+            alert("Select items！");
+        } else if ($scope.status == 'Success' || $scope.status == 'Publish' || $scope.status == 'Error') {
+            if (confirm('Confirm to delete？')) {
                 //console.log($scope.taskid);
                 $scope.taskid = {
                     uuid: $scope.taskId
                 };
                 CAmaintenanceService.DelItem($scope.taskid).then(function (data) {
                     if (data.code == 0) {
-                        alert("删除成功！");
+                        alert("Success！");
                         $scope.taskId = '';
                         $scope.getPage();
                         //$("#tabExample").dataTable().fnDestroy();
                         //$scope.PRCWW = true;
-                    }else {
+                    } else {
                         alert(data.msg);
                     }
                     //console.log(data);
@@ -224,75 +225,75 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                     //console.log(data);
                 });
             }
-        }else {
-            alert("还未执行完成！");
+        } else {
+            alert("Execution is not complete！");
         }
     };
 
     //prc时的Download
-    $scope.getPRCDownLoad = function(){
-        if(!$scope.TaskID){
+    $scope.getPRCDownLoad = function () {
+        if (!$scope.TaskID) {
             return;
-        }else{
-        CAmaintenanceService.getPrcDown($scope.TaskID).then(function(response){
-        	var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+        } else {
+            CAmaintenanceService.getPrcDown($scope.TaskID).then(function (response) {
+                var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
                 var data = response.data;
-           // console.log(data);
-            //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
-            //而使用“application/vnd.openxmlformats-officedocument.spreadsheetml.sheet”则会保存为xlsx
-            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-            var objectUrl = URL.createObjectURL(blob);
-            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-            aForExcel.attr("download",fileName);
-            $("body").append(aForExcel);
-            $(".forExcel").click();
-            aForExcel.remove();
-        },function(data){
-            //console.log(data);
-        })
+                // console.log(data);
+                //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
+                //而使用“application/vnd.openxmlformats-officedocument.spreadsheetml.sheet”则会保存为xlsx
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+                aForExcel.attr("download", fileName);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+            }, function (data) {
+                //console.log(data);
+            })
         }
     }
 
     //ww时的Download
-    $scope.getWWDownLoad = function(){
-        if(!$scope.TaskID){
+    $scope.getWWDownLoad = function () {
+        if (!$scope.TaskID) {
             return;
-        }else{
-            CAmaintenanceService.getWwDown($scope.TaskID).then(function(response){
+        } else {
+            CAmaintenanceService.getWwDown($scope.TaskID).then(function (response) {
                 var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
                 var data = response.data;
                 //console.log(data);
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                 var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
-                 aForExcel.attr("download",fileName);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+                aForExcel.attr("download", fileName);
                 $("body").append(aForExcel);
                 $(".forExcel").click();
                 aForExcel.remove();
-            },function(data){
+            }, function (data) {
                 //console.log(data);
             })
         }
     }
 
     //点击Validate
-    $scope.getValidate = function(){
+    $scope.getValidate = function () {
         $scope.validate = {
-            zcycle_name : $scope.CycleName,
-            zuuid : $scope.TaskID,
-            user : $rootScope.user
+            zcycle_name: $scope.CycleName,
+            zuuid: $scope.TaskID,
+            user: $rootScope.user
         };
-      //  console.log($rootScope.user)
+        //  console.log($rootScope.user)
         CAmaintenanceService.getValidate($scope.validate).then(function (data) {
-            if(data.code == 0){
+            if (data.code == 0) {
                 alert('成功！');
                 $scope.getPage();
-            }else {
+            } else {
                 alert(data.msg);
             }
-          //  console.log(data);
+            //  console.log(data);
         }, function (data) {
-          //  console.log(data);
+            //  console.log(data);
         });
     };
 
@@ -314,7 +315,19 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
 
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js
-    	$('#final table').stickySort({ sortable: true });
+        $('#final table').stickySort({sortable: true});
+
+        var length = -1;
+        $.each($scope.dataMap,function(key,value,index){
+           $.each(value.geo,function(gkey,gvalue,gindex){
+               length += gvalue;
+               if(gvalue > 1){
+                   $(".th_"+length).addClass("gray");
+               }
+           });
+        })
+
+
     });
 
 })

@@ -1,187 +1,268 @@
 "use strict";
 
-angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function ($scope,$rootScope,Upload,$timeout,APP_CONFIG,$state,$stateParams,$location,OutTapeAllocationService) {
-    //EBR  上传文件
-    $scope.myfiles = {};
-    $scope.openUpload = function(){
-        $scope.myfilesVal = '';
-        $scope.fileChange = function(){
-            if($scope.myfiles.name){
-                $scope.myfilesVal = $scope.myfiles.name;
-            }else {
-                $scope.myfilesVal = '';
+angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function ($scope, $rootScope, Upload, $timeout, APP_CONFIG, $state, $stateParams, $location, OutTapeAllocationService) {
+    //EBR  上传文件  lta
+    $scope.myfileslta1 = {};
+    $scope.openUploadlta1 = function () {
+        $scope.myfilesltaVal1 = '';
+        $scope.fileChangelta1 = function () {
+            if ($scope.myfileslta1.name) {
+                $scope.myfilesltaVal1 = $scope.myfileslta1.name;
+            } else {
+                $scope.myfilesltaVal1 = '';
             }
         }
     };
-    //GIBP 上传文件
-    $scope.myfiles1 = {};
-    $scope.openUpload1 = function(){
-        $scope.myfilesVal1 = '';
-        $scope.fileChange1 = function(){
-            if($scope.myfiles1.name){
-                $scope.myfilesVal1 = $scope.myfiles1.name;
-            }else {
-                $scope.myfilesVal1 = '';
+    //GIBP 上传文件  lta
+    $scope.myfileslta2 = {};
+    $scope.openUploadlta2 = function () {
+        $scope.myfilesltaVal2 = '';
+        $scope.fileChangelta2 = function () {
+            if ($scope.myfileslta2.name) {
+                $scope.myfilesltaVal2 = $scope.myfileslta2.name;
+            } else {
+                $scope.myfilesltaVal2 = '';
             }
         }
     };
-    $rootScope.getCycle().then(function(data){
+    //EBR  上传文件  out
+    $scope.myfilesout1 = {};
+    $scope.openUploadout1 = function () {
+        $scope.myfilesoutVal1 = '';
+        $scope.fileChangeout1 = function () {
+            if ($scope.myfilesout1.name) {
+                $scope.myfilesoutVal1 = $scope.myfilesout1.name;
+            } else {
+                $scope.myfilesoutVal1 = '';
+            }
+        }
+    };
+    //GIBP 上传文件  out
+    $scope.myfilesout2 = {};
+    $scope.openUploadout2 = function () {
+        $scope.myfilesoutVal2 = '';
+        $scope.fileChangeout2 = function () {
+            if ($scope.myfilesout2.name) {
+                $scope.myfilesoutVal2 = $scope.myfilesout2.name;
+            } else {
+                $scope.myfilesoutVal2 = '';
+            }
+        }
+    };
+    //EBR  上传文件  sw
+    $scope.myfilessw1 = {};
+    $scope.openUploadsw1 = function () {
+        $scope.myfilesswVal1 = '';
+        $scope.fileChangesw1 = function () {
+            if ($scope.myfilessw1.name) {
+                $scope.myfilesswVal1 = $scope.myfilessw1.name;
+            } else {
+                $scope.myfilesswVal1 = '';
+            }
+        }
+    };
+    //GIBP 上传文件  sw
+    $scope.myfilessw2 = {};
+    $scope.openUploadsw2 = function () {
+        $scope.myfilesswVal2 = '';
+        $scope.fileChangesw2 = function () {
+            if ($scope.myfilessw2.name) {
+                $scope.myfilesswVal2 = $scope.myfilessw2.name;
+            } else {
+                $scope.myfilesswVal2 = '';
+            }
+        }
+    };
+    $rootScope.getCycle().then(function (data) {
+        console.log(data);
         $scope.cycledata = data.result;
     });
-    //上传
-    $scope.upload = function(){
-        Upload.upload({
-            //服务端接收
-            url:APP_CONFIG.baseUrl+ '/api/dm/ca/attachments',
-            data : {
-                file : $scope.myfiles,
-                username :$rootScope.user,
-                cyclename:$scope.CycleChoose
-            },
-            headers: {
-                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
-            },
-        }).success(function (data, status, headers, config){
-            if(!$scope.CycleChoose){
-                alert("请选择条件！");
-            }else {
-                if (data.code == 0 && $scope.CycleChoose.indexOf("M0") != -1) {
-                    alert('上传成功！');
-                    console.log(data);
-                    $scope.id=data.result;
-                    $scope.getPage();
-                }else if(data.code == 0 && $scope.CycleChoose.indexOf("Actual") != -1){
-                    alert('上传成功！');
-                    $scope.id=data.result;
-                    console.log(data);
-                    console.log($scope.id);
-                    $scope.getPage();
-                } else {
-                    alert('上传失败！');
-                }
-            }
-        }).error(function (data, status, headers, config) {
-            alert('上传失败');
-            //上传失败
-            console.log('error status: ' + status);
-        });
-    }
-
-    //第二部分tab信息展示
-    $scope.getPage = function(){
-        OutTapeAllocationService.getExecute2().then(function(data){
-            if(data.code == 0){
-                $scope.tablist = data.result;
-                console.log($scope.tablist);
-                $("#tabExample1").dataTable().fnDestroy();
-                $timeout(function () {
-                    $('#tabExample1').dataTable({
-                        "scrollY": 160,
-                        "scrollX": true,
-                        "dom": '<"top">rt<"bottom"><"clear">',
-                        "scrollCollapse": true,
-                        //"jQueryUI": true,
-                        // "pagingType":   "simple_numbers",
-                        stateSave: true,
-                        "paging": false,
-                        "ordering": false,
-                        "bLengthChange": true
-                    });
-                });
-            }
-            console.log(data);
-        },function(data){
-            console.log(data);
-        });
-    }
-    $scope.getPage();
-
-    //单击整行选中
-    $scope.trClick = function($event,id,status,cycleName){
-        $($("#tabExample input:radio")).removeAttr("checked");
-        $($event.target).parent().find("input:radio").prop("checked",true);
-        $scope.taskId = id;
-        console.log($scope.taskId);
-        $scope.status = status;
-        console.log($scope.status);
-        $scope.cyclename = cycleName;
-        console.log($scope.cyclename);
-    };
-    //LTA Out  SW三个 隐藏
-    $scope.althree=false;
-    //点击Search
-    $scope.SearchTab = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'){
-            $scope.TaskID =  $scope.taskId;
-            $scope.CycleName = $scope.cyclename;
-            //LTA Out  SW三个 显示
-            $scope.althree=true;
-            //LTA显示
-            $scope.althreeLta=true;
-            $scope.althreeOut=true;
-            $scope.althreeSw=true;
-            //LatalTable 1
-            OutTapeAllocationService.getWw($scope.TaskID).then(function(data){
-                if(data.code == 0){
-                    $scope.WwList = data.result;
-                    $scope.LatalTable();
-                    console.log($scope.TaskID);
-                    console.log($scope.CyclName);
-                }
-                console.log(data);
-            },function(data){
-                console.log(data);
-            });
-
-            //LatresTable 2
-            OutTapeAllocationService.getPrc($scope.TaskID).then(function(data) {
+    //上传 LTA  （第一个）
+    $scope.uploadlta = function () {
+        if (!$scope.CycleChooselta) {
+            alert("Please select conditions！");
+        } else {
+            Upload.upload({
+                //服务端接收
+                url: APP_CONFIG.baseUrl + '/api/ota/attachments_alliance',
+                data: {
+                    file: $scope.myfileslta2,
+                    file1: $scope.myfileslta1,
+                    username: $rootScope.user,
+                    cyclename: $scope.CycleChooselta
+                },
+                headers: {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+                },
+            }).success(function (data, status, headers, config) {
                 if (data.code == 0) {
-                    $scope.PrcList = data.result;
-                    console.log($scope.PrcList);
+                    //alert('Uploaded successfully！');
+                    alert(data.result);
+                    console.log(data);
+                    $scope.id = data.result;
+                   $scope.outtapelta=true;
+                    $scope.outtapeout=false;
+                    $scope.outtapesw=false;
+                    $scope.LatalTable();
                     $scope.LatresTable();
+                } else {
+                    alert('Upload failed！');
                 }
-                console.log(data)
-            } ,function(data){
-                console.log(data);
+            }).error(function (data, status, headers, config) {
+                alert('Upload failed');
+                //上传失败
+                console.log('error status: ' + status);
             });
-        }else {
-            alert("暂未执行成功，无法查看！");
         }
     };
-    //删除
-    $scope.DelOneItem = function(){
-        if(!$scope.taskId){
-            alert("请选择项！");
-        }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
-            if(confirm('确认要删除？')) {
-                console.log($scope.taskid);
-                $scope.taskid = {
-                    uuid: $scope.taskId
-                };
-                OutTapeAllocationService.DelItem($scope.taskid).then(function (data) {
-                    if (data.code == 0) {
-                        alert("删除成功！");
-                        $scope.taskId = '';
-                        $scope.getPage();
-                    }else {
-                        alert(data.msg);
-                    }
+    //上传 out（第er个）
+    $scope.uploadout = function () {
+        if (!$scope.CycleChooseout) {
+            alert("Please select conditions！");
+        } else {
+            Upload.upload({
+                //服务端接收
+                url: APP_CONFIG.baseUrl + '/api/ota/attachments_ot',
+                data: {
+                    file: $scope.myfilesout1,
+                    file1: $scope.myfilesout2,
+                    username: $rootScope.user,
+                    cyclename: $scope.CycleChooseout
+                },
+                headers: {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+                },
+            }).success(function (data, status, headers, config) {
+                if (data.code == 0) {
+                    //alert('Uploaded successfully！');
                     console.log(data);
-                }, function (data) {
-                    console.log(data);
-                });
-            }
-        }else {
-            alert("还未执行完成！");
+                    alert(data.result);
+                    $scope.id = data.result;
+                    $scope.outtapelta=false;
+                    $scope.outtapeout=true;
+                    $scope.outtapesw=false;
+                    $scope.OutalTable();
+                    $scope.OutresTable();
+                } else {
+                    alert('Upload failed！');
+                }
+            }).error(function (data, status, headers, config) {
+                alert('Upload failed');
+                //上传失败
+                console.log('error status: ' + status);
+            });
         }
     };
-    //LatalTable 搜索数据
-    $scope.LatalTable = function(){
+    //上传 sw  （第san个）
+    $scope.uploadsw = function () {
+        if (!$scope.CycleChoosesw) {
+            alert("Please select conditions！");
+        } else {
+            Upload.upload({
+                //服务端接收
+                url: APP_CONFIG.baseUrl + '/api/ota/attachments_sw',
+                data: {
+                    file: $scope.myfilessw1,
+                    file1: $scope.myfilessw2,
+                    username: $rootScope.user,
+                    cyclename : $scope.CycleChoosesw
+                },
+                headers: {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+                },
+            }).success(function (data, status, headers, config) {
+                if (data.code == 0) {
+                    //alert('Uploaded successfully！');
+                    alert(data.result);
+                    console.log(data);
+                    $scope.id = data.result;
+                    $scope.outtapelta=false;
+                    $scope.outtapeout=false;
+                    $scope.outtapesw=true;
+
+                    $scope.SwalTable();
+                    $scope.SwresTable();
+                } else {
+                    alert('Upload failed！');
+                }
+            }).error(function (data, status, headers, config) {
+                alert('Upload failed');
+                //上传失败
+                console.log('error status: ' + status);
+            });
+        }
+    };
+
+    //下载模板 download Template lta
+    $scope.DowTemplta = function () {
+        $scope.temp = {
+            type: 'lta'
+        }
+        OutTapeAllocationService.download($scope.temp).then(function (response) {
+            console.log(response);
+            var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            var data = response.data;
+            //console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+            aForExcel.attr("download", fileName);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        }, function (data) {
+            console.log(data);
+        });
+    }
+    //下载模板 download Template out
+    $scope.DowTempout = function () {
+        $scope.temp = {
+            type: 'out'
+        }
+        OutTapeAllocationService.download($scope.temp).then(function (response) {
+            console.log(response);
+            var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            var data = response.data;
+            //console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+            aForExcel.attr("download", fileName);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        }, function (data) {
+            console.log(data);
+        });
+    }
+    //下载模板 download Template sw
+    $scope.DowTempsw = function () {
+        $scope.temp = {
+            type: 'sw'
+        }
+        OutTapeAllocationService.download($scope.temp).then(function (response) {
+            console.log(response);
+            var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            var data = response.data;
+            //console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+            aForExcel.attr("download", fileName);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        }, function (data) {
+            console.log(data);
+        });
+    }
+
+
+    //LatalTable 搜索数据 lta
+    $scope.LatalTable = function () {
         $("#LatalExample").dataTable().fnDestroy();
         $timeout(function () {
-            $('#LatalExample thead tr').eq(1).find('td').each(function() {
+            $('#LatalExample thead tr').eq(1).find('td').each(function () {
                 var title = $('#LatalExample thead tr td').eq($(this).index()).text();
                 $(this).html('<input type="text" placeholder="Search ' + title + '" />');
             });
@@ -193,23 +274,23 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "paging": false,
                 "ordering": false,
                 "autoWidth": false,
-                "data" :  $scope.WwList,
-                "columns":[
-                    { "data": "H1" },
-                    { "data": "Account" },
-                    { "data": "A0" },
-                    { "data": "Profit Center" },
-                    { "data": "Amount" },
-                    { "data": "Deal Des./SKU/Text"},
-                    {"data":"GPN"},
-                    {"data":"Plant"},
-                    {"data":"CD"},
-                    {"data":"BU"},
-                    {"data":"Geo"},
-                    {"data":"Sub_Geo"},
-                    {"data":"Country"},
-                    {"data":"BPC Segment"},
-                    {"data":"Segment"}
+                "data": $scope.WwList,
+                "columns": [
+                    {"data": "H1"},
+                    {"data": "Account"},
+                    {"data": "A0"},
+                    {"data": "Profit Center"},
+                    {"data": "Amount"},
+                    {"data": "Deal Des./SKU/Text"},
+                    {"data": "GPN"},
+                    {"data": "Plant"},
+                    {"data": "CD"},
+                    {"data": "BU"},
+                    {"data": "Geo"},
+                    {"data": "Sub_Geo"},
+                    {"data": "Country"},
+                    {"data": "BPC Segment"},
+                    {"data": "Segment"}
                     //{ "data": "lqBmc" ,render: function ( data, type, row ) {
                     //    if(data == null){
                     //        return data;
@@ -220,8 +301,8 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                     //}}
                 ]
             });
-            table.columns().eq(0).each(function(colIdx) {
-                $('input', table.column(colIdx).header()).on('keyup change', function() {
+            table.columns().eq(0).each(function (colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function () {
                     table
                         .column(colIdx)
                         .search(this.value)
@@ -230,11 +311,11 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
             });
         });
     }
-    //LatresTable  搜索 数据
-    $scope.LatresTable = function(){
+    //LatresTable  搜索数据  lta
+    $scope.LatresTable = function () {
         $("#LatresExample").dataTable().fnDestroy();
         $timeout(function () {
-            $('#LatresExample thead tr').eq(1).find('td').each(function() {
+            $('#LatresExample thead tr').eq(1).find('td').each(function () {
                 var title = $('#LatresExample thead tr td').eq($(this).index()).text();
                 $(this).html('<input type="text" placeholder="Search ' + title + '" />');
             });
@@ -246,15 +327,15 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "paging": false,
                 "ordering": false,
                 "autoWidth": false,
-                "data" :  $scope.PrcList,
-                "columns":[
-                    { "data": "BU" },
-                    { "data": "Segment" },
-                    { "data": "Intel Alliance Funding" },
-                    { "data": "SKU" },
-                    { "data": "Geo" },
-                    { "data": "Sub_Geo"},
-                    {"data":"Amount"}
+                "data": $scope.PrcList,
+                "columns": [
+                    {"data": "BU"},
+                    {"data": "Segment"},
+                    {"data": "Intel Alliance Funding"},
+                    {"data": "SKU"},
+                    {"data": "Geo"},
+                    {"data": "Sub_Geo"},
+                    {"data": "Amount"}
                     //{ "data": "lqBmc" ,render: function ( data, type, row ) {
                     //    if(data == null){
                     //        return data;
@@ -265,8 +346,195 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                     //}}
                 ]
             });
-            table.columns().eq(0).each(function(colIdx) {
-                $('input', table.column(colIdx).header()).on('keyup change', function() {
+            table.columns().eq(0).each(function (colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function () {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+    }
+    //OutalTable 搜索数据 out
+    $scope.OutalTable = function () {
+        $("#OutalExample").dataTable().fnDestroy();
+        $timeout(function () {
+            $('#OutalExample thead tr').eq(1).find('td').each(function () {
+                var title = $('#OutalExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table = $('#OutalExample').DataTable({
+                "scrollY": 600,
+                "scrollX": true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                "scrollCollapse": true,
+                "paging": false,
+                "ordering": false,
+                "autoWidth": false,
+                "data": $scope.WwList,
+                "columns": [
+                    {"data": "H1"},
+                    {"data": "Account"},
+                    {"data": "A0"},
+                    {"data": "Profit Center"},
+                    {"data": "Amount"},
+                    {"data": "Deal Des./SKU/Text"},
+                    {"data": "GPN"},
+                    {"data": "Plant"},
+                    {"data": "CD"},
+                    {"data": "BU"},
+                    {"data": "Geo"},
+                    {"data": "Sub_Geo"},
+                    {"data": "Country"},
+                    {"data": "BPC Segment"},
+                    {"data": "Segment"}
+                    //{ "data": "lqBmc" ,render: function ( data, type, row ) {
+                    //    if(data == null){
+                    //        return data;
+                    //    }else {
+                    //        var abc = data + '';
+                    //        return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                    //    }
+                    //}}
+                ]
+            });
+            table.columns().eq(0).each(function (colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function () {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+    }
+    //OutresTable  搜索数据  out
+    $scope.OutresTable = function () {
+        $("#OutresExample").dataTable().fnDestroy();
+        $timeout(function () {
+            $('#OutresExample thead tr').eq(1).find('td').each(function () {
+                var title = $('#OutresExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table = $('#OutresExample').DataTable({
+                "scrollY": 600,
+                "scrollX": true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                "scrollCollapse": true,
+                "paging": false,
+                "ordering": false,
+                "autoWidth": false,
+                "data": $scope.PrcList,
+                "columns": [
+                    {"data": "Geo"},
+                    {"data": "Sub_Geo"},
+                    {"data": "BU"},
+                    {"data": "Product Number"},
+                    {"data": "SKU"},
+                    {"data": "Amount"}
+                    //{ "data": "lqBmc" ,render: function ( data, type, row ) {
+                    //    if(data == null){
+                    //        return data;
+                    //    }else {
+                    //        var abc = data + '';
+                    //        return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                    //    }
+                    //}}
+                ]
+            });
+            table.columns().eq(0).each(function (colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function () {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+    }
+    //SwalTable 搜索数据 sw
+    $scope.SwalTable = function () {
+        $("#SwalExample").dataTable().fnDestroy();
+        $timeout(function () {
+            $('#SwalExample thead tr').eq(1).find('td').each(function () {
+                var title = $('#SwalExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table = $('#SwalExample').DataTable({
+                "scrollY": 600,
+                "scrollX": true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                "scrollCollapse": true,
+                "paging": false,
+                "ordering": false,
+                "autoWidth": false,
+                "data": $scope.WwList,
+                "columns": [
+                    {"data": "H1"},
+                    {"data": "Account"},
+                    {"data": "A0"},
+                    {"data": "Profit Center"},
+                    {"data": "Amount"},
+                    {"data": "Deal Des./SKU/Text"},
+                    {"data": "GPN"},
+                    {"data": "Plant"},
+                    {"data": "CD"},
+                    {"data": "BU"},
+                    {"data": "Geo"},
+                    {"data": "Sub_Geo"},
+                    {"data": "Country"},
+                    {"data": "BPC Segment"},
+                    {"data": "Segment"},
+                    {"data": "Material"}
+                    //{ "data": "lqBmc" ,render: function ( data, type, row ) {
+                    //    if(data == null){
+                    //        return data;
+                    //    }else {
+                    //        var abc = data + '';
+                    //        return abc.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                    //    }
+                    //}}
+                ]
+            });
+            table.columns().eq(0).each(function (colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function () {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+    }
+    //SwresTable  搜索数据  sw
+    $scope.SwresTable = function () {
+        $("#SwresExample").dataTable().fnDestroy();
+        $timeout(function () {
+            $('#SwresExample thead tr').eq(1).find('td').each(function () {
+                var title = $('#SwresExample thead tr td').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            var table = $('#SwresExample').DataTable({
+                "scrollY": 600,
+                "scrollX": true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                "scrollCollapse": true,
+                "paging": false,
+                "ordering": false,
+                "autoWidth": false,
+                "data": $scope.PrcList,
+                "columns": [
+                    {"data": "Geo"},
+                    {"data": "Country"},
+                    {"data": "BU"},
+                    {"data": "Deal Des#/SKU"},
+                    {"data": "PU"},
+                    {"data": "Amount"}
+                ]
+            });
+            table.columns().eq(0).each(function (colIdx) {
+                $('input', table.column(colIdx).header()).on('keyup change', function () {
                     table
                         .column(colIdx)
                         .search(this.value)
@@ -276,37 +544,40 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
         });
     }
 
-    //Download
-    $scope.getDownLoad = function(){
-        if(!$scope.TaskID){
+    //有数据的Download
+    $scope.getLtaDownLoad = function () {
+        if (!$scope.TaskID) {
             return;
-        }else{
-            OutTapeAllocationService.getWwDown($scope.TaskID).then(function(data){
-                console.log(data);
+        } else {
+            OutTapeAllocationService.getDownLoad($scope.TaskID).then(function (response) {
+                var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                var data = response.data;
+                //console.log(data);
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                 var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+                aForExcel.attr("download", fileName);
                 $("body").append(aForExcel);
                 $(".forExcel").click();
                 aForExcel.remove();
-            },function(data){
-                console.log(data);
+            }, function (data) {
+                //console.log(data);
             })
         }
     }
 
     //点击Validate
-    $scope.getValidate = function(){
+    $scope.getValidate = function () {
         $scope.validate = {
-            zcycle_name : $scope.CycleName,
-            zuuid : $scope.TaskID,
-            user : $rootScope.user
+            zcycle_name: $scope.CycleName,
+            zuuid: $scope.TaskID,
+            user: $rootScope.user
         };
         OutTapeAllocationService.getValidate($scope.validate).then(function (data) {
-            if(data.code == 0){
+            if (data.code == 0) {
                 alert('Success！');
                 $scope.getPage();
-            }else {
+            } else {
                 alert(data.msg);
             }
             console.log(data);
@@ -314,19 +585,5 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
             console.log(data);
         });
     };
-    $scope.type=0;
-   $scope.a=function(type){
-       switch (type) {
-           case 0:
-               console.log(0);
-               break;
-           case 1:
-              console.log(1);
-               break;
-           case 2:
-              console.log(2);
-               break;
 
-       }
-   }
-})
+});

@@ -81,7 +81,9 @@
                                 </table>
                             </div>
                             <div class="col-sm-4 tab-fun-btn2">
-                                <button class="btn btn-back btn-sm" ng-click="SearchTab()">Search</button>
+                                <button class="btn btn-back searchbtn pull-left" id="search1" style="display: none;"><i
+                                        class="fa fa-spinner fa-spin"></i></button>
+                                <button class="btn btn-back btn-sm" id="search2" ng-click="SearchTab()">Search</button>
                                 <button class="btn btn-back btn-sm" ng-click="DelOneItem()">Delete</button>
                             </div>
                         </div>
@@ -110,19 +112,19 @@
                                 <table class="table-bordered smart-form has-tickbox table-hover table-camain"
                                        style="width: 100%;table-layout: fixed;">
                                     <tbody>
-                                        <tr class="gray">
-                                            <th rowspan="12">CA(K)</th>
-                                            <th rowspan="2">BU</th>
-                                            <th colspan="{{Prcsegment.length}}">PRC Segment</th>
-                                            <th rowspan="2">Total</th>
-                                        </tr>
-                                        <tr class="gray">
-                                            <th ng-repeat="prcs in Prcsegment">{{prcs}}</th>
-                                        </tr>
-                                        <tr ng-repeat="(buKey,buVale) in getPrcDataMap">
-                                            <td>{{buKey}}</td>
-                                            <td ng-repeat="prcc in buVale track by $index">{{prcc}}</td>
-                                        </tr>
+                                    <tr class="gray">
+                                        <th rowspan="12">CA(K)</th>
+                                        <th rowspan="2">BU</th>
+                                        <th colspan="{{Prcsegment.length}}">PRC Segment</th>
+                                        <th rowspan="2">Total</th>
+                                    </tr>
+                                    <tr class="gray">
+                                        <th ng-repeat="prcs in Prcsegment">{{prcs}}</th>
+                                    </tr>
+                                    <tr ng-repeat="(buKey,buVale) in getPrcDataMap">
+                                        <td>{{buKey}}</td>
+                                        <td ng-repeat="prcc in buVale track by $index">{{prcc}}</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -148,7 +150,7 @@
                     </div>
                 </div>
 
-                <div ng-show="sw1" id="operadata-segment-tab" style="margin-top: 10px;">
+                <div ng-show="sw1" id="operadata-segment-tab">
                     <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false"
                          data-widget-deletebutton="false" data-widget-sortable="false" style="z-index: 1;">
                         <header>
@@ -177,7 +179,7 @@
                                          ng-repeat="(key,value) in dataMap">
                                         <main id="cacontent">
                                             <section class="demo1" id="final">
-                                                <table class="overflow-both" id="camainww">
+                                                <table class="overflow-both totbottom" id="camainww">
                                                     <thead>
                                                     <tr class="gray">
                                                         <th rowspan="8"
@@ -189,7 +191,7 @@
                                                         <th rowspan="2">Global Total</th>
                                                     </tr>
                                                     <tr class="gray">
-                                                        <th value="{{$index}}" ng-repeat="r in value.region track by $index">{{r}}</th>
+                                                        <th ng-repeat="r in value.region track by $index">{{r}}</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody class="Ftbody" on-finish-render-filters>
@@ -200,7 +202,9 @@
                                                     </tr>
                                                     <tr ng-repeat="(bukey,buvalue) in value.bu">
                                                         <th class="caleft">{{bukey}}</th>
-                                                        <td value="{{$index}}" ng-repeat="c in buvalue track by $index">{{c}}</td>
+                                                        <td class="th_{{$index}}" ng-repeat="c in buvalue track by $index">
+                                                            {{c}}
+                                                        </td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -210,7 +214,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div style>
+                    </div>
                     <div class="col-sm-4 tab-fun-btn" style="z-index:10;">
                         <button class="btn btn-back btn-xs" uib-tooltip="Shift View" tooltip-append-to-body="true"
                                 ng-click="btnSV('s1')" ng-show="!sw1">

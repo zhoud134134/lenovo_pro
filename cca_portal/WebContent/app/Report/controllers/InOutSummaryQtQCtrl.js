@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.Report').controller('InOutSummaryQtQCtrl', function ($scope,$rootScope,InOutSummaryQtQservice,$state,$stateParams,$location) {
+angular.module('app.Report').controller('InOutSummaryQtQCtrl', function ($scope, $rootScope, InOutSummaryQtQservice, $state, $stateParams, $location) {
     //
     // $scope.breplybox1 = false;
     // $scope.breplybox2 = false;
@@ -50,16 +50,35 @@ angular.module('app.Report').controller('InOutSummaryQtQCtrl', function ($scope,
 
     $rootScope.getOutsumCycle().then(function (data) {
         $scope.cycledata = data.result;
-
     });
-
-
-    $rootScope.getSeg('segment').then(function(data){
+    $rootScope.getSeg('segment').then(function (data) {
         $scope.seGcycledata = data.result;
     });
-    $rootScope.getSeg('geo').then(function(data){
+    $rootScope.getSeg('geo').then(function (data) {
         $scope.Geocycledata = data.result;
     });
+    $scope.Inoutqtq=false;
+    $scope.InoutSumsearch = function () {
+        if (!$scope.SegsycleChoose || !$scope.GeosycleChoose || !$scope.CycleChoose1 || !$scope.CycleChoose2) {
+            alert("Please select conditions!");
+        } else {
+            //$('#searchLoda1').css('display', 'none');
+            //$('#searchLoda').css('display', 'block');
+            $scope.Inoutqtq=true;
+            InOutSummaryQtQservice.getInOutSumdata().then(function (data) {
+                $scope.Inoutqtq=true;
+
+                var outsumData = data.result;
+                var categorylvl1 = $rootScope.getFiled(outsumData,"categorylvl1");
+                $scope.listData = InOutSummaryQtQservice.getList(outsumData,categorylvl1);
+                console.log($scope.listData);
+                //$('#searchLoda1').css('display', 'block');
+                //$('#searchLoda').css('display', 'none');
+            }, function (data) {
+                console.log(data);
+            });
+        }
+    };
 
 
 })

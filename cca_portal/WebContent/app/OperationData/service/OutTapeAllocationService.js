@@ -2,18 +2,30 @@
  * Created by Qinglanhui on 2018/9/5.
  */
 angular.module('app.OperationData').service("OutTapeAllocationService", function($http, $q , APP_CONFIG) {
-    //获取第二部分表格数据
-    this.getExecute2 = function() {
+    /**
+     * 下载模板
+     */
+    this.download = function (load) {
+        console.log(load)
         var d = $q.defer();
         $http({
-            method : 'GET',
-            url : APP_CONFIG.baseUrl + '/api/CAMaintenanceBmc/',
-            headers: {
-                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            method: 'GET',
+            url: APP_CONFIG.baseUrl + '/api/loadfile/loadexcel',
+            transformRequest: function (obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                }
+                return str.join("&");
             },
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+            params: load,
+            responseType: 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
-            d.resolve(response.data);
+            d.resolve(response);
         }, function errorCallback(response) {
             // 请求失败执行代码
             d.reject("error");
@@ -21,94 +33,30 @@ angular.module('app.OperationData').service("OutTapeAllocationService", function
         return d.promise;
     }
 
-    //删除第二部分某一项
-    this.DelItem = function(id) {
-        console.log(id)
-        var d = $q.defer();
-        $http({
-            method : 'DELETE',
-            url : APP_CONFIG.baseUrl + '/api/caMaintenanceUUid/',
-            /*transformRequest: function(obj) {
-             var str = [];
-             for (var s in obj) {
-             str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
-             }
-             return str.join("&");
-             },*/
-            params : id,
-            headers: {
-                'Authorization' : 'Bearer '+ sessionStorage.getItem("token"),
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-        }).then(function successCallback(response) {
-            // 请求成功执行代码
-            d.resolve(response.data);
-        }, function errorCallback(response) {
-            // 请求失败执行代码
-            d.reject("error");
-        });
-        return d.promise;
-    }
-
-    //请求Ww的数据 1
-    this.getWw = function(id) {
-        console.log(id)
+    //下边的Download
+    this.getDownLoad = function(id) {
+        // console.log(id)
         var d = $q.defer();
         $http({
             method : 'GET',
-            url : APP_CONFIG.baseUrl + '/api/bmc/summary/row/'+id,
+            url : APP_CONFIG.baseUrl + '/api/SUMACTExcel/',
             headers: {
                 'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
-        }).then(function successCallback(response) {
-            // 请求成功执行代码
-            d.resolve(response.data);
-        }, function errorCallback(response) {
-            // 请求失败执行代码
-            d.reject("error");
-        });
-        return d.promise;
-    }
-    //请求Prc的数据 2
-    this.getPrc = function(id) {
-        console.log(id)
-        var d = $q.defer();
-        $http({
-            method : 'GET',
-            url : APP_CONFIG.baseUrl + '/api/bmc/summary/prc/'+id,
-            headers: {
-                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
-            },
-        }).then(function successCallback(response) {
-            // 请求成功执行代码
-            d.resolve(response.data);
-        }, function errorCallback(response) {
-            // 请求失败执行代码
-            d.reject("error");
-        });
-        return d.promise;
-    }
-
-    //Download
-    this.getWwDown = function(id) {
-        console.log(id)
-        var d = $q.defer();
-        $http({
-            method : 'GET',
-            url : APP_CONFIG.baseUrl + '/api/dm/ca/loadexcel/ww/'+id,
-            headers: {
-                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            params : {
+                'uuid' :id
             },
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
-            d.resolve(response.data);
+            d.resolve(response);
         }, function errorCallback(response) {
             // 请求失败执行代码
             d.reject("error");
         });
         return d.promise;
     }
+
     //Validate按钮功能
     this.getValidate = function(v) {
         console.log(v)

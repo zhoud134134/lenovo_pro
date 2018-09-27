@@ -1,0 +1,86 @@
+{
+  "result":[
+    {
+      "categorylvl1": "BMC cost",
+      "categorylvl2": "",
+      "categorylvl3": ""
+    },
+    {
+      "categorylvl1": "Out tape delivery",
+      "categorylvl2": "",
+      "categorylvl3": ""
+    },
+    {
+      "categorylvl1": "Out tape delivery",
+      "categorylvl2": "CPU Sub-total",
+      "categorylvl3": ""
+    },
+    {
+      "categorylvl1": "Out tape delivery",
+      "categorylvl2": "CPU Sub-total",
+      "categorylvl3": "--Consusmption base:"
+    },
+    {
+      "categorylvl1": "Out tape delivery",
+      "categorylvl2": "CPU Sub-total",
+      "categorylvl3": "--Risk commit"
+    },
+    {
+      "categorylvl1": "Out tape delivery",
+      "categorylvl2": "HDD Sub-total",
+      "categorylvl3": "--Consusmption base:"
+    },
+    {
+      "categorylvl1": "Out tape delivery",
+      "categorylvl2": "HDD Sub-total",
+      "categorylvl3": "--Risk commit"
+    },
+    {
+      "categorylvl1": "Out tape delivery",
+      "categorylvl2": "HDD Sub-total",
+      "categorylvl3": ""
+    },
+    {
+      "categorylvl1": "Out tape delivery",
+      "categorylvl2": "SW",
+      "categorylvl3": ""
+    },
+    {
+      "categorylvl1": "Out tape delivery",
+      "categorylvl2": "Other",
+      "categorylvl3": ""
+    },
+    {
+      "categorylvl1": "",
+      "categorylvl2": "1% mark up reserve for segment fund pool",
+      "categorylvl3": ""
+    },
+    {
+      "categorylvl1": "",
+      "categorylvl2": "Segment program released benefit",
+      "categorylvl3": ""
+    },
+    {
+      "categorylvl1": "",
+      "categorylvl2": "Segment program released benefit",
+      "categorylvl3": "--Risk commit"
+    },
+    {
+      "categorylvl1": "4.5% mark up of BMC cost",
+      "categorylvl2": "",
+      "categorylvl3": ""
+    },
+    {
+      "categorylvl1": "4.5% mark up of BMC cost",
+      "categorylvl2": "2.5% cost credit refund",
+      "categorylvl3": ""
+    },
+    {
+      "categorylvl1": "4.5% mark up of BMC cost",
+      "categorylvl2": "1% GEO top management",
+      "categorylvl3": ""
+    }
+
+  ],
+  "code":0
+}

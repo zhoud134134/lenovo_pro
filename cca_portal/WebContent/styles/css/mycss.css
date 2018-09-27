@@ -95,6 +95,7 @@
     border: 1px solid #ccc;
 }
 .report-tab table {
+    width: 100%;
     text-align: center;
     line-height: 30px;
     border: 1px solid #ddd;
@@ -118,7 +119,8 @@
 }*/
 .report-tab-Catalog-a {
     text-align: left;
-    padding-left: 0px;
+    padding-left: 4px;
+    font-weight: bold;
 }
 .report-tab-Catalog-b {
     text-align: left;
@@ -391,7 +393,7 @@
     background-image: -moz-linear-gradient(top,#f2f2f2 0,#fafafa 100%);
     background-image: -ms-linear-gradient(top,#f2f2f2 0,#fafafa 100%);
     background-image: -o-linear-gradient(top,#f2f2f2 0,#fafafa 100%);
-    background-image: -linear-gradient(top,#f2f2f2 0,#fafafa 100%);
+    /*background-image: -linear-gradient(top,#f2f2f2 0,#fafafa 100%);*/
     font-size: 12px;
     font-weight: 600;
     color: #666;
@@ -538,4 +540,11 @@ table.dataTable thead .sorting_asc {
     padding: 5px 6px 7px;
     background: #FFF;
     border-radius: 4px;
+}
+
+.thstyle{
+    width:16px;
+    border-top: 1px solid #fff !important;
+    border-bottom: 1px solid #fff !important;
+    background:#fff;
 }

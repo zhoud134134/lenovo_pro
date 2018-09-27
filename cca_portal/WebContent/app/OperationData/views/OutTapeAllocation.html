@@ -8,10 +8,11 @@
         <article class="col-sm-12">
             <!-- 第一部分 -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#LTA" aria-controls="home" role="tab" data-toggle="tab"  ng-click="a(0)" >LTA & Alliance</a></li>
-                <li role="presentation"><a href="#Out" aria-controls="profile" role="tab" data-toggle="tab" ng-click="a(1)" >Out tape related</a></li>
-                <li role="presentation"><a href="#SW" aria-controls="messages" role="tab" data-toggle="tab"  ng-click="a(2)">SW</a></li>
+                <li role="presentation" class="active"><a href="#LTA" aria-controls="home" role="tab" data-toggle="tab">LTA & Alliance</a></li>
+                <li role="presentation"><a href="#Out" aria-controls="profile" role="tab" data-toggle="tab">Out tape related</a></li>
+                <li role="presentation"><a href="#SW" aria-controls="messages" role="tab" data-toggle="tab">SW</a></li>
             </ul>
+
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="LTA">
                     <div jarvis-widget data-widget-color="Light Blue" data-widget-editbutton="false" data-widget-fullscreenbutton="false"
@@ -27,7 +28,7 @@
                                 <div class="col-sm-5">
                                     <label style="text-align: right;width: 125px;float:left;">Cycle choose:</label>
                                     <div style="padding-left: 135px;" >
-                                        <select class="form-control col-sm-6" ng-model="CycleChoose" ng-options="x for x in cycledata" style="width: 44%;">
+                                        <select class="form-control col-sm-6" ng-model="CycleChooselta" ng-options="x for x in cycledata" style="width: 44%;">
                                         </select>
                                     </div>
                                 </div>
@@ -37,26 +38,26 @@
                                 <div class="col-sm-4" style="padding-left: 18px;">
                                     <label style="float:left;padding-right: 10px;">EBR data Excel File:</label>
                                     <div>
-                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesVal"/>
+                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesltaVal1"/>
                                         <div class="model-file-btn col-sm-3">
                                             <button type="button" class="btn btn-back">Browse</button>
-                                            <input type="file" name="file" ngf-select="true" ng-model="myfiles" ngf-accept="'.xlsx,.xls'" ng-change="fileChange()" ng-click="openUpload()"/>
+                                            <input type="file" name="file" ngf-select="true" ng-model="myfileslta1" ngf-accept="'.xlsx,.xls'" ng-change="fileChangelta1()" ng-click="openUploadlta1()"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-5"> <!--padding-left: 68px;-->
                                     <label style="padding-right:10px;float:left;">GIBP data Excel File:</label>
                                     <div>
-                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesVal1"/>
+                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesltaVal2"/>
                                         <div class="model-file-btn col-sm-3">
                                             <button type="button" class="btn btn-back">Browse</button>
-                                            <input type="file" name="file" ngf-select="true" ng-model="myfiles1" ngf-accept="'.xlsx,.xls'" ng-change="fileChange1()" ng-click="openUpload1()"/>
+                                            <input type="file" name="file" ngf-select="true" ng-model="myfileslta2" ngf-accept="'.xlsx,.xls'" ng-change="fileChangelta2()" ng-click="openUploadlta2()"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 tab-serch-btn">
-                                    <button class="btn btn-back searchbtn" ng-click="upload()">Upload</button>
-                                    <button class="btn btn-back searchbtn">Download Template</button>
+                                    <button class="btn btn-back searchbtn" ng-click="uploadlta()">Upload</button>
+                                    <button class="btn btn-back searchbtn" ng-click="DowTemplta()">Download Template</button>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +77,7 @@
                                 <div class="col-sm-5">
                                     <label style="text-align: right;width: 125px;float:left;">Cycle choose:</label>
                                     <div style="padding-left: 135px;" >
-                                        <select class="form-control col-sm-6" ng-model="CycleChoose" ng-options="x for x in cycledata" style="width: 44%;">
+                                        <select class="form-control col-sm-6" ng-model="CycleChooseout" ng-options="x for x in cycledata" style="width: 44%;">
                                         </select>
                                     </div>
                                 </div>
@@ -86,26 +87,26 @@
                                 <div class="col-sm-4" style="padding-left: 18px;">
                                     <label style="float:left;padding-right: 10px;">EBR data Excel File:</label>
                                     <div>
-                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesVal"/>
+                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesoutVal1"/>
                                         <div class="model-file-btn col-sm-3">
                                             <button type="button" class="btn btn-back">Browse</button>
-                                            <input type="file" name="file" ngf-select="true" ng-model="myfiles" ngf-accept="'.xlsx,.xls'" ng-change="fileChange()" ng-click="openUpload()"/>
+                                            <input type="file" name="file" ngf-select="true" ng-model="myfilesout1" ngf-accept="'.xlsx,.xls'" ng-change="fileChangeout1()" ng-click="openUploadout1()"/>
                                         </div>
                                     </div>
                                 </div>
-                               <div class="col-sm-5"> <!--padding-left: 68px;-->
+                                <div class="col-sm-5"> <!--padding-left: 68px;-->
                                     <label style="padding-right:10px;float:left;">GIBP data Excel File:</label>
                                     <div>
-                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesVal1"/>
+                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesoutVal2"/>
                                         <div class="model-file-btn col-sm-3">
                                             <button type="button" class="btn btn-back">Browse</button>
-                                            <input type="file" name="file" ngf-select="true" ng-model="myfiles1" ngf-accept="'.xlsx,.xls'" ng-change="fileChange1()" ng-click="openUpload1()"/>
+                                            <input type="file" name="file" ngf-select="true" ng-model="myfilesout2" ngf-accept="'.xlsx,.xls'" ng-change="fileChangeout2()" ng-click="openUploadout2()"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 tab-serch-btn">
-                                    <button class="btn btn-back searchbtn" ng-click="upload()">Upload</button>
-                                    <button class="btn btn-back searchbtn">Download Template</button>
+                                    <button class="btn btn-back searchbtn" ng-click="uploadout()">Upload</button>
+                                    <button class="btn btn-back searchbtn" ng-click="DowTempout()">Download Template</button>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +126,7 @@
                                 <div class="col-sm-5">
                                     <label style="text-align: right;width: 125px;float:left;">Cycle choose:</label>
                                     <div style="padding-left: 135px;" >
-                                        <select class="form-control col-sm-6" ng-model="CycleChoose" ng-options="x for x in cycledata" style="width: 44%;">
+                                        <select class="form-control col-sm-6" ng-model="CycleChoosesw" ng-options="x for x in cycledata" style="width: 44%;">
                                         </select>
                                     </div>
                                 </div>
@@ -135,86 +136,36 @@
                                 <div class="col-sm-4" style="padding-left: 18px;">
                                     <label style="float:left;padding-right: 10px;">EBR data Excel File:</label>
                                     <div>
-                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesVal"/>
+                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesswVal1"/>
                                         <div class="model-file-btn col-sm-3">
                                             <button type="button" class="btn btn-back">Browse</button>
-                                            <input type="file" name="file" ngf-select="true" ng-model="myfiles" ngf-accept="'.xlsx,.xls'" ng-change="fileChange()" ng-click="openUpload()"/>
+                                            <input type="file" name="file" ngf-select="true" ng-model="myfilessw1" ngf-accept="'.xlsx,.xls'" ng-change="fileChangesw1()" ng-click="openUploadsw1()"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-5"> <!--padding-left: 68px;-->
                                     <label style="padding-right:10px;float:left;">GIBP data Excel File:</label>
                                     <div>
-                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesVal1"/>
+                                        <input type="text" class="file-route col-sm-6" ng-model="myfilesswVal2"/>
                                         <div class="model-file-btn col-sm-3">
                                             <button type="button" class="btn btn-back">Browse</button>
-                                            <input type="file" name="file" ngf-select="true" ng-model="myfiles1" ngf-accept="'.xlsx,.xls'" ng-change="fileChange1()" ng-click="openUpload1()"/>
+                                            <input type="file" name="file" ngf-select="true" ng-model="myfilessw2" ngf-accept="'.xlsx,.xls'" ng-change="fileChangesw2()" ng-click="openUploadsw2()"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 tab-serch-btn">
-                                    <button class="btn btn-back searchbtn" ng-click="upload()">Upload</button>
-                                    <button class="btn btn-back searchbtn">Download Template</button>
+                                    <button class="btn btn-back searchbtn" ng-click="uploadsw()">Upload</button>
+                                    <button class="btn btn-back searchbtn" ng-click="DowTempsw()">Download Template</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <!-- 第二部分 -->
-            <!--<div jarvis-widget>-->
-                <!--<div>-->
-                    <!--<div class="widget-body no-padding">-->
-                        <!--<div class="table-responsive table-border-tb">-->
-                            <!--<div style="height: 160px;">-->
-                                <!--<table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-demo" id="tabExample1" style="table-layout: fixed;">-->
-                                    <!--<thead class="table-thead">-->
-                                    <!--<tr>-->
-                                        <!--<td width="19px"></td>-->
-                                        <!--<td>Cycle Name</td>-->
-                                        <!--<td>Description</td>-->
-                                        <!--<td>Status</td>-->
-                                        <!--<td>Created By</td>-->
-                                        <!--<td>Created Date</td>-->
-                                        <!--<td>End Date</td>-->
-                                        <!--<td>Validate by</td>-->
-                                        <!--<td>Validate Date</td>-->
-                                    <!--</tr>-->
-                                    <!--</thead>-->
-                                    <!--<tbody>-->
-                                    <!--<tr ng-repeat="tab in tablist" ng-click="trClick($event,tab.taskId,tab.status,tab.cycleName)">-->
-                                        <!--<td>-->
-                                            <!--<label class="radio">-->
-                                                <!--<input type="radio" name="radio-inline">-->
-                                                <!--<i></i>-->
-                                            <!--</label>-->
-                                        <!--</td>-->
-                                        <!--<td>{{tab.cycleName}}</td>-->
-                                        <!--<td>{{tab.taskName}}</td>-->
-                                        <!--<td>{{tab.status}}</td>-->
-                                        <!--<td>{{tab.sysCreatedBy}}</td>-->
-                                        <!--<td>{{tab.sysCreatedDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>-->
-                                        <!--<td>{{tab.sysEndDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>-->
-                                        <!--<td>{{tab.publishUser}}</td>-->
-                                        <!--<td>{{tab.publishDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>-->
-                                    <!--</tr>-->
-                                    <!--</tbody>-->
-                                <!--</table>-->
-                            <!--</div>-->
-                            <!--<div class="col-sm-4 tab-fun-btn2">-->
-                                <!--<button class="btn btn-back btn-sm" ng-click="SearchTab()">Search</button>-->
-                                <!--<button class="btn btn-back btn-sm" ng-click="DelOneItem()">Delete</button>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
-            <!-- 第三部分 -->
-            <div ng-show="althree">
+            <div class="outtapeCon">
                 <!-- 第四部分LTA & Alliance -->
-                <div class="mup-tabbtn report-tab" ng-show="althreeLta" style="max-height: 1045px;overflow: hidden;">
+                <div class="mup-tabbtn report-tab" ng-show="outtapelta" style="max-height: 1045px;">
                     <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
                         <header>
                             <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
@@ -297,13 +248,13 @@
                     </div>
 
                     <div class="col-sm-4 tab-fun-btn">
-                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getDownLoad()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
+                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getLtaDownLoad()"><i class="fa fa-download"></i></i></button>
                         <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
                     </div>
                 </div>
 
                  <!-- 第四部分Out tape related -->
-                 <div class="mup-tabbtn report-tab" ng-show="althreeOut" style="max-height: 1045px;overflow: hidden;">
+                 <div class="mup-tabbtn report-tab" ng-show="outtapeout"  style="max-height: 1045px;overflow: hidden;">
                     <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
                         <header>
                             <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
@@ -317,7 +268,7 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane active" id="Outal">
-                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
+                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" id="OutalExample"   >
                                             <thead class="table-thead tab-mid">
                                             <tr>
                                                 <td>H1</td>
@@ -357,7 +308,7 @@
                                         </table>
                                     </div>
                                     <div role="tabpanel" class="tab-pane" id="Outres">
-                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
+                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" id="OutresExample" >
                                             <thead class="table-thead tab-mid">
                                             <tr>
                                                 <td>Geo</td>
@@ -385,13 +336,13 @@
                     </div>
 
                     <div class="col-sm-4 tab-fun-btn">
-                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
+                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getLtaDownLoad()"><i class="fa fa-download"></i></button>
                         <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
                     </div>
                 </div>
 
                  <!-- 第四部分SW -->
-                 <div class="mup-tabbtn report-tab" ng-show="althreeSw" style="max-height: 1045px;overflow: hidden;">
+                 <div class="mup-tabbtn report-tab" ng-show="outtapesw" style="max-height: 1045px;overflow: hidden;">
                     <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
                         <header>
                             <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
@@ -405,7 +356,7 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane active" id="Swal">
-                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
+                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" id="SwalExample" >
                                             <thead class="table-thead tab-mid">
                                             <tr>
                                                 <td>H1</td>
@@ -447,7 +398,7 @@
                                         </table>
                                     </div>
                                     <div role="tabpanel" class="tab-pane" id="Swres">
-                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" >
+                                        <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear"  id="SwresExample" >
                                             <thead class="table-thead tab-mid">
                                             <tr>
                                                 <td>Geo</td>
@@ -474,7 +425,7 @@
                     </div>
 
                     <div class="col-sm-4 tab-fun-btn">
-                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
+                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getLtaDownLoad()"><i class="fa fa-download"></i></button>
                         <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
                     </div>
                 </div>
