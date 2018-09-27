@@ -1,13 +1,14 @@
 angular.module('app.Report').service("InOutSummaryQtQservice", function ($http, $q, $rootScope, APP_CONFIG) {
 
-    this.getInOutSumdata = function () {
+    this.getInOutSumdata = function (params) {
         var d = $q.defer();
         $http({
             method: 'GET',
-            url: '/api/InOutSummary.json',
+            url: APP_CONFIG.baseUrl+'/api/routine/FunInoutSummaryQtq',
             headers: {
                 'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
+            params:params
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);

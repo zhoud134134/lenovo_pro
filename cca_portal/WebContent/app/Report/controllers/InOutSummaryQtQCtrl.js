@@ -65,7 +65,13 @@ angular.module('app.Report').controller('InOutSummaryQtQCtrl', function ($scope,
             //$('#searchLoda1').css('display', 'none');
             //$('#searchLoda').css('display', 'block');
             $scope.Inoutqtq=true;
-            InOutSummaryQtQservice.getInOutSumdata().then(function (data) {
+            $scope.out={
+                inSegment:$scope.SegsycleChoose,
+                inGeo:$scope.GeosycleChoose,
+                inCyclel:$scope.CycleChoose1,
+                inCycleR:$scope.CycleChoose2
+            }
+            InOutSummaryQtQservice.getInOutSumdata($scope.out).then(function (data) {
                 $scope.Inoutqtq=true;
 
                 var outsumData = data.result;

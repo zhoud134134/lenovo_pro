@@ -75,17 +75,17 @@
                             <tr ng-repeat="i in listData"> <!--ng-repeat="i in outsumData"-->
                                 <td class="report-tab-Catalog-{{i.categorylvl3 != ''?'c' : i.categorylvl2 != ''?'b':'a'}}">{{i.categorylvl3 != ''?i.categorylvl3 : i.categorylvl2 != ''?i.categorylvl2:i.categorylvl1}}</td>
                                 <td class="thstyle"></td>
-                                <td>13.8</td>
-                                <td>$2.9</td>
-                                <td>$2.8</td>
+                                <td>{{i.l_ca}}</td>
+                                <td>{{i.l_savem_ca}}</td>
+                                <td>{{i.l_savem}}</td>
                                 <td class="thstyle"></td>
-                                <td>13.8</td>
-                                <td>$2.9</td>
-                                <td>$2.8</td>
+                                <td>{{i.r_ca}}</td>
+                                <td>{{i.r_savem_ca}}</td>
+                                <td>{{i.r_savem}}</td>
                                 <td class="thstyle"></td>
-                                <td>13.8</td>
-                                <td>$2.9</td>
-                                <td>$2.8</td>
+                                <td>{{i.v_ca}}</td>
+                                <td>{{i.v_savem_ca}}</td>
+                                <td>{{i.v_savem}}</td>
                             </tr>
                         </table>
                     </div>
