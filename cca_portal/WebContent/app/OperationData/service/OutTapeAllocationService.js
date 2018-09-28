@@ -32,20 +32,77 @@ angular.module('app.OperationData').service("OutTapeAllocationService", function
         });
         return d.promise;
     }
-
-    //下边的Download
-    this.getDownLoad = function(id) {
+    //请求lta 表格的数据
+    this.getltaTab = function(param) {
+        console.log(param);
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/ota/AllocationAlliance',
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+            params:param
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    };
+    //请求 out 表格的数据
+    this.getoutTab = function(param) {
+        console.log(param);
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/ota/OutTape',
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+            params:param
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    };
+    //请求 sw 表格的数据
+    this.getswTab = function(param) {
+        console.log(param);
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/ota/AllocationSW',
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+            params:param
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    };
+    //下边的 lta Download
+    this.getltaDown = function(timesta) {
         // console.log(id)
         var d = $q.defer();
         $http({
             method : 'GET',
-            url : APP_CONFIG.baseUrl + '/api/SUMACTExcel/',
+            url : APP_CONFIG.baseUrl + '/api/otaExcelAllocationAlliance/',
             headers: {
                 'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
-            params : {
-                'uuid' :id
-            },
+            params : timesta,
             responseType : 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
@@ -55,34 +112,47 @@ angular.module('app.OperationData').service("OutTapeAllocationService", function
             d.reject("error");
         });
         return d.promise;
-    }
-
-    //Validate按钮功能
-    this.getValidate = function(v) {
-        console.log(v)
+    };
+    //下边的 out Download
+    this.getoutDown = function(timesta) {
+        // console.log(id)
         var d = $q.defer();
         $http({
-            method : 'PUT',
-            url : APP_CONFIG.baseUrl + '/api/publish/',
-            transformRequest: function(obj) {
-                var str = [];
-                for (var s in obj) {
-                    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
-                }
-                return str.join("&");
-            },
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/otaExcelOutTape/',
             headers: {
                 'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
             },
-            params : v,
+            params : timesta,
+            responseType : 'arraybuffer'
         }).then(function successCallback(response) {
             // 请求成功执行代码
-            d.resolve(response.data);
+            d.resolve(response);
         }, function errorCallback(response) {
             // 请求失败执行代码
             d.reject("error");
         });
         return d.promise;
-    }
-
+    };
+    //下边的 sw Download
+    this.getswDown = function(timesta) {
+        // console.log(id)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/otaExcelSW/',
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+            params : timesta,
+            responseType : 'arraybuffer'
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    };
 })

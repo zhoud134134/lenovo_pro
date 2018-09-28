@@ -79,17 +79,13 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
     });
     //上传 LTA  （第一个）
     $scope.uploadlta = function () {
-        if (!$scope.CycleChooselta) {
-            alert("Please select conditions！");
-        } else {
             Upload.upload({
                 //服务端接收
-                url: APP_CONFIG.baseUrl + '/api/ota/attachments_alliance',
+                url: APP_CONFIG.baseUrl + '/api/ota/AllocationAlliance',
                 data: {
                     file: $scope.myfileslta2,
                     file1: $scope.myfileslta1,
-                    username: $rootScope.user,
-                    cyclename: $scope.CycleChooselta
+                    username: $rootScope.user
                 },
                 headers: {
                     'Authorization': 'Bearer ' + sessionStorage.getItem("token")
@@ -99,12 +95,54 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                     //alert('Uploaded successfully！');
                     alert(data.result);
                     console.log(data);
-                    $scope.id = data.result;
-                   $scope.outtapelta=true;
-                    $scope.outtapeout=false;
-                    $scope.outtapesw=false;
-                    $scope.LatalTable();
-                    $scope.LatresTable();
+                    $scope.timestamp = data.timestamp;
+                    $scope.ltaTab = {
+                        userName: $rootScope.user,
+                        timestamp: $scope.timestamp,
+                        flag: 0
+                    };
+                    $scope.ltaTab1 = {
+                        userName: $rootScope.user,
+                        timestamp: $scope.timestamp,
+                        flag: 1
+                    };
+                    if (data.result == "upload successed.") {
+                        OutTapeAllocationService.getltaTab($scope.ltaTab).then(function (data) {
+                            //if(data.result[0][0].Error){
+                            //    alert(data.result[0][0].Error);
+                            //}else{
+                                console.log("进入");
+                                $scope.ltaall=data.result[0];
+                                console.log($scope.ltaall);
+                                //让表格显示
+                                $scope.outtapelta = true;
+                                $scope.outtapeout = false;
+                                $scope.outtapesw = false;
+                                //表格的搜索
+                                $scope.LatalTable();
+                                //$scope.LatresTable();
+                            //}
+                        }, function (data) {
+                            console.log(data);
+                        });
+                        OutTapeAllocationService.getltaTab($scope.ltaTab1).then(function (data) {
+                            //if(data.result[0][0].Error){
+                            //    alert(data.result[0][0].Error);
+                            //}else{
+                                console.log("进入");
+                                $scope.ltaall1=data.result[0];
+                                console.log($scope.ltaall1);
+                                //让表格显示
+                                $scope.outtapelta = true;
+                                $scope.outtapeout = false;
+                                $scope.outtapesw = false;
+                                //表格的搜索
+                                $scope.LatresTable();
+                            //}
+                        }, function (data) {
+                            console.log(data);
+                        })
+                    }
                 } else {
                     alert('Upload failed！');
                 }
@@ -113,21 +151,16 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 //上传失败
                 console.log('error status: ' + status);
             });
-        }
     };
     //上传 out（第er个）
     $scope.uploadout = function () {
-        if (!$scope.CycleChooseout) {
-            alert("Please select conditions！");
-        } else {
             Upload.upload({
                 //服务端接收
-                url: APP_CONFIG.baseUrl + '/api/ota/attachments_ot',
+                url: APP_CONFIG.baseUrl + '/api/ota/OutTape',
                 data: {
                     file: $scope.myfilesout1,
                     file1: $scope.myfilesout2,
-                    username: $rootScope.user,
-                    cyclename: $scope.CycleChooseout
+                    username: $rootScope.user
                 },
                 headers: {
                     'Authorization': 'Bearer ' + sessionStorage.getItem("token")
@@ -135,15 +168,58 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
             }).success(function (data, status, headers, config) {
                 if (data.code == 0) {
                     //alert('Uploaded successfully！');
-                    console.log(data);
                     alert(data.result);
-                    $scope.id = data.result;
-                    $scope.outtapelta=false;
-                    $scope.outtapeout=true;
-                    $scope.outtapesw=false;
-                    $scope.OutalTable();
-                    $scope.OutresTable();
-                } else {
+                    console.log(data);
+                    $scope.timestamp = data.timestamp;
+                    $scope.outTab = {
+                        userName: $rootScope.user,
+                        timestamp: $scope.timestamp,
+                        flag: 0
+                    };
+                    $scope.outTab1 = {
+                        userName: $rootScope.user,
+                        timestamp: $scope.timestamp,
+                        flag: 1
+                    };
+                    if (data.result == "upload successed.") {
+                        OutTapeAllocationService.getoutTab($scope.outTab).then(function (data) {
+                            //if(data.result[0][0].Error){
+                            //    alert(data.result[0][0].Error);
+                            //}else{
+                                console.log("进入");
+                                $scope.outall=data.result[0];
+                                console.log($scope.outall);
+                                //让表格显示
+                                $scope.outtapelta = false;
+                                $scope.outtapeout = true;
+                                $scope.outtapesw = false;
+                                //表格的搜索
+                                $scope.OutalTable();
+                                //$scope.OutresTable();
+                            //}
+                        }, function (data) {
+                            console.log(data);
+                        });
+                        OutTapeAllocationService.getoutTab($scope.outTab1).then(function (data) {
+                            //if(data.result[0][0].Error){
+                            //    alert(data.result[0][0].Error);
+                            //}else{
+                                console.log("进入");
+                                $scope.outall1=data.result[0];
+                                console.log($scope.outall1);
+                                //让表格显示
+                                $scope.outtapelta = false;
+                                $scope.outtapeout = true;
+                                $scope.outtapesw = false;
+                                //表格的搜索
+                                //$scope.OutalTable();
+                                $scope.OutresTable();
+                            //}
+                        }, function (data) {
+                            console.log(data);
+                        });
+                    }
+                }else {
                     alert('Upload failed！');
                 }
             }).error(function (data, status, headers, config) {
@@ -151,21 +227,16 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 //上传失败
                 console.log('error status: ' + status);
             });
-        }
     };
     //上传 sw  （第san个）
     $scope.uploadsw = function () {
-        if (!$scope.CycleChoosesw) {
-            alert("Please select conditions！");
-        } else {
             Upload.upload({
                 //服务端接收
-                url: APP_CONFIG.baseUrl + '/api/ota/attachments_sw',
+                url: APP_CONFIG.baseUrl + '/api/ota/AllocationSW',
                 data: {
                     file: $scope.myfilessw1,
                     file1: $scope.myfilessw2,
-                    username: $rootScope.user,
-                    cyclename : $scope.CycleChoosesw
+                    username: $rootScope.user
                 },
                 headers: {
                     'Authorization': 'Bearer ' + sessionStorage.getItem("token")
@@ -175,13 +246,55 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                     //alert('Uploaded successfully！');
                     alert(data.result);
                     console.log(data);
-                    $scope.id = data.result;
-                    $scope.outtapelta=false;
-                    $scope.outtapeout=false;
-                    $scope.outtapesw=true;
-
-                    $scope.SwalTable();
-                    $scope.SwresTable();
+                    $scope.timestamp = data.timestamp;
+                    $scope.swTab = {
+                        userName: $rootScope.user,
+                        timestamp: $scope.timestamp,
+                        flag: 0
+                    };
+                    $scope.swTab1 = {
+                        userName: $rootScope.user,
+                        timestamp: $scope.timestamp,
+                        flag: 1
+                    };
+                    if (data.result == "upload successed.") {
+                        OutTapeAllocationService.getswTab($scope.swTab).then(function (data) {
+                            //if(data.result[0][0].Error){
+                            //    alert(data.result[0][0].Error);
+                            //}else{
+                                console.log("进入");
+                                $scope.swall=data.result[0];
+                                console.log($scope.swall);
+                            //让表格显示
+                            $scope.outtapelta = false;
+                            $scope.outtapeout = false;
+                            $scope.outtapesw = true;
+                            //表格的搜索
+                            $scope.SwalTable();
+                            //$scope.SwresTable();
+                            //}
+                        }, function (data) {
+                            console.log(data);
+                        });
+                        OutTapeAllocationService.getswTab($scope.swTab1).then(function (data) {
+                            //if(data.result[0][0].Error){
+                            //    alert(data.result[0][0].Error);
+                            //}else{
+                                console.log("进入");
+                                $scope.swall1=data.result[0];
+                                console.log($scope.swall1);
+                            //让表格显示
+                            $scope.outtapelta = false;
+                            $scope.outtapeout = false;
+                            $scope.outtapesw = true;
+                            //表格的搜索
+                            //$scope.SwalTable();
+                            $scope.SwresTable();
+                            //}
+                        }, function (data) {
+                            console.log(data);
+                        });
+                    }
                 } else {
                     alert('Upload failed！');
                 }
@@ -190,13 +303,12 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 //上传失败
                 console.log('error status: ' + status);
             });
-        }
     };
 
     //下载模板 download Template lta
     $scope.DowTemplta = function () {
         $scope.temp = {
-            type: 'lta'
+            type: 'alliance'
         }
         OutTapeAllocationService.download($scope.temp).then(function (response) {
             console.log(response);
@@ -217,7 +329,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
     //下载模板 download Template out
     $scope.DowTempout = function () {
         $scope.temp = {
-            type: 'out'
+            type: 'outTape'
         }
         OutTapeAllocationService.download($scope.temp).then(function (response) {
             console.log(response);
@@ -274,7 +386,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "paging": false,
                 "ordering": false,
                 "autoWidth": false,
-                "data": $scope.WwList,
+                "data": $scope.ltaall,
                 "columns": [
                     {"data": "H1"},
                     {"data": "Account"},
@@ -327,11 +439,10 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "paging": false,
                 "ordering": false,
                 "autoWidth": false,
-                "data": $scope.PrcList,
+                "data": $scope.ltaall1,
                 "columns": [
                     {"data": "BU"},
                     {"data": "Segment"},
-                    {"data": "Intel Alliance Funding"},
                     {"data": "SKU"},
                     {"data": "Geo"},
                     {"data": "Sub_Geo"},
@@ -372,7 +483,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "paging": false,
                 "ordering": false,
                 "autoWidth": false,
-                "data": $scope.WwList,
+                "data": $scope.outall,
                 "columns": [
                     {"data": "H1"},
                     {"data": "Account"},
@@ -425,7 +536,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "paging": false,
                 "ordering": false,
                 "autoWidth": false,
-                "data": $scope.PrcList,
+                "data": $scope.outall1,
                 "columns": [
                     {"data": "Geo"},
                     {"data": "Sub_Geo"},
@@ -469,7 +580,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "paging": false,
                 "ordering": false,
                 "autoWidth": false,
-                "data": $scope.WwList,
+                "data": $scope.swall,
                 "columns": [
                     {"data": "H1"},
                     {"data": "Account"},
@@ -485,8 +596,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                     {"data": "Sub_Geo"},
                     {"data": "Country"},
                     {"data": "BPC Segment"},
-                    {"data": "Segment"},
-                    {"data": "Material"}
+                    {"data": "Segment"}
                     //{ "data": "lqBmc" ,render: function ( data, type, row ) {
                     //    if(data == null){
                     //        return data;
@@ -523,7 +633,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "paging": false,
                 "ordering": false,
                 "autoWidth": false,
-                "data": $scope.PrcList,
+                "data": $scope.swall1,
                 "columns": [
                     {"data": "Geo"},
                     {"data": "Country"},
@@ -544,46 +654,75 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
         });
     }
 
-    //有数据的Download
+    //有数据的 lta 的 Download
     $scope.getLtaDownLoad = function () {
-        if (!$scope.TaskID) {
-            return;
-        } else {
-            OutTapeAllocationService.getDownLoad($scope.TaskID).then(function (response) {
-                var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
-                var data = response.data;
-                //console.log(data);
-                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-                var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
-                aForExcel.attr("download", fileName);
-                $("body").append(aForExcel);
-                $(".forExcel").click();
-                aForExcel.remove();
-            }, function (data) {
-                //console.log(data);
-            })
-        }
-    }
-
-    //点击Validate
-    $scope.getValidate = function () {
-        $scope.validate = {
-            zcycle_name: $scope.CycleName,
-            zuuid: $scope.TaskID,
-            user: $rootScope.user
+        $scope.timesta = {
+            userName:$rootScope.user,
+            timestamp:$scope.timestamp
         };
-        OutTapeAllocationService.getValidate($scope.validate).then(function (data) {
-            if (data.code == 0) {
-                alert('Success！');
-                $scope.getPage();
-            } else {
-                alert(data.msg);
-            }
-            console.log(data);
+        console.log($scope.timestamp);
+        OutTapeAllocationService.getltaDown($scope.timesta).then(function (response) {
+            var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            var data = response.data;
+            //console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+            aForExcel.attr("download", fileName);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
         }, function (data) {
-            console.log(data);
-        });
+            //console.log(data);
+        })
+        //}
     };
+    //有数据的 out 的 Download
+    $scope.getOutDownLoad = function () {
+        $scope.timesta = {
+            userName:$rootScope.user,
+            timestamp:$scope.timestamp
+        };
+        console.log($scope.timestamp);
+        OutTapeAllocationService.getoutDown($scope.timesta).then(function (response) {
+            var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            var data = response.data;
+            //console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+            aForExcel.attr("download", fileName);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        }, function (data) {
+            //console.log(data);
+        })
+        //}
+    };
+    //有数据的 sw 的 Download
+    $scope.getSwDownLoad = function () {
+        $scope.timesta = {
+            userName:$rootScope.user,
+            timestamp:$scope.timestamp
+        };
+        console.log($scope.timestamp);
+        OutTapeAllocationService.getswDown($scope.timesta).then(function (response) {
+            var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            var data = response.data;
+            //console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+            aForExcel.attr("download", fileName);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        }, function (data) {
+            //console.log(data);
+        })
+        //}
+    };
+
 
 });

@@ -24,16 +24,16 @@
                             <h2>Data Choose</h2>
                         </header>
                         <div class="tab-serch">
-                            <div class="col-sm-12">
-                                <div class="col-sm-5">
-                                    <label style="text-align: right;width: 125px;float:left;">Cycle choose:</label>
-                                    <div style="padding-left: 135px;" >
-                                        <select class="form-control col-sm-6" ng-model="CycleChooselta" ng-options="x for x in cycledata" style="width: 44%;">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-7"></div>
-                            </div>
+                            <!--<div class="col-sm-12">-->
+                                <!--<div class="col-sm-5">-->
+                                    <!--<label style="text-align: right;width: 125px;float:left;">Cycle choose:</label>-->
+                                    <!--<div style="padding-left: 135px;" >-->
+                                        <!--<select class="form-control col-sm-6" ng-model="CycleChooselta" ng-options="x for x in cycledata" style="width: 44%;">-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-7"></div>-->
+                            <!--</div>-->
                             <div class="col-sm-12" style="margin-top:10px ">
                                 <div class="col-sm-4" style="padding-left: 18px;">
                                     <label style="float:left;padding-right: 10px;">EBR data Excel File:</label>
@@ -73,16 +73,6 @@
                             <h2>Data Choose</h2>
                         </header>
                         <div class="tab-serch">
-                            <div class="col-sm-12">
-                                <div class="col-sm-5">
-                                    <label style="text-align: right;width: 125px;float:left;">Cycle choose:</label>
-                                    <div style="padding-left: 135px;" >
-                                        <select class="form-control col-sm-6" ng-model="CycleChooseout" ng-options="x for x in cycledata" style="width: 44%;">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-7"></div>
-                            </div>
                             <div class="col-sm-12" style="margin-top:10px ">
                                 <div class="col-sm-4" style="padding-left: 18px;">
                                     <label style="float:left;padding-right: 10px;">EBR data Excel File:</label>
@@ -122,16 +112,6 @@
                             <h2>Data Choose</h2>
                         </header>
                         <div class="tab-serch">
-                            <div class="col-sm-12">
-                                <div class="col-sm-5">
-                                    <label style="text-align: right;width: 125px;float:left;">Cycle choose:</label>
-                                    <div style="padding-left: 135px;" >
-                                        <select class="form-control col-sm-6" ng-model="CycleChoosesw" ng-options="x for x in cycledata" style="width: 44%;">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-7"></div>
-                            </div>
                             <div class="col-sm-12" style="margin-top:10px ">
                                 <div class="col-sm-4" style="padding-left: 18px;">
                                     <label style="float:left;padding-right: 10px;">EBR data Excel File:</label>
@@ -224,7 +204,6 @@
                                             <tr>
                                                 <td>BU</td>
                                                 <td>Segment</td>
-                                                <td>Intel Alliance Funding</td>
                                                 <td>SKU</td>
                                                 <td>Geo</td>
                                                 <td>Sub_Geo</td>
@@ -237,9 +216,11 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td></td>
                                             </tr>
                                             </thead>
+                                            <tbody>
+
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -249,7 +230,6 @@
 
                     <div class="col-sm-4 tab-fun-btn">
                         <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getLtaDownLoad()"><i class="fa fa-download"></i></i></button>
-                        <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
                     </div>
                 </div>
 
@@ -336,8 +316,7 @@
                     </div>
 
                     <div class="col-sm-4 tab-fun-btn">
-                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getLtaDownLoad()"><i class="fa fa-download"></i></button>
-                        <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
+                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getOutDownLoad()"><i class="fa fa-download"></i></button>
                     </div>
                 </div>
 
@@ -374,10 +353,8 @@
                                                 <td>Country</td>
                                                 <td>BPC Segment</td>
                                                 <td>Segment</td>
-                                                <td>Material</td>
                                             </tr>
                                             <tr>
-                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -425,8 +402,7 @@
                     </div>
 
                     <div class="col-sm-4 tab-fun-btn">
-                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getLtaDownLoad()"><i class="fa fa-download"></i></button>
-                        <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
+                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getSwDownLoad()"><i class="fa fa-download"></i></button>
                     </div>
                 </div>
             </div>
