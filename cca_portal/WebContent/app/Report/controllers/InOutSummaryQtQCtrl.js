@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.Report').controller('InOutSummaryQtQCtrl', function ($scope, $rootScope, InOutSummaryQtQservice, $state, $stateParams, $location) {
+angular.module('app.Report').controller('InOutSummaryQtQCtrl', function ($scope, $rootScope, InOutSummaryQtQservice,navService, $state, $stateParams, $location) {
     //
     // $scope.breplybox1 = false;
     // $scope.breplybox2 = false;
@@ -51,11 +51,17 @@ angular.module('app.Report').controller('InOutSummaryQtQCtrl', function ($scope,
     $rootScope.getOutsumCycle().then(function (data) {
         $scope.cycledata = data.result;
     });
-    $rootScope.getSeg('segment').then(function (data) {
-        $scope.seGcycledata = data.result;
+    //$rootScope.getSeg('segment').then(function (data) {
+    //    $scope.seGcycledata = data.result;
+    //});
+    navService.getSortData("segment","WW").then(function(cawwsegmentdata){
+        $scope.seGcycledata=cawwsegmentdata.result;
+    }, function (data) {
+         console.log(data);
     });
     $rootScope.getSeg('geo').then(function (data) {
         $scope.Geocycledata = data.result;
+        $scope.Geocycledata.push("ALL");
     });
     $scope.Inoutqtq=false;
     $scope.InoutSumsearch = function () {

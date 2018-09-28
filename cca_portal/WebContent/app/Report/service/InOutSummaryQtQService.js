@@ -61,6 +61,15 @@ angular.module('app.Report').service("InOutSummaryQtQservice", function ($http, 
             }
 
         }
+        for(var i=0;i<list.length;i++){
+            if(list[i].categorylvl1==list[i].categorylvl2&&list[i].categorylvl2==list[i].categorylvl3){
+                list[i].categorylvl2='';
+                list[i].categorylvl3='';
+            }
+            if(list[i].categorylvl1!=list[i].categorylvl2&&list[i].categorylvl2==list[i].categorylvl3){
+                list[i].categorylvl3='';
+            }
+        }
         return list;
         console.log(list);
     }
