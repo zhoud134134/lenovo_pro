@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.Report').controller('OuttapeSummaryCtrl', function ($scope, $rootScope, OuttapeSummaryService, $state, $stateParams, $timeout) {
+angular.module('app.Report').controller('OuttapeSummaryCtrl', function ($scope, $rootScope, OuttapeSummaryService, $state, $stateParams, $timeout,navService) {
     $rootScope.getCycle().then(function (data) {
         $scope.cycledata = data.result;
 
@@ -13,16 +13,31 @@ angular.module('app.Report').controller('OuttapeSummaryCtrl', function ($scope, 
         }else {
             $('#searchLoda1').css('display','none');
             $('#searchLoda').css('display','block');
+            if($scope.CycleChoose.indexOf('FCST') > 0){
+	            navService.getSortData("category2","summary fcst").then(function(cawwsegmentdata){
+	            	$rootScope.outSortData=cawwsegmentdata.result;
+	            }, function (data) {
+	                // console.log(data);
+	            });
+            }else if($scope.CycleChoose.indexOf('Actual') > 0){
+	            navService.getSortData("category2","summary actual").then(function(cawwsegmentdata){
+	            	$rootScope.outSortData=cawwsegmentdata.result;
+	            }, function (data) {
+	            	// console.log(data);
+	            });
+            }
+            
             OuttapeSummaryService.getSumdata($scope.CycleChoose).then(function (data) {
                 $scope.sumShow=true;
-                $scope.outtapeData = data.result;
-                console.log($scope.outtapeData)
-                var geo = $rootScope.getFiled($scope.outtapeData, "geo");
-                var categorylvl1 = $rootScope.getFiled($scope.outtapeData, "categorylvl1");
-                $scope.sudataMap = OuttapeSummaryService.getDataMap($scope.outtapeData, geo, categorylvl1);
+                var outtapeData = data.result;
+                console.log(outtapeData);
+                var geo = $rootScope.sortByDataBase($rootScope.getFiled(outtapeData, "geo"), $rootScope.allSortData.geos);
+                var categorylvl1 = $rootScope.sortByDataBase($rootScope.getFiled(outtapeData, "categorylvl1"),$rootScope.outSortData.category1);
+                //var categorylvl1 = $rootScope.getFiled(outtapeData, "categorylvl1");
+                $scope.sudataMap = OuttapeSummaryService.getDataMap(outtapeData, geo, categorylvl1);
                 $('#searchLoda1').css('display','block');
                 $('#searchLoda').css('display','none');
-                console.log($scope.sudataMap);
+               // console.log($scope.sudataMap);
             }, function (data) {
                 console.log(data);
             });
