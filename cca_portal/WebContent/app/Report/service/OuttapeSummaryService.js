@@ -42,6 +42,7 @@ angular.module('app.Report').service("OuttapeSummaryService", function ($http, $
         var segmentList = [];
         var geoList = [];
         var subsegmentList = [];
+        var canPushCa = true;
         for (var d = 0; d < geo.length; d++) {
 
             var segment = [];
@@ -110,6 +111,8 @@ angular.module('app.Report').service("OuttapeSummaryService", function ($http, $
                 }
             }
 
+            categorylvl2 = $rootScope.sortByDataBase(categorylvl2,$rootScope.outSortData.category2[categorylvl1[a]]);
+            
             for (var b = 0; b < categorylvl2.length; b++) {
                 var index = 0;
                 var buCa = {};
@@ -128,19 +131,29 @@ angular.module('app.Report').service("OuttapeSummaryService", function ($http, $
                                             if (geoList[h][i] == arryList[arl].segment) {
                                                 if (segmentMap[segmentMapKey][j] == arryList[arl].subsegment) {
 
-                                                    console.log(categorylvl1[a] + "  " + categorylvl2[b] + "  " + geo[h] + "  " + geoList[h][i] + "  " + segmentMap[segmentMapKey][j]);
 
                                                     if(geoList[h][i] == 'Total' && arryList[arl].subsegment == 'Total'){
-
-                                                        ca.push(arryList[arl].savem);
-                                                        if(arryList[arl].ca != 0){
-                                                            ca.push(arryList[arl].savem / arryList[arl].ca);
-                                                        }else{
-                                                            ca.push('-');
-                                                        }
-
+                                                    	if(canPushCa){
+	                                                        
+                                                    		if(arryList[arl].savem != null){
+                                                        		ca.push(arryList[arl].savem);
+                                                        	}else{
+                                                        		ca.push('-');
+                                                        	}
+	                                                        if(arryList[arl].ca != null && arryList[arl].ca != 0){
+	                                                            ca.push(arryList[arl].savem / arryList[arl].ca);
+	                                                        }else{
+	                                                            ca.push('-');
+	                                                        }
+	                                                        canPushCa = false;
+                                                    	}
                                                     }else{
-                                                        ca.push(arryList[arl].savem);
+                                                    	if(arryList[arl].savem != null){
+                                                    		ca.push(arryList[arl].savem);
+                                                    	}else{
+                                                    		ca.push('-');
+                                                    	}
+                                                        canPushCa = true;
                                                     }
 
                                                 }
@@ -153,6 +166,7 @@ angular.module('app.Report').service("OuttapeSummaryService", function ($http, $
                     }
                 }
 
+                
                 categorylvl1map[categorylvl1mapName] = categorylvl1[a];
                 categorylvl1map[lengthKey] = categorylvl2.length;
                 buCa[caKey] = ca;
@@ -164,7 +178,7 @@ angular.module('app.Report').service("OuttapeSummaryService", function ($http, $
 
                 categoryDataList.push(buCa);
             }
-            if (a != categorylvl1.length - 1) {
+           /* if (a != categorylvl1.length - 1) {
                 var buCatemp = {};
                 categorylvl1maptemp[categorylvl1mapName] = '';
                 categorylvl1maptemp[lengthKey] = 1;
@@ -176,7 +190,7 @@ angular.module('app.Report').service("OuttapeSummaryService", function ($http, $
 
                 categoryDataList.push(buCatemp);
 
-            }
+            }*/
         }
         map[categoryDataKey] = categoryDataList;
         return map;

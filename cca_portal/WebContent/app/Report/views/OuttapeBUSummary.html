@@ -31,23 +31,19 @@
                             <div class="col-sm-5 form-group-m">
                                 <label>Cycle Choose:</label>
                                 <div class="for-sel">
-                                    <select class="form-control">
-                                        <option value="">All</option>
-                                        <option value="">Q2M0</option>
-                                        <option value="">Q2M1</option>
-                                        <option value="">Q2M2</option>
+                                    <select class="form-control" ng-model="CycleChose" ng-options="x for x in cycledata">
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4 tab-serch-btn">
-                            <button class="btn btn-back searchbtn" ng-click="SearchTab()">Search</button>
+                            <button class="btn btn-back searchbtn" ng-click="SearchbuTab()">Search</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- 第二部分    内容 -->
-                <div class="mup-tabbtn">
+                <div class="mup-tabbtn" ng-show="outtapebu">
                     <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false"
                          data-widget-deletebutton="false"
                          data-widget-sortable="false">
@@ -85,8 +81,8 @@
                                                 <th ng-repeat="r in mapData.region track by $index">{{r}}</th>
                                             </tr>
                                             </thead>
-                                            <tbody class="Ftbody">
-                                            <tr ng-repeat="(bkey,bvalue) in value" on-finish-render-filters>
+                                            <tbody class="Ftbody" on-finish-render-filters>
+                                            <tr ng-repeat="(bkey,bvalue) in value">
                                                 <th >{{bkey}}</th>
                                                 <td ng-repeat="c in bvalue track by $index">{{c}}</td>
                                                 <td>-</td>

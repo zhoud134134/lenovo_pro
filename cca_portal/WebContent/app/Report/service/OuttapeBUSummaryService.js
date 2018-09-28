@@ -1,13 +1,13 @@
 angular.module('app.Report').service('OuttapeBUSummaryService', function ($http, $q , $rootScope,APP_CONFIG){
     
-    this.getOuttapeBUSummaryData = function() {
+    this.getOuttapeBUSummaryData = function(CycleChose) {
         var d = $q.defer();
         $http({
             method : 'GET',
-            url : '/api/outtapeBUSummary.json'
-            /*headers: {
+            url : APP_CONFIG.baseUrl + '/api/sumFcst/bu/list?cycle=' + CycleChose,
+            headers: {
                 'Authorization': 'Bearer '+ sessionStorage.getItem("token")
-            },*/
+            },
         }).then(function successCallback(response) {
             // 请求成功执行代码
             d.resolve(response.data);
