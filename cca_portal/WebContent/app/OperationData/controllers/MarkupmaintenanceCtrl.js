@@ -14,7 +14,6 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
     //第二部分tab信息展示
     $scope.getPage = function(){
         MarkupmaintenanceService.getExecute2().then(function(data){
-            console.log(data);
             if(data.code == 0){
                 //$scope.noData = false;
                 $scope.tablist = data.result;
@@ -35,9 +34,7 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
                     });
                 });
             }
-            console.log(data);
         },function(data){
-            console.log(data);
         });
     }
     $scope.getPage();
@@ -51,7 +48,6 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             cycleName : $scope.CycleChoose,
             user : $rootScope.user
         }
-        console.log($rootScope.user);
         if(!$scope.CycleChoose){
             alert("请选择条件！");
         }else {
@@ -62,9 +58,7 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
                 }else {
                     alert(data.msg);
                 }
-                console.log(data);
             },function(data){
-                console.log(data);
             });
         }
     };
@@ -75,11 +69,8 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
         $($("#tabExample input:radio")).removeAttr("checked");
         $($event.target).parent().find("input:radio").prop("checked",true);
         $scope.taskId = id;
-        console.log($scope.taskId)
         $scope.status = status;
-        console.log($scope.status)
         $scope.cyclename = cycleName;
-        console.log($scope.cyclename)
     }
 
 
@@ -92,6 +83,16 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
         if(!$scope.taskId){
             alert("请选择项！");
         }else if($scope.status =='Success' || $scope.status =='Publish'){
+	        	
+			var geo = [];
+			geo = geo.concat($rootScope.allSortData.geos);
+			var segmentWW = [];
+			segmentWW = segmentWW.concat($rootScope.wwSortData);
+			var segmentPRC = [];
+			segmentPRC = segmentPRC.concat($rootScope.prcSortData);
+			geo.push('Total');
+			segmentWW.push('Total');
+			segmentPRC.push('Total');
             $scope.markTab = true;
             $scope.TaskID =  $scope.taskId;
             $scope.CyclName = $scope.cyclename;
@@ -99,36 +100,28 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             //WW
             MarkupmaintenanceService.getWw($scope.TaskID).then(function(data){
                 if(data.code == 0){
-                	 $scope.geo = $rootScope.allSortData.geos;
-                	 $scope.segmentWW = $rootScope.wwSortData;
-                	 $scope.geo.push('Total');
-                	 $scope.segmentWW.push('Total');
                      $scope.result = data.result;
                      $scope.resData = [];
                      for(var i in $scope.result){
-                     var thead1 =['XXX+BMC $M（'+ i +'）'].concat($scope.geo);
-                     var thead2 = ['XXX+Markup in Tape $M (' + i + '）'].concat($scope.geo);
-                     var tbodyBmc = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead1,'bmc');
-                     var tbodyMark = $rootScope.SortUnique($scope.result[i],$scope.segmentWW,thead2,'mark45');
+                     var thead1 =['XXX+BMC $M（'+ i +'）'].concat(geo);
+                     var thead2 = ['XXX+Markup in Tape $M (' + i + '）'].concat(geo);
+                     var tbodyBmc = $rootScope.SortUnique($scope.result[i],segmentWW,thead1,'bmc');
+                     var tbodyMark = $rootScope.SortUnique($scope.result[i],segmentWW,thead2,'mark45');
                      $scope.resData.push({name : i,tbodyBmc : {tbodyBmcThead:thead1,tbodyBmcTbody : tbodyBmc.slice(0,tbodyBmc.length-1),tbodyBmcTfoot:tbodyBmc.slice(tbodyBmc.length-1)},tbodyMark : {tbodyMarkThead:thead2,tbodyMarkTbody : tbodyMark.slice(0,tbodyMark.length-1),tbodyMarkTfoot:tbodyMark.slice(tbodyMark.length-1)}})
                      }
                      $timeout($scope.resData);
                 }
-                console.log(data);
             },function(data){
-                console.log(data);
             });
 
             //PRC
              MarkupmaintenanceService.getPrc($scope.TaskID).then(function(data) {
                  if (data.code == 0) {
                      $timeout(function(){
-                         $scope.markHZ = $rootScope.markHZ(data.result,$scope.segmentPRC)
+                         $scope.markHZ = $rootScope.markHZ(data.result,segmentPRC)
                      });
                  }
-                    console.log(data)
                  } ,function(data){
-                    console.log(data);
              });
         }else {
             alert("暂未执行成功，无法查看！");
@@ -141,7 +134,6 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             alert("请选择项！");
         }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
             if(confirm('确认要删除？')) {
-                console.log($scope.taskid);
                 $scope.taskid = {
                     uuid: $scope.taskId
                 };
@@ -155,9 +147,7 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
                     }else {
                         alert(data.msg);
                     }
-                    console.log(data);
                 }, function (data) {
-                    console.log(data);
                 });
             }
         }else {
@@ -172,18 +162,14 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             zuuid : $scope.TaskID,
             user : $rootScope.user
         };
-        console.log($rootScope.user)
         MarkupmaintenanceService.getValidate($scope.validate).then(function (data) {
             if(data.code == 0){
-                console.log(data)
                 alert('Success!');
                 $scope.getPage();
             }else {
                 alert(data.msg);
             }
-            console.log(data);
         }, function (data) {
-            console.log(data);
         });
     };
 
@@ -207,7 +193,6 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
                 $('#ps2').css('display','none');
                 $('#ws2').css('display','none');
             }, function (data) {
-                console.log(data);
             });
         }
     };
