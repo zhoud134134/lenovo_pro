@@ -40,18 +40,21 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
                 if (data.code == 0) {
                     $scope.id = data.result;
                     $scope.TaskID = data.result;
-                    console.log(data);
+
+                    $scope.cycleName=$scope.CycleChoose;
                     //请求表格数据调用方法
                     AccountTemplateManualUploadService.getSumactData($scope.id).then(function (data) {
                         if (data.code == 0) {
                             $scope.account = true;
                             console.log(data);
                             $scope.categoryData = data.result;
-                            var geo = $rootScope.getFiled($scope.categoryData, "geo");
-                            var categorylvl1 = $rootScope.getFiled($scope.categoryData, "categorylvl1");
+
+                            var geo = $rootScope.sortByDataBase($rootScope.getFiled($scope.categoryData, "geo"),$scope.allSortData.geos);
+                            var categorylvl1 =$rootScope.getFiled($scope.categoryData, "categorylvl1");
                             var categorylvl2 = $rootScope.getFiled($scope.categoryData, "categorylvl2");
                             var categorylvl3 = $rootScope.getFiled($scope.categoryData, "categorylvl3");
                             $scope.dataMap = OthercategorymaintenanceService.getDataMap($scope.categoryData, geo, categorylvl1, categorylvl2, categorylvl3);
+                            console.log($scope.dataMap);
 
                             $('#upload1').css('display', 'block');
                             $('#upload2').css('display', 'none');
