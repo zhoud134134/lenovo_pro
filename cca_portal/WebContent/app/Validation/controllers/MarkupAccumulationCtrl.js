@@ -23,7 +23,7 @@ angular.module('app.Validation').controller('MarkupAccumulationCtrl', function (
         }else{
             $scope.markTab = true;
             $scope.TaskID =  $scope.CycleChoose.taskId;
-            $scope.CyclName = $scope.cyclename;
+            $scope.CyclName = $scope.CycleChoose.cycleName;
 
             //WW
             MarkupAccumulationService.getWw($scope.TaskID).then(function(data){
@@ -83,7 +83,7 @@ angular.module('app.Validation').controller('MarkupAccumulationCtrl', function (
         if(!$scope.TaskID){
             return;
         }else {
-            MarkupAccumulationService.getPrcSum($scope.TaskID).then(function (data) {
+            MarkupAccumulationService.getPrcSum($scope.TaskID).then(function (response) {
                 var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
                 fileName=fileName.replace(/\"/g,"")
                 var data = response.data;

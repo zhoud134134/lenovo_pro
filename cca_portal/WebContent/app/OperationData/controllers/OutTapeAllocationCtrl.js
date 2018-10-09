@@ -305,7 +305,30 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
         });
     };
 
-    //下载模板 download Template lta
+    //xia下载ebr
+    $scope.EbrDown=function(){
+        $scope.temp1 = {
+            type: 'ebr'
+        }
+        OutTapeAllocationService.download($scope.temp1).then(function (response) {
+            console.log(response);
+            var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            fileName=fileName.replace(/\"/g,"");
+            var data = response.data;
+            //console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+            aForExcel.attr("download", fileName);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+        }, function (data) {
+            console.log(data);
+        });
+    };
+
+ //下载模板 download Template lta
     $scope.DowTemplta = function () {
         $scope.temp = {
             type: 'alliance'
@@ -326,9 +349,11 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
         }, function (data) {
             console.log(data);
         });
+        $scope.EbrDown();
     }
     //下载模板 download Template out
     $scope.DowTempout = function () {
+        $scope.EbrDown();
         $scope.temp = {
             type: 'outTape'
         }
@@ -351,6 +376,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
     }
     //下载模板 download Template sw
     $scope.DowTempsw = function () {
+        $scope.EbrDown();
         $scope.temp = {
             type: 'sw'
         }
@@ -705,7 +731,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
         console.log($scope.timestamp);
         OutTapeAllocationService.getoutDown($scope.timesta).then(function (response) {
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
-            fileName=fileName.replace(/\"/g,"");
+
             var data = response.data;
             //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
@@ -729,7 +755,6 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
         console.log($scope.timestamp);
         OutTapeAllocationService.getswDown($scope.timesta).then(function (response) {
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
-            fileName=fileName.replace(/\"/g,"");
             var data = response.data;
             //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
