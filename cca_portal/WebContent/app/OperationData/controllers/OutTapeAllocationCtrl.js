@@ -313,6 +313,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
         OutTapeAllocationService.download($scope.temp).then(function (response) {
             console.log(response);
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            fileName=fileName.replace(/\"/g,"");
             var data = response.data;
             //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
@@ -334,6 +335,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
         OutTapeAllocationService.download($scope.temp).then(function (response) {
             console.log(response);
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            fileName=fileName.replace(/\"/g,"");
             var data = response.data;
             //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
@@ -355,6 +357,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
         OutTapeAllocationService.download($scope.temp).then(function (response) {
             console.log(response);
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            fileName=fileName.replace(/\"/g,"");
             var data = response.data;
             //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
@@ -678,6 +681,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
         console.log($scope.timestamp);
         OutTapeAllocationService.getltaDown($scope.timesta).then(function (response) {
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            fileName=fileName.replace(/\"/g,"");
             var data = response.data;
             //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
@@ -701,6 +705,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
         console.log($scope.timestamp);
         OutTapeAllocationService.getoutDown($scope.timesta).then(function (response) {
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            fileName=fileName.replace(/\"/g,"");
             var data = response.data;
             //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
@@ -724,6 +729,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
         console.log($scope.timestamp);
         OutTapeAllocationService.getswDown($scope.timesta).then(function (response) {
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            fileName=fileName.replace(/\"/g,"");
             var data = response.data;
             //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});

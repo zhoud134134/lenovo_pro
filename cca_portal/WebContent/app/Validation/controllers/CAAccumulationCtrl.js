@@ -71,14 +71,12 @@ angular.module('app.Validation').controller('CAAccumulationCtrl', function ($sco
         } else {
             CAAccumulationService.getPrcDown($scope.TaskID).then(function (response) {
                 var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                fileName=fileName.replace(/\"/g,"");
                 var data = response.data;
-                // console.log(data);
-                //type: "application/vnd.ms-excel"}���Ա���Ϊxls��ʽ��excel�ļ��������ϰ汾��
-                //��ʹ�á�application/vnd.openxmlformats-officedocument.spreadsheetml.sheet����ᱣ��Ϊxlsx
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                 var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
-                aForExcel.attr("download", fileName);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                aForExcel.attr("download",fileName);
                 $("body").append(aForExcel);
                 $(".forExcel").click();
                 aForExcel.remove();
@@ -95,6 +93,7 @@ angular.module('app.Validation').controller('CAAccumulationCtrl', function ($sco
         } else {
             CAAccumulationService.getWwDown($scope.TaskID).then(function (response) {
                 var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                fileName=fileName.replace(/\"/g,"");
                 var data = response.data;
                 //console.log(data);
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
