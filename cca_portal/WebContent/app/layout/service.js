@@ -207,6 +207,32 @@ angular.module('app.layout').service("navService", function($http, $q ,$rootScop
         });
         return d.promise;
     }
+
+    //Validation 第一个框Cycle Choose
+    this.setValidationcycle = function(program) {
+        var url=APP_CONFIG.baseUrl +'/api/bmc/history';
+        var d = $q.defer();
+        if(program){
+            url+="?programName="+program;
+        }
+        $http({
+            method : 'GET',
+            //http://10.99.123.10:8080/lenovo-ccf-prod/api/bmc/
+            //url : APP_CONFIG.baseUrl +'/api/mcm/',
+            url:url,
+            headers: {
+                'Authorization': 'Bearer '+ sessionStorage.getItem("token")
+            },
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response.data);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    };
+
     //outsummaryqtq cycle choose
     this.getOutsumSelectCycle = function(type) {
         var url=APP_CONFIG.baseUrl +'/api/cycle';
