@@ -54,7 +54,7 @@ angular.module('app.Report').controller('InOutSummaryQtQCtrl', function ($scope,
     //$rootScope.getSeg('segment').then(function (data) {
     //    $scope.seGcycledata = data.result;
     //});
-    navService.getSortData("segment","WW").then(function(cawwsegmentdata){
+    navService.getSortData("segment","ww").then(function(cawwsegmentdata){
         $scope.seGcycledata=cawwsegmentdata.result;
     }, function (data) {
          console.log(data);

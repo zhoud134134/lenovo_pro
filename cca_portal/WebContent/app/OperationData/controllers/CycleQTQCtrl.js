@@ -26,7 +26,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
     },function(data){
         console.log(data);
     });
-    $rootScope.getCycle().then(function(data){
+    $rootScope.getCycle('FCST').then(function(data){
         $scope.cycledata = data.result;
     });
     //多选控件

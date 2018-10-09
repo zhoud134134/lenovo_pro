@@ -15,17 +15,22 @@ angular.module('app.layout').controller('navCtrl', function ($scope,$rootScope, 
              
         navService.getSortData("all","").then(function(caprcsegmentdata){
             $rootScope.allSortData=caprcsegmentdata.result;
+             $rootScope.allSortData.geos.push('Total');
+             $rootScope.allSortData.bus.push('Total');
+
         }, function (data) {
             // console.log(data);
         });
         
         navService.getSortData("segment","prc").then(function(caprcsegmentdata){
             $rootScope.prcSortData=caprcsegmentdata.result;
+            //$rootScope.prcSortData.push('Total');
         }, function (data) {
             // console.log(data);
         });
         navService.getSortData("segment","ww").then(function(cawwsegmentdata){
             $rootScope.wwSortData=cawwsegmentdata.result;
+            $rootScope.wwSortData.push('Total');
         }, function (data) {
             // console.log(data);
         });
