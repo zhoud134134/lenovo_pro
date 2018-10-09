@@ -122,7 +122,7 @@
                                         <table class="overflow-both" >
                                             <thead>
                                             <tr>
-                                                <th class="center" rowspan="2" colspan="3">XXX+Account template cost details</th>
+                                                <th class="center" rowspan="2" colspan="3">{{cycleName}} Account template cost details</th>
                                                 <th class="center" rowspan="3">BU</th>
                                                 <th class="center" colspan="{{geovalue}}" ng-repeat="(geokey,geovalue) in dataMap.geo">{{geokey}}</th>
                                             </tr>
@@ -144,7 +144,7 @@
 	                                            	 <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl2}}</th>
 	                                            	 <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl3}}</th>
 	                                            	 <th>{{category.bu}}</th>
-                                                 <td ng-repeat="c in category.ca track by $index">{{c}}</td>
+                                                    <td ng-repeat="c in category.ca track by $index">{{c}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

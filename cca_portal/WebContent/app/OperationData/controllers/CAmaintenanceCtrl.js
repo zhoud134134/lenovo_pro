@@ -158,9 +158,10 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                         "Others": "fa-code-fork",
                         "Total": "fa-reorder"
                     };
-                    $scope.segment = $rootScope.getFiled(WwList, "segment");
-                    $scope.bu = $rootScope.getFiled(WwList, "bu");
-                    $scope.geo = $rootScope.getFiled(WwList, "geo");
+                   // $scope.segment = $rootScope.getFiled(WwList, "segment");
+                   $scope.segment = $rootScope.sortByDataBase($rootScope.getFiled(WwList, "segment"), $rootScope.wwSortData);
+                    $scope.bu = $rootScope.sortByDataBase( $rootScope.getFiled(WwList, "bu"),$rootScope.allSortData.bus);
+                    $scope.geo = $rootScope.sortByDataBase( $rootScope.getFiled(WwList, "geo"),$rootScope.allSortData.geos);
                     $scope.dataMap = CAmaintenanceService.getDataMap(WwList, $scope.segment, $scope.geo, $scope.bu, $rootScope.wwSortData.regions);
                 }
                 //console.log(data);
@@ -173,9 +174,9 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                 if (caprcdata.code == 0) {
 
                     var PrcList = caprcdata.result;
-                    $scope.Prcsegment = $rootScope.getFiled(PrcList, "segment");
-                   // $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled(PrcList, "segment"), $rootScope.prcSortData.segments);
-                    $scope.Prcbu = $rootScope.sortByDataBase($rootScope.getFiled(PrcList, "bu"), $rootScope.prcSortData.bus);
+                   // $scope.Prcsegment = $rootScope.getFiled(PrcList, "segment");
+                    $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled(PrcList, "segment"), $rootScope.prcSortData);
+                    $scope.Prcbu = $rootScope.sortByDataBase($rootScope.getFiled(PrcList, "bu"), $rootScope.allSortData.bus);
                     $scope.Prcbu.push('Total');
                     $scope.getPrcDataMap = CAmaintenanceService.getPrcDataMap(PrcList, $scope.Prcsegment, $scope.Prcbu);
                 }

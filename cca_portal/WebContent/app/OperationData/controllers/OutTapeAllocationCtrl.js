@@ -79,230 +79,230 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
     });
     //上传 LTA  （第一个）
     $scope.uploadlta = function () {
-            Upload.upload({
-                //服务端接收
-                url: APP_CONFIG.baseUrl + '/api/ota/AllocationAlliance',
-                data: {
-                    file: $scope.myfileslta2,
-                    file1: $scope.myfileslta1,
-                    username: $rootScope.user
-                },
-                headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem("token")
-                },
-            }).success(function (data, status, headers, config) {
-                if (data.code == 0) {
-                    //alert('Uploaded successfully！');
-                    alert(data.result);
-                    console.log(data);
-                    $scope.timestamp = data.timestamp;
-                    $scope.ltaTab = {
-                        userName: $rootScope.user,
-                        timestamp: $scope.timestamp,
-                        flag: 0
-                    };
-                    $scope.ltaTab1 = {
-                        userName: $rootScope.user,
-                        timestamp: $scope.timestamp,
-                        flag: 1
-                    };
-                    if (data.result == "upload successed.") {
-                        OutTapeAllocationService.getltaTab($scope.ltaTab).then(function (data) {
-                            //if(data.result[0][0].Error){
-                            //    alert(data.result[0][0].Error);
-                            //}else{
-                                console.log("进入");
-                                $scope.ltaall=data.result[0];
-                                console.log($scope.ltaall);
-                                //让表格显示
-                                $scope.outtapelta = true;
-                                $scope.outtapeout = false;
-                                $scope.outtapesw = false;
-                                //表格的搜索
-                                $scope.LatalTable();
-                                //$scope.LatresTable();
-                            //}
-                        }, function (data) {
-                            console.log(data);
-                        });
-                        OutTapeAllocationService.getltaTab($scope.ltaTab1).then(function (data) {
-                            //if(data.result[0][0].Error){
-                            //    alert(data.result[0][0].Error);
-                            //}else{
-                                console.log("进入");
-                                $scope.ltaall1=data.result[0];
-                                console.log($scope.ltaall1);
-                                //让表格显示
-                                $scope.outtapelta = true;
-                                $scope.outtapeout = false;
-                                $scope.outtapesw = false;
-                                //表格的搜索
-                                $scope.LatresTable();
-                            //}
-                        }, function (data) {
-                            console.log(data);
-                        })
-                    }
-                } else {
-                    alert('Upload failed！');
+        Upload.upload({
+            //服务端接收
+            url: APP_CONFIG.baseUrl + '/api/ota/AllocationAlliance',
+            data: {
+                file: $scope.myfileslta2,
+                file1: $scope.myfileslta1,
+                username: $rootScope.user
+            },
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+            },
+        }).success(function (data, status, headers, config) {
+            if (data.code == 0) {
+                //alert('Uploaded successfully！');
+                alert(data.result);
+                console.log(data);
+                $scope.timestamp = data.timestamp;
+                $scope.ltaTab = {
+                    userName: $rootScope.user,
+                    timestamp: $scope.timestamp,
+                    flag: 0
+                };
+                $scope.ltaTab1 = {
+                    userName: $rootScope.user,
+                    timestamp: $scope.timestamp,
+                    flag: 1
+                };
+                if (data.result == "upload successed.") {
+                    OutTapeAllocationService.getltaTab($scope.ltaTab).then(function (data) {
+                        //if(data.result[0][0].Error){
+                        //    alert(data.result[0][0].Error);
+                        //}else{
+                        console.log("进入");
+                        $scope.ltaall = data.result[0];
+                        console.log($scope.ltaall);
+                        //让表格显示
+                        $scope.outtapelta = true;
+                        $scope.outtapeout = false;
+                        $scope.outtapesw = false;
+                        //表格的搜索
+                        $scope.LatalTable();
+                        //$scope.LatresTable();
+                        //}
+                    }, function (data) {
+                        console.log(data);
+                    });
+                    OutTapeAllocationService.getltaTab($scope.ltaTab1).then(function (data) {
+                        //if(data.result[0][0].Error){
+                        //    alert(data.result[0][0].Error);
+                        //}else{
+                        console.log("进入");
+                        $scope.ltaall1 = data.result[0];
+                        console.log($scope.ltaall1);
+                        //让表格显示
+                        $scope.outtapelta = true;
+                        $scope.outtapeout = false;
+                        $scope.outtapesw = false;
+                        //表格的搜索
+                        $scope.LatresTable();
+                        //}
+                    }, function (data) {
+                        console.log(data);
+                    })
                 }
-            }).error(function (data, status, headers, config) {
-                alert('Upload failed');
-                //上传失败
-                console.log('error status: ' + status);
-            });
+            } else {
+                alert('Upload failed！');
+            }
+        }).error(function (data, status, headers, config) {
+            alert('Upload failed');
+            //上传失败
+            console.log('error status: ' + status);
+        });
     };
     //上传 out（第er个）
     $scope.uploadout = function () {
-            Upload.upload({
-                //服务端接收
-                url: APP_CONFIG.baseUrl + '/api/ota/OutTape',
-                data: {
-                    file: $scope.myfilesout1,
-                    file1: $scope.myfilesout2,
-                    username: $rootScope.user
-                },
-                headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem("token")
-                },
-            }).success(function (data, status, headers, config) {
-                if (data.code == 0) {
-                    //alert('Uploaded successfully！');
-                    alert(data.result);
-                    console.log(data);
-                    $scope.timestamp = data.timestamp;
-                    $scope.outTab = {
-                        userName: $rootScope.user,
-                        timestamp: $scope.timestamp,
-                        flag: 0
-                    };
-                    $scope.outTab1 = {
-                        userName: $rootScope.user,
-                        timestamp: $scope.timestamp,
-                        flag: 1
-                    };
-                    if (data.result == "upload successed.") {
-                        OutTapeAllocationService.getoutTab($scope.outTab).then(function (data) {
-                            //if(data.result[0][0].Error){
-                            //    alert(data.result[0][0].Error);
-                            //}else{
-                                console.log("进入");
-                                $scope.outall=data.result[0];
-                                console.log($scope.outall);
-                                //让表格显示
-                                $scope.outtapelta = false;
-                                $scope.outtapeout = true;
-                                $scope.outtapesw = false;
-                                //表格的搜索
-                                $scope.OutalTable();
-                                //$scope.OutresTable();
-                            //}
-                        }, function (data) {
-                            console.log(data);
-                        });
-                        OutTapeAllocationService.getoutTab($scope.outTab1).then(function (data) {
-                            //if(data.result[0][0].Error){
-                            //    alert(data.result[0][0].Error);
-                            //}else{
-                                console.log("进入");
-                                $scope.outall1=data.result[0];
-                                console.log($scope.outall1);
-                                //让表格显示
-                                $scope.outtapelta = false;
-                                $scope.outtapeout = true;
-                                $scope.outtapesw = false;
-                                //表格的搜索
-                                //$scope.OutalTable();
-                                $scope.OutresTable();
-                            //}
-                        }, function (data) {
-                            console.log(data);
-                        });
-                    }
-                }else {
-                    alert('Upload failed！');
+        Upload.upload({
+            //服务端接收
+            url: APP_CONFIG.baseUrl + '/api/ota/OutTape',
+            data: {
+                file: $scope.myfilesout2,
+                file1: $scope.myfilesout1,
+                username: $rootScope.user
+            },
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+            },
+        }).success(function (data, status, headers, config) {
+            if (data.code == 0) {
+                //alert('Uploaded successfully！');
+                alert(data.result);
+                console.log(data);
+                $scope.timestamp = data.timestamp;
+                $scope.outTab = {
+                    userName: $rootScope.user,
+                    timestamp: $scope.timestamp,
+                    flag: 0
+                };
+                $scope.outTab1 = {
+                    userName: $rootScope.user,
+                    timestamp: $scope.timestamp,
+                    flag: 1
+                };
+                if (data.result == "upload successed.") {
+                    OutTapeAllocationService.getoutTab($scope.outTab).then(function (data) {
+                        //if(data.result[0][0].Error){
+                        //    alert(data.result[0][0].Error);
+                        //}else{
+                        console.log("进入");
+                        $scope.outall = data.result[0];
+                        console.log($scope.outall);
+                        //让表格显示
+                        $scope.outtapelta = false;
+                        $scope.outtapeout = true;
+                        $scope.outtapesw = false;
+                        //表格的搜索
+                        $scope.OutalTable();
+                        //$scope.OutresTable();
+                        //}
+                    }, function (data) {
+                        console.log(data);
+                    });
+                    OutTapeAllocationService.getoutTab($scope.outTab1).then(function (data) {
+                        //if(data.result[0][0].Error){
+                        //    alert(data.result[0][0].Error);
+                        //}else{
+                        console.log("进入");
+                        $scope.outall1 = data.result[0];
+                        console.log($scope.outall1);
+                        //让表格显示
+                        $scope.outtapelta = false;
+                        $scope.outtapeout = true;
+                        $scope.outtapesw = false;
+                        //表格的搜索
+                        //$scope.OutalTable();
+                        $scope.OutresTable();
+                        //}
+                    }, function (data) {
+                        console.log(data);
+                    });
                 }
-            }).error(function (data, status, headers, config) {
-                alert('Upload failed');
-                //上传失败
-                console.log('error status: ' + status);
-            });
+            } else {
+                alert('Upload failed！');
+            }
+        }).error(function (data, status, headers, config) {
+            alert('Upload failed');
+            //上传失败
+            console.log('error status: ' + status);
+        });
     };
     //上传 sw  （第san个）
     $scope.uploadsw = function () {
-            Upload.upload({
-                //服务端接收
-                url: APP_CONFIG.baseUrl + '/api/ota/AllocationSW',
-                data: {
-                    file: $scope.myfilessw1,
-                    file1: $scope.myfilessw2,
-                    username: $rootScope.user
-                },
-                headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem("token")
-                },
-            }).success(function (data, status, headers, config) {
-                if (data.code == 0) {
-                    //alert('Uploaded successfully！');
-                    alert(data.result);
-                    console.log(data);
-                    $scope.timestamp = data.timestamp;
-                    $scope.swTab = {
-                        userName: $rootScope.user,
-                        timestamp: $scope.timestamp,
-                        flag: 0
-                    };
-                    $scope.swTab1 = {
-                        userName: $rootScope.user,
-                        timestamp: $scope.timestamp,
-                        flag: 1
-                    };
-                    if (data.result == "upload successed.") {
-                        OutTapeAllocationService.getswTab($scope.swTab).then(function (data) {
-                            //if(data.result[0][0].Error){
-                            //    alert(data.result[0][0].Error);
-                            //}else{
-                                console.log("进入");
-                                $scope.swall=data.result[0];
-                                console.log($scope.swall);
-                            //让表格显示
-                            $scope.outtapelta = false;
-                            $scope.outtapeout = false;
-                            $scope.outtapesw = true;
-                            //表格的搜索
-                            $scope.SwalTable();
-                            //$scope.SwresTable();
-                            //}
-                        }, function (data) {
-                            console.log(data);
-                        });
-                        OutTapeAllocationService.getswTab($scope.swTab1).then(function (data) {
-                            //if(data.result[0][0].Error){
-                            //    alert(data.result[0][0].Error);
-                            //}else{
-                                console.log("进入");
-                                $scope.swall1=data.result[0];
-                                console.log($scope.swall1);
-                            //让表格显示
-                            $scope.outtapelta = false;
-                            $scope.outtapeout = false;
-                            $scope.outtapesw = true;
-                            //表格的搜索
-                            //$scope.SwalTable();
-                            $scope.SwresTable();
-                            //}
-                        }, function (data) {
-                            console.log(data);
-                        });
-                    }
-                } else {
-                    alert('Upload failed！');
+        Upload.upload({
+            //服务端接收
+            url: APP_CONFIG.baseUrl + '/api/ota/AllocationSW',
+            data: {
+                file: $scope.myfilessw2,
+                file1: $scope.myfilessw1,
+                username: $rootScope.user
+            },
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+            },
+        }).success(function (data, status, headers, config) {
+            if (data.code == 0) {
+                //alert('Uploaded successfully！');
+                alert(data.result);
+                console.log(data);
+                $scope.timestamp = data.timestamp;
+                $scope.swTab = {
+                    userName: $rootScope.user,
+                    timestamp: $scope.timestamp,
+                    flag: 0
+                };
+                $scope.swTab1 = {
+                    userName: $rootScope.user,
+                    timestamp: $scope.timestamp,
+                    flag: 1
+                };
+                if (data.result == "upload successed.") {
+                    OutTapeAllocationService.getswTab($scope.swTab).then(function (data) {
+                        //if(data.result[0][0].Error){
+                        //    alert(data.result[0][0].Error);
+                        //}else{
+                        console.log("进入");
+                        $scope.swall = data.result[0];
+                        console.log($scope.swall);
+                        //让表格显示
+                        $scope.outtapelta = false;
+                        $scope.outtapeout = false;
+                        $scope.outtapesw = true;
+                        //表格的搜索
+                        $scope.SwalTable();
+                        //$scope.SwresTable();
+                        //}
+                    }, function (data) {
+                        console.log(data);
+                    });
+                    OutTapeAllocationService.getswTab($scope.swTab1).then(function (data) {
+                        //if(data.result[0][0].Error){
+                        //    alert(data.result[0][0].Error);
+                        //}else{
+                        console.log("进入");
+                        $scope.swall1 = data.result[0];
+                        console.log($scope.swall1);
+                        //让表格显示
+                        $scope.outtapelta = false;
+                        $scope.outtapeout = false;
+                        $scope.outtapesw = true;
+                        //表格的搜索
+                        //$scope.SwalTable();
+                        $scope.SwresTable();
+                        //}
+                    }, function (data) {
+                        console.log(data);
+                    });
                 }
-            }).error(function (data, status, headers, config) {
-                alert('Upload failed');
-                //上传失败
-                console.log('error status: ' + status);
-            });
+            } else {
+                alert('Upload failed！');
+            }
+        }).error(function (data, status, headers, config) {
+            alert('Upload failed');
+            //上传失败
+            console.log('error status: ' + status);
+        });
     };
 
     //下载模板 download Template lta
@@ -386,6 +386,8 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "paging": false,
                 "ordering": false,
                 "autoWidth": false,
+                "retrieve": true,
+                "destroy": true,
                 "data": $scope.ltaall,
                 "columns": [
                     {"data": "H1"},
@@ -393,7 +395,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                     {"data": "A0"},
                     {"data": "Profit Center"},
                     {"data": "Amount"},
-                    {"data": "Deal Des./SKU/Text"},
+                    {"data": "Deal Des#/SKU/Text"},
                     {"data": "GPN"},
                     {"data": "Plant"},
                     {"data": "CD"},
@@ -432,13 +434,15 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 $(this).html('<input type="text" placeholder="Search ' + title + '" />');
             });
             var table = $('#LatresExample').DataTable({
-                "scrollY": 600,
+                "scrollY": 340,
                 "scrollX": true,
                 "dom": '<"top">rt<"bottom"><"clear">',
                 "scrollCollapse": true,
                 "paging": false,
                 "ordering": false,
                 "autoWidth": false,
+                "retrieve": true,
+                "destroy": true,
                 "data": $scope.ltaall1,
                 "columns": [
                     {"data": "BU"},
@@ -465,6 +469,9 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                         .draw();
                 });
             });
+            //table.ajax.reload(function () {
+            //    table.columns.adjust().draw();
+            //},false);
         });
     }
     //OutalTable 搜索数据 out
@@ -483,6 +490,8 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "paging": false,
                 "ordering": false,
                 "autoWidth": false,
+                "retrieve": true,
+                "destroy": true,
                 "data": $scope.outall,
                 "columns": [
                     {"data": "H1"},
@@ -490,7 +499,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                     {"data": "A0"},
                     {"data": "Profit Center"},
                     {"data": "Amount"},
-                    {"data": "Deal Des./SKU/Text"},
+                    {"data": "Deal Des#/SKU/Text"},
                     {"data": "GPN"},
                     {"data": "Plant"},
                     {"data": "CD"},
@@ -537,6 +546,8 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "ordering": false,
                 "autoWidth": false,
                 "data": $scope.outall1,
+                "retrieve": true,
+                "destroy": true,
                 "columns": [
                     {"data": "Geo"},
                     {"data": "Sub_Geo"},
@@ -580,6 +591,8 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "paging": false,
                 "ordering": false,
                 "autoWidth": false,
+                "retrieve": true,
+                "destroy": true,
                 "data": $scope.swall,
                 "columns": [
                     {"data": "H1"},
@@ -587,7 +600,7 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                     {"data": "A0"},
                     {"data": "Profit Center"},
                     {"data": "Amount"},
-                    {"data": "Deal Des./SKU/Text"},
+                    {"data": "Deal Des#/SKU/Text"},
                     {"data": "GPN"},
                     {"data": "Plant"},
                     {"data": "CD"},
@@ -633,13 +646,15 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                 "paging": false,
                 "ordering": false,
                 "autoWidth": false,
+                "retrieve": true,
+                "destroy": true,
                 "data": $scope.swall1,
                 "columns": [
                     {"data": "Geo"},
                     {"data": "Country"},
                     {"data": "BU"},
-                    {"data": "Deal Des#/SKU"},
-                    {"data": "PU"},
+                    {"data": "SKU"},
+                    {"data": "PN"},
                     {"data": "Amount"}
                 ]
             });
@@ -657,8 +672,8 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
     //有数据的 lta 的 Download
     $scope.getLtaDownLoad = function () {
         $scope.timesta = {
-            userName:$rootScope.user,
-            timestamp:$scope.timestamp
+            userName: $rootScope.user,
+            timestamp: $scope.timestamp
         };
         console.log($scope.timestamp);
         OutTapeAllocationService.getltaDown($scope.timesta).then(function (response) {
@@ -680,8 +695,8 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
     //有数据的 out 的 Download
     $scope.getOutDownLoad = function () {
         $scope.timesta = {
-            userName:$rootScope.user,
-            timestamp:$scope.timestamp
+            userName: $rootScope.user,
+            timestamp: $scope.timestamp
         };
         console.log($scope.timestamp);
         OutTapeAllocationService.getoutDown($scope.timesta).then(function (response) {
@@ -703,8 +718,8 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
     //有数据的 sw 的 Download
     $scope.getSwDownLoad = function () {
         $scope.timesta = {
-            userName:$rootScope.user,
-            timestamp:$scope.timestamp
+            userName: $rootScope.user,
+            timestamp: $scope.timestamp
         };
         console.log($scope.timestamp);
         OutTapeAllocationService.getswDown($scope.timesta).then(function (response) {
