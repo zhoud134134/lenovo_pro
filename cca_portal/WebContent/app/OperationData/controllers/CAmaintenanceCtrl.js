@@ -238,6 +238,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         } else {
             CAmaintenanceService.getPrcDown($scope.TaskID).then(function (response) {
                 var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                fileName=fileName.replace(/\"/g,"")
                 var data = response.data;
                 // console.log(data);
                 //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
@@ -262,6 +263,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         } else {
             CAmaintenanceService.getWwDown($scope.TaskID).then(function (response) {
                 var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                fileName=fileName.replace(/\"/g,"")
                 var data = response.data;
                 //console.log(data);
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
