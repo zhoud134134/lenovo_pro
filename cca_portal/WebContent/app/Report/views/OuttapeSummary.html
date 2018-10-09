@@ -73,7 +73,7 @@
                                         <tr ng-repeat="cate in sudataMap.categoryData track by $index" on-finish-render-filters>
                                             <th   rowspan="{{cate.length}}" colspan="{{cate.categorylvl1.length == 1 ? 2 : 1}}" ng-if="cate.index == 0">{{cate.categorylvl1.name}}</th>
                                             <th ng-if="cate.categorylvl1.length != 1">{{cate.categorylvl2}}</th>
-                                            <td ng-repeat="c in cate.ca track by $index">{{c == '-'? c : c.toFixed(2)}}</td>
+                                            <td ng-repeat="c in cate.ca track by $index">{{c == '-'? c  : c | number:2}}</td>
                                         </tr>
                                         </tbody>
                                     </table>

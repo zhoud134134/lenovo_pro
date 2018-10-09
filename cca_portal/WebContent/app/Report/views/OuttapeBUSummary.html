@@ -84,7 +84,7 @@
                                             <tbody class="Ftbody" on-finish-render-filters>
                                             <tr ng-repeat="(bkey,bvalue) in value">
                                                 <th >{{bkey}}</th>
-                                                <td ng-repeat="c in bvalue track by $index">{{c}}</td>
+                                                <td ng-repeat="c in bvalue track by $index">{{c|number:2}}</td>
                                                 <td>-</td>
                                                 <td>-</td>
                                             </tr>
