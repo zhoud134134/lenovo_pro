@@ -1,6 +1,7 @@
 "use strict";
 
 angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$rootScope,$state,$stateParams,$location,$timeout,MarkupmaintenanceService,navService) {
+  //调取bu、geo、region、segment
 
     var prc = {
         stype : 'PRC'
@@ -14,6 +15,7 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
     //第二部分tab信息展示
     $scope.getPage = function(){
         MarkupmaintenanceService.getExecute2().then(function(data){
+            console.log(data);
             if(data.code == 0){
                 //$scope.noData = false;
                 $scope.tablist = data.result;
@@ -34,7 +36,9 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
                     });
                 });
             }
+            console.log(data);
         },function(data){
+            console.log(data);
         });
     }
     $scope.getPage();
@@ -48,8 +52,9 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             cycleName : $scope.CycleChoose,
             user : $rootScope.user
         }
+        console.log($rootScope.user);
         if(!$scope.CycleChoose){
-            alert("请选择条件！");
+            alert("Please select conditions！");
         }else {
             MarkupmaintenanceService.getExecute($scope.search).then(function(data){
                 if(data.code == 0){
@@ -58,7 +63,9 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
                 }else {
                     alert(data.msg);
                 }
+                console.log(data);
             },function(data){
+                console.log(data);
             });
         }
     };
@@ -81,7 +88,7 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
     //点击Search
     $scope.SearchTab = function(){
         if(!$scope.taskId){
-            alert("请选择项！");
+            alert("Please select items！");
         }else if($scope.status =='Success' || $scope.status =='Publish'){
             $scope.markTab = true;
             $scope.TaskID =  $scope.taskId;
@@ -108,29 +115,30 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
              MarkupmaintenanceService.getPrc($scope.TaskID).then(function(data) {
                  if (data.code == 0) {
                      $timeout(function(){
-                         $scope.markHZ = $rootScope.markHZ(data.result,$rootScope.prcSortData)
+                         $scope.markHZ = $rootScope.markHZ(data.result,$rootScope.prcSortData);
                          $scope.cycleForTitle=$scope.CyclName;
                      });
                  }
                  } ,function(data){
              });
         }else {
-            alert("暂未执行成功，无法查看！");
+            alert("It has not been executed successfully and cannot be viewed！");
         }
     };
 
     //删除
     $scope.DelParticular = function(){
         if(!$scope.taskId){
-            alert("请选择项！");
+            alert("Please select items！");
         }else if($scope.status =='Success' || $scope.status =='Publish'|| $scope.status =='Error'){
-            if(confirm('确认要删除？')) {
+            if(confirm('Confirm to delete？')) {
+                console.log($scope.taskid);
                 $scope.taskid = {
                     uuid: $scope.taskId
                 };
                 MarkupmaintenanceService.DelParticular($scope.taskid).then(function (data) {
                     if (data.code == 0) {
-                        alert("删除成功！");
+                        alert("Delete the success！");
                         $scope.taskId = '';
                         $scope.getPage();
                         //$("#tabExample").dataTable().fnDestroy();
@@ -138,11 +146,13 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
                     }else {
                         alert(data.msg);
                     }
+                    console.log(data);
                 }, function (data) {
+                    console.log(data);
                 });
             }
         }else {
-            alert("还未执行完成！");
+            alert("Execution is not complete！");
         }
     };
 
@@ -153,14 +163,18 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             zuuid : $scope.TaskID,
             user : $rootScope.user
         };
+        console.log($rootScope.user)
         MarkupmaintenanceService.getValidate($scope.validate).then(function (data) {
             if(data.code == 0){
+                console.log(data)
                 alert('Success!');
                 $scope.getPage();
             }else {
                 alert(data.msg);
             }
+            console.log(data);
         }, function (data) {
+            console.log(data);
         });
     };
 
@@ -172,18 +186,23 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
         if(!$scope.TaskID){
             return;
         }else {
-            MarkupmaintenanceService.getPrcSum($scope.TaskID).then(function (data) {
+            MarkupmaintenanceService.getPrcSum($scope.TaskID).then(function (response) {
+            	var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                var data = response.data;
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                 var objectUrl = URL.createObjectURL(blob);
                 var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                 aForExcel.attr("download",fileName);
                 $("body").append(aForExcel);
                 $(".forExcel").click();
                 aForExcel.remove();
+
                 $('#ps1').css('display','block');
                 $('#ws1').css('display','block');
                 $('#ps2').css('display','none');
                 $('#ws2').css('display','none');
             }, function (data) {
+                console.log(data);
             });
         }
     };
