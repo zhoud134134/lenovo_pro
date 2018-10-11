@@ -114,7 +114,7 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
     		var geoValue = geo[d];
     		for (var r=0;r<arryList.length;r++){
 				if(geo[d] == $.trim(arryList[r].geo)){
-					if('TTL' != $.trim(arryList[r].region) && $rootScope.isNotInArray(region,$.trim(arryList[r].region))){
+					if('Total' != $.trim(arryList[r].region) && $rootScope.isNotInArray(region,$.trim(arryList[r].region))){
 						region.push($.trim(arryList[r].region));
 					}
 				}
@@ -194,7 +194,7 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
 						        						}
 						        						
 						        						/*if(h == geo.length -1 && i == geoList[h].length -1 && j == regionMap[geoList[h][i]].length -1){
-						        		    				if('Total' == arryList[arl].geo && 'Total' == arryList[arl].region && 'TTL $M' == arryList[arl].segment){
+						        		    				if('Total' == arryList[arl].geo && 'Total' == arryList[arl].region && 'Total $M' == arryList[arl].segment){
 						        		    					if(o == 0){console.log(arryList[arl].value)}
 						        								ca.push(arryList[arl].value);
 						        							}
