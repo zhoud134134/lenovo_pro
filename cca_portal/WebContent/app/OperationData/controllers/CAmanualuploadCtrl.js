@@ -74,6 +74,14 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
         CAmanualuploadService.getWw($scope.id).then(function (data) {
             if (data.code == 0) {
 
+                $scope.iconData = {
+                    "Consumer": "fa-university",
+                    "SMB": "fa-bookmark",
+                    "Commercial": "fa-life-bouy",
+                    "Others": "fa-code-fork",
+                    "Total": "fa-reorder"
+                };
+
                 $scope.WwList = data.result;
                 $scope.segment = $rootScope.getFiled($scope.WwList, "segment");
                 //    $scope.segment.push('Total');

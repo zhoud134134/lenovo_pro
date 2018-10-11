@@ -115,7 +115,7 @@
                                 <ul class="nav nav-tabs bordered">
                                     <li ng-class="{true:'active',false:''}[{{$index == 0}}]" ng-repeat="s in segment track by $index">
                                         <a ng-href="#operadata-segment-{{$index+1}}" data-toggle="tab" aria-expanded="true">
-                                            <i class="fa fa-lg fa-university"></i>
+                                            <i class="fa fa-lg {{iconData[s]}}"></i>
                                             <span class="hidden-mobile hidden-tablet">{{s}}</span>
                                         </a>
                                     </li>
