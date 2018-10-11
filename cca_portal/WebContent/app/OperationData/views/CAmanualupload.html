@@ -138,7 +138,7 @@
                                          ng-repeat="(key,value) in dataMap">
                                         <main id="cacontent">
                                             <section class="demo10" id="final">
-                                                <table class="overflow-both">
+                                                <table class="overflow-both totbottom">
                                                     <thead>
                                                     <tr class="gray">
                                                         <th rowspan="8"
@@ -162,7 +162,7 @@
                                                     </tr>
                                                     <tr ng-repeat="(bukey,buvalue) in value.bu">
                                                         <th class="caleft">{{bukey}}</th>
-                                                        <td ng-repeat="c in buvalue track by $index">{{c}}</td>
+                                                        <td class="th_{{$index}}" ng-repeat="c in buvalue track by $index">{{c}}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
