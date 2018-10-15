@@ -88,8 +88,8 @@
                                             </tr>
                                             </thead>
 
-                                            <tbody>
-                                            	 <tr ng-repeat="category in dataMap.categoryData track by $index" on-finish-render-filters>
+                                            <tbody on-finish-render-filters>
+                                            	 <tr ng-repeat="category in dataMap.categoryData track by $index">
 	                                            	 <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl1}}</th>
 	                                            	 <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl2}}</th>
 	                                            	 <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl3}}</th>
