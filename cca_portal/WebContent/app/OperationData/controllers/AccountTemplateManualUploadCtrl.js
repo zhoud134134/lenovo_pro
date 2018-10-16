@@ -52,6 +52,7 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
                             var categorylvl2 = $rootScope.getFiled(categoryData, "categorylvl2");
                             var categorylvl3 = $rootScope.getFiled(categoryData, "categorylvl3");
                             $scope.dataMap = OthercategorymaintenanceService.getDataMap(categoryData, geo, categorylvl1, categorylvl2, categorylvl3);
+                            $scope.account = true;
                         }
                     }, function (data) {
                         console.log(data);
@@ -70,7 +71,7 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
         //下面是在table render完成后执行的js
         $('#final table').stickySort({sortable: true});
 
-        $scope.account = true;
+        
         $('#upload1').css('display', 'block');
         $('#upload2').css('display', 'none');
 

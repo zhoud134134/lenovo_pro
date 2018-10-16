@@ -57,6 +57,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
                             var categorylvl2 = $rootScope.getFiled(categoryData,"categorylvl2");
                             var categorylvl3 = $rootScope.getFiled(categoryData,"categorylvl3");
                             $scope.dataMap = OthercategorymaintenanceService.getDataMap(categoryData,geo,categorylvl1,categorylvl2,categorylvl3);
+                            $scope.ww=true;
                         }
                     },function(data){
                         console.log(data);
@@ -75,7 +76,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js
     	$('#final table').stickySort({ sortable: true });
-    	$scope.ww=true;
+    	
     	$('#upload1').css('display','block');
         $('#upload2').css('display','none');
 

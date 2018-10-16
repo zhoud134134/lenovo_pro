@@ -224,7 +224,7 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
 				    			buCa[categorylvl2Key] = c2;
 				    			buCa[categorylvl3Key] = c3;
 				    			categoryDataList.push(buCa);
-			    			},100);
+			    			},0,false);
 		    			})(categorylvl1[a],categorylvl2[b],categorylvl3[c],bu[o],bu.length,o);
 		    		}
 		    	
