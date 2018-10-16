@@ -21,6 +21,8 @@ angular.module('app.Validation').controller('MarkupAccumulationCtrl', function (
         if(!$scope.CycleChoose){
             alert("Please select conditions");
         }else{
+            $('#execute2').css('display', 'block');
+            $('#execute1').css('display', 'none');
             $scope.markTab = true;
             $scope.TaskID =  $scope.CycleChoose.taskId;
             $scope.CyclName = $scope.CycleChoose.cycleName;
@@ -38,8 +40,12 @@ angular.module('app.Validation').controller('MarkupAccumulationCtrl', function (
                         $scope.resData.push({name : i,tbodyBmc : {tbodyBmcThead:thead1,tbodyBmcTbody : tbodyBmc.slice(0,tbodyBmc.length-1),tbodyBmcTfoot:tbodyBmc.slice(tbodyBmc.length-1)},tbodyMark : {tbodyMarkThead:thead2,tbodyMarkTbody : tbodyMark.slice(0,tbodyMark.length-1),tbodyMarkTfoot:tbodyMark.slice(tbodyMark.length-1)}})
                     }
                     $timeout($scope.resData);
+
+                    $('#execute1').css('display', 'block');
+                    $('#execute2').css('display', 'none');
                 }
             },function(data){
+                console.log(data);
             });
 
             //PRC
@@ -51,6 +57,7 @@ angular.module('app.Validation').controller('MarkupAccumulationCtrl', function (
                     });
                 }
             } ,function(data){
+                console.log(data);
             });
 
         }

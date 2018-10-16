@@ -6,16 +6,15 @@ angular.module('app.Validation').controller('CAAccumulationCtrl', function ($sco
         $scope.cycledata = data.result;
     });
     //Search
-    $scope.SearchTab = function (id) {
-        console.log($scope.CycleChoose.taskId);
+    $scope.SearchTab = function () {
         if (!$scope.CycleChoose) {
-            alert("Please select conditions");
+            alert("Please select conditions!");
         } else {
             $('#execute2').css('display', 'block');
             $('#execute1').css('display', 'none');
             $scope.PRCww = true;
             $scope.TaskID = $scope.CycleChoose.taskId;
-            $scope.CycleName =$scope.CycleChoose;
+            $scope.CycleName =$scope.CycleChoose.cycleName;
 
             //WW
             CAAccumulationService.getWw($scope.TaskID).then(function (data) {
