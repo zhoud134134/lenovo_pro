@@ -45,19 +45,14 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
                     //请求表格数据调用方法
                     AccountTemplateManualUploadService.getSumactData($scope.id).then(function (data) {
                         if (data.code == 0) {
+                            categoryData = data.result;
+
+                            var geo = $rootScope.sortByDataBase($rootScope.getFiled(categoryData, "geo"),$scope.allSortData.geos);
+                            var categorylvl1 =$rootScope.getFiled(categoryData, "categorylvl1");
+                            var categorylvl2 = $rootScope.getFiled(categoryData, "categorylvl2");
+                            var categorylvl3 = $rootScope.getFiled(categoryData, "categorylvl3");
+                            $scope.dataMap = OthercategorymaintenanceService.getDataMap(categoryData, geo, categorylvl1, categorylvl2, categorylvl3);
                             $scope.account = true;
-                            console.log(data);
-                            $scope.categoryData = data.result;
-
-                            var geo = $rootScope.sortByDataBase($rootScope.getFiled($scope.categoryData, "geo"),$scope.allSortData.geos);
-                            var categorylvl1 =$rootScope.getFiled($scope.categoryData, "categorylvl1");
-                            var categorylvl2 = $rootScope.getFiled($scope.categoryData, "categorylvl2");
-                            var categorylvl3 = $rootScope.getFiled($scope.categoryData, "categorylvl3");
-                            $scope.dataMap = OthercategorymaintenanceService.getDataMap($scope.categoryData, geo, categorylvl1, categorylvl2, categorylvl3);
-                            console.log($scope.dataMap);
-
-                            $('#upload1').css('display', 'block');
-                            $('#upload2').css('display', 'none');
                         }
                     }, function (data) {
                         console.log(data);
@@ -76,6 +71,9 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
         //下面是在table render完成后执行的js
         $('#final table').stickySort({sortable: true});
 
+        
+        $('#upload1').css('display', 'block');
+        $('#upload2').css('display', 'none');
 
     });
 
