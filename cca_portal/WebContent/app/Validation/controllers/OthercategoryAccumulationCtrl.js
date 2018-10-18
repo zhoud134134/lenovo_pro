@@ -33,6 +33,7 @@ angular.module('app.Validation').controller('OthercategoryAccumulationCtrl', fun
             $('#upload1').css('display', 'none');
             $('#upload2').css('display', 'block');
             $scope.id = $scope.CycleChoose.taskId;
+            $scope.ww = false;
             //请求表格数据调用方法
             OthercategoryAccumulationService.getOthercategoryData($scope.id).then(function (data) {
                 if (data.code == 0) {
@@ -46,6 +47,11 @@ angular.module('app.Validation').controller('OthercategoryAccumulationCtrl', fun
 
                     $('#upload1').css('display', 'block');
                     $('#upload2').css('display', 'none');
+
+                    if($scope.dataMap.geo==''||$scope.dataMap.region==''||$scope.dataMap.segment==''){
+                        console.log("空");
+                        $("#other_content .sticky-wrap .sticky-thead").hide();
+                    }
                 }
             }, function (data) {
                 console.log(data);

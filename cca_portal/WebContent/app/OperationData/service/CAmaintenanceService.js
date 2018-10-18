@@ -107,6 +107,7 @@ angular.module('app.OperationData').service("CAmaintenanceService", function ($h
             method: 'GET',
             url: APP_CONFIG.baseUrl + '/api/dm/ca/ww/' + id,
             //url : "http://10.116.44.182:8080/api/dm/ca/ww/20180829",
+            cache:false,
             headers: {
                 'Authorization': 'Bearer ' + sessionStorage.getItem("token")
                 // 'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MzYxOTkyMzMsInN1YiI6Imhhbmp6MSIsImNyZWF0ZWQiOjE1MzU1OTQ0MzMxMjZ9.GlA3OLL-lieX6XrZxPNeLPliybWx0z2j3zCCaY0Hiacl1bZ_8pUZ8CCF9ik2P127JDlIIIf6lqm5cRrYfqy0gQ'

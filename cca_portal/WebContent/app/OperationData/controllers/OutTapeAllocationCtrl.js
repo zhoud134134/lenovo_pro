@@ -148,6 +148,9 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                             console.log(data);
                         });
                     }, 3000);
+                }else{
+                    $('#ltaupload2').css('display', 'none');
+                    $('#ltaupload1').css('display', 'block');
                 }
             } else {
                 alert('Upload failed！');
@@ -234,6 +237,9 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                             console.log(data);
                         });
                     }, 3000);
+                }else{
+                    $('#outupload2').css('display', 'none');
+                    $('#outupload1').css('display', 'block');
                 }
             } else {
                 alert('Upload failed！');
@@ -320,6 +326,9 @@ angular.module('app.OperationData').controller('OutTapeAllocationCtrl', function
                             console.log(data);
                         });
                     }, 3000);
+                }else{
+                    $('#swupload2').css('display', 'none');
+                    $('#swupload1').css('display', 'block');
                 }
             } else {
                 alert('Upload failed！');

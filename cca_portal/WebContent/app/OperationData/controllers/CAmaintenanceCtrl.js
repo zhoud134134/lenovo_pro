@@ -144,12 +144,17 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         if (!$scope.taskId) {
             alert("Please select items！");
         } else if ($scope.status == 'Success' || $scope.status == 'Publish') {
-            $scope.PRCww = true;
+
+            $("#search1").show();
+            $("#search2").hide();
+
+            $scope.PRCww = false;
             $scope.TaskID = $scope.taskId;
             $scope.CycleName = $scope.cyclename;
             //WW
             CAmaintenanceService.getWw($scope.TaskID).then(function (data) {
                 if (data.code == 0) {
+                    $scope.PRCww = true;
                     var WwList = data.result;
                     $scope.iconData = {
                         "Consumer": "fa-university",
@@ -158,15 +163,26 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                         "Others": "fa-code-fork",
                         "Total": "fa-reorder"
                     };
-                   // $scope.segment = $rootScope.getFiled(WwList, "segment");
-                   $scope.segment = $rootScope.sortByDataBase($rootScope.getFiled(WwList, "segment"), $rootScope.wwSortData);
-                    $scope.bu = $rootScope.sortByDataBase( $rootScope.getFiled(WwList, "bu"),$rootScope.allSortData.bus);
-                    $scope.geo = $rootScope.sortByDataBase( $rootScope.getFiled(WwList, "geo"),$rootScope.allSortData.geos);
+
+                    // $scope.segment = $rootScope.getFiled(WwList, "segment");
+                    $scope.segment = $rootScope.sortByDataBase($rootScope.getFiled(WwList, "segment"), $rootScope.wwSortData);
+                    $scope.bu = $rootScope.sortByDataBase($rootScope.getFiled(WwList, "bu"), $rootScope.allSortData.bus);
+                    $scope.geo = $rootScope.sortByDataBase($rootScope.getFiled(WwList, "geo"), $rootScope.allSortData.geos);
                     $scope.dataMap = CAmaintenanceService.getDataMap(WwList, $scope.segment, $scope.geo, $scope.bu, $rootScope.wwSortData.regions);
+
+                    $("#search1").hide();
+                    $("#search2").show();
+                    //加载表格
+                    //$rootScope.change = true;
+                    //if ($rootScope.change == true) {
+                        $timeout(function () {
+                            $scope.$emit('ngRepeatFinished');
+                        });
+                    //}
                 }
                 //console.log(data);
             }, function (data) {
-                 console.log(data);
+                console.log(data);
             });
 
             //PRC
@@ -174,7 +190,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
                 if (caprcdata.code == 0) {
 
                     var PrcList = caprcdata.result;
-                   // $scope.Prcsegment = $rootScope.getFiled(PrcList, "segment");
+                    // $scope.Prcsegment = $rootScope.getFiled(PrcList, "segment");
                     $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled(PrcList, "segment"), $rootScope.prcSortData);
                     $scope.Prcbu = $rootScope.sortByDataBase($rootScope.getFiled(PrcList, "bu"), $rootScope.allSortData.bus);
                     $scope.Prcbu.push('Total');
@@ -238,7 +254,6 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         } else {
             CAmaintenanceService.getPrcDown($scope.TaskID).then(function (response) {
                 var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
-                fileName=fileName.replace(/\"/g,"")
                 var data = response.data;
                 // console.log(data);
                 //type: "application/vnd.ms-excel"}可以保存为xls格式的excel文件（兼容老版本）
@@ -263,7 +278,6 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         } else {
             CAmaintenanceService.getWwDown($scope.TaskID).then(function (response) {
                 var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
-                fileName=fileName.replace(/\"/g,"")
                 var data = response.data;
                 //console.log(data);
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
@@ -289,7 +303,7 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         //  console.log($rootScope.user)
         CAmaintenanceService.getValidate($scope.validate).then(function (data) {
             if (data.code == 0) {
-                alert('成功！');
+                alert('success！');
                 $scope.getPage();
             } else {
                 alert(data.msg);
@@ -321,15 +335,15 @@ angular.module('app.OperationData').controller('CAmaintenanceCtrl', function ($s
         $('#final table').stickySort({sortable: true});
 
         var length = -1;
-        $.each($scope.dataMap,function(key,value,index){
-           $.each(value.geo,function(gkey,gvalue,gindex){
-               length += gvalue;
-               if(gvalue > 1){
-                   $(".th_"+length).addClass("gray");
-               }
-           });
+        $(".caleft").nextAll().removeClass("gray");
+        $.each($scope.dataMap, function (key, value) {
+            $.each(value.geo, function (gkey, gvalue) {
+                length += gvalue;
+                if (gvalue > 1) {
+                    $(".th_" + length).addClass("gray");
+                }
+            });
         })
-
 
     });
 
