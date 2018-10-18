@@ -21,19 +21,11 @@ angular.module('app.Validation').controller('MarkupAccumulationCtrl', function (
         if(!$scope.CycleChoose){
             alert("Please select conditions");
         }else{
-
-            var geo = [];
-            geo = geo.concat($rootScope.allSortData.geos);
-            var segmentWW = [];
-            segmentWW = segmentWW.concat($rootScope.wwSortData);
-            var segmentPRC = [];
-            segmentPRC = segmentPRC.concat($rootScope.prcSortData);
-            geo.push('Total');
-            segmentWW.push('Total');
-            segmentPRC.push('Total');
+            $('#execute2').css('display', 'block');
+            $('#execute1').css('display', 'none');
             $scope.markTab = true;
             $scope.TaskID =  $scope.CycleChoose.taskId;
-            $scope.CyclName = $scope.cyclename;
+            $scope.CyclName = $scope.CycleChoose.cycleName;
 
             //WW
             MarkupAccumulationService.getWw($scope.TaskID).then(function(data){
@@ -41,26 +33,33 @@ angular.module('app.Validation').controller('MarkupAccumulationCtrl', function (
                     $scope.result = data.result;
                     $scope.resData = [];
                     for(var i in $scope.result){
-                        var thead1 =['XXX+BMC $M（'+ i +'）'].concat(geo);
-                        var thead2 = ['XXX+Markup in Tape $M (' + i + '）'].concat(geo);
-                        var tbodyBmc = $rootScope.SortUnique($scope.result[i],segmentWW,thead1,'bmc');
-                        var tbodyMark = $rootScope.SortUnique($scope.result[i],segmentWW,thead2,'mark45');
+                        var thead1 =[$scope.CyclName+' BMC $M（'+ i +'）'].concat($rootScope.allSortData.geos);
+                        var thead2 = [$scope.CyclName+' Markup in Tape $M (' + i + '）'].concat($rootScope.allSortData.geos);
+                        var tbodyBmc = $rootScope.SortUnique($scope.result[i],$rootScope.wwSortData,thead1,'bmc');
+                        var tbodyMark = $rootScope.SortUnique($scope.result[i],$rootScope.wwSortData,thead2,'mark45');
                         $scope.resData.push({name : i,tbodyBmc : {tbodyBmcThead:thead1,tbodyBmcTbody : tbodyBmc.slice(0,tbodyBmc.length-1),tbodyBmcTfoot:tbodyBmc.slice(tbodyBmc.length-1)},tbodyMark : {tbodyMarkThead:thead2,tbodyMarkTbody : tbodyMark.slice(0,tbodyMark.length-1),tbodyMarkTfoot:tbodyMark.slice(tbodyMark.length-1)}})
                     }
                     $timeout($scope.resData);
+
+                    $('#execute1').css('display', 'block');
+                    $('#execute2').css('display', 'none');
                 }
             },function(data){
+                console.log(data);
             });
 
             //PRC
             MarkupAccumulationService.getPrc($scope.TaskID).then(function(data) {
                 if (data.code == 0) {
                     $timeout(function(){
-                        $scope.markHZ = $rootScope.markHZ(data.result,segmentPRC)
+                        $scope.markHZ = $rootScope.markHZ(data.result,$rootScope.prcSortData);
+                        $scope.cycleForTitle=$scope.CyclName;
                     });
                 }
             } ,function(data){
+                console.log(data);
             });
+
         }
     };
 
@@ -91,13 +90,18 @@ angular.module('app.Validation').controller('MarkupAccumulationCtrl', function (
         if(!$scope.TaskID){
             return;
         }else {
-            MarkupAccumulationService.getPrcSum($scope.TaskID).then(function (data) {
+            MarkupAccumulationService.getPrcSum($scope.TaskID).then(function (response) {
+                var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                fileName=fileName.replace(/\"/g,"")
+                var data = response.data;
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                 var objectUrl = URL.createObjectURL(blob);
                 var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                aForExcel.attr("download",fileName);
                 $("body").append(aForExcel);
                 $(".forExcel").click();
                 aForExcel.remove();
+
                 $('#ps1').css('display','block');
                 $('#ws1').css('display','block');
                 $('#ps2').css('display','none');

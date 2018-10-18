@@ -1,24 +1,28 @@
 <!-- MAIN CONTENT -->
 <div id="content">
     <div class="row">
-        <big-breadcrumbs items="['Biz data maintenance','CA manual upload']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-5"></big-breadcrumbs>
+        <big-breadcrumbs items="['Biz data maintenance','CA manual upload']" icon="table"
+                         class="col-xs-12 col-sm-7 col-md-7 col-lg-5"></big-breadcrumbs>
     </div>
     <!-- widget grid -->
     <section id="widget-grid" widget-grid>
         <article class="col-sm-12">
             <!-- 第一部分 -->
-            <div jarvis-widget data-widget-color="Light Blue" data-widget-editbutton="false" data-widget-fullscreenbutton="false"
-                data-widget-deletebutton="false">
+            <div jarvis-widget data-widget-color="Light Blue" data-widget-editbutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-deletebutton="false">
                 <header>
                     <span class="widget-icon">
                         <i class="fa fa-table"></i>
                     </span>
+
                     <h2>Cycle choose</h2>
                 </header>
                 <div class="tab-serch">
                     <div class="col-sm-8">
                         <div class="col-sm-6 form-group-m">
                             <label>Cycle choose:</label>
+
                             <div class="for-sel">
                                 <select class="form-control" ng-model="CycleChoose" ng-options="x for x in cycledata">
                                 </select>
@@ -26,19 +30,27 @@
                         </div>
                         <div class="col-sm-6 form-group-m" style="margin-top: 5px;">
                             <label>Upload Excel File:</label>
+
                             <div class="model-file">
                                 <input type="text" class="file-route col-sm-8" ng-model="myfilesVal"/>
+
                                 <div class="model-file-btn col-sm-4">
                                     <button type="button" class="btn btn-back">Browse</button>
-                                    <input type="file" name="file" ngf-select="true" ng-model="myfiles" ngf-accept="'.xlsx,.xls'" ng-change="fileChange()" ng-click="openUpload()"/>
+                                    <input type="file" name="file" ngf-select="true" ng-model="myfiles"
+                                           ngf-accept="'.xlsx,.xls'" ng-change="fileChange()" ng-click="openUpload()"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4 tab-serch-btn">
-                        <button class="btn btn-back pull-right" id="upload2" style="display: none;"><i class="fa fa-spinner fa-spin"></i></button>
-                        <button class="btn btn-back pull-right" id="upload1" style="margin-right:10px;" ng-click="upload()">Upload</button>
-                        <button class="btn btn-back pull-right" style="margin-right: 10px;" ng-click="DowTemp()">Download Template</button>
+                        <button class="btn btn-back pull-right" id="upload2" style="display: none;"><i
+                                class="fa fa-spinner fa-spin"></i></button>
+                        <button class="btn btn-back pull-right" id="upload1" style="margin-right:10px;"
+                                ng-click="upload()">Upload
+                        </button>
+                        <button class="btn btn-back pull-right" style="margin-right: 10px;" ng-click="DowTemp()">
+                            Download Template
+                        </button>
                     </div>
                 </div>
             </div>
@@ -47,129 +59,139 @@
                 <!--PRC   switch to ww的时候显示的-->
                 <!--PRC-->
                 <div ng-show="ww">
-                    <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false"
+                    <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false"
+                         data-widget-deletebutton="false"
                          data-widget-sortable="false" style="z-index: 1;">
                         <header>
                                 <span class="widget-icon">
                                     <i class="fa fa-columns"></i>
                                 </span>
+
                             <h2>PRC Related</h2>
                         </header>
                         <div>
                             <div class="widget-body no-padding">
-                                <table id="camainprcTab" class="table-bordered smart-form has-tickbox table-hover table-camain" style="width: 100%;table-layout: fixed;">
-                                    <thead class="gray" id="caprcTab">
-                                    <!--<tr>-->
-                                        <!--<td style="width:160px;border-bottom: 1px solid transparent;"></td>-->
-                                        <!--<td ng-repeat="a in segmenttop track by $index">{{a}}</td>-->
-                                    <!--</tr>-->
-                                    <!--<tr>-->
-                                        <!--<td></td>-->
-                                        <!--<td ng-repeat="b in PrcSegment track by $index">{{b}}</td>-->
-                                    <!--</tr>-->
-                                        <tr>
-                                            <td rowspan="2" style="width:160px;border-bottom: 1px solid transparent;"></td>
-                                            <td rowspan="2">BU</td>
-                                            <td ng-repeat="b in PrcSegment" ng-if="$index == 0" colspan="{{PrcSegment.length}}">PRC Segment</td>
-                                            <td rowspan="2">Total</td>
-                                        </tr>
-                                        <tr>
-                                            <td ng-repeat="b in PrcSegment track by $index">{{b}}</td>
-                                        </tr>
-                                    </thead>
+                                <table id="camainprcTab"
+                                       class="table-bordered smart-form has-tickbox table-hover table-camain"
+                                       style="width: 100%;table-layout: fixed;">
                                     <tbody>
-                                    <tr ng-repeat="item in cadata">
-                                        <td class="gray" ng-if="$index == 0" rowspan="{{cadata.length}}" style="padding-bottom: 70px;">CA(K)</td>
-                                        <td>{{item.bu}}</td>
-                                        <td ng-repeat="i in item.arr track by $index">{{i}}</td>
-                                    </tr>
+                                        <tr class="gray">
+                                            <th rowspan="12">CA(K)</th>
+                                            <th rowspan="2">BU</th>
+                                            <th colspan="{{Prcsegment.length}}">PRC Segment</th>
+                                            <th rowspan="2">Total</th>
+                                        </tr>
+                                        <tr class="gray">
+                                            <th ng-repeat="prcs in Prcsegment">{{prcs}}</th>
+                                        </tr>
+                                        <tr ng-repeat="(buKey,buVale) in getPrcDataMap">
+                                            <td>{{buKey}}</td>
+                                            <td ng-repeat="prcc in buVale track by $index">{{prcc}}</td>
+                                        </tr>
                                     </tbody>
-                                   
+
                                 </table>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4 tab-fun-btn" style="z-index: 10;">
-                        <button class="btn btn-back btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true" ng-click="btnSwitch('w')" ng-show="!ww">
+                        <button class="btn btn-back btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true"
+                                ng-click="btnSwitch('w')" ng-show="!ww">
                             <i class="fa fa-refresh"></i>
                         </button>
-                        <button class="btn btn-back btn-xs" uib-tooltip="Switch to WW" tooltip-append-to-body="true" ng-click="btnSwitch('p')" ng-show="ww">
+                        <button class="btn btn-back btn-xs" uib-tooltip="Switch to WW" tooltip-append-to-body="true"
+                                ng-click="btnSwitch('p')" ng-show="ww">
                             <i class="fa fa-refresh"></i>
                         </button>
                         <!--<button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()">-->
-                            <!--<i class="fa fa-send-o"></i>-->
+                        <!--<i class="fa fa-send-o"></i>-->
                         <!--</button>-->
                     </div>
                 </div>
 
                 <div ng-show="sw1" id="operadata-segment-tab" style="margin-top: 10px;">
-                    <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" style="z-index: 1;">
+                    <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false"
+                         data-widget-deletebutton="false" data-widget-sortable="false" style="z-index: 1;">
                         <header>
                                 <span class="widget-icon">
                                     <i class="fa fa-columns"></i>
                                 </span>
+
                             <h2>Result</h2>
                         </header>
                         <div class="operadata-segment-con">
                             <div class="widget-body no-padding">
                                 <ul class="nav nav-tabs bordered">
-                                    <li ng-class="{true:'active',false:''}[{{$index == 0}}]" ng-repeat="s in segment track by $index">
-                                        <a ng-href="#operadata-segment-{{$index+1}}" data-toggle="tab" aria-expanded="true">
-                                            <i class="fa fa-lg fa-university"></i>
+                                    <li ng-class="{true:'active',false:''}[{{$index == 0}}]"
+                                        ng-repeat="s in segment track by $index">
+                                        <a ng-href="#operadata-segment-{{$index+1}}" data-toggle="tab"
+                                           aria-expanded="true">
+                                            <i class="fa fa-lg {{iconData[s]}}"></i>
                                             <span class="hidden-mobile hidden-tablet">{{s}}</span>
                                         </a>
                                     </li>
                                 </ul>
                                 <div class="tab-content">
 
-                                    <div id="operadata-segment-{{$index+1}}" class="tab-pane" ng-class="{true:'active',false:''}[{{$index == 0}}]" ng-repeat="(key,value) in dataMap">
-                                         <main id="cacontent"> 
-			<section class="demo10" id="final">
-				<table class="overflow-both">
-					<thead>
-						<tr class="gray">
-							<th rowspan="8" style="border-bottom: 1px solid transparent;"></th>
-							<th rowspan="2">BU</th>
-							<th colspan="{{geovalue}}" ng-repeat="(geokey,geovalue) in value.geo">{{geokey}}</th>
-							<th rowspan="2">Global Total</th>
-						</tr>
-						<tr class="gray">
-							
-							<th ng-repeat="r in value.region track by $index">{{r}}</th>
-						</tr>
-					</thead>
-					<tbody class="Ftbody" on-finish-render-filters>
-						<tr>
-							<th rowspan="{{bu.length + 2}}" style="padding-bottom: 60px;">CA(K)</th>
-						</tr>
-						<tr ng-repeat="(bukey,buvalue) in value.bu" >
-							<th class="caleft" >{{bukey}}</th>
-							<td ng-repeat="c in buvalue track by $index">{{c}}</td>
-						</tr>	
-					</tbody>
-				</table>
-			</section>
-		 </main> 
+                                    <div id="operadata-segment-{{$index+1}}" class="tab-pane"
+                                         ng-class="{true:'active',false:''}[{{$index == 0}}]"
+                                         ng-repeat="(key,value) in dataMap">
+                                        <main id="cacontent">
+                                            <section class="demo10" id="final">
+                                                <table class="overflow-both totbottom">
+                                                    <thead>
+                                                    <tr class="gray">
+                                                        <th rowspan="8"
+                                                            style="border-bottom: 1px solid transparent;"></th>
+                                                        <th rowspan="2">BU</th>
+                                                        <th colspan="{{geovalue}}"
+                                                            ng-repeat="(geokey,geovalue) in value.geo">{{geokey}}
+                                                        </th>
+                                                        <th rowspan="2">Global Total</th>
+                                                    </tr>
+                                                    <tr class="gray">
+
+                                                        <th ng-repeat="r in value.region track by $index">{{r}}</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody class="Ftbody" on-finish-render-filters>
+                                                    <tr>
+                                                        <th rowspan="{{bu.length + 2}}" style="padding-bottom: 60px;">
+                                                            CA(K)
+                                                        </th>
+                                                    </tr>
+                                                    <tr ng-repeat="(bukey,buvalue) in value.bu">
+                                                        <th class="caleft">{{bukey}}</th>
+                                                        <td class="th_{{$index}}" ng-repeat="c in buvalue track by $index">{{c}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </section>
+                                        </main>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 tab-fun-btn"  style="z-index: 10;">
-                        <button class="btn btn-back btn-xs" uib-tooltip="Shift View" tooltip-append-to-body="true" ng-click="btnSV('s1')" ng-show="!sw1">
+                    <div class="col-sm-4 tab-fun-btn" style="z-index: 10;">
+                        <button class="btn btn-back btn-xs" uib-tooltip="Shift View" tooltip-append-to-body="true"
+                                ng-click="btnSV('s1')" ng-show="!sw1">
                             <i class="fa fa-exchange"></i>
                         </button>
-                        <button class="btn btn-back btn-xs" uib-tooltip="Shift View" tooltip-append-to-body="true" ng-click="btnSV('s2')" ng-show="sw1">
+                        <button class="btn btn-back btn-xs" uib-tooltip="Shift View" tooltip-append-to-body="true"
+                                ng-click="btnSV('s2')" ng-show="sw1">
                             <i class="fa fa-exchange"></i>
                         </button>
-                        <button class="btn btn-back btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true" ng-click="btnSwitch('w')" ng-show="!ww">
+                        <button class="btn btn-back btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true"
+                                ng-click="btnSwitch('w')" ng-show="!ww">
                             <i class="fa fa-refresh"></i>
                         </button>
-                        <button class="btn btn-back btn-xs" uib-tooltip="Switch to WW" tooltip-append-to-body="true" ng-click="btnSwitsch('p')" ng-show="ww">
+                        <button class="btn btn-back btn-xs" uib-tooltip="Switch to WW" tooltip-append-to-body="true"
+                                ng-click="btnSwitsch('p')" ng-show="ww">
                             <i class="fa fa-refresh"></i>
                         </button>
                         <!--<button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()">-->
-                            <!--<i class="fa fa-send-o"></i>-->
+                        <!--<i class="fa fa-send-o"></i>-->
                         <!--</button>-->
                     </div>
                 </div>

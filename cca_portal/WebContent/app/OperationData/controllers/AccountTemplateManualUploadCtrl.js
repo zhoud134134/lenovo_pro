@@ -45,19 +45,14 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
                     //请求表格数据调用方法
                     AccountTemplateManualUploadService.getSumactData($scope.id).then(function (data) {
                         if (data.code == 0) {
+                            var categoryData = data.result;
+
+                            var geo = $rootScope.sortByDataBase($rootScope.getFiled(categoryData, "geo"),$scope.allSortData.geos);
+                            var categorylvl1 =$rootScope.getFiled(categoryData, "categorylvl1");
+                            var categorylvl2 = $rootScope.getFiled(categoryData, "categorylvl2");
+                            var categorylvl3 = $rootScope.getFiled(categoryData, "categorylvl3");
+                            $scope.dataMap = OthercategorymaintenanceService.getDataMap(categoryData, geo, categorylvl1, categorylvl2, categorylvl3);
                             $scope.account = true;
-                            console.log(data);
-                            $scope.categoryData = data.result;
-
-                            var geo = $rootScope.sortByDataBase($rootScope.getFiled($scope.categoryData, "geo"),$scope.allSortData.geos);
-                            var categorylvl1 =$rootScope.getFiled($scope.categoryData, "categorylvl1");
-                            var categorylvl2 = $rootScope.getFiled($scope.categoryData, "categorylvl2");
-                            var categorylvl3 = $rootScope.getFiled($scope.categoryData, "categorylvl3");
-                            $scope.dataMap = OthercategorymaintenanceService.getDataMap($scope.categoryData, geo, categorylvl1, categorylvl2, categorylvl3);
-                            console.log($scope.dataMap);
-
-                            $('#upload1').css('display', 'block');
-                            $('#upload2').css('display', 'none');
                         }
                     }, function (data) {
                         console.log(data);
@@ -76,16 +71,20 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
         //下面是在table render完成后执行的js
         $('#final table').stickySort({sortable: true});
 
+        
+        $('#upload1').css('display', 'block');
+        $('#upload2').css('display', 'none');
 
     });
 
-    //ww时的Download
-    $scope.getSumActDownLoad = function () {
+    //Download
+    $scope.getSumDownLoad = function () {
         if (!$scope.TaskID) {
             return;
         } else {
             AccountTemplateManualUploadService.getSumActDownLoad($scope.TaskID).then(function (response) {
                 var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                fileName=fileName.replace(/\"/g,"");
                 var data = response.data;
                 //console.log(data);
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
@@ -99,8 +98,29 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
                 //console.log(data);
             })
         }
-    }
-
+    };
+    //Download Detail
+    $scope.getSumSimpleDownLoad = function () {
+        if (!$scope.TaskID) {
+            return;
+        } else {
+            AccountTemplateManualUploadService.getSumSimpDownLoad($scope.TaskID).then(function (response) {
+                var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                fileName=fileName.replace(/\"/g,"");
+                var data = response.data;
+                //console.log(data);
+                var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                var objectUrl = URL.createObjectURL(blob);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+                aForExcel.attr("download", fileName);
+                $("body").append(aForExcel);
+                $(".forExcel").click();
+                aForExcel.remove();
+            }, function (data) {
+                //console.log(data);
+            })
+        }
+    };
     //下载模板
     $scope.DowTemp = function () {
         $scope.temp = {
@@ -109,6 +129,7 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
         AccountTemplateManualUploadService.download($scope.temp).then(function (response) {
             console.log(response);
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            fileName=fileName.replace(/\"/g,"");
             var data = response.data;
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
             var objectUrl = URL.createObjectURL(blob);

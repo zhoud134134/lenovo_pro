@@ -6,16 +6,15 @@ angular.module('app.Validation').controller('CAAccumulationCtrl', function ($sco
         $scope.cycledata = data.result;
     });
     //Search
-    $scope.SearchTab = function (id) {
-        console.log($scope.CycleChoose.taskId);
+    $scope.SearchTab = function () {
         if (!$scope.CycleChoose) {
-            alert("Please select conditions");
+            alert("Please select conditions!");
         } else {
             $('#execute2').css('display', 'block');
             $('#execute1').css('display', 'none');
             $scope.PRCww = true;
             $scope.TaskID = $scope.CycleChoose.taskId;
-            $scope.CycleName =$scope.CycleChoose;
+            $scope.CycleName =$scope.CycleChoose.cycleName;
 
             //WW
             CAAccumulationService.getWw($scope.TaskID).then(function (data) {
@@ -71,14 +70,12 @@ angular.module('app.Validation').controller('CAAccumulationCtrl', function ($sco
         } else {
             CAAccumulationService.getPrcDown($scope.TaskID).then(function (response) {
                 var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                fileName=fileName.replace(/\"/g,"");
                 var data = response.data;
-                // console.log(data);
-                //type: "application/vnd.ms-excel"}���Ա���Ϊxls��ʽ��excel�ļ��������ϰ汾��
-                //��ʹ�á�application/vnd.openxmlformats-officedocument.spreadsheetml.sheet����ᱣ��Ϊxlsx
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                 var objectUrl = URL.createObjectURL(blob);
-                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
-                aForExcel.attr("download", fileName);
+                var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+                aForExcel.attr("download",fileName);
                 $("body").append(aForExcel);
                 $(".forExcel").click();
                 aForExcel.remove();
@@ -95,6 +92,7 @@ angular.module('app.Validation').controller('CAAccumulationCtrl', function ($sco
         } else {
             CAAccumulationService.getWwDown($scope.TaskID).then(function (response) {
                 var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                fileName=fileName.replace(/\"/g,"");
                 var data = response.data;
                 //console.log(data);
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});

@@ -110,11 +110,13 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
 		var geoList = [];
 		var segmentList = [];
     	for(var d = 0;d < geo.length; d++){
-    		var region = [];
     		var geoValue = geo[d];
+    		if('Total' == geoValue) continue;
+    		var region = [];
     		for (var r=0;r<arryList.length;r++){
 				if(geo[d] == $.trim(arryList[r].geo)){
-					if('TTL' != $.trim(arryList[r].region) && $rootScope.isNotInArray(region,$.trim(arryList[r].region))){
+					if('Total' == $.trim(arryList[r].region)) continue;
+					if($rootScope.isNotInArray(region,$.trim(arryList[r].region))){
 						region.push($.trim(arryList[r].region));
 					}
 				}
@@ -169,64 +171,68 @@ angular.module('app.OperationData').service("OthercategorymaintenanceService", f
 		        		}
 		        	}
 		    		for(var o = 0; o < bu.length; o++){
-		    			var index = 0;
-		    			var buCa = {};
-		    			var ca = [];
-		    			for(var h = 0; h < geoList.length; h++){
-		    				for(var i = 0; i < geoList[h].length; i++){
-		    					var regionMapKey =  geoList[h][i] + '_' + geo[h];
-		    					var catemp = [];
-		    					for(var j = 0; j < regionMap[regionMapKey].length; j++){
-		    						for (var arl=0;arl<arryList.length;arl++){
-				    					if(categorylvl1[a] == arryList[arl].categorylvl1){
-						        			if(categorylvl2[b] == arryList[arl].categorylvl2){
-						        				if(categorylvl3[c] == arryList[arl].categorylvl3){
-						        					if(bu[o] == arryList[arl].bu){
-						        						if(geo[h] == arryList[arl].geo){
-						        							if(geoList[h][i] == arryList[arl].region){
-						        								if(regionMap[regionMapKey][j] == arryList[arl].segment){
-						        									ca.push(arryList[arl].formattedValue);
-						        									catemp.push(arryList[arl].formattedValue);
-						        									
-						        								}
-						        							}
-						        						
-						        						}
-						        						
-						        						/*if(h == geo.length -1 && i == geoList[h].length -1 && j == regionMap[geoList[h][i]].length -1){
-						        		    				if('Total' == arryList[arl].geo && 'Total' == arryList[arl].region && 'TTL $M' == arryList[arl].segment){
-						        		    					if(o == 0){console.log(arryList[arl].value)}
-						        								ca.push(arryList[arl].value);
-						        							}
-					        							}*/
-						        					}
-						        				}
-						        			}
-						        		}
+		    			(function(c1,c2,c3,b,bl,bo) {
+			    			setTimeout(function (args) {
+				    			var index = 0;
+				    			var buCa = {};
+				    			var ca = [];
+				    			for(var h = 0; h < geoList.length; h++){
+				    				for(var i = 0; i < geoList[h].length; i++){
+				    					var regionMapKey =  geoList[h][i] + '_' + geo[h];
+				    					var catemp = [];
+				    					for(var j = 0; j < regionMap[regionMapKey].length; j++){
+				    						for (var arl=0;arl<arryList.length;arl++){
+						    					if(c1 == arryList[arl].categorylvl1){
+								        			if(c2 == arryList[arl].categorylvl2){
+								        				if(c3 == arryList[arl].categorylvl3){
+								        					if(b == arryList[arl].bu){
+								        						if(geo[h] == arryList[arl].geo){
+								        							if(geoList[h][i] == arryList[arl].region){
+								        								if(regionMap[regionMapKey][j] == arryList[arl].segment){
+								        									ca.push(arryList[arl].formattedValue);
+								        									catemp.push(arryList[arl].formattedValue);
+								        									
+								        								}
+								        							}
+								        						
+								        						}
+								        						
+								        						/*if(h == geo.length -1 && i == geoList[h].length -1 && j == regionMap[geoList[h][i]].length -1){
+								        		    				if('Total' == arryList[arl].geo && 'Total' == arryList[arl].region && 'Total $M' == arryList[arl].segment){
+								        		    					if(o == 0){console.log(arryList[arl].value)}
+								        								ca.push(arryList[arl].value);
+								        							}
+							        							}*/
+								        					}
+								        				}
+								        			}
+								        		}
+						    				}
+				    						if(j+1 != catemp.length){
+				    							ca.push('-');
+				    							catemp.push('-');
+				    						}
+				    					}
 				    				}
-		    						if(j+1 != catemp.length){
-		    							ca.push('-');
-		    							catemp.push('-');
-		    						}
 		    					}
-		    				}
-    					}
-		    			
-		    			buCa[buKey] = bu[o];
-		    			buCa[caKey] = ca;
-		    			buCa[lengthKey] = bu.length;
-		    			buCa[indexKey] = o;
-		    			buCa[categorylvl1Key] = categorylvl1[a];
-		    			buCa[categorylvl2Key] = categorylvl2[b];
-		    			buCa[categorylvl3Key] = categorylvl3[c];
-		    			categoryDataList.push(buCa);
+				    			
+				    			buCa[buKey] = b;
+				    			buCa[caKey] = ca;
+				    			buCa[lengthKey] = bl;
+				    			buCa[indexKey] = bo;
+				    			buCa[categorylvl1Key] = c1;
+				    			buCa[categorylvl2Key] = c2;
+				    			buCa[categorylvl3Key] = c3;
+				    			categoryDataList.push(buCa);
+			    			},0,false);
+		    			})(categorylvl1[a],categorylvl2[b],categorylvl3[c],bu[o],bu.length,o);
 		    		}
 		    	
     			}
     		}
     	}
     	map[categoryDataKey] = categoryDataList;
-    	console.log(map);
+    	//console.log(map);
     	return map;
     }
 

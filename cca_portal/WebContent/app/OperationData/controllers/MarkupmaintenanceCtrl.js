@@ -188,6 +188,7 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
         }else {
             MarkupmaintenanceService.getPrcSum($scope.TaskID).then(function (response) {
             	var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+                fileName=fileName.replace(/\"/g,"")
                 var data = response.data;
                 var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                 var objectUrl = URL.createObjectURL(blob);

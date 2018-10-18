@@ -447,17 +447,20 @@ var ccf = angular.module('app', [
 
         $rootScope.getCycle = function(type){
             return navService.getSelectCycle(type);
-        }
+        };
          $rootScope.getOutsumCycle = function(type){
             return navService.getOutsumSelectCycle(type);
-        }
+        };
         $rootScope.getCycle = function(type){
             return navService.getSelectCycle(type);
-        }
+        };
 
         $rootScope.getSeg = function(type){
             return navService.getSegment(type);
-        }
+        };
+        $rootScope.getvalidationCycle = function(program){
+            return navService.setValidationcycle(program);
+        };
 
     }).directive('onFinishRenderFilters', function ($timeout) {
         return {

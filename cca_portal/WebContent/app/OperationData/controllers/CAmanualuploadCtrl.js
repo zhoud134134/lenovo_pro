@@ -73,7 +73,13 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
         //WW
         CAmanualuploadService.getWw($scope.id).then(function (data) {
             if (data.code == 0) {
-
+                $scope.iconData = {
+                    "Consumer": "fa-university",
+                    "SMB": "fa-bookmark",
+                    "Commercial": "fa-life-bouy",
+                    "Others": "fa-code-fork",
+                    "Total": "fa-reorder"
+                };
                 $scope.WwList = data.result;
                 $scope.segment = $rootScope.getFiled($scope.WwList, "segment");
                 //    $scope.segment.push('Total');
@@ -89,11 +95,14 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
         //PRC
         CAmanualuploadService.getPrc($scope.id).then(function (caprcdata) {
             if (caprcdata.code == 0) {
-                $scope.PrcList = caprcdata.result;
-                $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled($scope.PrcList, "segment"), $rootScope.prcSortData.segments);
-                $scope.Prcbu = $rootScope.sortByDataBase($rootScope.getFiled($scope.PrcList, "bu"), $rootScope.prcSortData.bus);
+
+                var PrcList = caprcdata.result;
+                // $scope.Prcsegment = $rootScope.getFiled(PrcList, "segment");
+                $scope.Prcsegment = $rootScope.sortByDataBase($rootScope.getFiled(PrcList, "segment"), $rootScope.prcSortData);
+                $scope.Prcbu = $rootScope.sortByDataBase($rootScope.getFiled(PrcList, "bu"), $rootScope.allSortData.bus);
                 $scope.Prcbu.push('Total');
-                $scope.getPrcDataMap = CAmaintenanceService.getPrcDataMap($scope.PrcList, $scope.Prcsegment, $scope.Prcbu);
+                $scope.getPrcDataMap = CAmaintenanceService.getPrcDataMap(PrcList, $scope.Prcsegment, $scope.Prcbu);
+                console.log($scope.getPrcDataMap);
             }
         }, function (data) {
             // console.log(data);
@@ -278,6 +287,17 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js
         $('#final table').stickySort({sortable: true});
+        //console.log("12");
+        var length = -1;
+        $(".caleft").nextAll().removeClass("gray");
+        $.each($scope.dataMap, function (key, value, index) {
+            $.each(value.geo, function (gkey, gvalue, gindex) {
+                length += gvalue;
+                if (gvalue > 1) {
+                    $(".th_" + length).addClass("gray");
+                }
+            });
+        })
     });
 
 })

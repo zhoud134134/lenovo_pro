@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,$timeout,OthercategorymaintenanceService,$state,$stateParams,$rootScope,$location,Upload,APP_CONFIG) {
-    $rootScope.getCycle().then(function(data){
+    $rootScope.getCycle('FCST').then(function(data){
         $scope.cycledata = data.result;
     });
     $scope.ww = true;
@@ -51,16 +51,13 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
                     //请求表格数据调用方法
                     OthercategorymaintenanceService.getOthercategoryData($scope.id).then(function(data){
                         if(data.code == 0){
+                            var categoryData = data.result;
+                            var geo = $rootScope.sortByDataBase($rootScope.getFiled(categoryData, "geo"), $rootScope.allSortData.geos);
+                            var categorylvl1 = $rootScope.getFiled(categoryData,"categorylvl1");
+                            var categorylvl2 = $rootScope.getFiled(categoryData,"categorylvl2");
+                            var categorylvl3 = $rootScope.getFiled(categoryData,"categorylvl3");
+                            $scope.dataMap = OthercategorymaintenanceService.getDataMap(categoryData,geo,categorylvl1,categorylvl2,categorylvl3);
                             $scope.ww=true;
-                            $scope.categoryData = data.result;
-                            var geo = $rootScope.getFiled($scope.categoryData,"geo");
-                            var categorylvl1 = $rootScope.getFiled($scope.categoryData,"categorylvl1");
-                            var categorylvl2 = $rootScope.getFiled($scope.categoryData,"categorylvl2");
-                            var categorylvl3 = $rootScope.getFiled($scope.categoryData,"categorylvl3");
-                            $scope.dataMap = OthercategorymaintenanceService.getDataMap($scope.categoryData,geo,categorylvl1,categorylvl2,categorylvl3);
-
-                            $('#upload1').css('display','block');
-                            $('#upload2').css('display','none');
                         }
                     },function(data){
                         console.log(data);
@@ -79,6 +76,9 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js
     	$('#final table').stickySort({ sortable: true });
+    	
+    	$('#upload1').css('display','block');
+        $('#upload2').css('display','none');
 
         //$('#upload1').css('display','block');
         //$('#upload2').css('display','none');
@@ -91,6 +91,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
         }
         OthercategorymaintenanceService.download($scope.temp).then(function(response){
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            fileName=fileName.replace(/\"/g,"");
             var data = response.data;
             //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
