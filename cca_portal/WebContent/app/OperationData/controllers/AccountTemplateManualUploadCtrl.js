@@ -45,7 +45,7 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
                     //请求表格数据调用方法
                     AccountTemplateManualUploadService.getSumactData($scope.id).then(function (data) {
                         if (data.code == 0) {
-                            categoryData = data.result;
+                            var categoryData = data.result;
 
                             var geo = $rootScope.sortByDataBase($rootScope.getFiled(categoryData, "geo"),$scope.allSortData.geos);
                             var categorylvl1 =$rootScope.getFiled(categoryData, "categorylvl1");
