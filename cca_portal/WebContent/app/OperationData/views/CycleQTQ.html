@@ -264,15 +264,44 @@
             </div>
 
             <!--WW+shift view-->
-            <div class="mup-tabbtn report-tab" ng-show="!WWShift" style="max-height: 575px;overflow: hidden">
+            <div class="mup-tabbtn report-tab" ng-show="!WWShift" style="overflow: hidden">
                 <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
                     <header>
                         <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
                         <h2>WW</h2>
                     </header>
                     <div>
-                        <div class="widget-body no-padding">
-                            <p>复杂表</p>
+                        <div class="widget-body no-padding" >
+                            <main id="QtQContent">
+                                <section class="demo7" id="final">
+                                    <table class="overflow-both1" >
+                                        <thead>
+                                        <tr>
+                                            <th colspan="2">$/CA</th>
+                                            <th colspan="{{geovalue}}"
+                                                ng-repeat="(geokey,geovalue) in dataMap.geolist.zfingeo">{{geokey}}
+                                            </th>
+
+                                        </tr>
+                                        <tr>
+                                            <th  colspan="2">BU vs. Segment CA</th>
+                                            <th ng-repeat="r in dataMap.geolist.region track by $index">{{r}}</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody class="tapetbody" >
+
+                                        <tr ng-repeat="cate in dataMap.buData track by $index" ng-class="{'colorRow':cate.cfeSegment == 'Subtotal'}" on-finish-render-filters>
+                                            <th rowspan="{{cate.length}}" ng-if="cate.index == 0" >{{cate.rptBuDes.name}}</th>
+                                            <th >{{cate.cfeSegment}}</th>
+                                            <td ng-repeat="c in cate.price track by $index" >{{c | number:2}}</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </section>
+                            </main>
                         </div>
                     </div>
                 </div>

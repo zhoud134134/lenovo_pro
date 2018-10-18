@@ -139,6 +139,7 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
 
     //点击Search
     $scope.SearchTab = function(){
+        $scope.WWShift = true;
         if(!$scope.taskId){
             alert("Please select items！");
         }else if($scope.status =='Success' || $scope.status =='Publish'){
@@ -479,20 +480,32 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
         $scope.WWShift = false;
         $scope.PRCShift = true;
         //切换复杂表
-       /* $scope.validate = {
-            cycleName : $scope.CyclName,
+       $scope.validate = {
+            cycleName :"M0",
+            ztype: "ROW"
         };
-        console.log($scope.validate)
         CycleQTQService.getSegment($scope.validate,$scope.TaskID).then(function (data) {
+
             if(data.code == 0){
-                alert('成功！');
+
+                var WwList = data.result;
+                $scope.zfingeo = $rootScope.sortByDataBase($rootScope.getFiled(WwList, "zfingeo"), $rootScope.allSortData.geos);
+                $rootScope.wwSortData.push('Subtotal');
+                $scope.cfeSegment=$rootScope.sortByDataBase($rootScope.getFiled(WwList, "cfeSegment"),$rootScope.wwSortData);
+                $rootScope.allSortData.bus.push('Grand Total');
+                 $scope.bu = $rootScope.sortByDataBase( $rootScope.getFiled(WwList, "rptBuDes"),$rootScope.allSortData.bus);
+                $scope.zregion2 = $rootScope.sortByDataBase( $rootScope.getFiled(WwList, "zregion2"),$rootScope.allSortData.geos);
+                $scope.dataMap = CycleQTQService.getDataMap(WwList, $scope.cfeSegment, $scope.zfingeo, $scope.bu);
+
+                console.log($scope.dataMap)
+
             }else {
                 alert(data.msg);
             }
-            console.log(data);
+
         }, function (data) {
-            console.log(data);
-        });*/
+
+        });
     };
     //点击PRC中的Shift view
     $scope.getSegmentPRC = function(){
@@ -646,4 +659,11 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
             });
         }
     };
+
+    $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
+        //下面是在table render完成后执行的js
+
+        $('#final table').stickySort({sortable: true});
+
+    });
 });
