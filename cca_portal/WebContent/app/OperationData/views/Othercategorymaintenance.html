@@ -58,7 +58,7 @@
                     <div jarvis-widget data-widget-colorbutton="false"
                          data-widget-editbutton="false"
                          data-widget-deletebutton="false"
-                         data-widget-sortable="false">
+                         data-widget-sortable="false" style="z-index:2;">
                         <header>
                                 <span class="widget-icon">
                                     <i class="fa fa-columns"></i>
@@ -89,13 +89,13 @@
                                             </thead>
 
                                             <tbody>
-                                            	 <tr ng-repeat="category in dataMap.categoryData track by $index" on-finish-render-filters>
-	                                            	 <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl1}}</th>
-	                                            	 <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl2}}</th>
-	                                            	 <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl3}}</th>
-	                                            	 <th>{{category.bu}}</th>
-                                                 <td ng-repeat="c in category.ca track by $index">{{c}}</td>
-                                                </tr>
+                                            <tr ng-repeat="category in dataMap.categoryData track by $index" on-finish-render-filters>
+                                                <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl1}}</th>
+                                                <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl2}}</th>
+                                                <th rowspan="{{category.length}}" ng-if="category.index == 0">{{category.categorylvl3}}</th>
+                                                <th>{{category.bu}}</th>
+                                                <td ng-repeat="c in category.ca track by $index">{{c}}</td>
+                                            </tr>
                                             </tbody>
                                         </table>
 
@@ -104,11 +104,11 @@
                             </div>
                         </div>
                     </div>
-                    <!--<div class="col-sm-4 tab-fun-btn">-->
-                        <!--<button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true"  ng-click="getPRCDownLoad()">-->
-                            <!--<i class="fa fa-download"></i>-->
-                        <!--</button>-->
-                    <!--</div>-->
+                    <div class="col-sm-4 tab-fun-btn" style="z-index: 10;">
+                        <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true"  ng-click="getOtherDown()">
+                            <i class="fa fa-download"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </article>
