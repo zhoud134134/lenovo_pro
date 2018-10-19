@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,$timeout,OthercategorymaintenanceService,$state,$stateParams,$rootScope,$location,Upload,APP_CONFIG) {
-    $rootScope.getCycle('FCST').then(function(data){
+    $rootScope.getCycle().then(function(data){
         $scope.cycledata = data.result;
     });
     $scope.ww = true;
