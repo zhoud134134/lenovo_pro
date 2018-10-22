@@ -44,15 +44,18 @@ angular.module('app.Validation').service("OthercategoryAccumulationService", fun
         var geoList = [];
         var segmentList = [];
         for(var d = 0;d < geo.length; d++){
-            var region = [];
             var geoValue = geo[d];
+            if('Total' == geoValue) continue;
+            var region = [];
             for (var r=0;r<arryList.length;r++){
                 if(geo[d] == $.trim(arryList[r].geo)){
-                    if('Total' != $.trim(arryList[r].region) && $rootScope.isNotInArray(region,$.trim(arryList[r].region))){
+                    if('Total' == $.trim(arryList[r].region)) continue;
+                    if($rootScope.isNotInArray(region,$.trim(arryList[r].region))){
                         region.push($.trim(arryList[r].region));
                     }
                 }
             }
+
             var sum = 0;
             for(var e = 0; e < region.length; e++){
                 var segment = [];
