@@ -1,14 +1,15 @@
 "use strict";
 
-angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope, $http, $timeout, OthercategorymaintenanceService, $state, $stateParams, $rootScope, $location, Upload, APP_CONFIG) {
-    $rootScope.getCycle('FCST').then(function (data) {
+
+angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', function ($scope,$http,$timeout,OthercategorymaintenanceService,$state,$stateParams,$rootScope,$location,Upload,APP_CONFIG) {
+    $rootScope.getCycle().then(function(data){
         $scope.cycledata = data.result;
     });
     $scope.ww = true;
     $scope.btnSwitch = function (flag) {
         if (flag == 'w') {
             $scope.ww = false;
-        } else if (flag == 'p') {
+        }else if(flag == 'p'){
             $scope.ww = true;
         }
     }
@@ -58,11 +59,8 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
                             var categorylvl3 = $rootScope.getFiled(categoryData, "categorylvl3");
                             $scope.dataMap = OthercategorymaintenanceService.getDataMap(categoryData, geo, categorylvl1, categorylvl2, categorylvl3);
                             $scope.ww = true;
-                            console.log("1");
-                            //$stickyInsct.find('table').html('<thead><tr><th rowspan="2" colspan="3" style="height:60px;">Mx Cost Guidance Forecast</th><th rowspan="3">BU</th></tr><tr></tr><tr><th>Main Category</th><th>First layer</th><th>Second layer</th></tr></thead>');
-
                         }
-                    }, function (data) {
+                    },function(data){
                         console.log(data);
                     });
                 } else {
@@ -76,10 +74,13 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
         }
     }
 
-
+    
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js
-        $('#final table').stickySort({sortable: true});
+    	$('#final table').stickySort({ sortable: true });
+    	
+    	$('#upload1').css('display','block');
+        $('#upload2').css('display','none');
 
         $(".sticky-intersect").find('table').html('<thead><tr><th rowspan="2" colspan="3" style="height:60px;">Mx Cost Guidance Forecast</th><th rowspan="3">BU</th></tr><tr></tr><tr><th>Main Category</th><th>First layer</th><th>Second layer</th></tr></thead>');
 
@@ -88,19 +89,19 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
     });
 
     //下载模板
-    $scope.DowTemp = function () {
+    $scope.DowTemp = function(){
         $scope.temp = {
             type: 'category'
         }
-        OthercategorymaintenanceService.download($scope.temp).then(function (response) {
+        OthercategorymaintenanceService.download($scope.temp).then(function(response){
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
-            fileName = fileName.replace(/\"/g, "");
+            fileName=fileName.replace(/\"/g,"");
             var data = response.data;
             //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
             var objectUrl = URL.createObjectURL(blob);
-            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
-            aForExcel.attr("download", fileName);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            aForExcel.attr("download",fileName);
             $("body").append(aForExcel);
             $(".forExcel").click();
             aForExcel.remove();

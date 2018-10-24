@@ -80,12 +80,13 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
                     "Others": "fa-code-fork",
                     "Total": "fa-reorder"
                 };
-                $scope.WwList = data.result;
-                $scope.segment = $rootScope.getFiled($scope.WwList, "segment");
-                //    $scope.segment.push('Total');
-                $scope.bu = $rootScope.getFiled($scope.WwList, "bu");
-                $scope.geo = $rootScope.getFiled($scope.WwList, "geo");
-                $scope.dataMap = CAmaintenanceService.getDataMap($scope.WwList, $scope.segment, $scope.geo, $scope.bu, $rootScope.wwSortData.regions);
+                var WwList = data.result;
+
+                $scope.segment = $rootScope.sortByDataBase($rootScope.getFiled(WwList, "segment"), $rootScope.wwSortData);
+                $scope.bu = $rootScope.sortByDataBase($rootScope.getFiled(WwList, "bu"), $rootScope.allSortData.bus);
+                $scope.geo = $rootScope.sortByDataBase($rootScope.getFiled(WwList, "geo"), $rootScope.allSortData.geos);
+                $scope.dataMap = CAmaintenanceService.getDataMap(WwList, $scope.segment, $scope.geo, $scope.bu, $rootScope.wwSortData.regions);
+
             }
             //console.log(data);
         }, function (data) {
@@ -270,6 +271,7 @@ angular.module('app.OperationData').controller('CAmanualuploadCtrl', function ($
         CAmanualuploadService.download($scope.temp).then(function (response) {
             console.log(response);
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            fileName=fileName.replace(/\"/g,"");
             var data = response.data;
             //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});

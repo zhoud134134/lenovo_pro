@@ -267,11 +267,10 @@ if (appConfig.voice_command) {
 }
 
 appConfig.apiRootUrl = 'api';
-appConfig.baseUrl="https://mcmt-dev.lenovo.com/ccf-dev";
-appConfig.indexUrl="https://mcmt-dev.lenovo.com/ccf-dev/index";
-//appConfig.baseUrl="https://mcmt.lenovo.com/ccf-prod";
-//appConfig.indexUrl="https://mcmt.lenovo.com/ccf-prod/index";
-//appConfig.baseUrl="http://10.99.123.10:8080/ccf-prod";
+//appConfig.baseUrl="https://mcmt-dev.lenovo.com/ccf-dev";
+//appConfig.indexUrl="https://mcmt-dev.lenovo.com/ccf-dev/index";
+appConfig.baseUrl="https://mcmt.lenovo.com/ccf-prod";
+appConfig.indexUrl="https://mcmt.lenovo.com/ccf-prod/index";
 appConfig.limit = 10;
 appConfig.page =1;
 //appConfig.Name =1;
