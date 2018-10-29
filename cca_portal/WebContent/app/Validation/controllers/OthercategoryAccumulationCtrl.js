@@ -63,6 +63,8 @@ angular.module('app.Validation').controller('OthercategoryAccumulationCtrl', fun
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js
         $('#final table').stickySort({sortable: true});
+
+        $(".sticky-intersect").find('table').html('<thead><tr><th rowspan="2" colspan="3" style="height:60px;">Mx Cost Guidance Forecast</th><th rowspan="3">BU</th></tr><tr></tr><tr><th>Main Category</th><th>First layer</th><th>Second layer</th></tr></thead>');
     });
 
     //下载模板
@@ -93,7 +95,8 @@ angular.module('app.Validation').controller('OthercategoryAccumulationCtrl', fun
         //if (!$scope.id) {
         //    return;
         //} else {
-
+        $('#Download2').css('display', 'block');
+        $('#Download1').css('display', 'none');
         OthercategoryAccumulationService.getOtherDownLoad($scope.id).then(function (response) {
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
             fileName = fileName.replace(/\"/g, "");
@@ -106,6 +109,9 @@ angular.module('app.Validation').controller('OthercategoryAccumulationCtrl', fun
             $("body").append(aForExcel);
             $(".forExcel").click();
             aForExcel.remove();
+
+            $('#Download1').css('display', 'block');
+            $('#Download2').css('display', 'none');
         }, function (data) {
             console.log(data);
         })
