@@ -56,12 +56,13 @@ angular.module('app.Report').controller('InOutSummaryQtQCtrl', function ($scope,
     //});
     navService.getSortData("segment","ww").then(function(cawwsegmentdata){
         $scope.seGcycledata=cawwsegmentdata.result;
+        $scope.seGcycledata.push("All");
     }, function (data) {
          console.log(data);
     });
     $rootScope.getSeg('geo').then(function (data) {
         $scope.Geocycledata = data.result;
-        $scope.Geocycledata.push("ALL");
+        $scope.Geocycledata.push("All");
     });
     $scope.Inoutqtq=false;
     $scope.InoutSumsearch = function () {

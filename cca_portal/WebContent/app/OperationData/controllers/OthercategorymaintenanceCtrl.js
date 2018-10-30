@@ -9,7 +9,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
     $scope.btnSwitch = function (flag) {
         if (flag == 'w') {
             $scope.ww = false;
-        } else if (flag == 'p') {
+        }else if(flag == 'p'){
             $scope.ww = true;
         }
     }
@@ -29,7 +29,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
     $scope.ww = false;
     $scope.upload = function () {
         if (!$scope.CycleChoose) {
-            alert("请选择条件！");
+            alert("Please select conditions！");
         } else {
             $('#upload1').css('display', 'none');
             $('#upload2').css('display', 'block');
@@ -48,7 +48,6 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
                 if (data.code == 0) {
                     $scope.id = data.result;
                     console.log(data);
-                    console.log($scope.id);
                     //请求表格数据调用方法
                     OthercategorymaintenanceService.getOthercategoryData($scope.id).then(function (data) {
                         if (data.code == 0) {
@@ -60,7 +59,7 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
                             $scope.dataMap = OthercategorymaintenanceService.getDataMap(categoryData, geo, categorylvl1, categorylvl2, categorylvl3);
                             $scope.ww = true;
                         }
-                    }, function (data) {
+                    },function(data){
                         console.log(data);
                     });
                 } else {
@@ -74,29 +73,31 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
         }
     }
 
-
+    
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js
-        $('#final table').stickySort({sortable: true});
+    	$('#final table').stickySort({ sortable: true });
+
+        $(".sticky-intersect").find('table').html('<thead><tr><th rowspan="2" colspan="3" style="height:60px;">Mx Cost Guidance Forecast</th><th rowspan="3">BU</th></tr><tr></tr><tr><th>Main Category</th><th>First layer</th><th>Second layer</th></tr></thead>');
 
         $('#upload1').css('display', 'block');
         $('#upload2').css('display', 'none');
     });
 
     //下载模板
-    $scope.DowTemp = function () {
+    $scope.DowTemp = function(){
         $scope.temp = {
             type: 'category'
         }
-        OthercategorymaintenanceService.download($scope.temp).then(function (response) {
+        OthercategorymaintenanceService.download($scope.temp).then(function(response){
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
-            fileName = fileName.replace(/\"/g, "");
+            fileName=fileName.replace(/\"/g,"");
             var data = response.data;
             //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
             var objectUrl = URL.createObjectURL(blob);
-            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
-            aForExcel.attr("download", fileName);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href",objectUrl);
+            aForExcel.attr("download",fileName);
             $("body").append(aForExcel);
             $(".forExcel").click();
             aForExcel.remove();
@@ -109,12 +110,12 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
         //if (!$scope.id) {
         //    return;
         //} else {
-
+        $('#Download2').css('display', 'block');
+        $('#Download1').css('display', 'none');
         OthercategorymaintenanceService.getOtherDownLoad($scope.id).then(function (response) {
             var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
             fileName = fileName.replace(/\"/g, "");
             var data = response.data;
-            //console.log(data);
             var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
             var objectUrl = URL.createObjectURL(blob);
             var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
@@ -122,6 +123,9 @@ angular.module('app.OperationData').controller('OthercategorymaintenanceCtrl', f
             $("body").append(aForExcel);
             $(".forExcel").click();
             aForExcel.remove();
+
+            $('#Download1').css('display', 'block');
+            $('#Download2').css('display', 'none');
         }, function (data) {
             console.log(data);
         })

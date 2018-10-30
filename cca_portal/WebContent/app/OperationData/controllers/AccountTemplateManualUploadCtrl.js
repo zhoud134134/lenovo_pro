@@ -71,7 +71,8 @@ angular.module('app.OperationData').controller('AccountTemplateManualUploadCtrl'
         //下面是在table render完成后执行的js
         $('#final table').stickySort({sortable: true});
 
-        
+        $(".sticky-intersect").find('table').html('<thead><tr><th rowspan="2" colspan="3" style="height:60px;">'+$scope.cycleName+' Account template cost details</th><th rowspan="3">BU</th></tr><tr></tr><tr><th>Main Category</th><th>Second category</th><th>Detail layer</th></tr></thead>');
+
         $('#upload1').css('display', 'block');
         $('#upload2').css('display', 'none');
 
