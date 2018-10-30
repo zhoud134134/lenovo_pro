@@ -218,3 +218,18 @@ tfoot.tf-class tr td{
     font-weight: 700;
     color: #333;
 }
+
+
+.report-tab .tab-content .dataTables_wrapper .dataTables_scrollBody .table-bordered>tbody>tr>td{
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.report-tab .tab-content .dataTables_wrapper .dataTables_scrollBody .table-bordered>tbody>tr>td:hover{
+    display: block;
+    width: 100%;
+    overflow: auto;
+    white-space: normal;
+}

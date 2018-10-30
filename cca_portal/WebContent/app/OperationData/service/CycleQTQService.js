@@ -393,4 +393,28 @@ angular.module('app.OperationData').service("CycleQTQService", function ($http, 
         map[BuDataKey] = BuDesDataList;
         return map;
     }
+
+
+    //getWW时的Download
+    this.getWWDownLoad = function(param,id) {
+        // console.log(id)
+        var d = $q.defer();
+        $http({
+            method : 'GET',
+            url : APP_CONFIG.baseUrl + '/api/bmc/summary/loadexcel/rpt/'+id,
+
+            headers: {
+                'Authorization' : 'Bearer '+ sessionStorage.getItem("token")
+            },
+            params : param,
+            responseType : 'arraybuffer'
+        }).then(function successCallback(response) {
+            // 请求成功执行代码
+            d.resolve(response);
+        }, function errorCallback(response) {
+            // 请求失败执行代码
+            d.reject("error");
+        });
+        return d.promise;
+    }
 });

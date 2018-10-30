@@ -664,6 +664,37 @@ angular.module('app.OperationData').controller('CycleQtQCtrl', function ($scope,
         }
     };
 
+
+    //Download table
+    $scope.getWWShiftDownLoad = function () {
+
+        $('#Download2').css('display', 'block');
+        $('#Download1').css('display', 'none');
+        $scope.validate = {
+            cycleName :"M0",
+            ztype: "ROW"
+
+        };
+        CycleQTQService.getWWDownLoad($scope.validate,$scope.TaskID).then(function (response) {
+            var fileName = response.headers("Content-Disposition").split(";")[1].split("filename=")[1];
+            fileName = fileName.replace(/\"/g, "");
+            var data = response.data;
+            //console.log(data);
+            var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+            var objectUrl = URL.createObjectURL(blob);
+            var aForExcel = $("<a><span class='forExcel'>下载excel</span></a>").attr("href", objectUrl);
+            aForExcel.attr("download", fileName);
+            $("body").append(aForExcel);
+            $(".forExcel").click();
+            aForExcel.remove();
+            $('#Download1').css('display', 'block');
+            $('#Download2').css('display', 'none');
+        }, function (data) {
+            console.log(data);
+        })
+        //}
+    }
+
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js
 
