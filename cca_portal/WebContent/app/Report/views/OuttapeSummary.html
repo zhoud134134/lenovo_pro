@@ -66,10 +66,10 @@
                                         </tr>
                                         </thead>
                                         <tbody class="tapetbody">
-                                        <tr style="height: 20px">
+                                        <!--<tr style="height: 20px">-->
 
-                                            <td colspan="51"></td>
-                                        </tr>
+                                            <!--<td colspan="51"></td>-->
+                                        <!--</tr>-->
                                         <tr ng-repeat="cate in sudataMap.categoryData track by $index" on-finish-render-filters>
                                             <th   rowspan="{{cate.length}}" colspan="{{cate.categorylvl1.length == 1 ? 2 : 1}}" ng-if="cate.index == 0">{{cate.categorylvl1.name}}</th>
                                             <th ng-if="cate.categorylvl1.length != 1">{{cate.categorylvl2}}</th>
@@ -2855,10 +2855,6 @@
                             </main>
 
                         </div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
 
                         <!--<div class="widget-body no-padding">-->
                         <!--<main id="outcontent">-->

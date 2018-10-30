@@ -52,10 +52,17 @@ angular.module('app.Report').service("OuttapeSummaryService", function ($http, $
                 if (geo[d] == $.trim(arryList[r].geo) && $.trim(arryList[r].segment) != '') {
                     if ($rootScope.isNotInArray(segment, $.trim(arryList[r].segment))) {
                         segment.push($.trim(arryList[r].segment));
-
+                        if(geo[d]=="PRC"||arryList[r].geo=="PRC"){
+                            segment = $rootScope.sortByDataBase(segment, $rootScope.prcSortData);
+                        }else{
+                            segment = $rootScope.sortByDataBase(segment, $rootScope.wwSortData);
+                        }
                     }
                 }
+
+
             }
+
             var sum = 0;
             for (var e = 0; e < segment.length; e++) {
                 var subsegment = [];

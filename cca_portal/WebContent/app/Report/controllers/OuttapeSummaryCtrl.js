@@ -26,18 +26,20 @@ angular.module('app.Report').controller('OuttapeSummaryCtrl', function ($scope, 
 	            	// console.log(data);
 	            });
             }
-            
+            $scope.sumShow=false;
             OuttapeSummaryService.getSumdata($scope.CycleChoose).then(function (data) {
                 $scope.sumShow=true;
                 var outtapeData = data.result;
                 console.log(outtapeData);
+
+                $rootScope.prcSortData.push('Total');
                 var geo = $rootScope.sortByDataBase($rootScope.getFiled(outtapeData, "geo"), $rootScope.allSortData.geos);
                 var categorylvl1 = $rootScope.sortByDataBase($rootScope.getFiled(outtapeData, "categorylvl1"),$rootScope.outSortData.category1);
-                //var categorylvl1 = $rootScope.getFiled(outtapeData, "categorylvl1");
                 $scope.sudataMap = OuttapeSummaryService.getDataMap(outtapeData, geo, categorylvl1);
+
                 $('#searchLoda1').css('display','block');
                 $('#searchLoda').css('display','none');
-               // console.log($scope.sudataMap);
+                //console.log($scope.sudataMap);
             }, function (data) {
                 console.log(data);
             });
@@ -47,7 +49,9 @@ angular.module('app.Report').controller('OuttapeSummaryCtrl', function ($scope, 
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         //下面是在table render完成后执行的js
         $('#final table').stickySort({sortable: true});
+
+        $(".sticky-intersect").find('table').html('<thead><tr><th rowspan="3" colspan="2" class="summary-tab-width1" style="width:276px;height:90px;">FY Cost Guidance <br/>(+Benefit/-Hit) </th></tr></thead>');
+
     });
-    // console.log($scope.sudataMap)
 
 })
