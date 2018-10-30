@@ -25,8 +25,8 @@
                         </div>
                         <div class="col-sm-4 form-group-m">
                             <label>EBR Data:</label>
-                            <div class="for-sel"  ng-click="openSel($event)">
-                                <input class="form-control" type="text" ng-model="EBRData" />
+                            <div class="for-sel" ng-click="openSel($event)">
+                                <input class="form-control" type="text" ng-model="EBRData"/>
                                 <div class="select-multi" ng-show="!Sel">
                                     <div class="select-multi-box" ng-repeat="i in dataMoth">
                                         <input type="checkbox" ng-click="One(i)"/>
@@ -38,7 +38,7 @@
                         <div class="col-sm-4 form-group-m">
                             <label>CFE Data:</label>
                             <div class="for-sel">
-                                <select class="form-control" ng-model="CFEData"  ng-options="x for x in cfedata">
+                                <select class="form-control" ng-model="CFEData" ng-options="x for x in cfedata">
                                 </select>
                             </div>
                         </div>
@@ -55,7 +55,8 @@
                     <div class="widget-body no-padding">
                         <div class="table-responsive table-border-tb" style="height: 480px">
                             <div>
-                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-point" id="tabExample" style="table-layout: fixed;">
+                                <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-point"
+                                       id="tabExample" style="table-layout: fixed;">
                                     <thead class="table-thead">
                                     <tr>
                                         <td width="19px"></td>
@@ -70,7 +71,8 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="tab in tablist" ng-click="trClick($event,tab.taskId,tab.status,tab.cycleName)">
+                                    <tr ng-repeat="tab in tablist"
+                                        ng-click="trClick($event,tab.taskId,tab.status,tab.cycleName)">
                                         <td>
                                             <label class="radio">
                                                 <input type="radio" name="radio-inline">
@@ -117,10 +119,10 @@
                 </div>
             </div>
             <!--第三部分搜索-->
-            <div jarvis-widget  data-widget-color="Light Blue"
+            <div jarvis-widget data-widget-color="Light Blue"
                  data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
                 <header>
-                   <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                     <h2>Result</h2>
                 </header>
             </div>
@@ -128,14 +130,16 @@
 
             <!--WW-->
             <div class="mup-tabbtn report-tab" ng-show="!WW" style="max-height: 1045px;overflow: hidden;">
-                <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-deletebutton="false" data-widget-sortable="false">
                     <header>
                         <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
                         <h2>WW</h2>
                     </header>
                     <div>
                         <div class="widget-body no-padding">
-                            <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear table-qtq" id="WWExample" ng-show="ww">
+                            <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear table-qtq"
+                                   id="WWExample" ng-show="ww">
                                 <thead class="table-thead tab-mid">
                                 <tr>
                                     <td>Qtr</td>
@@ -185,28 +189,40 @@
                 </div>
 
                 <div class="col-sm-4 tab-fun-btn">
-                    <button class="btn btn-back btn-xs" uib-tooltip="BU vs Segment $/Saving" tooltip-append-to-body="true" ng-click="getSegmentWW()"><i class="fa fa-exchange" ></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="BU vs Segment $/Saving"
+                            tooltip-append-to-body="true" ng-click="getSegmentWW()"><i class="fa fa-exchange"></i>
+                    </button>
 
-                    <button class="btn btn-back btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true" ng-click="btnSwitch('p')" ><i class="fa fa-refresh"></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="Switch to PRC" tooltip-append-to-body="true"
+                            ng-click="btnSwitch('p')"><i class="fa fa-refresh"></i></button>
 
-                    <button class="btn btn-back btn-xs" uib-tooltip="Download Summary" tooltip-append-to-body="true" ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="Download Summary" tooltip-append-to-body="true"
+                            ng-click="getWWDownLoadSum()"><i class="fa fa-download" style="display: block" id="ws1"></i><i
+                            class="fa fa-spinner fa-spin" style="display: none" id="ws2"></i></button>
 
-                    <button class="btn btn-back btn-xs" uib-tooltip="Download Detail" tooltip-append-to-body="true"  ng-click="getWWDownLoadDet()"><i class="fa fa-sort-amount-asc" style="display: block" id="wd1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="wd2"></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="Download Detail" tooltip-append-to-body="true"
+                            ng-click="getWWDownLoadDet()"><i class="fa fa-sort-amount-asc" style="display: block"
+                                                             id="wd1"></i><i class="fa fa-spinner fa-spin"
+                                                                             style="display: none" id="wd2"></i>
+                    </button>
 
-                    <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true"
+                            ng-click="getValidate()"><i class="fa fa-send-o"></i></button>
                 </div>
             </div>
 
             <!--PRC-->
             <div class="mup-tabbtn report-tab" ng-show="!PRC" style="max-height: 1045px;overflow: hidden;">
-                <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-deletebutton="false" data-widget-sortable="false">
                     <header>
                         <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
                         <h2>PRC</h2>
                     </header>
                     <div>
                         <div class="widget-body no-padding">
-                            <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear" id="PRCExample" >
+                            <table class="table table-bordered table-striped smart-form has-tickbox table-hover tab-data tab-sear"
+                                   id="PRCExample">
                                 <thead class="table-thead tab-mid">
                                 <tr>
                                     <td>Qtr</td>
@@ -251,30 +267,43 @@
                 </div>
 
                 <div class="col-sm-4 tab-fun-btn">
-                    <button class="btn btn-back btn-xs" uib-tooltip="BU vs Segment $/Saving" tooltip-append-to-body="true" ng-click="getSegmentPRC()"><i class="fa fa-exchange" ></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="BU vs Segment $/Saving"
+                            tooltip-append-to-body="true" ng-click="getSegmentPRC()"><i class="fa fa-exchange"></i>
+                    </button>
 
-                    <button class="btn btn-back btn-xs" uib-tooltip="Switch to WW" tooltip-append-to-body="true" ng-click="btnSwitch('w')"><i class="fa fa-refresh"></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="Switch to WW" tooltip-append-to-body="true"
+                            ng-click="btnSwitch('w')"><i class="fa fa-refresh"></i></button>
 
-                    <button class="btn btn-back btn-xs" uib-tooltip="Download Summary" tooltip-append-to-body="true" ng-click="getPRCDownLoadSum()"><i class="fa fa-download" style="display: block" id="ps1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="ps2"></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="Download Summary" tooltip-append-to-body="true"
+                            ng-click="getPRCDownLoadSum()"><i class="fa fa-download" style="display: block"
+                                                              id="ps1"></i><i class="fa fa-spinner fa-spin"
+                                                                              style="display: none" id="ps2"></i>
+                    </button>
 
-                    <button class="btn btn-back btn-xs" uib-tooltip="Download Detail" tooltip-append-to-body="true" ng-click="getPRCDownLoadDet()"><i class="fa fa-sort-amount-asc" style="display: block" id="pd1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="pd2"></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="Download Detail" tooltip-append-to-body="true"
+                            ng-click="getPRCDownLoadDet()"><i class="fa fa-sort-amount-asc" style="display: block"
+                                                              id="pd1"></i><i class="fa fa-spinner fa-spin"
+                                                                              style="display: none" id="pd2"></i>
+                    </button>
 
-                    <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true" ng-click="getValidate()"><i class="fa fa-send-o" ></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="Validate" tooltip-append-to-body="true"
+                            ng-click="getValidate()"><i class="fa fa-send-o"></i></button>
                 </div>
             </div>
 
             <!--WW+shift view-->
             <div class="mup-tabbtn report-tab" ng-show="!WWShift" style="overflow: hidden">
-                <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-deletebutton="false" data-widget-sortable="false">
                     <header>
                         <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
                         <h2>WW</h2>
                     </header>
                     <div>
-                        <div class="widget-body no-padding" >
+                        <div class="widget-body no-padding">
                             <main id="QtQContent">
                                 <section class="demo7" id="final">
-                                    <table class="overflow-both1" >
+                                    <table class="overflow-both1">
                                         <thead>
                                         <tr>
                                             <th colspan="2">$/CA</th>
@@ -284,17 +313,21 @@
 
                                         </tr>
                                         <tr>
-                                            <th  colspan="2">BU vs. Segment CA</th>
+                                            <th colspan="2">BU vs. Segment CA</th>
                                             <th ng-repeat="r in dataMap.geolist.region track by $index">{{r}}</th>
 
                                         </tr>
                                         </thead>
-                                        <tbody class="tapetbody" >
+                                        <tbody class="tapetbody">
 
-                                        <tr ng-repeat="cate in dataMap.buData track by $index" ng-class="{'colorRow':cate.cfeSegment == 'Subtotal'}" on-finish-render-filters>
-                                            <th rowspan="{{cate.length}}" ng-if="cate.index == 0" >{{cate.rptBuDes.name}}</th>
-                                            <th >{{cate.cfeSegment}}</th>
-                                            <td ng-repeat="c in cate.price track by $index" >{{c | number:2}}</td>
+                                        <tr ng-repeat="cate in dataMap.buData track by $index"
+                                            ng-class="{'colorRow':cate.cfeSegment == 'Subtotal'}"
+                                            on-finish-render-filters>
+                                            <th rowspan="{{cate.length}}" ng-if="cate.index == 0">
+                                                {{cate.rptBuDes.name}}
+                                            </th>
+                                            <th>{{cate.cfeSegment}}</th>
+                                            <td ng-repeat="c in cate.price track by $index">{{c | number:2}}</td>
                                         </tr>
 
                                         </tbody>
@@ -307,22 +340,32 @@
                 </div>
 
                 <div class="col-sm-4 tab-fun-btn">
-                    <button class="btn btn-back btn-xs" uib-tooltip="BU vs Segment $/Saving" tooltip-append-to-body="true" ng-click="getWWShift()"><i class="fa fa-exchange" ></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="BU vs Segment $/Saving"
+                            tooltip-append-to-body="true" ng-click="getWWShift()"><i class="fa fa-exchange"></i>
+                    </button>
 
-                    <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getWWShiftDownLoad()"><i class="fa fa-download" style="display: block" id="sws1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="sws2"></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true"
+                            ng-click="getWWShiftDownLoad()">
+                        <i class="fa fa-download" style="display: block"
+                           id="Download1"></i>
+                        <i class="fa fa-spinner fa-spin"
+                           style="display: none" id="Download2"></i>
+                    </button>
                 </div>
             </div>
 
             <!--PRC+shift view-->
             <div class="mup-tabbtn report-tab" ng-show="!PRCShift" style="max-height: 575px;overflow: hidden">
-                <div jarvis-widget data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
+                <div jarvis-widget data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-deletebutton="false" data-widget-sortable="false">
                     <header>
                         <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
                         <h2>PRC</h2>
                     </header>
                     <div>
                         <div class="widget-body no-padding">
-                            <table class="table-bordered smart-form has-tickbox table-hover table-camain" style="width: 100%;table-layout: fixed;">
+                            <table class="table-bordered smart-form has-tickbox table-hover table-camain"
+                                   style="width: 100%;table-layout: fixed;">
                                 <tbody>
                                 <tr class="gray">
                                     <td rowspan="12">PRC BU vs Segment $/Saving</td>
@@ -434,9 +477,15 @@
                 </div>
 
                 <div class="col-sm-4 tab-fun-btn">
-                    <button class="btn btn-back btn-xs" uib-tooltip="BU vs Segment $/Saving" tooltip-append-to-body="true" ng-click="getPRCShift()"><i class="fa fa-exchange" ></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="BU vs Segment $/Saving"
+                            tooltip-append-to-body="true" ng-click="getPRCShift()"><i class="fa fa-exchange"></i>
+                    </button>
 
-                    <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true" ng-click="getPRCShiftDownLoad()"><i class="fa fa-download" style="display: block" id="swd1"></i><i class="fa fa-spinner fa-spin" style="display: none" id="swd2"></i></button>
+                    <button class="btn btn-back btn-xs" uib-tooltip="Download" tooltip-append-to-body="true"
+                            ng-click="getPRCShiftDownLoad()"><i class="fa fa-download" style="display: block"
+                                                                id="swd1"></i><i class="fa fa-spinner fa-spin"
+                                                                                 style="display: none" id="swd2"></i>
+                    </button>
                 </div>
             </div>
 
