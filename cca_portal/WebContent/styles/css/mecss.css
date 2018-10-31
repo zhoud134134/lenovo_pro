@@ -353,7 +353,7 @@ article {
     width: 277px;
 }
 .report-tab .tab-content .dataTables_wrapper .dataTables_scrollHead .table-bordered>thead>tr>td,.report-tab .tab-content .dataTables_wrapper .dataTables_scrollBody .table-bordered>tbody>tr>td{
-    min-width:194px !important;
+    min-width:200px !important;
 }
 /*#outtContent .overflow-both1 thead tr:nth-child(1) th{*/
     /*min-width: 410px;*/
