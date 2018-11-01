@@ -352,8 +352,10 @@ article {
 #outtContent .sticky-col{
     width: 277px;
 }
-.report-tab .tab-content .dataTables_wrapper .dataTables_scrollHead .table-bordered>thead>tr>td,.report-tab .tab-content .dataTables_wrapper .dataTables_scrollBody .table-bordered>tbody>tr>td{
-    min-width:210px !important;
+@media all and (max-width: 1600px) {
+    .report-tab .tab-content .dataTables_wrapper .dataTables_scrollHead .table-bordered > thead > tr > td, .report-tab .tab-content .dataTables_wrapper .dataTables_scrollBody .table-bordered > tbody > tr > td {
+        min-width: 210px !important;
+    }
 }
 
 @media all and (min-width: 1600px) {
