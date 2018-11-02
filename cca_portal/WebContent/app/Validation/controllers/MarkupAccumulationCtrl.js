@@ -52,6 +52,7 @@ angular.module('app.Validation').controller('MarkupAccumulationCtrl', function (
             MarkupAccumulationService.getPrc($scope.TaskID).then(function(data) {
                 if (data.code == 0) {
                     $timeout(function(){
+                        $rootScope.prcSortData.push('Total');
                         $scope.markHZ = $rootScope.markHZ(data.result,$rootScope.prcSortData);
                         $scope.cycleForTitle=$scope.CyclName;
                     });

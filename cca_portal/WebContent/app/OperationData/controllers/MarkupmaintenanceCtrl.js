@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$rootScope,$state,$stateParams,$location,$timeout,MarkupmaintenanceService,navService) {
+angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function ($scope,$rootScope,$state,$stateParams,$location,$timeout,MarkupmaintenanceService,CAmaintenanceService,navService) {
   //调取bu、geo、region、segment
 
     var prc = {
@@ -115,6 +115,7 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
              MarkupmaintenanceService.getPrc($scope.TaskID).then(function(data) {
                  if (data.code == 0) {
                      $timeout(function(){
+                         $rootScope.prcSortData.push('Total');
                          $scope.markHZ = $rootScope.markHZ(data.result,$rootScope.prcSortData);
                          $scope.cycleForTitle=$scope.CyclName;
                      });
@@ -125,7 +126,6 @@ angular.module('app.OperationData').controller('MarkupmaintenanceCtrl', function
             alert("It has not been executed successfully and cannot be viewed！");
         }
     };
-
     //删除
     $scope.DelParticular = function(){
         if(!$scope.taskId){
